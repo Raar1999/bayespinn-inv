@@ -1,0 +1,36 @@
+# Inverse design experiment config.
+# Run with: python scripts/inverse_design.py --config-name inverse_base
+defaults:
+  - _self_
+
+seed: 0
+forward_ckpt: ./outputs/latest/ensemble/   # directory with M ckpt_final.pt's
+
+# Target measurements (synthetic by default; user can override with CSV)
+target:
+  family: synthetic
+  source_family: step       # which dataset family to draw target from
+  bias_grid:
+    start: 0.0
+    stop:  0.7
+    num:   15
+  noise_std_rel: 0.02       # multiplicative
+
+# Parameterization for the optimization variable
+parameterization:
+  kind: free_pointwise      # or: step_junction, graded_junction
+  n_points: 64
+
+# Optimization hyperparameters
+inverse:
+  n_iters: 1500
+  lr: 1.0e-2
+  optimizer: adam
+  lambda_TV: 0.0
+  lambda_smooth: 1.0e-6
+  lambda_solubility: 1.0
+  C_max_si: 1.0e26
+  grad_clip: 1.0
+  log_every: 100
+
+out_dir: ./outputs/inverse/${now:%Y-%m-%d_%H-%M-%S}

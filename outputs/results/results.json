@@ -1,0 +1,82 @@
+{
+  "H1_forward_step": {
+    "median_rel_err": 0.040783613331709975,
+    "p90_rel_err": 0.09429383123506661,
+    "mean_rel_err": 0.054205961535472955,
+    "n": 60
+  },
+  "H1_forward_graded": {
+    "median_rel_err": 0.0462319904671169,
+    "p90_rel_err": 0.10725870942570528,
+    "mean_rel_err": 0.05772868908611283,
+    "n": 60
+  },
+  "H2_inverse_vs_noise": {
+    "noise_0.0": {
+      "median_abs_err_decades": 0.004006293498111546,
+      "mean_abs_err_decades": 0.003741591224657981,
+      "coverage_1sigma": 1.0
+    },
+    "noise_0.02": {
+      "median_abs_err_decades": 0.0031118976142110455,
+      "mean_abs_err_decades": 0.004480043565930458,
+      "coverage_1sigma": 0.8
+    },
+    "noise_0.05": {
+      "median_abs_err_decades": 0.00286550215618675,
+      "mean_abs_err_decades": 0.006960167768248482,
+      "coverage_1sigma": 0.6
+    },
+    "noise_0.1": {
+      "median_abs_err_decades": 0.00932340315716118,
+      "mean_abs_err_decades": 0.011968941571959135,
+      "coverage_1sigma": 0.4
+    }
+  },
+  "H3_calibration": {
+    "z_1.0": {
+      "empirical_coverage": 0.3,
+      "nominal_coverage": 0.6826894921370859
+    },
+    "z_1.64": {
+      "empirical_coverage": 0.575,
+      "nominal_coverage": 0.8989948330517925
+    },
+    "z_2.0": {
+      "empirical_coverage": 0.6666666666666666,
+      "nominal_coverage": 0.9544997361036416
+    }
+  },
+  "H3_recalibrated": {
+    "temperature": 2.1888293932909946,
+    "z_1.0": {
+      "pre": 0.29,
+      "post": 0.71,
+      "nominal": 0.6826894921370859
+    },
+    "z_1.64": {
+      "pre": 0.56,
+      "post": 0.92,
+      "nominal": 0.8989948330517925
+    },
+    "z_2.0": {
+      "pre": 0.64,
+      "post": 0.96,
+      "nominal": 0.9544997361036416
+    }
+  },
+  "H4_active_learning": {
+    "low_3_biases": {
+      "median_abs_err_decades": 0.008361734199461068,
+      "n_biases": 3
+    },
+    "high_3_biases": {
+      "median_abs_err_decades": 0.006204522895750131,
+      "n_biases": 3
+    },
+    "all_13": {
+      "median_abs_err_decades": 0.004006293498111546,
+      "n_biases": 13
+    }
+  }
+}

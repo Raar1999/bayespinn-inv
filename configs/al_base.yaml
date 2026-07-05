@@ -1,0 +1,39 @@
+# Active learning experiment config.
+defaults:
+  - _self_
+
+seed: 0
+forward_ckpt: ./outputs/latest/ensemble/
+
+# Test profile from which we'll generate synthetic "ground truth" measurements
+target:
+  family: defect          # the inverse problem we're solving
+  N_A: 1.0e22
+  N_D: 1.0e22
+  x_junction: 5.0e-7
+  defect_amplitude: 5.0e22
+  defect_center: 7.0e-7
+  defect_width: 5.0e-8
+
+active_learning:
+  n_rounds: 30
+  candidate_biases:
+    start: 0.0
+    stop:  0.7
+    num:   71
+  initial_biases: [0.0, 0.3, 0.6]
+  measurement_noise_rel: 0.02
+  n_inverse_iters: 300
+
+# Run all three strategies for comparison
+strategies:
+  - random
+  - max_std
+  - ucb
+
+inverse:
+  lr: 5.0e-3
+  lambda_TV: 1.0
+  lambda_smooth: 1.0e-6
+
+out_dir: ./outputs/al/${now:%Y-%m-%d_%H-%M-%S}

@@ -1,0 +1,60 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Testing / coverage ----
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# ---- Generated outputs ----
+# outputs/ is regenerable via scripts and notebooks. The small results
+# summaries under outputs/results/ are force-added (see .gitignore exception)
+# so the README links resolve, but heavy artefacts (model checkpoints, figure
+# dumps, sweep intermediates) are not committed.
+outputs/*
+!outputs/results/
+outputs/results/*
+!outputs/results/results.json
+!outputs/results/results_summary.md
+
+# Trained model checkpoints (regenerable)
+*.pt
+*.pth
+*.ckpt
+
+# Colab / Drive mounts
+/content/
