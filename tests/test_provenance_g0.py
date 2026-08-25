@@ -28,8 +28,10 @@ from pathlib import Path
 
 import pytest
 
+from bayespinn_inv.utils import provenance
 from bayespinn_inv.utils.provenance import (
     RunManifest,
+    environment_info,
     git_is_dirty,
     git_status_counts,
     git_tree_digest,
@@ -168,3 +170,44 @@ class TestManifestCarriesTheNewFields:
             f"dirty={payload['dirty']} tracked_modified={payload['tracked_modified']} "
             f"untracked={payload['untracked']}"
         )
+
+
+# ---------------------------------------------------------------------------
+# AUDIT_g0 SW-04a -- `except Exception: pass` in library code.
+# ---------------------------------------------------------------------------
+
+class TestEnvironmentProbeFailsLoudly:
+    """SW-04: no bare except, and no `except Exception: pass`, in library code.
+
+    `environment_info()` swallowed every failure of the CUDA probe, so the
+    `cuda_*` keys simply vanished from the manifest. A reader then could not tell
+    "this run had no GPU" from "the probe raised" -- the same ambiguity PROV-02
+    was about, in miniature: an absent field that could mean two different things.
+    """
+
+    def test_no_except_pass_in_the_provenance_module(self) -> None:
+        import ast
+
+        source = Path(provenance.__file__).read_text(encoding="utf-8")
+        offenders = []
+        for node in ast.walk(ast.parse(source)):
+            if not isinstance(node, ast.ExceptHandler):
+                continue
+            if all(isinstance(stmt, ast.Pass) for stmt in node.body):
+                offenders.append(node.lineno)
+            if node.type is None:
+                offenders.append(node.lineno)      # bare `except:`
+        assert not offenders, (
+            f"AUDIT_g0 SW-04a -- silent or bare exception handler at lines {offenders}"
+        )
+
+    def test_the_cuda_keys_are_always_present(self) -> None:
+        """Absent-vs-unknown must not be ambiguous."""
+        info = environment_info()
+        for key in ("cuda_available", "cuda_device", "torch_threads"):
+            assert key in info, f"{key} missing from environment_info()"
+
+    def test_a_missing_library_is_recorded_as_None_not_omitted(self) -> None:
+        info = environment_info()
+        for mod in ("numpy", "scipy", "torch", "sklearn", "matplotlib"):
+            assert mod in info, f"{mod} missing from environment_info()"

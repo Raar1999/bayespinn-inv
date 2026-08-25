@@ -166,17 +166,35 @@ def environment_info() -> Dict[str, Any]:
     for mod in ("numpy", "scipy", "torch", "sklearn", "matplotlib"):
         try:
             m = __import__(mod)
+        except ImportError:
+            info[mod] = None          # not installed; None means "absent"
+        else:
             info[mod] = getattr(m, "__version__", "unknown")
-        except Exception:
-            info[mod] = None
+
+    # AUDIT_g0 SW-04a: this block was `except Exception: pass`, which SW-04
+    # forbids in library code. Swallowing the error silently omitted the CUDA
+    # keys from the manifest, so a reader could not tell "this run had no GPU"
+    # from "the probe failed" -- and a provenance record whose absent fields are
+    # ambiguous is the defect PROV-02 was about, in miniature. The keys are now
+    # always present: None for absent, and the reason recorded when the probe
+    # itself fails.
+    info["cuda_available"] = None
+    info["cuda_device"] = None
+    info["torch_threads"] = None
     try:
         import torch
-        info["cuda_available"] = bool(torch.cuda.is_available())
-        info["cuda_device"] = (torch.cuda.get_device_name(0)
-                               if torch.cuda.is_available() else None)
-        info["torch_threads"] = torch.get_num_threads()
-    except Exception:
-        pass
+    except ImportError:
+        info["torch_probe_error"] = "torch is not installed"
+    else:
+        try:
+            available = bool(torch.cuda.is_available())
+            info["cuda_available"] = available
+            info["cuda_device"] = torch.cuda.get_device_name(0) if available else None
+            info["torch_threads"] = torch.get_num_threads()
+        except (RuntimeError, OSError, AssertionError) as exc:
+            # A broken or partially-initialised CUDA driver raises here. Record
+            # it rather than reporting the run as CPU-only.
+            info["torch_probe_error"] = f"{type(exc).__name__}: {exc}"
     return info
 
 
