@@ -1,0 +1,75 @@
+{
+  "experiment": "identifiability",
+  "created_utc": "2026-08-25T13:39:09+00:00",
+  "git": {
+    "commit": "6f1d939d231fbab96885e7d3d5ec84105172a443",
+    "dirty": true,
+    "tracked_modified": 0,
+    "untracked": 1,
+    "tree_digest": "0210e79c0ee2bfa90c9afab3bf012672b22ca1f9625f3973674f71012fa69cf4"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "domain_si": [
+      0.0,
+      1e-06
+    ],
+    "n_anchor": 16,
+    "biases": [
+      0.0,
+      0.05,
+      0.1,
+      0.15000000000000002,
+      0.2,
+      0.25,
+      0.30000000000000004,
+      0.35000000000000003,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6000000000000001,
+      0.65,
+      0.7000000000000001,
+      0.75,
+      0.8,
+      0.8500000000000001,
+      0.9
+    ],
+    "sg_grid": 301,
+    "noise_grid": [
+      0.2,
+      0.1,
+      0.05,
+      0.02,
+      0.01,
+      0.001,
+      0.0001,
+      1e-06
+    ]
+  },
+  "results": {
+    "step_symmetric_identifiable_rank_at_2pct": 4,
+    "step_asymmetric_identifiable_rank_at_2pct": 5,
+    "graded_identifiable_rank_at_2pct": 3,
+    "ldd_identifiable_rank_at_2pct": 4
+  },
+  "artifacts": {
+    "identifiability_json": "outputs\\identifiability_g1\\identifiability.json"
+  },
+  "notes": "\nQuantify the identifiability of doping recovery from terminal I--V.\n\nThe repository has always *stated* that recovering a doping profile from\nterminal I--V is ill-posed. This script measures it: it differentiates the\nScharfetter--Gummel oracle, takes the SVD of the forward Jacobian, and reports\nhow many profile degrees of freedom an I--V sweep can actually determine at a\ngiven measurement noise -- plus how much a better instrument would buy.\n\nEverything is measured through the SG solver, so the result characterises the\ndrift--diffusion physics rather than any particular trained surrogate.\n\nThe analysis validates itself in three ways:\n\n1. **Analysis-convergence study.** The Jacobian is re-estimated at several\n   finite-difference steps and oracle signal-to-noise thresholds. A conclusion\n   that moves when the estimator improves is an artefact, not a result.\n2. **Spectral floor.** Singular values below the noise induced by the\n   finite-difference estimate itself are reported as unresolvable rather than\n   as measurements.\n3. **Linear-response check.** The predicted response ||J v|| along each\n   singular direction is compared against an independent re-solve of the\n   perturbed device.\n\nUsage\n-----\n    PYTHONPATH=src python scripts/run_identifiability.py [--out DIR] [--quick]\n"
+}

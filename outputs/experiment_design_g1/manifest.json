@@ -1,0 +1,115 @@
+{
+  "experiment": "experiment_design",
+  "created_utc": "2026-08-25T13:57:17+00:00",
+  "git": {
+    "commit": "9670bec32dc068069b35388f5bc929e47f4f060f",
+    "dirty": true,
+    "tracked_modified": 1,
+    "untracked": 2,
+    "tree_digest": "99996de367ae56b54137677ef10702a22605e5c2322fe42310b1e0fa33cf12f1"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "seed": 0,
+    "noise": 0.02,
+    "P": 16,
+    "n_bias": 19,
+    "v_max": 0.9,
+    "grid_n": 301,
+    "budgets": [
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
+    "n_seeds": 12,
+    "epochs": 2500,
+    "strategies": [
+      "random",
+      "max_std",
+      "d_optimal",
+      "e_optimal",
+      "null_space",
+      "std_x_nullspace"
+    ]
+  },
+  "results": {
+    "verdict": {
+      "table": {
+        "random": {
+          "mean_rank_delta_vs_random": 0.0,
+          "wins": 0,
+          "ties": 20,
+          "losses": 0,
+          "n_comparisons": 20
+        },
+        "max_std": {
+          "mean_rank_delta_vs_random": -0.3083333333333333,
+          "wins": 2,
+          "ties": 9,
+          "losses": 9,
+          "n_comparisons": 20
+        },
+        "d_optimal": {
+          "mean_rank_delta_vs_random": 0.3916666666666667,
+          "wins": 5,
+          "ties": 15,
+          "losses": 0,
+          "n_comparisons": 20
+        },
+        "e_optimal": {
+          "mean_rank_delta_vs_random": -0.058333333333333307,
+          "wins": 2,
+          "ties": 13,
+          "losses": 5,
+          "n_comparisons": 20
+        },
+        "null_space": {
+          "mean_rank_delta_vs_random": 0.3916666666666667,
+          "wins": 5,
+          "ties": 15,
+          "losses": 0,
+          "n_comparisons": 20
+        },
+        "std_x_nullspace": {
+          "mean_rank_delta_vs_random": 0.2416666666666667,
+          "wins": 4,
+          "ties": 14,
+          "losses": 2,
+          "n_comparisons": 20
+        }
+      },
+      "best": "d_optimal",
+      "best_beats_random": true,
+      "lines": [
+        "random             mean rank vs random +0.00  (win/tie/loss 0/20/0)",
+        "max_std            mean rank vs random -0.31  (win/tie/loss 2/9/9)",
+        "d_optimal          mean rank vs random +0.39  (win/tie/loss 5/15/0)",
+        "e_optimal          mean rank vs random -0.06  (win/tie/loss 2/13/5)",
+        "null_space         mean rank vs random +0.39  (win/tie/loss 5/15/0)",
+        "std_x_nullspace    mean rank vs random +0.24  (win/tie/loss 4/14/2)",
+        "best non-random strategy: d_optimal (beats random)"
+      ]
+    }
+  },
+  "artifacts": {
+    "json": "outputs\\experiment_design_g1\\experiment_design.json",
+    "summary": "outputs\\experiment_design_g1\\experiment_design.md"
+  },
+  "notes": ""
+}

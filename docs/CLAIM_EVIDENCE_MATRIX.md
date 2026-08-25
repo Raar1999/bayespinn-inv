@@ -126,3 +126,80 @@ mis-scoped) · ❌ withdrawn · 📄 documentation-only
 | U2 | MC-dropout / SWAG never compared | ✅ **Resolved.** Root cause was that both wrapped `ForwardPINN` rather than the surrogate. `bayesian/surrogate_uq.py` fixes it; D4–D6 are the comparison. ADR-0005. |
 | U3 | PINN pipeline unvalidated | ✅ **Resolved as a negative result.** D1–D3; reclassified as legacy (ADR-0004). |
 | U4 | GaAs never solved | ✅ **Resolved for the solver.** A GaAs PN junction now converges at 1e21/1e22/1e23 m⁻³ with V_bi exact to <1e-9 relative and mass action to 6e-5, and rectifies (`tests/test_sg_numerics.py::TestGaAsDeviceSolves`, 4 tests). GaAs *device physics* is still not validated against measurement, and none is claimed. |
+
+---
+
+## 6. Loop re-verification, generations 0–5 (2026-08-25)
+
+Every experiment launcher re-run from the champion commit and compared
+leaf-by-leaf against its recorded artefact. This is the evidence for `SPEC-g0-1`
+("one commit reproduces the entire claim surface"), which generation 0 could
+assert for only one of seven experiments.
+
+**Timing fields are excluded from the comparison and reported separately.**
+Wall-clock is not a scientific claim and the machine was under load throughout —
+`train_seconds` roughly doubled on several runs. Counting that as a
+non-reproduction would be dishonest in the other direction.
+
+| experiment | numeric leaves | non-timing diff | timing diff | integer leaves changed | claims | verdict |
+|---|---|---|---|---|---|---|
+| `run_results.py` | 174 | **0** | 0 | 0 | C1–C11, C21, C22 | ✅ bit-identical |
+| `run_uq_benchmark.py` | 471 | **0** | 10 | 0 / 136 | D4, D5, D6 | ✅ |
+| `run_uq_tuning.py` | 424 | **0** | 22 | 0 / 98 | D4, D5 | ✅ |
+| `run_pinn_vs_surrogate.py` | 21 | **0** | 2 | 0 / 9 | D1, D2, D3 | ✅ |
+| `run_experiment_design.py` | 5066 | **0** | 4 | 0 / 2102 | D10, D11, D12 | ✅ |
+| `run_gradient_fidelity.py` | 1639 | **0** | 4 | 0 / 283 | D7, D8, D9 | ✅ |
+| `run_identifiability_robustness.py` | 3287 | **0** | 0 | 0 / 1847 | D13, D14, D14a | ✅ |
+| `run_identifiability.py` | 375 | 41 | 0 | **0 / 79** | C12–C15 | ⚠️ `REPRO-01` |
+
+**Totals: 11,457 numeric leaves across eight experiments. 41 non-timing
+differences, all in one experiment, all diagnostics. Zero integer-valued leaves
+changed anywhere** — and the integers are where the ranks live, so every
+identifiability claim in the repository reproduces exactly.
+
+### The load-bearing one
+
+`run_pinn_vs_surrogate.py` re-ran **with the GRAD-02/GRAD-03 fix applied**:
+
+| | recorded | re-run |
+|---|---|---|
+| PINN median rel. error | `0.9999970197631748` | `0.9999970197631748` |
+| PINN p90 rel. error | `1.0000456802107016` | `1.0000456802107016` |
+| PINN fraction within 50% | `0.05555555555555555` | `0.05555555555555555` |
+| Surrogate median rel. error | `0.026436009151515727` | `0.026436009151515727` |
+
+Generation 0 argued, from 0 NaN in 26 weight-gradient tensors, that the ohmic fix
+could not disturb `D1`/`ADR-0004`. This is that argument tested end-to-end:
+**it holds bit-for-bit.** `ADR-0004` stands unchanged.
+
+### REPRO-01 — resolved as a provenance artefact, not a numerics defect
+
+41 of 375 leaves in `run_identifiability.py` differ from the 2026-08-19 artefact.
+Median relative drift `1.906e-08`; maximum `5.840e-02`, at
+`/devices/ldd/spectral_floor` and `/devices/ldd/entry_noise` (the same quantity
+propagated).
+
+**No claim is affected.** All four **local** identifiable ranks — the Jacobian
+rank at the reference operating point, 4, 5, 3, 4 of 16 — every
+`resolvable_rank`, and all four complete `rank_vs_noise` tables are identical.
+
+Three measurements, in order, and the first hypothesis was wrong:
+
+1. **BLAS threading — ruled out.** The forward Jacobian is bit-identical twice
+   within one process, across three separate processes at default thread counts,
+   and across three more with `OMP_NUM_THREADS=MKL_NUM_THREADS=OPENBLAS_NUM_THREADS=1`.
+   Six runs, one SHA-256.
+2. **The script as a whole — ruled out.** `run_identifiability.py` run twice on
+   the current tree: **375 leaves, 0 differing.** Bit-identical to itself.
+3. **Therefore the difference is in the producing tree, not the runtime.** The
+   2026-08-19 artefact's manifest says `6577f4b`, dirty — which `PROV-04`
+   establishes is not enough to reconstruct anything.
+
+`run_identifiability_robustness.py`, which exercises the same solver 88 times,
+reproduced bit-identically across 3287 leaves. That is consistent with the
+conclusion and inconsistent with a live nondeterminism in the solver.
+
+This is the first **quantified** cost of `PROV-03`: 41 numbers that can never be
+explained, because the tree that produced them was never committed. The
+explanation cannot be confirmed either — confirming it would require the very
+thing that was lost. Recorded as unresolvable rather than closed.

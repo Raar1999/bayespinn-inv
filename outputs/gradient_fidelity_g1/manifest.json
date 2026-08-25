@@ -1,0 +1,62 @@
+{
+  "experiment": "gradient_fidelity",
+  "created_utc": "2026-08-25T13:58:52+00:00",
+  "git": {
+    "commit": "9670bec32dc068069b35388f5bc929e47f4f060f",
+    "dirty": true,
+    "tracked_modified": 1,
+    "untracked": 4,
+    "tree_digest": "cfcee0df634616425ff8cbcfb111e8b28b3f3e01ab4c3ac9dfb91d89d014003e"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "seed": 0,
+    "noise": 0.02,
+    "P": 16,
+    "n_bias": 19,
+    "v_max": 0.9,
+    "grid_n": 301,
+    "training_budgets": [
+      300,
+      1000,
+      2500,
+      10000
+    ]
+  },
+  "results": {
+    "verdict": {
+      "mean_cosine_inside": 0.5044516540450575,
+      "mean_cosine_outside": -0.0009103076965655404,
+      "value_error_small": 1.132716048880726,
+      "value_error_large": 0.25184825569559677,
+      "outside_cosine_small": 0.0026630142189317937,
+      "outside_cosine_large": -0.0009103076965655404,
+      "hypothesis_supported": true,
+      "lines": [
+        "at 10000 epochs: mean |cos| inside identifiable subspace +0.504, outside -0.001",
+        "value error improved 1.1327 -> 0.2518 symlog (300 -> 10000 epochs)",
+        "outside-subspace agreement moved +0.003 -> -0.001 (flat => not an undertraining artefact)",
+        "HYPOTHESIS SUPPORTED: gradients are trustworthy only inside the identifiable subspace"
+      ]
+    }
+  },
+  "artifacts": {
+    "json": "outputs\\gradient_fidelity_g1\\gradient_fidelity.json",
+    "summary": "outputs\\gradient_fidelity_g1\\gradient_fidelity.md"
+  },
+  "notes": ""
+}

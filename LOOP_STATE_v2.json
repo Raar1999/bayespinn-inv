@@ -1,0 +1,104 @@
+{
+  "generation": 6,
+  "champion_commit": "b5218b104d3bf4823b84ff3433459f6c59bde7f0",
+  "champion_branch": "loop/champion",
+  "adoption_commit": "c115757f3e9829cd1feb8bb86d739bfd74ff2dcf",
+  "pre_audit_parent": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+  "spec_hash_prev": "28c853f0550adf023ed8e463f29a1a4af7af1f75a830955414280109553f4140",
+  "acceptance_suite_hash": "ef090a0f259cfe65e87219e1ac9d3e16f1f608379fc0880b6e41705bb97b3049",
+  "baselines": {
+    "tests_collected": 403,
+    "mypy_findings": 25,
+    "ruff_exit": 0,
+    "suite_seconds_median": 64.0,
+    "suite_seconds_n": 3
+  },
+  "champion_per_generation": {
+    "g0": "06eb32fa61",
+    "g1": "9670bec32d",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b104d"
+  },
+  "open_findings": [
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "opened_g": 0,
+      "note": "PERMANENT - never closes"
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "opened_g": 0,
+      "note": "R-4 blocks git push"
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "opened_g": 1,
+      "note": "UNRESOLVABLE - measured consequence of PROV-03, not a numerics defect"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "opened_g": 0,
+      "note": "existing manifests, R-3 protected"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "opened_g": 0,
+      "note": "existing manifests, R-3 protected"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "opened_g": 0,
+      "note": "duplication remains; equivalence pinned in value AND gradient"
+    }
+  ],
+  "closed_all_generations": [
+    "PROV-06",
+    "PROV-02",
+    "SCI-08",
+    "PROV-01",
+    "SCI-11",
+    "GRAD-02",
+    "GRAD-03",
+    "PROV-04",
+    "SEC-02",
+    "PKG-04",
+    "API-05",
+    "SW-04a",
+    "DOC-05",
+    "DOC-06"
+  ],
+  "spec_clause_status": {
+    "SPEC-g0-1": "PASS - all 8 artefacts re-run; 11457 leaves, 41 non-timing diffs (one experiment, diagnostics only), 0 integer leaves changed",
+    "SPEC-g0-2": "PASS",
+    "SPEC-g0-3": "OPEN - R-4 blocks git push",
+    "SPEC-g0-4": "PASS",
+    "SPEC-g0-5": "PASS for every editable document; 1 parked under R-3",
+    "SPEC-g0-6": "PASS",
+    "SPEC-g0-7": "PASS via the property-test route"
+  },
+  "scope_frozen": false,
+  "scope_unfreeze_reason": "SPEC-g0-1 passes, so S-1/S-2/S-5/S-6 unfreeze per ruling section 7",
+  "stagnation_counter": 0,
+  "escalations_open": [
+    {
+      "id": "R-3",
+      "where": "papers/draft.md:255",
+      "status": "parked",
+      "ref": "DEC-g0-4"
+    }
+  ],
+  "termination": {
+    "reached": false,
+    "reason": "T-1 unreachable (SPEC-g0-3 needs a push R-4 forbids; PROV-03 permanent); T-2/T-3 not reached; T-4/T-5 did not arise"
+  },
+  "next_target": "S-1 global identifiability - highest remaining scientific risk",
+  "halt": null
+}

@@ -1170,3 +1170,74 @@ value and gradient** over 402 points across the envelope, both signs, against a
 central finite difference of the NumPy implementation (max relative difference
 asserted < 1e-6). Structural merges were built and measured as candidates g0c3
 and g0c4; see `docs/gen/CANDIDATES_g0.md` for why neither was promoted.
+
+---
+
+## 10. Generations 1-5 of the audit loop (2026-08-25)
+
+Champion `b5218b1`. Full account: `docs/gen/FINAL_REPORT_v1.md`.
+Re-verification evidence: `docs/CLAIM_EVIDENCE_MATRIX.md` section 6.
+
+### SEC-02 - library code executed code from checkpoints
+| **Severity** | MEDIUM | **Status** | VERIFIED (generation 1) |
+
+`trainer.py:386` used `weights_only=False` unconditionally; `adapters.py:237`
+fell back to it behind a `warnings.warn`, which `SW-03` rejects (a warning is not
+a status flag the caller is forced to read, and it fires only once the unsafe
+load is underway). Removal was made safe by measurement: **all seven** checkpoints
+shipped in `outputs/` load cleanly under `weights_only=True`, so the fallback
+guarded nothing. Guard is an AST walk, not a substring search, with two controls.
+
+### PKG-04 - library `exec_module`d a file from the source checkout
+| **Severity** | MEDIUM | **Status** | VERIFIED (generation 2) |
+
+`adapters.py` reached `parents[3]/"scripts"/run_benchmark_sweep.py` and executed
+it at runtime (`SW-17`). `PKG-02` had "closed" this in the first cycle by
+improving the error message; the `exec_module` call survived. Measured reachable:
+`outputs/smoke/manifest.json` has `type: None` and takes that branch, so the fix
+is a move rather than a deletion. `load_deep_ensemble` now lives in
+`bayesian/ensembles.py`; the script delegates to it, leaving one definition
+(`SW-02`).
+
+### API-05 - minibatch sampling read the global RNG
+| **Severity** | MEDIUM | **Status** | VERIFIED (generation 3) |
+
+`train_surrogate` drew batch indices from the global torch RNG, so two identical
+calls gave different models (`091450bf7c0965bb` vs `cc67824aa4e606ff`) and
+ensemble members differed by ambient state as well as by seed (`SW-09`). Now a
+local generator seeded from `cfg.seed`. **The full-batch path every experiment
+actually uses is bit-identical pre- and post-fix** (`c3aa71f10f7f8172`, same loss
+to every digit), so no published number can shift.
+
+### SW-04a - the environment probe failed silently
+| **Severity** | MEDIUM | **Status** | VERIFIED (generation 4) |
+
+`environment_info()` ended in `except Exception: pass`, so a failed CUDA probe
+silently removed the `cuda_*` keys - a reader could not tell "no GPU" from "probe
+raised". Keys are now always present and the failure is recorded.
+
+### DOC-05, DOC-06 - prose contradicted by measurement
+| **Severity** | LOW | **Status** | VERIFIED (generation 5) |
+
+The GaAs constants comment still said "not exercised in M1-M2" after four tests
+began exercising them; the README suite timing had drifted twice in one session
+and is now measured with n and a range (64.0 s, n=3, 61-65 s).
+
+### REPRO-01 - `run_identifiability.py` vs its 2026-08-19 artefact
+| **Severity** | MEDIUM | **Status** | **OPEN - UNRESOLVABLE** |
+
+41 of 375 leaves differ; median relative drift `1.906e-08`, max `5.840e-02`.
+**No claim is affected**: zero integer leaves changed, so all four identifiable
+ranks and all four `rank_vs_noise` tables are identical.
+
+Runtime nondeterminism was ruled out in two stages. The forward Jacobian is
+bit-identical across six runs and two thread configurations. The script itself,
+re-run twice on the current tree, is **bit-identical to itself (375 leaves, 0
+differing)**, and `run_identifiability_robustness.py` reproduced bit-identically
+across 3287 leaves.
+
+The difference therefore lies in the tree that produced the 2026-08-19 artefact,
+which cannot be identified - its manifest says `6577f4b`, dirty. That explanation
+cannot be confirmed, because confirming it would require the tree that was lost.
+This is the first quantified cost of `PROV-03`: 41 numbers that can never be
+explained. Recorded as unresolvable rather than closed.
