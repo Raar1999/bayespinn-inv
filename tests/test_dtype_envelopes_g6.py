@@ -27,7 +27,6 @@ below fails.
 
 from __future__ import annotations
 
-import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -129,14 +128,32 @@ class TestBernoulliRemainsSingleDtype:
     """PH-10's 'full double range' is a float64 claim, and must stay one."""
 
     def test_there_is_exactly_one_definition(self) -> None:
-        out = subprocess.run(
-            ["git", "grep", "-n", "def bernoulli"], cwd=str(REPO_ROOT),
-            capture_output=True, text=True, timeout=60,
-        )
-        definitions = [ln for ln in out.stdout.splitlines() if ln.strip()]
+        """SW-02: one definition per concept, so PH-10's claim covers every call site.
+
+        AST over ``src/``, not ``git grep``. The first draft grepped the whole
+        repository for ``def bernoulli`` and passed only while this file was
+        untracked -- committing it made the test's own *pattern string* a match,
+        and it failed on itself. That is the fourth time in this loop a
+        text-matching guard has tripped on prose describing the thing it guards
+        (``weights_only=False`` in g1, ``"scripts"`` in g2, ``torch`` in g6, and
+        now this). The lesson is recorded rather than merely fixed: a guard whose
+        subject is source code should read the syntax tree, never the characters.
+        """
+        import ast
+
+        definitions = []
+        for path in sorted((REPO_ROOT / "src").rglob("*.py")):
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            definitions += [
+                f"{path.relative_to(REPO_ROOT).as_posix()}:{n.lineno}"
+                for n in ast.walk(tree)
+                if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                and n.name == "bernoulli"
+            ]
         assert len(definitions) == 1, (
-            "PH-22 / SW-02 -- bernoulli now has more than one definition, so the "
-            f"'full double range' claim no longer covers every call site:\n  {definitions}"
+            "PH-22 / SW-02 -- bernoulli no longer has exactly one definition, so "
+            "PH-10's 'finite across the full double range' no longer covers every "
+            f"call site:\n  {definitions}"
         )
         assert "scharfetter_gummel.py" in definitions[0], definitions[0]
 
