@@ -214,3 +214,113 @@ class TestBiasConventionIsUnchanged:
         a = ohmic_boundary_values(c, c, torch.zeros((), dtype=torch.float64))
         b = ohmic_boundary_values(c, c, torch.tensor(0.7, dtype=torch.float64))
         assert float(a["phi_s_left"]) == pytest.approx(float(b["phi_s_left"]), abs=1e-15)
+
+
+# ---------------------------------------------------------------------------
+# AUDIT_g0 GRAD-03 -- found by the generation-0 falsifier candidate (g0c5).
+#
+# The tests above run in float64, where the NaN onset sits at C_s = 1.3922e8 and
+# covers the top 21.4% of the envelope. Networks in this repository train in
+# float32 (`TrainConfig.dtype`, `IVSurrogate`), and float32 has far less headroom
+# before `-C + sqrt(C**2 + 4)` cancels to exactly zero.
+#
+# Measured on the pre-fix tree: the float32 onset is C_s = 7.079e3, i.e.
+# N = 7.079e19 m^-3 -- *below* the envelope's lower bound. All 41 sampled points
+# from N = 1e21 to 1e25 returned NaN gradients: 100% of the documented envelope,
+# not 21.4%.
+#
+# Blast radius, measured rather than assumed: the only caller,
+# `losses.boundary_residuals`, receives `C_s_bdy` as data with no
+# `requires_grad_`, so autograd never walks the d/dC_s path. A PINN training step
+# at N = 1e21, 1e24 and 1e25 m^-3 in float32 produced NaN in **0 of 26** weight
+# gradient tensors. D1 and ADR-0004 are therefore *not* confounded by this defect.
+# It fires only when doping itself carries a gradient -- inverse design, and the
+# Jacobian that the identifiability analysis is built on.
+#
+# These tests are additive. No test above was edited, skipped or relaxed; the
+# gate moves in the direction of strictness only (operator ruling section 3).
+# ---------------------------------------------------------------------------
+
+def _grad_in(field: str, c_value: float, dtype: torch.dtype) -> float:
+    """d(field)/d(C_s) at ``c_value``, evaluated in ``dtype``."""
+    c = torch.tensor(float(c_value), dtype=dtype, requires_grad=True)
+    out = ohmic_boundary_values(c, c, torch.zeros((), dtype=dtype))[field]
+    out.backward()
+    assert c.grad is not None
+    return float(c.grad)
+
+
+class TestGradientsAreFiniteInEveryTrainingDtype:
+    """SPEC-g0-4 holds in the dtype the networks actually use, not only float64."""
+
+    @pytest.mark.parametrize("dtype", [torch.float64, torch.float32])
+    @pytest.mark.parametrize("field", ["log_n_left", "log_p_left", "phi_s_left"])
+    def test_no_non_finite_gradient(self, dtype: torch.dtype, field: str) -> None:
+        bad = [
+            c for c in _envelope_points()
+            if not math.isfinite(_grad_in(field, c, dtype))
+        ]
+        assert not bad, (
+            f"AUDIT_g0 GRAD-03 -- d({field})/dC_s is non-finite at {len(bad)} of "
+            f"{2 * N_SWEEP} points in {dtype} inside the documented envelope. "
+            f"First: C_s={bad[0]:.4e} (N={bad[0] * SILICON.n_i:.4e} m^-3)"
+        )
+
+    @pytest.mark.parametrize(
+        "dtype,rel", [(torch.float64, 1e-12), (torch.float32, 1e-5)]
+    )
+    def test_gradient_matches_the_analytic_derivative(
+        self, dtype: torch.dtype, rel: float
+    ) -> None:
+        """Finiteness is not correctness -- compare against 1/sqrt(4 + C^2).
+
+        The tolerance is set by the dtype's epsilon, not by what the code happens
+        to produce: float32 carries ~7 decimal digits, so 1e-5 is loose enough to
+        be honest and tight enough that a wrong formula still fails.
+        """
+        worst, worst_at = 0.0, None
+        for c_value in _envelope_points():
+            got = _grad_in("log_n_left", c_value, dtype)
+            expected = 1.0 / math.sqrt(4.0 + float(c_value) ** 2)
+            assert math.isfinite(got), f"non-finite at C_s={c_value:.3e} in {dtype}"
+            err = abs(got - expected) / expected
+            if err > worst:
+                worst, worst_at = err, c_value
+        assert worst < rel, (
+            f"d(log n)/dC_s in {dtype}: max relative error {worst:.3e} at "
+            f"C_s={worst_at:.4e}, tolerance {rel:.0e}"
+        )
+
+
+class TestTheDefectDoesNotReachNetworkWeights:
+    """The measured blast radius, pinned so a future change cannot widen it silently."""
+
+    @pytest.mark.parametrize("doping_si", [1e21, 1e24, 1e25])
+    def test_pinn_boundary_loss_has_finite_weight_gradients(
+        self, doping_si: float
+    ) -> None:
+        from bayespinn_inv.pinn.losses import boundary_residuals
+        from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+
+        cfg = PINNConfig()
+        net = SemiconductorPINN(cfg).to(dtype=torch.float32)
+        c_s = doping_si / SILICON.n_i
+        # Exactly the trainer's construction: boundary doping is data, not a leaf
+        # requiring grad (trainer.py:262).
+        x_b = torch.tensor([[0.0], [1.0]], dtype=torch.float32)
+        v_b = torch.full((2, 1), 0.5, dtype=torch.float32)
+        latent = torch.zeros((2, cfg.doping_dim), dtype=torch.float32)
+        c_b = torch.tensor([[-c_s], [c_s]], dtype=torch.float32)
+
+        net.zero_grad(set_to_none=True)
+        residuals = boundary_residuals(net, x_b, v_b, latent, c_b)
+        loss = sum(torch.mean(r ** 2) for r in residuals.values())
+        loss.backward()
+
+        offenders = [
+            name for name, p in net.named_parameters()
+            if p.grad is not None and not torch.isfinite(p.grad).all()
+        ]
+        assert not offenders, (
+            f"non-finite weight gradients at N={doping_si:.0e} m^-3: {offenders}"
+        )

@@ -1,0 +1,417 @@
+{
+  "methodology": {
+    "label_filter": "SG label used only where solver converged AND |I| > 10 * current_noise_floor",
+    "splits": "train / calibration-val / test-interp / test-extrap / test-family, all disjoint in doping level",
+    "uncertainty": "bootstrap 95% CI for continuous stats, Wilson score interval for coverages; n reported everywhere"
+  },
+  "splits": {
+    "train_levels": [
+      1e+21,
+      1.2835688421125162e+21,
+      1.6475489724420658e+21,
+      2.1147425268811283e+21,
+      2.7144176165949066e+21,
+      3.4841418771425405e+21,
+      4.4721359549995795e+21,
+      5.740294369528563e+21,
+      7.368062997280773e+21,
+      9.45741609003176e+21,
+      1.2139244620058347e+22,
+      1.5581556161088884e+22,
+      2e+22
+    ],
+    "calibration_val_levels": [
+      1.1499999999999999e+21,
+      2.2680921336355346e+21,
+      8.822392928071207e+21,
+      1.74e+22
+    ],
+    "test_interp_levels": [
+      1.1329469723303541e+21,
+      1.8665856200942247e+21,
+      3.075291220361376e+21,
+      5.066692890066491e+21,
+      8.347624664708566e+21,
+      1.3753120438672645e+22
+    ],
+    "test_extrap_levels": [
+      2e+20,
+      3.741657386773942e+20,
+      7e+20,
+      2.8e+22,
+      4.732863826479695e+22,
+      8e+22
+    ],
+    "test_family_graded_levels": [
+      1.3e+21,
+      2.434935771332695e+21,
+      4.5607017003965355e+21,
+      8.542319778979513e+21,
+      1.6e+22
+    ],
+    "note": "disjoint by construction; extrapolation levels lie outside the training band on both sides"
+  },
+  "label_integrity": {
+    "n_candidate_labels": 169,
+    "n_dropped_untrustworthy": 13,
+    "n_used": 156,
+    "why": "SG terminal current below its own numerical noise floor near equilibrium; fitting it would be fitting noise"
+  },
+  "current_dynamic_range_decades": 9.961050987243652,
+  "current_range_A_per_m2": [
+    8.887507283361629e-05,
+    812514.3125
+  ],
+  "model": {
+    "M": 5,
+    "params_per_member": 35457
+  },
+  "H1_forward_accuracy": {
+    "interpolation": {
+      "median_rel_err": {
+        "point": 0.027834281028660313,
+        "lo": 0.019563938015089488,
+        "hi": 0.03877240933680387,
+        "n": 72
+      },
+      "p90_rel_err": 0.06976176088158392,
+      "max_rel_err": 0.33924419047270993,
+      "n": 72,
+      "n_profiles": 6
+    },
+    "extrapolation": {
+      "median_rel_err": {
+        "point": 0.3818233071446869,
+        "lo": 0.23062521728906027,
+        "hi": 0.8966923383585573,
+        "n": 68
+      },
+      "p90_rel_err": 8.605547777215666,
+      "max_rel_err": 68.94639617755425,
+      "n": 68,
+      "n_profiles": 6
+    },
+    "family_transfer_graded": {
+      "median_rel_err": {
+        "point": 0.8423089146208244,
+        "lo": 0.7500877125738705,
+        "hi": 1.063902165599747,
+        "n": 60
+      },
+      "p90_rel_err": 1.5148711248336633,
+      "max_rel_err": 1.793910901864018,
+      "n": 60,
+      "n_profiles": 5
+    }
+  },
+  "H2_inverse_vs_noise": {
+    "noise_0.0": {
+      "median_abs_err_decades": {
+        "point": 0.0017956257886453386,
+        "lo": 0.0012683402436692859,
+        "hi": 0.0023548273620797033,
+        "n": 40
+      },
+      "mean_abs_err_decades": {
+        "point": 0.0019167900085452771,
+        "lo": 0.001715561989908807,
+        "hi": 0.0021104581363482785,
+        "n": 40
+      },
+      "coverage_1sigma": {
+        "point": 0.75,
+        "lo": 0.5980603857923197,
+        "hi": 0.858128813609037,
+        "n": 40
+      }
+    },
+    "noise_0.02": {
+      "median_abs_err_decades": {
+        "point": 0.0020400829805229392,
+        "lo": 0.0011734828856647893,
+        "hi": 0.0023841391938645984,
+        "n": 40
+      },
+      "mean_abs_err_decades": {
+        "point": 0.0022160426758615513,
+        "lo": 0.0017445459379522178,
+        "hi": 0.0027536092628590975,
+        "n": 40
+      },
+      "coverage_1sigma": {
+        "point": 0.775,
+        "lo": 0.6249690325768998,
+        "hi": 0.8768390867645927,
+        "n": 40
+      }
+    },
+    "noise_0.05": {
+      "median_abs_err_decades": {
+        "point": 0.0033437161536191695,
+        "lo": 0.001900356345721832,
+        "hi": 0.005380789370883932,
+        "n": 40
+      },
+      "mean_abs_err_decades": {
+        "point": 0.0039860686175684275,
+        "lo": 0.0031359816274413375,
+        "hi": 0.004810340033833127,
+        "n": 40
+      },
+      "coverage_1sigma": {
+        "point": 0.475,
+        "lo": 0.329354701126789,
+        "hi": 0.6250263789330753,
+        "n": 40
+      }
+    },
+    "noise_0.1": {
+      "median_abs_err_decades": {
+        "point": 0.007197985316212296,
+        "lo": 0.004658252663070073,
+        "hi": 0.010073350620482202,
+        "n": 40
+      },
+      "mean_abs_err_decades": {
+        "point": 0.010048274138039392,
+        "lo": 0.007490265370380442,
+        "hi": 0.012869562418920504,
+        "n": 40
+      },
+      "coverage_1sigma": {
+        "point": 0.275,
+        "lo": 0.16108016247667337,
+        "hi": 0.42834955806210573,
+        "n": 40
+      }
+    }
+  },
+  "H3_calibration": {
+    "temperature": 2.0926970199407045,
+    "n_val": 48,
+    "n_test": 140,
+    "fit": "T = RMS(z) on the calibration split; NLL-optimal variance inflation. Evaluated pre and post on the identical test set.",
+    "z_1.0": {
+      "pre": {
+        "point": 0.2857142857142857,
+        "lo": 0.21738979502274602,
+        "hi": 0.36548429084985956,
+        "n": 140
+      },
+      "post": {
+        "point": 0.6214285714285714,
+        "lo": 0.5388554401603023,
+        "hi": 0.6975159111785545,
+        "n": 140
+      },
+      "nominal": 0.6826894921370857
+    },
+    "z_1.64": {
+      "pre": {
+        "point": 0.45714285714285713,
+        "lo": 0.3768699173117245,
+        "hi": 0.5397048998627966,
+        "n": 140
+      },
+      "post": {
+        "point": 0.9,
+        "lo": 0.8391410969490967,
+        "hi": 0.939493942755373,
+        "n": 140
+      },
+      "nominal": 0.8989948330517925
+    },
+    "z_2.0": {
+      "pre": {
+        "point": 0.5857142857142857,
+        "lo": 0.5028920761838734,
+        "hi": 0.6639582894670845,
+        "n": 140
+      },
+      "post": {
+        "point": 0.9785714285714285,
+        "lo": 0.9388952114746261,
+        "hi": 0.9926859967432213,
+        "n": 140
+      },
+      "nominal": 0.9544997361036417
+    }
+  },
+  "H4a_bias_subset_ablation": {
+    "low_3": {
+      "n_biases_requested": 3,
+      "median_abs_err_decades": {
+        "point": 0.004733587550903806,
+        "lo": 0.0020420564205672065,
+        "hi": 0.0068260340271208975,
+        "n": 8
+      }
+    },
+    "mid_3": {
+      "n_biases_requested": 3,
+      "median_abs_err_decades": {
+        "point": 0.006522749665929695,
+        "lo": 0.004464561613406914,
+        "hi": 0.01581700510447348,
+        "n": 8
+      }
+    },
+    "high_3": {
+      "n_biases_requested": 3,
+      "median_abs_err_decades": {
+        "point": 0.009506711575943072,
+        "lo": 0.0021580208403157997,
+        "hi": 0.02631594472462595,
+        "n": 8
+      }
+    },
+    "all_13": {
+      "n_biases_requested": 13,
+      "median_abs_err_decades": {
+        "point": 0.0017956257886453386,
+        "lo": 0.0012368825426705143,
+        "hi": 0.002617628146538209,
+        "n": 8
+      }
+    }
+  },
+  "H4b_active_learning": {
+    "per_strategy": {
+      "random": {
+        "2": {
+          "point": 0.00639653216071423,
+          "lo": 0.0038301957638289252,
+          "hi": 0.007548157408063361,
+          "n": 32
+        },
+        "3": {
+          "point": 0.004839372736887171,
+          "lo": 0.0027345645462997226,
+          "hi": 0.0063666039043148714,
+          "n": 32
+        },
+        "4": {
+          "point": 0.003886062773073462,
+          "lo": 0.0026903801494313484,
+          "hi": 0.005241028501814071,
+          "n": 32
+        },
+        "6": {
+          "point": 0.0033935534989382177,
+          "lo": 0.002172692684780486,
+          "hi": 0.004630694056448448,
+          "n": 32
+        }
+      },
+      "max_std": {
+        "2": {
+          "point": 0.010992970799506452,
+          "lo": 0.0075258573576331145,
+          "hi": 0.01369514346475853,
+          "n": 32
+        },
+        "3": {
+          "point": 0.00918372360071018,
+          "lo": 0.006816226906231293,
+          "hi": 0.010991858247471953,
+          "n": 32
+        },
+        "4": {
+          "point": 0.004170607331944964,
+          "lo": 0.003226281400962705,
+          "hi": 0.0058944702148444605,
+          "n": 32
+        },
+        "6": {
+          "point": 0.0036709162244168425,
+          "lo": 0.0026780863584634496,
+          "hi": 0.004852802223616948,
+          "n": 32
+        }
+      }
+    },
+    "comparison": [
+      {
+        "budget": 2,
+        "random": 0.00639653216071423,
+        "max_std": 0.010992970799506452,
+        "max_std_better": false,
+        "cis_overlap": true
+      },
+      {
+        "budget": 3,
+        "random": 0.004839372736887171,
+        "max_std": 0.00918372360071018,
+        "max_std_better": false,
+        "cis_overlap": false
+      },
+      {
+        "budget": 4,
+        "random": 0.003886062773073462,
+        "max_std": 0.004170607331944964,
+        "max_std_better": false,
+        "cis_overlap": true
+      },
+      {
+        "budget": 6,
+        "random": 0.0033935534989382177,
+        "max_std": 0.0036709162244168425,
+        "max_std_better": false,
+        "cis_overlap": true
+      }
+    ],
+    "conclusion": "NO budget shows a statistically distinguishable advantage for uncertainty-driven acquisition over random selection",
+    "n_seeds": 8
+  },
+  "H5_uncertainty_vs_error": {
+    "spearman_rho": 0.8240606015150379,
+    "n": 200,
+    "sigma_quartiles": [
+      {
+        "q": 1,
+        "median_sigma": 0.005977055989205837,
+        "median_abs_err": 0.00797329395124624,
+        "n": 50
+      },
+      {
+        "q": 2,
+        "median_sigma": 0.025388581678271294,
+        "median_abs_err": 0.030714894737569942,
+        "n": 50
+      },
+      {
+        "q": 3,
+        "median_sigma": 0.22166689485311508,
+        "median_abs_err": 0.37315579380534913,
+        "n": 50
+      },
+      {
+        "q": 4,
+        "median_sigma": 0.6878359615802765,
+        "median_abs_err": 0.2537718407513063,
+        "n": 50
+      }
+    ],
+    "monotone_across_quartiles": false,
+    "per_group": {
+      "interpolation": {
+        "median_sigma": 0.007228936767205596,
+        "median_abs_err": 0.011922884430927816,
+        "n": 72
+      },
+      "extrapolation": {
+        "median_sigma": 0.1134091392159462,
+        "median_abs_err": 0.14044877195922156,
+        "n": 68
+      },
+      "family_graded": {
+        "median_sigma": 0.6661428809165955,
+        "median_abs_err": 0.26535929895497734,
+        "n": 60
+      }
+    },
+    "sigma_inflation_extrap_over_interp": 15.688218457025654,
+    "error_inflation_extrap_over_interp": 11.77976460082924,
+    "verdict": "sigma tracks the extrapolation error"
+  }
+}
