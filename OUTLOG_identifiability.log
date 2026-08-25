@@ -1,0 +1,188 @@
+==========================================================================
+ANALYSIS-CONVERGENCE STUDY (is the conclusion an artefact of the
+finite-difference estimator?)
+==========================================================================
+  min_snr   step  rows        eta      floor  resolv  ident@2%    s1/s2
+    1e+04   0.01    15   2.58e-03   4.00e-02       3         3     6.12
+    1e+06   0.01    12   5.87e-06   8.13e-05       7         4     6.11
+    1e+06   0.03    12   1.96e-06   2.71e-05       8         4     6.11
+    1e+07   0.03    11   4.43e-07   5.87e-06       9         4     6.11
+    1e+08   0.05    10   3.32e-08   4.20e-07       9         4     6.11
+
+==========================================================================
+DEVICE: step_symmetric
+==========================================================================
+  using 10/19 bias points (min_snr=1e+08, step=0.05)
+Identifiability report
+  observations (bias points) : 10
+  parameters (profile nodes) : 16
+  measurement noise (symlog) : 8.600e-03
+  identifiable rank          : 4 / 16
+  resolvable by this estimate: 9 (spectral floor 4.20e-07)
+  condition number           : inf
+  singular values (gain, symlog per decade):
+    sigma[ 0] = 6.9098e-01   needs   0.0124 decades   observable
+    sigma[ 1] = 2.9147e-01   needs   0.0295 decades   observable
+    sigma[ 2] = 4.7675e-02   needs     0.18 decades   observable
+    sigma[ 3] = 9.1880e-03   needs    0.936 decades   observable
+    sigma[ 4] = 5.6281e-03   needs     1.53 decades   UNOBSERVABLE
+    sigma[ 5] = 6.3939e-04   needs     13.5 decades   UNOBSERVABLE
+    sigma[ 6] = 1.8136e-04   needs     47.4 decades   UNOBSERVABLE
+    sigma[ 7] = 2.1353e-05   needs      403 decades   UNOBSERVABLE
+    sigma[ 8] = 1.9392e-06   needs 4.43e+03 decades   UNOBSERVABLE
+    sigma[ 9] = 1.9349e-07   needs   -- decades   below analysis floor
+    sigma[10] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[11] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[12] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[13] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[14] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[15] = 0.0000e+00   needs   -- decades   below analysis floor
+  linear-response validation (a = 0.01 decades):
+    dir 0: ||J v|| = 6.9098e-03   actual = 6.9051e-03   ratio = 0.999
+    dir 1: ||J v|| = 2.9147e-03   actual = 2.9061e-03   ratio = 0.997
+    dir 2: ||J v|| = 4.7675e-04   actual = 4.7739e-04   ratio = 1.001
+    dir 3: ||J v|| = 9.1880e-05   actual = 9.2262e-05   ratio = 1.004
+  identifiable dof vs measurement noise:
+    20.00000% ->  2 / 16
+    10.00000% ->  3 / 16
+     5.00000% ->  3 / 16
+     2.00000% ->  4 / 16
+     1.00000% ->  5 / 16
+     0.10000% ->  6 / 16
+     0.01000% ->  7 / 16
+     0.00010% ->  9 / 16
+  equivalence twin: profile differs by up to 0.100 decades (1.26x), I-V by 1.2750% -> distinguishable at 2% noise: False
+
+==========================================================================
+DEVICE: step_asymmetric
+==========================================================================
+  using 11/19 bias points (min_snr=1e+08, step=0.05)
+Identifiability report
+  observations (bias points) : 11
+  parameters (profile nodes) : 16
+  measurement noise (symlog) : 8.600e-03
+  identifiable rank          : 5 / 16
+  resolvable by this estimate: 11 (spectral floor 6.79e-07)
+  condition number           : inf
+  singular values (gain, symlog per decade):
+    sigma[ 0] = 1.4578e+00   needs   0.0059 decades   observable
+    sigma[ 1] = 3.8900e-01   needs   0.0221 decades   observable
+    sigma[ 2] = 7.5310e-02   needs    0.114 decades   observable
+    sigma[ 3] = 2.6176e-02   needs    0.329 decades   observable
+    sigma[ 4] = 1.0376e-02   needs    0.829 decades   observable
+    sigma[ 5] = 2.5710e-03   needs     3.35 decades   UNOBSERVABLE
+    sigma[ 6] = 6.7499e-04   needs     12.7 decades   UNOBSERVABLE
+    sigma[ 7] = 1.9641e-04   needs     43.8 decades   UNOBSERVABLE
+    sigma[ 8] = 4.9080e-05   needs      175 decades   UNOBSERVABLE
+    sigma[ 9] = 1.1268e-05   needs      763 decades   UNOBSERVABLE
+    sigma[10] = 4.8173e-06   needs 1.79e+03 decades   UNOBSERVABLE
+    sigma[11] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[12] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[13] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[14] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[15] = 0.0000e+00   needs   -- decades   below analysis floor
+  linear-response validation (a = 0.01 decades):
+    dir 0: ||J v|| = 1.4578e-02   actual = 1.4582e-02   ratio = 1.000
+    dir 1: ||J v|| = 3.8900e-03   actual = 3.8841e-03   ratio = 0.998
+    dir 2: ||J v|| = 7.5310e-04   actual = 7.5521e-04   ratio = 1.003
+    dir 3: ||J v|| = 2.6176e-04   actual = 2.6044e-04   ratio = 0.995
+  identifiable dof vs measurement noise:
+    20.00000% ->  2 / 16
+    10.00000% ->  3 / 16
+     5.00000% ->  4 / 16
+     2.00000% ->  5 / 16
+     1.00000% ->  5 / 16
+     0.10000% ->  7 / 16
+     0.01000% ->  9 / 16
+     0.00010% -> 11 / 16
+  equivalence twin: profile differs by up to 0.100 decades (1.26x), I-V by 0.2996% -> distinguishable at 2% noise: False
+
+==========================================================================
+DEVICE: graded
+==========================================================================
+  using 10/19 bias points (min_snr=1e+08, step=0.05)
+Identifiability report
+  observations (bias points) : 10
+  parameters (profile nodes) : 16
+  measurement noise (symlog) : 8.600e-03
+  identifiable rank          : 3 / 16
+  resolvable by this estimate: 9 (spectral floor 3.56e-07)
+  condition number           : inf
+  singular values (gain, symlog per decade):
+    sigma[ 0] = 7.0001e-01   needs   0.0123 decades   observable
+    sigma[ 1] = 2.6486e-01   needs   0.0325 decades   observable
+    sigma[ 2] = 4.7545e-02   needs    0.181 decades   observable
+    sigma[ 3] = 7.5957e-03   needs     1.13 decades   UNOBSERVABLE
+    sigma[ 4] = 3.3689e-03   needs     2.55 decades   UNOBSERVABLE
+    sigma[ 5] = 5.7843e-04   needs     14.9 decades   UNOBSERVABLE
+    sigma[ 6] = 9.0851e-05   needs     94.7 decades   UNOBSERVABLE
+    sigma[ 7] = 1.7446e-05   needs      493 decades   UNOBSERVABLE
+    sigma[ 8] = 1.5084e-06   needs  5.7e+03 decades   UNOBSERVABLE
+    sigma[ 9] = 2.4720e-07   needs   -- decades   below analysis floor
+    sigma[10] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[11] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[12] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[13] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[14] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[15] = 0.0000e+00   needs   -- decades   below analysis floor
+  linear-response validation (a = 0.01 decades):
+    dir 0: ||J v|| = 7.0001e-03   actual = 6.9946e-03   ratio = 0.999
+    dir 1: ||J v|| = 2.6486e-03   actual = 2.6413e-03   ratio = 0.997
+    dir 2: ||J v|| = 4.7545e-04   actual = 4.7610e-04   ratio = 1.001
+    dir 3: ||J v|| = 7.5957e-05   actual = 7.7402e-05   ratio = 1.019
+  identifiable dof vs measurement noise:
+    20.00000% ->  2 / 16
+    10.00000% ->  3 / 16
+     5.00000% ->  3 / 16
+     2.00000% ->  3 / 16
+     1.00000% ->  4 / 16
+     0.10000% ->  6 / 16
+     0.01000% ->  7 / 16
+     0.00010% ->  9 / 16
+  equivalence twin: profile differs by up to 0.100 decades (1.26x), I-V by 0.2385% -> distinguishable at 2% noise: False
+
+==========================================================================
+DEVICE: ldd
+==========================================================================
+  using 8/19 bias points (min_snr=1e+08, step=0.05)
+Identifiability report
+  observations (bias points) : 8
+  parameters (profile nodes) : 16
+  measurement noise (symlog) : 8.600e-03
+  identifiable rank          : 4 / 16
+  resolvable by this estimate: 8 (spectral floor 4.45e-07)
+  condition number           : inf
+  singular values (gain, symlog per decade):
+    sigma[ 0] = 8.1226e-01   needs   0.0106 decades   observable
+    sigma[ 1] = 1.8130e-01   needs   0.0474 decades   observable
+    sigma[ 2] = 6.2992e-02   needs    0.137 decades   observable
+    sigma[ 3] = 1.1098e-02   needs    0.775 decades   observable
+    sigma[ 4] = 1.7860e-03   needs     4.82 decades   UNOBSERVABLE
+    sigma[ 5] = 1.3171e-03   needs     6.53 decades   UNOBSERVABLE
+    sigma[ 6] = 2.5241e-04   needs     34.1 decades   UNOBSERVABLE
+    sigma[ 7] = 4.0483e-05   needs      212 decades   UNOBSERVABLE
+    sigma[ 8] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[ 9] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[10] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[11] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[12] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[13] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[14] = 0.0000e+00   needs   -- decades   below analysis floor
+    sigma[15] = 0.0000e+00   needs   -- decades   below analysis floor
+  linear-response validation (a = 0.01 decades):
+    dir 0: ||J v|| = 8.1226e-03   actual = 8.1141e-03   ratio = 0.999
+    dir 1: ||J v|| = 1.8130e-03   actual = 1.8168e-03   ratio = 1.002
+    dir 2: ||J v|| = 6.2992e-04   actual = 6.2997e-04   ratio = 1.000
+    dir 3: ||J v|| = 1.1098e-04   actual = 1.1539e-04   ratio = 1.040
+  identifiable dof vs measurement noise:
+    20.00000% ->  2 / 16
+    10.00000% ->  3 / 16
+     5.00000% ->  3 / 16
+     2.00000% ->  4 / 16
+     1.00000% ->  4 / 16
+     0.10000% ->  6 / 16
+     0.01000% ->  7 / 16
+     0.00010% ->  8 / 16
+  equivalence twin: profile differs by up to 0.100 decades (1.26x), I-V by 0.0240% -> distinguishable at 2% noise: False
+
+Wrote outputs\identifiability_g1\identifiability.json and outputs\identifiability_g1\manifest.json

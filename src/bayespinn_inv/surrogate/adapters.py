@@ -222,19 +222,16 @@ def load_surrogate_ensemble(manifest_path) -> Tuple[SurrogateEnsembleAdapter, di
     for ck in manifest["checkpoints"]:
         # AUDIT_MASTER SEC-01: weights_only=False disables PyTorch >= 2.6's
         # safe-loading default, so a malicious checkpoint executes arbitrary
-        # code on load. Our checkpoints hold only a state_dict and a plain
-        # dict of config scalars, so weights_only=True is sufficient; we fall
-        # back only for checkpoints written by older versions of this code,
-        # and say so loudly.
-        try:
-            state = torch.load(ck, map_location="cpu", weights_only=True)
-        except Exception:
-            import warnings
-            warnings.warn(
-                f"Falling back to unsafe torch.load for {ck}: this executes "
-                "arbitrary code from the checkpoint. Only do this for files "
-                "you produced yourself.", RuntimeWarning, stacklevel=2)
-            state = torch.load(ck, map_location="cpu", weights_only=False)
+        # code on load. Our checkpoints hold only a state_dict and a plain dict
+        # of config scalars, so weights_only=True is always sufficient.
+        #
+        # AUDIT_g0 SEC-02: this used to fall back to weights_only=False behind a
+        # warnings.warn. SW-03 requires a degraded path to return a status flag
+        # the caller is forced to read, or to raise -- a warning is neither, and
+        # it is emitted only once the unsafe load is already underway. Measured
+        # before removal: all seven checkpoints shipped in outputs/ load cleanly
+        # under weights_only=True, so the fallback guarded nothing.
+        state = torch.load(ck, map_location="cpu", weights_only=True)
         cfg = IVSurrogateConfig(**state["cfg"])
         net = IVSurrogate(cfg)
         net.load_state_dict(state["state_dict"])

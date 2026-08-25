@@ -383,7 +383,11 @@ class PINNTrainer:
         }, path)
 
     def load_checkpoint(self, path: Path) -> None:
-        ck = torch.load(path, map_location=self.device, weights_only=False)
+        # AUDIT_g0 SEC-02 / SW-16: this was weights_only=False unconditionally,
+        # so every checkpoint load executed arbitrary pickle. save_checkpoint
+        # writes only tensors and plain scalars (model_state, opt_state, and
+        # asdict() of two dataclasses), all of which weights_only=True accepts.
+        ck = torch.load(path, map_location=self.device, weights_only=True)
         self.network.load_state_dict(ck["model_state"])
         self.opt.load_state_dict(ck["opt_state"])
         # cfg, weights, history are informational on load
