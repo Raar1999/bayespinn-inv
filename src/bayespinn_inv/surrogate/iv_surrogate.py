@@ -191,18 +191,44 @@ def train_surrogate(
     weight_decay: float = 1e-5,
     batch_size: Optional[int] = None,
     verbose: bool = False,
+    seed: Optional[int] = None,
 ) -> List[float]:
-    """Train a single surrogate on (X, Y). Returns the loss history."""
+    """Train a single surrogate on (X, Y). Returns the loss history.
+
+    Parameters
+    ----------
+    seed
+        Seed for minibatch sampling. Defaults to ``model.cfg.seed``, so an
+        ensemble whose members differ only by ``cfg.seed`` also differs only by
+        ``cfg.seed`` in its batch draws. Ignored on the full-batch path, which
+        draws nothing.
+
+    Notes
+    -----
+    AUDIT_g0 API-05 / SW-09. Minibatch indices used to come from
+    ``torch.randint(0, n, (batch_size,))``, which reads the **global** torch RNG:
+    two consecutive calls with identical arguments produced different models, and
+    ensemble members differed by the ambient RNG state as well as by their seed.
+    Measured before the fix at ``cfg.seed=0``, 200 epochs, ``batch_size=32``:
+    state-dict hashes ``091450bf7c0965bb`` and ``cc67824aa4e606ff`` on successive
+    calls. Sampling now uses a local generator, so the global RNG is irrelevant
+    and no caller has to reseed it -- the same discipline ``PINNTrainer`` already
+    applies at ``trainer.py:132``.
+    """
     Xt = normalizer(torch.tensor(X, dtype=torch.float32))
     Yt = torch.tensor(Y, dtype=torch.float32).reshape(-1, 1)
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=epochs)
     n = Xt.shape[0]
     history = []
+    # Local generator, never the global RNG. Constructed unconditionally so the
+    # seed is resolved the same way whichever path runs.
+    batch_rng = torch.Generator()
+    batch_rng.manual_seed(int(model.cfg.seed if seed is None else seed))
     model.train()
     for ep in range(epochs):
         if batch_size and batch_size < n:
-            idx = torch.randint(0, n, (batch_size,))
+            idx = torch.randint(0, n, (batch_size,), generator=batch_rng)
             xb, yb = Xt[idx], Yt[idx]
         else:
             xb, yb = Xt, Yt
