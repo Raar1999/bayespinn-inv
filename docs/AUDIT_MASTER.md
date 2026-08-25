@@ -1241,3 +1241,81 @@ which cannot be identified - its manifest says `6577f4b`, dirty. That explanatio
 cannot be confirmed, because confirming it would require the tree that was lost.
 This is the first quantified cost of `PROV-03`: 41 numbers that can never be
 explained. Recorded as unresolvable rather than closed.
+
+---
+
+## 11. Generation 6 and the terminal adversarial generation (2026-08-25)
+
+Champion `a59255e`. Full record: `docs/gen/GEN_g6.md`,
+`docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`, `docs/audit/AUDIT_g6.md`.
+
+### S-1 - global non-identifiability, demonstrated by witness
+| **Severity** | (seed item, not a defect) | **Status** | MEASURED |
+
+13 witness pairs among 1,999,000 examined at d=4, log-uniform prior 1e21-1e23
+m^-3, 16 biases over 0.15-0.90 V, distinguishability floor 2.0e-02 = max(noise
+2.0e-02, solver discretisation 1.5e-03). The closest differs by **8.18x in doping**
+at one anchor and **1.23% in I-V**. All three pairs tested survive 4x grid
+refinement (N=301/601/1201) and `tol_carrier=1e-12`; pair 0's distance FALLS under
+refinement. Oracle-arbitrated throughout (`ADR-0007`).
+
+For scale, `C14`'s equivalence twins were *constructed* along locally flat
+directions and differ by 1.26x. These were *found by search* and differ by 8.18x.
+
+Contraction at the instrument's own 2% noise is **not measured**: prior importance
+sampling collapses (ESS 1.0 of 2000, all variance ratios 0.000), which would report
+as "4 of 4 directions contract". That is the estimator dying, not the device
+speaking, and it is marked unsupported rather than published.
+
+### PH-22 retro-sweep - no second GRAD-02
+| **Severity** | n/a | **Status** | NEGATIVE RESULT |
+
+Two quantities cross the solver/network dtype boundary and both degrade gracefully:
+SI<->scaled doping round trip 1.678e-16 (float64) vs 8.714e-08 (float32); symlog
+2.030e-15 vs 8.823e-07. `bernoulli` has one NumPy definition in a module that does
+not import torch. Envelopes now annotated per dtype and pinned by tests.
+
+### NB-02 - the CI notebook step destroys committed evidence
+| **Severity** | MEDIUM | **Status** | OPEN |
+
+`scripts/build_notebooks.py` regenerates the twelve notebooks WITHOUT executed
+outputs; `test_notebooks.py` asserts they HAVE outputs, which is the evidence for
+claim `U1`. CI is green only because `Test` (step 5) precedes the generator
+(step 6), and nothing states that dependency. Running the step verbatim destroyed
+all twelve notebooks' outputs; restored from HEAD via `git archive` and
+digest-verified 12/12.
+
+### PROV-07 - ignored directories are invisible to all three provenance fields
+| **Severity** | MEDIUM | **Status** | OPEN |
+
+Found by the terminal adversarial generation (A-6, F3). A source module placed
+inside a `.gitignore`'d directory leaves `dirty=False`, both counts zero, and the
+`tree_digest` unchanged - the same shape of failure `PROV-02` was opened for.
+
+MEDIUM rather than a repeat CRITICAL: the exclusion is deliberate and documented
+(regenerable build output is not divergence), and the attack requires code to be
+deliberately placed in an ignored path, which is not this repository's structure
+and has not occurred. Candidate fix for a later generation: hash the ignore rules
+themselves into the tree digest.
+
+### BUG-14 recurrence - fixed and made permanent
+| **Severity** | LOW | **Status** | VERIFIED |
+
+`tests/test_robustness.py:278` read a UTF-8 manifest with the platform encoding.
+Fixed, and the file-by-file part of BUG-14 removed: an AST guard now fails on any
+text `open`/`read_text`/`write_text` without `encoding=` in `src/`, `scripts/` or
+`tests/`.
+
+### A recurring defect in this loop's own output
+| **Severity** | (process) | **Status** | RECORDED |
+
+Four times a guard whose subject is source code was implemented by matching
+characters, and tripped on prose describing the very thing it guards:
+`weights_only=False` (g1), `"scripts"` (g2), `torch` (g6), and `def bernoulli` via
+`git grep` (g6 - the test matched its own search pattern once committed). All four
+were fixed by reading the syntax tree. Recorded as a defect class rather than four
+slips.
+
+Also: commit `1a090f0` carried a message stating "420 passed" when the suite was
+437 passed / 1 failed. `R-4` forbids amending, so the error stands in history and
+is corrected in `d3b7693`.
