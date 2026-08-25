@@ -3,7 +3,7 @@
   "designation": "G7-R (bounded reconciliation follow-on; not a new loop)",
   "terminated": true,
   "termination_condition": "T-1 was reached at generation 6 and is not re-opened. G7-R was a single bounded generation ordered post-termination; it resolved every SPEC-g7 clause and opened no new scientific scope.",
-  "champion_commit": "f807024df752fc52e0ccd1b7eefc6ca8b846ff46",
+  "champion_commit": "922c2cc35f047f5c5556ba02e0305cf71c05e3cc",
   "machinery_commit": "3e05c9da55e152c8305838ff1da4166207051826",
   "champion_branch": "loop/champion",
   "one_tree_one_commit": {
@@ -30,7 +30,7 @@
     "g4": "de1b6f6",
     "g5": "b5218b1",
     "g6": "a59255e",
-    "g7": "f807024"
+    "g7": "922c2cc"
   },
   "spec_clause_status": {
     "SPEC-g7-1": "PASS - neither chart contains the other, read from the construction",
@@ -146,5 +146,6 @@
     "OT-1 push and run CI - BLOCKED: no git remote exists on this host; a remote must be added before the documented command can run",
     "OT-2 apply papers/CORRIGENDA_g6.md - still unapplied; papers/draft.md:255 is unchanged"
   ],
-  "halt": null
+  "halt": null,
+  "results_commit": "f807024df752fc52e0ccd1b7eefc6ca8b846ff46"
 }
