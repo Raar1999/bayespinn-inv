@@ -1,0 +1,48 @@
+# Line-ending policy — AUDIT_g6 §3.4, and the reason it is not the usual one.
+#
+# This repository was adopted byte-for-byte in commit c115757 after its entire
+# post-audit state had been preserved and digest-verified (212/212, twice). The
+# adoption commit is attested: `git archive c115757 | tar -x` reproduces 164/164
+# tracked files byte-identically against PRESERVE_MANIFEST_g0.sha256.
+#
+# That attestation is only meaningful if a checkout returns exactly what was
+# committed. It very nearly did not: `core.autocrlf` was `true` at system level
+# on the adopting machine with no .gitattributes present, and 39+ tracked files
+# carry CRLF. Staging would have rewritten every one of them, and the Step 2
+# attestation would have failed on a git configuration default rather than on
+# anything wrong with the project. It was caught by hand and worked around with a
+# repository-local `core.autocrlf=false`.
+#
+# A local config setting does not travel with a clone. This file makes it travel.
+#
+# `-text` means: never convert, in either direction. Checkout bytes == index
+# bytes == the bytes that were attested, on every platform and under any
+# `core.autocrlf` value the next person happens to have set.
+#
+# WHY NOT `* text=auto`, the usual answer:
+#   the index holds 119 CRLF files, 74 LF files and 2 genuinely mixed files.
+#   Normalising would rewrite 119+ of them, changing the very bytes the
+#   attestation covers and silently invalidating PRESERVE_MANIFEST_g0.sha256.
+#   Mixed line endings are not tidy, but they are *what was measured*, and this
+#   loop does not rewrite evidence to make it look better.
+#
+# tests/test_line_endings_g6.py fails if any tracked file's working-tree bytes
+# stop matching its blob, which is the property this file exists to guarantee.
+
+* -text
+
+# Binary formats: no conversion (already implied above) and no textual diff.
+*.pt      binary
+*.pth     binary
+*.ckpt    binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pdf     binary
+*.whl     binary
+*.gz      binary
+*.zip     binary
+*.npy     binary
+*.npz     binary

@@ -1,0 +1,93 @@
+# OPERATOR_TASKS — actions reserved to the operator
+
+Append-only. Each entry is an action the loop is forbidden to take, with the exact
+command and the finding it closes. The loop does not perform these and does not
+mark the corresponding finding closed.
+
+---
+
+## OT-1 — push `loop/champion` so CI executes · closes `SPEC-g0-3b` / `CI-01`
+
+**Status** `OPERATOR-BLOCKED` · **Blocks** `CI-01`, open since generation 0
+**Why the loop cannot do it** `R-4` prohibits `git push`; `SK-09` prohibits network
+access.
+
+`.github/workflows/ci.yml` has existed since before generation 0 and has **never
+executed** — it was untracked until commit `c115757`, so it was never pushed and
+never ran, while `AUDIT_MASTER` recorded `CI-01` as VERIFIED against it. That false
+closure is the reason this file exists.
+
+Generation 6 executed everything that can be executed locally (`SPEC-g0-3a`, see
+`docs/WINDOWS_RISK_g6.md`): the workflow is valid YAML, and its `Lint`, `Test` and
+notebook-generator steps all exit 0 on Python 3.11.9 / Windows. What cannot be
+produced locally is a **retrievable run log per matrix leg**, which is what
+`SPEC-g0-3b` requires.
+
+```bash
+cd /d/bayespinn-inv/bayespinn-inv
+git switch loop/champion            # confirm you are on the champion branch
+git log --oneline -1                # expect the generation-6 champion
+
+# Push. The workflow triggers on push to main and on pull_request, so a branch
+# push alone will NOT start it -- use workflow_dispatch, or open a PR:
+git push -u origin loop/champion
+
+# then either
+gh workflow run ci.yml --ref loop/champion
+gh run watch
+
+# or open a pull request, which the `pull_request` trigger does fire on
+gh pr create --base main --head loop/champion \
+  --title "Audit loop generations 0-6" --body-file docs/gen/FINAL_REPORT_v1.md
+```
+
+**Note before pushing:** the workflow's triggers are `push: branches: [main]`,
+`pull_request`, and `workflow_dispatch`. Pushing `loop/champion` on its own fires
+none of them. Use `workflow_dispatch` or a PR.
+
+**What to check in the logs, and what closes the finding.** `CI-01` closes only
+with a retrievable log for **every** leg:
+
+| leg | what it proves |
+|---|---|
+| ubuntu × 3.9 | the `requires-python >=3.9` floor is real. **Never executed anywhere** — this repository has only ever run on 3.11. |
+| ubuntu × 3.11 | the baseline |
+| ubuntu × 3.12 | the top of the declared classifier range, also never executed |
+| **windows × 3.11** | the BUG-14 leg. See `docs/WINDOWS_RISK_g6.md` for what to look for. |
+| clean-install | the wheel path, with dependency resolution — the one thing the offline substitute could not verify |
+
+Expect **419 passed** on each leg. A different count is a finding, not a rounding
+difference.
+
+**Watch specifically for:** the 3.9 leg. `pyproject.toml` claims it and
+`[tool.mypy]` carries a comment saying the 3.9 support claim "is backed by the CI
+matrix (which actually runs the suite on 3.9)". The CI matrix has never run. That
+sentence is currently unsupported, and the 3.9 leg is the only thing that can
+support it.
+
+---
+
+## OT-2 — apply `papers/CORRIGENDA_g6.md` · closes the standing `R-3` escalation
+
+**Status** `OPERATOR-BLOCKED` · **Blocks** the last instance of `SCI-11`
+**Why the loop cannot do it** `R-3` makes `papers/**` reserved.
+
+One line in `papers/draft.md` states the identifiable-rank result without its
+local/global qualifier, which `PH-21` forbids. Six other instances were corrected
+in generation 0; this one is protected.
+
+The corrigendum gives the exact line, its current text, the measured replacement,
+the evidence command and the manifest path. Apply it, or decline it and record the
+decision — either resolves the escalation.
+
+```bash
+cat papers/CORRIGENDA_g6.md
+# apply the replacement given there, then:
+PYTHONPATH=src python -m pytest tests/test_claim_surface_g0.py -q
+```
+
+`tests/test_claim_surface_g0.py::TestParkedPapersInstance` pins the count of
+unqualified passages at **1** and fails in **both** directions. When the
+corrigendum is applied the count drops to 0 and that test fails **by design** —
+that failure is the signal to move `papers/draft.md` into `CLAIM_SURFACE` and
+delete the parked-instance test.

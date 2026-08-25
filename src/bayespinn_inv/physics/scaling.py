@@ -119,6 +119,19 @@ class Scaling:
     # compression to map typical doping ranges (1e16 -- 1e25 m^-3) into
     # the ~O(1) regime the network can actually learn over.
     #
+    # PH-22 (dtype). This representation is the one quantity that crosses the
+    # solver/network boundary: the SG oracle works in float64, the surrogate and
+    # the PINN in float32. Measured round-trip relative error of the SI <-> scaled
+    # conversion over 1e16 -- 1e25 m^-3, 91 log-spaced points:
+    #
+    #     float64   1.678e-16   (worst at N = 1e23)
+    #     float32   8.714e-08   (worst at N = 2.5e19)
+    #
+    # Both are at their dtype's epsilon, so the envelope transfers -- but the
+    # float32 figure is a hard floor on how finely two doping profiles can be
+    # *distinguished* on the network side, which matters to any study of
+    # profile degeneracy. It is not a floor on the oracle.
+    #
     #     latent = sign(C_si) * log10(1 + |C_si| / n_i) / 10
     #
     # This is bijective (preserves sign and magnitude information), smooth

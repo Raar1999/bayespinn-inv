@@ -275,7 +275,12 @@ class TestProvenance:
         man.add_result("x", 42)
         p = man.write(tmp_path)
         import json
-        d = json.loads(p.read_text())
+        # AUDIT_g6 3.2a (BUG-14 class): RunManifest.write() writes UTF-8, so the
+        # read must say so. Without it this decodes with the platform encoding --
+        # cp1252 on the Windows CI leg -- and any non-ASCII in the environment
+        # block (processor string, locale-dependent fields) either raises or
+        # mis-decodes silently.
+        d = json.loads(p.read_text(encoding="utf-8"))
         assert d["experiment"] == "unit-test"
         assert d["seed"] == 3
         assert d["results"]["x"] == 42

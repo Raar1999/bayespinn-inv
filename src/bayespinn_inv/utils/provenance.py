@@ -162,6 +162,15 @@ def environment_info() -> Dict[str, Any]:
         "platform": platform.platform(),
         "machine": platform.machine(),
         "processor": platform.processor(),
+        # AUDIT_g6 §3.4. core.autocrlf was `true` at system level on the machine
+        # that adopted this tree, which would have rewritten 119 CRLF files during
+        # staging and broken the c115757 attestation. `.gitattributes` now pins
+        # `* -text` so the setting cannot matter, but it is recorded anyway: if a
+        # future result ever fails to reproduce, the first question is whether the
+        # bytes on disk were the bytes in the commit, and this answers it without
+        # requiring the tree that produced the result to still exist.
+        "git_autocrlf": _git("config", "core.autocrlf"),
+        "git_eol": _git("config", "core.eol"),
     }
     for mod in ("numpy", "scipy", "torch", "sklearn", "matplotlib"):
         try:

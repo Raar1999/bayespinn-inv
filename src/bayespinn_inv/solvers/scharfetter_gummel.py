@@ -421,7 +421,11 @@ class ScharfetterGummel1D:
         # precision once C^2 >> 4: the minority density is wrong by 0.35% at
         # C_s = 1e7 (N = 1e23 m^-3, an ordinary doping level), by 25% at 1e8,
         # and is exactly 0.0 at 1e9 -- whereupon log(0) = -inf and the entire
-        # solve returns NaN. The claimed doping range is 1e21-1e25 m^-3, i.e.
+        # solve returns NaN. PH-22 (dtype): this solver is float64 throughout, and
+        # the range below is a float64 envelope. It does NOT transfer to float32 --
+        # AUDIT_g0 GRAD-03 measured the torch mirror of this same contact algebra
+        # failing across 41 of 41 sampled points of this very range in float32,
+        # against 21.4% of it in float64. The claimed doping range is 1e21-1e25 m^-3, i.e.
         # C_s up to 1e9, so this covered the top two decades of it.
         #
         # Stable form: take the majority carrier from the quadratic (no

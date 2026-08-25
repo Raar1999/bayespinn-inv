@@ -225,6 +225,11 @@ def sg_forward_jacobian(
     Perturbs the *magnitude* of the doping at each node by ``rel_step`` decades,
     keeping its sign, and re-solves. Central differences.
 
+    PH-22 (dtype): **float64 throughout** -- this is the NumPy oracle path, and it
+    is the only one permitted to arbitrate a published identifiability number. Its
+    float32 sibling is :func:`torch_forward_jacobian`; the two are not
+    interchangeable and their envelopes are reported separately.
+
     Parameters
     ----------
     oracle : ScharfetterGummel1D
@@ -308,6 +313,21 @@ def torch_forward_jacobian(
 
     ``iv_curve`` must have the ``(C_si, biases) -> (biases, I)`` signature used
     by :class:`~bayespinn_inv.surrogate.adapters.SurrogateForwardAdapter`.
+
+    PH-22 (dtype): **float32** -- the surrogate's own dtype, set at line
+    ``C0 = torch.as_tensor(..., dtype=torch.float32)`` below. Two consequences,
+    both measured:
+
+    * doping differences below ~1e-7 relative are not representable here, so this
+      function cannot resolve profile pairs closer than that (the float64 oracle
+      can: its round-trip error is 1.678e-16);
+    * GRAD-01 measured surrogate directional derivatives as agreeing with the
+      oracle **only inside the identifiable subspace** (cosine ~ +0.50 inside,
+      ~ -0.00 outside).
+
+    Together these make this function suitable for *proposing* directions and
+    unsuitable for *arbitrating* any claim about what lies outside the
+    identifiable subspace. Use :func:`sg_forward_jacobian` for that.
     """
     import torch
 
