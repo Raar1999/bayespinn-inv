@@ -18,6 +18,7 @@ Usage
 
 from __future__ import annotations
 
+import hashlib
 import json
 import platform
 import subprocess
@@ -27,38 +28,132 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-__all__ = ["RunManifest", "environment_info", "git_commit", "git_is_dirty"]
+__all__ = [
+    "RunManifest",
+    "environment_info",
+    "git_commit",
+    "git_is_dirty",
+    "git_status_counts",
+    "git_tree_digest",
+]
+
+#: Repository root when the package is used from a source checkout.
+_DEFAULT_REPO = Path(__file__).resolve().parents[3]
 
 
-def _git(*args: str) -> Optional[str]:
+def _git_bytes(*args: str, repo: Optional[Path] = None) -> Optional[bytes]:
+    """Raw stdout of a git command, or ``None`` if git or the repo is unavailable."""
     try:
         out = subprocess.run(
             ["git", *args],
-            capture_output=True, text=True, timeout=10,
-            cwd=str(Path(__file__).resolve().parents[3]),
+            capture_output=True, timeout=30,
+            cwd=str(repo if repo is not None else _DEFAULT_REPO),
         )
-        if out.returncode != 0:
-            return None
-        return out.stdout.strip()
-    except Exception:
+    except (OSError, subprocess.SubprocessError):
         return None
+    if out.returncode != 0:
+        return None
+    return out.stdout
 
 
-def git_commit() -> Optional[str]:
+def _git(*args: str, repo: Optional[Path] = None) -> Optional[str]:
+    raw = _git_bytes(*args, repo=repo)
+    return None if raw is None else raw.decode("utf-8", "replace").strip()
+
+
+def git_commit(repo: Optional[Path] = None) -> Optional[str]:
     """Full SHA of HEAD, or None outside a git checkout."""
-    return _git("rev-parse", "HEAD")
+    return _git("rev-parse", "HEAD", repo=repo)
 
 
-def git_is_dirty() -> Optional[bool]:
-    """True if tracked files differ from HEAD. None if git is unavailable.
+def git_status_counts(repo: Optional[Path] = None) -> Optional[Dict[str, int]]:
+    """Count the two *distinct* ways a tree can diverge from its commit.
 
-    A result produced from a dirty tree is not reproducible from the commit
-    alone, so this must be recorded rather than assumed clean.
+    AUDIT_g0 PROV-02: a single boolean cannot distinguish "one line was edited"
+    from "six source modules and 83% of the test suite are absent from this
+    commit". Both make a result unreproducible from the commit, but only the
+    second means the commit is a different program. They are counted separately
+    so a reader of the manifest can tell which happened.
+
+    Ignored files (build output, caches) are not divergence and are excluded.
+
+    Returns
+    -------
+    dict or None
+        ``{"tracked_modified": int, "untracked": int}``; ``None`` if git is
+        unavailable or the path is not a checkout.
     """
-    status = _git("status", "--porcelain", "--untracked-files=no")
-    if status is None:
+    raw = _git_bytes("status", "--porcelain", "--untracked-files=all", "-z",
+                     repo=repo)
+    if raw is None:
         return None
-    return bool(status.strip())
+    tracked = untracked = 0
+    # -z output: "XY path\0" per entry, with an extra "\0origpath" after a rename.
+    fields = raw.split(b"\0")
+    i = 0
+    while i < len(fields):
+        entry = fields[i]
+        i += 1
+        if len(entry) < 3:
+            continue
+        code = entry[:2].decode("ascii", "replace")
+        if code == "??":
+            untracked += 1
+        else:
+            tracked += 1
+            if "R" in code or "C" in code:
+                i += 1        # consume the rename/copy source path
+    return {"tracked_modified": tracked, "untracked": untracked}
+
+
+def git_is_dirty(repo: Optional[Path] = None) -> Optional[bool]:
+    """True if the working tree differs from HEAD in any way that matters.
+
+    AUDIT_g0 PROV-02: this previously ran with ``--untracked-files=no``, so a
+    tree missing entire source modules reported *clean*. Measured on a scratch
+    repository, a tree with three untracked modules returned ``False``. That is
+    the generation-0 state, in which 33 untracked paths carried 6 of 40 source
+    modules and 204 of 246 tests.
+
+    Untracked files now count, because a result produced by code that is not in
+    the commit is exactly as unreproducible as one produced by edited code.
+    Ignored files do not count -- regenerable build output is not divergence.
+
+    Returns ``None`` if git is unavailable, so callers can tell "clean" from
+    "unknown".
+    """
+    counts = git_status_counts(repo=repo)
+    if counts is None:
+        return None
+    return bool(counts["tracked_modified"] or counts["untracked"])
+
+
+def git_tree_digest(repo: Optional[Path] = None) -> Optional[str]:
+    """SHA-256 over the content of every non-ignored file in the tree.
+
+    Two runs can name the same commit and still have been produced by different
+    code -- that is precisely what happened before the generation-0 adoption
+    commit. The commit SHA cannot detect it and the dirty flag only says *that*
+    something differs. This digest says *which* tree ran, so two manifests can be
+    compared directly.
+
+    Covers tracked files plus untracked-but-not-ignored files, hashed by content
+    and keyed by path, so it is independent of file order and of mtime.
+    """
+    raw = _git_bytes("ls-files", "-c", "-o", "--exclude-standard", "-z", repo=repo)
+    if raw is None:
+        return None
+    root = Path(repo if repo is not None else _DEFAULT_REPO)
+    names = sorted(n.decode("utf-8", "replace") for n in raw.split(b"\0") if n)
+    outer = hashlib.sha256()
+    for name in names:
+        path = root / name
+        try:
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        except OSError:
+            digest = "absent"        # staged deletion, or a broken symlink
+        outer.update(f"{digest}  {name}\n".encode("utf-8"))
+    return outer.hexdigest()
 
 
 def environment_info() -> Dict[str, Any]:
@@ -94,6 +189,12 @@ class RunManifest:
     git_commit: Optional[str]
     git_dirty: Optional[bool]
     environment: Dict[str, Any]
+    #: AUDIT_g0 PROV-02: recorded separately so a reader can tell an edited line
+    #: from a source module that is absent from the commit entirely.
+    git_tracked_modified: Optional[int] = None
+    git_untracked: Optional[int] = None
+    #: Content digest of the tree that actually ran, independent of the commit.
+    git_tree_digest: Optional[str] = None
     config: Dict[str, Any] = field(default_factory=dict)
     seed: Optional[int] = None
     results: Dict[str, Any] = field(default_factory=dict)
@@ -103,12 +204,19 @@ class RunManifest:
     @classmethod
     def create(cls, experiment: str, config: Optional[Dict[str, Any]] = None,
                seed: Optional[int] = None, notes: str = "") -> "RunManifest":
+        # One status call, so the flag and the counts can never disagree.
+        counts = git_status_counts()
+        dirty = (None if counts is None
+                 else bool(counts["tracked_modified"] or counts["untracked"]))
         return cls(
             experiment=experiment,
             created_utc=datetime.now(timezone.utc).isoformat(timespec="seconds"),
             git_commit=git_commit(),
-            git_dirty=git_is_dirty(),
+            git_dirty=dirty,
             environment=environment_info(),
+            git_tracked_modified=None if counts is None else counts["tracked_modified"],
+            git_untracked=None if counts is None else counts["untracked"],
+            git_tree_digest=git_tree_digest(),
             config=dict(config or {}),
             seed=seed,
             notes=notes,
@@ -124,7 +232,13 @@ class RunManifest:
         return {
             "experiment": self.experiment,
             "created_utc": self.created_utc,
-            "git": {"commit": self.git_commit, "dirty": self.git_dirty},
+            "git": {
+                "commit": self.git_commit,
+                "dirty": self.git_dirty,
+                "tracked_modified": self.git_tracked_modified,
+                "untracked": self.git_untracked,
+                "tree_digest": self.git_tree_digest,
+            },
             "environment": self.environment,
             "seed": self.seed,
             "config": self.config,

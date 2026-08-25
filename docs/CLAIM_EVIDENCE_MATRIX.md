@@ -34,8 +34,8 @@ mis-scoped) · ❌ withdrawn · 📄 documentation-only
 | C14 | Equivalence twins indistinguishable | 1.26× doping change → 0.02–1.3% I–V change | same | same | 0 | 4 families | ✅ new |
 | C15 | Jacobian linear-response validation | ratios 0.995–1.04 | same | same | 0 | 4 dirs × 4 families | ✅ new |
 | C16 | Surrogate speedup vs SG | 152× (0.85 ms vs 129 ms, M=5) | timing harness | see README | — | 10/200 reps | ⚠️ was "~500×" |
-| C17 | Built-in potential vs analytic | rel. error 2.8e-7 | `cli.py` selftest | `bayespinn selftest` | — | 1 | ✅ |
-| C18 | Mass action at equilibrium | max \|np−1\| = 7.6e-6 | same | same | — | 301 nodes | ⚠️ was 1.3e-2 |
+| C17 | Built-in potential vs analytic | rel. error 7.24e-14 | `cli.py` selftest | `bayespinn selftest` | — | 1 | ⚠️ **2.8e-7 withdrawn** (X15) — it measured the *pre-audit* solver |
+| C18 | Mass action at equilibrium | max \|np−1\| = 2.93e-9 | same | same | — | 301 nodes | ⚠️ **7.6e-6 withdrawn** (X16) — same cause |
 | C19 | Diode ideality factor | 1.018 | same | same | — | 8 biases | ✅ |
 | C21 | Uncertainty vs error | Spearman ρ = +0.824; NOT monotone across σ quartiles | `run_results.py` H5 | same | 0 | 200 | ✅ new |
 | C22 | OOD awareness | σ inflates 15.7× vs error 11.8× (interp → extrap) | same | same | 0 | 140 | ✅ new |
@@ -45,7 +45,7 @@ mis-scoped) · ❌ withdrawn · 📄 documentation-only
 
 | # | Claim | Value | Evidence | Verdict |
 |---|---|---|---|---|
-| S1 | Equilibration improves mass action | 1.32e-2 → 7.62e-6 (1730×) | `test_sg_numerics.py::test_equilibration_beats_plain_spsolve` | ✅ |
+| S1 | Equilibration improves mass action | 6.77e-3 → 9.7e-10 (7.0e6×) | `test_sg_numerics.py::test_equilibration_beats_plain_spsolve` | ⚠️ **"1.32e-2 → 7.62e-6 (1730×)" withdrawn** (X17) |
 | S2 | expm1 flux removes cancellation | 5.86e-7 → 1.39e-13 A/m² on an exact state (4.2e6×) | `::test_exact_equilibrium_state_gives_machine_zero_current` | ✅ |
 | S3 | expm1 form is an exact identity | agrees with direct form to 1.9e-11 relative away from equilibrium | `::test_agrees_with_direct_form_away_from_equilibrium` | ✅ |
 | S4 | Noise floor is predictive | current precision tracks 1/SNR over 5 decades | measured; ADR-0002 | ✅ |
@@ -76,6 +76,10 @@ mis-scoped) · ❌ withdrawn · 📄 documentation-only
 | X12 | "The forward PINN converges on realistic doping ranges" | `papers/draft.md` | Directly contradicted `docs/forward_model_reframe.md` in the same repository. | ❌ withdrawn |
 | X13 | Beucler et al. (2022) as the source of the TV+positivity scheme | `inverse_design.py` | Citation could not be verified; no paper with that title located. | ❌ removed (CITE-01) |
 | X14 | README quick-start `0.5*(Jn.mean()+Jp.mean())` | README | Off by a factor of 2 vs `terminal_current = mean(Jn+Jp)`. | 📄 fixed and executed |
+| X15 | "Built-in potential vs analytic: rel. error **2.8e-7**" | README headline table, C17, `RELEASE_READINESS` | Measured on the **pre-audit** solver. `git archive 6577f4b` and re-run: `2.7558e-07` — the published figure, reproduced exactly on the *superseded* code. The adopted solver measures `7.243e-14`, grid-independent over N=101…601. The claim described a program the project no longer ships. | ❌ withdrawn → C17 (AUDIT_g0 SCI-08 / PROV-06) |
+| X16 | "Mass action at equilibrium: max \|np−1\| = **7.6e-6**" | C17/C18, `RELEASE_READINESS` | Same cause. Adopted solver: `2.93e-9` at the selftest configuration (`1.37e-9 … 8.42e-9` over grids 101–601). | ❌ withdrawn → C18 |
+| X17 | "Equilibration improves mass action **1.32e-2 → 7.62e-6 (1730×)**" | S1 | The `1.32e-2` starting point is sound (measured `6.77e-3`, 1.95× — within tolerance). The `7.62e-6` endpoint is not: the adopted solver reaches `9.7e-10`, so the real gain is ~**7.0e6×**, not 1730×. The published figure understated the improvement by ~4000×. | ❌ withdrawn → S1 |
+| X18 | Identifiability stated without a local/global label | README rows 51, 70, 267, 340; `RELEASE_READINESS` 72, 189 | `inverse/identifiability.py` computes a **local** Jacobian rank at one operating point and says so; `papers/draft.md` labels it three times. The README and release gates dropped the qualifier, inviting the number to be read as global non-identifiability. PH-21 forbids this. | ⚠️ qualified, not withdrawn (AUDIT_g0 SCI-11) |
 
 ## 4. Claims that remain unverified *(as of the first cycle; see §5 for resolutions)*
 

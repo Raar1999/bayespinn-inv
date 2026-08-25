@@ -4,6 +4,93 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — generation 0 of the audit loop (2026-08-25)
+
+An adversarial audit loop was run over the repository. Its first finding was that
+**the repository's only commit was the pre-audit project**: both audit cycles —
+6 of 40 source modules, 204 of 246 collected tests, 7 experiment launchers, the CI
+workflow and the entire audit corpus — existed only as uncommitted working-tree
+state. `git archive 6577f4b` and re-running the physics gives `SGConfig` with no
+`equilibrate` option, a built-in-potential relative error of `2.7558e-07` against
+the working tree's `7.243e-14`, and a mass-action residual of `6.1019e-03` against
+`2.934e-09`. Every manifest in `outputs/` named that commit as its provenance.
+
+### Added
+
+- **Adoption commit `c115757`** on branch `loop/champion`, parent `6577f4b`
+  (untouched). Before any git operation the tree was copied to two paths outside
+  the repository and both verified 212/212 against
+  `PRESERVE_MANIFEST_g0.sha256` (digest-of-digests
+  `9cd95213c1a7979f358743865dc133e998897705e55ae5c622eecd333a204cdd`). The commit
+  was then attested by extracting it and digest-comparing: **164/164 byte-identical,
+  0 mismatched, 0 missing.**
+- `outputs/` is now tracked — all 42 files including every `manifest.json`, so a
+  clone ships the evidence with the claims (`PROV-01`).
+- `git_status_counts()` and `git_tree_digest()` in `utils.provenance`
+  (`ADR-0006`), and an optional `repo` argument on all four git helpers so the
+  behaviour can be tested against a controlled repository.
+- `docs/PROVENANCE_BIFURCATION_g0.md` — per-manifest record of which commit each
+  result claims, why `6577f4b` cannot have produced it, and whether the numbers
+  reproduce. Existing manifests are **not** edited.
+- `docs/audit/AUDIT_g0.md`, `docs/spec/SPEC_g0.md`, `docs/gen/DECISIONS.md`.
+- 34 regression tests across `tests/test_provenance_g0.py`,
+  `tests/test_claim_surface_g0.py`, `tests/test_ohmic_gradient_g0.py`.
+
+### Fixed
+
+- **PROV-02 (CRITICAL) — dirty detection was blind to untracked files.**
+  `git_is_dirty()` ran `git status --porcelain --untracked-files=no`. Measured on
+  a scratch repository, a tree missing three source modules returned `False`. A
+  manifest could therefore report a tree missing six source modules and 83% of the
+  test suite as clean, indistinguishable from a fixed typo. Untracked files now
+  count; `tracked_modified`, `untracked` and `tree_digest` are recorded as separate
+  manifest fields; the flag is derived from the counts so the two cannot disagree.
+  Digest cost measured at 28 ms over 166 files / 4.1 MB.
+  Reproduce: `pytest tests/test_provenance_g0.py` (16 tests).
+
+### Changed — claims corrected or withdrawn
+
+- **Built-in potential `2.8e-7` → `7.24e-14` (withdrawn, not corrected).** The
+  published figure measured the *pre-audit* solver: `git archive 6577f4b` and
+  re-running reproduces `2.7558e-07` exactly. It described a program the project
+  no longer ships. `CLAIM_EVIDENCE_MATRIX` X15.
+- **Mass action `7.6e-6` → `2.93e-9`**, same cause. X16.
+- **Equilibration gain `1.32e-2 → 7.62e-6` (1730×) → `6.77e-3 → 9.7e-10` (7.0e6×).**
+  The starting point was sound (1.95× from measured); the endpoint understated the
+  improvement by ~4000×. X17.
+- **`RELEASE_READINESS` "Reference solver validated ✅"** cited exactly the two
+  withdrawn figures. The gate was green on evidence from a superseded program.
+- **Identifiability is now labelled `local` wherever it is stated** (README rows
+  51, 70, 267, 340; `RELEASE_READINESS` 72, 189), with its operating point, noise
+  level, parameterisation dimension and observation count (PH-21). Global,
+  sampling-based non-identifiability remains **unmeasured**. X18.
+  One instance in `papers/draft.md:255` is **parked**, not fixed — that path is
+  operator-protected; it is pinned by a test that fails if the count moves in
+  either direction.
+
+### Verified — no change required
+
+- A full re-run of `scripts/run_results.py` (2500 epochs, M=5, no `--quick`)
+  reproduced **all 174 numeric leaves bit-identically**: C1 interpolation
+  `0.027834281028660313`, C2 extrapolation `0.3818233071446869`, C3 family
+  transfer `0.8423089146208244`, C4 `9.961050987243652` decades. The headline
+  science is exactly reproducible; only its provenance chain was broken.
+- `outputs/results/manifest.json` agrees with its `results.json` on all 102 shared
+  numeric leaves — 0 mismatches. Nothing was fabricated.
+
+### Known open
+
+- **GRAD-02 (HIGH)** — `ohmic_boundary_values` returns NaN gradients for
+  `C_s >= 1.3922e8` (N >= 1.3922e24 m⁻³), **21.4% of the documented 1e21–1e25 m⁻³
+  envelope**, because `torch.where` evaluates a branch that underflows to `1/0`.
+  No published number is affected: the protocol bands reach only `C_s <= 8.0e6`,
+  two decades below onset, so `D1`/`ADR-0004` are **not** confounded.
+  Regression tests are committed and failing by design (AH-08).
+- **CI-01 reopened** — `.github/workflows/ci.yml` had never been committed, so CI
+  has never run, yet `AUDIT_MASTER` recorded the finding as VERIFIED.
+- **PROV-03 (permanent)** — the adopted tree has no attestable origin. Nothing in
+  git records who produced this code or against what evidence. This does not close.
+
 ## [Unreleased] — second audit cycle (2026-08-19)
 
 The first audit cycle closed 40 findings and left the project at "release

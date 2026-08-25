@@ -208,3 +208,116 @@ class TestPublishedSolverQualityIsReproducible:
                 "CLAIM_EVIDENCE_MATRIX S1",
                 "mass action with equilibration",
             )
+
+
+# ---------------------------------------------------------------------------
+# AUDIT_g0 SCI-11 / PH-21 -- a local Jacobian rank is never reported as an
+# identifiability result without the word "local".
+# ---------------------------------------------------------------------------
+
+#: Documents this loop is permitted to correct. `papers/**` is excluded here and
+#: handled by :class:`TestParkedPapersInstance` below -- it is protected from
+#: edits by operator ruling R-3, so its one unqualified passage is pinned rather
+#: than fixed. Excluding it from this tuple narrows the guard's *reach*, never its
+#: *strictness*: the papers instance is asserted on, not skipped.
+CLAIM_SURFACE = (
+    "README.md",
+    "docs/RELEASE_READINESS.md",
+    "docs/CLAIM_EVIDENCE_MATRIX.md",
+)
+
+#: A statement of the identifiable-rank result, e.g. "3-4 of 16 dof".
+_RANK_CLAIM = re.compile(r"\d\s*(?:-|–|—)?\s*\d?\s*of\s*16\b")
+
+#: How many lines either side count as the same passage.
+_CONTEXT = 6
+
+
+def _rank_claim_lines(text: str):
+    """Yield (line_number, line) for every line asserting the rank result."""
+    for i, line in enumerate(text.splitlines()):
+        if _RANK_CLAIM.search(line):
+            yield i, line
+
+
+class TestIdentifiabilityIsLabelledLocal:
+    """PH-21: the regime label travels with the number, in every document."""
+
+    @pytest.mark.parametrize("document", CLAIM_SURFACE)
+    def test_every_rank_claim_is_qualified(self, document: str) -> None:
+        lines = _read(document).splitlines()
+        unqualified = []
+        for i, line in _rank_claim_lines("\n".join(lines)):
+            lo = max(0, i - _CONTEXT)
+            hi = min(len(lines), i + _CONTEXT + 1)
+            if "local" not in "\n".join(lines[lo:hi]).lower():
+                unqualified.append(f"{document}:{i + 1}: {line.strip()[:110]}")
+        assert not unqualified, (
+            "AUDIT_g0 SCI-11 / PH-21 -- identifiable-rank claims stated without a "
+            "local/global label:\n  " + "\n  ".join(unqualified)
+        )
+
+    def test_the_guard_would_catch_a_regression(self) -> None:
+        """A negative control: the checker must reject an unqualified passage.
+
+        Without this, a bug that made `_RANK_CLAIM` match nothing would leave the
+        test above passing vacuously on every document.
+        """
+        assert list(_rank_claim_lines("determines only 3-4 of 16 doping dof")), (
+            "the rank-claim pattern matches nothing -- the guard above is vacuous"
+        )
+        lines = ["determines only 3-4 of 16 doping dof"]
+        found = [
+            i for i, _ in _rank_claim_lines("\n".join(lines))
+            if "local" not in "\n".join(lines).lower()
+        ]
+        assert found == [0]
+
+
+class TestParkedPapersInstance:
+    """`papers/draft.md` carries one unqualified rank claim. It is parked, not fixed.
+
+    Operator ruling R-3 makes `papers/**` reserved: this loop may not mutate it.
+    AUDIT_g0 SCI-11 is therefore only partly closable, and the honest record is a
+    pinned count rather than a silent exclusion.
+
+    The document *does* label the result `local` three times (lines 23, 73 and an
+    explicit limitation at 349), so a reader of the whole paper is not misled. The
+    passage below is unqualified within its own paragraph, which is what PH-21
+    addresses -- a reader quoting that sentence does not carry line 349 with it.
+
+    This test fails in **both** directions on purpose:
+
+    - if the count rises, a new unqualified claim entered the protected document;
+    - if it falls to zero, the operator has released R-3 or fixed the passage, and
+      `papers/draft.md` should be moved into ``CLAIM_SURFACE`` and this test deleted.
+    """
+
+    #: Pinned at generation 0. See docs/gen/DECISIONS.md DEC-g0-4.
+    KNOWN_UNQUALIFIED = 1
+
+    def _unqualified(self):
+        lines = _read("papers/draft.md").splitlines()
+        out = []
+        for i, line in _rank_claim_lines("\n".join(lines)):
+            lo = max(0, i - _CONTEXT)
+            hi = min(len(lines), i + _CONTEXT + 1)
+            if "local" not in "\n".join(lines[lo:hi]).lower():
+                out.append((i + 1, line.strip()))
+        return out
+
+    def test_count_is_exactly_what_generation_0_measured(self) -> None:
+        found = self._unqualified()
+        assert len(found) == self.KNOWN_UNQUALIFIED, (
+            f"papers/draft.md unqualified rank claims: expected "
+            f"{self.KNOWN_UNQUALIFIED} (parked under R-3), found {len(found)}:\n  "
+            + "\n  ".join(f"line {n}: {t[:110]}" for n, t in found)
+        )
+
+    def test_the_document_does_label_the_result_elsewhere(self) -> None:
+        """The parked instance is a passage-level defect, not a missing caveat."""
+        text = _read("papers/draft.md").lower()
+        assert text.count("local") >= 3, (
+            "papers/draft.md no longer labels the identifiability result as local "
+            "anywhere -- this is now a document-level defect, not a parked passage"
+        )

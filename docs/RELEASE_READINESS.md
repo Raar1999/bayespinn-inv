@@ -36,7 +36,7 @@ not release-grade is listed at the bottom and is smaller than before.
 | Units verified | ✅ | Constants checked against Sze App. G; De Mari scaling round-trips tested; `J* = q n_i μ* V_T / L_D` dimensionally confirmed |
 | Signs verified | ✅ | Forward bias raises current 1e3× over reverse; ideality factor 1.018 |
 | Boundary conditions verified | ✅ | Ohmic BC exact (`n·p = 1` to 0.0) up to C_s = 1e12 after BUG-11 |
-| Reference solver validated | ✅ | V_bi vs analytic to 2.8e-7 rel.; mass action 7.6e-6; reverse saturation; monotonicity; 2D φ_s vs depletion approximation within V_T; 2D Gauss law to 0.000% |
+| Reference solver validated | ✅ | V_bi vs analytic to 7.24e-14 rel.; mass action 2.93e-9; reverse saturation; monotonicity; 2D φ_s vs depletion approximation within V_T; 2D Gauss law to 0.000% <br> *(This gate previously read "2.8e-7 / 7.6e-6". Those figures measured the **pre-audit** solver at `6577f4b` and were withdrawn in generation 0 — see `CLAIM_EVIDENCE_MATRIX` X15/X16 and `docs/PROVENANCE_BIFURCATION_g0.md`. The gate was green on evidence from a superseded program.)* |
 | Numerical stability checked | ✅ | Bernoulli finite over the full double range; damped Newton with step limiting; automatic bias continuation; equilibrated linear solves |
 | Mesh convergence | ✅ | 1D: LDD current grid-converged to 4 s.f. across N=201/301/601; after BUG-13, **every** trustworthy point over doping 1e21–1e25 m⁻³ is grid-converged to ≤0.35%. 2D: φ_s converges under refinement and is exactly Nx-independent |
 
@@ -69,7 +69,7 @@ not release-grade is listed at the bottom and is smaller than before.
 | Parameterization validated | ✅ | Three parameterizations; junction position in normalized logit space |
 | Optimization stable | ✅ | Gradient clipping, bounded doping, normalized penalties |
 | Bounds enforced | ✅ | `clamp_to_range` |
-| Identifiability discussed | ✅ | **Measured and stress-tested**: 3–4 of 16 dof at 2% noise across four device families; 1–6 (median 3) over 88 measurements spanning six axes plus a bootstrap; invariant to parameterisation dimension |
+| Identifiability discussed | ✅ | **Measured and stress-tested — *locally***: the Jacobian rank at one operating point, not a global result. 3–4 of 16 dof at 2% noise across four device families; 1–6 (median 3) over 88 measurements spanning six axes plus a bootstrap; invariant to parameterisation dimension. **Global, sampling-based non-identifiability is unmeasured** (PH-21; AUDIT_g0 SCI-11) |
 | Multiple solutions investigated | ✅ | Equivalence twins constructed and verified through the SG solver |
 
 ## Gate F — Active learning
@@ -186,7 +186,8 @@ not asserted.
 
 ### 5. Inverse-problem researcher — "is the problem identifiable?"
 
-3–4 of 16 at the reference conditions; 1–6 (median 3) across 88 measurements
+**Locally** — the Jacobian rank at one operating point — 3–4 of 16 at the
+reference conditions; 1–6 (median 3) across 88 measurements
 spanning six axes plus a 400-replicate bootstrap. The extremes are attributed
 rather than reported as scatter: rank 1 only at a reduced bias range, rank 5–6
 only at larger finite-difference steps (an *estimator* effect). The decisive
