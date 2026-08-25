@@ -227,6 +227,11 @@ class RunManifest:
     results: Dict[str, Any] = field(default_factory=dict)
     artifacts: Dict[str, str] = field(default_factory=dict)
     notes: str = ""
+    #: PROV-07: the resolved ``__file__`` of every imported ``bayespinn_inv``
+    #: module and the ``sys.path`` in effect. Filled in by :meth:`write` rather
+    #: than :meth:`create`, because the point is to record what the run actually
+    #: imported -- most of which happens after the manifest is created.
+    loaded_code: Optional[Dict[str, Any]] = None
 
     @classmethod
     def create(cls, experiment: str, config: Optional[Dict[str, Any]] = None,
@@ -267,6 +272,7 @@ class RunManifest:
                 "tree_digest": self.git_tree_digest,
             },
             "environment": self.environment,
+            "loaded_code": self.loaded_code,
             "seed": self.seed,
             "config": self.config,
             "results": self.results,
@@ -275,6 +281,17 @@ class RunManifest:
         }
 
     def write(self, out_dir) -> Path:
+        if self.loaded_code is None:
+            # Imported here, not at module scope: provenance must never be the
+            # reason a run fails to record itself.
+            try:
+                from bayespinn_inv.utils.loaded_code import loaded_code_provenance
+                self.loaded_code = loaded_code_provenance()
+            except Exception as exc:                      # pragma: no cover
+                self.loaded_code = {
+                    "error": f"{type(exc).__name__}: {exc}",
+                    "flagged": None,
+                }
         out_dir = Path(out_dir)
         out_dir.mkdir(parents=True, exist_ok=True)
         path = out_dir / "manifest.json"

@@ -11,7 +11,16 @@ license = { text = "MIT" }
 authors = [
     { name = "Raar1999", email = "Raar1999@users.noreply.github.com" },
 ]
-requires-python = ">=3.9"
+# AUDIT_g7 SPEC-g0-3b-local. This floor is 3.11 because 3.11 is the only
+# interpreter the suite has ever executed on. 3.9, 3.10 and 3.12 were declared
+# for six generations and never ran anywhere: the CI matrix that was said to
+# evidence them has never executed (CI-01), and no 3.9 or 3.12 interpreter is
+# obtainable on the development host (SK-09 forbids the network access that
+# fetching one needs). An unexecuted support claim in packaging metadata is the
+# S-4 pattern -- an advertised surface nobody has run -- so it is withdrawn
+# rather than carried forward on the assumption that CI will eventually settle
+# it. See docs/gen/DECISIONS.md DEC-g7-2 for the reversal.
+requires-python = ">=3.11"
 keywords = [
     "physics-informed neural networks",
     "PINN",
@@ -27,10 +36,10 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
+    # Only versions the suite has actually run on are listed. Restoring 3.9,
+    # 3.10 or 3.12 requires a retrievable green run log for that leg, not an
+    # argument that it ought to work.
     "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
@@ -105,6 +114,11 @@ omit = ["*/tests/*"]
 
 [tool.ruff]
 line-length = 96
+# Deliberately BELOW the declared requires-python floor of 3.11. The tree was
+# measured 3.9-clean by scripts/check_python_support_floor.py (96 files, zero
+# syntax rejections, zero post-3.9 stdlib or typing uses, zero runtime PEP 604
+# unions). Holding ruff at py39 keeps it that way, so the withdrawn 3.9
+# classifier can be restored by running one CI leg rather than by a port.
 target-version = "py39"
 
 [tool.ruff.lint]
@@ -128,9 +142,13 @@ line-length = 96
 target-version = ["py39"]
 
 [tool.mypy]
-# No `python_version` pin: current mypy refuses to target 3.9, and the 3.9
-# support claim is backed by the CI matrix (which actually runs the suite on
-# 3.9) rather than by a static-analysis setting.
+# No `python_version` pin: current mypy refuses to target 3.9.
+#
+# The previous comment here claimed the 3.9 support claim was "backed by the CI
+# matrix (which actually runs the suite on 3.9)". That was false in both halves:
+# the CI matrix has never executed (CI-01, open since generation 0), so nothing
+# has ever run the suite on 3.9. The claim it was defending has been withdrawn --
+# see `requires-python` above and docs/gen/DECISIONS.md DEC-g7-2.
 ignore_missing_imports = true
 warn_unused_configs = true
 warn_redundant_casts = true

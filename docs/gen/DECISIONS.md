@@ -167,3 +167,117 @@ OPTIONS:   1) Operator edits line 255 to read "determines only 3-4 of 16 doping
 BLOCKED:   SPEC-g0-5 cannot reach 100% of the claim surface; it passes for every
            document this loop may edit.
 ```
+
+---
+
+## DEC-g7-1 — run `G7-R` against one commit under a recorded CI waiver
+
+**WHAT** Execute every `G7-R` measurement **and** Phase A's audit against a single
+commit, without waiting for a CI result, and record the waiver here with the
+command that reverses it.
+
+**EVIDENCE** The `§7` precondition ("on receipt of the CI result … run `G7-R`") is
+not satisfiable on this host and not satisfiable soon:
+
+```
+$ git remote -v
+                       # empty
+$ git ls-remote --heads origin
+fatal: 'origin' does not appear to be a git repository
+```
+
+`docs/OPERATOR_TASKS.md` `OT-1` gives `git push -u origin loop/champion`, which
+assumes a remote that does not exist. `R-4` forbids the loop creating one and
+`SK-09` forbids the network access it would need.
+
+**OPTIONS CONSIDERED**
+1. Hold `G7-R` until a remote exists. — Blocks the entire generation on an
+   operator action of unknown latency, and CI protects none of `SPEC-g7-1…-4`.
+2. Run the scientific clauses now against tree X, audit later against tree Y. —
+   Refused by the operator, and correctly: measuring on one tree and auditing
+   another is the bifurcation pathology at smaller scale.
+3. Run everything against one commit under a recorded waiver. — Chosen.
+
+**CHOSEN** Option 3, per the operator ruling of 2026-08-26 §"G7-R SEQUENCING",
+which withdrew the `§7` CI precondition as over-scoped. `SPEC-g0-3` is decomposed:
+`3a` unchanged; `3b-local` requires every interpreter obtainable *on this host* to
+execute with a retrievable log; `3b-windows` stays `OPERATOR-BLOCKED` hard, with
+`docs/WINDOWS_RISK_g6.md` as standing substitute evidence.
+
+`CI-01` and `SPEC-g0-3b` remain **OPERATOR-BLOCKED**. The waiver buys sequencing,
+not closure.
+
+**REVERSAL** When CI executes, re-run Phase A's `G-CODE` clause against the tree
+that CI ran on and compare it to `docs/audit/AUDIT_g7.md`:
+
+```bash
+git remote add origin <url> && git push -u origin loop/champion
+gh workflow run ci.yml --ref loop/champion && gh run watch
+# then re-run the G-CODE clause and diff against AUDIT_g7 §G-CODE
+```
+
+**FORCED DEFAULT FOLLOWED?** Yes — one tree, one commit.
+
+---
+
+## DEC-g7-2 — move the support floor to 3.11 and withdraw the 3.9/3.10/3.12 claims
+
+**WHAT** Set `requires-python = ">=3.11"`, reduce the version classifiers to 3.11
+alone, remove 3.9 from the CI matrix, and correct the false statement in
+`[tool.mypy]`. Hold `ruff`/`black` at `target-version = "py39"` deliberately.
+
+**EVIDENCE** Three measurements, in order of what they settle.
+
+*Which interpreters are obtainable here* — `SPEC-g0-3b-local`:
+
+| leg | obtainable | method tried |
+|---|---|---|
+| 3.9 | **no** | `py -0p`; `where python`; `C:\Python*`, `AppData\Local\Programs\Python`, conda/miniconda/anaconda roots, `.pyenv`; `uv python list` lists `cpython-3.9.25` as `<download available>` only, and fetching it needs the network (`SK-09`); `hatch`/`tox`/`nox` absent |
+| 3.11 | **yes** | `C:\Program Files\Python311\python.exe`, 3.11.9 |
+| 3.12 | **no** | as 3.9 — `cpython-3.12.13` is `<download available>` only |
+| 3.14 | interpreter yes, **unusable** | present at `pythoncore-3.14-64`, but numpy, scipy, pytest, torch and matplotlib are all absent and installing them needs the network (`SK-09`) |
+
+*What the 3.11 leg actually does* — `outputs/ci_local_g7/`: ruff exit 0;
+**470 passed, 0 failed**; notebook generator exits 0.
+
+*What can be said about 3.9 without a 3.9 interpreter* —
+`scripts/check_python_support_floor.py`, 96 files: **0** syntax rejections under
+`ast.parse(feature_version=(3,9))`, **0** post-3.9 stdlib or typing uses, **0**
+runtime PEP 604 unions. Every dependency floor (`numpy>=1.22`, `scipy>=1.10`,
+`torch>=2.0`, `matplotlib>=3.7`) admits 3.9.
+
+That last result is the one that must not be over-read. It can only **falsify**
+the floor, never confirm it: it cannot see dependency *resolution*, which is what
+actually breaks old interpreters, and only a CI leg settles that.
+
+The `[tool.mypy]` comment asserted the 3.9 claim "is backed by the CI matrix
+(which actually runs the suite on 3.9)". False in both halves — `CI-01` records
+that the matrix has never executed.
+
+**OPTIONS CONSIDERED**
+1. Keep `>=3.9` and mark it unevidenced in prose. — This is `S-4` exactly: an
+   advertised API surface nobody has run. Packaging metadata is a promise to an
+   installer, not prose, and a reader of `pyproject.toml` never sees the caveat.
+2. Keep `>=3.9` because static analysis found no obstruction. — Confuses "no
+   obstruction found by a method that cannot see resolution" with "works".
+3. Move the floor to 3.11 and withdraw the unevidenced classifiers. — Chosen.
+
+**CHOSEN** Option 3. The operator ruling of 2026-08-25 §3.2 allowed exactly two
+outcomes and no third: a green leg, or the floor moves and the claim is
+withdrawn. The leg cannot run here, so the floor moves.
+
+`ruff` and `black` stay at `py39`, **below** the declared floor, on purpose: the
+tree is measured 3.9-clean today, and holding the linter there keeps it that way,
+so restoring the classifier later costs one CI leg instead of a port. A withdrawn
+claim should be cheap to re-earn.
+
+**REVERSAL** Restore `requires-python = ">=3.9"`, the 3.9/3.10/3.12 classifiers
+and the 3.9 CI leg **only** on a retrievable green run log for that leg:
+
+```bash
+gh workflow run ci.yml --ref <branch> && gh run watch     # 3.9 leg green
+git revert <this commit> --no-commit -- pyproject.toml .github/workflows/ci.yml
+```
+
+**FORCED DEFAULT FOLLOWED?** Yes — measurement over assertion; an unevidenced
+claim is withdrawn, not annotated.

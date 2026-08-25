@@ -14,7 +14,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        python-version: ["3.9", "3.11", "3.12"]
+        # AUDIT_g7: 3.9 was removed together with the support claim it was
+        # meant to evidence -- `requires-python = ">=3.11"` now makes the 3.9
+        # leg fail at install rather than at test, which would be noise. 3.12
+        # stays: it installs under the new floor, has still never executed, and
+        # a green 3.12 leg is what restores its classifier.
+        python-version: ["3.11", "3.12"]
         include:
           # AUDIT_MASTER BUG-14 was a Windows-only encoding defect that a
           # Linux-only matrix could not see. Keep one Windows job.
