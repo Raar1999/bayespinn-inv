@@ -318,7 +318,7 @@ independent re-solve (measured ratios 0.995–1.04).
 ## Reproducing the experiments
 
 ```bash
-make test                          # 403 tests, ~1 min 15 s
+make test                          # 403 tests, ~1 min 5 s (n=3, 61-65 s)
 make selftest                      # physics self-check of the installed package
 make check-install                 # build a wheel, install clean, test there
 

@@ -77,7 +77,13 @@ SILICON = Material(
     tau_p=1.0e-6,
 )
 
-# GaAs sketch parameters (forward compatibility; not exercised in M1-M2).
+# GaAs parameters, cross-checked against Sze. AUDIT_g0 DOC-06: this comment
+# used to read "forward compatibility; not exercised in M1-M2", which stopped
+# being true once a GaAs PN junction was actually solved. Four tests now
+# exercise it (tests/test_sg_numerics.py::TestGaAsDeviceSolves): V_bi exact to
+# <1e-9 relative at 1e21/1e22/1e23 m^-3, mass action to 6e-5, and rectification
+# >1e3x. GaAs *device physics* is still not validated against measurement, and
+# nothing in this repository claims it is (CLAIM_EVIDENCE_MATRIX U4).
 GAAS = Material(
     name="GaAs",
     eps_r=12.9,
