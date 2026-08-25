@@ -1,0 +1,1154 @@
+{
+  "witness_search": {
+    "config": {
+      "n_anchor": 4,
+      "prior_lo_si": 1e+21,
+      "prior_hi_si": 1e+23,
+      "biases": [
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "noise_rel": 0.02,
+      "discretisation_floor_rel": 0.0015,
+      "domain_si": [
+        0.0,
+        1e-06
+      ],
+      "seed": 0,
+      "min_separation_decades": 0.3,
+      "distinguishability_floor": 0.02,
+      "prior_hash": "ba11a6d5357388cb564e88a7c1f397adbaf0131c396dfab57153685e42a16f31"
+    },
+    "sampling": {
+      "drawn": 2000,
+      "kept": 2000,
+      "rejected_not_converged": 0,
+      "rejected_not_trustworthy": 0
+    },
+    "n_pairs_examined": 1999000,
+    "floors": {
+      "noise_rel": 0.02,
+      "discretisation_rel": 0.0015,
+      "distinguishability": 0.02
+    },
+    "n_witnesses": 13,
+    "witnesses": [
+      {
+        "observational_distance": 0.012254760252752345,
+        "separation_decades": 0.9125150783578668,
+        "profile_a_log10": [
+          22.052336061003242,
+          21.92875081578813,
+          21.445066677544368,
+          22.512934220719224
+        ],
+        "profile_b_log10": [
+          22.61289465164883,
+          21.016235737430264,
+          22.067308825254717,
+          22.022419910385203
+        ],
+        "current_a": [
+          0.008450116932446114,
+          0.05468961629563232,
+          0.3624218971104103,
+          2.4281434269692173,
+          16.334812930167207,
+          109.9718488732137,
+          739.4484289846142,
+          4954.570062478274,
+          32885.44597050824,
+          211158.743594719,
+          1200902.7291980223,
+          5095894.752419016,
+          14942731.519264437,
+          32763166.091163043,
+          59202457.94393453,
+          94077603.59288193
+        ],
+        "current_b": [
+          0.008554955865551323,
+          0.05479221553844065,
+          0.36164944731988174,
+          2.4213096251421393,
+          16.305236761216158,
+          109.9837232447313,
+          741.3339332647374,
+          4979.864650011921,
+          33104.94876710681,
+          212044.34605436146,
+          1195906.3224175703,
+          5051693.31575259,
+          14835634.906657925,
+          32591310.628803812,
+          58953392.30366297,
+          93708137.53281727
+        ]
+      },
+      {
+        "observational_distance": 0.013788224487543424,
+        "separation_decades": 0.30253534449837716,
+        "profile_a_log10": [
+          22.699075567562822,
+          22.64180093149725,
+          22.214049145119084,
+          21.76244294174013
+        ],
+        "profile_b_log10": [
+          22.396540223064445,
+          22.757661128736586,
+          22.18611318380498,
+          21.870309995258673
+        ],
+        "current_a": [
+          0.0029888742725731852,
+          0.019201005978947628,
+          0.12666533903092025,
+          0.8458321687491249,
+          5.676545502528514,
+          38.155108296614735,
+          256.4265026752833,
+          1721.2024980329281,
+          11520.937830518084,
+          76517.84621872021,
+          492465.55505369115,
+          2777550.157495488,
+          11196664.444558,
+          30148186.024982896,
+          60441423.83711353,
+          100321188.97501658
+        ],
+        "current_b": [
+          0.002996314357626774,
+          0.01928886840172946,
+          0.12743480370741558,
+          0.8521246796069858,
+          5.724911021085777,
+          38.51703492854526,
+          259.0891182908382,
+          1740.5769596722619,
+          11660.9271170829,
+          77521.49203753327,
+          499350.71480747184,
+          2814027.9110532114,
+          11286504.56908603,
+          30203806.077331595,
+          60427292.498945564,
+          100694950.640684
+        ]
+      },
+      {
+        "observational_distance": 0.014223591577103359,
+        "separation_decades": 0.32805190826584507,
+        "profile_a_log10": [
+          22.329376752419346,
+          21.73002052292039,
+          21.6701478394127,
+          22.293446921073624
+        ],
+        "profile_b_log10": [
+          22.156018494649174,
+          21.90402987001289,
+          21.342095931146854,
+          22.54042502182543
+        ],
+        "current_a": [
+          0.008004412925210107,
+          0.051943155858938966,
+          0.3448224431042542,
+          2.312950847997837,
+          15.573695552487209,
+          104.92552714315914,
+          706.0097610217418,
+          4734.34447636017,
+          31465.59465072094,
+          202683.32796685814,
+          1161420.810125087,
+          4989709.628657121,
+          14857886.303370165,
+          33076033.402670644,
+          60584086.749413975,
+          97456435.65411408
+        ],
+        "current_b": [
+          0.007974930543901821,
+          0.05135864254361061,
+          0.3400099203635481,
+          2.280052379798001,
+          15.366564054325803,
+          103.69040531277018,
+          699.0090116001129,
+          4696.643685088706,
+          31264.1439712181,
+          201359.49156690176,
+          1151322.3867040349,
+          4956025.515641134,
+          14844622.820855675,
+          33212488.131558582,
+          61032498.98767626,
+          98356395.2957002
+        ]
+      },
+      {
+        "observational_distance": 0.014926755711088615,
+        "separation_decades": 0.5421133024675555,
+        "profile_a_log10": [
+          21.96461892092583,
+          22.79309534713399,
+          22.65689275444628,
+          21.366564698618276
+        ],
+        "profile_b_log10": [
+          21.422505618458274,
+          22.826607800285778,
+          22.716214024704918,
+          21.73902576425456
+        ],
+        "current_a": [
+          0.0022524066017028123,
+          0.014710763124173602,
+          0.09818154648248381,
+          0.6617328212795767,
+          4.478102626452397,
+          30.339985971248655,
+          205.51812171910782,
+          1390.6925859092855,
+          9389.62224026928,
+          62984.01421661842,
+          410085.0219240402,
+          2318749.5027276757,
+          8886112.663867181,
+          21540106.11162691,
+          38487480.79428856,
+          57403125.16782064
+        ],
+        "current_b": [
+          0.0022585245681902683,
+          0.014819920557129598,
+          0.09904244273734411,
+          0.6678634642440725,
+          4.52033381944047,
+          30.625975876211815,
+          207.4379820705573,
+          1403.5071283922732,
+          9474.754318803998,
+          63544.45717218272,
+          413587.09226061066,
+          2334316.213812198,
+          8887694.909932643,
+          21346835.294808183,
+          37922414.96010525,
+          56546282.74138754
+        ]
+      },
+      {
+        "observational_distance": 0.015319545886537224,
+        "separation_decades": 0.3077227676635985,
+        "profile_a_log10": [
+          22.438802275886253,
+          22.13926822548301,
+          22.009862966177813,
+          22.625124858764536
+        ],
+        "profile_b_log10": [
+          22.685070657334755,
+          21.831545457819413,
+          22.273407850718915,
+          22.36316936486006
+        ],
+        "current_a": [
+          0.004007929654151767,
+          0.025836010209094366,
+          0.17168485464271346,
+          1.1568443821824979,
+          7.838058433190945,
+          53.191969329351096,
+          360.88744556803334,
+          2444.6844088814173,
+          16501.00279614648,
+          110181.30372028511,
+          703798.9046882255,
+          3805487.4981959653,
+          14522229.639904369,
+          38473122.46010015,
+          78678822.59440397,
+          136059942.7569583
+        ],
+        "current_b": [
+          0.004061506031765824,
+          0.026069051406440932,
+          0.1728857503627772,
+          1.1643808327680794,
+          7.890483118851862,
+          53.571616432778086,
+          363.66105557990875,
+          2464.817054913441,
+          16643.756229048202,
+          111114.39211233276,
+          708087.2044224105,
+          3807910.0852324804,
+          14465001.751503723,
+          38169088.825169615,
+          77751965.13174619,
+          133975566.22057346
+        ]
+      }
+    ],
+    "closest_far_pair": {
+      "observational_distance": 0.012254760252752345,
+      "separation_decades": 0.9125150783578668,
+      "profile_a_log10": [
+        22.052336061003242,
+        21.92875081578813,
+        21.445066677544368,
+        22.512934220719224
+      ],
+      "profile_b_log10": [
+        22.61289465164883,
+        21.016235737430264,
+        22.067308825254717,
+        22.022419910385203
+      ],
+      "current_a": [
+        0.008450116932446114,
+        0.05468961629563232,
+        0.3624218971104103,
+        2.4281434269692173,
+        16.334812930167207,
+        109.9718488732137,
+        739.4484289846142,
+        4954.570062478274,
+        32885.44597050824,
+        211158.743594719,
+        1200902.7291980223,
+        5095894.752419016,
+        14942731.519264437,
+        32763166.091163043,
+        59202457.94393453,
+        94077603.59288193
+      ],
+      "current_b": [
+        0.008554955865551323,
+        0.05479221553844065,
+        0.36164944731988174,
+        2.4213096251421393,
+        16.305236761216158,
+        109.9837232447313,
+        741.3339332647374,
+        4979.864650011921,
+        33104.94876710681,
+        212044.34605436146,
+        1195906.3224175703,
+        5051693.31575259,
+        14835634.906657925,
+        32591310.628803812,
+        58953392.30366297,
+        93708137.53281727
+      ]
+    },
+    "closest_any_pair": {
+      "observational_distance": 0.007631711683171756,
+      "separation_decades": 0.13662018360832207,
+      "profile_a_log10": [
+        22.09530697338556,
+        22.117342017045473,
+        21.767025675328377,
+        22.15952454845013
+      ],
+      "profile_b_log10": [
+        21.983210994106415,
+        22.17726501666574,
+        21.641322383415396,
+        22.29614473205845
+      ],
+      "current_a": [
+        0.00711463783381465,
+        0.04626087748359085,
+        0.3070119348581267,
+        2.0563401437874753,
+        13.818281664601846,
+        92.89362543231493,
+        623.6887494043278,
+        4174.962489891828,
+        27747.736227154444,
+        179983.14034194415,
+        1058811.041549137,
+        4716529.936227987,
+        14186640.81967693,
+        31201773.72968417,
+        56056129.82909935,
+        88358969.66139443
+      ],
+      "current_b": [
+        0.00711050673762605,
+        0.04608991805816726,
+        0.3056884104956397,
+        2.0487468187444553,
+        13.783408059805733,
+        92.79027036293321,
+        623.9329415461708,
+        4182.78297382151,
+        27833.658178041907,
+        180568.19806036024,
+        1059490.5255433545,
+        4703533.195990491,
+        14132438.682392586,
+        31060153.13368997,
+        55731508.55006502,
+        87684639.48031655
+      ]
+    },
+    "verdict": "13 witness pair(s) found",
+    "wall_clock_s": 1015.8411648000038
+  },
+  "contraction": {
+    "config": {
+      "n_anchor": 4,
+      "prior_lo_si": 1e+21,
+      "prior_hi_si": 1e+23,
+      "biases": [
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "noise_rel": 0.02,
+      "discretisation_floor_rel": 0.0015,
+      "domain_si": [
+        0.0,
+        1e-06
+      ],
+      "seed": 0,
+      "min_separation_decades": 0.3,
+      "distinguishability_floor": 0.02,
+      "prior_hash": "ba11a6d5357388cb564e88a7c1f397adbaf0131c396dfab57153685e42a16f31"
+    },
+    "sampling": {
+      "drawn": 2000,
+      "kept": 2000,
+      "rejected_not_converged": 0,
+      "rejected_not_trustworthy": 0
+    },
+    "truth_log10": [
+      22.0,
+      22.0,
+      22.0,
+      22.0
+    ],
+    "truth_usable": true,
+    "prior_variance": [
+      0.3396541693247235,
+      0.3298032991863064,
+      0.33713030864443977,
+      0.334286472756978
+    ],
+    "contraction_threshold": 0.5,
+    "ess_floor": 20.0,
+    "n_directions": 4,
+    "tolerance_sweep": [
+      {
+        "tolerance_rel": 0.02,
+        "tolerance_multiple_of_noise": 1.0,
+        "effective_sample_size": 1.0010283919174483,
+        "supported": false,
+        "variance_ratio": [
+          0.00011337688857317,
+          0.00038983909015496184,
+          0.000387575892770552,
+          4.1569382286120756e-05
+        ],
+        "n_contracting_directions": 4
+      },
+      {
+        "tolerance_rel": 0.04,
+        "tolerance_multiple_of_noise": 2.0,
+        "effective_sample_size": 1.704275349730492,
+        "supported": false,
+        "variance_ratio": [
+          0.04104441489120236,
+          0.1332078683060706,
+          0.1803381770074283,
+          0.022372936126761816
+        ],
+        "n_contracting_directions": 4
+      },
+      {
+        "tolerance_rel": 0.1,
+        "tolerance_multiple_of_noise": 5.0,
+        "effective_sample_size": 13.863127833130571,
+        "supported": false,
+        "variance_ratio": [
+          0.2693541471276338,
+          0.2681565975461458,
+          0.7660030066736441,
+          0.36686442691934473
+        ],
+        "n_contracting_directions": 3
+      },
+      {
+        "tolerance_rel": 0.2,
+        "tolerance_multiple_of_noise": 10.0,
+        "effective_sample_size": 71.00288683376425,
+        "supported": true,
+        "variance_ratio": [
+          0.47747632607848906,
+          0.41141778636938725,
+          0.7911990283452977,
+          0.4210233027645388
+        ],
+        "n_contracting_directions": 3
+      },
+      {
+        "tolerance_rel": 0.5,
+        "tolerance_multiple_of_noise": 25.0,
+        "effective_sample_size": 400.0012540318868,
+        "supported": true,
+        "variance_ratio": [
+          0.6325941901065139,
+          0.6450708947813436,
+          0.8407553707204031,
+          0.623078314666286
+        ],
+        "n_contracting_directions": 0
+      },
+      {
+        "tolerance_rel": 1.0,
+        "tolerance_multiple_of_noise": 50.0,
+        "effective_sample_size": 1106.6628600172946,
+        "supported": true,
+        "variance_ratio": [
+          0.8037756313589871,
+          0.7850569733479447,
+          0.8926645489195351,
+          0.8268927014151488
+        ],
+        "n_contracting_directions": 0
+      },
+      {
+        "tolerance_rel": 2.0,
+        "tolerance_multiple_of_noise": 100.0,
+        "effective_sample_size": 1846.0976590341486,
+        "supported": true,
+        "variance_ratio": [
+          0.9355486156520668,
+          0.9179289921919539,
+          0.9625154257676354,
+          0.9465926319114841
+        ],
+        "n_contracting_directions": 0
+      },
+      {
+        "tolerance_rel": 5.0,
+        "tolerance_multiple_of_noise": 250.0,
+        "effective_sample_size": 1995.0913907356216,
+        "supported": true,
+        "variance_ratio": [
+          0.9890541607872533,
+          0.9852086305743202,
+          0.9936260728364328,
+          0.9911377915019713
+        ],
+        "n_contracting_directions": 0
+      }
+    ],
+    "tightest_supported": {
+      "tolerance_rel": 0.2,
+      "tolerance_multiple_of_noise": 10.0,
+      "effective_sample_size": 71.00288683376425,
+      "supported": true,
+      "variance_ratio": [
+        0.47747632607848906,
+        0.41141778636938725,
+        0.7911990283452977,
+        0.4210233027645388
+      ],
+      "n_contracting_directions": 3
+    },
+    "verdict": "at the tightest supported tolerance (10x the 2% noise floor, ESS 71.0), 3 of 4 directions contract below ratio 0.5",
+    "wall_clock_s": 788.1313941999979
+  },
+  "dimension_sweep": {
+    "2": {
+      "config": {
+        "n_anchor": 2,
+        "prior_lo_si": 1e+21,
+        "prior_hi_si": 1e+23,
+        "biases": [
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9
+        ],
+        "noise_rel": 0.02,
+        "discretisation_floor_rel": 0.0015,
+        "domain_si": [
+          0.0,
+          1e-06
+        ],
+        "seed": 0,
+        "min_separation_decades": 0.3,
+        "distinguishability_floor": 0.02,
+        "prior_hash": "b21da67ef831fa6f5f2b51b9894727d36a497c6c4378dc56e08eb1e2092b3e02"
+      },
+      "sampling": {
+        "drawn": 1000,
+        "kept": 1000,
+        "rejected_not_converged": 0,
+        "rejected_not_trustworthy": 0
+      },
+      "truth_log10": [
+        22.0,
+        22.0
+      ],
+      "truth_usable": true,
+      "prior_variance": [
+        0.33696744654177757,
+        0.3389294430496029
+      ],
+      "contraction_threshold": 0.5,
+      "ess_floor": 20.0,
+      "n_directions": 2,
+      "tolerance_sweep": [
+        {
+          "tolerance_rel": 0.02,
+          "tolerance_multiple_of_noise": 1.0,
+          "effective_sample_size": 1.0048921353922178,
+          "supported": false,
+          "variance_ratio": [
+            2.258125023248012e-05,
+            4.645881256943044e-05
+          ],
+          "n_contracting_directions": 2
+        },
+        {
+          "tolerance_rel": 0.04,
+          "tolerance_multiple_of_noise": 2.0,
+          "effective_sample_size": 2.432810574186755,
+          "supported": false,
+          "variance_ratio": [
+            0.003167369562652157,
+            0.009320998326969752
+          ],
+          "n_contracting_directions": 2
+        },
+        {
+          "tolerance_rel": 0.1,
+          "tolerance_multiple_of_noise": 5.0,
+          "effective_sample_size": 10.302101933046506,
+          "supported": false,
+          "variance_ratio": [
+            0.01285258344973128,
+            0.031893229660436916
+          ],
+          "n_contracting_directions": 2
+        },
+        {
+          "tolerance_rel": 0.2,
+          "tolerance_multiple_of_noise": 10.0,
+          "effective_sample_size": 31.582955051652704,
+          "supported": true,
+          "variance_ratio": [
+            0.07051612480662514,
+            0.15927794028190523
+          ],
+          "n_contracting_directions": 2
+        },
+        {
+          "tolerance_rel": 0.5,
+          "tolerance_multiple_of_noise": 25.0,
+          "effective_sample_size": 172.9888722442474,
+          "supported": true,
+          "variance_ratio": [
+            0.33820602485860435,
+            0.6054788588755332
+          ],
+          "n_contracting_directions": 1
+        },
+        {
+          "tolerance_rel": 1.0,
+          "tolerance_multiple_of_noise": 50.0,
+          "effective_sample_size": 467.7673018846173,
+          "supported": true,
+          "variance_ratio": [
+            0.5494121821627463,
+            0.8092092777724518
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 2.0,
+          "tolerance_multiple_of_noise": 100.0,
+          "effective_sample_size": 890.0044323012016,
+          "supported": true,
+          "variance_ratio": [
+            0.8268126999145671,
+            0.9292495012850118
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 5.0,
+          "tolerance_multiple_of_noise": 250.0,
+          "effective_sample_size": 996.4168050772741,
+          "supported": true,
+          "variance_ratio": [
+            0.969802100608978,
+            0.9873009047089685
+          ],
+          "n_contracting_directions": 0
+        }
+      ],
+      "tightest_supported": {
+        "tolerance_rel": 0.2,
+        "tolerance_multiple_of_noise": 10.0,
+        "effective_sample_size": 31.582955051652704,
+        "supported": true,
+        "variance_ratio": [
+          0.07051612480662514,
+          0.15927794028190523
+        ],
+        "n_contracting_directions": 2
+      },
+      "verdict": "at the tightest supported tolerance (10x the 2% noise floor, ESS 31.6), 2 of 2 directions contract below ratio 0.5",
+      "wall_clock_s": 361.83035960000416
+    },
+    "4": {
+      "config": {
+        "n_anchor": 4,
+        "prior_lo_si": 1e+21,
+        "prior_hi_si": 1e+23,
+        "biases": [
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9
+        ],
+        "noise_rel": 0.02,
+        "discretisation_floor_rel": 0.0015,
+        "domain_si": [
+          0.0,
+          1e-06
+        ],
+        "seed": 0,
+        "min_separation_decades": 0.3,
+        "distinguishability_floor": 0.02,
+        "prior_hash": "ba11a6d5357388cb564e88a7c1f397adbaf0131c396dfab57153685e42a16f31"
+      },
+      "sampling": {
+        "drawn": 1000,
+        "kept": 1000,
+        "rejected_not_converged": 0,
+        "rejected_not_trustworthy": 0
+      },
+      "truth_log10": [
+        22.0,
+        22.0,
+        22.0,
+        22.0
+      ],
+      "truth_usable": true,
+      "prior_variance": [
+        0.3345409708228439,
+        0.32919745124034067,
+        0.32985962938759045,
+        0.3349633999246076
+      ],
+      "contraction_threshold": 0.5,
+      "ess_floor": 20.0,
+      "n_directions": 4,
+      "tolerance_sweep": [
+        {
+          "tolerance_rel": 0.02,
+          "tolerance_multiple_of_noise": 1.0,
+          "effective_sample_size": 1.0004362719906703,
+          "supported": false,
+          "variance_ratio": [
+            0.00010199692341511156,
+            0.0003059476083184601,
+            0.000175761499342632,
+            3.140455583197471e-05
+          ],
+          "n_contracting_directions": 4
+        },
+        {
+          "tolerance_rel": 0.04,
+          "tolerance_multiple_of_noise": 2.0,
+          "effective_sample_size": 1.2504240300594924,
+          "supported": false,
+          "variance_ratio": [
+            0.04538138563758922,
+            0.13535126073666265,
+            0.08403959433693836,
+            0.01797590098020126
+          ],
+          "n_contracting_directions": 4
+        },
+        {
+          "tolerance_rel": 0.1,
+          "tolerance_multiple_of_noise": 5.0,
+          "effective_sample_size": 7.3805990274575946,
+          "supported": false,
+          "variance_ratio": [
+            0.2464155936234722,
+            0.29645718007348754,
+            0.781041079713291,
+            0.4081889351113621
+          ],
+          "n_contracting_directions": 3
+        },
+        {
+          "tolerance_rel": 0.2,
+          "tolerance_multiple_of_noise": 10.0,
+          "effective_sample_size": 38.83014689900178,
+          "supported": true,
+          "variance_ratio": [
+            0.4124790602793825,
+            0.37403082531087495,
+            0.840866466280355,
+            0.421784569501917
+          ],
+          "n_contracting_directions": 3
+        },
+        {
+          "tolerance_rel": 0.5,
+          "tolerance_multiple_of_noise": 25.0,
+          "effective_sample_size": 209.35191243198858,
+          "supported": true,
+          "variance_ratio": [
+            0.5909513699793003,
+            0.6045151825066232,
+            0.8341724623381351,
+            0.6379108185501148
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 1.0,
+          "tolerance_multiple_of_noise": 50.0,
+          "effective_sample_size": 567.9422857220026,
+          "supported": true,
+          "variance_ratio": [
+            0.7891259240930244,
+            0.7717896011425391,
+            0.8913609067561397,
+            0.8580796173005566
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 2.0,
+          "tolerance_multiple_of_noise": 100.0,
+          "effective_sample_size": 926.7142990182242,
+          "supported": true,
+          "variance_ratio": [
+            0.9328816504366794,
+            0.9169881958296913,
+            0.9620269801562685,
+            0.9602180887181391
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 5.0,
+          "tolerance_multiple_of_noise": 250.0,
+          "effective_sample_size": 997.6492294329139,
+          "supported": true,
+          "variance_ratio": [
+            0.9887065549425602,
+            0.9851840663582276,
+            0.9934727675333146,
+            0.9936736078477785
+          ],
+          "n_contracting_directions": 0
+        }
+      ],
+      "tightest_supported": {
+        "tolerance_rel": 0.2,
+        "tolerance_multiple_of_noise": 10.0,
+        "effective_sample_size": 38.83014689900178,
+        "supported": true,
+        "variance_ratio": [
+          0.4124790602793825,
+          0.37403082531087495,
+          0.840866466280355,
+          0.421784569501917
+        ],
+        "n_contracting_directions": 3
+      },
+      "verdict": "at the tightest supported tolerance (10x the 2% noise floor, ESS 38.8), 3 of 4 directions contract below ratio 0.5",
+      "wall_clock_s": 383.0272960000002
+    },
+    "8": {
+      "config": {
+        "n_anchor": 8,
+        "prior_lo_si": 1e+21,
+        "prior_hi_si": 1e+23,
+        "biases": [
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9
+        ],
+        "noise_rel": 0.02,
+        "discretisation_floor_rel": 0.0015,
+        "domain_si": [
+          0.0,
+          1e-06
+        ],
+        "seed": 0,
+        "min_separation_decades": 0.3,
+        "distinguishability_floor": 0.02,
+        "prior_hash": "13820a290460ccefaa357dc46d2ba74454b315146a4917e429a9923ea33016de"
+      },
+      "sampling": {
+        "drawn": 1000,
+        "kept": 1000,
+        "rejected_not_converged": 0,
+        "rejected_not_trustworthy": 0
+      },
+      "truth_log10": [
+        22.0,
+        22.0,
+        22.0,
+        22.0,
+        22.0,
+        22.0,
+        22.0,
+        22.0
+      ],
+      "truth_usable": true,
+      "prior_variance": [
+        0.34207076750717536,
+        0.33000370916982336,
+        0.33390730362381826,
+        0.31290680190738884,
+        0.33722430390673697,
+        0.32950197749241383,
+        0.3402790003613179,
+        0.35566600313536817
+      ],
+      "contraction_threshold": 0.5,
+      "ess_floor": 20.0,
+      "n_directions": 8,
+      "tolerance_sweep": [
+        {
+          "tolerance_rel": 0.02,
+          "tolerance_multiple_of_noise": 1.0,
+          "effective_sample_size": 1.0103295418330474,
+          "supported": false,
+          "variance_ratio": [
+            0.0026501911807342154,
+            0.004030322765476252,
+            0.0002706471635001746,
+            1.9871202196353065e-05,
+            0.0036635311202531167,
+            0.0028554367931747063,
+            0.00658851037267469,
+            0.003199137590077002
+          ],
+          "n_contracting_directions": 8
+        },
+        {
+          "tolerance_rel": 0.04,
+          "tolerance_multiple_of_noise": 2.0,
+          "effective_sample_size": 1.5052063706378191,
+          "supported": false,
+          "variance_ratio": [
+            0.08840317877376752,
+            0.13190856188020714,
+            0.010850249318266558,
+            0.0016038923814140245,
+            0.12153141066863057,
+            0.09485339506231728,
+            0.21556237059011119,
+            0.10550428020159042
+          ],
+          "n_contracting_directions": 8
+        },
+        {
+          "tolerance_rel": 0.1,
+          "tolerance_multiple_of_noise": 5.0,
+          "effective_sample_size": 8.337217962920787,
+          "supported": false,
+          "variance_ratio": [
+            0.5879687825759055,
+            0.4483355062145133,
+            0.5497258144329107,
+            0.3720483756390857,
+            0.4231383887456761,
+            0.9023837837721055,
+            0.5323425670594901,
+            0.26257196440328057
+          ],
+          "n_contracting_directions": 4
+        },
+        {
+          "tolerance_rel": 0.2,
+          "tolerance_multiple_of_noise": 10.0,
+          "effective_sample_size": 50.48842216301832,
+          "supported": true,
+          "variance_ratio": [
+            0.691024105842553,
+            0.6565663484734814,
+            0.561987928839485,
+            0.6414071317935891,
+            0.706588734407091,
+            0.9936993002582626,
+            0.7852362619995343,
+            0.4729582716372512
+          ],
+          "n_contracting_directions": 1
+        },
+        {
+          "tolerance_rel": 0.5,
+          "tolerance_multiple_of_noise": 25.0,
+          "effective_sample_size": 255.0628774689203,
+          "supported": true,
+          "variance_ratio": [
+            0.828744974254193,
+            0.7463528754510449,
+            0.7508637055666175,
+            0.7867605543959163,
+            0.8807388550977103,
+            0.9829608792171383,
+            0.8876981171041738,
+            0.7709945539156206
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 1.0,
+          "tolerance_multiple_of_noise": 50.0,
+          "effective_sample_size": 666.6250751086776,
+          "supported": true,
+          "variance_ratio": [
+            0.9185985750941245,
+            0.8740109141874695,
+            0.861945671313642,
+            0.9070506075771061,
+            0.948557490701698,
+            0.9723316711836649,
+            0.9490011528557021,
+            0.9142100788568196
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 2.0,
+          "tolerance_multiple_of_noise": 100.0,
+          "effective_sample_size": 952.1306051295194,
+          "supported": true,
+          "variance_ratio": [
+            0.9691635521533524,
+            0.960190846553864,
+            0.9553781760116559,
+            0.9735016230584382,
+            0.9846376723708681,
+            0.9893535567604884,
+            0.9827852456087309,
+            0.9738304365912334
+          ],
+          "n_contracting_directions": 0
+        },
+        {
+          "tolerance_rel": 5.0,
+          "tolerance_multiple_of_noise": 250.0,
+          "effective_sample_size": 998.4912647913625,
+          "supported": true,
+          "variance_ratio": [
+            0.9943505615847137,
+            0.9932021275926154,
+            0.9923951798850055,
+            0.9956615040092593,
+            0.997458960551193,
+            0.9981732386911478,
+            0.9970561270259987,
+            0.9955015084888932
+          ],
+          "n_contracting_directions": 0
+        }
+      ],
+      "tightest_supported": {
+        "tolerance_rel": 0.2,
+        "tolerance_multiple_of_noise": 10.0,
+        "effective_sample_size": 50.48842216301832,
+        "supported": true,
+        "variance_ratio": [
+          0.691024105842553,
+          0.6565663484734814,
+          0.561987928839485,
+          0.6414071317935891,
+          0.706588734407091,
+          0.9936993002582626,
+          0.7852362619995343,
+          0.4729582716372512
+        ],
+        "n_contracting_directions": 1
+      },
+      "verdict": "at the tightest supported tolerance (10x the 2% noise floor, ESS 50.5), 1 of 8 directions contract below ratio 0.5",
+      "wall_clock_s": 442.19755359999544
+    }
+  }
+}

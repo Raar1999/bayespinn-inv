@@ -48,7 +48,8 @@ interval.
 | **Inverse recovery** (single level, well-posed) | **0.0018 decades** at 0% noise → 0.0072 at 10% noise (n=40 each) | `run_results.py` |
 | **UQ calibration** | ±1.64σ coverage 46% → **90%** after variance inflation T=2.09 (nominal 90%, n=140, same test set) | `run_results.py` |
 | **Is the uncertainty useful?** | Spearman ρ(σ, \|error\|) = **+0.82** (n=200); σ inflates **15.7×** on extrapolation while error inflates 11.8× | `run_results.py` |
-| **Identifiability** (***local***) | **Local** identifiability — the rank of the Jacobian at one operating point, *not* a global result. At the reference point (1 µm Si PN junction, N_A=N_D=1e22 m⁻³, 19 bias points over 0–0.9 V, 2% noise, P=16), I–V determines only **3–4 of 16** doping dof; **1–6 across every tested variation**, median 3, over 88 measurements; **the rank does not grow with the parameterisation** (P=8→32 leaves it at 3–4). Global, sampling-based non-identifiability is **unmeasured** | `run_identifiability.py`, `run_identifiability_robustness.py` |
+| **Identifiability** (***local***) | **Local** identifiability — the rank of the Jacobian at one operating point. At the reference point (1 µm Si PN junction, N_A=N_D=1e22 m⁻³, 19 bias points over 0–0.9 V, 2% noise, P=16), I–V determines only **3–4 of 16** doping dof; **1–6 across every tested variation**, median 3, over 88 measurements; **the rank does not grow with the parameterisation** (P=8→32 leaves it at 3–4) | `run_identifiability.py`, `run_identifiability_robustness.py` |
+| **Identifiability** (***global***) | **Demonstrated by witness, not inferred.** At d=4, log-uniform prior 1e21–1e23 m⁻³, 16 biases over 0.15–0.90 V, distinguishability floor **2.0e-02** = max(noise 2.0e-02, solver 1.5e-03): **13 witness pairs** among 1,999,000 examined. Closest differs by **8.18× in doping** yet only **1.23%** in I–V. All tested pairs **survive 4× grid refinement and a tighter tolerance**. Oracle-arbitrated; the surrogate is never used (ADR-0007) | `run_global_identifiability.py`, `run_witness_falsifier.py` |
 | **Surrogate speed** vs SG | **152×** faster per I–V curve (0.85 ms vs 129 ms, M=5 ensemble) | `run_results.py` |
 | **Surrogate *gradient* fidelity** | directional derivatives agree with SG **only inside** the identifiable subspace: mean cosine **+0.50 inside vs −0.00 outside**, unchanged by a 33× training-budget increase | `run_gradient_fidelity.py` |
 | **UQ backend comparison** | deep ensemble beats tuned MC-dropout and tuned SWAG on every uncertainty axis; σ inflates **21.3×** off-distribution vs 1.4×/2.5× | `run_uq_benchmark.py`, `run_uq_tuning.py` |
@@ -66,11 +67,18 @@ interval.
 2. **Inverse recovery of a single doping level is the well-posed
    sub-problem.** It is a one-parameter identification against 13 observations,
    not profile recovery.
-3. **Profile recovery is ill-posed, and now quantified — *locally*.** This is a
-   **local** identifiability result: the numerical rank of the forward
-   Jacobian at one operating point (1 µm Si PN junction, N_A=N_D=1e22 m⁻³).
-   Global, sampling-based non-identifiability has **not** been measured, and
-   nothing here rules out distant parameter sets that fit equally well. A
+3. **Profile recovery is ill-posed — locally *and* globally.** The *local*
+   result is the numerical rank of the forward Jacobian at one operating point
+   (1 µm Si PN junction, N_A=N_D=1e22 m⁻³). The *global* question — whether
+   distant parameter sets fit equally well — is no longer open: at d=4 over a
+   1e21–1e23 m⁻³ log-uniform prior, a search over 1,999,000 pairs found **13**
+   whose I–V curves differ by less than the 2% distinguishability floor, the
+   closest differing by **8.18× in doping** for a **1.23%** change in I–V. Those
+   witnesses survive 4× grid refinement and a tighter solver tolerance, so they
+   are degeneracies of the device rather than of the solver
+   ([`docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`](docs/S1_GLOBAL_IDENTIFIABILITY_g6.md)).
+   The two results are not the same fraction: 3–4 of 16 is local at 2% noise,
+   3 of 4 is global at d=4 and 10× that noise. A
    19-point forward-bias I–V sweep at 2% measurement noise determines only 3–4
    of 16 doping degrees of freedom at the reference conditions, and 1–6 (median 3)
    across 88 measurements spanning parameterisation dimension, bias count,
@@ -268,11 +276,13 @@ matter for everything downstream:
 
 ### The result that ties the project together
 
-The forward map is **locally** rank-deficient: at a given operating point, the
-Jacobian of a terminal I–V sweep determines only 3–4 of 16 doping degrees of
-freedom, and that number **does not grow when you add parameters** — it is a
-property of the measurement. "Locally" is not a hedge: the rank is measured at
-one operating point, and global non-identifiability is unmeasured.
+The forward map is rank-deficient **locally**, and degenerate **globally**.
+Locally: at a given operating point the Jacobian of a terminal I–V sweep
+determines only 3–4 of 16 doping degrees of freedom, and that number **does not
+grow when you add parameters**. Globally: two profiles differing by **8.18× in
+doping** produce I–V curves differing by **1.23%**, below a 2% floor — and that
+pair survives 4× grid refinement, so it is the device that cannot tell them
+apart, not the solver.
 
 A surrogate trained only on that measurement is therefore constrained only in
 that subspace. Its *values* can be excellent while its *derivatives* along the
@@ -343,7 +353,7 @@ configuration — so any number can be traced to what produced it.
 |---|---|---|
 | 1 | Terminal-current noise floor ~2e-6 A/m² near equilibrium; the true current there is zero and the oracle cannot resolve it. | Measured and reported per solve. Removing it needs a quasi-Fermi reformulation (ADR-0002). |
 | 2 | The surrogate extrapolates poorly outside its training doping band (38% median error) and does not transfer to unseen profile families (84%). | Measured; the honest operating envelope. |
-| 3 | Profile recovery from terminal I–V is ***locally*** ill-posed: 3–4 of 16 dof identifiable at 2% noise at the reference operating point (1–6, median 3, across all tested conditions). | **Local** Jacobian rank, quantified and stress-tested across six axes plus a bootstrap; invariant to parameterisation dimension. Global identifiability is unmeasured. |
+| 3 | Profile recovery from terminal I–V is ill-posed **locally and globally**: 3–4 of 16 dof identifiable at 2% noise at the reference point, and 13 witness pairs (up to **8.18×** apart in doping, **1.23%** apart in I–V) found by global search at d=4. | Local Jacobian rank stress-tested across six axes plus a bootstrap; global witnesses found by oracle-arbitrated search over 1,999,000 pairs and shown to **survive 4× grid refinement**. ADR-0007. |
 | 4 | Uncertainty-driven bias acquisition is **worse** than random for inverse identifiability (−0.31 rank, 9 losses / 20). | Measured negative result; information-based design (+0.39) is the working alternative. AUDIT_MASTER DES-01. |
 | 4b | The surrogate's **gradients** are usable only inside the identifiable subspace (mean cosine +0.50 inside, −0.00 outside) — and more training does not fix it. | Measured; this bounds gradient-based inverse design and any Jacobian-based experiment design. AUDIT_MASTER GRAD-01. |
 | 4c | The pure-physics PINN does not work as a forward model (100% median relative error). | Retained as legacy + a documented negative result. ADR-0004. |

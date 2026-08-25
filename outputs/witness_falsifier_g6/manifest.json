@@ -1,0 +1,223 @@
+{
+  "experiment": "witness_falsifier",
+  "created_utc": "2026-08-25T16:48:02+00:00",
+  "git": {
+    "commit": "ac7aa8ec11d03368679aaea7f260f8a94e35088c",
+    "dirty": true,
+    "tracked_modified": 0,
+    "untracked": 1,
+    "tree_digest": "d3e3f6f01613ae8767c1f3a6db3f219156463e2902883b0f51de3d3b9ea14a07"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "git_autocrlf": "false",
+    "git_eol": null,
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "grids": [
+      301,
+      601,
+      1201
+    ],
+    "floor": 0.02,
+    "source_study": "outputs/global_identifiability_g6/global_identifiability.json",
+    "n_pairs": 5,
+    "label": "witness"
+  },
+  "results": {
+    "falsifier": {
+      "label": "witness",
+      "floor": 0.02,
+      "grids": [
+        301,
+        601,
+        1201
+      ],
+      "pairs": [
+        {
+          "pair_index": 0,
+          "separation_decades": 0.9125150783578668,
+          "reported_distance": 0.012254760252752345,
+          "refinements": [
+            {
+              "grid_n": 301,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.012254760252752345,
+              "below_floor": true
+            },
+            {
+              "grid_n": 301,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.012254760252752345,
+              "below_floor": true
+            },
+            {
+              "grid_n": 601,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.012368512029011668,
+              "below_floor": true
+            },
+            {
+              "grid_n": 601,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.012368512029011668,
+              "below_floor": true
+            },
+            {
+              "grid_n": 1201,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.008608856638555297,
+              "below_floor": true
+            },
+            {
+              "grid_n": 1201,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.008608856638555297,
+              "below_floor": true
+            }
+          ],
+          "survives_refinement": true
+        },
+        {
+          "pair_index": 1,
+          "separation_decades": 0.30253534449837716,
+          "reported_distance": 0.013788224487543424,
+          "refinements": [
+            {
+              "grid_n": 301,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.013788224487543424,
+              "below_floor": true
+            },
+            {
+              "grid_n": 301,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.013788224501646094,
+              "below_floor": true
+            },
+            {
+              "grid_n": 601,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.013556956595348705,
+              "below_floor": true
+            },
+            {
+              "grid_n": 601,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.013556956608144948,
+              "below_floor": true
+            },
+            {
+              "grid_n": 1201,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.013442016366699778,
+              "below_floor": true
+            },
+            {
+              "grid_n": 1201,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.013442016371745209,
+              "below_floor": true
+            }
+          ],
+          "survives_refinement": true
+        },
+        {
+          "pair_index": 2,
+          "separation_decades": 0.32805190826584507,
+          "reported_distance": 0.014223591577103359,
+          "refinements": [
+            {
+              "grid_n": 301,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.014223591577103359,
+              "below_floor": true
+            },
+            {
+              "grid_n": 301,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.014223591577103359,
+              "below_floor": true
+            },
+            {
+              "grid_n": 601,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.014425695862653298,
+              "below_floor": true
+            },
+            {
+              "grid_n": 601,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.014425695862653298,
+              "below_floor": true
+            },
+            {
+              "grid_n": 1201,
+              "tolerance": "default",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.014520826042279241,
+              "below_floor": true
+            },
+            {
+              "grid_n": 1201,
+              "tolerance": "tight",
+              "n_trustworthy": 16,
+              "n_biases": 16,
+              "observational_distance": 0.014520826042279241,
+              "below_floor": true
+            }
+          ],
+          "survives_refinement": true
+        }
+      ],
+      "verdict": "all tested pairs survive grid refinement and a tighter tolerance"
+    }
+  },
+  "artifacts": {},
+  "notes": "Section 4.6 falsifier: does the pair survive grid refinement and a tighter tolerance, or was it a solver artefact?"
+}

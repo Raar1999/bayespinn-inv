@@ -203,3 +203,35 @@ This is the first **quantified** cost of `PROV-03`: 41 numbers that can never be
 explained, because the tree that produced them was never committed. The
 explanation cannot be confirmed either — confirming it would require the very
 thing that was lost. Recorded as unresolvable rather than closed.
+
+---
+
+## 7. S-1 — global identifiability (generation 6, 2026-08-25)
+
+Oracle-arbitrated throughout; the surrogate is never called (`ADR-0007`,
+`SPEC-g6-5`). Every row carries the five conditions §4.2 requires: parameterisation
+`d`, prior support, noise model, observation set, and both floors.
+
+**Common regime for G1-G5:** d as stated; log-uniform prior 1e21-1e23 m^-3 per
+anchor (hash `ba11a6d5357388cb...`, fixed before sampling); 16 biases over
+0.15-0.90 V; noise floor 2.0e-02; solver discretisation floor 1.5e-03;
+distinguishability floor **2.0e-02** = max of the two. Manifest:
+`outputs/global_identifiability_g6/manifest.json`.
+
+| # | Claim | Value | Command | n | Verdict |
+|---|---|---|---|---|---|
+| G1 | Global non-identifiability, witness search (d=4) | **13 witness pairs** of 1,999,000 examined; separations **2.01x - 8.18x** in doping; observational distances 1.23e-02 - 1.53e-02, all below the 2.0e-02 floor | `python scripts/run_global_identifiability.py` | 2000 profiles, all oracle-certified | :white_check_mark: new |
+| G2 | The closest witness | doping differs **8.18x** at one anchor; I-V differs **1.23%** across 16 biases spanning ten decades of current | same | 1 pair | :white_check_mark: new |
+| G3 | Witnesses survive refinement | 3 of 3 tested pairs stay below the floor at N=301/601/1201 and at `tol_carrier=1e-12`; pair 0's distance *falls* 1.23e-02 -> 8.61e-03 | `python scripts/run_witness_falsifier.py` | 3 pairs x 3 grids x 2 tolerances | :white_check_mark: new |
+| G4 | Contraction spectrum (d=4) | **3 of 4** directions contract below variance ratio 0.5, at **10x** the instrument noise, ESS 71.0 | `run_global_identifiability.py` | 2000 | :warning: measurable only in a narrow band, see G5 |
+| G5 | Contraction at the instrument's own 2% noise | **NOT MEASURED.** Prior importance sampling collapses: ESS 1.0, all variance ratios 0.000. The apparent "4 of 4 contracting" is an estimator artefact and is reported as unsupported | same | 2000 | :white_check_mark: negative result |
+| G6 | Contracting directions vs parameterisation | does **not** grow with d: **2 of 2** (d=2), **3 of 4** (d=4), **1 of 8** (d=8), all at 10x noise | same | 1000 per d | :warning: d=8 confounded -- samples/dimension fall 500 -> 250 -> 125 |
+| G7 | Local vs global relationship | agree in direction, **not comparable in magnitude**: 3-4 of 16 is local at 2% noise; 3 of 4 is global at d=4 and 20% noise. A local rank cannot exhibit a witness; only the global search can, and it did | `S1_GLOBAL_IDENTIFIABILITY_g6.md` | - | :white_check_mark: new |
+
+### What G1-G7 do not establish
+
+Nothing at d=16, the parameterisation the local result uses; nothing outside the
+stated prior (a narrower physical prior could exclude these witnesses entirely);
+no contraction spectrum at 2% noise; and 13 is the number found at this budget,
+not the true number. The d=8 decline is confounded with sampling density and is
+not evidence of less information at higher d.

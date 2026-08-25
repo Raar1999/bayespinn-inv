@@ -24,9 +24,9 @@ not release-grade is listed at the bottom and is smaller than before.
 | Check | Status | Evidence |
 |---|---|---|
 | No known critical bugs | ✅ | All 47 audit findings recorded and closed or explicitly accepted; each has a regression test (`docs/AUDIT_MASTER.md`). BUG-13 (CRITICAL) was found and fixed in the second cycle. |
-| No unexplained failing tests | ✅ | **240 passed**, 0 failed, 0 skipped |
+| No unexplained failing tests | ✅ | **438 passed**, 0 failed, 0 skipped |
 | No critical lint issues | ✅ | `ruff check src tests scripts` exits 0 |
-| No obvious dead/duplicate implementation | ⚠️ | `_ohmic_bc` and `pinn/losses.ohmic_boundary_values` remain separate implementations of the same physics — the cause of BUG-11. They now agree, but the duplication is not removed. |
+| No obvious dead/duplicate implementation | ⚠️ | `_ohmic_bc` and `pinn/losses.ohmic_boundary_values` remain separate implementations of the same physics — the cause of BUG-11. The duplication is not removed, but their equivalence is now **pinned in both value and gradient** over 402 points across the doping envelope, both signs (`SPEC-g0-7`). |
 
 ## Gate B — Physics
 
@@ -69,8 +69,8 @@ not release-grade is listed at the bottom and is smaller than before.
 | Parameterization validated | ✅ | Three parameterizations; junction position in normalized logit space |
 | Optimization stable | ✅ | Gradient clipping, bounded doping, normalized penalties |
 | Bounds enforced | ✅ | `clamp_to_range` |
-| Identifiability discussed | ✅ | **Measured and stress-tested — *locally***: the Jacobian rank at one operating point, not a global result. 3–4 of 16 dof at 2% noise across four device families; 1–6 (median 3) over 88 measurements spanning six axes plus a bootstrap; invariant to parameterisation dimension. **Global, sampling-based non-identifiability is unmeasured** (PH-21; AUDIT_g0 SCI-11) |
-| Multiple solutions investigated | ✅ | Equivalence twins constructed and verified through the SG solver |
+| Identifiability discussed | ✅ | **Measured locally *and* globally.** Local: Jacobian rank at one operating point — 3–4 of 16 dof at 2% noise across four device families; 1–6 (median 3) over 88 measurements; invariant to parameterisation dimension. Global: **13 witness pairs** found by oracle-arbitrated search over 1,999,000 pairs at d=4, the closest differing **8.18×** in doping for **1.23%** in I–V, all tested pairs surviving 4× grid refinement (ADR-0007, `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`). Contraction at the instrument's own 2% noise is **not measured** — the estimator collapses (PH-21) |
+| Multiple solutions investigated | ✅ | Equivalence twins constructed (1.26×) **and** 13 global witness pairs *found by search* (up to 8.18×), all surviving 4× grid refinement — `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md` |
 
 ## Gate F — Active learning
 
@@ -85,12 +85,12 @@ not release-grade is listed at the bottom and is smaller than before.
 
 | Check | Status | Evidence |
 |---|---|---|
-| Clean environment works | ✅ | Wheel built and installed into a fresh venv; **240** tests pass **against the installed package** |
+| Clean environment works | ✅ | Wheel built and installed into a fresh venv; the suite passes **against the installed package**. Note: the build was performed offline (`SK-09`), so dependency *resolution* from `pyproject.toml` is **not** verified — see `docs/WINDOWS_RISK_g6.md` |
 | Seeds recorded | ✅ | In every manifest |
 | Configs recorded | ✅ | Full config dict in every manifest |
 | Artifacts traceable | ✅ | `manifest.json` records git commit, tree cleanliness, Python/NumPy/SciPy/Torch versions, platform, CUDA, seed |
 | Results reproducible | ✅ | Independent re-run reproduces H1 interpolation to 0.01 pp |
-| CI | ✅ | `.github/workflows/ci.yml`: lint + tests on 3.9/3.11/3.12, plus a clean-install job that runs the suite against the wheel |
+| CI | ❌ | **`CI-01` is REOPENED.** The workflow existed but was **untracked** until `c115757`, so it has never been pushed and **has never executed** — this gate was previously green against a file that had never run. Generation 6 executed its steps locally on Python 3.11.9/Windows (lint 0, tests 0, notebook generator 0); the **3.9 and 3.12 legs are unevaluated, not passing**. A retrievable remote run log is `OPERATOR-BLOCKED` — `R-4` forbids `git push`. Commands: `docs/OPERATOR_TASKS.md` OT-1 |
 
 ## Gate H — Documentation
 

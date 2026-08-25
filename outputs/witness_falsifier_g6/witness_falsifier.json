@@ -1,0 +1,180 @@
+{
+  "label": "witness",
+  "floor": 0.02,
+  "grids": [
+    301,
+    601,
+    1201
+  ],
+  "pairs": [
+    {
+      "pair_index": 0,
+      "separation_decades": 0.9125150783578668,
+      "reported_distance": 0.012254760252752345,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.012254760252752345,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.012254760252752345,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.012368512029011668,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.012368512029011668,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.008608856638555297,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.008608856638555297,
+          "below_floor": true
+        }
+      ],
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 1,
+      "separation_decades": 0.30253534449837716,
+      "reported_distance": 0.013788224487543424,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.013788224487543424,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.013788224501646094,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.013556956595348705,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.013556956608144948,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.013442016366699778,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.013442016371745209,
+          "below_floor": true
+        }
+      ],
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 2,
+      "separation_decades": 0.32805190826584507,
+      "reported_distance": 0.014223591577103359,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.014223591577103359,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.014223591577103359,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.014425695862653298,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.014425695862653298,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.014520826042279241,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "n_trustworthy": 16,
+          "n_biases": 16,
+          "observational_distance": 0.014520826042279241,
+          "below_floor": true
+        }
+      ],
+      "survives_refinement": true
+    }
+  ],
+  "verdict": "all tested pairs survive grid refinement and a tighter tolerance"
+}
