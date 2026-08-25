@@ -54,7 +54,7 @@ the solver's own `converged` and `current_is_trustworthy()` verdict.
 
 | | |
 |---|---:|
-| profiles sampled (all oracle-certified) | 2,000 |
+| profiles sampled for the **global** search, **chart G**, **d=4** (all oracle-certified) | 2,000 |
 | pairs examined | 1,999,000 |
 | **witness pairs found** | **13** |
 | rate | 6.5e-06 |
@@ -77,10 +77,11 @@ device.
 
 ### Context: this is much stronger than the existing local claim
 
-`C14` reports *equivalence twins* — profiles differing by up to **1.26×** locally,
-changing I–V by 0.02–1.3%. Those were **constructed** along locally flat
-directions. The witnesses here were **found by global search** and are up to
-**8.18×** apart — six times the doping difference, still indistinguishable.
+`C14` reports *equivalence twins* — profiles differing by up to **1.26×**
+locally, in **chart L** at **d=16**, changing I–V by 0.02–1.3%. Those were
+**constructed** along locally flat directions. The witnesses here were **found by
+global search** in **chart G** at **d=4** and are up to **8.18×** apart — six
+times the doping difference, still indistinguishable.
 
 ---
 
@@ -114,7 +115,7 @@ as proof: 3 of the 13 pairs were tested, at three grids and two tolerances.
 
 d = 4, n = 2,000, prior → posterior variance ratio per direction.
 
-| tolerance (× noise) | ESS | supported | contracting | variance ratios |
+| tolerance (× noise) | ESS | supported | contracting (**global**, **chart G**, **d=4**) | variance ratios |
 |---:|---:|:---:|---:|---|
 | 1 | 1.0 | **no** | (4) | 0.000 0.000 0.000 0.000 |
 | 2 | 1.7 | **no** | (4) | 0.041 0.133 0.180 0.022 |
@@ -131,9 +132,9 @@ variance goes to zero, and *every* direction reports as contracting. That row is
 artefact of the estimator and is marked unsupported rather than reported. It is the
 S-1 equivalent of quoting an ECE below its M=5 floor (`API-04`).
 
-The measurable statement is narrow and is given as such: **at 10× the instrument
-noise (20% relative), with ESS 71 of 2,000 usable samples, 3 of 4 directions
-contract below a variance ratio of 0.5.** Above 25× the data constrains nothing;
+The measurable statement is narrow and is given as such: **globally, in chart G
+at d=4, at 10× the instrument noise (20% relative), with ESS 71 of 2,000 usable
+samples, 3 of 4 directions contract below a variance ratio of 0.5.** Above 25× the data constrains nothing;
 below 10× the estimator stops estimating.
 
 Reaching 2% would need sequential Monte Carlo or MCMC, not a larger `n` — the
@@ -146,7 +147,7 @@ method and is reported as one.
 
 n = 1,000 per `d`, all figures at the tightest supported tolerance (10× noise):
 
-| d | samples per dimension | ESS | contracting |
+| d | samples per dimension | ESS | contracting (**global**, **chart G**) |
 |---:|---:|---:|---|
 | 2 | 500 | 31.6 | **2 of 2** |
 | 4 | 250 | 38.8 | **3 of 4** |
@@ -166,16 +167,23 @@ pre-registered budget did not cover. Stated rather than glossed (`SPEC-g6-3` RIS
 
 ## 6. `SPEC-g6-4` — The local/global relationship
 
-| | local | global |
+| | local (**chart L**, **d=16**) | global (**chart G**, **d=4**) |
 |---|---|---|
 | method | Jacobian rank at one operating point | prior→posterior contraction + witness search |
-| result | **3–4 of 16** at 2% noise | **3 of 4** at d=4, 10× noise |
+| result | **3–4 of 16**, **chart L**, **d=16**, at 2% noise — **not comparable** with the next column, see `CHART_RECONCILIATION_g7.md` | **3 of 4**, **chart G**, **d=4**, at 10× noise |
 | what it says | which directions are flat *here* | which directions the data constrains *at all*, and which distant profiles collide |
 
 **They agree in direction and cannot be compared in magnitude.** Both say only a
-handful of directions are constrained. The denominators differ (16 vs 4) and the
-noise levels differ (2% vs 20%), so "3–4 of 16" and "3 of 4" are not the same
-fraction and must not be quoted as though they were.
+handful of directions are constrained. Generation 7 found the deeper reason: the
+local number was measured in **chart L** and the global one in **chart G**, and
+neither chart contains the other, so the two fractions are **not comparable**
+across charts — they are over different manifolds, not merely different
+denominators (`CHART_RECONCILIATION_g7.md`). The denominators differ (16 vs 4) and
+the noise levels differ (2% vs 20%) as well.
+
+Measured at matched chart and matched `d`, the **dimension** moves the rank and
+the **chart** does not: identifiable rank 3 at `d=4` and 4 at `d=16` in **chart G**
+*and* in **chart L**, with the spectra agreeing to within 3% at `d=16`.
 
 **Where the local analysis is insufficient, precisely:** a local rank cannot
 exhibit a witness. It says a direction is flat *at a point*; it cannot say that a
@@ -187,11 +195,14 @@ generation 0 said it might be.
 
 ## 7. What this does and does not establish
 
-**Establishes.** At d=4, over a 1e21–1e23 m⁻³ log-uniform prior, with 16 bias
-points over 0.15–0.90 V and a 2% distinguishability floor, terminal I–V does **not**
-determine the doping profile: pairs differing by up to 8.18× produce
-indistinguishable measurements, and they survive 4× grid refinement and a tighter
-solver tolerance.
+**Establishes.** Globally, in **chart G** at **d=4**, over a 1e21–1e23 m⁻³
+log-uniform prior, with 16 bias points over 0.15–0.90 V and a 2% distinguishability
+floor — the maximum of a 2.0e-02 noise floor and a 1.5e-03 solver discretisation
+floor — terminal I–V does **not** determine the doping profile: pairs differing by
+up to 8.18× produce indistinguishable measurements, and they survive 4× grid
+refinement and a tighter solver tolerance. Generation 7 showed the same pair
+survives embedding into **chart L** at **d=16**, and found 37 further witnesses
+natively in **chart L** (`CHART_RECONCILIATION_g7.md`).
 
 **Does not establish.**
 

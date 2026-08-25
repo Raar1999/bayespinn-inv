@@ -29,9 +29,9 @@ mis-scoped) · ❌ withdrawn · 📄 documentation-only
 | C9 | Calibration, ±1.64σ | 46% → 90% (nominal 90%) | `run_results.py` H3 | same | 0 | 140 | ⚠️ pre/post now on the same set |
 | C10 | Variance-inflation factor | T = 2.09 | same | same | 0 | 48 (val) | ⚠️ was 2.19 |
 | C11 | Active learning vs random | no distinguishable advantage at any budget | `run_results.py` H4b | same | 1000–1007 | 32/cell | ✅ new (negative) |
-| C12 | Identifiable dof at 2% noise | 4 (sym step), 5 (asym), 3 (graded), 4 (LDD), of 16 | `run_identifiability.py` | `python scripts/run_identifiability.py` | 0 | 8–10 biases | ✅ new |
+| C12 | Identifiable dof at 2% noise, **local**, **chart L**, **d=16** | 4 (sym step), 5 (asym), 3 (graded), 4 (LDD), of 16 | `run_identifiability.py` | `python scripts/run_identifiability.py` | 0 | 8–10 biases | ✅ new |
 | C13 | Rank vs instrument quality | 2 dof @20% → 9 dof @1e-4% noise | same | same | 0 | — | ✅ new |
-| C14 | Equivalence twins indistinguishable | 1.26× doping change → 0.02–1.3% I–V change | same | same | 0 | 4 families | ✅ new |
+| C14 | Equivalence twins indistinguishable (**local**, **chart L**, **d=16**) | 1.26× doping change → 0.02–1.3% I–V change | same | same | 0 | 4 families | ✅ new |
 | C15 | Jacobian linear-response validation | ratios 0.995–1.04 | same | same | 0 | 4 dirs × 4 families | ✅ new |
 | C16 | Surrogate speedup vs SG | 152× (0.85 ms vs 129 ms, M=5) | timing harness | see README | — | 10/200 reps | ⚠️ was "~500×" |
 | C17 | Built-in potential vs analytic | rel. error 7.24e-14 | `cli.py` selftest | `bayespinn selftest` | — | 1 | ⚠️ **2.8e-7 withdrawn** (X15) — it measured the *pre-audit* solver |
@@ -79,7 +79,7 @@ mis-scoped) · ❌ withdrawn · 📄 documentation-only
 | X15 | "Built-in potential vs analytic: rel. error **2.8e-7**" | README headline table, C17, `RELEASE_READINESS` | Measured on the **pre-audit** solver. `git archive 6577f4b` and re-run: `2.7558e-07` — the published figure, reproduced exactly on the *superseded* code. The adopted solver measures `7.243e-14`, grid-independent over N=101…601. The claim described a program the project no longer ships. | ❌ withdrawn → C17 (AUDIT_g0 SCI-08 / PROV-06) |
 | X16 | "Mass action at equilibrium: max \|np−1\| = **7.6e-6**" | C17/C18, `RELEASE_READINESS` | Same cause. Adopted solver: `2.93e-9` at the selftest configuration (`1.37e-9 … 8.42e-9` over grids 101–601). | ❌ withdrawn → C18 |
 | X17 | "Equilibration improves mass action **1.32e-2 → 7.62e-6 (1730×)**" | S1 | The `1.32e-2` starting point is sound (measured `6.77e-3`, 1.95× — within tolerance). The `7.62e-6` endpoint is not: the adopted solver reaches `9.7e-10`, so the real gain is ~**7.0e6×**, not 1730×. The published figure understated the improvement by ~4000×. | ❌ withdrawn → S1 |
-| X18 | Identifiability stated without a local/global label | README rows 51, 70, 267, 340; `RELEASE_READINESS` 72, 189 | `inverse/identifiability.py` computes a **local** Jacobian rank at one operating point and says so; `papers/draft.md` labels it three times. The README and release gates dropped the qualifier, inviting the number to be read as global non-identifiability. PH-21 forbids this. | ⚠️ qualified, not withdrawn (AUDIT_g0 SCI-11) |
+| X18 | Identifiability stated without a local/global label (the **chart L** / **chart G** label was added later still, see G8) | README rows 51, 70, 267, 340; `RELEASE_READINESS` 72, 189 | `inverse/identifiability.py` computes a **local** Jacobian rank at one operating point and says so; `papers/draft.md` labels it three times. The README and release gates dropped the qualifier, inviting the number to be read as global non-identifiability. PH-21 forbids this. | ⚠️ qualified, not withdrawn (AUDIT_g0 SCI-11) |
 
 ## 4. Claims that remain unverified *(as of the first cycle; see §5 for resolutions)*
 
@@ -179,8 +179,9 @@ Median relative drift `1.906e-08`; maximum `5.840e-02`, at
 `/devices/ldd/spectral_floor` and `/devices/ldd/entry_noise` (the same quantity
 propagated).
 
-**No claim is affected.** All four **local** identifiable ranks — the Jacobian
-rank at the reference operating point, 4, 5, 3, 4 of 16 — every
+**No claim is affected.** All four **local** identifiable ranks in **chart L**
+at **d=16** — the Jacobian rank at the reference operating point, 4, 5, 3, 4
+of 16 — every
 `resolvable_rank`, and all four complete `rank_vs_noise` tables are identical.
 
 Three measurements, in order, and the first hypothesis was wrong:
@@ -220,13 +221,15 @@ distinguishability floor **2.0e-02** = max of the two. Manifest:
 
 | # | Claim | Value | Command | n | Verdict |
 |---|---|---|---|---|---|
-| G1 | Global non-identifiability, witness search (d=4) | **13 witness pairs** of 1,999,000 examined; separations **2.01x - 8.18x** in doping; observational distances 1.23e-02 - 1.53e-02, all below the 2.0e-02 floor | `python scripts/run_global_identifiability.py` | 2000 profiles, all oracle-certified | :white_check_mark: new |
+| G1 | Global non-identifiability, witness search (**chart G**, **d=4**) | **13 witness pairs** of 1,999,000 examined; separations **2.01x - 8.18x** in doping; observational distances 1.23e-02 - 1.53e-02, all below the 2.0e-02 floor | `python scripts/run_global_identifiability.py` | 2000 profiles, all oracle-certified | :white_check_mark: new |
 | G2 | The closest witness | doping differs **8.18x** at one anchor; I-V differs **1.23%** across 16 biases spanning ten decades of current | same | 1 pair | :white_check_mark: new |
 | G3 | Witnesses survive refinement | 3 of 3 tested pairs stay below the floor at N=301/601/1201 and at `tol_carrier=1e-12`; pair 0's distance *falls* 1.23e-02 -> 8.61e-03 | `python scripts/run_witness_falsifier.py` | 3 pairs x 3 grids x 2 tolerances | :white_check_mark: new |
-| G4 | Contraction spectrum (d=4) | **3 of 4** directions contract below variance ratio 0.5, at **10x** the instrument noise, ESS 71.0 | `run_global_identifiability.py` | 2000 | :warning: measurable only in a narrow band, see G5 |
-| G5 | Contraction at the instrument's own 2% noise | **NOT MEASURED.** Prior importance sampling collapses: ESS 1.0, all variance ratios 0.000. The apparent "4 of 4 contracting" is an estimator artefact and is reported as unsupported | same | 2000 | :white_check_mark: negative result |
-| G6 | Contracting directions vs parameterisation | does **not** grow with d: **2 of 2** (d=2), **3 of 4** (d=4), **1 of 8** (d=8), all at 10x noise | same | 1000 per d | :warning: d=8 confounded -- samples/dimension fall 500 -> 250 -> 125 |
-| G7 | Local vs global relationship | agree in direction, **not comparable in magnitude**: 3-4 of 16 is local at 2% noise; 3 of 4 is global at d=4 and 20% noise. A local rank cannot exhibit a witness; only the global search can, and it did | `S1_GLOBAL_IDENTIFIABILITY_g6.md` | - | :white_check_mark: new |
+| G4 | Contraction spectrum (**chart G**, **d=4**) | **3 of 4** directions contract below variance ratio 0.5, at **10x** the instrument noise, ESS 71.0 | `run_global_identifiability.py` | 2000 | :warning: measurable only in a narrow band, see G5 |
+| G5 | Contraction at the instrument's own 2% noise (**global**, **chart G**, **d=4**) | **NOT MEASURED.** Prior importance sampling collapses: ESS 1.0, all variance ratios 0.000. The apparent "4 of 4 contracting" is an estimator artefact and is reported as unsupported | same | 2000 | :white_check_mark: negative result |
+| G6 | Contracting directions vs parameterisation (**global**, **chart G**) | does **not** grow with d: **2 of 2** (d=2), **3 of 4** (d=4), **1 of 8** (d=8), all at 10x noise | same | 1000 per d | :warning: d=8 confounded -- samples/dimension fall 500 -> 250 -> 125 |
+| G7 | Local vs global relationship | **superseded by G8**. The two numbers were measured in different charts (**chart L** at d=16; **chart G** at d=4) and their fractions are over different manifolds, so "not comparable in magnitude" was right for the wrong reason | `CHART_RECONCILIATION_g7.md` | - | :warning: superseded |
+| G8 | Local and global at matched chart and d | **the dimension moves the rank; the chart does not.** Rank 3 at d=4 and 4 at d=16 in **chart G** *and* in **chart L**, one operating point, 2% noise, 16 biases; spectra agree to within 3% at matched d. Witness pair 0 embeds into **chart L** at **d=16** with observational distance 1.207e-02 vs 1.225e-02, separation preserved to 0.999 | `python scripts/run_chart_reconciliation_g7.py` | 4 cells, oracle float64 | :white_check_mark: new |
+| G9 | Shape of the degeneracy | **bimodal, not a flat manifold**: two isolated likelihood maxima at the witness endpoints, barrier 242 log-units deep, 5 of 61 path points inside the 2.0e-02 floor; a control along the most observable direction is 43.7x deeper with no second mode (**chart G**, **d=4**) | same | 61 points + 61 control | :white_check_mark: new |
 
 ### What G1-G7 do not establish
 

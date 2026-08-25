@@ -69,8 +69,8 @@ not release-grade is listed at the bottom and is smaller than before.
 | Parameterization validated | ✅ | Three parameterizations; junction position in normalized logit space |
 | Optimization stable | ✅ | Gradient clipping, bounded doping, normalized penalties |
 | Bounds enforced | ✅ | `clamp_to_range` |
-| Identifiability discussed | ✅ | **Measured locally *and* globally.** Local: Jacobian rank at one operating point — 3–4 of 16 dof at 2% noise across four device families; 1–6 (median 3) over 88 measurements; invariant to parameterisation dimension. Global: **13 witness pairs** found by oracle-arbitrated search over 1,999,000 pairs at d=4, the closest differing **8.18×** in doping for **1.23%** in I–V, all tested pairs surviving 4× grid refinement (ADR-0007, `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`). Contraction at the instrument's own 2% noise is **not measured** — the estimator collapses (PH-21) |
-| Multiple solutions investigated | ✅ | Equivalence twins constructed (1.26×) **and** 13 global witness pairs *found by search* (up to 8.18×), all surviving 4× grid refinement — `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md` |
+| Identifiability discussed | ✅ | **Measured locally *and* globally, in two different charts.** Local, in **chart L** at **d=16**: Jacobian rank at one operating point — 3–4 of 16 dof of that chart's reachable set, at 2% noise across four device families; 1–6 (median 3) over 88 measurements; invariant to parameterisation dimension. Global, in **chart G** at **d=4**: **13 witness pairs** found by oracle-arbitrated search over 1,999,000 pairs, the closest differing **8.18×** in doping for **1.23%** in I–V against a distinguishability floor of 2.0e-02 = max(noise 2.0e-02, solver discretisation 1.5e-03), all tested pairs surviving 4× grid refinement (ADR-0007, `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`). Contraction at the instrument's own 2% noise is **not measured** — the estimator collapses (PH-21). The two fractions are **not comparable** across charts; at matched `d` the rank is the same in both, and the chart-G witness survives embedding into chart L (`docs/CHART_RECONCILIATION_g7.md`) |
+| Multiple solutions investigated | ✅ | Equivalence twins constructed (1.26×, **chart L**, **d=16**) **and** 13 global witness pairs *found by search* (up to 8.18×, **chart G**, **d=4**; the closest survives embedding into **chart L** at **d=16**), all surviving 4× grid refinement — `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md` |
 
 ## Gate F — Active learning
 
@@ -186,8 +186,8 @@ not asserted.
 
 ### 5. Inverse-problem researcher — "is the problem identifiable?"
 
-**Locally** — the Jacobian rank at one operating point — 3–4 of 16 at the
-reference conditions; 1–6 (median 3) across 88 measurements
+**Locally**, in **chart L** at **d=16** — the Jacobian rank at one operating
+point, over that chart's reachable set — 3–4 of 16 at the reference conditions; 1–6 (median 3) across 88 measurements
 spanning six axes plus a 400-replicate bootstrap. The extremes are attributed
 rather than reported as scatter: rank 1 only at a reduced bias range, rank 5–6
 only at larger finite-difference steps (an *estimator* effect). The decisive

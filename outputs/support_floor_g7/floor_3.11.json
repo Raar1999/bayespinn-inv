@@ -1,0 +1,13 @@
+{
+  "floor": "3.11",
+  "n_files": 96,
+  "excluded": [
+    "D:\\bayespinn-inv\\bayespinn-inv\\scripts\\check_python_support_floor.py",
+    "D:\\bayespinn-inv\\bayespinn-inv\\tests\\test_python_support_floor_g7.py"
+  ],
+  "syntax_rejections": [],
+  "api_uses_newer_than_floor": [],
+  "runtime_pep604_unions": [],
+  "obstruction_found": false,
+  "verdict_meaning": "This method can only FALSIFY the floor. A clean result means 'no obstruction found by static analysis', never 'the floor works'. Dependency resolution at the floor is invisible here and only a CI leg can settle it."
+}

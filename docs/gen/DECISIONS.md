@@ -281,3 +281,115 @@ git revert <this commit> --no-commit -- pyproject.toml .github/workflows/ci.yml
 
 **FORCED DEFAULT FOLLOWED?** Yes — measurement over assertion; an unevidenced
 claim is withdrawn, not annotated.
+
+---
+
+## DEC-g7-3 — split `SPEC-g7-6`'s required fields by whether they discriminate
+
+**WHAT** Enforce `SPEC-g7-6` as two assertions rather than one: regime, chart and
+`d` must appear in **every statement's own passage**; prior, noise model, noise
+level, observation set and both floors must appear **somewhere in the document**
+that makes the statement. Both are asserted; neither is optional.
+
+**EVIDENCE** The clause reads "every statement of the identifiability result
+carries local/global, d, prior, noise model and level, observation set, and both
+floors", with the falsifier "a grep finds one statement missing any of these".
+Measured against the claim surface, a literal reading has 33 statements across
+five documents, each of which would have to repeat five constants:
+
+| document | statements |
+|---|---|
+| `README.md` | 8 |
+| `docs/RELEASE_READINESS.md` | 3 |
+| `docs/CLAIM_EVIDENCE_MATRIX.md` | 8 |
+| `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md` | 14 |
+
+The five fields held at document level are **identical across the entire study** —
+one prior, one noise model, one noise level, one observation set, two floors. The
+three held per statement **vary between statements**, and getting one wrong makes
+the sentence false rather than merely under-specified. That asymmetry is the whole
+argument.
+
+**OPTIONS CONSIDERED**
+1. Enforce all seven per statement. — Produces prose that repeats five constants
+   after every sentence. The cost is real and the reader gains nothing, because a
+   constant repeated 33 times carries no information on the 33rd repetition.
+2. Enforce none per statement, all per document. — Loses exactly the fields whose
+   absence changes meaning. `PH-21` exists because "3-4 of 16" without *local*
+   reads as a global claim; "3-4 of 16" without *chart L* reads as a claim about
+   doping profiles.
+3. Split by whether the field discriminates. — Chosen.
+4. Allow a passage to cite a canonical qualifier block by anchor, and resolve the
+   anchor in the guard. — Satisfies the letter, but adds a reference-resolution
+   mechanism whose failure mode is a dangling anchor that silently passes.
+
+**CHOSEN** Option 3, in `tests/test_claim_surface_g7.py`. This narrows the guard's
+*shape*, never its *strictness*: no field is dropped, and the document-level
+assertion fails the whole document if a condition is missing anywhere.
+
+This is a deviation from a literal reading of `SPEC-g7-6` and is flagged as such
+in the generation report rather than absorbed silently.
+
+**REVERSAL** Move the five document-level fields into the per-passage tuple in
+`tests/test_claim_surface_g7.py::TestEveryStatementNamesItsChart` and re-run; the
+guard will name every passage that must then be expanded.
+
+**FORCED DEFAULT FOLLOWED?** No — the literal default is option 1. The deviation
+is recorded here with its reversal, per `A-1`.
+
+---
+
+## DEC-g7-4 — measure the chart Jacobian control against the spectral floor, not round-off
+
+**WHAT** `tests/test_charts_g7.py::test_chart_jacobian_reduces_to_the_published_one_on_chartL`
+asserts that the new chart-aware Jacobian agrees with the published
+`sg_forward_jacobian` to within the estimator's **spectral floor**, not to
+round-off.
+
+**EVIDENCE** For chart L the two functions differentiate the same thing, so
+bit-identity looks like the right assertion. It fails, at 3.5e-04 absolute. The
+cause is not a defect:
+
+```
+chart :  10**(theta_j + s)          # perturb in chart coordinates
+sg    :  10**theta_j * 10**s        # perturb the array entry
+```
+
+These differ by **1.68e-15** relative — float non-associativity. The Gummel
+iteration terminates on a tolerance, so a one-ulp change in doping can move the
+accepted iterate, and central differencing divides by `2*s = 0.1`. Measured
+amplification: 1.7e-15 in, 3.5e-04 out.
+
+Against the analysis's own resolution:
+
+| quantity | value |
+|---|---|
+| max abs disagreement | 3.505e-04 |
+| per-entry noise `eta` | 2.745e-04 |
+| spectral floor (Weyl, `eta*sqrt(B*P)`) | 4.253e-03 |
+| disagreement / spectral floor | **0.082** |
+| identifiable rank, both | 4 |
+| resolvable rank, both | 5 |
+
+**OPTIONS CONSIDERED**
+1. Make the perturbation formulas bit-identical. — Would force chart coordinates
+   to be perturbed by the array-entry formula, which is meaningless for chart G,
+   where the coordinates are not array entries. It buys a green test by making the
+   estimator worse.
+2. Assert to a loose relative tolerance. — A number with no principle behind it,
+   which is what a tuned threshold is.
+3. Assert below the spectral floor, and additionally that no reported quantity
+   moves. — Chosen.
+
+**CHOSEN** Option 3. The spectral floor is already this repository's stated limit
+of resolution — the value below which it refuses to call a singular value a
+measurement. A disagreement beneath it cannot change any published number, and
+the test additionally pins that both ranks and every resolvable singular value
+agree. Asserting round-off instead would claim a precision the finite-difference
+estimate does not have, which is the failure `spectral_floor` exists to prevent.
+
+**REVERSAL** Replace the `spectral_floor` comparison with `np.allclose(Jc, Js)`
+in that test; it will fail, and the failure is the 3.5e-04 above.
+
+**FORCED DEFAULT FOLLOWED?** Yes — never claim resolution the instrument does not
+have.
