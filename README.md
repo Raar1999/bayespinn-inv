@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-352%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-395%20passing-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -54,7 +54,7 @@ interval.
 | **UQ backend comparison** | deep ensemble beats tuned MC-dropout and tuned SWAG on every uncertainty axis; σ inflates **21.3×** off-distribution vs 1.4×/2.5× | `run_uq_benchmark.py`, `run_uq_tuning.py` |
 | **Bias selection** | information-based design **+0.39** identifiable rank vs random (5 wins/0 losses); the incumbent uncertainty acquisition is **−0.31**, i.e. *worse than random* | `run_experiment_design.py` |
 | **Built-in potential** vs analytic | rel. error **7.24e-14** (grid-independent over N=101…601) | `bayespinn selftest` |
-| **Test suite** | **352 passing**, incl. 58 solver-numerics, 27 MOS-cap physics and 41 ohmic-gradient tests | `make test` |
+| **Test suite** | **395 passing**, incl. 58 solver-numerics, 27 MOS-cap physics and 41 ohmic-gradient tests | `make test` |
 
 ### Read these caveats before quoting any number above
 
@@ -215,7 +215,7 @@ bayespinn-inv/
 │   ├── utils/           # run provenance / manifests
 │   └── cli.py           # `bayespinn` console entry point
 ├── scripts/             # experiment launchers (repo tools, need configs/)
-├── tests/               # 352 tests
+├── tests/               # 395 tests
 ├── docs/                # audit ledger, novelty audit, ADRs, release readiness
 └── outputs/             # generated results + manifests
 ```
@@ -318,7 +318,7 @@ independent re-solve (measured ratios 0.995–1.04).
 ## Reproducing the experiments
 
 ```bash
-make test                          # 352 tests, ~1 min 50 s
+make test                          # 395 tests, ~1 min 15 s
 make selftest                      # physics self-check of the installed package
 make check-install                 # build a wheel, install clean, test there
 

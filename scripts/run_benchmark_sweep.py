@@ -45,13 +45,10 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.bayesian.ensembles import DeepEnsemble
+from bayespinn_inv.bayesian.ensembles import load_deep_ensemble
 from bayespinn_inv.benchmarks.sg_vs_pinn import compare_solvers
 from bayespinn_inv.data.datasets import sample_doping
 from bayespinn_inv.physics.constants import GAAS, SILICON
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
-from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
 from bayespinn_inv.solvers.scharfetter_gummel import (
     Grid1D,
     ScharfetterGummel1D,
@@ -63,43 +60,17 @@ def _material_from_name(name: str):
     return {"Si": SILICON, "Silicon": SILICON, "GaAs": GAAS}[name]
 
 
-def load_ensemble(manifest_path: Path) -> DeepEnsemble:
-    """Reconstruct a DeepEnsemble from a manifest.json."""
-    with open(manifest_path, encoding="utf-8") as f:
-        manifest = json.load(f)
-    cfg = manifest["config"]
-    material = _material_from_name(cfg["material"]["name"])
-    scaling = Scaling.for_material(material, T=cfg["material"]["T"])
-    L_scaled = float(scaling.x_to_scaled(
-        torch.tensor(cfg["domain_si"][1] - cfg["domain_si"][0])))
-    V_a_max_s = float(cfg["dataset"]["bias_range"][1]) / scaling.V_T
-    ens = DeepEnsemble(scaling, material)
-    for seed, ck_path in zip(manifest["member_seeds"], manifest["checkpoints"]):
-        net_cfg = PINNConfig(
-            in_dim=cfg["network"]["in_dim"],
-            hidden_dim=cfg["network"]["hidden_dim"],
-            num_blocks=cfg["network"]["num_blocks"],
-            fourier_features=cfg["network"]["fourier_features"],
-            fourier_sigma=cfg["network"]["fourier_sigma"],
-            dropout=cfg["network"]["dropout"],
-            doping_dim=cfg["network"]["doping_dim"],
-            output_dim=cfg["network"]["output_dim"],
-            seed=seed,
-            x_scaled_extent=L_scaled,
-            V_a_scaled_extent=V_a_max_s,
-        )
-        net = SemiconductorPINN(net_cfg)
-        ck = torch.load(ck_path, map_location="cpu", weights_only=False)
-        net.load_state_dict(ck["model_state"])
-        net.eval()
-        fwd = ForwardPINN(net, scaling, material,
-                          ForwardPINNConfig(
-                              n_query=cfg["network"].get("n_query", 201),
-                              n_anchor=cfg["network"]["doping_dim"],
-                              domain_si=tuple(cfg["domain_si"]),
-                          ))
-        ens.add_member(fwd)
-    return ens, manifest
+def load_ensemble(manifest_path: Path):
+    """Reconstruct a DeepEnsemble from a manifest.json.
+
+    AUDIT_g0 PKG-04: the implementation moved into the package
+    (``bayespinn_inv.bayesian.ensembles.load_deep_ensemble``) because
+    ``surrogate/adapters.py`` used to reach into this file and ``exec_module`` it
+    at runtime, which cannot work from an installed wheel (SW-17). This wrapper
+    keeps the script's own call sites working and leaves one definition of the
+    loader rather than two (SW-02).
+    """
+    return load_deep_ensemble(manifest_path)
 
 
 def _aggregate(rows: List[Dict], by: str) -> Dict[str, Dict]:

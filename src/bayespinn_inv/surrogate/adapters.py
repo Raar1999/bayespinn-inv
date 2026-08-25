@@ -256,30 +256,19 @@ def load_forward_ensemble(manifest_path):
     if manifest.get("type") == "surrogate":
         return load_surrogate_ensemble(manifest_path)
 
-    # Legacy pure-physics PINN path. This branch execs a file from the *source
-    # checkout*: parents[3] is the repository root in a dev install, but in
-    # site-packages it points somewhere arbitrary and scripts/ does not exist
-    # (AUDIT_MASTER PKG-02). Fail with an actionable message instead of an
-    # opaque AttributeError on a None spec.
-    import importlib.util
-    import sys
+    # Legacy pure-physics PINN path (ADR-0004). AUDIT_g0 PKG-04 / SW-17: this
+    # used to reach parents[3]/"scripts"/run_benchmark_sweep.py and exec_module
+    # it at runtime. That path is the *source checkout* -- in site-packages it
+    # points somewhere arbitrary and scripts/ does not exist, so the branch could
+    # only ever work in a dev install. AUDIT_MASTER PKG-02 closed the symptom by
+    # improving the error message; the exec_module call survived, which is why
+    # the recurrence check reopened it as PKG-04.
+    #
+    # The loader depended on nothing repo-only, so it now lives in the package
+    # and is imported normally. One definition, no exec, works from a wheel.
+    from ..bayesian.ensembles import load_deep_ensemble
 
-    scripts_dir = Path(__file__).resolve().parents[3] / "scripts"
-    legacy = scripts_dir / "run_benchmark_sweep.py"
-    if not legacy.is_file():
-        raise FileNotFoundError(
-            f"Manifest {manifest_path} is not a surrogate manifest "
-            f"(type={manifest.get('type')!r}), so the legacy pure-physics PINN "
-            f"loader is required -- but it lives in the repository's scripts/ "
-            f"directory, which is not packaged, and was not found at {legacy}. "
-            "Run from a source checkout, or regenerate the ensemble with "
-            "scripts/train_surrogate_ensemble.py to get a type='surrogate' "
-            "manifest.")
-    spec = importlib.util.spec_from_file_location("_rbs", legacy)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["_rbs"] = mod
-    spec.loader.exec_module(mod)
-    return mod.load_ensemble(Path(manifest_path))
+    return load_deep_ensemble(manifest_path)
 
 
 __all__ = [
