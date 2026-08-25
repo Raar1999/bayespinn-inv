@@ -1,5 +1,28 @@
 # Forward-model reframe: from pure-physics PINN to SG-supervised surrogate
 
+> **Status note (post-audit).** The diagnosis in this document still stands: the
+> pure-physics PINN does not reproduce diode I--V, and a directly-supervised
+> current head does. But several *numbers* below were measured against the
+> pre-audit Scharfetter-Gummel solver and are superseded. In particular:
+>
+> * "13 orders of magnitude" was never measured. The reference diode's I--V
+>   spans **9.96 decades** over the training band (`docs/CLAIM_EVIDENCE_MATRIX.md`
+>   C4).
+> * "median 4.5% relative I-V error on held-out doping levels" was
+>   *interpolation* inside the training band. Re-measured with disjoint splits:
+>   **2.8%** interpolation, **38%** extrapolation, **84%** family transfer (C1-C3).
+> * "The only large errors are at exactly V=0, where SG returns sign-flipped
+>   noise" -- correct, and now handled properly: the solver reports
+>   `current_noise_floor` per solve and such points are excluded from training
+>   rather than fitted (ADR-0002).
+> * "ECE 0.224 -> ~0.086 after temperature scaling" -- 0.086 is *at* the
+>   floor of the ECE estimator for a 5-member ensemble (0.088), so it cannot be
+>   read as a calibration quality (C9, S12).
+> * The three "latent bugs fixed in the process" listed at the end remain
+>   correct. The audit found nine more; see `docs/AUDIT_MASTER.md`.
+>
+> Current, reproducible numbers live in `outputs/results/results_summary.md`.
+
 ## The problem (diagnosed, not guessed)
 
 The original forward model is a **pure-physics PINN**: it trains on Poisson +

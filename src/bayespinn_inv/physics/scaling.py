@@ -30,11 +30,10 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Final
 
 import numpy as np
 
-from .constants import EPS_0, Q_E, Material, SILICON, thermal_voltage
+from .constants import Q_E, SILICON, Material, thermal_voltage
 
 
 @dataclass(frozen=True)

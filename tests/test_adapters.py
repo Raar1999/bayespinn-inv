@@ -3,18 +3,26 @@
 import numpy as np
 import torch
 
+from bayespinn_inv.bayesian.ensembles import EnsemblePrediction
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
 )
 from bayespinn_inv.surrogate import (
-    SymlogTransform, Normalizer, IVSurrogate, IVSurrogateConfig,
-    build_sg_dataset, train_surrogate,
-    SurrogateForwardAdapter, SurrogateEnsembleAdapter,
-    save_surrogate_ensemble, load_surrogate_ensemble, load_forward_ensemble,
+    IVSurrogate,
+    IVSurrogateConfig,
+    Normalizer,
+    SurrogateEnsembleAdapter,
+    SurrogateForwardAdapter,
+    SymlogTransform,
+    build_sg_dataset,
+    load_forward_ensemble,
+    save_surrogate_ensemble,
+    train_surrogate,
 )
-from bayespinn_inv.bayesian.ensembles import EnsemblePrediction
 
 
 def _tiny_setup():

@@ -6,11 +6,18 @@ import torch
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
 )
 from bayespinn_inv.surrogate import (
-    SymlogTransform, Normalizer, IVSurrogate, IVSurrogateConfig,
-    build_sg_dataset, train_surrogate, SurrogateEnsemble,
+    IVSurrogate,
+    IVSurrogateConfig,
+    Normalizer,
+    SurrogateEnsemble,
+    SymlogTransform,
+    build_sg_dataset,
+    train_surrogate,
 )
 
 

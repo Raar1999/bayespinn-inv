@@ -1,0 +1,79 @@
+{
+  "experiment": "identifiability_robustness",
+  "created_utc": "2026-08-19T14:26:16+00:00",
+  "git": {
+    "commit": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "seed": 0,
+    "noise": 0.02,
+    "base": {
+      "P": 16,
+      "n_bias": 19,
+      "v_max": 0.9,
+      "grid_n": 301,
+      "rel_step": 0.01,
+      "min_snr": 10000.0,
+      "level": 1e+22
+    },
+    "families": [
+      "step_symmetric",
+      "step_asymmetric",
+      "graded",
+      "ldd"
+    ],
+    "n_boot": 400
+  },
+  "results": {
+    "verdict": {
+      "rank_min": 1,
+      "rank_max": 6,
+      "rank_median": 3.0,
+      "n_measurements": 88,
+      "rank_by_P": {
+        "8": [
+          4
+        ],
+        "12": [
+          3,
+          4
+        ],
+        "16": [
+          3,
+          4
+        ],
+        "24": [
+          2,
+          3,
+          4
+        ],
+        "32": [
+          3
+        ]
+      },
+      "rank_saturates_in_P": true,
+      "headline_3_to_5_holds": false
+    }
+  },
+  "artifacts": {
+    "robustness_json": "outputs\\identifiability_robustness\\identifiability_robustness.json",
+    "robustness_summary": "outputs\\identifiability_robustness\\identifiability_robustness.md"
+  },
+  "notes": ""
+}

@@ -56,10 +56,9 @@ import numpy as np
 from scipy.sparse import csr_matrix, diags, lil_matrix
 from scipy.sparse.linalg import spsolve
 
-from ..physics.constants import EPS_0, Q_E, Material, SILICON, thermal_voltage
+from ..physics.constants import EPS_0, Q_E, SILICON, Material, thermal_voltage
 from ..physics.scaling import Scaling
-from .grid_2d import Grid2D, MOSCapBoundary, MOSCapGeometry
-
+from .grid_2d import Grid2D, MOSCapBoundary
 
 # ============================================================================
 # Configuration + state
@@ -69,10 +68,12 @@ from .grid_2d import Grid2D, MOSCapBoundary, MOSCapGeometry
 class MOSCap2DConfig:
     """Newton-Raphson parameters for the 2D Poisson solve."""
     max_iters: int = 50
-    tol: float = 1e-8
+    tol: float = 1e-8          # absolute Newton step size (volts)
+    tol_rel: float = 1e-9      # relative residual: ||r||_inf / characteristic
     damping: float = 1.0       # 1.0 = full Newton step; reduce if oscillating
-    phi_init: str = "linear"   # "linear" or "zero"
+    phi_init: str = "lcn"      # cold start at local charge neutrality
     clip_arg: float = 60.0     # cap |phi/V_T| in exp() to avoid overflow
+    max_bias_step_VT: float = 5.0   # continuation step size, in units of V_T
     verbose: bool = False
 
 
@@ -95,6 +96,10 @@ class MOSCap2DState:
     converged: bool
     iterations: int
     residuals: List[float] = field(default_factory=list)
+    #: True if |phi|/V_T hit ``clip_arg`` anywhere in the semiconductor. The
+    #: Boltzmann carrier model was saturated there, so the solution is
+    #: outside the solver's validated range even if ``converged`` is True.
+    carrier_clipping_active: bool = False
 
     def surface_potential(self, gridY_interface_idx: int) -> np.ndarray:
         """Potential at the Si/SiO2 interface, as a function of x.
@@ -189,14 +194,27 @@ class MOSCap2DSolver:
         def idx(i, j): return j * Nx + i
 
         A = lil_matrix((N, N), dtype=np.float64)
-        # Constant scaling: face area / distance
-        ax = hy / hx       # east/west face area = hy, distance = hx
-        ay = hx / hy       # north/south face area = hx, distance = hy
+        # Face areas must match the half-cells used by cell_volume
+        # (BUG-08, docs/AUDIT_MASTER.md). A node on the x = 0 / x = Lx
+        # Neumann boundary owns a half control volume, so its charge integral
+        # is halved -- but its *north/south* faces are also only hx/2 wide.
+        # The old assembly used the full hx there while cell_volume
+        # already used hx/2, making the scheme non-conservative at the
+        # Neumann boundary: the boundary columns got twice the vertical
+        # conductance they should per unit charge. On a problem that is
+        # exactly 1D (uniform doping, no lateral structure) the potential
+        # then bowed by ~1.5 mV toward the side walls, decaying only as
+        # O(1/Nx) instead of being identically flat.
+        wx = np.full(Nx, hx, dtype=np.float64)
+        wx[0] = wx[-1] = 0.5 * hx
+        wy = np.full(Ny, hy, dtype=np.float64)
+        wy[0] = wy[-1] = 0.5 * hy
 
         for j in range(Ny):
             for i in range(Nx):
                 k = idx(i, j)
-                # Default: collect contributions; track boundary handling
+                ax = wy[j] / hx    # east/west face area = wy_j, distance = hx
+                ay = wx[i] / hy    # north/south face area = wx_i, distance = hy
                 diag = 0.0
                 # East face (between (i, j) and (i+1, j))
                 if i < Nx - 1:
@@ -267,7 +285,6 @@ class MOSCap2DSolver:
         """
         cfg = self.config
         Nx, Ny = self.grid.Nx, self.grid.Ny
-        N = Nx * Ny
         V_T = self.V_T
         n_i = self.material.n_i
         cell_vol = self.grid.cell_volume()      # (Ny, Nx) m^2
@@ -291,17 +308,24 @@ class MOSCap2DSolver:
         phi_bot_target = phi_F + bc.V_substrate
         phi_top_target = phi_F + (bc.V_gate - bc.phi_ms)
 
-        # Initialize phi: from initial_state if given, else linear
+        # Initialize phi. Cold start = local charge neutrality (phi_F
+        # everywhere), which is the standard TCAD initial guess and is the
+        # exact solution at flat band.
+        #
+        # BUG-06 (docs/AUDIT_MASTER.md): the boundary rows used to be pinned
+        # to the *target* bias right here, before phi_top_now was measured
+        # from them a few lines below. The continuation therefore always
+        # measured a travel distance of exactly zero, computed n_steps = 1
+        # and jumped straight to the full bias -- i.e. the bias continuation
+        # that exists precisely to keep Newton out of the stiff exponential
+        # regime never executed on a cold start. Newton then diverged for
+        # every |V_gate| >~ 1 V, growing the residual by up to 16 orders of
+        # magnitude. The boundary rows are now pinned inside the
+        # continuation loop only, where they belong.
         if initial_state is not None:
             phi2d = initial_state.phi.copy()
-        elif cfg.phi_init == "linear":
-            phi2d = np.full((Ny, Nx), phi_F)
-            phi2d[0, :]  = phi_bot_target
-            phi2d[-1, :] = phi_top_target
         else:
             phi2d = np.full((Ny, Nx), phi_F)
-            phi2d[0, :]  = phi_bot_target
-            phi2d[-1, :] = phi_top_target
 
         # ---------------- Bias continuation ----------------
         # We step from the current top-Dirichlet value to the target in
@@ -309,7 +333,7 @@ class MOSCap2DSolver:
         # run damped-Newton to convergence.
         phi_top_now = float(np.mean(phi2d[-1, :]))
         phi_bot_now = float(np.mean(phi2d[0, :]))
-        V_step_max = 5.0 * V_T            # ~130 mV per continuation step
+        V_step_max = cfg.max_bias_step_VT * V_T
         # How many steps?
         n_steps_top = int(np.ceil(abs(phi_top_target - phi_top_now) / V_step_max))
         n_steps_bot = int(np.ceil(abs(phi_bot_target - phi_bot_now) / V_step_max))
@@ -321,6 +345,7 @@ class MOSCap2DSolver:
         all_residuals: List[float] = []
         total_iters = 0
         converged_all = True
+        clipped_any = False
         for step_idx in range(1, n_steps + 1):
             frac = step_idx / n_steps
             phi_bot = phi_bot_now + frac * (phi_bot_target - phi_bot_now)
@@ -330,10 +355,11 @@ class MOSCap2DSolver:
             phi2d[-1, :] = phi_top
             phi = phi2d.flatten()
 
-            phi, step_iters, step_res, step_conv = self._newton_solve(
+            phi, step_iters, step_res, step_conv, step_clip = self._newton_solve(
                 phi, phi_bot, phi_top, semi_flat, C_flat, V_flat,
                 V_T, n_i, cfg,
             )
+            clipped_any |= step_clip
             phi2d = phi.reshape(Ny, Nx)
             all_residuals.extend(step_res)
             total_iters += step_iters
@@ -352,100 +378,139 @@ class MOSCap2DSolver:
             doping=C, V_gate=bc.V_gate, V_substrate=bc.V_substrate,
             region=self.grid.region.copy(),
             converged=converged_all, iterations=total_iters,
-            residuals=all_residuals,
+            residuals=all_residuals, carrier_clipping_active=clipped_any,
         )
 
     def _newton_solve(self, phi, phi_bot, phi_top, semi_flat, C_flat, V_flat,
-                       V_T, n_i, cfg):
-        """One bias-step Newton iteration.
+                      V_T, n_i, cfg):
+        """Damped-Newton solve of the nonlinear Poisson at one bias step.
 
-        Returns ``(phi_final, n_iters, residuals, converged)``.
+        Returns ``(phi, n_iters, residuals, converged, clipped)``.
+
+        Scale-aware tolerances (BUG-05, docs/AUDIT_MASTER.md)
+        ----------------------------------------------------
+        The residual ``r = L phi + q V (p - n + C)`` carries the units of the
+        finite-volume charge integral, so its magnitude depends on the mesh
+        spacing, the doping and the permittivity -- for this project's
+        default MOS-cap it sits near 1e-5, and on another mesh it moves by
+        orders of magnitude. The previous implementation compared it against
+        two hard-coded absolute constants: it declared convergence at
+        ``r_norm < 1e-6`` and, fatally, *skipped the Armijo line search*
+        whenever ``r_norm < 1e-4``. Since the residual is essentially always
+        below 1e-4, the line search was dead code and every iteration took
+        an unguarded full Newton step into a stiff exponential.
+
+        We therefore normalise the residual by the characteristic size of
+        the terms that build it, so ``r_rel`` is a genuine relative error,
+        and we always run the line search: Armijo tries alpha = 1 first, so
+        a healthy Newton step costs one extra residual evaluation.
         """
-        N = phi.size
         residuals: List[float] = []
-        r_norm_initial: float = None
+        clipped_ever = False
+
+        # Fixed characteristic scale: the ionised dopant charge held in the
+        # largest control volume. This is the natural magnitude of the
+        # Poisson right-hand side and, crucially, it does NOT collapse as the
+        # iteration converges -- normalising by max(|L phi|, |charge|)
+        # instead makes r_rel identically 1 whenever the Laplacian term
+        # vanishes (e.g. at flat band), which is precisely where the solve is
+        # already exact.
+        _arg0 = np.clip(phi / V_T, -cfg.clip_arg, cfg.clip_arg)
+        _chg0 = Q_E * V_flat * np.where(
+            semi_flat,
+            n_i * np.exp(-_arg0) - n_i * np.exp(_arg0) + C_flat, 0.0)
+        charge_scale = max(
+            float(Q_E * np.max(V_flat) * max(float(np.max(np.abs(C_flat))), n_i)),
+            float(np.max(np.abs(_chg0))),
+            float(np.max(np.abs(self._L @ phi))),
+            np.finfo(np.float64).tiny,
+        )
+        # Interior (non-Dirichlet) mask: the Dirichlet rows carry volts, not
+        # charge, and must not be mixed into the same norm.
+        interior = np.ones(phi.size, dtype=bool)
+        interior[self._dirichlet_idx_bottom] = False
+        interior[self._dirichlet_idx_top] = False
+
+        def _residual(ph):
+            raw = ph / V_T
+            clipped = bool(np.any(np.abs(raw[semi_flat]) > cfg.clip_arg))
+            arg = np.clip(raw, -cfg.clip_arg, cfg.clip_arg)
+            nn = np.where(semi_flat, n_i * np.exp(arg), 0.0)
+            pp = np.where(semi_flat, n_i * np.exp(-arg), 0.0)
+            charge = Q_E * V_flat * np.where(semi_flat, (pp - nn + C_flat), 0.0)
+            rr = self._L @ ph + charge
+            rr[self._dirichlet_idx_bottom] = (ph[self._dirichlet_idx_bottom]
+                                              - phi_bot)
+            rr[self._dirichlet_idx_top] = ph[self._dirichlet_idx_top] - phi_top
+            r_rel = float(np.max(np.abs(rr[interior]))) / charge_scale
+            return rr, nn, pp, r_rel, clipped
+
         for it in range(cfg.max_iters):
-            arg = np.clip(phi / V_T, -cfg.clip_arg, cfg.clip_arg)
-            n = np.where(semi_flat, n_i * np.exp( arg), 0.0)
-            p = np.where(semi_flat, n_i * np.exp(-arg), 0.0)
-            rhs_charge = Q_E * V_flat * np.where(semi_flat, (p - n + C_flat), 0.0)
-            r = self._L @ phi + rhs_charge
-            r[self._dirichlet_idx_bottom] = phi[self._dirichlet_idx_bottom] - phi_bot
-            r[self._dirichlet_idx_top]    = phi[self._dirichlet_idx_top]    - phi_top
-            r_norm = float(np.linalg.norm(r) / max(N ** 0.5, 1.0))
-            residuals.append(r_norm)
-            if r_norm_initial is None:
-                r_norm_initial = max(r_norm, 1e-30)
-            # Residual-decay convergence: residual dropped many orders from
-            # its starting value, or stagnated near machine precision.
-            if it >= 2 and (r_norm / r_norm_initial < 1e-5 or r_norm < 1e-6):
-                return phi, it + 1, residuals, True
+            r, n, p, r_rel, clipped = _residual(phi)
+            clipped_ever |= clipped
+            residuals.append(r_rel)
+            if r_rel < cfg.tol_rel:
+                return phi, it + 1, residuals, True, clipped_ever
 
+            # Jacobian. Where the exponential argument is clipped the model
+            # is locally constant, so its derivative is zero; using the
+            # unclipped derivative there would make Newton solve a
+            # linearisation inconsistent with the residual it reduces.
+            raw = phi / V_T
+            active = np.abs(raw) <= cfg.clip_arg
+            # BUG-07 (docs/AUDIT_MASTER.md): this term had the WRONG SIGN.
+            #   r(phi)  = L phi + q V (p - n + C),  with L phi = +div(eps grad phi)
+            #   n = n_i exp(+phi/V_T)  ->  dn/dphi = +n/V_T
+            #   p = n_i exp(-phi/V_T)  ->  dp/dphi = -p/V_T
+            #   => dr/dphi = L + q V (dp/dphi - dn/dphi) = L - (q V / V_T)(n + p)
+            # The old code added +(q V/V_T)(n+p), so Newton was solving a
+            # linearisation whose charge block pointed the wrong way. With the
+            # correct sign J is a negative-definite M-matrix (negative diagonal,
+            # positive off-diagonals) and Newton converges quadratically.
             d_charge = (Q_E * V_flat / V_T) * np.where(
-                semi_flat, n + p, 0.0)
-            J = self._L + diags(d_charge, 0, shape=(N, N), format="csr")
-            for k in self._dirichlet_idx_bottom:
-                J = self._row_to_identity(J, k)
-            for k in self._dirichlet_idx_top:
-                J = self._row_to_identity(J, k)
+                semi_flat & active, n + p, 0.0)
+            J = self._L - diags(d_charge, 0, shape=self._L.shape, format="csr")
+            J = self._apply_dirichlet_rows(J)
 
-            delta = spsolve(J, -r)
-            delta_natural_max = float(np.abs(delta).max())
+            delta = spsolve(J.tocsc(), -r)
+            if not np.all(np.isfinite(delta)):
+                return phi, it + 1, residuals, False, clipped_ever
 
-            # When the residual is already small (near-linear regime or close
-            # to the solution), Newton is reliable: take the full step. Only
-            # invoke backtracking when the residual is large enough that the
-            # quadratic charge nonlinearity could cause overshoot.
-            if r_norm < 1e-4:
-                phi = phi + delta
-                if cfg.verbose:
-                    print(f"    Newton {it}: |r|={r_norm:.3e} full step "
-                          f"max|delta|={delta_natural_max:.3e}")
-                if delta_natural_max < cfg.tol:
-                    return phi, it + 1, residuals, True
-                continue
-
-            # Armijo backtracking line search for the stiff nonlinear regime.
-            alpha = 1.0
-            phi_trial = phi + alpha * delta
-            best_alpha = 0.0
-            for _ in range(20):
-                arg_t = np.clip(phi_trial / V_T, -cfg.clip_arg, cfg.clip_arg)
-                n_t = np.where(semi_flat, n_i * np.exp( arg_t), 0.0)
-                p_t = np.where(semi_flat, n_i * np.exp(-arg_t), 0.0)
-                r_t = (self._L @ phi_trial
-                        + Q_E * V_flat * np.where(semi_flat, (p_t - n_t + C_flat), 0.0))
-                r_t[self._dirichlet_idx_bottom] = phi_trial[self._dirichlet_idx_bottom] - phi_bot
-                r_t[self._dirichlet_idx_top]    = phi_trial[self._dirichlet_idx_top]    - phi_top
-                rt_norm = float(np.linalg.norm(r_t) / max(N ** 0.5, 1.0))
-                if rt_norm < r_norm:
-                    best_alpha = alpha
+            alpha, accepted = 1.0, False
+            for _ in range(40):
+                trial = phi + cfg.damping * alpha * delta
+                _, _, _, rt_rel, _ = _residual(trial)
+                if rt_rel < r_rel:
+                    phi, accepted = trial, True
                     break
                 alpha *= 0.5
-                phi_trial = phi + alpha * delta
-            if best_alpha == 0.0:
-                best_alpha = 1.0 / 64.0
-            phi = phi + cfg.damping * best_alpha * delta
-            delta_max = float(np.abs(best_alpha * delta).max())
-            if cfg.verbose:
-                print(f"    Newton {it}: |r|={r_norm:.3e} alpha={best_alpha:.3f} "
-                      f"max|step|={delta_max:.3e}")
-            if delta_max < cfg.tol:
-                return phi, it + 1, residuals, True
-        return phi, cfg.max_iters, residuals, False
+            if not accepted:
+                # No descent found: report honestly instead of stepping anyway.
+                return phi, it + 1, residuals, False, clipped_ever
+            if float(np.max(np.abs(cfg.damping * alpha * delta))) < cfg.tol:
+                _, _, _, r_rel, _ = _residual(phi)
+                residuals.append(r_rel)
+                return (phi, it + 1, residuals,
+                        bool(r_rel < cfg.tol_rel), clipped_ever)
 
-    # Helper: set a row of a CSR matrix to identity at column k.
-    @staticmethod
-    def _row_to_identity(A: csr_matrix, k: int) -> csr_matrix:
-        A = A.tolil()
-        A.rows[k] = [k]
-        A.data[k] = [1.0]
-        return A.tocsr()
+        _, _, _, r_rel, _ = _residual(phi)
+        return (phi, cfg.max_iters, residuals,
+                bool(r_rel < cfg.tol_rel), clipped_ever)
 
+    def _apply_dirichlet_rows(self, A: csr_matrix) -> csr_matrix:
+        """Replace the Dirichlet rows of ``A`` with identity rows.
 
-# ============================================================================
-# Convenience: 1D-equivalent MOS-cap (for analytical comparison)
-# ============================================================================
+        Vectorised. The previous helper round-tripped the entire matrix
+        through LIL format once *per boundary node per Newton iteration*,
+        which dominated the solve cost.
+        """
+        N = A.shape[0]
+        keep = np.ones(N, dtype=np.float64)
+        keep[self._dirichlet_idx_bottom] = 0.0
+        keep[self._dirichlet_idx_top] = 0.0
+        return (diags(keep, format="csr") @ A
+                + diags(1.0 - keep, format="csr")).tocsr()
+
 
 def depletion_approximation_surface_potential(
     V_gate: float, N_A: float, t_ox: float, eps_si: float, eps_ox: float,
@@ -492,6 +557,8 @@ def depletion_approximation_surface_potential(
 
 
 __all__ = [
-    "MOSCap2DConfig", "MOSCap2DState", "MOSCap2DSolver",
+    "MOSCap2DConfig",
+    "MOSCap2DSolver",
+    "MOSCap2DState",
     "depletion_approximation_surface_potential",
 ]

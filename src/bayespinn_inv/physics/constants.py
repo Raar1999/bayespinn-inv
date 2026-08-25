@@ -93,13 +93,13 @@ GAAS = Material(
 
 
 __all__ = [
-    "Q_E",
-    "K_B",
     "EPS_0",
-    "H_PLANCK",
-    "T_REF",
-    "thermal_voltage",
-    "Material",
-    "SILICON",
     "GAAS",
+    "H_PLANCK",
+    "K_B",
+    "Q_E",
+    "SILICON",
+    "T_REF",
+    "Material",
+    "thermal_voltage",
 ]

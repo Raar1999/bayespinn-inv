@@ -10,9 +10,11 @@ active learning, benchmarking, and visualization.
 Run from the repo root:  python scripts/build_notebooks.py
 """
 from __future__ import annotations
-import nbformat as nbf
-from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
+
 from pathlib import Path
+
+import nbformat as nbf
+from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook
 
 REPO = Path(__file__).parent.parent
 NB_DIR = REPO / "notebooks"
@@ -97,17 +99,13 @@ def code(src): return new_code_cell(src)
 
 def make_nb(name, title, intro, cells):
     nb = new_notebook()
-    nb.cells = [
-        md(f"# {title}\n\n{badge(name)}\n\n{intro}"),
-        md("## Setup"),
-        code(SETUP),
-    ] + cells
+    nb.cells = [md(f"# {title}\n\n{badge(name)}\n\n{intro}"), md("## Setup"), code(SETUP), *cells]
     nb.metadata = {
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python"},
         "colab": {"provenance": []},
     }
-    (NB_DIR / name).write_text(nbf.writes(nb))
+    (NB_DIR / name).write_text(nbf.writes(nb), encoding="utf-8")
     print(f"  wrote {name} ({len(nb.cells)} cells)")
 
 
@@ -190,7 +188,7 @@ make_nb(
     "ground truth the surrogate learns to reproduce.",
     [
         code(COMMON),
-        md("## Forward-bias I–V (13 orders of magnitude)"),
+        md("## Forward-bias I–V (measured dynamic range, ~10 decades)"),
         code('''
 biases = np.linspace(0.0, 0.6, 25)
 I = sg_iv(step(1e22), biases)
@@ -223,8 +221,10 @@ make_nb(
     "The forward model. A pure-physics PINN cannot reproduce diode I–V "
     "(the terminal current is a numerically-fragile derived quantity — see "
     "`docs/forward_model_reframe.md`). Instead we train a **differentiable "
-    "surrogate** supervised by the SG oracle. It reproduces I–V to a few "
-    "percent across 13 orders of magnitude, in seconds.",
+    "surrogate** supervised by the SG oracle. Measured on disjoint splits: "
+    "**2.8% median relative error interpolating, 38% extrapolating, 84% on "
+    "an unseen profile family**, over a 9.96-decade label range "
+    "(`outputs/results/results_summary.md`).",
     [
         code(COMMON + '''
 from bayespinn_inv.surrogate import (
@@ -621,8 +621,8 @@ make_nb(
     "12 · End-to-End Demo — Forward → Inverse → Uncertainty",
     "**Start here for the 5-minute tour.** A complete, self-contained "
     "demonstration of uncertainty-aware inverse design of semiconductor doping:\n\n"
-    "1. **Forward** — a fast SG-supervised surrogate reproduces diode I–V to a "
-    "few percent across 13 orders of magnitude.\n"
+    "1. **Forward** — a fast SG-supervised surrogate reproduces diode I–V to "
+    "2.8% median error *inside* the training band; 38% outside it.\n"
     "2. **Inverse** — recover unknown doping from a measured I–V by gradient "
     "descent through the differentiable surrogate.\n"
     "3. **Uncertainty** — a deep ensemble quantifies confidence, and temperature "
@@ -664,7 +664,7 @@ plt.fill_between(biases, np.abs(symlog.inverse(pred.mean_symlog-2*pred.std_symlo
 plt.xlabel("Bias (V)"); plt.ylabel("|J| (A/m²)"); plt.legend(); plt.grid(alpha=0.3)
 plt.title(f"Forward I–V (held-out): median error {np.median(rel):.1%}")
 plt.tight_layout(); plt.show()
-print(f"median relative I-V error across 13 orders of magnitude: {np.median(rel):.1%}")
+print(f"median relative I-V error on this held-out profile: {np.median(rel):.1%}")
 '''),
         md("### 2 · Inverse design — recover unknown doping from a measured I–V"),
         code('''

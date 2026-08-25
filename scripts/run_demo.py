@@ -22,38 +22,47 @@ from pathlib import Path
 
 import numpy as np
 import torch
-import torch.nn.functional as F
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.physics.constants import SILICON
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
-from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
-from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
-from bayespinn_inv.data.datasets import (
-    build_dataset, step_profile, defect_profile,
+from bayespinn_inv.active_learning.loop import (
+    ActiveLearningConfig,
+    active_learning_loop,
 )
 from bayespinn_inv.bayesian.ensembles import DeepEnsemble
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
-)
 from bayespinn_inv.benchmarks.sg_vs_pinn import (
-    compare_solvers, format_benchmark_table,
-)
-from bayespinn_inv.inverse.inverse_design import (
-    InverseDesigner, InverseConfig, FreePointwiseDoping,
-)
-from bayespinn_inv.active_learning.loop import (
-    ActiveLearningConfig, active_learning_loop,
+    compare_solvers,
 )
 from bayespinn_inv.calibration.metrics import (
-    report_calibration, fit_temperature_regression,
+    fit_temperature_regression,
+    report_calibration,
 )
+from bayespinn_inv.data.datasets import (
+    build_dataset,
+    defect_profile,
+)
+from bayespinn_inv.inverse.inverse_design import (
+    FreePointwiseDoping,
+    InverseConfig,
+    InverseDesigner,
+)
+from bayespinn_inv.physics.constants import SILICON
+from bayespinn_inv.physics.scaling import Scaling
+from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
+from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
 from bayespinn_inv.visualization.plots import (
-    plot_training_history, plot_device_state, plot_iv_with_uncertainty,
-    plot_doping_recovery, plot_reliability_diagram,
     plot_active_learning_convergence,
+    plot_device_state,
+    plot_doping_recovery,
+    plot_iv_with_uncertainty,
+    plot_reliability_diagram,
+    plot_training_history,
 )
 
 # ---------------------------------------------------------------------------
@@ -75,9 +84,9 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR = OUT_DIR / "figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
-print(f"=" * 70)
-print(f"BayesPINN-Inv: end-to-end demonstration")
-print(f"=" * 70)
+print("=" * 70)
+print("BayesPINN-Inv: end-to-end demonstration")
+print("=" * 70)
 print(f"Output directory:  {OUT_DIR}")
 print(f"Ensemble M:        {N_ENSEMBLE}")
 print(f"Epochs/member:     {N_EPOCHS}")
@@ -113,7 +122,7 @@ examples, samples = build_dataset(
     bias_range=(0.0, BIAS_MAX),
 )
 print(f"Dataset: {len(examples)} profiles, families = "
-      f"{set(s.family for s in samples)}")
+      f"{ {s.family for s in samples} }")
 
 ensemble = DeepEnsemble(scaling, SILICON)
 all_histories = []
@@ -170,7 +179,7 @@ print(f"\nTotal training time: {total_train:.1f}s "
 # Training history plot
 fig = plot_training_history(all_histories[0], title="Training history (member 0)")
 fig.savefig(FIG_DIR / "01_training_history.png")
-print(f"  -> figures/01_training_history.png")
+print("  -> figures/01_training_history.png")
 
 # ---------------------------------------------------------------------------
 # Stage 2: Benchmark vs SG
@@ -220,7 +229,7 @@ for name, dop in test_doping_list:
     print(f"  time_per_solve: SG={res.time_per_solve_sg*1e3:.1f} ms, "
           f"PINN={res.time_per_solve_pinn*1e3:.1f} ms")
 
-with open(OUT_DIR / "benchmark.json", "w") as f:
+with open(OUT_DIR / "benchmark.json", "w", encoding="utf-8") as f:
     json.dump(benchmark_results, f, indent=2)
 
 # Device-state plot for one test bias
@@ -234,7 +243,7 @@ fig = plot_device_state(sg_state, title="SG (oracle), test_step_1e22, V=0.3V")
 fig.savefig(FIG_DIR / "02_sg_state.png")
 fig = plot_device_state(pinn_state, title="Trained PINN, test_step_1e22, V=0.3V")
 fig.savefig(FIG_DIR / "02_pinn_state.png")
-print(f"\nField-comparison plots -> figures/02_sg_state.png, 02_pinn_state.png")
+print("\nField-comparison plots -> figures/02_sg_state.png, 02_pinn_state.png")
 
 # I-V uncertainty plot
 target_biases_np = np.linspace(0.0, BIAS_MAX, 13)
@@ -256,7 +265,7 @@ fig = plot_iv_with_uncertainty(
     log_y=True,
 )
 fig.savefig(FIG_DIR / "03_iv_uncertainty.png")
-print(f"I-V plot -> figures/03_iv_uncertainty.png")
+print("I-V plot -> figures/03_iv_uncertainty.png")
 
 # ---------------------------------------------------------------------------
 # Stage 3: Inverse design
@@ -292,7 +301,7 @@ inv_x = torch.linspace(*DOMAIN, 64)
 init_C = torch.where(inv_x < 5e-7,
                       torch.tensor(1e21), torch.tensor(-1e21))
 param = FreePointwiseDoping(inv_x, init_C)
-print(f"Inverse design starting from wrong-sign N_A=N_D=1e21 m^-3 guess")
+print("Inverse design starting from wrong-sign N_A=N_D=1e21 m^-3 guess")
 
 icfg = InverseConfig(
     n_iters=200, lr=5e-3, optimizer="adam",
@@ -311,7 +320,7 @@ fig = plot_doping_recovery(
     title=f"Inverse design (final loss = {result.final_loss:.2e})",
 )
 fig.savefig(FIG_DIR / "04_doping_recovery.png")
-print(f"Recovery plot -> figures/04_doping_recovery.png")
+print("Recovery plot -> figures/04_doping_recovery.png")
 
 # Save the recovered profile + history
 np.savez(OUT_DIR / "inverse_result.npz",
@@ -321,7 +330,7 @@ np.savez(OUT_DIR / "inverse_result.npz",
           target_currents=result.target_currents_si.numpy(),
           predicted_currents=result.predicted_currents_si.numpy(),
           C_true=np.interp(inv_x.numpy(), true_x_si, true_doping_si.numpy()))
-with open(OUT_DIR / "inverse_history.json", "w") as f:
+with open(OUT_DIR / "inverse_history.json", "w", encoding="utf-8") as f:
     json.dump(result.history, f, indent=2)
 
 # ---------------------------------------------------------------------------
@@ -385,8 +394,8 @@ fig = plot_active_learning_convergence(
     title="Active learning convergence",
 )
 fig.savefig(FIG_DIR / "05_al_convergence.png")
-print(f"\nAL convergence plot -> figures/05_al_convergence.png")
-with open(OUT_DIR / "al_results.json", "w") as f:
+print("\nAL convergence plot -> figures/05_al_convergence.png")
+with open(OUT_DIR / "al_results.json", "w", encoding="utf-8") as f:
     json.dump(al_logs_serializable, f, indent=2)
 
 # ---------------------------------------------------------------------------
@@ -401,6 +410,7 @@ print("=" * 70)
 # Generate 16 held-out test profiles + their SG-oracle I-V curves
 rng = np.random.default_rng(101)
 from bayespinn_inv.data.datasets import sample_doping
+
 held_out = [sample_doping("step", n_points=128, domain_si=DOMAIN, rng=rng)
             for _ in range(4)]
 cal_biases = np.linspace(0.0, BIAS_MAX, 6)
@@ -429,6 +439,7 @@ print(f"Calibration set: {sample_currents.shape[1]} (profile, bias) points, "
 
 # Reliability + ECE
 from bayespinn_inv.bayesian.ensembles import EnsemblePrediction
+
 pred = EnsemblePrediction(
     mean=sample_currents.mean(axis=0),
     std=sample_currents.std(axis=0),
@@ -457,7 +468,7 @@ fig = plot_reliability_diagram(report_T.predicted_q, report_T.empirical_q,
                                  ece=report_T.ece,
                                  title=f"Temperature-scaled (T={T:.2f})")
 fig.savefig(FIG_DIR / "06_reliability_cal.png")
-print(f"Reliability plots -> figures/06_reliability_uncal.png, _cal.png")
+print("Reliability plots -> figures/06_reliability_uncal.png, _cal.png")
 
 # Save aggregated metrics
 metrics_summary = {
@@ -487,7 +498,7 @@ metrics_summary = {
         "sharpness": report_T.sharpness,
     },
 }
-with open(OUT_DIR / "metrics_summary.json", "w") as f:
+with open(OUT_DIR / "metrics_summary.json", "w", encoding="utf-8") as f:
     json.dump(metrics_summary, f, indent=2)
 
 print()

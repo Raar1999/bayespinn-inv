@@ -33,16 +33,14 @@ anywhere, not only at anchor positions.
 
 from __future__ import annotations
 
-import math
-from dataclasses import dataclass, field
-from typing import Callable, Dict, List, Optional, Sequence, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import torch
 
 from ..physics.scaling import Scaling
 from ..training.trainer import TrainingExample
-
 
 # ============================================================================
 # Profile generators
@@ -285,11 +283,11 @@ def build_dataset(
 
 __all__ = [
     "DopingSample",
-    "step_profile",
+    "build_dataset",
+    "defect_profile",
     "graded_profile",
     "ldd_profile",
-    "defect_profile",
-    "sample_doping",
     "make_training_example",
-    "build_dataset",
+    "sample_doping",
+    "step_profile",
 ]

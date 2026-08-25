@@ -34,6 +34,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Any, Dict, List
@@ -41,18 +42,21 @@ from typing import Any, Dict, List
 import numpy as np
 import torch
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.bayesian.ensembles import DeepEnsemble
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
-)
-from bayespinn_inv.inverse.inverse_design import (
-    InverseDesigner, InverseConfig,
-    FreePointwiseDoping, StepJunctionDoping, GradedJunctionDoping,
-)
 from bayespinn_inv.data.datasets import sample_doping
+from bayespinn_inv.inverse.inverse_design import (
+    FreePointwiseDoping,
+    GradedJunctionDoping,
+    InverseConfig,
+    InverseDesigner,
+    StepJunctionDoping,
+)
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
 
 # Reuse loader from benchmark script
 from bayespinn_inv.surrogate import load_forward_ensemble as load_ensemble
@@ -181,7 +185,7 @@ def main():
                     # Per-member recoveries -> uncertainty band on C
                     per_member_C = []
                     per_member_loss = []
-                    for m_idx, fwd in enumerate(ens.members):
+                    for _m_idx, fwd in enumerate(ens.members):
                         param = _make_param(param_kind, x_anchor)
                         designer = InverseDesigner(fwd, icfg_base)
                         result = designer.design(param, target_b_t, target_I_t)
@@ -229,12 +233,12 @@ def main():
 
     # CSV
     if rows:
-        with open(out_dir / "summary.csv", "w", newline="") as f:
+        with open(out_dir / "summary.csv", "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
             writer.writeheader()
             writer.writerows(rows)
         print(f"  summary -> {out_dir / 'summary.csv'}")
-    with open(out_dir / "raw_results.json", "w") as f:
+    with open(out_dir / "raw_results.json", "w", encoding="utf-8") as f:
         json.dump(raw, f, indent=2, default=str)
 
     # Aggregate by (parameterization, noise)
@@ -256,11 +260,11 @@ def main():
             "coverage_90_mean":  float(np.mean(cov)),
             "coverage_90_median": float(np.median(cov)),
         }
-    with open(out_dir / "aggregate.json", "w") as f:
+    with open(out_dir / "aggregate.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, default=str)
 
     # Headline print
-    print(f"\nHeadline (median rel-L2 doping error, target coverage = 0.90):")
+    print("\nHeadline (median rel-L2 doping error, target coverage = 0.90):")
     print(f"  {'param':12s} {'noise':>8s} {'rel-L2':>10s} {'coverage':>10s}")
     for k, s in sorted(summary.items()):
         p_name, n_name = k.split("/")
@@ -304,7 +308,8 @@ def main():
             for n in noises_unique:
                 rs = [r["coverage_90"] for r in rows
                       if r["parameterization"] == p and r["noise"] == n]
-                if not rs: continue
+                if not rs:
+                    continue
                 xs.append(n); ys.append(np.median(rs))
             ax.plot(xs, ys, "o-", label=p)
         ax.axhline(0.90, color="k", lw=0.7, ls="--", label="Target 0.90")

@@ -10,20 +10,28 @@ Usage:
         --M 5 --epochs 2500
 """
 from __future__ import annotations
-import argparse, time
+
+import argparse
+import sys
+import time
 from pathlib import Path
+
 import numpy as np
 import torch
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.solvers.scharfetter_gummel import ScharfetterGummel1D, Grid1D, SGConfig
+from bayespinn_inv.solvers.scharfetter_gummel import Grid1D, ScharfetterGummel1D, SGConfig
 from bayespinn_inv.surrogate import (
-    SymlogTransform, Normalizer, IVSurrogate, IVSurrogateConfig,
-    build_sg_dataset, train_surrogate, save_surrogate_ensemble,
+    IVSurrogate,
+    IVSurrogateConfig,
+    Normalizer,
+    SymlogTransform,
+    build_sg_dataset,
+    save_surrogate_ensemble,
+    train_surrogate,
 )
 
 

@@ -18,19 +18,19 @@ import numpy as np
 import torch
 import yaml
 
-from bayespinn_inv.physics.constants import SILICON
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.bayesian.ensembles import DeepEnsemble
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
-)
-from bayespinn_inv.active_learning.loop import (
-    ActiveLearningConfig, active_learning_loop,
-)
-from bayespinn_inv.inverse.inverse_design import InverseConfig
-
 # Reuse the ensemble-loader from the inverse-design launcher
 from inverse_design import _load_ensemble
+
+from bayespinn_inv.active_learning.loop import (
+    ActiveLearningConfig,
+    active_learning_loop,
+)
+from bayespinn_inv.inverse.inverse_design import InverseConfig
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
 
 
 def build_oracle(scaling, n_anchor=301, domain=(0., 1e-6)):
@@ -43,7 +43,10 @@ def build_oracle(scaling, n_anchor=301, domain=(0., 1e-6)):
 def build_target_doping(cfg, n_points=128, domain=(0., 1e-6)):
     """Construct the ground-truth doping profile from config."""
     from bayespinn_inv.data.datasets import (
-        step_profile, graded_profile, ldd_profile, defect_profile,
+        defect_profile,
+        graded_profile,
+        ldd_profile,
+        step_profile,
     )
     x = np.linspace(domain[0], domain[1], n_points)
     t = cfg["target"]
@@ -69,7 +72,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/al_base.yaml")
     args = ap.parse_args()
-    with open(args.config) as f:
+    with open(args.config, encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
     out_dir = Path(cfg["out_dir"])
@@ -118,14 +121,14 @@ def main():
                   measurements=res["measurements"],
                   final_doping=res["final_doping"],
                   true_doping=C_true, true_x=x_true)
-        with open(sdir / "log.json", "w") as f:
+        with open(sdir / "log.json", "w", encoding="utf-8") as f:
             json.dump([asdict(l) for l in res["log"]], f, indent=2)
         all_results[strategy] = [asdict(l) for l in res["log"]]
         print(f"  final relative L2 error: {res['log'][-1].doping_error_relative:.4f}")
 
-    with open(out_dir / "summary.json", "w") as f:
+    with open(out_dir / "summary.json", "w", encoding="utf-8") as f:
         json.dump(all_results, f, indent=2)
-    with open(out_dir / "config_used.yaml", "w") as f:
+    with open(out_dir / "config_used.yaml", "w", encoding="utf-8") as f:
         yaml.safe_dump(cfg, f)
     print(f"\nAll strategies complete. Outputs -> {out_dir}/")
 

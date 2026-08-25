@@ -11,21 +11,25 @@ end-to-end) live in tests/integration/ and are run by ``make test-slow``.
 """
 
 import math
+
 import numpy as np
-import pytest
 import torch
 
-from bayespinn_inv.physics.constants import SILICON, thermal_voltage, Q_E, K_B
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, SGConfig, Grid1D, bernoulli,
-)
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
-from bayespinn_inv.pinn.losses import ohmic_boundary_values
 from bayespinn_inv.calibration.metrics import (
-    expected_calibration_error, crps_empirical, gaussian_nll,
+    crps_empirical,
+    expected_calibration_error,
+    gaussian_nll,
 )
-
+from bayespinn_inv.physics.constants import SILICON, thermal_voltage
+from bayespinn_inv.physics.scaling import Scaling
+from bayespinn_inv.pinn.losses import ohmic_boundary_values
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+    bernoulli,
+)
 
 # ============================================================================
 # Physics constants and scaling
@@ -131,8 +135,11 @@ class TestSGEquilibrium:
         n_i_sq = SILICON.n_i ** 2
         ratio = np_product / n_i_sq
         assert np.all(np.isfinite(ratio))
-        # Should be within a few percent everywhere
-        assert np.all(np.abs(ratio - 1.0) < 0.05)
+        # Tightened from 5e-2 after BUG-03 (docs/AUDIT_MASTER.md): the old
+        # tolerance was loose enough to pass with a 1.3e-2 violation caused
+        # by an unequilibrated continuity solve plus a convergence test that
+        # only watched the potential. The equilibrated solver reaches ~8e-6.
+        assert np.all(np.abs(ratio - 1.0) < 1e-4)
 
     def test_forward_bias_increases_current(self):
         """V_a > 0 should mean forward bias: |I| increases by many orders.
@@ -306,8 +313,8 @@ class TestEndToEndSmoke:
     """Confirm the training stack starts on a tiny problem without NaN."""
 
     def test_training_no_nan_in_5_epochs(self):
-        from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
         from bayespinn_inv.data.datasets import build_dataset
+        from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
         torch.manual_seed(0)
         scaling = Scaling.for_material(SILICON, T=300.0)
         L_scaled = float(scaling.x_to_scaled(torch.tensor(1e-6)))

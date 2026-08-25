@@ -23,16 +23,15 @@ design, calibration, plots) is agnostic to the UQ method.
 from __future__ import annotations
 
 import warnings
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Dict, List, Sequence, Tuple
 
 import numpy as np
 import torch
 import torch.nn as nn
 
-from ..pinn.forward_pinn import ForwardPINN
 from ..physics.constants import Material
 from ..physics.scaling import Scaling
+from ..pinn.forward_pinn import ForwardPINN
 from ..solvers.scharfetter_gummel import DeviceState
 from .ensembles import EnsemblePrediction
 
@@ -128,7 +127,7 @@ class MCDropoutPINN(nn.Module):
         torch.manual_seed(self.seed)
         self._enable_test_dropout()
         samples: List[torch.Tensor] = []
-        for t in range(self.T):
+        for _ in range(self.T):
             _, I = self.forward_pinn.iv_curve(doping_si, biases)
             samples.append(I if with_grad else I.detach())
         stacked = torch.stack(samples, dim=0)              # (T, B)
@@ -144,7 +143,7 @@ class MCDropoutPINN(nn.Module):
         torch.manual_seed(self.seed)
         self._enable_test_dropout()
         states: List[DeviceState] = []
-        for t in range(self.T):
+        for _ in range(self.T):
             states.append(self.forward_pinn.solve(doping_si, bias))
         x = states[0].x
         phi_s = np.stack([s.phi for s in states], axis=0)

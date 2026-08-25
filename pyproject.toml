@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bayespinn-inv"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Bayesian Physics-Informed Neural Networks for Uncertainty-Aware Inverse Design of Semiconductor Devices"
 readme = "README.md"
 license = { text = "MIT" }
@@ -68,9 +68,18 @@ all = [
 "Issues" = "https://github.com/Raar1999/bayespinn-inv/issues"
 
 [project.scripts]
-bayespinn-train   = "bayespinn_inv.scripts.train:main"
-bayespinn-inverse = "bayespinn_inv.scripts.inverse_design:main"
-bayespinn-al      = "bayespinn_inv.scripts.active_learning:main"
+# NOTE (AUDIT_MASTER PKG-01): the previous entries pointed at
+# bayespinn_inv.scripts.{train,inverse_design,active_learning}, a package that
+# does not exist -- those launchers live in the repo-level scripts/ directory,
+# which is not part of the wheel, so every console script failed on a clean
+# install. The experiment launchers stay repo tools (they need configs/*.yaml);
+# the installed package exposes what the library can do standalone.
+bayespinn = "bayespinn_inv.cli:main"
+
+[tool.setuptools.dynamic]
+# Single source of truth for the version: bayespinn_inv.__version__.
+# The literal here previously read 0.1.0 while the package said 0.1.0-dev.
+version = { attr = "bayespinn_inv.__version__" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -97,15 +106,31 @@ omit = ["*/tests/*"]
 [tool.ruff]
 line-length = 96
 target-version = "py39"
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "C4", "SIM", "RUF"]
-ignore = ["E501"]  # line length handled by formatter
+ignore = [
+    "E501",    # line length handled by the formatter
+    "E741",    # "I" is the standard symbol for current; "l"/"O" are not used
+    "RUF001",  # unicode in docstrings (physics symbols) is intentional
+    "RUF059",  # unpacked-but-unused is idiomatic for solver return tuples
+    "C408",    # dict(...) reads better than {...} for config-like kwargs
+    "E702",    # `a = 1; b = 2` for tightly-coupled scalar setup is idiomatic here
+    "E731",    # short lambdas for local math helpers read better than def
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Experiment launchers prepend src/ to sys.path before importing the package.
+"scripts/*" = ["E402"]
 
 [tool.black]
 line-length = 96
 target-version = ["py39"]
 
 [tool.mypy]
-python_version = "3.9"
+# No `python_version` pin: current mypy refuses to target 3.9, and the 3.9
+# support claim is backed by the CI matrix (which actually runs the suite on
+# 3.9) rather than by a static-analysis setting.
 ignore_missing_imports = true
 warn_unused_configs = true
 warn_redundant_casts = true

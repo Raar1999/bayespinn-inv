@@ -15,7 +15,6 @@ training history JSON, and a ``manifest.json`` describing the run.
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 
 import torch
@@ -24,17 +23,17 @@ import torch
 # isn't installed (keeps the script usable in minimal environments).
 try:
     import hydra
-    from omegaconf import OmegaConf, DictConfig
+    from omegaconf import DictConfig, OmegaConf
     _HAS_HYDRA = True
 except ImportError:
     _HAS_HYDRA = False
 
 
-from bayespinn_inv.physics.constants import SILICON, GAAS, Material
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
-from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
 from bayespinn_inv.data.datasets import build_dataset
+from bayespinn_inv.physics.constants import GAAS, SILICON, Material
+from bayespinn_inv.physics.scaling import Scaling
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
 
 
 def _material_from_name(name: str) -> Material:
@@ -123,7 +122,7 @@ def main_from_dict(cfg: dict) -> None:
         "member_seeds": member_seeds,
         "checkpoints": ckpts,
     }
-    with open(out_dir / "manifest.json", "w") as f:
+    with open(out_dir / "manifest.json", "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, default=str)
     print(f"\nTraining complete. Manifest: {out_dir / 'manifest.json'}")
 
@@ -136,11 +135,13 @@ if _HAS_HYDRA:
 else:
     def main():  # pragma: no cover
         # Minimal fallback: read configs/train_base.yaml with PyYAML.
-        import argparse, yaml
+        import argparse
+
+        import yaml
         ap = argparse.ArgumentParser()
         ap.add_argument("--config", default="configs/train_base.yaml")
         args = ap.parse_args()
-        with open(args.config) as f:
+        with open(args.config, encoding="utf-8") as f:
             cfg = yaml.safe_load(f)
         main_from_dict(cfg)
 

@@ -53,12 +53,11 @@ References
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Optional, Tuple, Dict
+from dataclasses import dataclass
+from typing import Dict, Optional, Tuple
 
 import torch
 import torch.nn as nn
-
 
 # ============================================================================
 # Autograd helpers
@@ -354,7 +353,7 @@ class NTKAdaptiveWeights:
         self.names = list(names)
         self.alpha = float(alpha)
         self.clip_lo, self.clip_hi = clip
-        self.weights = {n: 1.0 for n in self.names}
+        self.weights = dict.fromkeys(self.names, 1.0)
 
     @staticmethod
     def _grad_norm(loss: torch.Tensor, params) -> float:
@@ -392,11 +391,11 @@ class NTKAdaptiveWeights:
 
 
 __all__ = [
-    "PhysicsParams",
     "LossWeights",
+    "NTKAdaptiveWeights",
+    "PhysicsParams",
+    "boundary_residuals",
     "ohmic_boundary_values",
     "pde_residuals",
-    "boundary_residuals",
     "total_loss",
-    "NTKAdaptiveWeights",
 ]

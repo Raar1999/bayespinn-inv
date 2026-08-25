@@ -1,0 +1,124 @@
+# Claim → Evidence Matrix
+
+Every quantitative claim made anywhere in this repository, traced to the code,
+data, seed and command that produces it. A claim without a reproducing command
+is not a result.
+
+**Environment for all measured values below:** Python 3.11.9, NumPy 2.4.4,
+SciPy 1.17.1, PyTorch 2.11.0+cu128, Windows 11, CPU. Each experiment script
+writes a `manifest.json` recording the git commit, tree cleanliness, versions
+and configuration.
+
+**Verdict key:** ✅ reproduced · ⚠️ corrected (old value was wrong or
+mis-scoped) · ❌ withdrawn · 📄 documentation-only
+
+---
+
+## 1. Current claims (README, `outputs/results/`)
+
+| # | Claim | Value | Source | Command | Seed | n | Verdict |
+|---|---|---|---|---|---|---|---|
+| C1 | Forward I–V error, interpolation | 2.8% median (CI 2.0–3.9%), p90 7.0% | `run_results.py` H1 | `python scripts/run_results.py` | 0 | 72 | ✅ |
+| C2 | Forward I–V error, **extrapolation** | 38.2% median (23.1–89.7%), p90 861% | same | same | 0 | 68 | ✅ new |
+| C3 | Forward I–V error, **family transfer** (graded, trained on steps) | 84.2% median (75.0–106.4%) | same | same | 0 | 60 | ✅ new |
+| C4 | Current dynamic range of training labels | 9.96 decades (8.9e-5 → 8.1e5 A/m²) | same | same | 0 | 156 labels | ⚠️ was "13 orders of magnitude" |
+| C5 | Labels dropped as numerically untrustworthy | 13 of 169 | same | same | 0 | — | ✅ new |
+| C6 | Inverse recovery, 0% noise | 0.0018 decades (0.0013–0.0024) | `run_results.py` H2 | same | 0 | 40 | ⚠️ was 0.004, n=5 |
+| C7 | Inverse recovery, 10% noise | 0.0072 decades (0.0047–0.0101) | same | same | 0 | 40 | ⚠️ was 0.009, n=5 |
+| C8 | 1σ coverage falls with noise | 75% → 28% (0% → 10% noise) | same | same | 0 | 40/row | ✅ |
+| C9 | Calibration, ±1.64σ | 46% → 90% (nominal 90%) | `run_results.py` H3 | same | 0 | 140 | ⚠️ pre/post now on the same set |
+| C10 | Variance-inflation factor | T = 2.09 | same | same | 0 | 48 (val) | ⚠️ was 2.19 |
+| C11 | Active learning vs random | no distinguishable advantage at any budget | `run_results.py` H4b | same | 1000–1007 | 32/cell | ✅ new (negative) |
+| C12 | Identifiable dof at 2% noise | 4 (sym step), 5 (asym), 3 (graded), 4 (LDD), of 16 | `run_identifiability.py` | `python scripts/run_identifiability.py` | 0 | 8–10 biases | ✅ new |
+| C13 | Rank vs instrument quality | 2 dof @20% → 9 dof @1e-4% noise | same | same | 0 | — | ✅ new |
+| C14 | Equivalence twins indistinguishable | 1.26× doping change → 0.02–1.3% I–V change | same | same | 0 | 4 families | ✅ new |
+| C15 | Jacobian linear-response validation | ratios 0.995–1.04 | same | same | 0 | 4 dirs × 4 families | ✅ new |
+| C16 | Surrogate speedup vs SG | 152× (0.85 ms vs 129 ms, M=5) | timing harness | see README | — | 10/200 reps | ⚠️ was "~500×" |
+| C17 | Built-in potential vs analytic | rel. error 2.8e-7 | `cli.py` selftest | `bayespinn selftest` | — | 1 | ✅ |
+| C18 | Mass action at equilibrium | max \|np−1\| = 7.6e-6 | same | same | — | 301 nodes | ⚠️ was 1.3e-2 |
+| C19 | Diode ideality factor | 1.018 | same | same | — | 8 biases | ✅ |
+| C21 | Uncertainty vs error | Spearman ρ = +0.824; NOT monotone across σ quartiles | `run_results.py` H5 | same | 0 | 200 | ✅ new |
+| C22 | OOD awareness | σ inflates 15.7× vs error 11.8× (interp → extrap) | same | same | 0 | 140 | ✅ new |
+| C20 | Test suite | 161 passing | pytest | `make test` | — | — | ⚠️ was 42 |
+
+## 2. Solver-improvement claims (audit)
+
+| # | Claim | Value | Evidence | Verdict |
+|---|---|---|---|---|
+| S1 | Equilibration improves mass action | 1.32e-2 → 7.62e-6 (1730×) | `test_sg_numerics.py::test_equilibration_beats_plain_spsolve` | ✅ |
+| S2 | expm1 flux removes cancellation | 5.86e-7 → 1.39e-13 A/m² on an exact state (4.2e6×) | `::test_exact_equilibrium_state_gives_machine_zero_current` | ✅ |
+| S3 | expm1 form is an exact identity | agrees with direct form to 1.9e-11 relative away from equilibrium | `::test_agrees_with_direct_form_away_from_equilibrium` | ✅ |
+| S4 | Noise floor is predictive | current precision tracks 1/SNR over 5 decades | measured; ADR-0002 | ✅ |
+| S5 | 2D MOS-cap converges over full range | −2 V → +5 V, rel. residual ~1e-12 | `test_mos_cap_physics.py::TestConvergenceAcrossBias` | ✅ |
+| S6 | 2D lateral invariance exact | ~1e-15 (was ~1.5e-3, O(1/Nx)) | `::TestLateralInvariance` | ✅ |
+| S7 | 2D Gauss law | Q_semi = D_ox to 0.000% | `::test_gauss_law_total_charge_balances_gate_field` | ✅ |
+| S8 | φ_s vs depletion approximation | within 15–26 mV (≈V_T) over 0.2–0.8 V | `::test_surface_potential_matches_depletion_approximation` | ✅ |
+| S9 | Ohmic BC exact at extreme doping | \|np−1\| = 0 exactly up to C_s = 1e12 | `test_robustness.py::test_doping_magnitude_sweep` | ✅ |
+| S10 | LDD high-injection grid convergence | I = 3.5976e8–3.5986e8 A/m² across N=201/301/601 | `test_sg_numerics.py::TestAutomaticContinuation` | ✅ |
+| S11 | Bernoulli finite over full double range | exact identity to 8e-17 | `::TestBernoulliExtremes` | ✅ |
+| S12 | ECE floor for M=5 | 0.088 (Monte-Carlo, matches analytic 0.091) | `test_robustness.py::test_perfect_ensemble_scores_at_its_floor` | ✅ |
+
+## 3. Superseded claims
+
+| # | Old claim | Where | Why it changed | Now |
+|---|---|---|---|---|
+| X1 | "~4% median rel. error across **13 orders of magnitude**" | README | Measured span of the reference I–V is 10.0 decades, and the evaluated points span less. The "13" was never measured. | C1, C4 |
+| X2 | "Graded junctions: median 4.6%" | `results_summary.md` | The old script **trained on graded profiles too**, so this was in-distribution error reported as generalization. Retested as true family transfer. | C3 (84%) |
+| X3 | Calibration "30% → 71%" | `results_summary.md` | The two columns came from **different test sets**. | C9 |
+| X4 | "1σ coverage 100 / 80 / 60 / 40%" | `results_summary.md` | n = 5, no interval, and one RNG seed reused across all noise rows. | C8 (n=40, Wilson CIs) |
+| X5 | "H4 Active-learning gain" | `results_summary.md` | Contained no active learning — three fixed bias subsets. Its own numbers also contradicted its stated hypothesis. | H4a (renamed), C11 (real AL) |
+| X6 | "~500× faster (0.4 ms vs 194 ms)" | README | Compared a single surrogate against SG; the ensemble is what is used, and SG is now slower but correct. | C16 (152×) |
+| X7 | "SG solver ✅ validated … 0–0.7 V converges 3–7 it" | README roadmap | The 3-iteration "convergence" was the false-convergence bug (BUG-03). | S1, C18 |
+| X8 | "Unit tests (38) … 23 core + 9 MOS-cap + 6 surrogate" | README roadmap | Contradicted the badge (42) in the same file and omitted `test_adapters.py`. | C20 |
+| X9 | "ECE 0.224 → 0.086 after temperature scaling" | README, reframe doc | 0.086 is *at* the M=5 estimator floor (0.088); it cannot be read as a calibration quality. | S12 |
+| X10 | "Strong-inversion stiffness" limitation | README, `grid_2d.py` | Was BUG-07, a wrong-sign Jacobian, not physics. | S5 |
+| X11 | "First to evaluate Bayesian PINN calibration quantitatively for semiconductor inverse problems" | `papers/draft.md` | No prior-art search supported it; Bayesian inversion for this problem is published (arXiv:2408.11485). | ❌ withdrawn (ADR-0003) |
+| X12 | "The forward PINN converges on realistic doping ranges" | `papers/draft.md` | Directly contradicted `docs/forward_model_reframe.md` in the same repository. | ❌ withdrawn |
+| X13 | Beucler et al. (2022) as the source of the TV+positivity scheme | `inverse_design.py` | Citation could not be verified; no paper with that title located. | ❌ removed (CITE-01) |
+| X14 | README quick-start `0.5*(Jn.mean()+Jp.mean())` | README | Off by a factor of 2 vs `terminal_current = mean(Jn+Jp)`. | 📄 fixed and executed |
+
+## 4. Claims that remain unverified *(as of the first cycle; see §5 for resolutions)*
+
+| # | Claim | Where | Status |
+|---|---|---|---|
+| U1 | Notebook outputs `01`–`12` | `notebooks/` | **Stale.** Executed against the pre-audit solver, so their numbers predate BUG-01…BUG-12. Not re-executed in this cycle; they should be regenerated or marked historical before release. |
+| U2 | MC-dropout and SWAG UQ quality | `bayesian/` | Implemented and interface-tested, but never compared against the deep ensemble under a common protocol. No claim is made about them. |
+| U3 | `pinn/` training pipeline results | `training/`, `configs/` | The pure-physics PINN is superseded as a forward model; its training loop is exercised only by a 5-epoch smoke test. |
+| U4 | GaAs material parameters | `physics/constants.py` | Constants check out against Sze, but no GaAs device has been solved or validated. |
+
+---
+
+## 5. Second-cycle claims (2026-08-19)
+
+| # | Claim | Value | Command | Seed | n | Verdict |
+|---|---|---|---|---|---|---|
+| D1 | Pure-physics PINN, forward I–V error | **100.00% median, 100.00% p90**, 6% of points within 50% | `python scripts/run_pinn_vs_surrogate.py` | 0 | 72 | ✅ new |
+| D2 | Surrogate, same protocol as D1 | 2.64% median, 6.64% p90, 100% within 50% | same | 0 | 72 | ✅ new |
+| D3 | PINN self-consistency `std(J)/\|mean(J)\|` | 0.03 (0 = exact steady state) — converged, and wrong | same | 0 | 6 profiles | ✅ new |
+| D4 | Deep ensemble ρ(σ,\|err\|) vs tuned MC-dropout / tuned SWAG | **+0.798** vs +0.299 / +0.486 | `python scripts/run_uq_tuning.py` | 0 | 200 | ✅ new |
+| D5 | σ inflation off-distribution, ensemble vs MC-dropout vs SWAG | **21.3×** vs 1.4× vs 2.5×, against a 12–13× error inflation | same | 0 | 140 | ✅ new |
+| D6 | Budget-matched ensemble still beats both single-network methods | ρ +0.731, 6.7 s train (vs 9.2 s / 6.3 s) | `python scripts/run_uq_benchmark.py` | 0 | 200 | ✅ new |
+| D7 | Surrogate gradient fidelity inside identifiable subspace | mean cosine **+0.504** | `python scripts/run_gradient_fidelity.py` | 0 | 4 devices | ✅ new |
+| D8 | Surrogate gradient fidelity **outside** identifiable subspace | mean cosine **−0.001** | same | 0 | 4 devices | ✅ new |
+| D9 | D7/D8 are not undertraining | 300→10000 epochs: value error 1.133→0.252 symlog while outside-cosine +0.003→−0.001 | same | 0 | 4 devices × 4 budgets | ✅ new |
+| D10 | `max_std` acquisition vs random, on identifiable rank | **−0.31** (2 wins / 9 ties / 9 losses) | `python scripts/run_experiment_design.py` | 0 | 20 device×budget, 12 seeds | ✅ new |
+| D11 | `d_optimal` / `null_space` vs random | **+0.39** (5 wins / 15 ties / **0 losses**) | same | 0 | same | ✅ new |
+| D12 | Surrogate-vs-SG Jacobian correlation (bounds D10/D11) | +0.01 … +0.40 by device | same | 0 | 4 devices | ✅ new |
+| D13 | Identifiable rank vs parameterisation dimension | does **not** grow: P = 8→32 gives rank 2–4 | `python scripts/run_identifiability_robustness.py` | 0 | see manifest | ✅ new |
+| D14 | Identifiable rank across all robustness axes | **1–6, median 3** over 88 measurements; **3–4** at the reference conditions | same | 0 | 88 | ⚠️ headline "3–5" corrected to 3–4 (reference) / 1–6 (all conditions) |
+| D14a | Where the extremes come from | rank 1 only at a reduced bias range (v_max=0.6, graded); rank 5–6 only at larger finite-difference steps (0.02–0.05), which lower the *analysis* noise floor rather than revealing more physics | same | 0 | 88 | ✅ new |
+| D15 | SG converges across the claimed doping envelope after BUG-13 | 90/90 solves; every trustworthy point grid-converged to ≤0.35% | `pytest tests/test_sg_numerics.py -k Roundoff` | — | 90 | ✅ new |
+| D16 | Headline results unchanged by the BUG-13 fix | H1/H3/H5 bit-identical before and after | `python scripts/run_results.py` | 0 | — | ✅ verified |
+| D17 | Test suite | **240 passing** (was 161) | `make test` | — | — | ✅ |
+| D18 | GaAs PN junction solves | V_bi exact to <1e-9 rel.; mass action ≤6e-5; rectifies >1e3× | `pytest -k GaAs` | — | 3 levels | ✅ new |
+| D19 | `current_is_trustworthy()` now requires convergence | at +100 V: was `trust=True` on a non-converged state carrying I=3.0e10 A/m²; now `False` | `pytest -k TrustFlag` | — | — | ⚠️ API footgun closed |
+| D20 | README quick-start runs verbatim | V_bi 0.7143 V = analytic; 12/13 bias points trustworthy, V=0 correctly flagged | copy-paste from README | — | 13 | ✅ |
+
+### Resolution of the previously-unverified claims
+
+| # | Was | Now |
+|---|---|---|
+| U1 | Notebook outputs stale | ✅ **Resolved.** All twelve regenerated from `scripts/build_notebooks.py` and re-executed top to bottom against the current solver; the stale narrative numbers ("13 orders", "~4%", "~500×") corrected *in the generator*. |
+| U2 | MC-dropout / SWAG never compared | ✅ **Resolved.** Root cause was that both wrapped `ForwardPINN` rather than the surrogate. `bayesian/surrogate_uq.py` fixes it; D4–D6 are the comparison. ADR-0005. |
+| U3 | PINN pipeline unvalidated | ✅ **Resolved as a negative result.** D1–D3; reclassified as legacy (ADR-0004). |
+| U4 | GaAs never solved | ✅ **Resolved for the solver.** A GaAs PN junction now converges at 1e21/1e22/1e23 m⁻³ with V_bi exact to <1e-9 relative and mass action to 6e-5, and rectifies (`tests/test_sg_numerics.py::TestGaAsDeviceSolves`, 4 tests). GaAs *device physics* is still not validated against measurement, and none is claimed. |

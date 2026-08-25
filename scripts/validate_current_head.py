@@ -10,19 +10,23 @@ If held-out I-V tracks SG across 13 orders of magnitude, the surrogate
 reframe is proven: inverse design / UQ / AL / calibration all work on top.
 """
 from __future__ import annotations
+
+import sys
 import time
+from pathlib import Path
+
 import numpy as np
 import torch
 import torch.nn as nn
 
-import sys
-from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
 )
 
 torch.manual_seed(0); np.random.seed(0)

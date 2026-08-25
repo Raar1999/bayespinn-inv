@@ -15,22 +15,28 @@ This is intentionally small (free-Colab budget): one network, a handful of
 profiles, a few thousand epochs, a few minutes on CPU.
 """
 from __future__ import annotations
+
+import sys
 import time
+from pathlib import Path
+
 import numpy as np
 import torch
 
-import sys
-from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
 from bayespinn_inv.pinn.losses import (
-    pde_residuals, boundary_residuals, PhysicsParams,
+    PhysicsParams,
+    boundary_residuals,
+    pde_residuals,
 )
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
 from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
 )
 
 torch.manual_seed(0)
@@ -176,7 +182,7 @@ print(f"Trained in {time.time()-t0:.1f}s")
 # --- Validate: PINN I-V vs SG on the training profiles ---
 print("\n=== PINN I-V vs SG (symlog-supervised surrogate) ===")
 net.eval()
-for pi, C in enumerate(profiles):
+for pi, _C in enumerate(profiles):
     latent = latents[pi]
     print(f"\nProfile N_A=N_D={doping_levels[pi]:.0e}:")
     print(f"  {'V':>5} {'I_SG':>11} {'I_PINN':>11} {'symlog_err':>10}")

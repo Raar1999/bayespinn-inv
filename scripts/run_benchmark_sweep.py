@@ -35,6 +35,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Dict, List
@@ -42,19 +43,20 @@ from typing import Dict, List
 import numpy as np
 import torch
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.physics.constants import SILICON, GAAS
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
-from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
 from bayespinn_inv.bayesian.ensembles import DeepEnsemble
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
-)
 from bayespinn_inv.benchmarks.sg_vs_pinn import compare_solvers
 from bayespinn_inv.data.datasets import sample_doping
+from bayespinn_inv.physics.constants import GAAS, SILICON
+from bayespinn_inv.physics.scaling import Scaling
+from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
 
 
 def _material_from_name(name: str):
@@ -63,7 +65,7 @@ def _material_from_name(name: str):
 
 def load_ensemble(manifest_path: Path) -> DeepEnsemble:
     """Reconstruct a DeepEnsemble from a manifest.json."""
-    with open(manifest_path) as f:
+    with open(manifest_path, encoding="utf-8") as f:
         manifest = json.load(f)
     cfg = manifest["config"]
     material = _material_from_name(cfg["material"]["name"])
@@ -230,7 +232,7 @@ def main():
     # Write raw CSV
     csv_path = out_dir / "raw_results.csv"
     if rows:
-        with open(csv_path, "w", newline="") as f:
+        with open(csv_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
             writer.writeheader()
             writer.writerows(rows)
@@ -243,7 +245,7 @@ def main():
         "n_rows":    len(rows),
         "elapsed_s": elapsed,
     }
-    with open(out_dir / "summary.json", "w") as f:
+    with open(out_dir / "summary.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, default=str)
     print(f"  summary -> {out_dir / 'summary.json'}")
 

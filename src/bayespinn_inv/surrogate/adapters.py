@@ -37,9 +37,11 @@ import torch
 
 from ..bayesian.ensembles import EnsemblePrediction
 from .iv_surrogate import (
-    IVSurrogate, IVSurrogateConfig, Normalizer, SymlogTransform,
+    IVSurrogate,
+    IVSurrogateConfig,
+    Normalizer,
+    SymlogTransform,
 )
-
 
 # ---------------------------------------------------------------------------
 # Minimal cfg object so legacy code can read .device / .dtype / anchors
@@ -200,15 +202,15 @@ def save_surrogate_ensemble(
         },
     }
     mpath = out_dir / "manifest.json"
-    mpath.write_text(json.dumps(manifest, indent=2))
+    mpath.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return mpath
 
 
 def load_surrogate_ensemble(manifest_path) -> Tuple[SurrogateEnsembleAdapter, dict]:
     """Reconstruct a :class:`SurrogateEnsembleAdapter` from a manifest."""
-    from ..physics.constants import SILICON, GAAS
+    from ..physics.constants import GAAS, SILICON
     from ..physics.scaling import Scaling
-    manifest = json.loads(Path(manifest_path).read_text())
+    manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
     material = {"Si": SILICON, "Silicon": SILICON, "GaAs": GAAS}[manifest["material"]["name"]]
     scaling = Scaling.for_material(material, T=manifest["material"]["T"])
     symlog = SymlogTransform(I0=manifest.get("symlog_I0", 1e-6))
@@ -218,7 +220,21 @@ def load_surrogate_ensemble(manifest_path) -> Tuple[SurrogateEnsembleAdapter, di
     )
     members = []
     for ck in manifest["checkpoints"]:
-        state = torch.load(ck, map_location="cpu", weights_only=False)
+        # AUDIT_MASTER SEC-01: weights_only=False disables PyTorch >= 2.6's
+        # safe-loading default, so a malicious checkpoint executes arbitrary
+        # code on load. Our checkpoints hold only a state_dict and a plain
+        # dict of config scalars, so weights_only=True is sufficient; we fall
+        # back only for checkpoints written by older versions of this code,
+        # and say so loudly.
+        try:
+            state = torch.load(ck, map_location="cpu", weights_only=True)
+        except Exception:
+            import warnings
+            warnings.warn(
+                f"Falling back to unsafe torch.load for {ck}: this executes "
+                "arbitrary code from the checkpoint. Only do this for files "
+                "you produced yourself.", RuntimeWarning, stacklevel=2)
+            state = torch.load(ck, map_location="cpu", weights_only=False)
         cfg = IVSurrogateConfig(**state["cfg"])
         net = IVSurrogate(cfg)
         net.load_state_dict(state["state_dict"])
@@ -239,15 +255,30 @@ def load_forward_ensemble(manifest_path):
 
     This lets every pipeline script consume either forward model transparently.
     """
-    manifest = json.loads(Path(manifest_path).read_text())
+    manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
     if manifest.get("type") == "surrogate":
         return load_surrogate_ensemble(manifest_path)
-    # Legacy PINN path
+
+    # Legacy pure-physics PINN path. This branch execs a file from the *source
+    # checkout*: parents[3] is the repository root in a dev install, but in
+    # site-packages it points somewhere arbitrary and scripts/ does not exist
+    # (AUDIT_MASTER PKG-02). Fail with an actionable message instead of an
+    # opaque AttributeError on a None spec.
     import importlib.util
     import sys
+
     scripts_dir = Path(__file__).resolve().parents[3] / "scripts"
-    spec = importlib.util.spec_from_file_location(
-        "_rbs", scripts_dir / "run_benchmark_sweep.py")
+    legacy = scripts_dir / "run_benchmark_sweep.py"
+    if not legacy.is_file():
+        raise FileNotFoundError(
+            f"Manifest {manifest_path} is not a surrogate manifest "
+            f"(type={manifest.get('type')!r}), so the legacy pure-physics PINN "
+            f"loader is required -- but it lives in the repository's scripts/ "
+            f"directory, which is not packaged, and was not found at {legacy}. "
+            "Run from a source checkout, or regenerate the ensemble with "
+            "scripts/train_surrogate_ensemble.py to get a type='surrogate' "
+            "manifest.")
+    spec = importlib.util.spec_from_file_location("_rbs", legacy)
     mod = importlib.util.module_from_spec(spec)
     sys.modules["_rbs"] = mod
     spec.loader.exec_module(mod)
@@ -255,6 +286,9 @@ def load_forward_ensemble(manifest_path):
 
 
 __all__ = [
-    "SurrogateForwardAdapter", "SurrogateEnsembleAdapter",
-    "save_surrogate_ensemble", "load_surrogate_ensemble", "load_forward_ensemble",
+    "SurrogateEnsembleAdapter",
+    "SurrogateForwardAdapter",
+    "load_forward_ensemble",
+    "load_surrogate_ensemble",
+    "save_surrogate_ensemble",
 ]

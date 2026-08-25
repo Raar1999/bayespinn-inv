@@ -33,18 +33,19 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from pathlib import Path
 
 import numpy as np
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.physics.constants import SILICON, Q_E, EPS_0
+from bayespinn_inv.physics.constants import EPS_0, Q_E, SILICON
 from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.solvers.grid_2d import MOSCapGeometry, Grid2D, MOSCapBoundary
+from bayespinn_inv.solvers.grid_2d import Grid2D, MOSCapBoundary, MOSCapGeometry
 from bayespinn_inv.solvers.mos_cap_2d import (
-    MOSCap2DSolver, MOSCap2DConfig,
+    MOSCap2DConfig,
+    MOSCap2DSolver,
     depletion_approximation_surface_potential,
 )
 
@@ -142,7 +143,7 @@ def main():
     print(f"\nC_ox = {C_ox*1e3:.3f} mF/m^2")
     print(f"max C/C_ox = {np.max(C_hf)/C_ox:.3f} (accumulation should approach 1)")
 
-    with open(out_dir / "cv_data.json", "w") as f:
+    with open(out_dir / "cv_data.json", "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
     # ---------------- Figures ----------------

@@ -31,16 +31,16 @@ to ensembles.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
 import torch.nn as nn
 
-from ..pinn.forward_pinn import ForwardPINN
 from ..physics.constants import Material
 from ..physics.scaling import Scaling
+from ..pinn.forward_pinn import ForwardPINN
 from ..solvers.scharfetter_gummel import DeviceState
 from .ensembles import EnsemblePrediction
 
@@ -179,7 +179,7 @@ class SWAG(nn.Module):
         orig = _flatten_params(self.forward_pinn.network)
         samples: List[torch.Tensor] = []
         try:
-            for t in range(self.cfg.T_samples):
+            for _ in range(self.cfg.T_samples):
                 theta = self.recorder.sample(generator=gen)
                 _unflatten_params(theta, self.forward_pinn.network)
                 _, I = self.forward_pinn.iv_curve(doping_si, biases)
@@ -202,7 +202,7 @@ class SWAG(nn.Module):
         orig = _flatten_params(self.forward_pinn.network)
         states: List[DeviceState] = []
         try:
-            for t in range(self.cfg.T_samples):
+            for _ in range(self.cfg.T_samples):
                 theta = self.recorder.sample(generator=gen)
                 _unflatten_params(theta, self.forward_pinn.network)
                 states.append(self.forward_pinn.solve(doping_si, bias))
@@ -233,4 +233,4 @@ class SWAG(nn.Module):
             _unflatten_params(orig, self.forward_pinn.network)
 
 
-__all__ = ["SWAG", "SWAGRecorder", "SWAGConfig"]
+__all__ = ["SWAG", "SWAGConfig", "SWAGRecorder"]

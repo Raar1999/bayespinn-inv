@@ -22,15 +22,17 @@ docstring.
 import math
 
 import numpy as np
-import pytest
 
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.grid_2d import (
-    MOSCapGeometry, Grid2D, MOSCapBoundary,
+    Grid2D,
+    MOSCapBoundary,
+    MOSCapGeometry,
 )
 from bayespinn_inv.solvers.mos_cap_2d import (
-    MOSCap2DSolver, MOSCap2DConfig,
+    MOSCap2DConfig,
+    MOSCap2DSolver,
     depletion_approximation_surface_potential,
 )
 
@@ -79,16 +81,32 @@ class TestMOSCap2D:
         )
 
     def test_zero_doping_linear_poisson(self):
-        """No-charge case: pure Laplace equation with piecewise eps."""
+        """Undoped body in the linear-screening limit: capacitor divider.
+
+        NOTE (BUG-09, docs/AUDIT_MASTER.md): this test previously used
+        V_gate = 1.0 V and called the expected answer "pure Laplace". That is
+        not physics. With C = 0 the body is *intrinsic*, not charge-free, and
+        its carriers still respond as n = n_i exp(+phi/V_T),
+        p = n_i exp(-phi/V_T). At 1 V that is n ~ 6e32 m^-3 -- an enormous
+        space charge that screens the field completely, so the capacitor
+        divider is simply the wrong reference and the old assertion only
+        passed because the solver was not converging (BUG-07).
+
+        The divider IS exact in the linear-screening limit: the intrinsic
+        Debye length in Si is ~41 um, four orders of magnitude beyond this
+        300 nm body, so at a small gate bias the induced charge is
+        negligible. We test there.
+        """
         doping = np.zeros_like(self.grid.eps_r_field)
-        bc = MOSCapBoundary(V_gate=1.0, V_substrate=0.0, phi_ms=0.0)
+        V_g = 1e-3                       # deep in the linear-screening regime
+        bc = MOSCapBoundary(V_gate=V_g, V_substrate=0.0, phi_ms=0.0)
         st = self.solver.solve(doping, bc)
         assert st.converged
 
         # Analytical: capacitor-divider
         Ly_semi = 100e-9
         t_ox = 5e-9
-        phi_s_ana = 1.0 * (3.9 / t_ox) / (11.7 / Ly_semi + 3.9 / t_ox)
+        phi_s_ana = V_g * (3.9 / t_ox) / (11.7 / Ly_semi + 3.9 / t_ox)
         # Interface node index
         j_if = int(np.argmin(np.abs(self.grid.y - self.geom.y_interface)))
         phi_s_num = float(st.phi[j_if, self.grid.Nx // 2])
@@ -119,11 +137,11 @@ class TestMOSCap2D:
         N_A = 1e21
         doping = np.zeros_like(self.grid.eps_r_field)
         doping[self.grid.semi_mask] = -N_A
-        phi_F = -self.scaling.V_T * math.asinh(N_A / (2 * SILICON.n_i))
         j_if = int(np.argmin(np.abs(self.grid.y - self.geom.y_interface)))
         prev_state = None
         phi_s_values = []
         V_gates = [-0.3, -0.1, 0.0, 0.1, 0.2, 0.3]
+        phi_F = -self.scaling.V_T * math.asinh(N_A / (2 * SILICON.n_i))
         for V_g in V_gates:
             bc = MOSCapBoundary(V_gate=V_g, V_substrate=0.0, phi_ms=phi_F)
             st = self.solver.solve(doping, bc, initial_state=prev_state)
@@ -171,7 +189,6 @@ class TestDepletionApproximation:
         # At V_GB = 0 (with phi_ms = 0), depletion approx gives phi_s = phi_F (~0)
         # for a flat-band biased MOS-cap.
         N_A = 1e22
-        phi_F = -SILICON.n_i  # placeholder
         # Just check it runs and returns finite values
         phi_s, W_d, V_ox = depletion_approximation_surface_potential(
             V_gate=1.0, N_A=N_A, t_ox=5e-9,

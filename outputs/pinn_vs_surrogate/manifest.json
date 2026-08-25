@@ -1,0 +1,58 @@
+{
+  "experiment": "pinn_vs_surrogate",
+  "created_utc": "2026-08-19T14:29:07+00:00",
+  "git": {
+    "commit": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "seed": 0,
+    "pinn_epochs": 8000,
+    "surrogate_epochs": 2500,
+    "n_anchor": 16
+  },
+  "results": {
+    "head_to_head": {
+      "pinn": {
+        "median_rel_err": 0.9999970197631748,
+        "p90_rel_err": 1.0000456802107016,
+        "max_rel_err": 283.0343183321931,
+        "n": 72,
+        "frac_within_50pct": 0.05555555555555555,
+        "train_seconds": 210.58548760414124,
+        "self_consistency_std_over_mean_J": {
+          "median": 0.02982050832360983,
+          "max": 0.03285031020641327,
+          "note": "div(J)=0 in steady state, so std(J)/|mean(J)| is 0 for an exact solution. This is the PINN's own diagnostic, independent of the oracle."
+        }
+      },
+      "surrogate": {
+        "median_rel_err": 0.026436009151515727,
+        "p90_rel_err": 0.06642569583235006,
+        "max_rel_err": 0.3222989758374556,
+        "n": 72,
+        "frac_within_50pct": 1.0,
+        "train_seconds": 22.511343717575073
+      }
+    }
+  },
+  "artifacts": {
+    "json": "outputs\\pinn_vs_surrogate\\pinn_vs_surrogate.json"
+  },
+  "notes": ""
+}

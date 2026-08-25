@@ -27,24 +27,24 @@ and a re-run with the same config produces byte-identical results.
 from __future__ import annotations
 
 import json
-import math
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
-import torch.nn as nn
 
 from ..physics.constants import Material
 from ..physics.scaling import Scaling
-from ..pinn.network import SemiconductorPINN
 from ..pinn.losses import (
-    PhysicsParams, pde_residuals, boundary_residuals,
-    LossWeights, total_loss, NTKAdaptiveWeights,
+    LossWeights,
+    NTKAdaptiveWeights,
+    PhysicsParams,
+    boundary_residuals,
+    pde_residuals,
 )
-
+from ..pinn.network import SemiconductorPINN
 
 # ============================================================================
 # Config
@@ -331,9 +331,12 @@ class PINNTrainer:
                                                     self.cfg.grad_clip)
                 self.opt.step()
             else:  # LBFGS
+                # ruff B023: `ex` / `V_max_curr` are late-bound, but the
+                # closure is consumed by opt.step() inside this same loop
+                # iteration and never escapes it, so the binding is correct.
                 def closure():
                     self.opt.zero_grad(set_to_none=True)
-                    loss, diag = self._compute_loss(ex, V_max_curr)
+                    loss, diag = self._compute_loss(ex, V_max_curr)  # noqa: B023
                     loss.backward()
                     closure.last_loss = loss
                     closure.last_diag = diag
@@ -362,7 +365,7 @@ class PINNTrainer:
 
         if self.out_dir is not None:
             self.save_checkpoint(self.out_dir / "ckpt_final.pt")
-            with open(self.out_dir / "history.json", "w") as f:
+            with open(self.out_dir / "history.json", "w", encoding="utf-8") as f:
                 json.dump(self.history, f, indent=2, default=float)
         return self.history
 
@@ -387,9 +390,9 @@ class PINNTrainer:
 
 
 __all__ = [
+    "PINNTrainer",
     "TrainConfig",
     "TrainingExample",
-    "PINNTrainer",
     "curriculum_bias_max",
     "sample_collocation",
 ]
