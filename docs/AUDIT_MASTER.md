@@ -1012,3 +1012,161 @@ it is the one the evidence supports, and it is what makes GRAD-01 follow.
 | LIM-03 | Boltzmann statistics; degenerate doping (>~5e25 m⁻³) out of range | Documented; `carrier_clipping_active` now flags saturation per solve. |
 | LIM-04 | No interface traps, no quantum confinement | Documented. |
 | LIM-05 | Constant mobility (no field- or doping-dependence) | Hook exists in `ScharfetterGummel1D.__init__`; not implemented. |
+
+---
+
+## 9. Generation 0 of the audit loop (2026-08-25)
+
+Run under the operator ruling of 2026-08-25. The loop's first finding was that
+the repository's only commit was the **pre-audit** project: both prior audit
+cycles existed solely as uncommitted working-tree state. Adoption commit
+`c115757f3e9829cd1feb8bb86d739bfd74ff2dcf` on `loop/champion`, parent `6577f4b`
+(untouched). Full ledger: `docs/audit/AUDIT_g0.md`. Decisions:
+`docs/gen/DECISIONS.md`. Supersession record:
+`docs/PROVENANCE_BIFURCATION_g0.md`.
+
+### PROV-06 — the repository had bifurcated; `HEAD` was the pre-audit project
+| **Severity** | CRITICAL | **Status** | VERIFIED (adopted) |
+
+`git archive 6577f4b src | tar -x` and re-running the same physics:
+
+| | `6577f4b` | working tree |
+|---|---|---|
+| `src` modules | 34 | 40 |
+| tests collected | 42, in 4 files | 246, in 13 files |
+| `SGConfig(equilibrate=…)` | **`TypeError` — absent** | present |
+| built-in potential rel. error | 2.7558e-07 | 7.243e-14 |
+| mass action max\|np−1\| | 6.1019e-03 | 2.934e-09 |
+
+`6577f4b`'s 42-test suite is exactly the "42-test suite" `README.md` describes as
+pre-audit. 204 of 246 collected tests (83%) and 6 of 40 source modules were
+untracked, including `test_sg_numerics.py` — the 58-test regression suite for
+BUG-01 … BUG-13. Every manifest in `outputs/` named that commit as its provenance.
+
+Closed by adopting the tree, after preserving it to two external paths (212 files,
+digest-of-digests `9cd95213c1a7979f358743865dc133e998897705e55ae5c622eecd333a204cdd`,
+both copies verified 212/212) and attesting the commit against that manifest
+(**164/164 byte-identical, 0 mismatched, 0 missing**).
+
+### PROV-02 — `git_is_dirty()` was blind to untracked files
+| **Severity** | CRITICAL | **Status** | VERIFIED |
+
+`git status --porcelain --untracked-files=no`. Measured on a scratch repository:
+a tree missing three source modules returns `False`. A manifest could therefore
+report a tree missing 6 source modules and 83% of the test suite as clean —
+indistinguishable from a fixed typo. Untracked files now count;
+`tracked_modified`, `untracked` and `tree_digest` are separate manifest fields;
+the flag is derived from the counts so the two cannot disagree. Digest measured
+at 28 ms over 166 files / 4.1 MB. `ADR-0006`.
+Regression: `tests/test_provenance_g0.py` (16 tests). AH-08 pre-fix outcome
+recorded: `git_is_dirty() == False` on a tree missing three modules.
+
+### PROV-01 — every manifest was gitignored
+| **Severity** | HIGH | **Status** | VERIFIED |
+
+`git ls-files outputs/` returned only `results.json` and `results_summary.md`;
+`outputs/results/manifest.json` was matched by the `outputs/*` ignore rule, so a
+fresh clone shipped the headline results with **no provenance record at all**.
+All 42 files under `outputs/` are now tracked.
+
+### PROV-03 — the adopted tree has no attestable origin
+| **Severity** | HIGH | **Status** | **OPEN — PERMANENT** |
+
+Nothing in git records who produced the adopted code, when, in what order, or
+against what evidence. The adoption commit makes the tree attestable *from here
+forward*; it cannot make its past attestable. **No candidate in any generation
+may mark this closed.**
+
+### PROV-04 — manifests naming a commit that cannot have produced them
+| **Severity** | HIGH | **Status** | SUPERSEDED (recorded, not edited) |
+
+Nine of eleven manifests name `6577f4b`; two (`smoke`, `surrogate_ensemble`)
+carry no `git` block at all, and `surrogate_ensemble` records artefact paths under
+`/home/claude/…` — a different machine from every other manifest. The manifests
+are protected (`R-3`) and were **not** edited; `docs/PROVENANCE_BIFURCATION_g0.md`
+records per manifest why `6577f4b` cannot have produced it. Seven rows are marked
+*not re-verified* rather than assumed — `AH-07`.
+
+### SCI-08 — the claim surface mixed two mutually exclusive code states
+| **Severity** | CRITICAL | **Status** | VERIFIED |
+
+The published solver-quality figures were **not** stale guesses: they reproduce
+exactly on `6577f4b` (`2.7558e-07` measured against a published `2.8e-7`). They
+described the pre-audit solver, while the *same* documents quoted the working
+tree for the 240-test badge and all of D1–D20. No single code state reproduced
+the whole claim surface. `RELEASE_READINESS` marked "Reference solver validated
+✅" citing precisely these two figures.
+
+Withdrawn: `2.8e-7` → `7.24e-14` (X15); `7.6e-6` → `2.93e-9` (X16);
+`1.32e-2 → 7.62e-6` (1730×) → `6.77e-3 → 9.7e-10` (7.0e6×) (X17).
+Regression: `tests/test_claim_surface_g0.py`, which re-measures rather than
+hard-coding, so it keeps working as the solver improves. AH-08 pre-fix: 5 failed
+/ 1 passed.
+
+### SCI-11 — identifiability stated without its regime
+| **Severity** | HIGH | **Status** | VERIFIED (one instance parked) |
+
+`inverse/identifiability.py` is scrupulous ("the **local** Jacobian", "at one
+operating point") and `papers/draft.md` labels it three times, but `README.md`
+used the word `local` exactly once — about *local doping*, unrelated. Seven
+unqualified statements were measured across the claim surface; six were corrected
+(README 51, 70, 267, 340; `RELEASE_READINESS` 72, 189) and now carry the operating
+point, noise level, parameterisation dimension and observation count (PH-21).
+`papers/draft.md:255` is **parked** under `R-3` and pinned by a test that fails if
+the count moves in either direction (`DEC-g0-4`).
+
+### GRAD-02 — NaN gradients in the ohmic boundary condition
+| **Severity** | HIGH | **Status** | VERIFIED |
+
+`torch.where` evaluates both branches. For large positive `C_s`,
+`-C + sqrt(C²+4)` underflows to exactly `0.0`, the discarded branch is `inf`, and
+backward computes `0 × inf = NaN` in the *selected* branch. Bisected onset
+(40 steps): `C_s = 1.3922e8`, i.e. **N = 1.3922e24 m⁻³** — the top **21.4%** of
+the solver's own documented 1e21–1e25 m⁻³ range.
+
+### GRAD-03 — …and in float32 it covers the *whole* envelope
+| **Severity** | HIGH | **Status** | VERIFIED |
+
+Found by the generation-0 **falsifier** candidate (g0c5), pointed at the audit's
+own scoping of GRAD-02. Networks here train in float32, which cancels far
+earlier: first NaN at `C_s = 7.079e3` (**N = 7.08e19 m⁻³**, *below* the envelope).
+Sampling the documented envelope in float32: **41 of 41 points** return NaN
+gradients — 100%, not 21.4%.
+
+**Blast radius, measured rather than assumed: no published number is affected.**
+The only caller, `losses.boundary_residuals`, receives `C_s_bdy` as data with no
+`requires_grad_` (`trainer.py:262`), so autograd never walks the `d/dC_s` path. A
+float32 PINN boundary-loss backward at N = 1e21, 1e24 and 1e25 m⁻³ produced
+non-finite gradients in **0 of 26** weight tensors. **D1 and ADR-0004 are not
+confounded.** The defect fires only where doping itself carries a gradient —
+inverse design, and the Jacobian the identifiability analysis is built on, where
+float32 returns `grad = [1e-08, nan]` at N = 1e24 m⁻³.
+
+Closed by candidate **g0c2**: `log n = asinh(C/2)`, `log p = −asinh(C/2)`.
+Branchless, exact in every dtype, derivative `1/sqrt(4+C²)` finite everywhere.
+Measured after the fix: 0 non-finite of 402 points in both dtypes; gradient
+relative error **0.000e+00** in float64 (was 4.39e-16) and 8.19e-08 in float32
+(was 1.63e-07); mass-action deviation 2.22e-16 (was 3.66e-15).
+Regression: `tests/test_ohmic_gradient_g0.py` (41 tests). AH-08 pre-fix: 17
+failed / 22 passed.
+
+### CI-01 — **REOPENED**
+| **Severity** | MEDIUM | **Status** | **OPEN** |
+
+§6b recorded CI-01 as VERIFIED against `.github/workflows/ci.yml`. That file was
+**untracked**: never committed, never pushed, never executed. The gate clause
+"CI matrix green including the Windows job" was therefore unevaluable, which §6 of
+the loop specification scores as FAIL, not skip. The workflow is now committed
+(`c115757`) but `R-4` prohibits `git push`, so it still has not run. `SPEC-g0-3`
+records this as expected-to-remain-open rather than quietly green.
+
+### S-3 — duplicate ohmic implementations
+| **Severity** | (no Phase-A severity assigned) | **Status** | OPEN, equivalence pinned |
+
+Two implementations remain (`solvers/_ohmic_bc`, `pinn/ohmic_boundary_values`).
+Generation 0 promoted the reformulation rather than a merge, so `SPEC-g0-7` is
+satisfied by its property-test route: their equivalence is now pinned in **both
+value and gradient** over 402 points across the envelope, both signs, against a
+central finite difference of the NumPy implementation (max relative difference
+asserted < 1e-6). Structural merges were built and measured as candidates g0c3
+and g0c4; see `docs/gen/CANDIDATES_g0.md` for why neither was promoted.

@@ -78,14 +78,44 @@ the working tree's `7.243e-14`, and a mass-action residual of `6.1019e-03` again
 - `outputs/results/manifest.json` agrees with its `results.json` on all 102 shared
   numeric leaves — 0 mismatches. Nothing was fabricated.
 
-### Known open
+### Fixed — GRAD-02 / GRAD-03, promoted candidate g0c2
 
-- **GRAD-02 (HIGH)** — `ohmic_boundary_values` returns NaN gradients for
-  `C_s >= 1.3922e8` (N >= 1.3922e24 m⁻³), **21.4% of the documented 1e21–1e25 m⁻³
-  envelope**, because `torch.where` evaluates a branch that underflows to `1/0`.
-  No published number is affected: the protocol bands reach only `C_s <= 8.0e6`,
-  two decades below onset, so `D1`/`ADR-0004` are **not** confounded.
-  Regression tests are committed and failing by design (AH-08).
+- **`ohmic_boundary_values` returned NaN gradients across the documented doping
+  envelope.** `torch.where` evaluates both branches; for large positive `C_s`,
+  `-C + sqrt(C²+4)` underflows to exactly `0.0`, the discarded branch is `inf`,
+  and backward computes `0 × inf = NaN` in the *selected* branch. Bisected onset
+  `C_s = 1.3922e8` (N = 1.3922e24 m⁻³) in float64 — the top **21.4%** of the
+  solver's own 1e21–1e25 m⁻³ range.
+
+  The generation-0 **falsifier** then broke that scoping: networks here train in
+  float32, where cancellation arrives at `C_s = 7.079e3` — *below* the envelope.
+  Sampling the envelope in float32, **41 of 41** points returned NaN. 100%, not
+  21.4%. Filed as GRAD-03.
+
+  Fixed by reformulation (`M-01`): `log n = asinh(C/2)`, `log p = −asinh(C/2)`.
+  Branchless, exact in every dtype, derivative `1/sqrt(4+C²)` finite everywhere.
+  Measured after the fix, over 402 envelope points in both dtypes:
+
+  | | before | after |
+  |---|---|---|
+  | non-finite gradients, float64 | 44 / 402 | **0** |
+  | non-finite gradients, float32 | 201 / 402 | **0** |
+  | gradient rel. error, float64 | 4.393e-16 | **0.000e+00** |
+  | gradient rel. error, float32 | 1.629e-07 | **8.190e-08** |
+  | mass-action deviation | 3.664e-15 | **2.220e-16** |
+
+  **No published number changes.** Measured, not inferred: `losses.boundary_residuals`
+  receives boundary doping as data with no `requires_grad_` (`trainer.py:262`), so a
+  float32 PINN backward at N = 1e21, 1e24 and 1e25 m⁻³ produced non-finite gradients
+  in **0 of 26** weight tensors. `D1` and `ADR-0004` are **not** confounded. The
+  defect fired only where doping itself carries a gradient — inverse design, and the
+  Jacobian the identifiability result is built on.
+
+  Reproduce: `pytest tests/test_ohmic_gradient_g0.py` (41 tests).
+  AH-08 pre-fix outcome recorded: 17 failed / 22 passed.
+  Three competing candidates were built and measured; see `docs/gen/CANDIDATES_g0.md`.
+
+### Known open
 - **CI-01 reopened** — `.github/workflows/ci.yml` had never been committed, so CI
   has never run, yet `AUDIT_MASTER` recorded the finding as VERIFIED.
 - **PROV-03 (permanent)** — the adopted tree has no attestable origin. Nothing in

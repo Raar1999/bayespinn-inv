@@ -324,3 +324,67 @@ class TestTheDefectDoesNotReachNetworkWeights:
         assert not offenders, (
             f"non-finite weight gradients at N={doping_si:.0e} m^-3: {offenders}"
         )
+
+
+class TestTheTwoImplementationsAgreeOnGradientsToo:
+    """SPEC-g0-7, satisfied by the property-test route rather than by merging.
+
+    Generation 0 promoted the reformulation (g0c2), which fixes the gradient but
+    leaves two implementations of the ohmic contact standing -- seed item S-3.
+    SPEC-g0-7 allows that only if their equivalence is pinned over the envelope
+    in *both* value and gradient.
+
+    The solver's ``_ohmic_bc`` is NumPy and carries no autograd gradient, so the
+    comparison is against a central finite difference of it. The step is taken
+    relative to ``C_s`` because the quantity spans four decades; an absolute step
+    would be meaningless at both ends.
+    """
+
+    #: Relative finite-difference step. Large enough to clear float64 round-off
+    #: on a difference of two ~1e1 values, small enough that the O(h^2) central
+    #: truncation error stays well under the 1e-6 tolerance asserted below.
+    FD_REL_STEP = 1e-6
+
+    def _solver_log_n(self, c_value: float) -> float:
+        from bayespinn_inv.physics.scaling import Scaling
+        from bayespinn_inv.solvers.scharfetter_gummel import (
+            Grid1D,
+            ScharfetterGummel1D,
+            SGConfig,
+        )
+
+        scaling = Scaling.for_material(SILICON, T=300.0)
+        sg = ScharfetterGummel1D(Grid1D.uniform(1.0, 11), scaling, SILICON, SGConfig())
+        _phi, n, _p = sg._ohmic_bc(float(c_value))
+        return math.log(n)
+
+    def test_gradient_agrees_with_the_solver_finite_difference(self) -> None:
+        worst, worst_at = 0.0, None
+        # 200+ points, both signs, across the documented envelope (SPEC-g0-7).
+        for c_value in _envelope_points():
+            h = abs(c_value) * self.FD_REL_STEP
+            fd = (self._solver_log_n(c_value + h) - self._solver_log_n(c_value - h)) / (2 * h)
+            autograd = _grad_of("log_n_left", c_value)
+            assert math.isfinite(autograd), f"non-finite autograd at C_s={c_value:.3e}"
+            err = abs(autograd - fd) / abs(fd)
+            if err > worst:
+                worst, worst_at = err, c_value
+        assert worst < 1e-6, (
+            "AUDIT_g0 S-3 -- the torch and NumPy ohmic implementations disagree on "
+            f"d(log n)/dC_s: max relative difference {worst:.3e} at C_s={worst_at:.4e}"
+        )
+
+    def test_the_finite_difference_reference_is_itself_sane(self) -> None:
+        """Negative control: the FD reference must track the analytic derivative.
+
+        Without this, a broken ``_ohmic_bc`` and a broken autograd path could
+        agree with each other and the test above would pass on two wrongs.
+        """
+        for c_value in (1e5, -1e5, 1e7, 1e9, -1e9):
+            h = abs(c_value) * self.FD_REL_STEP
+            fd = (self._solver_log_n(c_value + h) - self._solver_log_n(c_value - h)) / (2 * h)
+            analytic = 1.0 / math.sqrt(4.0 + c_value ** 2)
+            assert fd == pytest.approx(analytic, rel=1e-6), (
+                f"the NumPy reference itself is wrong at C_s={c_value:.3e}: "
+                f"finite difference {fd:.6e} vs analytic {analytic:.6e}"
+            )
