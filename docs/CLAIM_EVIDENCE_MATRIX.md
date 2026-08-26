@@ -304,7 +304,7 @@ commit `a6728fe`, `dirty = false`. Artefacts `outputs/g9/`, manifest
 | I5 | A *local* rank is a curve in the observation set as well as in the cutoff (**chart G**, **d=16**) | at the generation-8 device the identifiable count at a 2% cutoff runs **1 -> 4** as the bias window widens from 0.10 V to 0.75 V about a fixed 0.525 V centre, and does **not move at all** as spacing runs from linear to geometric over a fixed 0.15-0.90 V window | `python scripts/run_g9.py --phases rank_obs` | 2 devices x (9 widths + 9 spacings) | :white_check_mark: new |
 | I5a | A bare integer becomes licensed at **d=16** in a narrow bias window | at 0.10 V and 0.15 V the 2% cutoff falls inside a spectral gap of **x230.6** and **x171.3**, so the inherited gap criterion licenses a bare integer there. The licence follows the gap, and the gap is a property of the `(chart, d, device, bias window)` cell | same | 18 cells | :white_check_mark: extends `SPEC-11` |
 | I6 | The chart-G witness pairs are a **ridge**, not two isolated points (**global**, **chart G**, **d=4**) | median likelihood barrier between the two members of a witness pair **8.31 log-units** against a floor barrier of 8.0, with **6 of 13** pairs at or below it. Null control - the same criterion over the same number of ordinary prior draws forming no witness pair - has a **minimum** of 339 and a median of 9379 | `python scripts/run_g9.py --phases basins` | 13 witness + 13 null paths | :white_check_mark: new, strengthens S-1 |
-| I6a | Chart J's witness pairs are the other shape (**global**, **chart J**, **d=16**) | no pair within the floor barrier; median **468 log-units**, 59x the floor. Null control minimum 1332, median 9479. Both are global non-identifiability; they are different shapes of it | same | 13 witness + 13 null paths | :white_check_mark: new |
+| I6a | Chart J's witness pairs are the other shape (**global**, **chart J**, **d=16**) | **no connecting path below the floor barrier was found along the straight line**; median **468 log-units**, 59x the floor. Null control minimum 1332, median 9479. Both are global non-identifiability; they are different shapes of it. **Amended at close: a SEARCH statement, not a separation.** The barrier is an upper bound, so a curved path can only be shallower; the minimum-energy path was not computed. `AH-13` | same | 13 witness + 13 null paths | :warning: **weakened at close to a search statement** |
 
 ### What I1-I6a do not establish
 
@@ -321,7 +321,13 @@ shallower. (This paragraph said "lower" until generation 10; the direction was
 recorded correctly in `LOOP_STATE_v6.json` and incorrectly here, and the two
 halves of the claim surface disagreed for a generation. It matters: the bound
 direction is favourable for the ridge result, which says barriers are low, and
-unfavourable for both basin results.)
+unfavourable for both basin results. **Carried to its conclusion by the closing
+ruling of 2026-08-26 §3:** the ridge result is safe and slightly strengthened,
+since an upper bound at the floor means the true barrier is at most at the floor;
+both basin results are **weakened to search statements** — no connecting path
+below the floor was found *along the straight line*, which is not a demonstration
+that none exists. The test that would settle it is a minimum-energy path, string
+method or NEB against the same oracle, and it was **not run**. `AH-13`.)
 
 ### Negative control
 
@@ -356,8 +362,8 @@ J3.**
 | J1 | The **localisation mechanism** for `rank(window width)` is falsified (**chart G**, **d=16**) | the leading right singular vector's spread moves by **0.0080** and **0.0117** on a 0.0625–1.000 scale while the rank climbs 1 → 4 over the same bias windows; `spearman(width, spread)` = **−0.433** and **−1.000**, both the wrong sign for the hypothesis, against a registered threshold of ≥ +0.7 | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,localisation` | 2 devices × 18 windows | :white_check_mark: new, **falsifies a hypothesis** |
 | J1a | The junction distance moves **away** from the junction as the window widens | `spearman(width, junction distance of v₁)` = **+1.000** at `device_p50`, the opposite of the predicted sign; `+0.083` at the generation-8 device | same | same | :white_check_mark: new |
 | J1b | Width is not even the stronger axis at one of the two devices | at the generation-8 device the monotone trend against **spacing** (−0.933) is stronger than the one against **width** (−0.433) | same | same | :white_check_mark: new |
-| J2 | **Chart L** at **d=16** is a **basin**, not a ridge (*global*) | no pair within the floor barrier of 8.0 log-units; median **1696.11**, **212×** the floor. Null control median 2564.55, minimum 267.26 | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,ridge_basin` | 37 witness + 37 null paths | :white_check_mark: new |
-| J2a | The ridge/basin split is a property of the **dimension**, not the chart | both `d=16` cells are basins (**chart L** 0 of 37, **chart J** 0 of 13 within the floor) and the only ridge is **chart G** at `d=4` (6 of 13). It survives path-length normalisation: 15.35 log-units per unit path against 199 and 569 | same | 3 sets, 126 paths | :white_check_mark: new, **withdraws a generation-9 reading** |
+| J2 | **Chart L** at **d=16** is a **basin**, not a ridge (*global*) | **no connecting path below the floor barrier of 8.0 log-units was found along the straight line** for any of the 37 witness pairs; median **1696.11**, **212×** the floor. Null control median 2564.55, minimum 267.26. **Amended at close: a SEARCH statement, not a separation** — upper-bound barrier, minimum-energy path not computed (`AH-13`). The set is also **0 of 37 refined** under `WIT-02` | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,ridge_basin` | 37 witness + 37 null paths | :warning: **weakened at close to a search statement** |
+| J2a | The ridge/basin split is a property of the **dimension**, not the chart | at both `d=16` cells no path below the floor was found (**chart L** 0 of 37, **chart J** 0 of 13) and the only cell putting pairs at the floor is **chart G** at `d=4` (6 of 13). It survives path-length normalisation: 15.35 log-units per unit path against 199 and 569. **Both sides of the comparison are upper bounds**, so the ordering stands; what is untested is whether the *slack* in the bound differs between cells (`PATH-01`) | same | 3 sets, 126 paths | :white_check_mark: new, **withdraws a generation-9 reading** |
 | J2b | At matched `d` the chart moves the **depth**, not the kind | **chart L** and **chart J** at `d=16` have matched witness path lengths (2.979 vs 2.872) and matched null path lengths (3.230 vs 3.246), and differ **13×** in witness-to-null barrier ratio — 0.661 against 0.049 | same | same | :white_check_mark: new |
 | J3 | `WIT-01` admissibility, retro-applied to every committed witness count | **chart G** `d=4` 13 of 13, **chart L** `d=16` 37 of 37, **chart J** `d=16` 13 of 13 — an **admissibility ratio of 1.000** in all three. Every pair qualifies on a doping *magnitude*, and magnitudes reach the grid exactly | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,wit01` | 63 pairs | :white_check_mark: new, changes no count |
 | J3a | What the rule does catch is a reported *quantity* | one **chart J** pair's junction separation of **0.425 nm** against a node spacing of **3.333 nm** — a difference the representation does not carry | same | 1 of 13 pairs | :x: withdrawn as a junction separation |
@@ -373,7 +379,7 @@ the first failed. J2a's classifier is binary over three cells; the numbers
 beneath it are not, and only the **chart L against chart J** contrast is matched
 in both path length and dimension. Every barrier is a straight line in that
 chart's own coordinates and therefore an **upper** bound; no search over paths
-was run. J3's ratio is 1.000 because magnitude coordinates are exact — the rule
+was run, so J2 and I6a are searches that found nothing rather than separations. J3's ratio is 1.000 because magnitude coordinates are exact — the rule
 is, on today's chart inventory, a chart-J rule with no live instance, and that is
 stated rather than assumed. J4 states a boundary and does not test one:
 extending the range above 0.90 V carries its own convergence burden and is a

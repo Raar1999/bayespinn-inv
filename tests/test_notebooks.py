@@ -144,14 +144,27 @@ class TestDocumentedTestCountIsHonest:
     A number that has to be updated by hand drifts. This asserts the README
     badge matches what pytest actually collects, so the drift is caught by the
     thing it describes.
+
+    ``DOC-03a``, closed at close. The badge read *"tests-N passing"* while this
+    check compared ``N`` against **collection**, and the suite collects more than
+    it passes because some tests skip with a stated reason. The number was honest
+    as a collected count and loose as a passing one, and generation 10 recorded
+    that the text could not be changed without breaking this regex. It could:
+    the regex now accepts either word and the assertion below requires the one
+    the check actually measures, so the badge and the guard agree on what is
+    being counted rather than only on the integer.
     """
 
     def test_readme_badge_matches_the_collected_count(self):
         import subprocess
         import sys
         readme = (REPO / "README.md").read_text(encoding="utf-8")
-        m = re.search(r"tests-(\d+)%20passing", readme)
+        m = re.search(r"tests-(\d+)%20(passing|collected)", readme)
         assert m, "README has no test-count badge"
+        assert m.group(2) == "collected", (
+            "the badge says the count is " + m.group(2) + "; this check "
+            "compares it against pytest's COLLECTION, which includes tests that "
+            "skip. DOC-03a")
         claimed = int(m.group(1))
         out = subprocess.run(
             [sys.executable, "-m", "pytest", str(REPO / "tests"), "-q",

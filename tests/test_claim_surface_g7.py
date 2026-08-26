@@ -81,6 +81,11 @@ CLAIM_SURFACE_G7 = (
     "docs/G8_RESULT.md",
     "docs/G9_RESULT.md",
     "docs/NOVELTY_AUDIT.md",
+    # The closing ruling's document. It publishes the free check, the spine and
+    # the search-form rewrite, so it belongs here and not in EXEMPT: a document
+    # that states the result and is not on this list is unguarded, which is the
+    # defect this tuple exists to prevent.
+    "docs/CLOSE_RULING.md",
 )
 
 #: Excluded, with the reason. Each of these *describes* the rule or records the

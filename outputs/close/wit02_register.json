@@ -1,0 +1,86 @@
+{
+  "rule": {
+    "id": "WIT-02",
+    "text": "every witness is refined before it is counted -- not the ones near the floor, all of them",
+    "enacted": "closing operator ruling of 2026-08-26 section 2",
+    "supersedes": null,
+    "relationship_to_WIT01": "WIT-01 is not withdrawn. It stays for the sub-grid case it does catch. Retro-applied it removes nothing -- admissibility ratio 1.000 in all three charts -- because every pair qualifies on a doping magnitude and magnitudes reach the grid exactly, so it is not sufficient either.",
+    "why_no_threshold": "the observed refinement split sits between 92.2% and 93.65% of the distinguishability floor, 1.4 percentage points. A threshold inside a band that narrow is tuned; PH-11 forbids it. Refining every witness needs no threshold to defend."
+  },
+  "provenance": {
+    "inputs_sha256": {
+      "outputs/g10/wit01.json": "ab895bc9a4d21c626f67d82ee87f39b6bb8750d9a53dc5b96da0ea2e3fa216d3",
+      "outputs/witness_falsifier_g6/witness_falsifier.json": "73a55eced4d8d03e57229ac4a7124b6570329f961b770d0b956f94d88a2da42d",
+      "outputs/g9/junction_refine.json": "bd7b296d6ee375ebd66032ed2f292083ce00442161b6478159bd914618588d59"
+    },
+    "input_manifests": [
+      "outputs/g10/manifest.json",
+      "outputs/g9/manifest.json"
+    ],
+    "git_commit": "11c1fdcea7f24f7ed02b8340e4eccfca8b5158a3",
+    "git_dirty": true,
+    "git_dirty_is_not_a_gate": "the inputs are pinned by digest, so a dirty tree cannot have changed what was read; this differs from a solving run, where the working tree IS the measurement",
+    "python": "3.11.9",
+    "platform": "windows",
+    "validated_platforms": [
+      "win32"
+    ],
+    "unvalidated": "linux and darwin -- PROV-07, open and unchanged"
+  },
+  "sets": {
+    "chart_G_d4": {
+      "chart": "G",
+      "d": 4,
+      "n_pairs_offered": 13,
+      "admissibility_ratio_WIT01": 1.0,
+      "refinement_artefact": "outputs/witness_falsifier_g6/witness_falsifier.json",
+      "n_refined": 3,
+      "n_surviving": 3,
+      "coverage": 0.23076923076923078,
+      "compliant": false,
+      "carries": "the ridge result",
+      "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+      "n_records_in_artefact": 3,
+      "n_records_not_matched_to_this_set": 0
+    },
+    "chart_L_d16": {
+      "chart": "L",
+      "d": 16,
+      "n_pairs_offered": 37,
+      "admissibility_ratio_WIT01": 1.0,
+      "refinement_artefact": null,
+      "n_refined": 0,
+      "n_surviving": null,
+      "coverage": 0.0,
+      "compliant": false,
+      "carries": "the chart-L basin search statement, and through it the reading that the ridge/basin split follows the dimension",
+      "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set"
+    },
+    "chart_J_d16": {
+      "chart": "J",
+      "d": 16,
+      "n_pairs_offered": 13,
+      "admissibility_ratio_WIT01": 1.0,
+      "refinement_artefact": "outputs/g9/junction_refine.json",
+      "n_refined": 13,
+      "n_surviving": 7,
+      "coverage": 1.0,
+      "compliant": true,
+      "carries": "the junction degeneracy, and the chart-J basin search statement",
+      "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+      "n_records_in_artefact": 13,
+      "n_records_not_matched_to_this_set": 0
+    }
+  },
+  "verdict": {
+    "n_sets": 3,
+    "n_compliant": 1,
+    "non_compliant": [
+      "chart_G_d4",
+      "chart_L_d16"
+    ],
+    "all_compliant": false,
+    "why_not_repaired_here": "refining the uncovered pairs is new solving. The closing ruling section 5 allows arithmetic on existing artefacts only and orders a stop; there is no generation 11. The gap is registered rather than closed, and WITNESS-04 carries it as load-bearing.",
+    "reading": "chart J is the only committed witness set that satisfies WIT-02. Chart G is partially covered -- generation 6's battery refined three of its thirteen pairs and all three survived. Chart L is uncovered, and it is the set the dimension reading rests on."
+  }
+}

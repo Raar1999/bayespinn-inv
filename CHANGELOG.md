@@ -4,6 +4,72 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — close of the audit loop (2026-08-26)
+
+No API changes. The closing ruling permits one arithmetic check over existing
+artefacts and no further measurement. This entry is that check, one rule, and
+the consequence of a bound direction carried through the claim surface.
+`docs/CLOSE_RULING.md`.
+
+**The rank climb is the spectrum flattening, not the head sliding.** Generation
+10 killed the localisation mechanism and left the sharper question: why does the
+leading observable direction stay put while the ones behind it cross the noise
+floor? The answer is decidable from artefacts already on disk. The operational
+cutoff is absolute, so the two candidate readings separate by sign alone. Over
+the nine bias windows of `rank(observation set)`, `σ₁` moves by a factor of only
+1.195 and 1.148 at the two devices and moves **downward** (`spearman` −1.000 and
+−0.983) — the wrong direction to raise a count against a fixed cutoff — while
+`σ₂`, `σ₃` and `σ₄` rise by ×20.9 to ×535 in the *normalised* spectrum. The
+identity `Δlog σᵢ = Δlog σ₁ + Δlog(σᵢ/σ₁)` puts 95.6%–97.9% of each one's motion
+in the shape term. The spectrum's log-decay slope halves (−1.265 → −0.552 and
+−1.261 → −0.525) and the largest multiplicative gap behind the head collapses
+from 230.6× to 4.99× and from 87.8× to 5.11×. Along the spacing axis, where the
+rank does not move, the same slope moves 2.1% and 2.8%. Reproduce:
+`PYTHONPATH=src python scripts/run_close.py`. **This is a description, not a
+test** — the question was asked after the data existed, and no pre-registration
+is claimed.
+
+**A control the check failed on its own first draft.** Claiming five singular
+values fails `C3` in 4 of 18 cells: `σ₅` sits at or below the estimator's
+spectral floor at the widest windows. The claim was narrowed to `σ₁…σ₄` — the
+indices the rank is made of, clearing the probe in all 18 cells at a worst
+margin of 1.51× — rather than the control being loosened, and the excluded cells
+stay named in the artefact.
+
+**`WIT-02` enacted: every witness is refined before it is counted.** `WIT-01`
+was ordered against a defect it does not reach — retro-applied it removes
+nothing, admissibility ratio 1.000 in all three charts. What predicts refinement
+survival is headroom against the floor, and the observed split is 1.4 percentage
+points wide, too narrow for a threshold that would not be tuned (`PH-11`). So the
+rule is refinement without a threshold, and its live consequence is a measured
+register: **chart G 3 of 13, chart L 0 of 37, chart J 13 of 13**. One set of
+three is compliant, and the uncovered one carries the dimension reading.
+Refining it is new solving and the ruling orders a stop, so the gap is published
+rather than closed. Four claim-surface documents quoted a witness count with no
+coverage beside it; one said *"all tested pairs survive 4× grid refinement"* of a
+set in which three of thirteen pairs had ever been tested.
+`outputs/close/wit02_register.json`, `docs/RULES_ENACTED.md`.
+
+**Both basin results are weakened to search statements.** The straight-line
+barrier is an **upper** bound — a curved path can only be shallower — and that
+direction is asymmetric. It strengthens the chart-G ridge, whose barrier is then
+at most at the floor. It weakens chart J at `d=16` (median 468, 59× the floor)
+and chart L at `d=16` (median 1696, 212× the floor) to *no connecting path below
+the floor was found along the straight line*, which is not a demonstration that
+the members are separated. The test that would settle it — a minimum-energy path,
+string method or NEB against the same oracle — was **not run**. `AH-13`. The
+dimension reading survives: both sides of that comparison are upper bounds.
+
+**`DOC-03a` closed.** The README badge read *"tests-N passing"* while its guard
+compared `N` against collection. Generation 10 recorded that the text could not
+change without breaking the guard's regex; it could. The badge now reads
+*collected*, and the guard asserts the word as well as the integer.
+
+**Three ruling premises ratified**, all corrected and hashed in generation 10:
+the `SPEC-g10-2` falsifier was inverted, refinement survival is predicted by
+headroom rather than by sub-grid junctions, and `WIT-01` read literally rejects
+almost every real witness.
+
 ## [Unreleased] — generation 10 of the audit loop (2026-08-26)
 
 No API changes. This generation tests one mechanism and kills it, removes a

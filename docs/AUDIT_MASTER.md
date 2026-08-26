@@ -1185,7 +1185,17 @@ records this as expected-to-remain-open rather than quietly green.
 > the reversion condition is unchanged.
 
 ### DOC-03a — the test-count badge is checked against collection, not passes
-| **Severity** | LOW | **Status** | OPEN |
+| **Severity** | LOW | **Status** | **RESOLVED at close (2026-08-26)** |
+
+> **Resolution.** The premise below — *"the guard cannot be tightened without
+> breaking its own regex against the badge text"* — does not hold. The regex now
+> accepts either word and the check asserts the one it actually measures, so the
+> badge reads `tests-N%20collected` and guard and badge agree on *what* is being
+> counted rather than only on the integer. Two lines in
+> `tests/test_notebooks.py::TestDocumentedTestCountIsHonest`. Recorded because
+> the generation-10 entry stated an obstruction it had not tried, which is a
+> smaller version of the defect this file exists for: an untested claim written
+> in the same voice as a measured one.
 
 `README.md` carries a badge reading `tests-N%20passing`, and
 `tests/test_notebooks.py::TestDocumentedTestCountIsHonest` asserts that `N`

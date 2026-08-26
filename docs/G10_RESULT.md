@@ -470,6 +470,14 @@ that produced it was confounded in chart and dimension together. At matched
    against 199 and 569). The likely reading is geometric: at `d=4` the straight
    line between two indistinguishable devices has fewer directions available to
    leave the indistinguishable set through.
+
+   **Amended at close (ruling of 2026-08-26 §3).** Every barrier here is an
+   *upper* bound, so the two `d=16` statements are **searches that found no
+   connecting path below the floor along the straight line**, not demonstrations
+   that the members are separated. The dimension ordering itself is undisturbed —
+   both sides of the comparison are upper bounds — but what is untested is
+   whether the slack in the bound differs between cells, which is what a
+   minimum-energy path would measure and what `PATH-01` records as open. `AH-13`.
 2. **What the chart moves at matched `d` is the depth, not the kind.** Charts L
    and J at `d=16` have the same path lengths and the same coordinate separations
    and differ by 13× in witness-to-null ratio (0.661 against 0.049). Chart L's
@@ -477,8 +485,17 @@ that produced it was confounded in chart and dimension together. At matched
    chart J's are twenty times easier than its own.
 
 **Unchanged.** Generation 9's two cells reproduce bit for bit. The chart-G ridge
-stands, the chart-J basins stand, the junction degeneracy survives refinement,
-and every witness count is admissible under `WIT-01`.
+stands — it is strengthened by the bound direction, since an upper bound at the
+floor means the true barrier is at most at the floor — the junction degeneracy
+survives refinement, and every witness count is admissible under `WIT-01`. The
+chart-J basin stands as a **search statement**, amended at close with the
+chart-L one; see `docs/CLOSE_RULING.md` §4.
+
+**Added at close, and it is not in this generation's measurements.** `WIT-02`
+requires every witness to be refined before it is counted. Two of the three
+committed sets do not satisfy it — **chart G 3 of 13** and **chart L 0 of 37** —
+and the chart-L one is the set item 1 above rests on. Register:
+`outputs/close/wit02_register.json`.
 
 ### 6.1 The paper's spine, with item 4 rewritten and item 6 added
 
@@ -500,9 +517,12 @@ to the draft.
    junctions.*
 4. ~~Its geometry is not universal: a ridge in one chart, isolated basins in
    another.~~ **Its geometry follows the dimension, not the chart.** Only `d=4`
-   puts witness pairs at the instrument's own floor; both charts tested at `d=16`
-   are basins. What the chart moves at matched `d` is the *depth* relative to that
-   chart's own null — 13× between two charts with matched path lengths.
+   puts witness pairs at the instrument's own floor; at both charts tested at
+   `d=16` no connecting path below the floor was found. What the chart moves at
+   matched `d` is the *depth* relative to that chart's own null — 13× between two
+   charts with matched path lengths. *Amended at close:* the `d=16` results are
+   **search statements against an upper-bound barrier**, not separation proofs,
+   and the minimum-energy path was not computed.
 5. Local analysis is structurally incapable of detecting any of (3) or (4).
    *Unchanged.*
 6. **The obvious mechanism for (2) is wrong.** The window does not set the rank by
@@ -510,6 +530,12 @@ to the draft.
    invariant to the window to within 2.5% while the rank quadruples, and what
    movement it has runs opposite to the prediction. A negative, measured against a
    criterion fixed in advance, and the sharpest open question the project has.
+
+   *At close, this item folds into item 2 and item 6 becomes the `0.9 V` validity
+   bound; see `docs/CLOSE_RULING.md` §5 for the spine as the closing ruling states
+   it. The free check §5 allowed adds a description: the rank climb is the
+   spectrum **flattening** — `σ₁` nearly fixed and falling while `σ₂…σ₄` rise by
+   ×21–×535 in the normalised spectrum, 95.6%–97.9% of the motion in shape.*
 
 ---
 

@@ -360,3 +360,79 @@ a sub-node junction separation. The other five separate with junctions 9, 196,
 41.7 nm. Junction separation does not predict refinement survival;
 `outputs/g10/wit01.json` carries the table and `docs/G10_RESULT.md` §3 carries
 what does.
+
+---
+
+## `WIT-02` — every witness is refined before it is counted
+
+**Enacted** closing operator ruling of 2026-08-26 §2.
+
+> Every witness is refined before it is counted. Not the ones near the floor —
+> all of them. `WIT-01` stays for the sub-grid case it does catch.
+
+**The defect that forced it.** `WIT-01` was enacted against a defect it does not
+reach. Retro-applied to every committed set it removes **nothing** — the
+admissibility ratio is 1.000 in all three charts — because every pair qualifies
+on a doping magnitude and magnitude coordinates reach the grid exactly. It
+admits all thirteen chart-J pairs including the one whose junctions are 0.425 nm
+apart on a 3.333 nm grid, because that pair qualifies elsewhere.
+
+What actually predicts which pairs separate under refinement is **headroom
+against the distinguishability floor**. The 7 survivors are exactly the 7
+smallest distances at `N=301`, maximum `0.01844`; the 6 that separate are the 6
+largest, minimum `0.01873`; the floor is `0.02`. A perfect split with no
+geometry in it at all.
+
+**Why there is no threshold, and why the absence is the point.** The obvious
+rule to write from that split is a margin band — refine anything within some
+percentage of the floor. The operator declined it, and the reason is arithmetic:
+the observed boundary sits between **92.2%** and **93.65%** of the floor, a gap
+of 1.4 percentage points. That is not `BUG-13`'s eleven orders of magnitude. A
+threshold chosen inside a band that narrow is tuned by construction, whatever
+its author intended, and `PH-11` forbids it. Refining every witness needs no
+threshold to defend, and the cost is known to be affordable: thirteen pairs went
+through the battery inside one bounded generation.
+
+**What the rule gets at close, which is a register and not compliance.**
+Refining the uncovered pairs is new solving. The closing ruling §5 permits
+arithmetic on existing artefacts only and orders a stop, and there is no
+generation 11. So `WIT-02` is enacted with its non-compliance **measured and
+published** rather than enacted and quietly violated:
+
+| global witness set | witness pairs | refined | surviving |
+|---|---|---|---|
+| **chart G**, `d = 4` | 13 | **3** (23.1%) | 3 of 3 |
+| **chart L**, `d = 16` | 37 | **0** (0.0%) | — |
+| **chart J**, `d = 16` | 13 | **13** (100%) | 7 of 13 |
+
+One set of three is compliant. The uncovered one is the set the dimension
+reading rests on (`WITNESS-04`, raised to load-bearing at generation 10), and
+the one set that *was* refined in full lost 6 of 13 members.
+
+**Enforced by** `scripts/run_close.py::wit02_register`, which builds
+`outputs/close/wit02_register.json` by matching each refinement record to its
+witness pair on **exact equality** of the separation in decades against
+`WIT-01`'s `max_separation` for the same set — so coverage is measured and
+"three of the thirteen" is a fraction rather than a recollection — and
+`tests/test_witness_refinement_close.py`, which re-derives every coverage figure
+from the source artefacts, refuses to let a set become compliant without a named
+artefact covering every offered pair, and requires each claim-surface document
+quoting a witness count to point at the register.
+
+Its positive control plants a separation one nanodecade off a real one and
+requires the match to fail, because a coverage figure built on approximate
+matching could be counting another set's pairs. Its prose control is the same
+shape as the one `WIT-01`'s guard needed: the citation pattern deliberately does
+not accept the bare word *refinement*, since grid refinement of the
+discretisation is discussed throughout this repository and has nothing to do
+with witness coverage — and it was then widened once, on a measured false
+positive, to accept `docs/G8_RESULT.md`'s *"7 of which survive grid refinement"*,
+where the intervening word had made a real witness-refinement statement
+unquotable.
+
+**What enacting it changed.** Four claim-surface documents quoted a witness
+count with no coverage beside it, and one of them — `README.md` — said *"all
+tested pairs survive 4× grid refinement"* of a set in which 3 of 13 pairs had
+ever been tested. That sentence is true and reads as its opposite. It is the
+reason the rule is worth having even though it closes nothing: before `WIT-02`,
+"not refined" and "refined, fine" were the same sentence on the claim surface.
