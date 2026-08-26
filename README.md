@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-792%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-812%20passing-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -318,6 +318,15 @@ members of each *global* **chart G** **d=4** witness pair and found a median
 barrier of 8.31 log-units against a floor barrier of 8.0, where ordinary prior
 pairs sit at 339 or deeper: the witness pairs are a **ridge the instrument
 cannot resolve**, not two isolated points.
+Generation 10 added the matched-dimension cell that comparison was missing.
+**Chart L** at **d=16** is a *basin*, not a ridge — none of its 37 witness pairs
+is within the floor barrier and its median is 212× the floor — and so is
+**chart J** at **d=16**. The ridge is a property of the **dimension**: only
+`d = 4` puts witness pairs at the instrument's own floor, and it stays there
+after normalising by path length. What the chart moves at matched `d` is the
+*depth*: charts L and J have the same path lengths for their witness pairs and
+for their null controls, and differ 13× in the ratio between them
+([`docs/G10_RESULT.md`](docs/G10_RESULT.md) §2).
 
 **What the local number is most sensitive to is what you measure.** Across
 twelve operating points -- four devices crossed with three bias windows --

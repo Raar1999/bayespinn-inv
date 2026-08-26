@@ -316,7 +316,12 @@ I5's curves are at two devices, named in `docs/G9_RESULT.md` section 3
 before they were chosen. I6's barrier metric covers the *global* witness pairs of **chart G** at
 **d=4** and of **chart J** at **d=16**, with an equal-sized null control,
 and not every pair among the members; a straight line in chart coordinates
-is a lower bound on the barrier, since a curved path can only be shallower.
+is an **upper** bound on the barrier, since a curved path can only be
+shallower. (This paragraph said "lower" until generation 10; the direction was
+recorded correctly in `LOOP_STATE_v6.json` and incorrectly here, and the two
+halves of the claim surface disagreed for a generation. It matters: the bound
+direction is favourable for the ridge result, which says barriers are low, and
+unfavourable for both basin results.)
 
 ### Negative control
 
@@ -329,3 +334,63 @@ about the operating points that were not measured. That same predicate
 accepts three synthetic points carrying one order under both statistics, so
 it is not a predicate that only ever rejects. `all_controls_pass = True`;
 `outputs/g9/negative_control.json`.
+
+---
+
+## 10. Generation 10 — the mechanism, the matched-`d` geometry, and `WIT-01` (2026-08-26)
+
+Oracle-arbitrated; 301-node grid; 2% noise; finite differences at a relative
+step of 0.05 with rows below `min_snr = 1e4` discarded — all inherited
+unchanged from generations 8 and 9. The barrier metric is not re-implemented:
+`scripts/run_g10.py` imports it from `scripts/run_g9.py` and refuses to run
+unless the criterion hash generation 9 wrote to disk equals the one it
+recomputes. Localisation measure, ridge/basin decision table and `WIT-01`
+hashed before anything was measured: `outputs/g10/preregister.json`. Machinery
+commit `e05d463`, `dirty = false`. Artefacts `outputs/g10/`, manifest
+`manifest.json`. **Every witness count below is admissible under `WIT-01`; see
+J3.**
+
+| # | Claim | Value | Command | n | Verdict |
+|---|---|---|---|---|---|
+| J0 | Generation 9's two barrier sets reproduce through this generation's code | chart G `d=4` median **8.314616217138337**, chart J `d=16` median **468.3503463634576** — `relative_change = 0.0` against `outputs/g9/basins.json`, below-floor counts unchanged | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,ridge_basin` | 2 sets, 52 paths | :white_check_mark: reproduces bit for bit |
+| J1 | The **localisation mechanism** for `rank(window width)` is falsified (**chart G**, **d=16**) | the leading right singular vector's spread moves by **0.0080** and **0.0117** on a 0.0625–1.000 scale while the rank climbs 1 → 4 over the same bias windows; `spearman(width, spread)` = **−0.433** and **−1.000**, both the wrong sign for the hypothesis, against a registered threshold of ≥ +0.7 | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,localisation` | 2 devices × 18 windows | :white_check_mark: new, **falsifies a hypothesis** |
+| J1a | The junction distance moves **away** from the junction as the window widens | `spearman(width, junction distance of v₁)` = **+1.000** at `device_p50`, the opposite of the predicted sign; `+0.083` at the generation-8 device | same | same | :white_check_mark: new |
+| J1b | Width is not even the stronger axis at one of the two devices | at the generation-8 device the monotone trend against **spacing** (−0.933) is stronger than the one against **width** (−0.433) | same | same | :white_check_mark: new |
+| J2 | **Chart L** at **d=16** is a **basin**, not a ridge (*global*) | no pair within the floor barrier of 8.0 log-units; median **1696.11**, **212×** the floor. Null control median 2564.55, minimum 267.26 | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,ridge_basin` | 37 witness + 37 null paths | :white_check_mark: new |
+| J2a | The ridge/basin split is a property of the **dimension**, not the chart | both `d=16` cells are basins (**chart L** 0 of 37, **chart J** 0 of 13 within the floor) and the only ridge is **chart G** at `d=4` (6 of 13). It survives path-length normalisation: 15.35 log-units per unit path against 199 and 569 | same | 3 sets, 126 paths | :white_check_mark: new, **withdraws a generation-9 reading** |
+| J2b | At matched `d` the chart moves the **depth**, not the kind | **chart L** and **chart J** at `d=16` have matched witness path lengths (2.979 vs 2.872) and matched null path lengths (3.230 vs 3.246), and differ **13×** in witness-to-null barrier ratio — 0.661 against 0.049 | same | same | :white_check_mark: new |
+| J3 | `WIT-01` admissibility, retro-applied to every committed witness count | **chart G** `d=4` 13 of 13, **chart L** `d=16` 37 of 37, **chart J** `d=16` 13 of 13 — an **admissibility ratio of 1.000** in all three. Every pair qualifies on a doping *magnitude*, and magnitudes reach the grid exactly | `PYTHONPATH=src python scripts/run_g10.py --phases preregister,wit01` | 63 pairs | :white_check_mark: new, changes no count |
+| J3a | What the rule does catch is a reported *quantity* | one **chart J** pair's junction separation of **0.425 nm** against a node spacing of **3.333 nm** — a difference the representation does not carry | same | 1 of 13 pairs | :x: withdrawn as a junction separation |
+| J3b | Junction separation does **not** predict refinement survival | of the 6 pairs that separate under `N = 301 → 1201`, **one** has a sub-node junction separation; the others are 9–412 nm apart. Survivors include 26.6 and 41.7 nm. What predicts survival is headroom: the 7 survivors are exactly the 7 smallest distances at `N=301` (max `0.01844`) and the 6 that separate are the 6 largest (min `0.01873`), against a floor of `0.02` | same | 13 pairs | :warning: corrects a ruling premise |
+| J4 | The two ends of the validated bias range have **different** status | lower bound 0.15 V: **measured and rejected below** — at `V = 0.10` the refinement differences do not halve. Upper bound 0.90 V: **untested** (`PH-15`) — the convergence sweep's own upper end is 0.9 V, and the largest bias any artefact under `outputs/` was ever evaluated at is **0.9 V**, over **74** JSON files read | `PYTHONPATH=src python scripts/run_g10.py --phases validity` | 74 artefacts | :white_check_mark: new, documentation of scope |
+
+### What J1–J4 do not establish
+
+J1 falsifies **one** mechanism at two devices in one chart at one `d`, over bias
+windows inside one converged range. It does not identify what does drive the
+rank climb, and `SPEC-g10-1` explicitly forbade chasing a second mechanism after
+the first failed. J2a's classifier is binary over three cells; the numbers
+beneath it are not, and only the **chart L against chart J** contrast is matched
+in both path length and dimension. Every barrier is a straight line in that
+chart's own coordinates and therefore an **upper** bound; no search over paths
+was run. J3's ratio is 1.000 because magnitude coordinates are exact — the rule
+is, on today's chart inventory, a chart-J rule with no live instance, and that is
+stated rather than assumed. J4 states a boundary and does not test one:
+extending the range above 0.90 V carries its own convergence burden and is a
+different study.
+
+### Negative control
+
+Five predicates each returned the required answer on a case constructed to
+deserve it, through the same code the rows above ran through. The localisation
+statistic returns `1/16` on a planted single-anchor direction and `1.000` on a
+planted uniform one, and shows no width trend on Haar-random directions
+(`spearman = +0.067` against a threshold of 0.7). `WIT-01` **rejects** a planted
+chart-J pair whose junction coordinates are 0.4 decades apart but whose junctions
+sit inside one node interval — and rejects it *for the stated reason*, not by
+failing the earlier separation criterion — while **admitting** the 694 nm /
+271 nm headline pair. The ridge/basin classifier returns RIDGE for a device
+against itself and BASIN for two devices 1.6 decades apart on a certified path.
+Chart J with a pinned junction is still **not different** from **chart G** at
+`d=15`, now with an infinite `WIT-01` resolution beside it.
+`all_controls_pass = True`; `outputs/g10/negative_control.json`.

@@ -130,5 +130,5 @@ exact commands are in `docs/OPERATOR_TASKS.md`.
 
 ## 6. Gates at the champion
 
-ruff exit 0 · **438 passed, 0 failed** · selftest PASS · mypy **25**, unchanged
+ruff exit 0 · **438 passed, 0 failed** · selftest PASS · mypy **25** over the package only and never the tracked tree, unchanged
 from the generation-0 baseline · fresh wheel imports and runs.

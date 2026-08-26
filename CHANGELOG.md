@@ -4,6 +4,107 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — generation 10 of the audit loop (2026-08-26)
+
+No API changes. This generation tests one mechanism and kills it, removes a
+confound from the generation-9 geometry result, and enacts a rule that turns out
+not to reach the defect it was ordered against.
+
+**The localisation mechanism is falsified.** Generation 9 established that bias
+window *width* sets the identifiable rank while spacing does not, and left no
+account of why. The cheapest mechanism consistent with that split — the window
+selects which transport regimes the current is sensitive to, so the observable
+directions should concentrate near the junction at narrow windows and delocalise
+at wide ones — was tested under a measure hashed before the first SVD. It fails
+at both devices. The leading right singular vector's spatial extent moves by
+under 2.5% while the rank climbs from 1 to 4 over the same sweep, and at
+`device_p50` it moves monotonically the *wrong* way (`spearman = −1.000`) with its
+centroid receding from the junction (`+1.000`). At the generation-8 operating
+point the trend against *spacing* (`−0.933`) is stronger than the one against
+width (`−0.433`). Reproduce:
+`PYTHONPATH=src python scripts/run_g10.py --phases preregister,localisation`.
+
+**The ridge/basin split is a property of the dimension, not the chart.**
+Generation 9 compared chart G at `d=4` against chart J at `d=16` — differing in
+both chart and dimension — and read the difference as chart-dependence. Barriers
+on the 37 chart-L witness pairs at `d=16` make the comparison matched in `d`, and
+chart L is a **basin**: not one of its 37 pairs is within the floor barrier, and
+its median is 212 floor units against chart J's 58.5. Both `d=16` cells are
+basins; the only ridge is `d=4`, and it survives normalisation by path length.
+Generation 9's two sets re-measure bit for bit through the same imported
+function. Reproduce:
+`PYTHONPATH=src python scripts/run_g10.py --phases preregister,ridge_basin`.
+
+**What the chart moves at matched `d` is the depth, not the kind.** Charts L and
+J at `d=16` have matched path lengths for both their witness pairs (2.979 against
+2.872) and their null controls (3.230 against 3.246), and differ by 13× in
+witness-to-null barrier ratio — 0.661 against 0.049. Read as connectivity
+relative to ordinary prior pairs the three cells order cleanly across both axes:
+1/1100 in chart G at `d=4`, 1/20 in chart J at `d=16`, 1/1.5 in chart L at `d=16`.
+
+**`WIT-01` removes nothing, and that is the result.** Every witness pair in this
+repository qualifies on a doping magnitude, and magnitude coordinates reach the
+solver grid exactly, so the admissibility ratio is 1.000 in all three charts. The
+rule does catch one reported *quantity* — a chart-J pair whose junctions sit
+0.425 nm apart on a 3.333 nm grid — which is withdrawn as a junction separation.
+Reproduce: `PYTHONPATH=src python scripts/run_g10.py --phases preregister,wit01`.
+
+**The two ends of the validated bias range do not have the same status, and nine
+generations wrote them as if they did.** Below 0.15 V the oracle was tested and
+found unconverged; above 0.90 V it was never tested, because the convergence
+sweep's own upper end *is* 0.9 V. Every bias list in every artefact under
+`outputs/` was read to check it — 74 files — and the largest bias any artefact was
+ever evaluated at is 0.9 V. The upper boundary is labelled `PH-15` untested rather than treated
+as a limit.
+
+### Added
+
+- `scripts/run_g10.py` — the `SPEC-g10-1..3` battery plus `WIT-01`. Pre-registers
+  the localisation measure, the ridge/basin decision table and the admissibility
+  rule with their hashes before anything is measured, and refuses to run against
+  a pre-registration that has moved. Imports the barrier metric from
+  `scripts/run_g9.py` rather than restating it, and refuses to run unless the
+  criterion hash generation 9 wrote to disk equals the one it recomputes.
+- `bayespinn_inv.inverse.witness_admissibility` — `WIT-01` as a hashable rule and
+  a predicate, with the reading it takes and the scope it has stated in full.
+- `Chart.coordinate_resolution` and `Chart.separation_is_resolved`, plus
+  `ChartJ.node_spacing_si` and `ChartJ.junction_node_index` — the representation's
+  resolution as a property of the chart. Zero for every magnitude coordinate;
+  an exact node-index test for chart J's junction; infinite for a pinned one.
+- `identifiability.singular_vector_localisation` — participation ratio, centroid,
+  spread and junction distance of a right singular vector, all computed from
+  `v_j**2` so the sign gauge cannot enter, with vectors below the identifiable
+  rank reported and stamped unreliable rather than mixed in.
+- `tests/test_witness_admissibility_g10.py`, `tests/test_localisation_g10.py`,
+  `tests/test_loop_state_g10.py`.
+- `docs/G10_RESULT.md`, `docs/audit/AUDIT_g10.md`, and the `WIT-01` section of
+  `docs/RULES_ENACTED.md`.
+
+### Changed
+
+- Every claim-surface document quoting a witness count now carries its
+  admissibility ratio, and a guard fails if one stops doing so.
+- `README.md`'s test-suite row pointed at a hand-maintained total that had
+  drifted badly; it now points at the badge, which a guard maintains against live
+  collection.
+
+### Withdrawn
+
+- *"The geometry of the degeneracy is chart-dependent — a ridge at the instrument
+  floor in one chart, isolated basins in another."* The comparison behind it was
+  confounded in chart and dimension together. At matched `d=16` both charts are
+  basins.
+- *"These two devices have junctions 0.425 nm apart and are indistinguishable."*
+  The grid node is 3.333 nm; the representation does not carry that difference.
+
+### Fixed
+
+- Five coordinate annotations narrower than every caller, which cost findings
+  under the tracked-tree `mypy` scan; now the `Coords` alias `charts.py` already
+  used.
+- Working-tree line endings on documents and a module edited this session,
+  restored to match their blobs (`EOL-01`'s guard caught them).
+
 ## [Unreleased] — generation 9 of the audit loop (2026-08-26)
 
 No API changes. This generation is a **replication**, and it falsifies the

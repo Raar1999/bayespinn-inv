@@ -15,7 +15,7 @@ completed before anything else proceeded.
 | ruff | exit 0 |
 | suite | **438 passed, 0 failed** (403 at entry; +35 this generation) |
 | selftest | PASS |
-| mypy | **25** — unchanged from the generation-0 baseline |
+| mypy | **25**, the package only and never the tracked tree — unchanged from the generation-0 baseline |
 
 ---
 

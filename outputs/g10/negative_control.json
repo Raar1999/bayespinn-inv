@@ -1,0 +1,123 @@
+{
+  "localisation_measure_separates_planted_extremes": {
+    "construction": "a Jacobian whose leading direction is a single anchor, against one whose leading direction is uniform",
+    "delta_spread_fraction": 0.0625,
+    "uniform_spread_fraction": 0.9999999999999998,
+    "expected_delta": 0.0625,
+    "expected_uniform": 1.0,
+    "passes": true
+  },
+  "random_directions_show_no_width_trend": {
+    "construction": "one Haar-random unit vector per width, scored by the same statistic; the width axis carries no information about them by construction",
+    "spread_fractions": [
+      0.6000423994494221,
+      0.4166552683635124,
+      0.35856499977864303,
+      0.3175704078227141,
+      0.3392489019389927,
+      0.3991455312636473,
+      0.3895602687032157,
+      0.5200199335942125,
+      0.5115019893283477
+    ],
+    "rho": 0.06666666666666667,
+    "threshold": 0.7,
+    "passes": true,
+    "note": "a single draw per width, so this bounds the statistic's gullibility rather than estimating a null distribution"
+  },
+  "wit01_rejects_a_sub_node_pair_and_admits_the_headline_pair": {
+    "planted": {
+      "construction": "two chart-J devices with identical doping magnitudes, junction coordinates 0.4 decades apart -- comfortably past the separation criterion -- placed in the logistic's saturated tail so the junctions themselves stay inside one node interval and the two profiles are identical bit for bit",
+      "junction_coordinate_separation": 0.40000000000000036,
+      "reaches_the_separation_criterion": true,
+      "junction_separation_nm": 0.060180868774568776,
+      "node_spacing_nm": 3.333333333333333,
+      "same_node_index": true,
+      "verdict": {
+        "admissible": false,
+        "reason": "the only coordinates reaching the separation criterion are unresolved by the chart; coordinate 0 is separated by 0.4 against a resolution of 14.48",
+        "max_separation": 0.40000000000000036,
+        "qualifying_coordinates": [
+          0
+        ],
+        "resolved_qualifying_coordinates": [],
+        "coordinates_separated_but_unresolved": [
+          0
+        ],
+        "separation_of_unresolved": [
+          0.40000000000000036
+        ],
+        "resolution_of_unresolved": [
+          14.479378171416837
+        ]
+      },
+      "rejected": true,
+      "rejected_by_WIT_01_rather_than_by_the_separation_criterion": true
+    },
+    "headline": {
+      "construction": "the chart-J pair whose junctions are 694 nm and 271 nm apart, which every junction claim in this repository rests on",
+      "pair": [
+        299,
+        612
+      ],
+      "verdict": {
+        "admissible": true,
+        "reason": "coordinate 0 is separated by 0.7851 and is resolved",
+        "max_separation": 1.1026651833988126,
+        "qualifying_coordinates": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          13,
+          14
+        ],
+        "resolved_qualifying_coordinates": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          13,
+          14
+        ],
+        "coordinates_separated_but_unresolved": [],
+        "separation_of_unresolved": [],
+        "resolution_of_unresolved": []
+      },
+      "admitted": true
+    },
+    "passes": true
+  },
+  "classifier_returns_both_answers": {
+    "identical_pair": {
+      "construction": "one device against itself; the barrier is zero by construction",
+      "barrier": 0.0,
+      "class": "RIDGE"
+    },
+    "distinguishable_pair": {
+      "construction": "two chart-L devices 1.6 decades apart at every anchor",
+      "barrier": 131507.19111854048,
+      "certified": true,
+      "class": "BASIN"
+    },
+    "passes": true
+  },
+  "pinned_junction_is_still_not_different": {
+    "construction": "retained from generation 9 because every junction number in this repository rests on it; extended with the WIT-01 resolution, which must be infinite for a pinned junction",
+    "pinned_junction_column_norm": 0.0,
+    "magnitude_columns_vs_chartG_d15_max_rel": 0.0,
+    "wit01_resolution_of_the_pinned_junction": Infinity,
+    "not_different": true
+  },
+  "all_controls_pass": true
+}

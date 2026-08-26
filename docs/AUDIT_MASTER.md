@@ -1173,6 +1173,35 @@ records this as expected-to-remain-open rather than quietly green.
 > generations had stopped describing anything, which is the defect this ledger
 > exists to catch.
 
+> **Cost review, generation 10.** The status requires the cost to be reviewed for
+> growth each generation rather than remembered, so this is that review rather
+> than a restatement. Generation 10 adds source modules and test modules, so the
+> statically-scanned surface the declared floor rests on grows again; the file
+> count is recorded in `LOOP_STATE_v7.json` under `python_support_floor_scan`
+> with the generation-7 and generation-9 values beside it, so the direction is
+> visible without re-reading three state files. The scan can only *falsify* a
+> floor, never confirm one, and it cannot see dependency resolution at all;
+> nothing in this repository has ever run on linux or darwin. `OT-1` stands and
+> the reversion condition is unchanged.
+
+### DOC-03a — the test-count badge is checked against collection, not passes
+| **Severity** | LOW | **Status** | OPEN |
+
+`README.md` carries a badge reading `tests-N%20passing`, and
+`tests/test_notebooks.py::TestDocumentedTestCountIsHonest` asserts that `N`
+equals what `pytest --collect-only` **collects**. The suite collects more than it
+passes, because some tests skip with a stated reason. The number is therefore
+honest as a *collected* count and loose as a *passing* one, and the guard cannot
+be tightened without breaking its own regex against the badge text.
+
+Found at generation 10 while repairing a separate instance of the same class: the
+capability table in the same file restated the total by hand and had drifted by
+more than a hundred tests. That row now points at the badge rather than carrying
+its own number, on the same argument `DOC-07` makes about commit messages —
+removing an unguardable number beats updating one. The badge's own wording is
+left alone and recorded here, because changing it silently breaks the only guard
+that maintains it.
+
 ### S-3 — duplicate ohmic implementations
 | **Severity** | (no Phase-A severity assigned) | **Status** | OPEN, equivalence pinned |
 

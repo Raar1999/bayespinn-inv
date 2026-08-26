@@ -242,6 +242,6 @@ Do **not** `git stash` or `git clean`.
 
 ## 11. Gates at termination
 
-ruff **exit 0** · **438 passed, 0 failed** · selftest **PASS** · mypy **25**,
-unchanged from the generation-0 baseline across seven generations · fresh wheel
+ruff **exit 0** · **438 passed, 0 failed** · selftest **PASS** · mypy **25** over the package only and
+never the tracked tree, unchanged from the generation-0 baseline across seven generations · fresh wheel
 builds, installs and imports with no checkout present.

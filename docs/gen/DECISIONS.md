@@ -99,7 +99,7 @@ audit cycles.
 an ADR and a test; this uses 2, with `ADR-0006` and `tests/test_provenance_g0.py`
 (16 tests). The `repo` argument is a parameter addition, not a new symbol.
 Measured cost of the digest on this repository: 28 ms. mypy findings unchanged at
-25; ruff exit 0.
+25 over the package only, never the tracked tree; ruff exit 0.
 
 **REVERSAL** `git revert <commit>` on the `loop/champion` branch; or
 `git checkout c115757 -- src/bayespinn_inv/utils/provenance.py` to restore the

@@ -18,7 +18,7 @@ measurement.
 | ruff | exit 0 |
 | suite | **352 passed, 0 failed** (was 309 at the g0 champion) |
 | selftest | PASS |
-| mypy | **25** findings — unchanged from the generation-0 baseline |
+| mypy | **25** findings, the package only and never the tracked tree — unchanged from the generation-0 baseline |
 
 Provenance of this audit's own tree, from the fixed `RunManifest`:
 
@@ -173,7 +173,7 @@ closed: the first quantified cost of `PROV-03`.
 | D1 / ADR-0004 under the g0c2 fix | **bit-identical** — the fix disturbed nothing |
 | D4, D5, D6 (UQ backends) | 0 non-timing differences across 895 leaves in two experiments |
 | README quick-start | runs verbatim, rc=0 |
-| mypy | 25, unchanged — the SEC-02 fix introduced no new typing debt |
+| mypy | 25, the package only and never the tracked tree, unchanged — the SEC-02 fix introduced no new typing debt |
 | Badge guard | fired correctly again at 309 → 352, as designed |
 
 ---

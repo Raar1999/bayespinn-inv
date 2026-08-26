@@ -29,6 +29,12 @@ access.
 > superseded forward, not deleted. That is the same discipline `R-4` applies to
 > commit messages: a withdrawn statement leaves its trace.
 
+> **Generation-10 review.** Done, and it is a review rather than a restatement:
+> `docs/AUDIT_MASTER.md` §`CI-01`, with the scanned file count carried in
+> `LOOP_STATE_v7.json` beside its generation-7 and generation-9 values so the
+> direction is visible. The task is still not withdrawn and the reversion
+> condition is unchanged.
+
 > **Correction, generation 8, per the ruling of 2026-08-26 §10.** *This task
 > requires adding a remote first.* `git remote -v` is empty on this host, so the
 > command block below — written as though `origin` existed — describes something

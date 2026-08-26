@@ -40,7 +40,7 @@ ruling forbids *normalising past* a rewrite, not preventing one (`DEC-g0-1`).
 | ruff | exit 0 |
 | suite | **309 passed, 0 failed** |
 | selftest (checkout) | PASS |
-| mypy | 25 findings — **unchanged** from the generation-0 baseline |
+| mypy | 25 findings, the package only and never the tracked tree — **unchanged** from the generation-0 baseline |
 | wheel build | fresh build succeeds |
 | selftest (installed) | PASS |
 | suite vs installed wheel | **308 passed, 1 skipped** |

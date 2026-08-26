@@ -24,7 +24,8 @@ No file in those trees was modified. New experiment output was written only to
 | `make check-install` (suite) | `<venv>/Scripts/python -m pytest tests -q` against the **installed wheel** | **240 passed**, 54.22 s |
 | CI matrix (incl. Windows job) | — | **CANNOT BE EVALUATED** → FAIL (see CI-02) |
 
-`mypy` baseline for the "may not increase" rule: **25**.
+`mypy` baseline for the "may not increase" rule: **25**, over
+`python -m mypy src/bayespinn_inv` — the package only, never the tracked tree.
 Test-count baseline for the "may only go up" rule: **240**.
 
 ---
@@ -250,7 +251,7 @@ Silence is not a result; these were measured, not assumed.
 | Inverse-problem researcher | **SCI-11** — local/global label missing in README only |
 | Research reviewer | claim surface vs `papers/draft.md` cross-checked; **SCI-08** raised |
 | Reproducibility reviewer | **PROV-01/02/03**, API-05; determinism measured on the used path |
-| Software engineer | SEC-02, PKG-04, SW-04a; mypy baseline fixed at 25 |
+| Software engineer | SEC-02, PKG-04, SW-04a; mypy baseline fixed at 25, over `python -m mypy src/bayespinn_inv` |
 | Industry engineer | doping envelope vs NaN onset quantified; `weights_only` footgun |
 | Release engineer | **CI-02**; wheel verified; version single-sourced (VER-01 holds: `0.1.0-dev` from the attr) |
 
@@ -331,7 +332,8 @@ Silence is not a result; these were measured, not assumed.
     badge guard firing because the suite grew 240 → 246. **Correct behaviour, not a
     defect.** It is not repaired here (SK-18); G-DOC already requires the candidate
     that lands these tests to update the README badge in the same candidate.
-- **Baselines carried to generation 1:** mypy **25** findings (may not increase);
+- **Baselines carried to generation 1:** mypy **25** findings over
+  `python -m mypy src/bayespinn_inv` (may not increase);
   test count **246** (may only go up); ruff **exit 0**.
 - **G-CODE fails at baseline** on the CI clause (CI-02): a gate that cannot be
   evaluated is FAIL, never skipped.
