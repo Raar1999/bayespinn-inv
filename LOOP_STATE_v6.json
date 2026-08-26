@@ -1,0 +1,253 @@
+{
+  "generation": 9,
+  "designation": "G9 (replication generation; ordered post-termination by the ruling of 2026-08-26, re-issued after the loop mis-scoped its four clauses as a recorded risk rather than an unstarted task)",
+  "terminated": true,
+  "termination_condition": "T-1 was reached at generation 6 and is not re-opened. G9, like G7-R and G8, is a bounded generation ordered post-termination. It opened no new scientific scope: SPEC-g9-1 falsified, so the ruling's 'if g9-1 holds, stop' did not arise, and no fourth chart, S-5 or S-2 was opened either way.",
+  "schema": {
+    "champion_commit": "The last CONTENT commit of the generation, by definition. Never the commit that wrote this file: a state file cannot name its own commit, because its bytes are part of the tree that commit hashes. Guarded by tests/test_loop_state_g9.py.",
+    "bookkeeping_commit": "null at write time, always. Nothing may fill this during the commit that writes the file, because the value would be that commit's own hash. A later generation reading git history may fill it; the null is the record that this one did not.",
+    "machinery_commit": "The commit every measurement in this generation ran against. One tree, one commit: outputs/g9/manifest.json records it with dirty=false.",
+    "results_commit": "The commit carrying the artefacts and the result documents. Equal to champion_commit when the generation ends with its results.",
+    "baselines": "REP-01 as amended at generation 9 section 3: every entry is an OBJECT carrying the invocation that produced it, never a bare scalar. Entries marked rerunnable are re-run by tests/test_loop_state_g9.py and compared; entries that are not carry conditions and measured_at_commit instead, because a number the suite cannot re-derive is only checkable against its conditions."
+  },
+  "champion_commit": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+  "machinery_commit": "a6728fe58e94d89607edb248f8bbc4d73bb174ea",
+  "results_commit": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+  "bookkeeping_commit": null,
+  "champion_branch": "loop/champion",
+  "one_tree_one_commit": {
+    "honoured": true,
+    "note": "Every G9 measurement ran against a6728fe. outputs/g9/manifest.json records that commit with dirty=false. The three clean suite timings in baselines.pytest were taken against the same tree, before the commit was made."
+  },
+  "baselines": {
+    "pytest": {
+      "invocation": "PYTHONPATH=src python -m pytest tests -q",
+      "tool_version": "pytest 9.1.1",
+      "collected": 709,
+      "passed": 706,
+      "skipped": 3,
+      "failed": 0,
+      "wall_clock_s": [
+        169.0,
+        163.8,
+        171.43
+      ],
+      "rerunnable": false,
+      "conditions": "Quiet host: no other job on the machine, three consecutive runs. This is the correction the ruling of 2026-08-26 section 3 ordered. The generation-8 figures of 370.94-374.10 s, and the 378.11 s quoted in that generation's verification report, were measured while spot-check scripts shared the cores and are superseded by measurement rather than by a note. The band this sits in is generation 7's 171-181 s.",
+      "measured_at_commit": "a6728fe58e94d89607edb248f8bbc4d73bb174ea",
+      "environment": "CPython 3.11.9, win32",
+      "skips_are": "2 tests skip at the results and state commits: two claim-surface documents quote no rank fraction, so the document-level curve-citation requirement has nothing to check in them. A third skipped at the machinery commit, where outputs/g9/rank_obs.json did not yet exist.",
+      "collected_at_state_commit": 734,
+      "why_two_counts": "709 is the collection at machinery_commit, which is the tree the timings describe. The generation then added test modules of its own -- the lint scope guard, the claim-surface window guard and this file's own guard -- plus one document to the claim surface, which is parameterised over, so the final tree collects 734. Both numbers are the same invocation at two named commits, which is the point of recording the invocation. The README badge tracks the current tree and is checked against live collection by tests/test_notebooks.py::TestDocumentedTestCountIsHonest."
+    },
+    "ruff_whole_tree": {
+      "invocation": "ruff check .",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true,
+      "note": "This is the invocation that exited 1 with 107 findings at generation 8, all of them in notebooks/. The generation-8 baseline recorded a single ruff_exit of 0 with no scope, so it recorded the other invocation's verdict without saying so. The two now agree, by configuration rather than by annotation: pyproject.toml's per-file-ignores for notebooks/*.ipynb, with each code's reason and the generator named. Guarded by tests/test_lint_scope_g9.py, which also asserts the scopes do not agree by exclusion."
+    },
+    "ruff_scoped": {
+      "invocation": "ruff check src tests scripts",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true,
+      "note": "The invocation .github/workflows/ci.yml and the Makefile run. Unchanged from generation 8, and now no longer the only defensible scope that exits 0."
+    },
+    "mypy_package": {
+      "invocation": "mypy src",
+      "tool_version": "mypy 2.3.1",
+      "findings": 25,
+      "files_checked": 44,
+      "rerunnable": false,
+      "conditions": "Advisory in the Makefile ('-' prefixed), so exit code is not a gate. 25 reproduces the generation-7 and generation-8 baseline exactly; generation 9 adds none, confirmed by running mypy on scripts/run_g9.py alone. This is the number generation 8 recorded, and its note described it as 'over the tracked tree', which is the wrong scope: see mypy_tracked_tree below. The file count is the scope at measured_at_commit; the guard asserts the findings exactly and the scope only in the direction that matters.",
+      "measured_at_commit": "a6728fe58e94d89607edb248f8bbc4d73bb174ea"
+    },
+    "mypy_tracked_tree": {
+      "invocation": "mypy src tests scripts",
+      "tool_version": "mypy 2.3.1",
+      "findings": 150,
+      "files_checked": 113,
+      "rerunnable": false,
+      "conditions": "Recorded because the generation-8 note claimed 25 was this scope and it is not. Never gated on, never used by the Makefile or CI; recorded so that the phrase 'over the tracked tree' has a number attached to it and cannot drift again. The file count is the scope at measured_at_commit and grows with the tree; tests/test_loop_state_g9.py asserts it never shrinks rather than asserting equality, because a scan that quietly stopped covering part of the tree is CI-01's shape and adding a module is not.",
+      "measured_at_commit": "a6728fe58e94d89607edb248f8bbc4d73bb174ea"
+    },
+    "python_support_floor_scan": {
+      "invocation": "PYTHONPATH=src python scripts/check_python_support_floor.py",
+      "files_scanned": 110,
+      "syntax_rejections": 0,
+      "api_uses_newer_than_floor": 0,
+      "runtime_pep604_unions": 0,
+      "obstruction_found": 0,
+      "rerunnable": false,
+      "conditions": "Static analysis at a floor of 3.9. It can only FALSIFY a floor, never confirm one, and it cannot see dependency resolution at all. Not re-run by tests/test_loop_state_g9.py because tests/test_python_support_floor_g7.py already exercises the scanner with both SW-20 controls; this record exists to carry the file count, which is CI-01's cost and which grows.",
+      "measured_at_commit": "a6728fe58e94d89607edb248f8bbc4d73bb174ea",
+      "was_at_generation_7": 96
+    }
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e",
+    "g7": "922c2cc",
+    "g8": "0f22ecc",
+    "g9": "68f3d5d4a0265a3d99f57031af2442c1d0d820db"
+  },
+  "spec_clause_status": {
+    "SPEC-g9-1": "PASS as a measurement, and the FALSIFIER FIRES. The four-way ordering was repeated at nine further operating points -- three devices at the 10th, 50th and 90th percentiles of the doping prior, crossed with three bias windows -- under a rule hashed before the first draw. Five distinct orderings appear under the larger-movement statistic and four under the milder one; the generation-8 order is recovered at 2 of 9 and 0 of 9 respectively. Pre-registered as reportable either way (AH-04, AH-13), so the headline converts to 'the ordering is itself operating-point dependent'. The reproduction control re-measures every generation-8 cell through this generation's code and matches.",
+    "SPEC-g9-2": "PASS. rank(observation set) measured as two curves at two stated devices: rank runs 1 -> 4 over bias-window width at a fixed centre and does not move at all over spacing from linear to geometric, each point carrying its own rank(cutoff) curve. Falsifier (a rank on the claim surface at a single window without its curve) is enforced on the prose by tests/test_claim_surface_g9.py; it found 18 live passages across six documents on its first run and does NOT fire now.",
+    "SPEC-g9-3": "PASS, and the FALSIFIER FIRES. All 13 chart-J witness pairs through the generation-6 refinement battery: 7 stay below the floor at N=301/601/1201 and tol_carrier=1e-12; 6 separate. The headline 694 nm / 271 nm pair SURVIVES, its distance falling 1.7%, so the junction non-identifiability claim stands and the count of 13 does not.",
+    "SPEC-g9-4": "PASS, run whole. The pilot projected 183 s against a 900 s budget, so the clause was not dropped and was not part-run. Criterion hashed before the first barrier. Witness pairs clustered by likelihood barrier depth against the floor barrier of 0.5*B = 8.0 log-units, with the mandatory null control in the same record as every count. Falsifier (a basin count without its null control) does NOT fire.",
+    "SPEC-g9-negative-control": "REJECTED as required. The case the clause names -- an ordering from one operating point, stated unqualified -- was put through the same predicate that judges SPEC-g9-1 and rejected on the stated ground. The same predicate accepts three synthetic consistent points, so it is not a predicate that only rejects. Two retained controls also pass: the refinement battery separates a distinguishable chart-J pair, and the chart discriminator returns 'not different' for a pinned junction. all_controls_pass=True.",
+    "RULING-2026-08-26-s3": "DONE. ruff scope ambiguity eliminated by configuration, not annotation; REP-01 applied to the whole baseline block above; the suite wall clock re-measured on a quiet machine.",
+    "RULING-2026-08-26-s4": "DONE. CI-01 reclassified ACCEPTED-PERMANENT by default trigger, cost statement in docs/G9_RESULT.md section 1.4, growth recorded.",
+    "SPEC-g0-3b-windows": "OPERATOR-BLOCKED (hard), unchanged; substitute evidence docs/WINDOWS_RISK_g6.md."
+  },
+  "open_findings": [
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/G9_RESULT.md section 1.4",
+      "cost_grown_since_assignment": true,
+      "note": "Reclassified at generation 9 by the default the generation-8 ruling set, after three cycles without a remote-or-no-remote decision. The growth: the static support-floor scan covered 96 files at generation 7 and covers 110 now, so the unevidenced surface is larger, not the claim stronger. docs/OPERATOR_TASKS.md OT-1 stands and records the reversion condition -- if a remote is added the status reverts and the cost statement is superseded forward, not deleted."
+    },
+    {
+      "id": "ORDER-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-BY-FALSIFICATION",
+      "note": "Opened and closed at generation 9. The generation-8 ordering (observation set > junction > dimension > interpolant) is withdrawn as a general claim: five orderings across nine further operating points, recovered at 2 of 9 and 0 of 9 under the two statistics. It was also under-specified before it was unreplicated -- its two natural statistics disagree at its own operating point. What replaces it is narrower and measured: the observation set dominates at every operating point tested (0.925-1.080), and the other three trade places."
+    },
+    {
+      "id": "CHART-03",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "note": "Opened at generation 9. Chart-invariance at matched d is a property of a (device, bias window) cell, not of the charts: the chart-G-to-chart-L movement is 2.6% at best and 101.5% at device_p50 in 0.15-0.50 V. The generation-7 statement, already retired once to its interpolant family, is now also confined to the cell it was measured in. What is NOT known is what makes a cell one or the other; nine points show the variation and do not explain it."
+    },
+    {
+      "id": "WITNESS-04",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "note": "Opened at generation 9. 6 of 13 chart-J witness pairs separate above the floor under N=301->1201 and tol_carrier=1e-12, so the count of 13 was a property of the grid. The headline pair survives. What remains open is that no OTHER search in this repository has been re-checked at 1201 except the generation-6 doping witnesses -- in particular the generation-7 chart-L native search has not."
+    },
+    {
+      "id": "FALSIFIER-01",
+      "severity": "MEDIUM",
+      "status": "PARTIALLY-ADDRESSED",
+      "note": "Opened at generation 8: no falsifier in this repository had been audited for the defect that run_witness_falsifier.py re-derived chart G by hand. Generation 9 applied the generation-6 refinement battery to a search that had never faced it and it fired, which is evidence the battery is live. The audit of the remaining falsifiers is still not done."
+    },
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "cost_grown_since_assignment": false
+    },
+    {
+      "id": "PROV-07",
+      "severity": "HIGH",
+      "status": "MITIGATED-PENDING-CI",
+      "note": "Unchanged. Validated on win32 only; linux and darwin unvalidated and stated as such in every manifest. Now downstream of CI-01's ACCEPTED-PERMANENT status rather than of a pending action."
+    },
+    {
+      "id": "CHART-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-STRUCTURALLY",
+      "note": "Unchanged. scripts/run_g9.py's three anchor-to-anchor collocations are allowlisted per call with their reason; the solver grid is still reached only through charts._lerp."
+    },
+    {
+      "id": "CHART-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "SPEC-11",
+      "severity": "MEDIUM",
+      "status": "MITIGATED",
+      "note": "Amended by measurement at generation 9: the bare-integer licence follows the population gap, and the gap is a property of the (chart, d, device, bias window) cell rather than of (chart, d). Chart G at d=4 is in-gap at 4 of 12 operating points and out of gap at 8; chart G at d=16 IS in-gap at a 0.10 V window, with a gap of x230.6. tests/test_claim_surface_g7.py still reads the licensed denominators from outputs/g8/ranks.json, which is not rewritten; keying that guard on the cell is the next step and is not taken here."
+    },
+    {
+      "id": "DOC-07-a",
+      "severity": "LOW",
+      "status": "MITIGATED",
+      "note": "The widened guard fired on generation 9's own machinery commit message before it was built on -- the first time it has caught a live message. See docs/audit/AUDIT_g9.md section 2."
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z"
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-04",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "Opened at generation 9. Three lint findings live in scripts/build_notebooks.py's source strings and are suppressed rather than fixed, because regenerating the notebooks to fix them deletes 3,097 lines of executed output. They are enumerated in tests/test_lint_scope_g9.py so that repairing the generator fails a test by design."
+    },
+    {
+      "id": "EOL-01",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    }
+  ],
+  "ruling_premises_corrected": [
+    "Section 2's '44% apart in the observable' could not be re-derived: the figure carried no invocation, which is the defect section 3 of the same ruling is about. Measured on exactly the two cells whose spectra are compared, over exactly the window they are compared in, the distance is 0.82% at the generation-8 operating point and at most 2.67% at any of the twelve. The inference inverts: the spectra agree BECAUSE the two charts put the device in nearly the same place in the observable, while sitting more than 1.2 decades apart in profile space.",
+    "Section 3's 'mypy_findings: 25 carries scope and method' is half right. It carries a stated scope and the stated scope is wrong: 25 is mypy src over 44 files; the tracked tree gives 150 over 112.",
+    "Section 4's 'static analysis of 96 files' is out of date; the scan covers 110 at this generation, and the direction matters because the unevidenced surface is what grew.",
+    "The generation-8 ordering was under-specified before it was unreplicated: its two natural statistics disagree at its own operating point. That is prior to the replication question and would have held had SPEC-g9-1 never run.",
+    "Generation 8's 'the number of likelihood basins is larger than the number of profile-distance clusters' is the wrong way round for chart G's witness pairs, whose median barrier is 8.31 log-units against a floor barrier of 8.0. It holds for chart J at d=16."
+  ],
+  "highest_remaining_scientific_risk": "Nothing measured here explains WHY the ordering moves. Nine operating points establish that the relative sensitivity of junction, dimension and interpolant is not a property of this problem, and give no account of what it is a property of. The one axis that is stable -- the observation set, 0.925 to 1.080 across all twelve points -- is stable over three windows inside ONE converged bias range, chosen because the oracle's discretisation error was measured to converge there. A range the solver has not been validated over could behave differently and has not been tried. The honest summary is that generation 9 replaced a false general claim with a true narrow one and a mechanism-shaped hole.",
+  "second_remaining_scientific_risk": "The barrier metric walks a STRAIGHT LINE in chart coordinates between two members, so every barrier reported is an upper bound on the true barrier -- a curved path can only be shallower. That direction is favourable for the chart-G ridge result, which says barriers are LOW, and unfavourable for the chart-J result, which says they are high: chart J's 468 log-unit median could be smaller along some other path, and no search over paths was run. The null control bounds how much this can matter for the comparison, not for the absolute number.",
+  "not_supported_and_not_to_be_written": [
+    "any ordering of the four sensitivities (observation set, junction, dimension, interpolant) as a general claim -- withdrawn by measurement at nine further operating points, not merely qualified",
+    "'the chart does not move the local spectrum at matched d', with or without the interpolant-family qualifier generation 8 added; it moves it by 101.5% at one of the nine points",
+    "13 chart-J witness pairs, without the refinement result beside it; 7 survive N=301->1201 at tol_carrier=1e-12",
+    "44% as the observable-space distance between the two compared chart cells; it could not be re-derived and the measured value is at most 2.67%",
+    "any rank fraction on the claim surface without the observation set it was measured over, guarded by tests/test_claim_surface_g9.py",
+    "any rank fraction compared across charts -- three charts, and the rank now also moves with the device and the window inside a single chart",
+    "any frequency or probability of degeneracy in any chart",
+    "any contraction number at the instrument's own 2% noise",
+    "any bare integer rank whose cell has no measured population gap; the licence is a property of the (chart, d, device, bias window) cell",
+    "any full-spectrum comparison involving chart J without stating junction_scale",
+    "any statement that an identifiable rank is a property of the device; it is a property of the (device, observation set) pair, and the observation-set half is a curve",
+    "any barrier depth as a property of the landscape rather than of the straight line between two points in one chart's coordinates"
+  ],
+  "operator_tasks": [
+    "OT-1 push and run CI -- CI-01 is now ACCEPTED-PERMANENT by the ruling's own default. The task is not withdrawn and the reversion condition is in docs/OPERATOR_TASKS.md.",
+    "OT-2 apply papers/CORRIGENDA_g6.md -- still unapplied; papers/draft.md line 255 unchanged. R-3 reserves papers/**. Four cycles.",
+    "OT-3 preservation: two copies on one disk is one failure from losing nine generations. PRESERVE_MANIFEST_g0.sha256 covers the generation-0 adoption only. Four cycles."
+  ],
+  "halt": null
+}

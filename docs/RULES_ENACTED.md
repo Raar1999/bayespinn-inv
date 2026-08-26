@@ -183,6 +183,48 @@ does not report them.
 the g7 artefact: for each witness member, the method the artefact calls best must
 be the best, and must beat collocation.
 
+### Amendment, generation 9 — the same rule, applied to the state file
+
+**Enacted** operator ruling, 2026-08-26 §3.
+
+> Apply `REP-01` forward to the whole baseline block, not just this field:
+> **every number in a state file carries its invocation.**
+
+**The defect that forced the amendment.** `LOOP_STATE_v5.json` recorded
+`"ruff_exit": 0`. The field carried no scope and no command, and the two
+defensible scopes disagreed: `ruff check .` exited **1** with findings in
+`notebooks/` while `ruff check src tests scripts` exited **0**. One verdict was
+recorded and two existed.
+
+The field beside it was supposed to be the good example, and it is not quite one
+either. `"mypy_findings": 25` came with the note *"25 over the tracked tree"*.
+That scope is wrong: 25 is what `mypy src` reports over 44 files. Over the
+tracked tree — `mypy src tests scripts`, 112 files — it is 150. The number was
+right and the sentence describing it was not, which is exactly what an
+invocation prevents and a prose note does not: a command can be re-run, a
+description can only be re-read.
+
+So the rule generalises off representation errors. A baseline number
+approximates the tree in the same sense a projection approximates a profile: it
+depends on a method, and quoting it without the method makes it unfalsifiable.
+
+**Enforced by** `tests/test_loop_state_g9.py`. Every entry in the state file's
+`baselines` block must be an object carrying a non-empty `invocation` and at
+least one number, and for records marked rerunnable the guard **runs that
+invocation** and compares the recorded verdict against what the command returns
+today — so a baseline goes stale loudly rather than quietly. Measurements that
+cannot be re-run inside the suite — the suite's own wall clock, which cannot
+measure itself — carry `conditions` and `measured_at_commit` instead, and both
+are asserted present and non-empty, because a timing number without its
+conditions is the same defect wearing a stopwatch. Its positive control plants
+the literal `{"ruff_exit": 0}` and requires rejection; its negative controls are
+a note whose *prose* contains the word "invocation" without carrying one, which
+must be rejected, and a correctly formed block, which must not be.
+
+The finding-count comparison is version-gated and says so when it skips: a count
+moves with the analyser, and a guard that fails on an upgrade is a guard someone
+deletes.
+
 **What the guard found on its first run**, recorded because a guard's first run is
 the only unbiased one it ever has: **three** generation-7 artefacts violate
 `REP-01` — `containment.json` (4 records), `spectra.json` (4 records) and

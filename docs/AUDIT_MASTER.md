@@ -1150,8 +1150,8 @@ relative error **0.000e+00** in float64 (was 4.39e-16) and 8.19e-08 in float32
 Regression: `tests/test_ohmic_gradient_g0.py` (41 tests). AH-08 pre-fix: 17
 failed / 22 passed.
 
-### CI-01 — **REOPENED**
-| **Severity** | MEDIUM | **Status** | **OPEN** |
+### CI-01 — **REOPENED**, then **ACCEPTED-PERMANENT** at generation 9
+| **Severity** | MEDIUM | **Status** | **ACCEPTED-PERMANENT** (was OPEN) |
 
 §6b recorded CI-01 as VERIFIED against `.github/workflows/ci.yml`. That file was
 **untracked**: never committed, never pushed, never executed. The gate clause
@@ -1159,6 +1159,19 @@ failed / 22 passed.
 the loop specification scores as FAIL, not skip. The workflow is now committed
 (`c115757`) but `R-4` prohibits `git push`, so it still has not run. `SPEC-g0-3`
 records this as expected-to-remain-open rather than quietly green.
+
+> **Status correction, generation 9.** The generation-8 ruling put a decision
+> ahead of the command — remote, or no remote — and it went unanswered for three
+> cycles. The stated default fired: `CI-01` is **`ACCEPTED-PERMANENT`**, and the
+> cost statement the status owes is `docs/G9_RESULT.md` §1.4. The cost is
+> reviewed each generation for growth and has grown: the static support-floor
+> scan the declared floor rests on covered 96 files at generation 7 and covers
+> 110 now, so the *unevidenced* surface is larger, not the claim stronger.
+> `docs/OPERATOR_TASKS.md` OT-1 stands unwithdrawn and records the reversion
+> condition — if a remote is added, the status reverts and the cost statement is
+> superseded forward rather than deleted. A status that read "OPEN" for nine
+> generations had stopped describing anything, which is the defect this ledger
+> exists to catch.
 
 ### S-3 — duplicate ohmic implementations
 | **Severity** | (no Phase-A severity assigned) | **Status** | OPEN, equivalence pinned |
