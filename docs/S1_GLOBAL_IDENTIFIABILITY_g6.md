@@ -147,7 +147,7 @@ method and is reported as one.
 
 n = 1,000 per `d`, all figures at the tightest supported tolerance (10× noise):
 
-| d | samples per dimension | ESS | contracting (**global**, **chart G**) |
+| d | samples per dimension | ESS | contracting at a variance-ratio threshold of 0.5, at 10x the instrument noise (**global**, **chart G**) |
 |---:|---:|---:|---|
 | 2 | 500 | 31.6 | **2 of 2** |
 | 4 | 250 | 38.8 | **3 of 4** |

@@ -4,6 +4,81 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — generation 8 of the audit loop, the final technical generation (2026-08-26)
+
+Generations 1–7 are recorded in `docs/gen/` and `docs/audit/` rather than here;
+this entry resumes the changelog because generation 8 changes a solver contract
+that anything depending on this package will notice.
+
+**Breaking, deliberately.** `ScharfetterGummel1D.solve` no longer interpolates a
+doping array onto its own grid. Four lines of convenience had been selecting a
+**parameterisation chart** from an array length, in a solver that never mentions
+charts, and six generations of identifiability results were published in that
+chart without recording it (`CHART-01`). A census taken by patching `solve` and
+running the suite found the implicit reconstruction load-bearing at five call
+sites in `src/` and nine in `tests/`, across three grid resolutions — including
+the Jacobian that produced the published local rank, and the generator that
+produced the surrogate's entire training set.
+
+Callers now pass grid values, or a `ChartedDoping` that carries the chart it is a
+vector in, or get `DopingChartError`. Nothing about the numbers changed: 24
+profiles captured from the old code path before deletion reproduce byte for byte
+(`tests/data/chart_l_resampler_golden_g8.json`), and both the generation-6 and
+generation-7 witness searches reproduce their witness counts exactly.
+Reproduce: `PYTHONPATH=src python -m pytest tests/test_one_reconstruction_g8.py`.
+
+### Added
+
+- `bayespinn_inv.inverse.charts.ChartJ` — a third parameterisation with the
+  junction position as a free continuous coordinate. At `s = 0` it is `ChartG` at
+  `d-1` bit for bit, which is its positive control; `junction_scale` exposes the
+  mixed-unit problem in its Jacobian rather than hiding it.
+  Reproduce: `PYTHONPATH=src python -m pytest tests/test_charts_g8.py`.
+- `bayespinn_inv.inverse.charts.ChartedDoping`, `anchor_signed_to_grid`,
+  `regrid_signed` — the chart-carrying type and the two named forms of the one
+  reconstruction operator.
+- `bayespinn_inv.inverse.identifiability.rank_cutoff_record` — reports a rank as
+  a curve over cutoffs with the spectrum, the largest multiplicative gap and
+  whether the operational cutoff falls inside it (`SPEC-11`).
+- `bayespinn_inv.inverse.modes` — basin counting by profile distance against a
+  criterion that hashes itself before clustering (`AH-14`), with the count
+  reported as a curve over thresholds and stated as a lower bound, plus
+  `barrier_depth` as the check on the parameter-space proxy.
+- `scripts/run_g8.py` and the artefacts under `outputs/g8/`.
+- `docs/G8_RESULT.md`, `docs/audit/AUDIT_g8.md`, `LOOP_STATE_v5.json`.
+- Guards: `tests/test_one_reconstruction_g8.py`, `tests/test_charts_g8.py`,
+  `tests/test_modes_g8.py`, `tests/test_rank_curve_g8.py`,
+  `tests/test_rep01_g8.py`, `tests/test_rules_enacted_g8.py`,
+  `tests/test_loop_state_g8.py`.
+
+### Changed
+
+- `docs/RULES_ENACTED.md` gains `REP-01`, `SPEC-11`'s rank-curve rule, `OPS-01`
+  and a **marked-as-reconstructed** `PH-22`, each with a guard and both
+  controls. `tests/test_rules_enacted_g8.py` asserts that transitively: a rule
+  whose guard does not exist, or whose guard ships no controls, fails the suite.
+- The claim surface learns about a third chart, and `docs/G8_RESULT.md` joins it.
+- `docs/OPERATOR_TASKS.md` OT-1 now states that a remote must be added before the
+  command block can run, and no longer asserts an expected test count.
+- `README.md` retires *the dimension moves the rank and the chart does not* to
+  the interpolant family it was measured in, and states the multimodality result
+  as the headline it is.
+
+### Fixed
+
+- **`DOC-07`'s guard was too narrow to catch the commit that enacted `OPS-01`.**
+  The generation-8 machinery commit asserts a measured count of this tree that
+  the census contradicts, spelled out in words, and the guard matched only digits
+  beside "passed"/"tests". Under `R-4` the message stands; the guard is widened
+  to catch a cardinal — digit or word — in front of a noun naming something a run
+  counts, with that commit as its positive control.
+  Reproduce: `PYTHONPATH=src python -m pytest tests/test_commit_messages_g7.py`.
+- **`EOL-01` amended.** Writing with `newline=''` is only half the rule: reading a
+  CRLF file in text mode normalises too, so a read-modify-write round trip
+  rewrites the whole file even when the write is careful. Generation 8 did that
+  to 20 tracked files; `tests/test_line_endings_g6.py` caught it before the
+  commit, which is what the guard is for.
+
 ## [Unreleased] — generation 0 of the audit loop (2026-08-25)
 
 An adversarial audit loop was run over the repository. Its first finding was that

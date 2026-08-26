@@ -67,12 +67,19 @@ import pytest
 REPO = Path(__file__).resolve().parents[1]
 
 #: Documents that publish the identifiability result to a reader.
+#:
+#: Generation 8 adds ``docs/G8_RESULT.md`` and a third chart. Both are widenings
+#: of this guard's reach, not of its strictness: a document that publishes the
+#: result and is not on this list is unguarded, and a chart the regexes cannot
+#: name is a chart whose rank fractions travel unlabelled.
 CLAIM_SURFACE_G7 = (
     "README.md",
     "docs/RELEASE_READINESS.md",
     "docs/CLAIM_EVIDENCE_MATRIX.md",
     "docs/S1_GLOBAL_IDENTIFIABILITY_g6.md",
     "docs/CHART_RECONCILIATION_g7.md",
+    "docs/G8_RESULT.md",
+    "docs/NOVELTY_AUDIT.md",
 )
 
 #: Excluded, with the reason. Each of these *describes* the rule or records the
@@ -101,11 +108,17 @@ _GLOBAL = re.compile(r"witness pair|non-identifiab|globally|indistinguishable", 
 #: 3 of 4 directions contract" is a single-chart statement and must not be read
 #: as putting a rank beside the other chart's witness result.
 _WITNESS = re.compile(r"witness|non-identifiab|indistinguishable", re.I)
-#: Naming a chart.
-_CHART = re.compile(r"chart[\s-]*[GL]\b", re.I)
+#: Naming a chart. Chart J joined at generation 8; a chart the guard cannot name
+#: is a chart whose rank fractions travel unlabelled past it.
+_CHART = re.compile(r"chart[\s-]*[GLJ]\b", re.I)
 _CHART_G = re.compile(r"chart[\s-]*G\b", re.I)
 _CHART_L = re.compile(r"chart[\s-]*L\b", re.I)
-_REGIME = re.compile(r"\blocal\b|\bglobal(?:ly)?\b", re.I)
+_CHART_J = re.compile(r"chart[\s-]*J\b", re.I)
+_CHARTS = (("G", _CHART_G), ("L", _CHART_L), ("J", _CHART_J))
+#: A regime word. "locally" was not matched until generation 8 found the
+#: asymmetry -- "globally" was accepted and "locally" was not, which forced
+#: awkward prose to satisfy a guard rather than a reader.
+_REGIME = re.compile(r"\blocal(?:ly)?\b|\bglobal(?:ly)?\b", re.I)
 _DIM = re.compile(r"\bd\s*=\s*\d+|\bof\s+\d+\b", re.I)
 #: Citing what licenses putting the two charts side by side.
 _RECONCILED = re.compile(
@@ -181,7 +194,8 @@ def reconciliation_offenders(text: str, document: str = "<text>"):
     for label, unit in _units(text):
         if not _RANK.search(unit):
             continue
-        spans_both = bool(_CHART_G.search(unit) and _CHART_L.search(unit))
+        named = [name for name, rx in _CHARTS if rx.search(unit)]
+        spans_both = len(named) >= 2
         if not (spans_both or _WITNESS.search(unit)):
             continue
         if _RECONCILED.search(unit):
@@ -245,6 +259,186 @@ class TestEveryStatementNamesItsChart:
             f"not carry {missing} anywhere in the document")
 
 
+#: A witness-search budget: the pair count a search examined. These are the three
+#: denominators this repository has, and quoting two of them in one breath is the
+#: frequency comparison every ruling since generation 6 has forbidden.
+_PAIR_COUNTS = re.compile(r"\b1,999,000\b|\b719,400\b")
+
+
+def frequency_offenders(text: str, document: str = "<text>"):
+    """Units that put two searches' budgets side by side without a disclaimer.
+
+    ``SPEC-g8`` carries forward: *frequencies stay uncompared across charts*.
+    Existence is a search outcome and transfers; frequency is a density estimate
+    and does not, and three searches at three budgets over three priors are
+    existence proofs.
+
+    Deliberately narrow. It matches the literal pair counts rather than trying to
+    recognise "a frequency", because a guard that tries to parse the concept
+    fires on the sentences that forbid it and gets disabled. Its scope is the one
+    comparison the rulings name; the rest is enforced by review, and
+    ``docs/audit/AUDIT_g8.md`` says so rather than implying this guard is
+    complete.
+    """
+    offenders = []
+    for label, unit in _units(text):
+        if len(_PAIR_COUNTS.findall(unit)) < 2:
+            continue
+        if re.search(r"not comparable|do not compare|uncompared|different "
+                     r"priors?|existence proof", unit, re.I):
+            continue
+        offenders.append(f"{document} {label}: {unit.strip()[:150]}")
+    return offenders
+
+
+#: Denominators for which generation 8 measured a population gap at the
+#: operational cutoff, so a bare integer rank is licensed. Read from the
+#: measurement rather than written down, so the guard tracks the artefact instead
+#: of a remembered sentence; the fallback is the measured answer at the time this
+#: was written, for a checkout without the artefact.
+def _licensed_denominators():
+    path = REPO / "outputs" / "g8" / "ranks.json"
+    if not path.is_file():
+        return {4}
+    import json
+    cells = json.loads(path.read_text(encoding="utf-8"))["cells"]
+    return {c["n_parameters"] for c in cells.values()
+            if c["bare_integer_rank_justified"]}
+
+
+#: A cutoff, however the passage spells it.
+_CUTOFF = re.compile(r"\d\s*%|noise|cutoff|floor|threshold", re.I)
+
+#: A unit that *forbids* a shape rather than asserting it. Deliberately narrow:
+#: it is the vocabulary of a prohibition, and it excludes "not comparable",
+#: which is a disclaimer attached to a claim rather than a prohibition of one.
+#: Without this the guard fires on the passages that state the rule -- the
+#: SW-20 failure mode -- and with anything wider it becomes a way to smuggle a
+#: bare rank past it behind a disclaimer.
+_PROHIBITION = re.compile(
+    r"not to be written|must not|may not|never (?:appear|be quoted|quote)|"
+    r"forbidden|do not quote|not supported", re.I)
+
+
+def bare_rank_offenders(text: str, document: str = "<text>",
+                        licensed=None):
+    """Rank fractions at an unlicensed denominator, quoted without a cutoff.
+
+    ``SPEC-11``, enacted at generation 8 §5: *a bare integer rank appears only
+    where a gap justifies it*. Generation 7 measured where that is -- the
+    operational cutoff falls inside the spectrum's largest multiplicative gap at
+    ``d = 4`` in both older charts and at no other cell -- so at every other
+    denominator the number is a threshold count and may not travel without its
+    threshold.
+
+    The licensed set is read from ``outputs/g8/ranks.json`` rather than written
+    here, so that re-measuring the cells moves the guard with them.
+    """
+    lic = _licensed_denominators() if licensed is None else licensed
+    offenders = []
+    for label, unit in _units(text):
+        for m in _RANK.finditer(unit):
+            if int(m.group(1)) in lic:
+                continue
+            if _CUTOFF.search(unit) or _PROHIBITION.search(unit):
+                continue
+            offenders.append(f"{document} {label}: {unit.strip()[:150]}")
+            break
+    return offenders
+
+
+class TestEveryUnlicensedRankCarriesItsCutoff:
+    """``SPEC-11``: at a denominator with no population gap, the rank is a count."""
+
+    def test_the_licensed_set_is_read_from_the_measurement(self) -> None:
+        lic = _licensed_denominators()
+        assert lic, "no denominator is licensed; the guard would flag everything"
+        assert 16 not in lic, (
+            "d=16 became licensed, which contradicts the measured spectra; if "
+            "that is real, re-measure and say so, do not let it pass silently")
+
+    @pytest.mark.parametrize("document", CLAIM_SURFACE_G7)
+    def test_no_document_quotes_a_bare_unlicensed_rank(self, document: str) -> None:
+        offenders = bare_rank_offenders(_read(document), document)
+        assert not offenders, (
+            "SPEC-11 -- a rank fraction at a denominator with no population gap "
+            "at the cutoff is quoted with no cutoff in its own passage. It is a "
+            "threshold count, not a boundary between populations, and must "
+            "carry the threshold:\n  " + "\n  ".join(offenders))
+
+    def test_the_guard_catches_a_planted_bare_rank(self) -> None:
+        planted = ("In chart L the Jacobian determines only 3-4 of 16 doping "
+                   "degrees of freedom.")
+        assert bare_rank_offenders(planted, licensed={4})
+
+    def test_the_guard_passes_the_same_rank_with_its_cutoff(self) -> None:
+        repaired = ("In chart L at 2% measurement noise the Jacobian determines "
+                    "only 3-4 of 16 doping degrees of freedom.")
+        assert not bare_rank_offenders(repaired, licensed={4})
+
+    def test_the_guard_does_not_fire_on_a_licensed_denominator(self) -> None:
+        """Negative control: `d = 4` is where the gap is, so it needs nothing."""
+        licensed = "In chart G at d=4, 3 of 4 directions are identifiable."
+        assert not bare_rank_offenders(licensed, licensed={4})
+
+    def test_the_guard_does_not_fire_on_prose_describing_the_rule(self) -> None:
+        """The SW-20 control, and the one that actually bites here.
+
+        ``docs/CHART_RECONCILIATION_g7.md``'s *not to be written* list quotes
+        "3-4 of 16" as an example of the forbidden shape. A word-matching guard
+        cannot tell that from the shape itself, so the prohibition vocabulary is
+        what separates them -- and it is kept narrow for the reason the next test
+        checks.
+        """
+        prose = ('Not supported, and not to be written: the local "3-4 of 16" '
+                 "of chart L at d=16 beside chart G's result.")
+        assert not bare_rank_offenders(prose, licensed={4})
+
+    def test_a_disclaimer_is_not_a_prohibition(self) -> None:
+        """The loophole the narrow vocabulary exists to close.
+
+        "not comparable" is something a *claim* carries, not something a
+        prohibition says, so it must not buy an exemption from the cutoff
+        requirement. If it did, every bare rank could be smuggled past this
+        guard by appending three words.
+        """
+        smuggled = ("Chart L determines 3-4 of 16 doping directions, which is "
+                    "not comparable with chart G's fraction.")
+        assert bare_rank_offenders(smuggled, licensed={4})
+
+
+class TestNoFrequencyComparison:
+    """Two searches' budgets may not stand side by side without a disclaimer."""
+
+    @pytest.mark.parametrize("document", CLAIM_SURFACE_G7)
+    def test_no_document_compares_two_search_budgets(self, document: str) -> None:
+        offenders = frequency_offenders(_read(document), document)
+        assert not offenders, (
+            "frequencies stay uncompared across charts -- two search budgets "
+            "are quoted in one unit with nothing saying they are not "
+            "comparable:\n  " + "\n  ".join(offenders))
+
+    def test_the_guard_catches_a_planted_comparison(self) -> None:
+        planted = ("Chart G found 13 witnesses in 1,999,000 pairs and chart L "
+                   "found 37 in 719,400, so chart L is denser.")
+        assert frequency_offenders(planted)
+
+    def test_the_guard_does_not_fire_on_the_disclaimer(self) -> None:
+        """Negative control: the sentence that states the rule states the numbers.
+
+        Both budgets have to appear together somewhere, precisely so a reader can
+        see that neither can be quoted without the other. The disclaimer is what
+        distinguishes stating them from comparing them.
+        """
+        allowed = ("Chart G examined 1,999,000 pairs and chart L 719,400; the "
+                   "two rates are not comparable, because the chart, the "
+                   "dimension and the sampling density all differ.")
+        assert not frequency_offenders(allowed)
+
+    def test_the_guard_does_not_fire_on_one_budget_alone(self) -> None:
+        assert not frequency_offenders("13 witness pairs among 1,999,000 examined")
+
+
 class TestGuardControls:
     """SW-20's two controls, plus a check that the exclusions are honest."""
 
@@ -271,7 +465,29 @@ class TestGuardControls:
 
         assert not _RANK.search("the acquisition loses 9 of 20 comparisons"), (
             "the rank matcher fires on an unrelated fraction")
+
+        # Generation 8: the regime matcher is symmetric. It accepted "globally"
+        # and rejected "locally", which is a guard shaping prose rather than
+        # checking it.
+        assert _REGIME.search("measured locally, in chart L")
+        assert _REGIME.search("measured globally, in chart G")
+        assert _REGIME.search("a local Jacobian rank")
+        assert not _REGIME.search("a locale-dependent format string")
         assert list(_statement_lines(unlabelled))
+
+        # Generation 8: the third chart must be caught by the same battery, and
+        # a fraction naming chart J alongside chart G must need the same licence.
+        j_only = "In chart J at d=16 the local rank is 5 of 16 at a 2% cutoff."
+        assert _CHART.search(j_only), "the chart matcher cannot see chart J"
+        assert _RANK.search(j_only)
+        assert not reconciliation_offenders(j_only), (
+            "a single-chart statement must not need a reconciliation licence")
+
+        j_and_g = ("Chart J gives 5 of 16 at d=16 and chart G gives 3 of 4 at "
+                   "d=4.")
+        assert reconciliation_offenders(j_and_g), (
+            "a fraction spanning chart J and chart G must be rejected without a "
+            "licence, exactly as one spanning G and L is")
 
     def test_does_not_fire_on_prose_describing_the_rule(self) -> None:
         """The control generation 6 kept failing.

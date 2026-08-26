@@ -228,6 +228,21 @@ the cutoff, which must be flagged justified; its negative control is a smoothly
 decaying spectrum, which must not be — and a guard that flagged both would be
 worthless, so both directions are asserted.
 
+**Also enforced on the prose**, because a rule about how a number is reported has
+to reach the documents that report it.
+`tests/test_claim_surface_g7.py::TestEveryUnlicensedRankCarriesItsCutoff` fails
+when a rank fraction whose denominator has no measured population gap appears in
+a passage that does not carry a cutoff. The licensed set of denominators is read
+from `outputs/g8/ranks.json` rather than written into the test, so re-measuring
+the cells moves the guard with them. On its first run it found three live
+instances — one in `README.md`, one in `docs/RELEASE_READINESS.md` and a table
+header in `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md` — all now carrying their cutoff.
+Its negative control is the *not to be written* list in
+`docs/CHART_RECONCILIATION_g7.md`, which quotes the forbidden shape in order to
+forbid it; the exemption is keyed on prohibition vocabulary and deliberately
+excludes "not comparable", so a disclaimer cannot buy a bare rank past the guard.
+A second control asserts exactly that.
+
 The rule generalises past ranks. `bayespinn_inv.inverse.modes.count_basins`
 reports a **basin count** the same way, over a threshold grid, because a cluster
 count is also an integer obtained by thresholding a continuous structure.

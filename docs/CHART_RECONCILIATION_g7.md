@@ -1,5 +1,22 @@
 # Chart reconciliation — `G7-R`
 
+> **Amended by generation 8, 2026-08-26.** Nothing measured here is withdrawn and
+> no number changes. One *summary* is narrowed: **"the dimension moves the rank
+> and the chart does not"** was measured across two charts that differ along a
+> single axis — geometric against arithmetic interpolation between equally spaced
+> anchors in `log10|C|`, with the same fixed sign convention — and generation 8
+> measured a third chart off that axis and perturbed the observation set. Both
+> move the *local* spectrum by far more than the chart change does. The sentence
+> is true **within that interpolant family** and says nothing outside it. See
+> [`docs/G8_RESULT.md`](G8_RESULT.md) §2 and §3.
+>
+> Two records in this document's artefacts also predate `REP-01` and report a
+> representation-shaped error without naming the projection that produced it:
+> `containment.json` (4 records) and `spectra.json` (4). Under `R-4` the
+> artefacts are not rewritten; the methods are named in
+> `tests/test_rep01_g8.py::PRE_ENACTMENT_VIOLATIONS`, which asserts the set
+> exactly so it is a guard on those files rather than an amnesty for them.
+
 **What this settles.** Generation 6 published a *local* Jacobian rank at `d = 16`
 — measured in what this document names **chart L** — and a *global* witness of
 non-identifiability at `d = 4`, measured in **chart G**, and recorded as its
@@ -269,8 +286,9 @@ generation-6 headline — 14.75× apart at 44% of the floor, against 8.18× at 6
 
 ### What must not be read off these two searches
 
-The witness *frequencies* are not comparable. Chart G found 13 in 1,999,000 pairs;
-chart L found 37 in 719,400. Three things differ at once — the chart, the
+The witness *frequencies* are not comparable. Chart G found 13 in 1,999,000 pairs
+and chart L found 37 in 719,400, and those two rates are not comparable. Three
+things differ at once — the chart, the
 dimension (4 against 16), and the sampling density per dimension — so the ratio of
 those rates measures the confound, not the physics. Existence is a **search
 outcome** and transfers; frequency is a **density estimate** and does not. Both
@@ -349,7 +367,11 @@ mode it started nearest, with no indication that the other exists.
 * **Matched-`d` local geometry.** At one operating point, 2% noise, 16 biases:
   identifiable rank 3 at `d=4` and 4 at `d=16`, **in each chart separately**, with
   σ₁…σ₅ agreeing between charts to within 3% at `d=16`. The dimension moves the
-  rank; the chart does not.
+  rank; the chart does not — **within the family these two charts span**, which is
+  piecewise interpolation over equally spaced anchors in `log10|C|` with a fixed
+  sign convention. Generation 8 measured a third chart outside that family and
+  found the spectrum moves materially, so this sentence must not be generalised
+  past its measured family ([`docs/G8_RESULT.md`](G8_RESULT.md) §2).
 * **The degeneracy is bimodal, not a flat manifold** — two isolated likelihood
   maxima separated by a 242-log-unit barrier, against a control direction 43.7×
   steeper with no second mode.

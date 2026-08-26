@@ -49,6 +49,62 @@ _COUNT_CLAIMS = (
     re.compile(r"\b(?:tests?|suite)\s*[:=]\s*\d[\d,]*\b", re.I),
 )
 
+# ---------------------------------------------------------------------------
+# Generation 8: the same rule, widened, because it did not catch its own author
+# ---------------------------------------------------------------------------
+#
+# ``01f0281`` -- the generation-8 machinery commit, whose message enacts OPS-01 --
+# asserts "seven production call sites across three grid resolutions". That is a
+# measured count of this tree, and it is **wrong**: the census found five call
+# sites in ``src/`` and nine more in ``tests/``. Exactly the failure DOC-07 names,
+# in the commit enacting the rule that rules must be guarded, and the guard above
+# did not see it because it matches digits next to "passed"/"tests" and nothing
+# else.
+#
+# The narrowness was deliberate and is recorded as such above. It was also too
+# narrow. The widened patterns below catch a cardinal -- digit **or word** --
+# standing in front of a noun that names something a run or a scan counts.
+#
+# Two design choices, both stated rather than tuned:
+#
+# * the vocabulary is explicit and short. A heuristic for "is this noun a
+#   measurement" would fire on "three pieces of apparatus" and get disabled
+#   within a generation, which is how guards die (see the g6 bernoulli guard).
+# * ``generations`` is deliberately **excluded**. "six generations of results"
+#   is a fact about this project's history, not a measurement this tree
+#   produced; it cannot drift and it cannot be mis-transcribed from a run.
+#
+# Scope, following DOC-07's own design: the wide patterns apply to commits **after**
+# the widening, because ``R-4`` makes earlier messages uncorrectable and a guard
+# that fails on uncorrectable history is a guard people disable. ``01f0281`` is
+# therefore out of scope and is instead the **positive control** -- the guard must
+# flag it, exactly as ``1a090f0`` is the control for the original patterns.
+
+#: Nouns that name something a run or a scan counts.
+_MEASURED_NOUNS = (
+    r"call[\s-]sites?|tests?|cells?|witnesses|witness|pairs?|findings?|"
+    r"violations?|records?|modules?|files?|guards?|controls?|sweeps?|draws?|"
+    r"samples?|resolutions?|basins?|clusters?|anchors|nodes?|clauses?|"
+    r"call sites?"
+)
+_CARDINALS = (r"\d[\d,]*|one|two|three|four|five|six|seven|eight|nine|ten|"
+              r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|twenty")
+
+#: A cardinal directly in front of a measured noun, with at most one adjective
+#: between them. The negative lookbehind keeps identifiers out: ``generation-6``,
+#: ``DEC-g7-1`` and ``py39`` are not counts of anything.
+_COUNT_CLAIMS_WIDE = (
+    re.compile(rf"(?<![\w-])(?:{_CARDINALS})\s+(?:[a-z]+[\s-])?"
+               rf"(?:{_MEASURED_NOUNS})\b", re.I),
+)
+
+#: The commit that widens the rule. Messages after it are in scope for the wide
+#: patterns.
+WIDENED_AT_SUBJECT = "g8 machinery: one reconstruction operator"
+
+#: The message that forced the widening. Its own text is the control.
+POSITIVE_CONTROL_WIDE_SUBJECT = WIDENED_AT_SUBJECT
+
 
 def _git(*args: str) -> str:
     out = subprocess.run(["git", *args], capture_output=True, cwd=str(REPO),
@@ -62,6 +118,21 @@ def _git(*args: str) -> str:
 def offending_claims(message: str):
     """Substrings of ``message`` that assert a measured count or metric."""
     return [m.group(0) for rx in _COUNT_CLAIMS for m in rx.finditer(message)]
+
+
+def offending_claims_wide(message: str):
+    """As above, under the generation-8 widened patterns."""
+    return [m.group(0) for rx in _COUNT_CLAIMS_WIDE for m in rx.finditer(message)]
+
+
+def _sha_of_subject(subject: str):
+    """Newest commit whose subject starts with ``subject``, or ``None``."""
+    raw = _git("log", "--format=%H%x1f%s")
+    for line in raw.splitlines():
+        sha, _, subj = line.partition("\x1f")
+        if subj.startswith(subject):
+            return sha.strip()
+    return None
 
 
 def _in_scope_commits():
@@ -122,3 +193,79 @@ def test_does_not_fire_on_ordinary_messages(text: str):
 def test_fires_on_each_forbidden_shape(text: str):
     """One planted violation per pattern, so a dead pattern cannot hide."""
     assert offending_claims(text), f"missed: {text!r}"
+
+# ---------------------------------------------------------------------------
+# The widened rule
+# ---------------------------------------------------------------------------
+
+def test_no_commit_since_the_widening_asserts_a_spelled_out_count():
+    widened_at = _sha_of_subject(WIDENED_AT_SUBJECT)
+    if widened_at is None:
+        pytest.skip("the widening commit is not in this history")
+    raw = _git("log", "--format=%H%x1f%B%x1e", f"{widened_at}..HEAD")
+    offenders = []
+    for record in raw.split("\x1e"):
+        record = record.strip()
+        if not record:
+            continue
+        sha, _, body = record.partition("\x1f")
+        claims = offending_claims_wide(body)
+        if claims:
+            offenders.append(f"{sha.strip()[:9]}: {claims}")
+    assert not offenders, (
+        "DOC-07, widened at generation 8 -- a commit message asserts a count of "
+        "something a run or a scan measured. R-4 makes it permanent. Reference "
+        "the manifest or the artefact:\n  " + "\n  ".join(offenders))
+
+
+def test_the_widened_guard_catches_the_message_that_forced_it():
+    """Positive control, and it is this repository's own machinery commit.
+
+    ``01f0281`` says "seven production call sites across three grid resolutions".
+    The census found five in ``src/``. A wrong measured count, permanent under
+    ``R-4``, in the commit that enacts OPS-01. If this stops firing the widening
+    has gone vacuous.
+    """
+    sha = _sha_of_subject(POSITIVE_CONTROL_WIDE_SUBJECT)
+    if sha is None:
+        pytest.skip("the control commit is not in this history")
+    body = _git("log", "-1", "--format=%B", sha)
+    claims = offending_claims_wide(body)
+    assert claims, (
+        f"the widened guard did not flag {sha[:9]}, whose message asserts a "
+        f"count the census contradicts. It is vacuous.\nmessage:\n{body[:600]}")
+    assert any("call site" in c.lower() for c in claims), claims
+
+
+@pytest.mark.parametrize("text", [
+    "seven production call sites across three grid resolutions",
+    "12 tests added",
+    "found three findings and two violations",
+    "sixteen cells measured",
+])
+def test_the_widened_guard_fires_on_each_forbidden_shape(text: str):
+    assert offending_claims_wide(text), f"missed: {text!r}"
+
+
+@pytest.mark.parametrize("text", [
+    "g7 machinery: three pieces of apparatus, no results yet",
+    "counts are in outputs/g8/ and the manifests, not in this message",
+    "supersedes 1a090f0 and d3b7693; see generation 6",
+    "six generations of results were published in an unnamed chart",
+    "the generation-6 witness pair embeds into the local chart",
+    "DEC-g7-1 records the CI waiver",
+    "bump numpy to 1.22 and scipy to 1.10",
+    "hold ruff and black at py39",
+])
+def test_the_widened_guard_does_not_fire_on_ordinary_messages(text: str):
+    """Negative control, including the two identifier shapes that broke the
+    first draft of these patterns: ``generation-6 witness`` and ``DEC-g7-1
+    records`` both read as "a number followed by a measured noun" until the
+    lookbehind excluded identifiers."""
+    assert not offending_claims_wide(text), f"fired on: {text!r}"
+
+
+def test_the_widening_does_not_weaken_the_original():
+    """The narrow patterns still fire on the shape 1a090f0 used."""
+    assert offending_claims("all 420 passed")
+    assert offending_claims("419 of 420 tests passing")

@@ -97,8 +97,8 @@ PRE_ENACTMENT_VIOLATIONS = {
             "exact at the anchors and is NOT the best admissible embedding -- "
             "the same distinction that cost the g7 headline. These four numbers "
             "are therefore upper bounds on the representation error, not the "
-            "representation error, and docs/G8_RESULT.md says so where it "
-            "quotes them."),
+            "representation error, and any document that quotes them has to "
+            "say so. Generation 8 does not quote them."),
     },
     "outputs/chart_reconciliation_g7/spectra.json": {
         "records": [

@@ -12,6 +12,20 @@ mark the corresponding finding closed.
 **Why the loop cannot do it** `R-4` prohibits `git push`; `SK-09` prohibits network
 access.
 
+> **Correction, generation 8, per the ruling of 2026-08-26 §10.** *This task
+> requires adding a remote first.* `git remote -v` is empty on this host, so the
+> command block below — written as though `origin` existed — describes something
+> that cannot run. Generation 7 recorded that as the reason `CI-01` could not be
+> actioned; the file itself still said otherwise, which is the same class of
+> defect as a rule that lives only in a ruling. The block now begins with the
+> `git remote add` that has to precede it.
+>
+> The ruling also puts a **decision** ahead of the command: if a remote will
+> exist, `CI-01` stays `OPERATOR-BLOCKED`; if it will not, `CI-01` becomes
+> `ACCEPTED-PERMANENT` and owes a cost statement. The mislabel is what corrupts
+> the status system, not the missing CI. That decision is the operator's and is
+> unanswered as of the generation-8 champion.
+
 `.github/workflows/ci.yml` has existed since before generation 0 and has **never
 executed** — it was untracked until commit `c115757`, so it was never pushed and
 never ran, while `AUDIT_MASTER` recorded `CI-01` as VERIFIED against it. That false
@@ -26,7 +40,11 @@ produced locally is a **retrievable run log per matrix leg**, which is what
 ```bash
 cd /d/bayespinn-inv/bayespinn-inv
 git switch loop/champion            # confirm you are on the champion branch
-git log --oneline -1                # expect the generation-6 champion
+git log --oneline -1                # expect the current champion
+
+# THIS FIRST. There is no remote on this host; `git remote -v` prints nothing,
+# so every command below fails until one exists.
+git remote add origin <url>
 
 # Push. The workflow triggers on push to main and on pull_request, so a branch
 # push alone will NOT start it -- use workflow_dispatch, or open a PR:
@@ -56,8 +74,13 @@ with a retrievable log for **every** leg:
 | **windows × 3.11** | the BUG-14 leg. See `docs/WINDOWS_RISK_g6.md` for what to look for. |
 | clean-install | the wheel path, with dependency resolution — the one thing the offline substitute could not verify |
 
-Expect **419 passed** on each leg. A different count is a finding, not a rounding
-difference.
+Expect the suite to pass on each leg. The count is **not** written here: it moves
+every generation, a number in a document nobody re-measures is a claim on an
+unguardable surface, and `DOC-07` exists because of exactly that. The count for a
+given tree is in `README.md`'s badge, which
+`tests/test_notebooks.py::TestDocumentedTestCountIsHonest` checks against what
+pytest actually collects. A leg that disagrees with the badge is a finding, not a
+rounding difference.
 
 **Watch specifically for:** the 3.9 leg. `pyproject.toml` claims it and
 `[tool.mypy]` carries a comment saying the 3.9 support claim "is backed by the CI

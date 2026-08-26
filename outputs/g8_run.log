@@ -1,0 +1,137 @@
+==========================================================================
+PHASE 1  REPRODUCE the g6 and g7 witness searches through the
+         post-CHART-01 code, and render EVERY witness
+==========================================================================
+
+  chart_G_d4: n=2000 draws, prior hash ba11a6d5357388cb...
+    chart_G_d4 sampled 500/2000
+    chart_G_d4 sampled 1000/2000
+    chart_G_d4 sampled 1500/2000
+    chart_G_d4 sampled 2000/2000
+    -> 13 witnesses (artefact says 13); the CHART-01 fix moved no published number
+
+  chart_L_d16: n=1200 draws, prior hash 1bf57e7ee7be53b2...
+    chart_L_d16 sampled 500/1200
+    chart_L_d16 sampled 1000/1200
+    chart_L_d16 sampled 1200/1200
+    -> 37 witnesses (artefact says 37); the CHART-01 fix moved no published number
+  wrote outputs\g8\reproduce.json
+
+==========================================================================
+PHASE 2  CHART J: the junction as a free continuous coordinate
+==========================================================================
+  positive control  J(s=0) == G(d-1) exactly: True
+  flat_magnitude               x_j/L=0.25: best G stand-in  0.0000 dec /  75 sign nodes  |  best L stand-in  1.0000 dec /  76 sign nodes
+  flat_magnitude               x_j/L=0.35: best G stand-in  0.0000 dec /  45 sign nodes  |  best L stand-in  1.0000 dec /  46 sign nodes
+  flat_magnitude               x_j/L=0.50: best G stand-in  0.0000 dec /   0 sign nodes  |  best L stand-in  1.0000 dec /   1 sign nodes
+  flat_magnitude               x_j/L=0.65: best G stand-in  0.0000 dec /  45 sign nodes  |  best L stand-in  1.0000 dec /  45 sign nodes
+  flat_magnitude               x_j/L=0.75: best G stand-in  0.0000 dec /  75 sign nodes  |  best L stand-in  1.0000 dec /  75 sign nodes
+  witness_member_a_magnitudes  x_j/L=0.25: best G stand-in  0.0282 dec /  75 sign nodes  |  best L stand-in  1.2246 dec /  77 sign nodes
+  witness_member_a_magnitudes  x_j/L=0.35: best G stand-in  0.0282 dec /  45 sign nodes  |  best L stand-in  1.2246 dec /  47 sign nodes
+  witness_member_a_magnitudes  x_j/L=0.50: best G stand-in  0.0282 dec /   0 sign nodes  |  best L stand-in  1.2246 dec /   2 sign nodes
+  witness_member_a_magnitudes  x_j/L=0.65: best G stand-in  0.0282 dec /  45 sign nodes  |  best L stand-in  1.2246 dec /  43 sign nodes
+  witness_member_a_magnitudes  x_j/L=0.75: best G stand-in  0.0282 dec /  75 sign nodes  |  best L stand-in  1.2246 dec /  73 sign nodes
+  J d=16 s=0 js=0.1   rank 4/16 junction col |.|=4.6496e-02 node shift 0.86 mag cols == G_d15: True
+  J d=16 s=0 js=1     rank 5/16 junction col |.|=7.9711e-01 node shift 8.63 mag cols == G_d15: True
+  J d=16 s=0 js=10    rank 5/16 junction col |.|=1.1791e+01 node shift 77.92 mag cols == G_d15: True
+  J d=16 x_j/L=0.35 rank 5/16 junction col |.|=2.1600e+00
+  J d=16 x_j/L=0.65 rank 5/16 junction col |.|=1.7059e-01
+  full spectrum   G_d15                vs G_d16: max 0.0528
+  full spectrum   J_d16_s0_js0.1       vs G_d16: max 0.0530
+  full spectrum   J_d16_s0_js1         vs G_d16: max 0.4764
+  full spectrum   J_d16_s0_js10        vs G_d16: max 10.1686
+  full spectrum   J_d16_xj0.35         vs G_d16: max 2.9743
+  full spectrum   J_d16_xj0.65         vs G_d16: max 0.3815
+  full spectrum   J_d16_pinned         vs G_d16: max 0.0528
+  magnitude block G_d16                vs G_d15: max 0.0501
+  magnitude block J_d16_s0_js0.1       vs G_d15: max 0.0000
+  magnitude block J_d16_s0_js1         vs G_d15: max 0.0000
+  magnitude block J_d16_s0_js10        vs G_d15: max 0.0000
+  magnitude block J_d16_xj0.35         vs G_d15: max 2.1918
+  magnitude block J_d16_xj0.65         vs G_d15: max 0.0913
+  magnitude block J_d16_pinned         vs G_d15: max 0.0000
+
+  native witness search in chart J at d=16, n=1200
+    sampled 250/1200
+    sampled 500/1200
+    sampled 750/1200
+    sampled 1000/1200
+    sampled 1200/1200
+  -> 13 witness pair(s); 13 of them are still witnesses under a magnitude-only separation criterion
+  wrote outputs\g8\chart_j.json
+
+==========================================================================
+PHASE 3  OBSERVATION-SET DISCRIMINATOR
+==========================================================================
+  G_d16:
+    baseline_16_linear_0.15_0.90     B=15 matched rank  4 move max 0.0000
+    16_geometric_0.15_0.90           B=14 matched rank  4 move max 0.1980
+    16_linear_0.30_0.60              B=16 matched rank  2 move max 0.9743
+    16_linear_0.50_0.90              B=16 matched rank  4 move max 0.6633
+    8_every_other                    B= 7 UNMATCHED rank  3 move max 0.4583
+    8_lower_half                     B= 7 UNMATCHED rank  2 move max 0.9843
+  L_d16:
+    baseline_16_linear_0.15_0.90     B=15 matched rank  4 move max 0.0000
+    16_geometric_0.15_0.90           B=13 matched rank  4 move max 0.1991
+    16_linear_0.30_0.60              B=16 matched rank  2 move max 0.9763
+    16_linear_0.50_0.90              B=16 matched rank  4 move max 0.6595
+    8_every_other                    B= 7 UNMATCHED rank  3 move max 0.4476
+    8_lower_half                     B= 7 UNMATCHED rank  2 move max 0.9865
+  J_d16:
+    baseline_16_linear_0.15_0.90     B=15 matched rank  5 move max 0.0000
+    16_geometric_0.15_0.90           B=13 matched rank  5 move max 0.2070
+    16_linear_0.30_0.60              B=16 matched rank  2 move max 0.9748
+    16_linear_0.50_0.90              B=16 matched rank  4 move max 0.6051
+    8_every_other                    B= 7 UNMATCHED rank  4 move max 0.4196
+    8_lower_half                     B= 7 UNMATCHED rank  2 move max 0.9954
+
+  chart change G->L at d=16 : 0.0276
+  largest observation-set change (offered-B matched): 0.974333235426993
+  ... after sqrt(rows-used) normalisation:            0.9751482620644292
+  SPEC-g8-3 falsifier fires: True  (normalised: True)
+  wrote outputs\g8\obs_set.json
+
+==========================================================================
+PHASE 4  RANK(CUTOFF) CURVES for every cell
+==========================================================================
+  G_d4   rank  3/ 4  in-gap True   gap x7.39  bare integer justified True  plateau noise_rel {'noise_rel_lo': 0.02, 'noise_rel_hi': 0.1, 'limited_by_resolvable_rank': False, 'note': "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"}
+  G_d16  rank  4/16  in-gap False  gap x4.99  bare integer justified False  plateau noise_rel {'noise_rel_lo': 0.02, 'noise_rel_hi': 0.02, 'limited_by_resolvable_rank': False, 'note': "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"}
+  L_d4   rank  3/ 4  in-gap True   gap x17.46  bare integer justified True  plateau noise_rel {'noise_rel_lo': 0.01, 'noise_rel_hi': 0.1, 'limited_by_resolvable_rank': False, 'note': "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"}
+  L_d16  rank  4/16  in-gap False  gap x5.11  bare integer justified False  plateau noise_rel {'noise_rel_lo': 0.02, 'noise_rel_hi': 0.02, 'limited_by_resolvable_rank': False, 'note': "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"}
+  J_d4   rank  4/ 4  in-gap False  gap x6.21  bare integer justified False  plateau noise_rel {'noise_rel_lo': 1e-06, 'noise_rel_hi': 0.02, 'limited_by_resolvable_rank': True, 'note': "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"}
+  J_d16  rank  5/16  in-gap False  gap x6.59  bare integer justified False  plateau noise_rel {'noise_rel_lo': 1e-06, 'noise_rel_hi': 0.02, 'limited_by_resolvable_rank': True, 'note': "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"}
+
+  bare integer rank may be quoted in: ['G_d4', 'L_d4']
+  wrote outputs\g8\ranks.json
+
+==========================================================================
+PHASE 5  MODE COUNT: is the witness set two basins or many?
+==========================================================================
+  criterion fixed BEFORE any distance is computed (AH-14):
+    metric      max_abs_log10_decades
+    linkage     single
+    threshold   0.3 decades (inherited from GlobalStudyConfig.min_separation_decades)
+    hash        430caed50544057a15b78dd969c23811f52b73a0f3c90dbf1ca7e7dfbeece76f
+  chart_G_d4: 13 pairs, 26 members -> 20 basin(s) at 0.3 dec; witness graph has 13 component(s), sizes [2, 2, 2, 2, 2, 2]
+    count vs threshold: 0.05->26, 0.1->26, 0.15->25, 0.2->25, 0.25->23, 0.3->20, 0.4->10, 0.5->6, 0.6->1, 0.8->1, 1->1, 1.25->1, 1.5->1, 2->1, 2.5->1, 3->1
+    barrier depths  within: median 630.4806219405  between: median 1393.1901371026488
+  chart_L_d16: 37 pairs, 67 members -> 67 basin(s) at 0.3 dec; witness graph has 31 component(s), sizes [4, 3, 3, 3, 2, 2]
+    count vs threshold: 0.05->67, 0.1->67, 0.15->67, 0.2->67, 0.25->67, 0.3->67, 0.4->67, 0.5->67, 0.6->67, 0.8->66, 1->63, 1.25->26, 1.5->5, 2->1, 2.5->1, 3->1
+    barrier depths  within: median None  between: median 1187.859868907096
+  chart_J_d16: 13 pairs, 26 members -> 26 basin(s) at 0.3 dec; witness graph has 13 component(s), sizes [2, 2, 2, 2, 2, 2]
+    count vs threshold: 0.05->26, 0.1->26, 0.15->26, 0.2->26, 0.25->26, 0.3->26, 0.4->26, 0.5->26, 0.6->26, 0.8->25, 1->15, 1.25->3, 1.5->1, 2->1, 2.5->1, 3->1
+    barrier depths  within: median None  between: median 873.957356470323
+  wrote outputs\g8\modes.json
+
+==========================================================================
+PHASE 6  NEGATIVE CONTROL (mandatory)
+==========================================================================
+  1. witness predicate on a distinguishable pair: d = 5.3473e-01 vs floor 2.00e-02 -> REJECTED
+  2. pinned-junction chart J vs chart G d=15: junction column |.| = 0.000e+00, magnitude columns agree to 0.000e+00 -> NOT DIFFERENT (control passes)
+  3. cluster criterion: 3 blobs -> 3, 1 blob -> 1 -> PASSES
+  4. bare length-16 vector to a 301-node solver -> RAISED; charted vector still solves: True
+
+  -> all negative controls behave as required: True
+  wrote outputs\g8\negative_control.json
+
+wrote outputs\g8/manifest.json

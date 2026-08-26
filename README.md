@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-615%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-678%20passing-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -55,7 +55,7 @@ interval.
 | **UQ backend comparison** | deep ensemble beats tuned MC-dropout and tuned SWAG on every uncertainty axis; σ inflates **21.3×** off-distribution vs 1.4×/2.5× | `run_uq_benchmark.py`, `run_uq_tuning.py` |
 | **Bias selection** | information-based design **+0.39** identifiable rank vs random (5 wins/0 losses); the incumbent uncertainty acquisition is **−0.31**, i.e. *worse than random* | `run_experiment_design.py` |
 | **Built-in potential** vs analytic | rel. error **7.24e-14** (grid-independent over N=101…601) | `bayespinn selftest` |
-| **Test suite** | **615 passing**, incl. 58 solver-numerics, 27 MOS-cap physics and 41 ohmic-gradient tests | `make test` |
+| **Test suite** | **678 passing**, incl. 58 solver-numerics, 27 MOS-cap physics and 41 ohmic-gradient tests | `make test` |
 
 ### Read these caveats before quoting any number above
 
@@ -82,10 +82,24 @@ interval.
    **chart L** at d=16, the global contraction in **chart G** at d=4 — and
    neither chart contains the other, so their fractions are over different
    manifolds and are not comparable. Generation 7 measured both charts at both
-   dimensions at one operating point and found that **the dimension moves the
-   rank and the chart does not**: rank 3 at d=4 and rank 4 at d=16, in *each*
-   chart separately, with the spectra agreeing to within 3% at matched d
-   (`docs/CHART_RECONCILIATION_g7.md`). A
+   dimensions at one operating point and found the spectra agreeing to within 3%
+   at matched d (`docs/CHART_RECONCILIATION_g7.md`), which it summarised as *the
+   dimension moves the rank and the chart does not*.
+
+   **Generation 8 confined that summary to what it measured and then beat it in
+   two directions** ([`docs/G8_RESULT.md`](docs/G8_RESULT.md)). Charts G and L
+   differ only in whether the interpolation between anchors is geometric or
+   arithmetic; a **third chart** with the junction position as a free continuous
+   coordinate — **chart J** — moves the unit-homogeneous part of the spectrum by
+   **219%** at one displaced junction and **9.1%** at another, against the 2.8%
+   the chart-G-to-chart-L change produces at the same operating point. And
+   perturbing the **observation set** alone, in **chart G** at **d=16**, moves it
+   by **19.8%** merely by spacing the same 16 biases geometrically instead of
+   linearly, and by **97.4%** over a narrowed 0.30–0.60 V range — where the
+   *local* rank itself falls from 4 to 2. So the honest statement is that within
+   one interpolant family the chart hardly matters, the dimension matters a
+   little more, **what you measure matters an order of magnitude more than
+   either**, and a genuinely different parameterisation matters most of all. A
    19-point forward-bias I–V sweep at 2% measurement noise determines only 3–4
    of 16 doping degrees of freedom of **chart L** at **d=16** at the reference
    conditions, and 1–6 (median 3)
@@ -231,7 +245,7 @@ bayespinn-inv/
 │   ├── utils/           # run provenance / manifests
 │   └── cli.py           # `bayespinn` console entry point
 ├── scripts/             # experiment launchers (repo tools, need configs/)
-├── tests/               # 615 tests
+├── tests/               # 678 tests
 ├── docs/                # audit ledger, novelty audit, ADRs, release readiness
 └── outputs/             # generated results + manifests
 ```
@@ -285,7 +299,7 @@ matter for everything downstream:
 ### The result that ties the project together
 
 The forward map is rank-deficient **locally**, and degenerate **globally**.
-Locally, in **chart L** at **d=16**: at a given operating point the Jacobian of a
+Locally, in **chart L** at **d=16**, at 2% measurement noise: at a given operating point the Jacobian of a
 terminal I–V sweep determines only 3–4 of 16 of that chart's doping degrees of
 freedom, and that number **does not grow when you add parameters**. Globally, in
 **chart G** at **d=4**: two profiles differing by **8.18× in doping** produce I–V
@@ -295,10 +309,39 @@ refinement, so it is the device that cannot tell them apart, not the solver.
 The degeneracy is not an artefact of either chart. Generation 7 embedded that
 witness pair into **chart L** at **d=16** and it survives: observational distance
 1.207e-02 against 1.225e-02 in **chart G**, with the 8.18× separation preserved to
-one part in a thousand. The likelihood along the path between the two devices is
-**bimodal**, not flat — two isolated maxima separated by a barrier 242 log-units
-deep — so a gradient-based inversion reaches whichever device it starts nearest
-and never learns the other exists.
+one part in a thousand.
+
+**And it is not a flat direction.** The likelihood along the path between the two
+devices, in **chart G** at **d=4**, is **bimodal** — two isolated maxima at the
+endpoints, separated by a barrier **242 log-units** deep, with only 5 of 61 path
+points inside the 2% floor, against a control along the most observable direction
+that is 43.7× deeper and has no second mode. Three things follow, and they are
+what this project is actually about.
+
+1. **The degeneracy is a discrete set of isolated equivalent devices, not a
+   continuum.** A flat direction is a manifold of indistinguishable devices; this
+   is several distinct devices, each locally well determined, that produce the
+   same measurement.
+2. **The *local* and *global* results never disagreed.** A local Jacobian
+   spectrum is *structurally incapable* of detecting a second mode 8–15× away in
+   doping — it is a derivative at a point. The two analyses measure different
+   things and one of them cannot see the phenomenon in principle. That, not the
+   chart and not the dimension, is the reconciliation; the chart work
+   (`docs/CHART_RECONCILIATION_g7.md`, [`docs/G8_RESULT.md`](docs/G8_RESULT.md))
+   is what had to happen before it could be seen.
+3. **Gradient-based inversion cannot cross a 242-log-unit barrier.** It converges
+   to whichever basin it was initialised in and reports a well-conditioned local
+   spectrum while doing so — high apparent confidence, wrong device. Every
+   inverse-design method that reports a *local* uncertainty inherits this.
+
+And it is not only the doping magnitudes. Generation 8 added a **chart J** whose
+extra coordinate is the junction position, searched it *globally* at **d=16**, and
+found **13 witness pairs** among 719,400
+examined. The widest puts the metallurgical junction at **694 nm** in one
+device and **271 nm** in the other — **423 nm apart in a 1000 nm
+device** — with an I–V difference below the 2% floor. Terminal I–V cannot locate
+the junction either, once the doping is free to compensate
+([`docs/G8_RESULT.md`](docs/G8_RESULT.md) §2).
 
 A surrogate trained only on that measurement is therefore constrained only in
 that subspace. Its *values* can be excellent while its *derivatives* along the
@@ -344,7 +387,7 @@ independent re-solve (measured ratios 0.995–1.04).
 ## Reproducing the experiments
 
 ```bash
-make test                          # 615 tests, ~2 min 55 s (n=3, 171-181 s)
+make test                          # 678 tests; timings in LOOP_STATE_v5.json
 make selftest                      # physics self-check of the installed package
 make check-install                 # build a wheel, install clean, test there
 
@@ -369,7 +412,7 @@ configuration — so any number can be traced to what produced it.
 |---|---|---|
 | 1 | Terminal-current noise floor ~2e-6 A/m² near equilibrium; the true current there is zero and the oracle cannot resolve it. | Measured and reported per solve. Removing it needs a quasi-Fermi reformulation (ADR-0002). |
 | 2 | The surrogate extrapolates poorly outside its training doping band (38% median error) and does not transfer to unseen profile families (84%). | Measured; the honest operating envelope. |
-| 3 | Profile recovery from terminal I–V is ill-posed **locally and globally**. Locally, in **chart L** at **d=16**: 3–4 of 16 dof identifiable at 2% noise at the reference point. Globally, in **chart G** at **d=4**: 13 witness pairs (up to **8.18×** apart in doping, **1.23%** apart in I–V) found by search. The two fractions are over different charts and are not comparable; at matched d the rank is the same in both charts (`docs/CHART_RECONCILIATION_g7.md`). | Local Jacobian rank stress-tested across six axes plus a bootstrap; global witnesses found by oracle-arbitrated search over 1,999,000 pairs and shown to **survive 4× grid refinement**. ADR-0007. |
+| 3 | Profile recovery from terminal I–V is ill-posed **locally and globally**. Locally, in **chart L** at **d=16**: 3–4 of 16 dof identifiable at 2% noise at the reference point. Globally, in **chart G** at **d=4**: 13 witness pairs (up to **8.18×** apart in doping, **1.23%** apart in I–V) found by search. The two fractions are over different charts and are not comparable; at matched d the rank is the same in both charts (`docs/CHART_RECONCILIATION_g7.md`), but that invariance holds only within the one interpolant family those two charts span — a third chart with a free junction, and the observation set, both move the spectrum far more ([`docs/G8_RESULT.md`](docs/G8_RESULT.md)). | Local Jacobian rank stress-tested across six axes plus a bootstrap; global witnesses found by oracle-arbitrated search over 1,999,000 pairs and shown to **survive 4× grid refinement**. ADR-0007. |
 | 4 | Uncertainty-driven bias acquisition is **worse** than random for inverse identifiability (−0.31 rank, 9 losses / 20). | Measured negative result; information-based design (+0.39) is the working alternative. AUDIT_MASTER DES-01. |
 | 4b | The surrogate's **gradients** are usable only inside the identifiable subspace (mean cosine +0.50 inside, −0.00 outside) — and more training does not fix it. | Measured; this bounds gradient-based inverse design and any Jacobian-based experiment design. AUDIT_MASTER GRAD-01. |
 | 4c | The pure-physics PINN does not work as a forward model (100% median relative error). | Retained as legacy + a documented negative result. ADR-0004. |

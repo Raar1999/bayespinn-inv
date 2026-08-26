@@ -1,0 +1,39 @@
+{
+  "witness_predicate_rejects_a_distinguishable_pair": {
+    "construction": "two chart-J devices with identical doping magnitudes and junctions at 0.25 L and 0.75 L -- far apart in coordinates, and nothing like each other in I-V",
+    "separation_decades": 0.9542425094393249,
+    "observational_distance": 0.5347317772149442,
+    "distinguishability_floor": 0.02,
+    "n_witnesses": 0,
+    "rejected": true,
+    "ran_through": "bayespinn_inv.inverse.global_identifiability.witness_search"
+  },
+  "chart_discriminator_returns_not_different_for_a_pinned_junction": {
+    "construction": "chart J with junction_scale = 0 pins the junction at the midpoint, which is where charts G and L pin it. A discriminator that cannot return *not different* here is not measuring anything.",
+    "pinned_junction_column_norm": 0.0,
+    "free_junction_column_norm": 1.0131269232682505,
+    "magnitude_columns_vs_chartG_d15_max_rel": 0.0,
+    "spectral_movement_pinned_vs_G_d15": {
+      "max_rel": 1.690665229429799e-15,
+      "mean_rel": 8.335633708041198e-16,
+      "k": 5
+    },
+    "not_different": true
+  },
+  "cluster_criterion_recovers_a_known_answer": {
+    "three_separated_blobs_expected": 3,
+    "got": 3,
+    "one_blob_expected": 1,
+    "got_one": 1,
+    "passes": true,
+    "ran_through": "bayespinn_inv.inverse.modes.count_basins"
+  },
+  "solver_refuses_a_chartless_parameter_vector": {
+    "construction": "a bare length-16 doping array handed to a 301-node solver -- exactly what six generations of results were produced by, and what CHART-01's fix forbids",
+    "raised": true,
+    "message_head": "doping has shape (16,) but this solver's grid has 301 nodes. Until generation 8 this method interpolated the difference away silently, which is how six generati",
+    "same_call_with_a_chart_succeeds": true,
+    "passes": true
+  },
+  "all_controls_pass": true
+}
