@@ -1,0 +1,45 @@
+{
+  "an_ordering_from_one_operating_point_is_rejected": {
+    "construction": "exactly the generation-8 evidence -- the four-way ordering at witness pair 0 member a, 16 biases over 0.15-0.90 V -- offered to the battery as a general claim",
+    "claim_offered": "observation set > junction > dimension > interpolant, unqualified",
+    "verdict": {
+      "supported": false,
+      "reason": "an ordering measured at one operating point is a measurement of that point; generality is a claim about the others, and none were measured",
+      "n_operating_points": 1
+    },
+    "rejected": true,
+    "ran_through": "scripts/run_g9.py::ordering_is_supported_as_general, the same predicate that judges the positive result"
+  },
+  "the_same_predicate_accepts_a_consistent_ordering": {
+    "construction": "three synthetic points carrying one order under both statistics",
+    "verdict": {
+      "supported": true,
+      "reason": "the same order under both statistics at all 3 points",
+      "n_operating_points": 3
+    },
+    "accepted": true
+  },
+  "the_refinement_battery_can_separate_a_distinguishable_pair": {
+    "construction": "two chart-J devices with identical doping magnitudes and junctions at 0.25 L and 0.75 L, through the same refinement battery SPEC-g9-3 uses",
+    "rows": [
+      {
+        "grid_n": 301,
+        "observational_distance": 0.5347317772149442,
+        "above_floor": true
+      },
+      {
+        "grid_n": 1201,
+        "observational_distance": 0.5238003527195241,
+        "above_floor": true
+      }
+    ],
+    "passes": true
+  },
+  "chart_discriminator_returns_not_different_for_a_pinned_junction": {
+    "construction": "chart J with junction_scale = 0 pins the junction where charts G and L pin it; retained from generation 8 because every junction number in phase 1 rests on it",
+    "pinned_junction_column_norm": 0.0,
+    "magnitude_columns_vs_chartG_d15_max_rel": 0.0,
+    "not_different": true
+  },
+  "all_controls_pass": true
+}

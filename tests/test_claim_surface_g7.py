@@ -79,6 +79,7 @@ CLAIM_SURFACE_G7 = (
     "docs/S1_GLOBAL_IDENTIFIABILITY_g6.md",
     "docs/CHART_RECONCILIATION_g7.md",
     "docs/G8_RESULT.md",
+    "docs/G9_RESULT.md",
     "docs/NOVELTY_AUDIT.md",
 )
 

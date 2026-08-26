@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-709%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-717%20passing-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -313,7 +313,20 @@ refinement, so it is the device that cannot tell them apart, not the solver.
 The degeneracy is not an artefact of either chart. Generation 7 embedded that
 witness pair into **chart L** at **d=16** and it survives: observational distance
 1.207e-02 against 1.225e-02 in **chart G**, with the 8.18× separation preserved to
-one part in a thousand.
+one part in a thousand. Generation 9 walked the likelihood between the two
+members of each *global* **chart G** **d=4** witness pair and found a median
+barrier of 8.31 log-units against a floor barrier of 8.0, where ordinary prior
+pairs sit at 339 or deeper: the witness pairs are a **ridge the instrument
+cannot resolve**, not two isolated points.
+
+**What the local number is most sensitive to is what you measure.** Across
+twelve operating points -- four devices crossed with three bias windows --
+perturbing the observation set moves the leading spectrum by 92%-108% every
+time, while changing the chart, the dimension or the junction position each
+swings by more than a factor of twenty and the three trade places depending on
+the device and the window. The ranking generation 8 published is
+operating-point dependent and is withdrawn as a general claim;
+`docs/G9_RESULT.md` has the measurement.
 
 **And it is not a flat direction.** The likelihood along the path between the two
 devices, in **chart G** at **d=4**, is **bimodal** — two isolated maxima at the

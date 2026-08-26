@@ -4,7 +4,110 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
-## [Unreleased] — generation 8 of the audit loop, the final technical generation (2026-08-26)
+## [Unreleased] — generation 9 of the audit loop (2026-08-26)
+
+No API changes. This generation is a **replication**, and it falsifies the
+headline of the one before it.
+
+**The four-way ordering of what moves the local identifiability spectrum —
+observation set, junction, dimension, interpolant — is operating-point
+dependent.** Generation 8 measured it at one operating point and recorded, as its
+own highest remaining scientific risk, that every cell in it sat there.
+Generation 9 measured it at nine further operating points: three devices spanning
+the doping prior crossed with three bias windows spanning the observation range,
+under a selection rule hashed before the first device was drawn. Five distinct
+orderings appear. The generation-8 order is recovered at 2 of 9 points under one
+statistic and 0 of 9 under the other, and the two statistics agree at only 2 of
+the 12 points measured — they already disagreed at generation 8's own operating
+point, which means the published summary never named one object.
+Reproduce: `PYTHONPATH=src python scripts/run_g9.py --phases preregister,op_points`.
+
+**What survives is one-against-three.** The observation set's largest movement
+spans 0.925–1.080 across all twelve operating points, a factor of 1.17 end to
+end, while the junction spans ×26, the dimension ×21 and the interpolant ×39, and
+those three trade places depending on the device and the window. *What you
+measure* dominates the local spectrum everywhere tested; how you parameterise it
+does not have a stable rank at all.
+
+**The generation-7 chart-invariance result is narrowed again.** Chart G against
+chart L at matched `d` moves the spectrum by 2.6% at best and by 101.5% at one of
+the nine points. At generation 8's own device, merely narrowing the bias window
+takes it from 2.8% to 30.7%.
+
+### Added
+
+- `scripts/run_g9.py` — the `SPEC-g9-1..4` battery. Pre-registers the
+  operating-point selection rule, the ordering statistic and the barrier
+  criterion, writes their SHA-256 hashes before anything is drawn, and refuses to
+  measure against a pre-registration that has moved.
+  Reproduce: `PYTHONPATH=src python scripts/run_g9.py --phases preregister`.
+- `outputs/g9/` — seven artefacts and a manifest recording machinery commit
+  `a6728fe` with `dirty = false`.
+- `docs/G9_RESULT.md`, `docs/audit/AUDIT_g9.md`, `LOOP_STATE_v6.json`.
+- `tests/test_claim_surface_g9.py` — `SPEC-g9-2`'s falsifier, which is about
+  prose: a rank fraction may not appear in a passage that does not say what was
+  measured, and a document quoting a rank must point at a rank curve. Found 18
+  live passages across six documents on its first run.
+- `tests/test_lint_scope_g9.py` — asserts `ruff check .` and
+  `ruff check src tests scripts` return the same verdict, that the notebook
+  ignore block is not a blanket amnesty, and that the scopes do not agree by
+  exclusion.
+- `tests/test_loop_state_g9.py` — `REP-01` applied forward: every number in the
+  state file's baseline block carries the command that produced it, and the
+  rerunnable ones are re-run and compared.
+
+### Changed
+
+- `pyproject.toml` — `[tool.ruff.lint.per-file-ignores]` now covers
+  `notebooks/*.ipynb`, naming `scripts/build_notebooks.py` as the generator and
+  each suppressed code with its reason. Both lint invocations now exit 0 over the
+  tracked tree; before this they disagreed, and the state file recorded one of
+  the two verdicts with no scope attached.
+  Reproduce: `python -m ruff check .` and `python -m ruff check src tests scripts`.
+- The support-floor comment in `pyproject.toml` now records 110 files, the
+  current scan, with the generation-7 figure of 96 beside it. A larger clean
+  static scan is a larger unevidenced surface, not a stronger claim.
+- Eighteen passages across `README.md`, `docs/RELEASE_READINESS.md`,
+  `docs/CLAIM_EVIDENCE_MATRIX.md`, `docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`,
+  `docs/CHART_RECONCILIATION_g7.md` and `docs/NOVELTY_AUDIT.md` now carry the
+  observation set their rank was measured over. Every one already carried its
+  cutoff.
+- `docs/OPERATOR_TASKS.md` — `CI-01` is reclassified `ACCEPTED-PERMANENT` by the
+  default the generation-8 ruling set, after three cycles without a decision. The
+  task stands, the reversion condition is written down, and the cost statement is
+  in `docs/G9_RESULT.md` §1.4.
+- `docs/G8_RESULT.md` carries a pointer block naming what generation 9 moved. Its
+  body is unchanged: it is what was measured at that operating point.
+
+### Fixed
+
+- Nothing in the library. Two bookkeeping defects in the loop's own records: a
+  promoted figure that carried no invocation and could not be re-derived
+  (`AUDIT_g9` §1.1), and a baseline whose stated scope was wrong — `25` is
+  `mypy src` over 44 files, not the tracked tree, which gives 150 over 112
+  (`AUDIT_g9` §1.2).
+
+### Measured, and not to be quoted without their conditions
+
+- The chart-J witness count of 13 does not survive grid refinement: **7 of 13**
+  pairs stay below the 2.0e-02 floor at `N = 301/601/1201` and
+  `tol_carrier = 1e-12`. The 694 nm / 271 nm headline pair does survive, its
+  distance falling 1.7%.
+  Reproduce: `PYTHONPATH=src python scripts/run_g9.py --phases junction_refine`.
+- A local rank is a curve in the observation set as well as in the cutoff: at the
+  generation-8 device in chart G at `d = 16`, the identifiable count at a 2%
+  cutoff runs from 1 to 4 as the bias window widens from 0.10 V to 0.75 V about a
+  fixed 0.525 V centre, and does not move at all as spacing runs from linear to
+  geometric over a fixed 0.15–0.90 V window.
+  Reproduce: `PYTHONPATH=src python scripts/run_g9.py --phases rank_obs`.
+- The chart-G witness pairs are a ridge, not two isolated points: median
+  likelihood barrier 8.31 log-units against a floor barrier of 8.0, against a
+  null control whose minimum is 339.
+  Reproduce: `PYTHONPATH=src python scripts/run_g9.py --phases basins`.
+
+---
+
+## [Superseded] — generation 8 of the audit loop (2026-08-26)
 
 Generations 1–7 are recorded in `docs/gen/` and `docs/audit/` rather than here;
 this entry resumes the changelog because generation 8 changes a solver contract

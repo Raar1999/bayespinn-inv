@@ -26,6 +26,44 @@ solver **discretisation floor** of `1.5e-3`; their maximum, `2.0e-2`, is the
 distinguishability floor.
 
 Artefacts: `outputs/g8/`, manifest `manifest.json`, machinery commit `01f0281`.
+
+> ## Superseded in part at generation 9
+>
+> Generation 8's own closing caveat -- *every cell sits at one operating point* --
+> was tested at nine further operating points and was right. What moved:
+>
+> * **The four-way ordering does not survive.** Five distinct orderings appear
+>   across the nine points under the larger-movement statistic; the ordering
+>   below is recovered at 2 of 9 under that statistic and at 0 of 9 under the
+>   milder one. The summary *observation set > junction > dimension >
+>   interpolant* is withdrawn as a general claim. What survives is one-against-
+>   three: **the observation set dominates at every operating point measured**,
+>   its largest movement spanning 0.925-1.080, while the other three swing by
+>   more than a factor of twenty each and trade places.
+> * **The ordering was never one ordering.** Its two natural statistics disagree
+>   at generation 8's own operating point -- by the largest movement each axis
+>   produces the junction leads, by the mildest the observation set does -- and
+>   nothing here says which was meant.
+> * **section 2's chart-invariance survivor is narrower still.** The
+>   chart-G-to-chart-L movement at matched `d` is 2.8% here and **101.5%** at
+>   another device in a narrower bias window. It is a property of a
+>   `(device, window)` cell.
+> * **section 2's 13 *global* chart-J witness pairs at `d = 16` become 7** under
+>   the grid refinement the *global* doping witnesses survived at generation 6. The 694 nm / 271 nm headline
+>   pair survives; the count does not.
+> * **section 4's licensed set is not a property of `(chart, d)`.** At a 0.10 V
+>   bias window chart G at `d = 16` has a spectral gap of x230.6 at the cutoff,
+>   which the inherited criterion licenses. The licence follows the gap and the
+>   gap follows the cell.
+> * **section 5's basin reading is corrected for chart G.** Measured on the
+>   witness pairs themselves rather than an index-ordered sample, their median
+>   likelihood barrier is 8.31 log-units against a floor barrier of 8.0 -- they
+>   are a ridge, not two maxima. The generation-8 sentence *the number of
+>   likelihood basins is larger than the number of profile-distance clusters*
+>   holds for chart J and is the wrong way round here.
+>
+> Everything else below stands as measured. See `docs/G9_RESULT.md`.
+
 Reproduce with:
 
 ```bash
@@ -407,7 +445,7 @@ Control 2 is the one that matters most for §2. A discriminator that cannot retu
 
 * **`CHART-01` is closed structurally.** One reconstruction operator, a parameter vector that carries its chart across every API boundary, and an AST guard that fails when a second path appears. The 24 frozen profiles show no published number moved, and the two witness searches reproduce exactly.
 * **Charts G and L cannot place a junction.** A chart-J device with its junction at `x_j/L = 0.25` is answered by the best chart-G stand-in with a device whose magnitude is right to a few hundredths of a decade and whose doping type is wrong at 75 of 301 grid nodes. Chart J's reachable set is not a refinement of either older chart's.
-* **The junction position is *globally* non-identifiable too.** Chart J at `d=16` yields 13 witness pairs; the widest puts the metallurgical junction at 694 nm in one device and 271 nm in the other — 423 nm apart in a 1000 nm device — with an I–V difference below the 2% floor. The free coordinate was chosen because it is a fabrication parameter, and it turns out to be degenerate in the same way the doping magnitudes are.
+* **The junction position is *globally* non-identifiable too.** Chart J at `s = 0` *is* chart G at `d-1` bit for bit, so chart J **contains** chart G rather than sitting beside it and the search below runs inside one family. Chart J at `d=16` yields 13 witness pairs -- **7 of which survive grid refinement**, measured at generation 9; the widest, which does survive, puts the metallurgical junction at 694 nm in one device and 271 nm in the other — 423 nm apart in a 1000 nm device — with an I–V difference below the 2% floor. The free coordinate was chosen because it is a fabrication parameter, and it turns out to be degenerate in the same way the doping magnitudes are.
 * **The chart-invariance statement is retired to its measured family.** Within piecewise interpolants over equally spaced anchors in `log10|C|` with a fixed sign convention, the reconstruction operator does not move the *local* spectrum at matched `d`, while `d` does. Chart J moves it by far more, and so does the observation set.
 * **At `d = 16`, what you measure dominates how you parameterise.** Spacing the same 16 biases geometrically rather than linearly over the same range moves the leading *local* spectrum 7x more than changing the chart does; narrowing the range to 0.30–0.60 V drops the identifiable count from 4 to 2 in chart G at `d=16`.
 * **Rank is a curve.** A bare integer is licensed by a population gap at the cutoff, which holds in `G_d4`, `L_d4` and nowhere else among the six cells measured.

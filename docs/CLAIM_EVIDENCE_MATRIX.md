@@ -248,18 +248,71 @@ Oracle-arbitrated throughout; the surrogate is never called (`ADR-0007`, `SPEC-g
 |---|---|---|---|---|---|
 | H1 | `CHART-01` closed structurally | one reconstruction operator; the solver raises rather than interpolating; an AST guard fails per call when a second path appears. 24 profiles frozen from the deleted code path reproduce byte for byte | `pytest tests/test_one_reconstruction_g8.py` | 24 golden profiles, 3 grids | :white_check_mark: new |
 | H2 | The fix moved no published number | **chart G**, **d=4**: 13 witness pairs of 1,999,000, identical to the generation-6 artefact. **chart L**, **d=16**: 37 of 719,400, identical to the generation-7 artefact. Distances of the five rendered witnesses agree to 0.0 in both. The two budgets are **not comparable** and are quoted only to show each search reproduced itself | `python scripts/run_g8.py --phases reproduce` | 2000 + 1200 draws | :white_check_mark: new |
-| H3 | A third chart moves the *local* spectrum (**chart J**, **d=16**) | displacing the junction moves the unit-homogeneous magnitude-block spectrum by **219%** (`x_j/L = 0.35`) and **9.1%** (0.65) against **chart G** at **d=15**, versus **2.8%** for the chart-G-to-chart-L change at matched d. The generation-7 invariance is retired to the interpolant family it was measured in | `python scripts/run_g8.py --phases chart_j` | 7 cells, one operating point | :white_check_mark: new |
+| H3 | A third chart moves the *local* spectrum (**chart J**, **d=16**) | **chart J at `s=0` IS chart G at `d=15`, bit for bit** -- chart J *contains* chart G rather than sitting beside it, re-verified at 12 operating points at generation 9, so what follows is measured within one family. Displacing the junction moves the unit-homogeneous magnitude-block spectrum by **219%** (`x_j/L = 0.35`) and **9.1%** (0.65) against **chart G** at **d=15**, versus **2.8%** for the chart-G-to-chart-L change at matched d. The generation-7 invariance is retired to the interpolant family it was measured in | `python scripts/run_g8.py --phases chart_j` | 7 cells, one operating point | :white_check_mark: new |
 | H4 | The observation set moves it far more (**chart G**, **d=16**) | the same 16 biases over the same range, spaced geometrically instead of linearly: **19.8%**. Narrowed to 0.30-0.60 V: **97.4%**, and the *local* identifiable count falls from 4 to 2. Unchanged after `sqrt(rows-used)` normalisation | `python scripts/run_g8.py --phases obs_set` | 6 observation sets x 3 charts | :white_check_mark: new |
 | H5 | A *local* rank is a curve over cutoffs | a bare integer is licensed by a population gap at the cutoff in 2 of 6 cells: `G_d4`, `L_d4`. Chart J at **d=4** has no gap either, so the licence follows the gap and not the dimension | `python scripts/run_g8.py --phases ranks` | 6 cells x 8 cutoffs | :white_check_mark: new |
 | H6 | How many basins the witness set is | **many, not two**: **chart G**, **d=4**: 20 basins from 26 members of 13 pairs; **chart L**, **d=16**: 67 basins from 67 members of 37 pairs; **chart J**, **d=16**: 26 basins from 26 members of 13 pairs, single-linkage at a threshold of 0.3 decades fixed and hashed before clustering. Reported as a **lower bound** and as a curve over 0.05-3.0 decades. **Qualified by its own null control**: the same criterion over the same number of ordinary prior draws returns almost the member count in **chart L** at **d=16**, so the count there is close to trivial and only the qualitative answer survives | `python scripts/run_g8.py --phases modes` | see manifest | :white_check_mark: new |
 | H7 | Native witness search (**chart J**, **d=16**), *global* | **13 witness pair(s)** among 719,400 pairs from 1200 draws under the junction prior (hash `236ff6576a85...`), 13 of them still witnesses under a magnitude-only separation criterion. **Not comparable** to the other charts' counts: the chart, the coordinate meaning and the kind of prior all differ | `python scripts/run_g8.py --phases chart_j` | 1200 draws | :white_check_mark: new |
-| H7a | The junction position is *globally* non-identifiable too (**chart J**, **d=16**) | the widest witness pair puts the junction at 694 nm and 271 nm — **423 nm apart in a 1000 nm device** — with an observational distance of 1.7551e-02, below the 2.0e-02 floor. Terminal I-V cannot locate the metallurgical junction to better than that once the doping is free to compensate | same | 1 pair of 1200 draws | :white_check_mark: new |
+| H7a | The junction position is *globally* non-identifiable too (**chart J**, **d=16**; chart J at `s=0` is chart G at `d=15` bit for bit, so the free junction is one coordinate added to a contained chart) | the widest witness pair puts the junction at 694 nm and 271 nm — **423 nm apart in a 1000 nm device** — with an observational distance of 1.7551e-02, below the 2.0e-02 floor. Terminal I-V cannot locate the metallurgical junction to better than that once the doping is free to compensate | same | 1 pair of 1200 draws | :white_check_mark: new |
 | H8 | Charts G and L cannot place a junction | best **chart G** stand-in for a chart-J device at `x_j/L = 0.25` reproduces the magnitude to 0.0282 decades (log10) and dopes **75 of 301** grid nodes the wrong type; best **chart L** stand-in, 1.2246 decades (log10) and 77 of 301 | same | 2 probes x 5 junctions | :white_check_mark: new |
 
 ### What H1-H8 do not establish
+
+> **Measured at generation 9, and the caveat was right.** The ordering named below was repeated at nine further operating points and does not survive: five distinct orderings appear, the generation-8 order is reproduced at 2 of 9 under the larger-movement statistic and at 0 of 9 under the milder one, and the interpolant reaches 101%. See the I-series in section 9 and `docs/G9_RESULT.md` section 2. The rows above are what was measured at the generation-8 operating point and stand as that.
 
 Every cell above sits at **one operating point** - witness pair 0 member a, or a projection of it into the chart in question. The ordering the generation found (observation set > junction > dimension > interpolant) is measured there and nowhere else, and the one axis generation 8 did not perturb is the one every cell shares. The basin counts are single-linkage lower bounds over members the search happened to find, at one prior and one budget; they are not estimates of how many basins exist. No frequency is comparable across charts, and the chart-J prior is not the same kind of prior as the other two.
 
 ### Negative control
 
 Four predicates each returned the negative answer on a case constructed to deserve it, through the same code the rows above ran through: the witness search on a distinguishable pair, the chart discriminator on a pinned junction, the cluster criterion on known-answer sets, and the solver on a chartless parameter vector. `all_controls_pass = True`; `outputs/g8/negative_control.json`.
+
+---
+
+## 9. Generation 9 - the ordering at further operating points (2026-08-26)
+
+Oracle-arbitrated; 301-node grid except in I4, where the grid is the
+subject; 16 bias points per window; 2% noise; finite differences at a
+relative step of 0.05 with rows below `min_snr = 1e4` discarded -- all
+inherited unchanged from generation 8, because one ruler is what makes a
+replication one. Selection rule, ordering statistic and cluster criterion
+hashed before the first draw: `outputs/g9/preregister.json`. Machinery
+commit `a6728fe`, `dirty = false`. Artefacts `outputs/g9/`, manifest
+`manifest.json`.
+
+| # | Claim | Value | Command | n | Verdict |
+|---|---|---|---|---|---|
+| I0 | The generation-8 cells reproduce through this generation's code | interpolant 2.76% (g8: 2.8%), dimension 5.01% (5.0%), junction `x_j/L=0.35` 219.2% (219%), `0.65` 9.13% (9.1%), observation set geometric 19.80% (19.8%) | `python scripts/run_g9.py --phases op_points` | 1 control point, 12 cells | :white_check_mark: reproduction control |
+| I1 | The four-way ordering is **operating-point dependent** | five distinct orderings across nine further operating points under the larger-movement statistic, four under the milder one; the generation-8 order recovered at **2 of 9** and **0 of 9** respectively; the two statistics agree at only 2 of the 12 points measured | same | 3 devices x 3 bias windows | :white_check_mark: **falsifies the generation-8 ordering** |
+| I2 | What survives: the observation set dominates everywhere | its largest movement spans **0.925 - 1.080** across all 12 operating points, a factor of 1.17 end to end, while junction spans 0.173-4.560 (x26), dimension 0.026-0.558 (x21) and interpolant 0.026-1.015 (x39) | same | 12 points | :white_check_mark: new |
+| I3 | Chart-invariance is a property of a cell, not of the charts | the chart-G-to-chart-L movement at matched `d` is **2.6%** at best and **101.5%** at `device_p50` in the 0.15-0.50 V window; at the generation-8 device alone, narrowing the window takes it from 2.8% to **30.7%** | same | 12 points | :white_check_mark: **narrows the generation-7 result** |
+| I3a | The two charts in the observable, which is the denominator the invariance result needed | **at most 2.67%** apart in terminal current over the window their spectra are compared in, while sitting **more than 1.2 decades** apart in profile space (least-squares projection in `log10|C|`, the best admissible method). 0.82% at the generation-8 operating point | same | 12 points | :white_check_mark: new; supersedes an unreproducible 44% |
+| I4 | The chart-J witness **count** does not survive refinement | **7 of 13** pairs stay below the 2.0e-02 floor at `N = 301/601/1201` and `tol_carrier = 1e-12`. The pairs that separate are concentrated among those whose junctions were nearly coincident: the pair 0.4 nm apart rises **195%** | `python scripts/run_g9.py --phases junction_refine` | 13 pairs x 3 grids x 2 tolerances | :warning: **falsifies the count of 13** |
+| I4a | The junction *headline* pair survives it | 694 nm / 271 nm: observational distance **falls** 1.7551e-02 -> 1.7247e-02, below the floor at all six configurations | same | 1 pair | :white_check_mark: survives |
+| I5 | A *local* rank is a curve in the observation set as well as in the cutoff (**chart G**, **d=16**) | at the generation-8 device the identifiable count at a 2% cutoff runs **1 -> 4** as the bias window widens from 0.10 V to 0.75 V about a fixed 0.525 V centre, and does **not move at all** as spacing runs from linear to geometric over a fixed 0.15-0.90 V window | `python scripts/run_g9.py --phases rank_obs` | 2 devices x (9 widths + 9 spacings) | :white_check_mark: new |
+| I5a | A bare integer becomes licensed at **d=16** in a narrow bias window | at 0.10 V and 0.15 V the 2% cutoff falls inside a spectral gap of **x230.6** and **x171.3**, so the inherited gap criterion licenses a bare integer there. The licence follows the gap, and the gap is a property of the `(chart, d, device, bias window)` cell | same | 18 cells | :white_check_mark: extends `SPEC-11` |
+| I6 | The chart-G witness pairs are a **ridge**, not two isolated points (**global**, **chart G**, **d=4**) | median likelihood barrier between the two members of a witness pair **8.31 log-units** against a floor barrier of 8.0, with **6 of 13** pairs at or below it. Null control - the same criterion over the same number of ordinary prior draws forming no witness pair - has a **minimum** of 339 and a median of 9379 | `python scripts/run_g9.py --phases basins` | 13 witness + 13 null paths | :white_check_mark: new, strengthens S-1 |
+| I6a | Chart J's witness pairs are the other shape (**global**, **chart J**, **d=16**) | no pair within the floor barrier; median **468 log-units**, 59x the floor. Null control minimum 1332, median 9479. Both are global non-identifiability; they are different shapes of it | same | 13 witness + 13 null paths | :white_check_mark: new |
+
+### What I1-I6a do not establish
+
+Nine further operating points are nine, drawn under one rule from one prior
+at one `d`; they establish that the ordering is not invariant, not what it
+depends on. The observation-set dominance is measured over three windows
+inside one converged bias range and says nothing about ranges outside it.
+I5's curves are at two devices, named in `docs/G9_RESULT.md` section 3
+before they were chosen. I6's barrier metric covers the *global* witness pairs of **chart G** at
+**d=4** and of **chart J** at **d=16**, with an equal-sized null control,
+and not every pair among the members; a straight line in chart coordinates
+is a lower bound on the barrier, since a curved path can only be shallower.
+
+### Negative control
+
+Four predicates each returned the negative answer on a case constructed to
+deserve it, through the same code the rows above ran through. The one the
+clause names: the generation-8 evidence -- the four-way ordering at a single
+operating point -- offered as a general claim, **rejected** by the same
+predicate that judges I1, on the stated ground that generality is a claim
+about the operating points that were not measured. That same predicate
+accepts three synthetic points carrying one order under both statistics, so
+it is not a predicate that only ever rejects. `all_controls_pass = True`;
+`outputs/g9/negative_control.json`.

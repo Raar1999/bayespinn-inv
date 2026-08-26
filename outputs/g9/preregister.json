@@ -1,0 +1,98 @@
+{
+  "written_before": "any draw, any solve, any spectrum. Every later phase recomputes these hashes and refuses to run on a mismatch.",
+  "operating_point_rule": {
+    "n_candidates": 400,
+    "seed": 9,
+    "d_select": 4,
+    "rank_statistic": "mean_log10_magnitude",
+    "percentiles": [
+      10.0,
+      50.0,
+      90.0
+    ],
+    "prior_lo_si": 1e+21,
+    "prior_hi_si": 1e+23,
+    "min_distance_from_g8_decades": 0.3,
+    "require_all_biases_certified": true,
+    "substitution": "next candidate in ascending rank order; each recorded",
+    "bias_windows": [
+      [
+        "wide_0.15_0.90",
+        0.15,
+        0.9
+      ],
+      [
+        "low_0.15_0.50",
+        0.15,
+        0.5
+      ],
+      [
+        "high_0.50_0.90",
+        0.5,
+        0.9
+      ]
+    ],
+    "n_biases": 16,
+    "rule_hash": "f4d51bc566b86f483f8da6496eb664c188718d204cd9a859225363290892e3ea"
+  },
+  "ordering_statistic": {
+    "metric": "max relative movement of the leading singular values",
+    "k": 5,
+    "statistics": [
+      "by_max",
+      "by_mildest"
+    ],
+    "stable_requires": "both statistics give the same order at that point",
+    "axes": [
+      "observation_set",
+      "junction",
+      "dimension",
+      "interpolant"
+    ],
+    "axis_members": {
+      "interpolant": [
+        "G_to_L_at_d16"
+      ],
+      "dimension": [
+        "G_d15_vs_G_d16"
+      ],
+      "junction": [
+        "xj_0.35",
+        "xj_0.65"
+      ],
+      "observation_set": [
+        "geometric_same_window",
+        "middle_half",
+        "upper_half",
+        "stride2",
+        "lower_half_count"
+      ]
+    },
+    "reported_outside_the_ordering": [
+      "G_d4_vs_G_d16"
+    ],
+    "statistic_hash": "1c69e254d4b12b180f15ce35b2302ccc707507a4e0265aa179e17ecb05f8b081"
+  },
+  "barrier_criterion": {
+    "metric": "profile likelihood barrier depth, straight line in chart coordinates",
+    "n_points": 11,
+    "noise_rel": 0.02,
+    "floor_reference": "0.5 * B_certified log-units, the cost of a curve one noise unit away at every bias",
+    "threshold_multiples_of_floor": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      25.0,
+      50.0,
+      100.0,
+      250.0,
+      1000.0
+    ],
+    "null_control": "the same criterion over the same number of ordinary prior draws that form no witness pair, taken in draw order",
+    "criterion_hash": "9631b4711f99a6319504b5c50185a26cb4f6dc2427024816831fa0846184c56f"
+  },
+  "generation_8_operating_point": "witness pair 0 member a of outputs/global_identifiability_g6/global_identifiability.json, chart G d=4, collocated or projected into each chart; bias window 0.15-0.90 V, 16 linear points. Re-measured here as a reproduction control, and excluded from the count of *further* operating points.",
+  "what_would_falsify_g9_1": "the ordering changes at any operating point. Pre-registered as reportable either way (AH-04, AH-13): a flip converts the headline to 'the ordering is itself operating-point dependent', which is weaker and still publishable."
+}
