@@ -9,11 +9,10 @@
     "machinery_commit": "The commit every measurement in this generation ran against. One tree, one commit: the run manifest records it with dirty=false.",
     "results_commit": "The commit carrying the artefacts and the result documents. Equal to champion_commit when the generation ends with its results."
   },
-  "champion_commit": "01f02812e367958ca81a73d4b0c48cf2622c42d7",
+  "champion_commit": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
   "machinery_commit": "01f02812e367958ca81a73d4b0c48cf2622c42d7",
-  "results_commit": "01f02812e367958ca81a73d4b0c48cf2622c42d7",
+  "results_commit": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
   "bookkeeping_commit": null,
-  "pointer_provisional": "This file is written by the commit that carries the results, so at the moment of writing the results commit does not yet exist and cannot be named -- the fixed point section 8 of the ruling describes. The pointer therefore names the machinery commit here and is repointed at the results commit by the following bookkeeping commit, which is the shape generation 7 used and the ruling ratified. This key is absent once the pointer is final.",
   "champion_branch": "loop/champion",
   "one_tree_one_commit": {
     "honoured": true,
@@ -42,7 +41,7 @@
     "g5": "b5218b1",
     "g6": "a59255e",
     "g7": "922c2cc",
-    "g8": "01f0281"
+    "g8": "0f22ecc"
   },
   "spec_clause_status": {
     "SPEC-g8-1": "PASS - CHART-01 closed structurally, not documented away. One reconstruction operator; the solver raises instead of interpolating; an AST guard fails when a second path appears, per call rather than per file. 24 profiles frozen from the deleted code path reproduce byte for byte, and both prior witness searches reproduce exactly. Falsifier (a second reconstruction path can be introduced without a test failing) does NOT fire.",
