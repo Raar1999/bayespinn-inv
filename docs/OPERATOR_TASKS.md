@@ -8,9 +8,26 @@ mark the corresponding finding closed.
 
 ## OT-1 — push `loop/champion` so CI executes · closes `SPEC-g0-3b` / `CI-01`
 
-**Status** `OPERATOR-BLOCKED` · **Blocks** `CI-01`, open since generation 0
+**Status** `OPERATOR-BLOCKED` · **Blocks** `CI-01` — **reclassified
+`ACCEPTED-PERMANENT` at generation 9 by default trigger**, see below
 **Why the loop cannot do it** `R-4` prohibits `git push`; `SK-09` prohibits network
 access.
+
+> **Resolution, generation 9, ruling of 2026-08-26 §4 — the default fired.** The
+> generation-8 ruling put a decision ahead of this command: remote, or no
+> remote. It went unanswered for three cycles, outliving its own deadline, so
+> the stated default applies rather than the wait continuing.
+>
+> **`CI-01` is `ACCEPTED-PERMANENT`.** The task below is *not* withdrawn — it
+> remains the action that would close `SPEC-g0-3b` — but the finding is no
+> longer carried as a thing about to be fixed, because a status that says
+> "blocked" for nine generations is a status that has stopped describing
+> anything. The cost statement the status owes is in `docs/G9_RESULT.md` §1 and
+> is reviewed each generation for growth.
+>
+> **If a remote is added later the status reverts** and the cost statement is
+> superseded forward, not deleted. That is the same discipline `R-4` applies to
+> commit messages: a withdrawn statement leaves its trace.
 
 > **Correction, generation 8, per the ruling of 2026-08-26 §10.** *This task
 > requires adding a remote first.* `git remote -v` is empty on this host, so the

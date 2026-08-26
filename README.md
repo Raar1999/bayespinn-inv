@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-678%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-709%20passing-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -299,9 +299,13 @@ matter for everything downstream:
 ### The result that ties the project together
 
 The forward map is rank-deficient **locally**, and degenerate **globally**.
-Locally, in **chart L** at **d=16**, at 2% measurement noise: at a given operating point the Jacobian of a
-terminal I–V sweep determines only 3–4 of 16 of that chart's doping degrees of
-freedom, and that number **does not grow when you add parameters**. Globally, in
+Locally, in **chart L** at **d=16**, at 2% measurement noise over the reference
+observation set of 16 bias points spanning 0.15–0.90 V: at a given operating
+point the Jacobian of a terminal I–V sweep determines only 3–4 of 16 of that
+chart's doping degrees of freedom, and that number **does not grow when you add
+parameters**. It does, however, move with what you measure: the count is
+reported as `rank(cutoff)` in `outputs/g8/ranks.json`, and narrowing the same 16
+biases to 0.30–0.60 V halves it, from 4 to 2. Globally, in
 **chart G** at **d=4**: two profiles differing by **8.18× in doping** produce I–V
 curves differing by **1.23%**, below a 2% floor — and that pair survives 4× grid
 refinement, so it is the device that cannot tell them apart, not the solver.

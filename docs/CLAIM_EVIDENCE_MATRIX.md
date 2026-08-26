@@ -180,7 +180,8 @@ Median relative drift `1.906e-08`; maximum `5.840e-02`, at
 propagated).
 
 **No claim is affected.** All four **local** identifiable ranks in **chart L**
-at **d=16** — the Jacobian rank at the reference operating point, 4, 5, 3, 4
+at **d=16** — the Jacobian rank at the reference operating point, over 16 bias
+points spanning 0.15–0.90 V and reported as `rank(cutoff)`, 4, 5, 3, 4
 of 16 — every
 `resolvable_rank`, and all four complete `rank_vs_noise` tables are identical.
 
@@ -224,9 +225,9 @@ distinguishability floor **2.0e-02** = max of the two. Manifest:
 | G1 | Global non-identifiability, witness search (**chart G**, **d=4**) | **13 witness pairs** of 1,999,000 examined; separations **2.01x - 8.18x** in doping; observational distances 1.23e-02 - 1.53e-02, all below the 2.0e-02 floor | `python scripts/run_global_identifiability.py` | 2000 profiles, all oracle-certified | :white_check_mark: new |
 | G2 | The closest witness | doping differs **8.18x** at one anchor; I-V differs **1.23%** across 16 biases spanning ten decades of current | same | 1 pair | :white_check_mark: new |
 | G3 | Witnesses survive refinement | 3 of 3 tested pairs stay below the floor at N=301/601/1201 and at `tol_carrier=1e-12`; pair 0's distance *falls* 1.23e-02 -> 8.61e-03 | `python scripts/run_witness_falsifier.py` | 3 pairs x 3 grids x 2 tolerances | :white_check_mark: new |
-| G4 | Contraction spectrum (**chart G**, **d=4**) | **3 of 4** directions contract below variance ratio 0.5, at **10x** the instrument noise, ESS 71.0 | `run_global_identifiability.py` | 2000 | :warning: measurable only in a narrow band, see G5 |
-| G5 | Contraction at the instrument's own 2% noise (**global**, **chart G**, **d=4**) | **NOT MEASURED.** Prior importance sampling collapses: ESS 1.0, all variance ratios 0.000. The apparent "4 of 4 contracting" is an estimator artefact and is reported as unsupported | same | 2000 | :white_check_mark: negative result |
-| G6 | Contracting directions vs parameterisation (**global**, **chart G**) | does **not** grow with d: **2 of 2** (d=2), **3 of 4** (d=4), **1 of 8** (d=8), all at 10x noise | same | 1000 per d | :warning: d=8 confounded -- samples/dimension fall 500 -> 250 -> 125 |
+| G4 | Contraction spectrum (**chart G**, **d=4**) | **3 of 4** directions contract below variance ratio 0.5, at **10x** the instrument noise, over 16 biases spanning 0.15-0.90 V, ESS 71.0 | `run_global_identifiability.py` | 2000 | :warning: measurable only in a narrow band, see G5 |
+| G5 | Contraction at the instrument's own 2% noise (**global**, **chart G**, **d=4**, 16 biases 0.15-0.90 V) | **NOT MEASURED.** Prior importance sampling collapses: ESS 1.0, all variance ratios 0.000. The apparent "4 of 4 contracting" is an estimator artefact and is reported as unsupported | same | 2000 | :white_check_mark: negative result |
+| G6 | Contracting directions vs parameterisation (**global**, **chart G**) | does **not** grow with d: **2 of 2** (d=2), **3 of 4** (d=4), **1 of 8** (d=8), all at 10x noise over 16 biases spanning 0.15-0.90 V | same | 1000 per d | :warning: d=8 confounded -- samples/dimension fall 500 -> 250 -> 125 |
 | G7 | Local vs global relationship | **superseded by G8**. The two numbers were measured in different charts (**chart L** at d=16; **chart G** at d=4) and their fractions are over different manifolds, so "not comparable in magnitude" was right for the wrong reason | `CHART_RECONCILIATION_g7.md` | - | :warning: superseded |
 | G8 | Local and global at matched chart and d | **the dimension moves the rank; the chart does not.** Rank 3 at d=4 and 4 at d=16 in **chart G** *and* in **chart L**, one operating point, 2% noise, 16 biases; spectra agree to within 3% at matched d. Witness pair 0 embeds into **chart L** at **d=16** with observational distance 1.207e-02 vs 1.225e-02, separation preserved to 0.999 | `python scripts/run_chart_reconciliation_g7.py` | 4 cells, oracle float64 | :white_check_mark: new |
 | G9 | Shape of the degeneracy | **bimodal, not a flat manifold**: two isolated likelihood maxima at the witness endpoints, barrier 242 log-units deep, 5 of 61 path points inside the 2.0e-02 floor; a control along the most observable direction is 43.7x deeper with no second mode (**chart G**, **d=4**) | same | 61 points + 61 control | :white_check_mark: new |

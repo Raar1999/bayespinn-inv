@@ -114,11 +114,18 @@ omit = ["*/tests/*"]
 
 [tool.ruff]
 line-length = 96
-# Deliberately BELOW the declared requires-python floor of 3.11. The tree was
-# measured 3.9-clean by scripts/check_python_support_floor.py (96 files, zero
-# syntax rejections, zero post-3.9 stdlib or typing uses, zero runtime PEP 604
-# unions). Holding ruff at py39 keeps it that way, so the withdrawn 3.9
-# classifier can be restored by running one CI leg rather than by a port.
+# Deliberately BELOW the declared requires-python floor of 3.11. The tree is
+# measured 3.9-clean by scripts/check_python_support_floor.py -- 110 files at
+# generation 9, zero syntax rejections, zero post-3.9 stdlib or typing uses,
+# zero runtime PEP 604 unions. Holding ruff at py39 keeps it that way, so the
+# withdrawn 3.9 classifier can be restored by running one CI leg rather than
+# by a port.
+#
+# The file count is stated because it grows and the guarantee does not. It was
+# 96 at generation 7; the scan is static analysis and cannot see dependency
+# resolution at the floor, so a larger clean scan is a larger unevidenced
+# surface, not a stronger claim. See CI-01's cost statement, docs/G9_RESULT.md
+# section 1.
 target-version = "py39"
 
 [tool.ruff.lint]
@@ -136,6 +143,56 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 # Experiment launchers prepend src/ to sys.path before importing the package.
 "scripts/*" = ["E402"]
+
+# ---------------------------------------------------------------------------
+# The twelve notebooks are GENERATED ARTEFACTS, written by
+# `scripts/build_notebooks.py`, and they ship with executed outputs (NB-01,
+# `tests/test_notebooks.py::TestNotebooksHaveExecutedOutputs`). They are not
+# hand-authored source, and they cannot be reformatted without regenerating,
+# which discards the outputs that make them evidence.
+#
+# WHY THIS BLOCK EXISTS -- ruling of 2026-08-26 section 3, "fix it by
+# elimination". The generation-8 baseline recorded `ruff_exit: 0` carrying
+# neither scope nor invocation, and the two defensible scopes disagreed:
+# `ruff check .` exited 1 with 107 findings, every one of them in
+# `notebooks/`, while `ruff check src tests scripts` exited 0. One verdict
+# was recorded and two existed. Annotating that ambiguity would have
+# preserved it. This removes it: after this block both invocations exit 0
+# over the tracked tree, and `tests/test_lint_scope_g9.py` asserts they agree
+# and that the block is not a blanket amnesty.
+#
+# Four codes are layout consequences of how the generator emits cells:
+#   I001  ruff lexes each cell as its own module, so the generator's
+#         readability-ordered imports read as unsorted per cell
+#   E401  `import numpy as np, torch, matplotlib.pyplot as plt` -- one setup
+#         line is the notebook idiom
+#   E402  a notebook imports where the narrative needs the import, which by
+#         construction is not the top of a module
+#   E701  `if s > 1e-9: zs.append(...)` -- compressed one-liners keep a
+#         teaching cell on one screen
+# Three are real untidiness in the generator's source strings, where the fix
+# is a regeneration this repository will not do for a lint finding:
+#   F401  one unused re-export, 01_setup cell 6
+#   F541  `f"...%.1e..." % x`, 04_forward_surrogate cell 8 -- an f-string with
+#         no placeholder followed by percent formatting; it prints correctly
+#   B007  an unused loop counter, 05_inverse_design cell 6
+# Those three are enumerated in `tests/test_lint_scope_g9.py` so that fixing
+# the generator stays a visible action rather than a rediscovery.
+#
+# RUF100 is the mechanical consequence of the F401 line above, not a ninth
+# judgement. The generator writes `import bayespinn_inv  # noqa: F401` into
+# every setup cell -- a deliberate, correct annotation -- and disabling F401
+# in these files makes all twelve of those directives unused, which is
+# precisely what RUF100 reports. Silencing the rule and keeping its noqa is
+# incoherent; the pair is listed together so the coupling is visible.
+"notebooks/*.ipynb" = [
+    # layout, from the generator
+    "I001", "E401", "E402", "E701",
+    # real untidiness in the generator source strings, enumerated in the guard
+    "F401", "F541", "B007",
+    # entailed by disabling F401 in files that carry `# noqa: F401`
+    "RUF100",
+]
 
 [tool.black]
 line-length = 96

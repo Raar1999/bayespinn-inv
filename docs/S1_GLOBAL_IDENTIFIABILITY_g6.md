@@ -115,7 +115,7 @@ as proof: 3 of the 13 pairs were tested, at three grids and two tolerances.
 
 d = 4, n = 2,000, prior → posterior variance ratio per direction.
 
-| tolerance (× noise) | ESS | supported | contracting (**global**, **chart G**, **d=4**) | variance ratios |
+| tolerance (× noise) | ESS | supported | contracting (**global**, **chart G**, **d=4**, over 16 biases spanning 0.15-0.90 V) | variance ratios |
 |---:|---:|:---:|---:|---|
 | 1 | 1.0 | **no** | (4) | 0.000 0.000 0.000 0.000 |
 | 2 | 1.7 | **no** | (4) | 0.041 0.133 0.180 0.022 |
@@ -133,9 +133,12 @@ artefact of the estimator and is marked unsupported rather than reported. It is 
 S-1 equivalent of quoting an ECE below its M=5 floor (`API-04`).
 
 The measurable statement is narrow and is given as such: **globally, in chart G
-at d=4, at 10× the instrument noise (20% relative), with ESS 71 of 2,000 usable
-samples, 3 of 4 directions contract below a variance ratio of 0.5.** Above 25× the data constrains nothing;
-below 10× the estimator stops estimating.
+at d=4, at 10× the instrument noise (20% relative), over 16 bias points spanning
+0.15–0.90 V, with ESS 71 of 2,000 usable samples, 3 of 4 directions contract
+below a variance ratio of 0.5.** Above 25× the data constrains nothing;
+below 10× the estimator stops estimating. The observation set is part of the
+statement, not context for it: every count here is one point of a curve, and the
+`rank(cutoff)` companion is in `outputs/g8/ranks.json`.
 
 Reaching 2% would need sequential Monte Carlo or MCMC, not a larger `n` — the
 required sample count grows exponentially in `d`. That is a limitation of the
@@ -147,7 +150,7 @@ method and is reported as one.
 
 n = 1,000 per `d`, all figures at the tightest supported tolerance (10× noise):
 
-| d | samples per dimension | ESS | contracting at a variance-ratio threshold of 0.5, at 10x the instrument noise (**global**, **chart G**) |
+| d | samples per dimension | ESS | contracting at a variance-ratio threshold of 0.5, at 10x the instrument noise (**global**, **chart G**, over 16 biases spanning 0.15-0.90 V) |
 |---:|---:|---:|---|
 | 2 | 500 | 31.6 | **2 of 2** |
 | 4 | 250 | 38.8 | **3 of 4** |
@@ -170,7 +173,7 @@ pre-registered budget did not cover. Stated rather than glossed (`SPEC-g6-3` RIS
 | | local (**chart L**, **d=16**) | global (**chart G**, **d=4**) |
 |---|---|---|
 | method | Jacobian rank at one operating point | prior→posterior contraction + witness search |
-| result | **3–4 of 16**, **chart L**, **d=16**, at 2% noise — **not comparable** with the next column, see `CHART_RECONCILIATION_g7.md` | **3 of 4**, **chart G**, **d=4**, at 10× noise |
+| result | **3–4 of 16**, **chart L**, **d=16**, at 2% noise over 16 biases spanning 0.15–0.90 V, as `rank(cutoff)` — **not comparable** with the next column, see `CHART_RECONCILIATION_g7.md` | **3 of 4**, **chart G**, **d=4**, at 10× noise over the same 16 biases |
 | what it says | which directions are flat *here* | which directions the data constrains *at all*, and which distant profiles collide |
 
 **They agree in direction and cannot be compared in magnitude.** Both say only a

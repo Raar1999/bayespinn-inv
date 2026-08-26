@@ -393,9 +393,11 @@ mode it started nearest, with no indication that the other exists.
   generation 6: the estimator collapses (ESS 1.0) and the result is withheld. §5
   now explains *why* — the posterior is multimodal, not diffuse — which makes more
   samples the wrong remedy.
-* **"4 of 16 is a population boundary."** In **chart L** at `d = 16` the *local*
-  rank is a threshold count, not a population count: the spectrum has no clean
-  gap at the cutoff (§3). The same caveat applies to **chart G** at `d = 16`.
+* **"4 of 16 is a population boundary"** — withdrawn, and it was measured over
+  16 biases spanning 0.15–0.90 V: in **chart L** at `d = 16` the *local* rank is
+  a threshold count, not a population count, because the spectrum has no clean
+  gap at the cutoff (§3), and it is reported as `rank(cutoff)` for that reason.
+  The same caveat applies to **chart G** at `d = 16`.
 
 ---
 

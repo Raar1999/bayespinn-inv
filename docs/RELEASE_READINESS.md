@@ -187,7 +187,9 @@ not asserted.
 ### 5. Inverse-problem researcher — "is the problem identifiable?"
 
 **Locally**, in **chart L** at **d=16** — the Jacobian rank at one operating
-point, over that chart's reachable set — 3–4 of 16 at a 2% noise cutoff at the reference conditions; 1–6 (median 3) across 88 measurements
+point, over that chart's reachable set — 3–4 of 16 at a 2% noise cutoff over
+the reference observation set of 16 bias points spanning 0.15–0.90 V, reported
+as `rank(cutoff)` rather than as an integer; 1–6 (median 3) across 88 measurements
 spanning six axes plus a 400-replicate bootstrap. The extremes are attributed
 rather than reported as scatter: rank 1 only at a reduced bias range, rank 5–6
 only at larger finite-difference steps (an *estimator* effect). The decisive

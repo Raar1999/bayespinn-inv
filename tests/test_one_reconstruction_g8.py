@@ -224,6 +224,12 @@ INTERPOLATION_ALLOWLIST = {
     "scripts/run_g8.py": (
         6, "g8: anchor-to-anchor collocation of the operating point between "
            "chart dimensions; the grid is reached through the chart objects."),
+    "scripts/run_g9.py": (
+        3, "g9: the same anchor-to-anchor collocation, at each of the further "
+           "operating points -- chart G d=4 coordinates onto the d=15 and d=16 "
+           "anchor lattices. Every one of the three lands on an anchor vector "
+           "that is then handed to a Chart, so the solver grid is still reached "
+           "only through charts._lerp."),
     "scripts/defect_case_study.py": (
         1, "grid -> anchors for the L2 comparison against the recovery."),
     "scripts/run_inverse_sweep.py": (
