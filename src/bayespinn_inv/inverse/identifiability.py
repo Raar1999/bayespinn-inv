@@ -47,9 +47,14 @@ check on whether the surrogate has inherited the true problem's conditioning.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, List, Optional, Sequence, Tuple
+from typing import Callable, List, Optional, Sequence, Tuple, Union
 
 import numpy as np
+
+#: An ordered run of numbers that may arrive as a list or as an array. The same
+#: alias ``charts.Coords`` uses, for the same reason: every caller in this
+#: package holds an ``ndarray`` and ``Sequence[float]`` does not describe one.
+Coords = Union[Sequence[float], np.ndarray]
 
 __all__ = [
     "IdentifiabilityReport",
@@ -564,4 +569,103 @@ def rank_cutoff_record(rep: "IdentifiabilityReport", noise_rel: float,
                "; the cutoff does NOT fall inside the largest multiplicative "
                f"gap (x{gap_ratio:.2f} after index {gap_idx}) -- this is a "
                "threshold count and must never be quoted without its cutoff")),
+    }
+
+
+def singular_vector_localisation(
+    rep: "IdentifiabilityReport",
+    positions: Coords,
+    reference_position: Optional[float] = None,
+    n_vectors: int = 4,
+    rank: Optional[int] = None,
+) -> dict:
+    """Where in the device each right singular vector lives.
+
+    ``SPEC-g10-1``. Generation 9 established that bias-window *width* sets the
+    rank (1 -> 4) while spacing moves only the spectrum, and left a
+    mechanism-shaped hole: nothing measured says *why*. The hypothesis this
+    function exists to test is that the window sets which transport regimes the
+    terminal current is sensitive to, so a narrow low-bias window should make the
+    observable directions **localise in space** near the junction and a wide one
+    should delocalise them.
+
+    A right singular vector ``v = directions[:, k]`` has one entry per chart
+    coordinate, and for a magnitude-only chart each coordinate is an anchor at a
+    known position. ``w_j = v_j**2`` is therefore a probability distribution over
+    the device, and localisation is a property of that distribution.
+
+    The measures, all gauge-invariant because they use ``v_j**2``
+    ---------------------------------------------------------
+    ``participation_ratio``
+        ``1 / sum_j w_j**2``. Runs from 1 (all weight on one anchor) to ``d``
+        (uniform). Reported normalised as ``spread_fraction = PR / d`` so the
+        number is comparable across ``d``.
+    ``centroid``
+        ``sum_j x_j w_j`` -- where the direction lives.
+    ``rms_spread``
+        ``sqrt(sum_j (x_j - centroid)**2 w_j)`` -- how wide it is, in the
+        positions' own units. Reported also as a fraction of the span.
+    ``reference_distance``
+        ``|centroid - reference_position|``, and the same over the half-span. For
+        charts G and L the natural reference is the junction, which those charts
+        pin at the device midpoint.
+
+    What is and is not reliable
+    ---------------------------
+    A right singular vector is only determined up to rotation *within* a
+    degenerate subspace. Below the identifiable rank the singular values are at or
+    under the noise cutoff and the corresponding vectors are an arbitrary basis of
+    a near-null space, so their localisation is not a measurement. ``rank`` is
+    therefore carried through and each vector is stamped ``reliable`` only where
+    ``k < rank``. Vectors beyond it are still reported -- suppressing them would
+    hide the shape of the null space -- but they are labelled.
+    """
+    x = np.asarray(positions, dtype=np.float64)
+    V = np.asarray(rep.directions, dtype=np.float64)
+    if x.shape[0] != V.shape[0]:
+        raise ValueError(
+            f"one position per coordinate: {V.shape[0]} coordinates, "
+            f"{x.shape[0]} positions. A localisation measure over a coordinate "
+            "whose position is unknown is not a spatial statement.")
+    d = int(V.shape[0])
+    span = float(x.max() - x.min()) if d > 1 else 0.0
+    rank = int(rep.identifiable_rank if rank is None else rank)
+
+    rows = []
+    for k in range(min(int(n_vectors), V.shape[1])):
+        v = V[:, k]
+        w = v ** 2
+        tot = float(np.sum(w))
+        w = w / tot if tot > 0 else w
+        pr = float(1.0 / np.sum(w ** 2)) if np.any(w) else float("nan")
+        centroid = float(np.sum(x * w))
+        rms = float(np.sqrt(np.sum((x - centroid) ** 2 * w)))
+        row = {
+            "index": k,
+            "singular_value": float(rep.singular_values[k])
+            if k < rep.singular_values.size else None,
+            "participation_ratio": pr,
+            "spread_fraction": pr / d,
+            "centroid": centroid,
+            "rms_spread": rms,
+            "rms_spread_fraction_of_span": (rms / span) if span > 0 else None,
+            "reliable": bool(k < rank),
+            "why_unreliable": None if k < rank else (
+                "at or below the identifiable rank cutoff: this vector spans a "
+                "near-null subspace and its orientation inside that subspace is "
+                "not determined by the data"),
+        }
+        if reference_position is not None:
+            dist = abs(centroid - float(reference_position))
+            row["reference_position"] = float(reference_position)
+            row["reference_distance"] = float(dist)
+            row["reference_distance_fraction_of_half_span"] = (
+                float(dist / (0.5 * span)) if span > 0 else None)
+        rows.append(row)
+    return {
+        "d": d,
+        "rank_used_for_reliability": rank,
+        "positions": [float(p) for p in x],
+        "span": span,
+        "vectors": rows,
     }

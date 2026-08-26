@@ -4,6 +4,20 @@
 **Artefacts** `outputs/global_identifiability_g6/`, `outputs/witness_falsifier_g6/`
 **Arbiter** the SG oracle at every step. The surrogate was never called.
 
+> **Amended by generation 10, 2026-08-26 — `WIT-01`.** Every witness count in
+> this document is admissible under `WIT-01`: a pair whose qualifying separation
+> the reconstruction cannot carry is not a witness. Applied to the three
+> committed witness sets it removes **nothing** — 13 of the 13 in **chart G** at
+> **d=4**, 37 of the 37 in **chart L** at **d=16**, 13 of the 13 in **chart J** at
+> **d=16**, an admissibility ratio of **1.000** in all three — because every pair
+> qualifies on a doping *magnitude*, and magnitudes reach the solver grid exactly.
+> The rule is stated and applied rather than assumed, because "the rule does not
+> bite here" and "the rule was never applied here" are different sentences and
+> only one is checkable. It does catch one reported *quantity*: a chart-J pair
+> whose junctions sit 0.425 nm apart on a 3.333 nm grid. See
+> [`docs/G10_RESULT.md`](G10_RESULT.md) §3 and `outputs/g10/wit01.json`.
+>
+
 ---
 
 ## 0. Headline

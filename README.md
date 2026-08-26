@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-734%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-792%20passing-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -55,7 +55,7 @@ interval.
 | **UQ backend comparison** | deep ensemble beats tuned MC-dropout and tuned SWAG on every uncertainty axis; σ inflates **21.3×** off-distribution vs 1.4×/2.5× | `run_uq_benchmark.py`, `run_uq_tuning.py` |
 | **Bias selection** | information-based design **+0.39** identifiable rank vs random (5 wins/0 losses); the incumbent uncertainty acquisition is **−0.31**, i.e. *worse than random* | `run_experiment_design.py` |
 | **Built-in potential** vs analytic | rel. error **7.24e-14** (grid-independent over N=101…601) | `bayespinn selftest` |
-| **Test suite** | **678 passing**, incl. 58 solver-numerics, 27 MOS-cap physics and 41 ohmic-gradient tests | `make test` |
+| **Test suite** | see the badge at the top, which `tests/test_notebooks.py::TestDocumentedTestCountIsHonest` checks against live collection on every run; incl. 58 solver-numerics, 27 MOS-cap physics and 41 ohmic-gradient tests. The row used to restate the total by hand and had drifted by more than a hundred tests, so it now points at the one number a guard maintains | `make test` |
 
 ### Read these caveats before quoting any number above
 
@@ -359,6 +359,19 @@ device and **271 nm** in the other — **423 nm apart in a 1000 nm
 device** — with an I–V difference below the 2% floor. Terminal I–V cannot locate
 the junction either, once the doping is free to compensate
 ([`docs/G8_RESULT.md`](docs/G8_RESULT.md) §2).
+
+**Every witness count on this page is admissible under `WIT-01`.** A pair whose
+qualifying separation the reconstruction cannot carry is not a witness, and
+generation 10 applies that to the counts rather than assuming it of them: 13 of
+the 13 in **chart G** at **d=4**, 37 of the 37 in **chart L** at **d=16**, and 13
+of the 13 in **chart J** at **d=16** are admissible — an admissibility ratio of
+**1.000** in all three, because every pair qualifies on a doping *magnitude* and
+magnitudes reach the solver grid exactly. The rule removes nothing here, and that
+is a measurement rather than an assumption. What it does catch is one reported
+*quantity*: a chart-J pair whose junctions sit **0.425 nm** apart on a **3.333 nm**
+grid, a difference the representation does not resolve, withdrawn as a junction
+separation ([`docs/G10_RESULT.md`](docs/G10_RESULT.md) §3,
+`outputs/g10/wit01.json`).
 
 A surrogate trained only on that measurement is therefore constrained only in
 that subspace. Its *values* can be excellent while its *derivatives* along the

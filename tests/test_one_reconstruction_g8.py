@@ -230,6 +230,12 @@ INTERPOLATION_ALLOWLIST = {
            "anchor lattices. Every one of the three lands on an anchor vector "
            "that is then handed to a Chart, so the solver grid is still reached "
            "only through charts._lerp."),
+    "scripts/run_g10.py": (
+        1, "g10: the same anchor-to-anchor collocation as g9, once -- chart G "
+           "d=4 coordinates onto the d=16 anchor lattice, at each device whose "
+           "singular vectors SPEC-g10-1 localises. It lands on an anchor "
+           "vector that is then handed to a Chart, so the solver grid is still "
+           "reached only through charts._lerp."),
     "scripts/defect_case_study.py": (
         1, "grid -> anchors for the L2 comparison against the recovery."),
     "scripts/run_inverse_sweep.py": (

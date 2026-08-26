@@ -294,6 +294,56 @@ class Chart:
         """
         return self.charted(log10_mag)
 
+    # -- WIT-01: what the representation can actually resolve ---------------
+
+    def coordinate_resolution(self, log10_mag: Coords) -> np.ndarray:
+        """Smallest change in each coordinate that changes the grid profile.
+
+        ``WIT-01``, as a property of the chart rather than of a search. A
+        witness pair is two devices the *instrument* cannot tell apart, and that
+        is a statement about semiconductors only if the *representation* can
+        tell them apart in the first place. A coordinate difference the
+        reconstruction rounds away produces two identical ``N``-node profiles,
+        which are then indistinguishable for a reason that has nothing to do
+        with the device.
+
+        For a magnitude coordinate the answer is **zero**. :meth:`_to_grid`
+        carries anchor values into :func:`_lerp` exactly and the map from anchor
+        magnitudes to grid values is injective, so no difference is rounded
+        away. Charts whose coordinates are *only* magnitudes therefore have no
+        sub-resolution pairs at all and the rule is vacuous for them -- which is
+        stated here rather than left to be assumed, because "the rule does not
+        bite" and "the rule was not applied" are different sentences and only
+        one of them is checkable. :class:`ChartJ` overrides this, because its
+        junction coordinate moves a sign flip that is applied *on the grid* and
+        therefore moves in whole nodes.
+
+        Returns
+        -------
+        (d,) resolutions, each in its own coordinate's units.
+        """
+        theta = np.asarray(log10_mag, dtype=np.float64)
+        if theta.shape[0] != self.d:
+            raise ValueError(f"{self.label()} takes {self.d} coordinates, "
+                             f"got {theta.shape[0]}")
+        return np.zeros(self.d, dtype=np.float64)
+
+    def separation_is_resolved(self, theta_a: Coords,
+                               theta_b: Coords) -> np.ndarray:
+        """Per coordinate: does this difference change the reconstruction?
+
+        The *exact* companion to :meth:`coordinate_resolution`, which is a local
+        linearisation and so is a scale to report rather than a test to apply. A
+        magnitude coordinate resolves any nonzero difference; :class:`ChartJ`
+        overrides the junction coordinate with the exact node test.
+        """
+        a = np.asarray(theta_a, dtype=np.float64)
+        b = np.asarray(theta_b, dtype=np.float64)
+        if a.shape[0] != self.d or b.shape[0] != self.d:
+            raise ValueError(f"{self.label()} takes {self.d} coordinates, "
+                             f"got {a.shape[0]} and {b.shape[0]}")
+        return a != b
+
     def label(self) -> str:
         return f"{self.name}(d={self.d})"
 
@@ -455,6 +505,60 @@ class ChartJ(Chart):
         dx = abs(self.junction_position(s + ds) - self.junction_position(s))
         span = float(self.x_si.max() - self.x_si.min())
         return dx / (span / (self.N - 1))
+
+    def node_spacing_si(self) -> float:
+        """Grid spacing in metres. One node is the junction's resolution."""
+        return float(self.x_si.max() - self.x_si.min()) / (self.N - 1)
+
+    def junction_node_index(self, s: float) -> int:
+        """How many grid nodes lie strictly left of the junction at ``s``.
+
+        :meth:`reconstruct` depends on ``s`` **only** through the boolean mask
+        ``x_si < x_j``, so this integer is the whole of what the representation
+        carries about the junction. Two values of ``s`` sharing it build the
+        same profile, bit for bit.
+        """
+        return int(np.count_nonzero(self.x_si < self.junction_position(s)))
+
+    def coordinate_resolution(self, theta: Coords) -> np.ndarray:
+        """``WIT-01``: the junction coordinate resolves in whole grid nodes.
+
+        The magnitude coordinates are exact, as in every chart. The junction is
+        not: the sign flip is placed on the grid, so the resolution is the
+        change in ``s`` that moves ``x_j`` by one node. It is taken *locally* at
+        ``theta[0]`` because ``s -> x_j`` is a logistic and its slope is not
+        constant -- the same coordinate is worth far fewer nanometres per decade
+        near the contacts than at the midpoint, which is why a single number for
+        "the junction resolution" would be wrong at both ends.
+
+        ``dx_j/ds = L ln(10) js f (1 - f)`` with ``f = x_j / L``. Where the slope
+        vanishes the resolution is ``inf``: ``junction_scale = 0`` pins the
+        junction and *no* change in ``s`` moves it, which is exactly the
+        pinned-junction control that generations 8 and 9 rest their junction
+        numbers on.
+        """
+        th = np.asarray(theta, dtype=np.float64)
+        if th.shape[0] != self.d:
+            raise ValueError(f"{self.label()} takes {self.d} coordinates, "
+                             f"got {th.shape[0]}")
+        res = np.zeros(self.d, dtype=np.float64)
+        span = float(self.x_si.max() - self.x_si.min())
+        frac = (self.junction_position(float(th[0]))
+                - float(self.x_si.min())) / span
+        slope = span * np.log(10.0) * self.junction_scale * frac * (1.0 - frac)
+        res[0] = (self.node_spacing_si() / slope) if slope > 0.0 else np.inf
+        return res
+
+    def separation_is_resolved(self, theta_a: Coords,
+                               theta_b: Coords) -> np.ndarray:
+        """Exact per-coordinate resolution test; the junction is a node test."""
+        out = super().separation_is_resolved(theta_a, theta_b)
+        a = np.asarray(theta_a, dtype=np.float64)
+        b = np.asarray(theta_b, dtype=np.float64)
+        out = out.copy()
+        out[0] = (self.junction_node_index(float(a[0]))
+                  != self.junction_node_index(float(b[0])))
+        return out
 
     def reconstruct(self, theta: Coords) -> np.ndarray:
         th = np.asarray(theta, dtype=np.float64)

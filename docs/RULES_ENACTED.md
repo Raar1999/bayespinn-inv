@@ -288,3 +288,75 @@ A second control asserts exactly that.
 The rule generalises past ranks. `bayespinn_inv.inverse.modes.count_basins`
 reports a **basin count** the same way, over a threshold grid, because a cluster
 count is also an integer obtained by thresholding a continuous structure.
+
+---
+
+## `WIT-01` — a separation the representation cannot carry is not a witness
+
+**Enacted** operator ruling, 2026-08-26 §4 (post-G9).
+
+> A pair whose separation along any coordinate falls below the grid resolution
+> is not a witness and is excluded **before** counting, not filtered afterwards
+> by refinement. State the admissibility ratio and apply it to every existing
+> witness count.
+
+**The defect that forced it.** Generation 9 put all thirteen chart-J witness
+pairs through the generation-6 refinement battery and six of them separated. One
+of the six had junctions **0.425 nm** apart on a grid whose node spacing is
+**3.333 nm**. `ChartJ.reconstruct` places the sign flip with `x_si < x_j`, so
+those two junctions build the same profile bit for bit; the 0.425 nm was a
+property of the grid and had been published as a property of a device.
+Refinement caught it, but refinement is the wrong instrument for the job — it
+costs three oracle solves per bias per pair, and it fires after the number is in
+print. The chart could have said it for free, before the count existed.
+
+**What the rule turned out to mean, which is not what it was expected to mean.**
+Read literally — *reject the pair if any one coordinate is separated by less than
+its resolution* — the rule rejects almost every real witness, including the ones
+it exists to protect: two chart-J devices sharing a junction are separated by
+exactly zero in that coordinate, and they are a perfectly good witness. So it is
+implemented on the separation that **qualifies** the pair: admissible iff some
+coordinate is separated by at least `min_separation_decades` *and* that
+separation is resolved by the reconstruction.
+
+Applied that way it removes **nothing**. Every witness pair in this repository
+qualifies on a magnitude coordinate, magnitude coordinates reach the grid exactly
+through `charts._lerp`, and the admissibility ratio is `1.000` in all three
+charts — chart G at `d=4` 13/13, chart L at `d=16` 37/37, chart J at `d=16`
+13/13. `WIT-01` is, on today's chart inventory, a **chart-J rule with no live
+instance**. That is the result, and it is exactly why the ratio has to be stated
+rather than assumed: "the rule does not bite here" and "the rule was never
+applied here" are different sentences, and only the first one is checkable.
+
+What the rule *does* catch is a reported **quantity** rather than a count. One
+chart-J pair's junction separation of 0.425 nm is a difference the representation
+does not carry, and it should never have been quoted as a junction separation at
+all.
+
+**Enforced by** `bayespinn_inv.inverse.charts.Chart.coordinate_resolution` and
+`Chart.separation_is_resolved`, which put the resolution on the *chart* rather
+than in a search — the base class returns zero for every magnitude coordinate and
+`ChartJ` overrides the junction with an exact node-index test — and
+`tests/test_witness_admissibility_g10.py`, which guards the predicate and the
+prose together. Its positive control plants a pair whose only qualifying
+separation is a 0.06 nm junction move inside one node interval, built in the
+logistic's saturated tail so that it reaches the 0.3-decade criterion and is
+still sub-node; the rule must reject it, and must reject it *for the stated
+reason* rather than by failing the separation criterion first. Its negative
+controls are the headline 694 nm / 271 nm pair, which must be admitted, and a
+pair sharing a junction, which must also be admitted. On the prose side, a
+claim-surface document quoting a witness count must point its reader at the
+ratio; the citation pattern deliberately does not accept a bare "admissible",
+because three documents contain *"the best of the two admissible projections"* and
+the first version of the guard passed all three on that phrase — a measured false
+negative, now pinned by its own control so it cannot reopen.
+
+**The premise it was ordered on does not hold, and that is recorded rather than
+quietly dropped.** The ruling states that the chart-J pairs which separate under
+refinement "are those whose junctions were nearly coincident — 0.4 nm apart …
+which is sub-grid and was never a witness". Of the six that separate, **one** has
+a sub-node junction separation. The other five separate with junctions 9, 196,
+246 and 412 nm apart, and pairs that *survive* include separations of 26.6 nm and
+41.7 nm. Junction separation does not predict refinement survival;
+`outputs/g10/wit01.json` carries the table and `docs/G10_RESULT.md` §3 carries
+what does.
