@@ -46,6 +46,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
@@ -117,10 +118,15 @@ def graded_profile(xa, level, width=1.5e-7):
 
 
 def oracle_iv(sg, C, biases):
-    """Return (currents, trust flags). Continuation warm-start along bias."""
+    """Return (currents, trust flags). Continuation warm-start along bias.
+
+    ``CHART-01``: ``C`` is signed doping at ``N_ANCHOR`` equally spaced anchors
+    and the solver integrates a 301-node grid. Chart L, named at the call site.
+    """
+    C_grid = anchor_signed_to_grid(C, sg.grid.N)
     prev, I, trust = None, [], []
     for V in biases:
-        st = sg.solve(C, float(V), initial_state=prev)
+        st = sg.solve(C_grid, float(V), initial_state=prev)
         prev = st
         I.append(st.terminal_current)
         trust.append(bool(st.converged and st.current_is_trustworthy()))

@@ -19,6 +19,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from bayespinn_inv.inverse.charts import ChartG
 from bayespinn_inv.inverse.global_identifiability import (
     GlobalStudyConfig,
     contraction_spectrum,
@@ -37,6 +38,13 @@ from bayespinn_inv.utils.provenance import RunManifest
 def make_oracle(cfg: GlobalStudyConfig, grid_n: int = 301):
     """(log10|C| at d anchors, biases) -> (current, trustworthy, converged).
 
+    Chart G, by name (``CHART-01``). Until generation 8 the three lines that
+    define this chart were written out here, and again in
+    ``scripts/run_witness_falsifier.py``, and again in
+    ``bayespinn_inv.inverse.charts.ChartG`` -- three copies of one operator, one
+    of them inside the falsifier that was supposed to be independent of the
+    study. The chart is now constructed once and imported.
+
     Anchors are evenly spaced across the device; the magnitude is interpolated
     linearly in log10 between them. Sign follows the project's PN convention
     (PH-03/PH-04): acceptors (negative C) on the left half, donors on the right.
@@ -48,13 +56,10 @@ def make_oracle(cfg: GlobalStudyConfig, grid_n: int = 301):
         Grid1D.uniform(length_scaled, grid_n), scaling, SILICON, SGConfig()
     )
     x_si = scaling.x_to_si(np.asarray(sg.grid.x))
-    x_anchor = np.linspace(x_si.min(), x_si.max(), cfg.n_anchor)
-    mid = 0.5 * (x_si.min() + x_si.max())
-    sign = np.where(x_si < mid, -1.0, 1.0)
+    chart = ChartG(cfg.n_anchor, x_si)
 
     def oracle(log10_mag, biases):
-        mag = 10.0 ** np.interp(x_si, x_anchor, np.asarray(log10_mag, dtype=float))
-        doping = sign * mag
+        doping = chart.charted(log10_mag)
         prev, current, trust, conv = None, [], [], []
         for v in biases:
             state = sg.solve(doping, float(v), initial_state=prev)

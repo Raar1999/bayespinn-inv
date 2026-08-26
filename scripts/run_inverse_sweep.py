@@ -45,6 +45,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from bayespinn_inv.data.datasets import sample_doping
+from bayespinn_inv.inverse.charts import regrid_signed
 from bayespinn_inv.inverse.inverse_design import (
     FreePointwiseDoping,
     GradedJunctionDoping,
@@ -77,11 +78,20 @@ def _make_param(kind: str, x_si: torch.Tensor, init_C: torch.Tensor = None):
 def _sg_iv(sg, sg_grid, scaling, doping_si: np.ndarray,
             biases: np.ndarray) -> np.ndarray:
     """Compute the SG-oracle I-V curve."""
-    # SG.solve auto-interpolates to its own grid as of the latest fix
+    # CHART-01 (generation 8): the comment that used to sit here read "SG.solve
+    # auto-interpolates to its own grid as of the latest fix". It did, and that
+    # was the defect -- a parameterisation chart chosen by an array length. The
+    # target lives on its own equally spaced abscissa; the regrid is explicit.
     currents = []
     prev = None
+    doping_grid = regrid_signed(
+        scaling.x_to_si(np.asarray(sg_grid.x)),
+        np.linspace(float(scaling.x_to_si(np.asarray(sg_grid.x)).min()),
+                    float(scaling.x_to_si(np.asarray(sg_grid.x)).max()),
+                    doping_si.shape[0]),
+        doping_si)
     for V in biases:
-        s = sg.solve(doping_si, float(V), initial_state=prev)
+        s = sg.solve(doping_grid, float(V), initial_state=prev)
         currents.append(s.terminal_current)
         prev = s
     return np.asarray(currents)

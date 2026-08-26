@@ -36,6 +36,7 @@ import numpy as np
 import torch
 
 from ..bayesian.ensembles import EnsemblePrediction
+from ..inverse.charts import regrid_signed
 from ..inverse.inverse_design import (
     FreePointwiseDoping,
     InverseConfig,
@@ -106,7 +107,7 @@ def simulate_measurement(
         if doping_np.shape[0] != N_oracle:
             x_user = np.linspace(0.0, 1.0, doping_np.shape[0])
             x_oracle = np.linspace(0.0, 1.0, N_oracle)
-            doping_for_oracle = np.interp(x_oracle, x_user, doping_np)
+            doping_for_oracle = regrid_signed(x_oracle, x_user, doping_np)
         else:
             doping_for_oracle = doping_np
     else:

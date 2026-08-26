@@ -13,6 +13,10 @@ rather than of a docstring:
 
 from __future__ import annotations
 
+import hashlib
+import json
+from pathlib import Path
+
 import numpy as np
 import pytest
 
@@ -50,13 +54,32 @@ def solver_and_grid():
 
 
 def test_chartL_matches_the_solvers_own_resampler(solver_and_grid):
-    """ChartL is a description of solve() L767-774, not a parallel implementation."""
+    """ChartL is a description of the resampler, not a parallel implementation.
+
+    Generation 8 deleted the resampler this test used to compare against, so the
+    original form -- solve it, read ``DeviceState.doping``, compare -- became
+    vacuous: the solver now calls ``ChartL`` and would agree with itself. The
+    comparison moved to 24 profiles captured from the old code path *before* it
+    was deleted, which is the only version of this check that can still fail.
+    See ``tests/test_one_reconstruction_g8.py`` for the full battery; this one
+    stays here so the g7 module keeps its own guard.
+    """
     _, sg, x_si = solver_and_grid
-    L16 = ChartL(16, x_si)
-    rng = np.random.default_rng(0)
-    for _ in range(3):
-        theta = rng.uniform(21.0, 23.0, size=16)
-        assert L16.assert_matches_solver(sg, theta) == 0.0
+    golden = json.loads(
+        (Path(__file__).parent / "data"
+         / "chart_l_resampler_golden_g8.json").read_text(encoding="utf-8"))
+    n = 0
+    for case in golden["cases"]:
+        if case["grid_N"] != GRID or case["d"] != 16:
+            continue
+        C = np.asarray(case["C_anchor"], dtype=np.float64)
+        L = ChartL(16, x_si)
+        mine = L.on_grid_signed(C)
+        assert [float(v) for v in mine[:8]] == case["grid_first8"]
+        assert [float(v) for v in mine[-8:]] == case["grid_last8"]
+        assert hashlib.sha256(mine.tobytes()).hexdigest() == case["grid_sha256"]
+        n += 1
+    assert n >= 2, f"expected frozen d=16/N={GRID} cases, found {n}"
 
 
 def test_chart_jacobian_reduces_to_the_published_one_on_chartL(solver_and_grid):
@@ -91,8 +114,9 @@ def test_chart_jacobian_reduces_to_the_published_one_on_chartL(solver_and_grid):
     biases = cfg.biases
     Jc, Ic, kc, ec = chart_forward_jacobian(sg, L16, theta, biases,
                                             rel_step=0.05, min_snr=1e4)
-    Js, Is, ks, es = sg_forward_jacobian(sg, L16.solver_input(theta), biases,
-                                         rel_step=0.05, min_snr=1e4)
+    Js, Is, ks, es = sg_forward_jacobian(sg, L16.signed_anchors(theta), biases,
+                                         rel_step=0.05, min_snr=1e4,
+                                         chart=L16)
     assert kc == ks
     assert np.allclose(Ic, Is, rtol=0, atol=0)
     assert ec == pytest.approx(es, rel=1e-12)

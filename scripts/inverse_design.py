@@ -23,6 +23,7 @@ import yaml
 
 from bayespinn_inv.bayesian.ensembles import DeepEnsemble
 from bayespinn_inv.data.datasets import sample_doping
+from bayespinn_inv.inverse.charts import regrid_signed
 from bayespinn_inv.inverse.inverse_design import (
     FreePointwiseDoping,
     GradedJunctionDoping,
@@ -103,7 +104,7 @@ def _make_target(cfg: dict, scaling: Scaling) -> Dict[str, Any]:
         prev = None
         currents = []
         for V in biases:
-            s = sg.solve(np.interp(scaling.x_to_si(
+            s = sg.solve(regrid_signed(scaling.x_to_si(
                 torch.as_tensor(grid.x)).numpy(),
                                      sample.x_si, sample.doping_si),
                           float(V), initial_state=prev)

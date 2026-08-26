@@ -36,6 +36,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from bayespinn_inv.inverse.charts import ChartG
 from bayespinn_inv.inverse.global_identifiability import GlobalStudyConfig
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
@@ -53,10 +54,10 @@ def solve_profile(log10_mag, biases, grid_n, sg_cfg, domain_si=(0.0, 1e-6)):
     length_scaled = float(scaling.x_to_scaled(np.float64(domain_si[1] - domain_si[0])))
     sg = ScharfetterGummel1D(Grid1D.uniform(length_scaled, grid_n), scaling, SILICON, sg_cfg)
     x_si = scaling.x_to_si(np.asarray(sg.grid.x))
-    x_anchor = np.linspace(x_si.min(), x_si.max(), len(log10_mag))
-    mid = 0.5 * (x_si.min() + x_si.max())
-    doping = np.where(x_si < mid, -1.0, 1.0) * 10.0 ** np.interp(
-        x_si, x_anchor, np.asarray(log10_mag, dtype=float))
+    # CHART-01: this used to be a third hand-written copy of chart G, inside the
+    # falsifier meant to be independent of the study that has the other two.
+    # Two copies agreeing proves nothing about either; one definition does.
+    doping = ChartG(len(log10_mag), x_si).charted(log10_mag)
     prev, current, trust = None, [], []
     for v in biases:
         st = sg.solve(doping, float(v), initial_state=prev)

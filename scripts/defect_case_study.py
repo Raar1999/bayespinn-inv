@@ -37,6 +37,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from bayespinn_inv.data.datasets import defect_profile
+from bayespinn_inv.inverse.charts import regrid_signed
 from bayespinn_inv.inverse.inverse_design import (
     FreePointwiseDoping,
     InverseConfig,
@@ -108,8 +109,12 @@ def main():
     rng = np.random.default_rng(args.seed)
     I_clean = []
     prev = None
+    # CHART-01: C_true lives on `x_true` (256 points), the solver on 301 nodes.
+    # A physical-abscissa regrid, said out loud.
+    C_true_grid = regrid_signed(
+        scaling.x_to_si(np.asarray(sg.grid.x)), x_true, C_true)
     for V in biases:
-        s = sg.solve(C_true, float(V), initial_state=prev)
+        s = sg.solve(C_true_grid, float(V), initial_state=prev)
         I_clean.append(s.terminal_current)
         prev = s
     I_clean = np.asarray(I_clean)

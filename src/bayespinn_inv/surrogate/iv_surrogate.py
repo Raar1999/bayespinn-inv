@@ -33,6 +33,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from ..inverse.charts import anchor_signed_to_grid
+
 # ============================================================================
 # Symlog transform (handles the 13-orders-of-magnitude signed current range)
 # ============================================================================
@@ -168,9 +170,13 @@ def build_sg_dataset(
     X, Y = [], []
     for C in profiles_si:
         latent = scaling.doping_to_net_input(C)
+        # CHART-01: the latent stays at anchor resolution -- it is the network
+        # input -- but the oracle integrates a grid profile, and which one was
+        # decided until generation 8 by the solver's resampler. Chart L, named.
+        C_grid = anchor_signed_to_grid(C, oracle.grid.N)
         prev = None
         for V in biases_si:
-            st = oracle.solve(C, float(V), initial_state=prev)
+            st = oracle.solve(C_grid, float(V), initial_state=prev)
             prev = st
             X.append(make_features(latent, V / VT))
             Y.append(symlog.forward(st.terminal_current))

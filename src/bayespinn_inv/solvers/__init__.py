@@ -14,6 +14,7 @@ from .mos_cap_2d import (
 )
 from .scharfetter_gummel import (
     DeviceState,
+    DopingChartError,
     Grid1D,
     ScharfetterGummel1D,
     SGConfig,
@@ -22,6 +23,7 @@ from .scharfetter_gummel import (
 
 __all__ = [
     "DeviceState",
+    "DopingChartError",
     "Grid1D",
     "Grid2D",
     "MOSCap2DConfig",

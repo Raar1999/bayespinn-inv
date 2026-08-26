@@ -14,6 +14,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
+from bayespinn_inv.inverse.charts import ChartL
 from bayespinn_inv.inverse.identifiability import (
     analyse_identifiability,
     equivalence_perturbation,
@@ -37,12 +38,31 @@ def oracle():
 
 
 @pytest.fixture(scope="module")
-def reference(oracle):
+def chart(oracle):
+    """CHART-01: 16 coordinates, a 301-node solver, and the chart said out loud.
+
+    These numbers used to be produced by handing the solver a length-16 array
+    and letting it resample. Same operator, same values -- named.
+    """
+    sc = Scaling.for_material(SILICON, T=300.0)
+    return ChartL(16, sc.x_to_si(np.asarray(oracle.grid.x)))
+
+
+@pytest.fixture(scope="module")
+def chart8(oracle):
+    """The same chart at d = 8, for the estimator-honesty tests."""
+    sc = Scaling.for_material(SILICON, T=300.0)
+    return ChartL(8, sc.x_to_si(np.asarray(oracle.grid.x)))
+
+
+@pytest.fixture(scope="module")
+def reference(oracle, chart):
     xa = np.linspace(0.0, 1e-6, 16)
     C = np.where(xa < 0.5e-6, -1e22, 1e22)
     biases = np.linspace(0.0, 0.9, 19)
     J, I_ref, kept, eta = sg_forward_jacobian(oracle, C, biases,
-                                              rel_step=0.05, min_snr=1e8)
+                                              rel_step=0.05, min_snr=1e8,
+                                              chart=chart)
     rep = analyse_identifiability(J, noise_rel=0.02, jacobian_noise=eta)
     return C, biases, J, kept, eta, rep
 
@@ -77,18 +97,21 @@ class TestSelfHonesty:
         assert huge.resolvable_rank == 0
         assert huge.identifiable_rank == 0
 
-    def test_refuses_to_difference_below_the_oracle_noise_floor(self, oracle):
+    def test_refuses_to_difference_below_the_oracle_noise_floor(self, oracle,
+                                                                chart8):
         """Requesting an impossible SNR must raise, not return noise."""
         xa = np.linspace(0.0, 1e-6, 8)
         C = np.where(xa < 0.5e-6, -1e22, 1e22)
         with pytest.raises(ValueError, match=r"noise floor|SNR"):
-            sg_forward_jacobian(oracle, C, [0.0, 0.05], min_snr=1e12)
+            sg_forward_jacobian(oracle, C, [0.0, 0.05], min_snr=1e12,
+                                chart=chart8)
 
-    def test_only_trustworthy_biases_are_kept(self, oracle):
+    def test_only_trustworthy_biases_are_kept(self, oracle, chart8):
         xa = np.linspace(0.0, 1e-6, 8)
         C = np.where(xa < 0.5e-6, -1e22, 1e22)
         biases = np.linspace(0.0, 0.6, 13)
-        _, _, kept, _ = sg_forward_jacobian(oracle, C, biases, min_snr=1e6)
+        _, _, kept, _ = sg_forward_jacobian(oracle, C, biases, min_snr=1e6,
+                                            chart=chart8)
         # V = 0 has zero true current; it can never clear the floor
         assert 0 not in kept
         assert len(kept) < len(biases)
@@ -102,7 +125,8 @@ class TestLinearResponseValidation:
 
     @pytest.mark.parametrize("k", [0, 1, 2])
     def test_predicted_response_matches_independent_resolve(self, oracle,
-                                                            reference, k):
+                                                            reference,
+                                                            chart, k):
         """||J v|| must match a fresh SG solve of the perturbed device."""
         C, biases, J, kept, _, rep = reference
         Bk = biases[kept]
@@ -110,7 +134,8 @@ class TestLinearResponseValidation:
         def iv(Cp):
             prev, o = None, []
             for V in Bk:
-                st = oracle.solve(Cp, float(V), initial_state=prev)
+                st = oracle.solve(chart.on_grid_signed(Cp), float(V),
+                                  initial_state=prev)
                 prev = st
                 o.append(st.terminal_current)
             return np.asarray(o)
@@ -154,7 +179,7 @@ class TestIllPosedness:
         assert curve[1e-4] < rep.n_parameters
 
     def test_equivalence_twin_is_physically_distinct_but_iv_indistinguishable(
-            self, oracle, reference):
+            self, oracle, reference, chart):
         """The operational statement of ill-posedness, verified through SG."""
         C, biases, _, kept, _, rep = reference
         twin = equivalence_perturbation(rep, C, decades=0.1, mode="least")
@@ -168,7 +193,8 @@ class TestIllPosedness:
         def iv(Cp):
             prev, o = None, []
             for V in biases[kept]:
-                st = oracle.solve(Cp, float(V), initial_state=prev)
+                st = oracle.solve(chart.on_grid_signed(Cp), float(V),
+                                  initial_state=prev)
                 prev = st
                 o.append(st.terminal_current)
             return np.asarray(o)

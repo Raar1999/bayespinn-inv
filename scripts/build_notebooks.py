@@ -74,6 +74,7 @@ COMMON = '''\
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import ScharfetterGummel1D, Grid1D, SGConfig
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 
 DOMAIN = (0.0, 1e-6); N_ANCHOR = 16
 scaling = Scaling.for_material(SILICON, T=300.0)
@@ -86,9 +87,12 @@ def step(L):   return np.where(xa < 0.5*DOMAIN[1], -L, L).astype(float)
 def graded(L, w=1.5e-7): return (L*np.tanh((xa - 0.5*DOMAIN[1])/w)).astype(float)
 
 def sg_iv(C, biases):
+    # CHART-01: C is signed doping at N_ANCHOR anchors; the solver integrates a
+    # 301-node grid. Chart L, named -- the solver no longer guesses.
+    Cg = anchor_signed_to_grid(C, sg.grid.N)
     prev=None; I=[]
     for V in biases:
-        s = sg.solve(C, float(V), initial_state=prev); I.append(s.terminal_current); prev=s
+        s = sg.solve(Cg, float(V), initial_state=prev); I.append(s.terminal_current); prev=s
     return np.array(I)
 '''
 
@@ -154,7 +158,7 @@ make_nb(
         code('''
 NA = ND = 1e22
 Vbi_analytic = VT*np.log(NA*ND/SILICON.n_i**2)
-st = sg.solve(step(1e22), 0.0)
+st = sg.solve(anchor_signed_to_grid(step(1e22), sg.grid.N), 0.0)
 phi = st.phi
 Vbi_sg = float(phi.max() - phi.min())
 print(f"V_bi analytic = {Vbi_analytic:.4f} V")
@@ -164,7 +168,7 @@ print(f"relative diff = {abs(Vbi_sg-Vbi_analytic)/Vbi_analytic:.2%}")
         md("## Equilibrium band picture\n"
            "Potential, field, and carrier densities across the junction."),
         code('''
-st = sg.solve(step(1e22), 0.0)
+st = sg.solve(anchor_signed_to_grid(step(1e22), sg.grid.N), 0.0)
 x_nm = np.linspace(0, 1000, len(st.phi))
 fig, ax = plt.subplots(1, 3, figsize=(12, 3.2))
 ax[0].plot(x_nm, st.phi); ax[0].set_title("Potential φ (V)"); ax[0].set_xlabel("x (nm)")
@@ -589,7 +593,7 @@ ens=SurrogateEnsemble(members,norm,symlog)
 '''),
         md("## Device-state panel (SG)"),
         code('''
-st=sg.solve(step(1e22),0.3); x_nm=np.linspace(0,1000,len(st.phi))
+st=sg.solve(anchor_signed_to_grid(step(1e22), sg.grid.N),0.3); x_nm=np.linspace(0,1000,len(st.phi))
 fig,ax=plt.subplots(2,2,figsize=(9,6))
 ax[0,0].plot(x_nm,st.phi); ax[0,0].set_title("Potential (V)")
 ax[0,1].plot(x_nm,-np.gradient(st.phi,x_nm*1e-9)/1e5,c="C1"); ax[0,1].set_title("Field (kV/cm)")

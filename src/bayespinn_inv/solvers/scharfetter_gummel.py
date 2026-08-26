@@ -128,6 +128,16 @@ def bernoulli(x: np.ndarray) -> np.ndarray:
 # Grid and configuration
 # ============================================================================
 
+
+class DopingChartError(ValueError):
+    """A doping vector reached the solver without saying which chart it is in.
+
+    Raised by :meth:`ScharfetterGummel1D._doping_on_grid`. See ``CHART-01`` in
+    ``docs/AUDIT_MASTER.md`` and the module
+    :mod:`bayespinn_inv.inverse.charts`.
+    """
+
+
 @dataclass
 class Grid1D:
     """Non-uniform 1D grid in *scaled* coordinates."""
@@ -716,6 +726,64 @@ class ScharfetterGummel1D:
         return n_new, p_new
 
     # ------------------------------------------------------- Top-level solve
+    def _doping_on_grid(self, doping) -> np.ndarray:
+        """Grid-valued net doping, or a hard error. Never a silent interpolation.
+
+        ``CHART-01``. Until generation 8 this method began by quietly resampling
+        any doping array whose length did not match the grid::
+
+            if doping_si.shape[0] != self.grid.N:
+                x_in = np.linspace(0.0, 1.0, doping_si.shape[0])
+                x_grid = np.linspace(0.0, 1.0, self.grid.N)
+                doping_si = np.interp(x_grid, x_in, doping_si)
+
+        Four lines of convenience, and a **parameterisation chart** -- piecewise
+        linear in the signed value, on normalised node index -- selected by an
+        array length, in a solver that never mentions charts. Six generations of
+        identifiability results were published in that chart without recording
+        it, because no call site said it was choosing one. A census over the test
+        suite at the moment of the fix found seven distinct call sites depending
+        on it, across three grid resolutions, including the Jacobian that
+        produced the published local rank and the generator that produced the
+        surrogate's entire training set.
+
+        The operator is not gone; it is named. It lives in
+        :func:`bayespinn_inv.inverse.charts.anchor_signed_to_grid`, which is
+        byte-identical to the deleted lines and pinned to them by frozen vectors.
+        What is gone is the *implicit* selection: a caller either hands over grid
+        values, or hands over a :class:`~bayespinn_inv.inverse.charts.ChartedDoping`
+        that carries the chart it means, or gets an exception.
+
+        The duck-typed ``on_grid`` check keeps ``solvers`` from importing
+        ``inverse`` -- the dependency runs the other way, and reversing it for a
+        type annotation would be a cycle.
+        """
+        on_grid = getattr(doping, "on_grid", None)
+        if callable(on_grid):
+            arr = np.asarray(on_grid(), dtype=np.float64)
+            if arr.shape != (self.grid.N,):
+                raise DopingChartError(
+                    f"{getattr(doping, 'label', lambda: type(doping).__name__)()} "
+                    f"reconstructed {arr.shape} values but this solver's grid has "
+                    f"{self.grid.N} nodes: the chart was built against a "
+                    f"different grid than the one it is being solved on.")
+            return arr
+        arr = np.asarray(doping)
+        if arr.ndim == 1 and arr.shape[0] == self.grid.N:
+            return arr
+        raise DopingChartError(
+            f"doping has shape {arr.shape} but this solver's grid has "
+            f"{self.grid.N} nodes. Until generation 8 this method interpolated "
+            f"the difference away silently, which is how six generations of "
+            f"identifiability results were published without recording the "
+            f"parameterisation chart they were measured in (CHART-01). "
+            f"Say which chart you mean: pass "
+            f"`ChartL(d, x_si).charted(theta)` (or ChartG / ChartJ) from "
+            f"bayespinn_inv.inverse.charts, or, if you hold signed doping at d "
+            f"equally spaced anchors and no chart object, reconstruct "
+            f"explicitly with `charts.anchor_signed_to_grid(C, solver.grid.N)` "
+            f"-- which is the operator these four lines used to apply for you.")
+
     def solve(
         self,
         doping_si: np.ndarray,
@@ -764,14 +832,7 @@ class ScharfetterGummel1D:
         """
         cfg = self.config
         scaling = self.scaling
-        # Auto-interpolate doping to the solver's grid if the caller provided
-        # it on a different resolution. We assume both grids span the same
-        # physical interval (the standard contract).
-        doping_si = np.asarray(doping_si)
-        if doping_si.shape[0] != self.grid.N:
-            x_in = np.linspace(0.0, 1.0, doping_si.shape[0])
-            x_grid = np.linspace(0.0, 1.0, self.grid.N)
-            doping_si = np.interp(x_grid, x_in, doping_si)
+        doping_si = self._doping_on_grid(doping_si)
         # Scale doping
         C_s = scaling.doping_to_scaled(doping_si)
 
@@ -1003,6 +1064,7 @@ class ScharfetterGummel1D:
 
 __all__ = [
     "DeviceState",
+    "DopingChartError",
     "Grid1D",
     "SGConfig",
     "ScharfetterGummel1D",

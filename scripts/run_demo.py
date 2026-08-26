@@ -41,6 +41,7 @@ from bayespinn_inv.data.datasets import (
     build_dataset,
     defect_profile,
 )
+from bayespinn_inv.inverse.charts import regrid_signed
 from bayespinn_inv.inverse.inverse_design import (
     FreePointwiseDoping,
     InverseConfig,
@@ -235,7 +236,7 @@ with open(OUT_DIR / "benchmark.json", "w", encoding="utf-8") as f:
 # Device-state plot for one test bias
 test_dop = test_doping_list[0][1]
 test_dop_t = torch.as_tensor(test_dop, dtype=torch.float32)
-sg_state = sg_solver.solve(np.interp(scaling.x_to_si(
+sg_state = sg_solver.solve(regrid_signed(scaling.x_to_si(
     torch.as_tensor(sg_grid.x)).numpy(),
     np.linspace(*DOMAIN, 128), test_dop), 0.3)
 pinn_state = ensemble.members[0].solve(test_dop_t, 0.3)
@@ -253,7 +254,7 @@ sg_biases = []
 sg_currents = []
 prev = None
 for V in target_biases_np:
-    s = sg_solver.solve(np.interp(scaling.x_to_si(
+    s = sg_solver.solve(regrid_signed(scaling.x_to_si(
         torch.as_tensor(sg_grid.x)).numpy(),
         np.linspace(*DOMAIN, 128), test_dop),
         float(V), initial_state=prev)
@@ -284,7 +285,7 @@ true_x_si = np.linspace(*DOMAIN, 128)
 target_biases = torch.linspace(0.05, BIAS_MAX, 7)
 target_currents = []
 prev = None
-sg_dop_on_grid = np.interp(scaling.x_to_si(
+sg_dop_on_grid = regrid_signed(scaling.x_to_si(
     torch.as_tensor(sg_grid.x)).numpy(), true_x_si,
                             true_doping_si.numpy())
 for V in target_biases:
@@ -425,7 +426,7 @@ for prof in held_out:
     for b_idx in range(len(cal_biases)):
         sample_currents.append(pred.samples[:, b_idx])
     # SG ground truth
-    sg_dop = np.interp(scaling.x_to_si(torch.as_tensor(sg_grid.x)).numpy(),
+    sg_dop = regrid_signed(scaling.x_to_si(torch.as_tensor(sg_grid.x)).numpy(),
                         prof.x_si, prof.doping_si)
     prev = None
     for V in cal_biases:

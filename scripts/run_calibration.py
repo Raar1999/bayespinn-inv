@@ -52,6 +52,7 @@ from bayespinn_inv.calibration.metrics import (
     report_calibration,
 )
 from bayespinn_inv.data.datasets import sample_doping
+from bayespinn_inv.inverse.charts import regrid_signed
 from bayespinn_inv.solvers.scharfetter_gummel import (
     Grid1D,
     ScharfetterGummel1D,
@@ -74,10 +75,13 @@ def _collect_predictions(uq_model, scaling, sg, sg_grid, profiles, biases):
         samples = np.asarray(pred.samples)
         if samples.shape != (M, len(biases)):
             samples = samples.reshape(M, len(biases))
-        # SG oracle for this profile
+        # SG oracle for this profile. CHART-01: the profile lives on its
+        # own abscissa (prof.x_si), the solver on its grid; regrid explicitly.
+        dop_grid = regrid_signed(
+            scaling.x_to_si(np.asarray(sg_grid.x)), prof.x_si, prof.doping_si)
         prev = None
         for b_idx, V in enumerate(biases):
-            s = sg.solve(prof.doping_si, float(V), initial_state=prev)
+            s = sg.solve(dop_grid, float(V), initial_state=prev)
             truth_all[idx] = s.terminal_current
             samples_all[:, idx] = samples[:, b_idx]
             prev = s

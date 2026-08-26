@@ -16,6 +16,7 @@ import numpy as np
 import pytest
 import torch
 
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
@@ -369,15 +370,26 @@ class TestAutomaticContinuation:
     """A cold solve that Gummel cannot reach directly must be ramped to."""
 
     @staticmethod
-    def _ldd(scaling):
+    def _ldd(scaling, sg=None):
+        """The LDD test profile, at 16 anchors.
+
+        ``CHART-01``: the solver used to resample this for us, so the
+        grid-convergence test below was comparing three reconstructions of
+        the same 16 numbers without saying which operator produced them.
+        The operator is index-based, so all three grids do sample one
+        continuous piecewise-linear function -- but that was a fact about
+        the solver internals, not something the test asserted. Now it is
+        named, and the three currents below are unchanged.
+        """
         xa = np.linspace(0.0, DOMAIN_L, 16)
-        return np.where(xa < 0.35e-6, -1e22,
-                        np.where(xa < 0.6e-6, 5e21, 5e23))
+        C = np.where(xa < 0.35e-6, -1e22,
+                     np.where(xa < 0.6e-6, 5e21, 5e23))
+        return C if sg is None else anchor_signed_to_grid(C, sg.grid.N)
 
     @pytest.mark.parametrize("N", [201, 301, 601])
     def test_high_injection_converges_from_cold_start(self, N):
         s, grid, sg = _setup(N=N)
-        st = sg.solve(self._ldd(s), 0.9)
+        st = sg.solve(self._ldd(s, sg), 0.9)
         assert st.converged, f"LDD @ 0.9 V, N={N} did not converge"
         assert np.isfinite(st.terminal_current)
 
@@ -386,7 +398,7 @@ class TestAutomaticContinuation:
         vals = []
         for N in (201, 301, 601):
             s, grid, sg = _setup(N=N)
-            st = sg.solve(self._ldd(s), 0.9)
+            st = sg.solve(self._ldd(s, sg), 0.9)
             assert st.converged
             vals.append(st.terminal_current)
         vals = np.asarray(vals)
@@ -396,7 +408,7 @@ class TestAutomaticContinuation:
 
     def test_continuation_can_be_disabled(self):
         s, grid, sg = _setup(N=301, cfg=SGConfig(auto_continuation=False))
-        st = sg.solve(self._ldd(s), 0.9)
+        st = sg.solve(self._ldd(s, sg), 0.9)
         assert not st.converged, (
             "this case is supposed to be hard without continuation; if it now "
             "converges directly, the continuation test above is vacuous")

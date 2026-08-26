@@ -22,9 +22,11 @@ from bayespinn_inv.calibration.metrics import (
     fit_temperature_regression,
     gaussian_nll,
 )
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
+    DopingChartError,
     Grid1D,
     ScharfetterGummel1D,
     SGConfig,
@@ -67,7 +69,7 @@ class TestDeviceFamilyRobustness:
         sc, sg = _solver()
         xa = np.linspace(0.0, 1e-6, 16)
         for name, C in self._families(xa).items():
-            st = sg.solve(C, bias)
+            st = sg.solve(anchor_signed_to_grid(C, sg.grid.N), bias)
             assert np.all(np.isfinite(st.phi)), f"{name} @ {bias}V: phi has NaN"
             assert np.all(np.isfinite(st.n)), f"{name} @ {bias}V: n has NaN"
             assert np.all(np.isfinite(st.p)), f"{name} @ {bias}V: p has NaN"
@@ -79,14 +81,14 @@ class TestDeviceFamilyRobustness:
         sc, sg = _solver()
         xa = np.linspace(0.0, 1e-6, 16)
         for name, C in self._families(xa).items():
-            I = sg.solve(C, 0.6).terminal_current
+            I = sg.solve(anchor_signed_to_grid(C, sg.grid.N), 0.6).terminal_current
             assert abs(I) < 1e8, f"{name}: implausible current {I:.3e} A/m^2"
 
     def test_carrier_densities_stay_positive(self):
         sc, sg = _solver()
         xa = np.linspace(0.0, 1e-6, 16)
         for name, C in self._families(xa).items():
-            st = sg.solve(C, 0.5)
+            st = sg.solve(anchor_signed_to_grid(C, sg.grid.N), 0.5)
             assert np.all(st.n > 0), f"{name}: non-positive electron density"
             assert np.all(st.p > 0), f"{name}: non-positive hole density"
 
@@ -129,11 +131,25 @@ class TestExtremeInputs:
         st = sg.solve(C, 0.3)
         assert np.isfinite(st.terminal_current)
 
-    def test_doping_resampled_when_grid_mismatched(self):
-        """The documented contract: any-length profile is interpolated."""
+    def test_grid_mismatched_doping_raises_instead_of_resampling(self):
+        """``CHART-01``: the old contract was the defect, so it is inverted here.
+
+        Until generation 8 this test asserted the opposite -- "any-length profile
+        is interpolated" -- and that documented contract is how six generations of
+        identifiability results were published in an unnamed parameterisation
+        chart. A length-9 array on a 201-node grid is not a profile; it is a
+        parameter vector in a chart nobody has said out loud, and the solver now
+        refuses it.
+
+        The two halves are the controls: the bare array must raise, and the same
+        numbers reconstructed through the named operator must go through and give
+        a finite current.
+        """
         sc, sg = _solver(N=201)
         C = np.where(np.linspace(0, 1, 9) < 0.5, -1e22, 1e22)
-        st = sg.solve(C, 0.3)
+        with pytest.raises(DopingChartError, match=r"CHART-01|chart"):
+            sg.solve(C, 0.3)
+        st = sg.solve(anchor_signed_to_grid(C, sg.grid.N), 0.3)
         assert st.doping.shape[0] == 201
         assert np.isfinite(st.terminal_current)
 

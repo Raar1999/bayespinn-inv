@@ -52,6 +52,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from bayespinn_inv.data.splits import ProtocolSpec, build_level_splits, build_sg_labels
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 from bayespinn_inv.inverse.identifiability import (
     analyse_identifiability,
     sg_forward_jacobian,
@@ -224,9 +225,10 @@ def main() -> int:
 
 
 def _sg_symlog(sg, C, biases, symlog):
+    C_grid = anchor_signed_to_grid(C, sg.grid.N)       # CHART-01: chart L
     prev = None
     for V in biases:
-        st = sg.solve(C, float(V), initial_state=prev); prev = st
+        st = sg.solve(C_grid, float(V), initial_state=prev); prev = st
         yield float(symlog.forward(st.terminal_current))
 
 

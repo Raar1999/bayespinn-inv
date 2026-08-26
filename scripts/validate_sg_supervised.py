@@ -25,6 +25,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.pinn.losses import (
@@ -84,9 +85,10 @@ biases = np.linspace(0.0, BIAS_MAX, 13)
 print("Precomputing SG terminal currents...")
 sg_currents = np.zeros((len(profiles), len(biases)))
 for pi, C in enumerate(profiles):
+    C_grid = anchor_signed_to_grid(C, sg.grid.N)       # CHART-01: chart L
     prev = None
     for bi, V in enumerate(biases):
-        st = sg.solve(C, float(V), initial_state=prev)
+        st = sg.solve(C_grid, float(V), initial_state=prev)
         sg_currents[pi, bi] = st.terminal_current
         prev = st
 print(f"  SG |I| range: [{np.abs(sg_currents).min():.2e}, {np.abs(sg_currents).max():.2e}] A/m^2")

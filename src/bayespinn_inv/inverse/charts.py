@@ -88,6 +88,7 @@ only path permitted to arbitrate a published identifiability number.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Dict, Optional, Sequence, Tuple, Union
 
 import numpy as np
@@ -100,18 +101,132 @@ Coords = Union[Sequence[float], np.ndarray]
 __all__ = [
     "Chart",
     "ChartG",
+    "ChartJ",
     "ChartL",
+    "ChartedDoping",
+    "anchor_signed_to_grid",
     "chart_forward_jacobian",
     "containment",
     "project_into_chart",
+    "regrid_signed",
 ]
 
 
+# ---------------------------------------------------------------------------
+# The reconstruction operator -- one definition, for the whole repository
+# ---------------------------------------------------------------------------
+
+def _lerp(x_out: Coords, x_in: Coords, y_in: Coords) -> np.ndarray:
+    """Piecewise-linear resampling: **the** operator that reaches the solver grid.
+
+    Generation 8's ``CHART-01`` fix is the sentence "every doping array the
+    solver integrates was produced by this function, and the caller said which
+    chart it meant". Before it there were **five** implementations reachable from
+    the analysis entry points -- ``make_oracle`` L56-57, ``run_witness_falsifier``
+    L58-59, :meth:`ChartG.reconstruct`, :meth:`ChartL.reconstruct`, and the
+    resampler inside ``ScharfetterGummel1D.solve`` that fired whenever a caller
+    handed the solver a short array -- and which one ran was decided by which
+    file you called.
+
+    ``tests/test_one_reconstruction_g8.py`` is what keeps the sentence true: it
+    walks the AST of every module under ``src/`` and ``scripts/`` and fails if an
+    interpolation onto a solver grid appears outside this module without being
+    named in its allowlist with a reason.
+    """
+    return np.interp(np.asarray(x_out, dtype=np.float64),
+                     np.asarray(x_in, dtype=np.float64),
+                     np.asarray(y_in, dtype=np.float64))
+
+
+def anchor_signed_to_grid(C_anchor: Coords, n_grid: int) -> np.ndarray:
+    """Chart L's reconstruction, applied to **signed** doping at equally spaced anchors.
+
+    Byte-identical to the resampler deleted from ``ScharfetterGummel1D.solve`` in
+    generation 8, and pinned to it by
+    ``tests/test_one_reconstruction_g8.py::test_matches_the_deleted_solver_resampler``
+    against 24 vectors frozen from the old code path before it was removed
+    (``tests/data/chart_l_resampler_golden_g8.json``). Nothing this function
+    returns differs from what the solver used to compute silently; the difference
+    is that the caller now says it.
+
+    Use it wherever a study has signed doping at ``d`` equally spaced anchors and
+    a solver grid, and no :class:`Chart` object -- dataset generation, surrogate
+    supervision, the demo scripts. Where the study *is* an identifiability
+    measurement, build the chart and pass :class:`ChartedDoping` instead, so the
+    chart travels with the vector rather than being re-chosen at each call site.
+    """
+    C = np.asarray(C_anchor, dtype=np.float64)
+    if C.ndim != 1:
+        raise ValueError(f"expected a 1-D anchor vector, got shape {C.shape}")
+    n = int(n_grid)
+    if C.shape[0] == n:
+        return C
+    return _lerp(np.linspace(0.0, 1.0, n), np.linspace(0.0, 1.0, C.shape[0]), C)
+
+
+def regrid_signed(x_out: Coords, x_in: Coords, C: Coords) -> np.ndarray:
+    """Chart L's interpolant on a **stated physical** abscissa rather than node index.
+
+    Distinct from :func:`anchor_signed_to_grid`, and the distinction is the whole
+    of ``CHART-01``: on a uniform grid the two agree exactly, on any other grid
+    they are different reconstruction operators. Callers that hold real positions
+    -- the active-learning loop resampling a user's profile onto the oracle's
+    ``x`` -- use this one and say so.
+    """
+    return _lerp(x_out, x_in, C)
+
+
+@dataclass(frozen=True)
+class ChartedDoping:
+    """A doping parameter vector that carries the chart it is a vector *in*.
+
+    ``CHART-01``, stated as a type. A bare length-``d`` array crossing an API
+    boundary is a chart selection made by whichever file receives it; six
+    generations of identifiability results were published that way. This is how a
+    parameter vector travels instead.
+
+    ``ScharfetterGummel1D.solve`` accepts one of these, calls :meth:`on_grid`, and
+    raises ``DopingChartError`` on any other array that is not already grid-valued.
+    """
+
+    chart: "Chart"
+    theta: np.ndarray
+
+    def on_grid(self) -> np.ndarray:
+        """The ``N``-node profile. The solver calls this and nothing else."""
+        return self.chart.reconstruct(self.theta)
+
+    @property
+    def d(self) -> int:
+        return int(np.asarray(self.theta).shape[0])
+
+    def label(self) -> str:
+        return self.chart.label()
+
+
 class Chart:
-    """A map from ``d`` log10-magnitude coordinates to an ``N``-node profile."""
+    """A map from ``d`` coordinates to an ``N``-node profile.
+
+    Subclasses differ in exactly two declared ways, and nothing else:
+
+    :attr:`abscissa`
+        where the anchors live -- ``"physical"`` (metres along the device,
+        ``x_si``) or ``"index"`` (normalised node index). On a uniform grid the
+        two coincide; on any other grid they are different operators. Until
+        generation 8 this was decided by which file you called.
+    :meth:`reconstruct`
+        what quantity is interpolated between the anchors, and how the sign is
+        placed.
+
+    Both reach the grid through :meth:`_to_grid`, which is the only route in the
+    package (see :func:`_lerp`).
+    """
 
     #: Short label used in tables and manifests.
     name = "chart"
+
+    #: ``"physical"`` or ``"index"``. See the class docstring.
+    abscissa = "physical"
 
     def __init__(self, d: int, x_si: np.ndarray) -> None:
         if d < 2:
@@ -120,22 +235,64 @@ class Chart:
         self.x_si = np.asarray(x_si, dtype=np.float64)
         self.N = int(self.x_si.shape[0])
         self.mid = 0.5 * (self.x_si.min() + self.x_si.max())
-        self.anchors = np.linspace(self.x_si.min(), self.x_si.max(), self.d)
+        #: How many of the ``d`` coordinates are log10 magnitudes at anchors.
+        #: Equal to ``d`` for every chart whose coordinates are *only*
+        #: magnitudes; :class:`ChartJ` spends one coordinate on the junction.
+        self.n_mag = self._n_mag(self.d)
+        self.anchors = np.linspace(self.x_si.min(), self.x_si.max(), self.n_mag)
         #: Project sign convention (PH-03/PH-04): acceptors left, donors right.
         self.anchor_signs = np.where(self.anchors < self.mid, -1.0, 1.0)
+
+    @staticmethod
+    def _n_mag(d: int) -> int:
+        return int(d)
+
+    # -- the one route to the grid -----------------------------------------
+
+    def _to_grid(self, y_anchor: Coords) -> np.ndarray:
+        """Anchor values -> grid values, by this chart's declared abscissa.
+
+        Every chart reconstruction in this repository passes through here.
+        """
+        y = np.asarray(y_anchor, dtype=np.float64)
+        if y.shape[0] != self.n_mag:
+            raise ValueError(f"{self.label()} interpolates {self.n_mag} anchor "
+                             f"values, got {y.shape[0]}")
+        if self.abscissa == "physical":
+            return _lerp(self.x_si, self.anchors, y)
+        if self.abscissa == "index":
+            return _lerp(np.linspace(0.0, 1.0, self.N),
+                         np.linspace(0.0, 1.0, self.n_mag), y)
+        raise ValueError(f"{self.label()}: unknown abscissa {self.abscissa!r}")
 
     def reconstruct(self, log10_mag: Coords) -> np.ndarray:
         raise NotImplementedError
 
-    def solver_input(self, log10_mag: Coords) -> np.ndarray:
-        """What the study actually passes to ``ScharfetterGummel1D.solve``.
+    def on_grid_signed(self, C_anchor: Coords) -> np.ndarray:
+        """Reconstruct from **signed** doping at the anchors, not from log10.
 
-        The distinction matters: ``ChartG`` passes an ``N``-node array and the
-        solver's resampler never fires, while ``ChartL`` passes a ``d``-node
-        array *specifically so that it does*. Driving the oracle through this
-        method keeps the measurement on the real code path.
+        The coordinates ``sg_forward_jacobian`` differentiates are signed
+        ``C`` values, not ``log10|C|``, so a chart has to be able to receive them
+        in that form. Same operator, same abscissa; only the quantity differs.
         """
-        return self.reconstruct(log10_mag)
+        raise NotImplementedError
+
+    # -- carrying the chart across an API boundary --------------------------
+
+    def charted(self, log10_mag: Coords) -> ChartedDoping:
+        """Wrap coordinates so they carry this chart to the solver (``CHART-01``)."""
+        return ChartedDoping(self, np.asarray(log10_mag, dtype=np.float64))
+
+    def solver_input(self, log10_mag: Coords) -> ChartedDoping:
+        """What the study passes to ``ScharfetterGummel1D.solve``.
+
+        Before generation 8 this returned a bare array, and what happened next
+        depended on its length: an ``N``-node array was integrated as given,
+        while a ``d``-node array was silently interpolated by the solver. Both
+        charts now return a :class:`ChartedDoping`, the solver reconstructs
+        through the chart, and a bare short array raises instead.
+        """
+        return self.charted(log10_mag)
 
     def label(self) -> str:
         return f"{self.name}(d={self.d})"
@@ -144,60 +301,181 @@ class Chart:
 class ChartG(Chart):
     """Geometric interpolation of the magnitude; hard sign flip at the midpoint.
 
-    Decided by ``scripts/run_global_identifiability.py::make_oracle`` L60--62.
+    Was decided by ``scripts/run_global_identifiability.py::make_oracle`` L60--62
+    and, separately and identically, by
+    ``scripts/run_witness_falsifier.py::solve_profile`` L58--59 -- two copies of
+    one chart: the study, and the falsifier that was supposed to be independent
+    of it. Both now call this class.
     """
 
     name = "G"
+    abscissa = "physical"
 
     def __init__(self, d: int, x_si: np.ndarray) -> None:
         super().__init__(d, x_si)
         self.sign_grid = np.where(self.x_si < self.mid, -1.0, 1.0)
 
     def reconstruct(self, log10_mag: Coords) -> np.ndarray:
-        mag = 10.0 ** np.interp(
-            self.x_si, self.anchors, np.asarray(log10_mag, dtype=np.float64))
-        return self.sign_grid * mag
+        return self.sign_grid * 10.0 ** self._to_grid(log10_mag)
+
+    def on_grid_signed(self, C_anchor: Coords) -> np.ndarray:
+        C = np.asarray(C_anchor, dtype=np.float64)
+        return self.reconstruct(np.log10(np.abs(C)))
 
 
 class ChartL(Chart):
     """Arithmetic interpolation of the signed value, on the solver's index grid.
 
-    Decided by ``scripts/run_identifiability.py`` (``N_ANCHOR``) reaching
-    ``solvers/scharfetter_gummel.py::ScharfetterGummel1D.solve`` L767--774.
+    Was decided by ``scripts/run_identifiability.py`` (``N_ANCHOR``) reaching a
+    resampler inside ``ScharfetterGummel1D.solve`` -- a chart chosen by an array
+    length, in a file that never mentions charts. Generation 8 deleted that
+    resampler; this class is now the only place the operator exists, and
+    :func:`anchor_signed_to_grid` is the same operator for callers holding signed
+    ``C`` and no chart object.
 
-    ``reconstruct`` replicates that resampler so the profile can be analysed
-    without a solve; :meth:`assert_matches_solver` checks the replication against
-    the solver's own stored ``DeviceState.doping``, which is written *after* the
-    resampling. A chart definition that is only asserted is a chart definition
-    that can drift from the code it claims to describe.
+    The old positive control compared :meth:`reconstruct` against the solver's
+    own stored ``DeviceState.doping``. With the resampler gone that control is
+    vacuous -- the solver now calls this method -- so it is replaced by
+    :meth:`assert_matches_frozen_reference`, which compares against 24 vectors
+    captured from the deleted code path before it was deleted.
     """
 
     name = "L"
+    abscissa = "index"
 
     def reconstruct(self, log10_mag: Coords) -> np.ndarray:
-        C_d = self.solver_input(log10_mag)
-        return np.interp(np.linspace(0.0, 1.0, self.N),
-                         np.linspace(0.0, 1.0, self.d), C_d)
+        return self._to_grid(self.signed_anchors(log10_mag))
 
-    def solver_input(self, log10_mag: Coords) -> np.ndarray:
+    def signed_anchors(self, log10_mag: Coords) -> np.ndarray:
+        """The ``d`` signed anchor values this chart interpolates between."""
         return self.anchor_signs * 10.0 ** np.asarray(log10_mag, dtype=np.float64)
 
-    def assert_matches_solver(self, solver, log10_mag: Coords,
-                              bias: float = 0.0) -> float:
-        """Positive control: does the solver reconstruct what this chart says?
+    def on_grid_signed(self, C_anchor: Coords) -> np.ndarray:
+        return self._to_grid(C_anchor)
 
-        Returns the max relative disagreement. Raises if it is above round-off.
+    def assert_matches_frozen_reference(self, C_anchor: Coords,
+                                        expected: Coords) -> float:
+        """Regression control against the deleted solver resampler.
+
+        ``expected`` is a profile the *old* ``ScharfetterGummel1D.solve`` produced
+        from ``C_anchor``, frozen before the resampler was removed. Returns the
+        max relative disagreement and raises above round-off. A chart definition
+        that is only asserted is a chart definition that can drift.
         """
-        state = solver.solve(self.solver_input(log10_mag), bias)
-        mine = self.reconstruct(log10_mag)
-        err = float(np.max(np.abs(state.doping - mine)
-                           / np.maximum(np.abs(mine), 1e-300)))
-        if err > 1e-12:
+        mine = self.on_grid_signed(C_anchor)
+        ref = np.asarray(expected, dtype=np.float64)
+        err = float(np.max(np.abs(ref - mine) / np.maximum(np.abs(mine), 1e-300)))
+        if err > 1e-15:
             raise AssertionError(
-                f"ChartL.reconstruct disagrees with the solver's resampler by "
-                f"{err:.3e}; the chart definition has drifted from "
-                f"scharfetter_gummel.py:767-774")
+                f"ChartL disagrees with the frozen pre-g8 solver resampler by "
+                f"{err:.3e}; the CHART-01 fix changed a published number")
         return err
+
+
+class ChartJ(Chart):
+    """Geometric magnitude over ``d-1`` anchors, with the **junction free**.
+
+    Charts G and L differ only in whether the interpolation between anchors is
+    geometric or arithmetic. Every invariance statement measured across those two
+    is measured along one axis with two points on it, which the generation-7 state
+    file recorded as its highest remaining scientific risk. This chart is a point
+    off that axis, and it is off it for a physical reason rather than a numerical
+    one: **where the junction sits is a fabrication parameter**, and neither G nor
+    L lets it move.
+
+    Coordinates, ``d`` of them::
+
+        theta = [s, m_1, ..., m_{d-1}]
+
+    ``m_i = log10|C|`` at ``d-1`` equally spaced anchors, exactly as in chart G.
+    ``s`` places the junction, in decades of the ratio ``x_j / (L - x_j)``::
+
+        x_j / L = 1 / (1 + 10 ** (-s * junction_scale))
+
+    ``s = 0`` is the device midpoint. So **chart J at ``s = 0`` is chart G at
+    ``d-1``**, exactly. That is this chart's positive control, and it is also the
+    negative control for "the third chart is genuinely different": a
+    discriminator that cannot return *not different* for a pinned junction is not
+    measuring anything.
+
+    How the reachable sets differ, precisely
+    ----------------------------------------
+    * Chart G's sign flip is pinned between the two grid nodes straddling the
+      midpoint. It cannot move, at any ``d``.
+    * Chart L's zero crossing is *not* pinned to the midpoint -- it lands where
+      the arithmetic interpolant crosses zero, which depends on the two
+      magnitudes straddling the midpoint -- but it cannot leave the one anchor
+      interval of width ``L/(d-1)`` that contains the midpoint.
+    * Chart J's junction is free over the whole device, and is a genuine
+      discontinuity wherever it lands.
+
+    ``junction_scale`` and why it is reported rather than chosen
+    ------------------------------------------------------------
+    A Jacobian whose columns carry different units has a basis-dependent singular
+    spectrum, and here ``d-1`` columns are decades of doping while one is decades
+    of junction ratio. There is no units-free choice, so the choice is *stated*
+    and its effect *measured*: ``junction_scale`` rescales the junction
+    coordinate, and generation 8 reports the spectrum over a range of it rather
+    than at one value -- ``SPEC-11``'s rank-curve rule, applied to a coordinate
+    scaling instead of to a cutoff.
+
+    Grid quantisation
+    -----------------
+    The sign flip is applied on the grid, so ``x_j`` moves in steps of one node.
+    A finite-difference step in ``s`` that moves the junction less than one node
+    differentiates a constant and returns exactly zero.
+    :meth:`junction_node_shift` reports the shift in nodes for a given step, so
+    the estimator can be checked against the discretisation rather than trusted.
+    """
+
+    name = "J"
+    abscissa = "physical"
+
+    def __init__(self, d: int, x_si: np.ndarray,
+                 junction_scale: float = 1.0) -> None:
+        if d < 3:
+            raise ValueError(
+                f"chart J spends one coordinate on the junction, so it needs at "
+                f"least 3 (2 magnitudes + 1 junction), got {d}")
+        super().__init__(d, x_si)
+        self.junction_scale = float(junction_scale)
+
+    @staticmethod
+    def _n_mag(d: int) -> int:
+        return int(d) - 1
+
+    def junction_position(self, s: float) -> float:
+        """``x_j`` in metres, for junction coordinate ``s``."""
+        frac = 1.0 / (1.0 + 10.0 ** (-float(s) * self.junction_scale))
+        lo, hi = float(self.x_si.min()), float(self.x_si.max())
+        return lo + frac * (hi - lo)
+
+    def junction_node_shift(self, s: float, ds: float) -> float:
+        """Grid nodes the junction moves when ``s`` changes by ``ds``."""
+        dx = abs(self.junction_position(s + ds) - self.junction_position(s))
+        span = float(self.x_si.max() - self.x_si.min())
+        return dx / (span / (self.N - 1))
+
+    def reconstruct(self, theta: Coords) -> np.ndarray:
+        th = np.asarray(theta, dtype=np.float64)
+        if th.shape[0] != self.d:
+            raise ValueError(f"{self.label()} takes {self.d} coordinates "
+                             f"(1 junction + {self.n_mag} magnitudes), "
+                             f"got {th.shape[0]}")
+        xj = self.junction_position(th[0])
+        return np.where(self.x_si < xj, -1.0, 1.0) * 10.0 ** self._to_grid(th[1:])
+
+    def on_grid_signed(self, C_anchor: Coords) -> np.ndarray:
+        C = np.asarray(C_anchor, dtype=np.float64)
+        if C.shape[0] != self.d:
+            raise ValueError(f"{self.label()} takes {self.d} coordinates")
+        return self.reconstruct(
+            np.concatenate([C[:1], np.log10(np.abs(C[1:]))]))
+
+    def label(self) -> str:
+        if self.junction_scale == 1.0:
+            return f"{self.name}(d={self.d})"
+        return f"{self.name}(d={self.d},js={self.junction_scale:g})"
 
 
 def chart_forward_jacobian(oracle, chart: Chart, log10_mag: Coords,

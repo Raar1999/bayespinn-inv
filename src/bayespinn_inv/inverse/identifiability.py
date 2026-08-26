@@ -55,6 +55,7 @@ __all__ = [
     "IdentifiabilityReport",
     "analyse_identifiability",
     "equivalence_perturbation",
+    "rank_cutoff_record",
     "sg_forward_jacobian",
     "symlog",
     "torch_forward_jacobian",
@@ -219,11 +220,23 @@ def sg_forward_jacobian(
     I0: float = 1e-6,
     rel_step: float = 1e-2,
     min_snr: float = 1e4,
+    *,
+    chart=None,
 ) -> Tuple[np.ndarray, np.ndarray, List[int]]:
     """Finite-difference Jacobian d symlog(I) / d log10|C| through the SG oracle.
 
     Perturbs the *magnitude* of the doping at each node by ``rel_step`` decades,
     keeping its sign, and re-solves. Central differences.
+
+    ``chart`` (``CHART-01``, generation 8)
+        Required whenever ``doping_si`` is **not** grid-valued. The published
+        local rank was measured by handing this function a length-16 signed
+        vector and letting ``ScharfetterGummel1D.solve`` resample it -- which
+        chose chart L, silently, from an array length. That resampler is gone;
+        the chart is now named at the call site and reconstructs through
+        :meth:`~bayespinn_inv.inverse.charts.Chart.on_grid_signed`. Passing
+        ``ChartL(d, x_si)`` reproduces the old numbers exactly; passing nothing
+        with a short vector now raises instead of guessing.
 
     PH-22 (dtype): **float64 throughout** -- this is the NumPy oracle path, and it
     is the only one permitted to arbitrate a published identifiability number. Its
@@ -261,11 +274,21 @@ def sg_forward_jacobian(
     """
     doping_si = np.asarray(doping_si, dtype=np.float64)
     P = doping_si.shape[0]
+    if chart is None:
+        def _to_grid(C):
+            return C
+    else:
+        if chart.d != P:
+            raise ValueError(
+                f"{chart.label()} takes {chart.d} coordinates, got {P}")
+
+        def _to_grid(C):
+            return chart.on_grid_signed(C)
 
     def _iv(C):
         prev, out, floors = None, [], []
         for V in biases:
-            st = oracle.solve(C, float(V), initial_state=prev)
+            st = oracle.solve(_to_grid(C), float(V), initial_state=prev)
             prev = st
             out.append(st.terminal_current)
             floors.append(st.current_noise_floor)
@@ -427,3 +450,118 @@ def equivalence_perturbation(
     sign = np.sign(doping_si)
     mag = np.abs(doping_si)
     return sign * mag * (10.0 ** v)
+
+
+def rank_cutoff_record(rep: "IdentifiabilityReport", noise_rel: float,
+                       cutoff_grid: Optional[Sequence[float]] = None) -> dict:
+    """The spectrum, then **rank as a curve over cutoffs** -- never a bare integer.
+
+    ``SPEC-11``, enacted by operator ruling at generation 8 §5.
+
+        Every rank is reported as ``rank(cutoff)`` over the range of defensible
+        cutoffs, with the spectrum, the chosen cutoff, and whether that cutoff
+        sits in a population gap. A bare integer rank appears only where a gap
+        justifies it.
+
+    The defect that forced it. Generation 7 measured four ``(chart, d)`` cells and
+    found that at ``d = 4`` the operational cutoff falls inside the spectrum's
+    largest multiplicative gap (x7.39 in chart G, x17.46 in chart L) while at
+    ``d = 16`` it does not (x4.99 and x5.12, cutoff outside). So "3 of 4" is a
+    boundary between two populations of singular values and "4 of 16" is a
+    threshold applied to a smooth decay. They are different kinds of object and
+    were being quoted in the same voice.
+
+    What "defensible" means here, stated rather than tuned
+    ------------------------------------------------------
+    The cutoff is a measurement-noise level expressed in symlog units,
+    ``log10(1 + noise_rel)``. Its range is bounded
+
+    * **below** by this analysis's own ``spectral_floor``: under it, a singular
+      value is not distinguishable from zero by Weyl's inequality, so a rank
+      counted there counts estimator noise;
+    * **above** by a noise level no one would claim for this instrument.
+
+    The default grid is the repository's existing ``NOISE_GRID`` from
+    ``scripts/run_identifiability.py``, so the range is inherited, not invented
+    for this report.
+
+    The gap criterion is also inherited, unchanged, from the generation-7
+    reconciliation: **a bare integer rank is justified iff the operational cutoff
+    falls strictly inside the largest multiplicative gap of the resolvable
+    spectrum.** Fixing it in an earlier generation is what keeps ``AH-14`` clean
+    here -- it cannot have been chosen after seeing the g8 cells.
+
+    ``plateau_containing_operational_cutoff`` is the continuous companion: the
+    span of noise levels over which the rank does not move. A wide plateau and an
+    in-gap cutoff are the same fact seen twice; a narrow plateau with an in-gap
+    verdict would be a contradiction worth chasing.
+    """
+    s = np.asarray(rep.singular_values, dtype=np.float64)
+    floor = rep.spectral_floor
+    above = s[s > floor]
+
+    gap_idx, gap_ratio, in_gap = None, None, None
+    if above.size >= 2:
+        ratios = above[:-1] / np.maximum(above[1:], 1e-300)
+        gap_idx = int(np.argmax(ratios))
+        gap_ratio = float(ratios[gap_idx])
+    op_cut = float(np.log10(1.0 + noise_rel))
+    if gap_idx is not None:
+        in_gap = bool(above[gap_idx + 1] <= op_cut < above[gap_idx])
+
+    grid = list(cutoff_grid) if cutoff_grid is not None else [
+        0.20, 0.10, 0.05, 0.02, 0.01, 1e-3, 1e-4, 1e-6]
+    curve = []
+    for nl in grid:
+        thr = float(np.log10(1.0 + float(nl)))
+        curve.append({
+            "noise_rel": float(nl),
+            "cutoff_symlog": thr,
+            "rank": int(min(int(np.sum(s > thr)), rep.resolvable_rank)),
+            "cutoff_below_spectral_floor": bool(thr < floor),
+        })
+
+    ranks = [c["rank"] for c in curve]
+    lo = hi = None
+    if noise_rel in grid:
+        k = grid.index(noise_rel)
+        i = k
+        while i > 0 and ranks[i - 1] == ranks[k]:
+            i -= 1
+        j = k
+        while j < len(grid) - 1 and ranks[j + 1] == ranks[k]:
+            j += 1
+        lo, hi = float(grid[j]), float(grid[i])   # grid descends in noise
+
+    return {
+        "singular_values": [float(x) for x in s],
+        "spectral_floor": float(floor),
+        "jacobian_noise": float(rep.jacobian_noise),
+        "n_observations": int(rep.n_observations),
+        "n_parameters": int(rep.n_parameters),
+        "operational_noise_rel": float(noise_rel),
+        "operational_cutoff_symlog": op_cut,
+        "rank_curve": curve,
+        "rank_at_operational_cutoff": int(rep.identifiable_rank),
+        "resolvable_rank": int(rep.resolvable_rank),
+        "largest_gap_after_index": gap_idx,
+        "largest_gap_ratio": gap_ratio,
+        "operational_cutoff_falls_in_largest_gap": in_gap,
+        "bare_integer_rank_justified": bool(in_gap) if in_gap is not None else False,
+        "plateau_containing_operational_cutoff": {
+            "noise_rel_lo": lo, "noise_rel_hi": hi,
+            "limited_by_resolvable_rank": bool(
+                rep.identifiable_rank == rep.resolvable_rank),
+            "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure",
+        },
+        "how_to_quote": (
+            f"rank {rep.identifiable_rank} at cutoff {op_cut:.3e} symlog "
+            f"(noise_rel={noise_rel:g})"
+            + ("; the cutoff falls inside the largest multiplicative gap "
+               f"(x{gap_ratio:.2f} after index {gap_idx}), so this is a "
+               "population boundary and the bare integer may be quoted"
+               if in_gap else
+               "; the cutoff does NOT fall inside the largest multiplicative "
+               f"gap (x{gap_ratio:.2f} after index {gap_idx}) -- this is a "
+               "threshold count and must never be quoted without its cutoff")),
+    }

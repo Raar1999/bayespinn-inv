@@ -38,6 +38,8 @@ from typing import Dict, Optional, Tuple
 
 import numpy as np
 
+from ..inverse.charts import anchor_signed_to_grid
+
 __all__ = [
     "ProtocolSpec",
     "build_level_splits",
@@ -134,9 +136,12 @@ def oracle_iv(sg, C: np.ndarray, biases: np.ndarray,
     solve, so those points are numerical noise, not measurements
     (AUDIT_MASTER BUG-04, ADR-0002).
     """
+    # CHART-01: this study's profiles are signed doping at equally spaced
+    # anchors, and the solver used to resample them for us. Chart L, named.
+    C_grid = anchor_signed_to_grid(C, sg.grid.N)
     prev, I, trust = None, [], []
     for V in biases:
-        st = sg.solve(C, float(V), initial_state=prev)
+        st = sg.solve(C_grid, float(V), initial_state=prev)
         prev = st
         I.append(st.terminal_current)
         trust.append(bool(st.converged and st.current_is_trustworthy(trust_snr)))

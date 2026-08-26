@@ -188,13 +188,14 @@ def _collect(
     oracle: Callable,
     n: int,
     progress: Optional[Callable[[int, int], None]] = None,
+    draw: Optional[Callable[[GlobalStudyConfig, int], np.ndarray]] = None,
 ) -> Tuple[List[OracleSample], Dict[str, int]]:
     """Draw and solve ``n`` profiles, keeping only those the oracle certifies.
 
     Rejections are counted by reason and returned, never silently dropped
     (PH-19: every filter states its predicate and its removal count).
     """
-    draws = _draw_profiles(cfg, n)
+    draws = (_draw_profiles if draw is None else draw)(cfg, n)
     kept: List[OracleSample] = []
     counts = {"drawn": n, "kept": 0, "rejected_not_converged": 0,
               "rejected_not_trustworthy": 0}
@@ -217,6 +218,10 @@ def witness_search(
     oracle: Callable,
     n_samples: int,
     progress: Optional[Callable[[int, int], None]] = None,
+    *,
+    draw: Optional[Callable[[GlobalStudyConfig, int], np.ndarray]] = None,
+    max_witnesses: Optional[int] = 5,
+    include_samples: bool = False,
 ) -> Dict:
     """Hunt for two distant profiles the instrument cannot tell apart.
 
@@ -233,8 +238,26 @@ def witness_search(
     both floors. ``AH-13``: if no witness is found this reports *"no witness found
     at this budget"*. That is not the same sentence as "identifiable", and only
     the first one is measured.
+
+    Generation-8 additions, all defaulted so no earlier result changes:
+
+    ``draw``
+        an alternative prior sampler, ``(cfg, n) -> (n, d)``. Chart J's junction
+        coordinate is not a log10 doping magnitude and cannot be drawn from the
+        doping prior, so the sampler has to be replaceable. It carries its own
+        specification hash into the artefact; ``cfg.prior_hash()`` alone no
+        longer identifies the prior when this is supplied, and the caller must
+        record both.
+    ``max_witnesses``
+        how many witness records to render. The default of 5 is what generations
+        6 and 7 stored, which is why ``SPEC-g8-5`` could not be answered from the
+        existing artefacts: 37 pairs were *found* and 5 were *kept*. Pass ``None``
+        for all of them.
+    ``include_samples``
+        also return every certified draw and the index pairs of the witnesses, so
+        the witness relation can be treated as a graph rather than a list.
     """
-    kept, counts = _collect(cfg, oracle, n_samples, progress)
+    kept, counts = _collect(cfg, oracle, n_samples, progress, draw=draw)
     if len(kept) < 2:
         return {"config": cfg.to_dict(), "sampling": counts, "witnesses": [],
                 "n_pairs_examined": 0,
@@ -273,17 +296,28 @@ def witness_search(
             "current_b": kept[j].current.tolist(),
         }
 
+    out_extra: Dict = {}
+    if include_samples:
+        out_extra["kept_log10"] = [k.log10_mag.tolist() for k in kept]
+        out_extra["witness_pair_indices"] = [[int(p[2]), int(p[3])]
+                                             for p in witnesses]
+        out_extra["witness_pair_distance"] = [float(p[0]) for p in witnesses]
+        out_extra["witness_pair_separation"] = [float(p[1]) for p in witnesses]
+
     return {
         "config": cfg.to_dict(),
         "sampling": counts,
         "n_pairs_examined": n_pairs,
+        "max_witnesses_rendered": max_witnesses,
+        **out_extra,
         "floors": {
             "noise_rel": cfg.noise_rel,
             "discretisation_rel": cfg.discretisation_floor_rel,
             "distinguishability": floor,
         },
         "n_witnesses": len(witnesses),
-        "witnesses": [_render(p) for p in witnesses[:5]],
+        "witnesses": [_render(p) for p in (
+            witnesses if max_witnesses is None else witnesses[:max_witnesses])],
         "closest_far_pair": _render(far[0]) if far else None,
         "closest_any_pair": _render(pairs[0]) if pairs else None,
         "verdict": (

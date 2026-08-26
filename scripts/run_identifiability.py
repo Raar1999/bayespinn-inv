@@ -38,6 +38,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
+from bayespinn_inv.inverse.charts import ChartL
 from bayespinn_inv.inverse.identifiability import (
     analyse_identifiability,
     equivalence_perturbation,
@@ -101,6 +102,15 @@ def main() -> int:
 
     report_json = {}
 
+    # CHART-01 (generation 8). N_ANCHOR = 16 coordinates reach a 301-node solver.
+    # Until g8 the solver resampled them silently and that choice -- piecewise
+    # linear in the signed value, on normalised node index -- was the chart every
+    # number below is measured in, unnamed. It is named now, and it is the only
+    # thing that changed: chart L reconstructs with the operator the solver used
+    # to apply, pinned byte-for-byte by tests/test_one_reconstruction_g8.py.
+    chart = ChartL(N_ANCHOR, scaling.x_to_si(np.asarray(oracle.grid.x)))
+    cfg["chart"] = chart.label()
+
     # -- 1. analysis-convergence study on the reference device --------------
     print("=" * 74)
     print("ANALYSIS-CONVERGENCE STUDY (is the conclusion an artefact of the")
@@ -115,7 +125,7 @@ def main() -> int:
           f" {'resolv':>7} {'ident@2%':>9} {'s1/s2':>8}")
     for snr, step in settings:
         J, I_ref, kept, eta = sg_forward_jacobian(
-            oracle, ref, biases, rel_step=step, min_snr=snr)
+            oracle, ref, biases, rel_step=step, min_snr=snr, chart=chart)
         rep = analyse_identifiability(J, noise_rel=0.02, jacobian_noise=eta)
         s = rep.singular_values
         row = dict(min_snr=snr, rel_step=step, n_rows=len(kept),
@@ -146,7 +156,8 @@ def main() -> int:
         for snr_try in (best_snr, 1e7, 1e6, 1e5, 1e4):
             try:
                 J, I_ref, kept, eta = sg_forward_jacobian(
-                    oracle, C, biases, rel_step=best_step, min_snr=snr_try)
+                    oracle, C, biases, rel_step=best_step, min_snr=snr_try,
+                    chart=chart)
             except ValueError:
                 continue
             if len(kept) >= 6:
@@ -172,7 +183,8 @@ def main() -> int:
         def iv(Cp):
             prev, o = None, []
             for V in Bk:  # noqa: B023
-                st = oracle.solve(Cp, float(V), initial_state=prev)
+                st = oracle.solve(chart.on_grid_signed(Cp), float(V),
+                                  initial_state=prev)
                 prev = st
                 o.append(st.terminal_current)
             return np.asarray(o)
