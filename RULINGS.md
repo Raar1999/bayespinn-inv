@@ -53,6 +53,7 @@ PREMISES:   what this ruling rests on that has not itself been measured
 | generation | corrections | zero-streak | red generation triggered |
 |---|---|---|---|
 | (pre-fusion g0–close addendum) | operator-written; not counted under `SR-2` | — | — |
+| `g11` | **9** — three of them errors in this loop's own rulings, two of them errors of mine made during the generation | 0 | no |
 
 ---
 

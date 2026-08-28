@@ -1,0 +1,515 @@
+{
+  "generation": 11,
+  "step": "generation 11 under fused operator authority, 2026-08-28",
+  "designation": "GENERATION 11. The first generation run under the operator directive of 2026-08-28, which fuses operator authority into the loop and replaces the two-party arrangement with a hashed condition ladder (LADDER.md), a self-ruling ledger (RULINGS.md) and an unreachability standard that has to be earned. The close of 2026-08-26 forbade a generation 11; that prohibition was issued by the operator under the arrangement this directive replaces, and the directive's section 8 instructs the next generation's Phase A by name. WITNESS-04 is closed, HIST-01 is repaired, one ratified premise is falsified, and the ladder was climbed rather than descended.",
+  "terminated": false,
+  "closed": false,
+  "why_not_terminated": "the stopping rule is claim-surface stationarity (directive section 5): two consecutive generations in which every finding is below HIGH, changes no spine item and changes no stated limitation. This generation changed two spine items and removed a limitation, so it is not stationary and the count of consecutive stationary generations is zero.",
+  "governance": {
+    "directive": "operator directive of 2026-08-28, authority fused",
+    "ladder": "LADDER.md",
+    "ladder_sha256": "a2596365f4ec053ba7fda37901c1bd8a11db264f4954a080f6801446743a7926",
+    "ladder_edited_since_instantiation": false,
+    "rulings": "RULINGS.md",
+    "rulings_sha256_at_instantiation": "43f7182d77c8f66e73a8fe1dce60233833cd5497c3c3c5b7888ae819277f6fe1",
+    "hash_lock": "outputs/g11/hashlock_g11.json",
+    "rung_at_start": "L2",
+    "rung_at_end": "L1",
+    "movement": "CLIMBED",
+    "unreachability_verdicts_issued": [],
+    "why_none": "none was available. U-BUDGET was the only plausible class and the directive voids a budget verdict without a measured pilot; the pilot measured the experiment at minutes. MECH-01 has one failed method against U-EMPIR's three by distinct methods.",
+    "distance_to_L0": "MECH-01 alone. After CI-01 and PROV-07 were reclassified OPERATOR-BLOCKED, every other open HIGH is exempt by the rung's own words."
+  },
+  "champion_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+  "machinery_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+  "results_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+  "bookkeeping_commit": null,
+  "champion_branch": "loop/champion",
+  "schema": {
+    "champion_commit": "The last CONTENT commit, by definition. Never the commit that wrote this file: a state file cannot name its own commit, because its bytes are part of the tree that commit hashes. Guarded by tests/test_loop_state_close.py.",
+    "bookkeeping_commit": "null at write time, always. Nothing may fill this during the commit that writes the file, because the value would be that commit's own hash.",
+    "machinery_commit": "Equal to champion_commit. The addendum's measurement ran against the working tree that became that commit, byte for byte: the run executed, then the artefacts and the code that produced them were committed together. The distinction the earlier files draw between the tree a measurement ran against and the tree carrying its results does not arise, and each artefact additionally pins its inputs by SHA-256.",
+    "results_commit": "Equal to champion_commit.",
+    "baselines": "REP-01 as amended at generation 9 section 3: every entry is an OBJECT carrying the invocation that produced it, never a bare scalar. Entries marked rerunnable are re-run and compared; entries that are not carry conditions and measured_at_commit instead.",
+    "free_check": "The one measurement the closing ruling section 5 permits. Recorded separately from `spec_clause_status` because it is a DESCRIPTION and not a clause: it was ordered after the data existed, so no pre-registration is possible and none is claimed.",
+    "addendum": "The one solving step authorised after the close. Recorded as a MEASUREMENT with a pre-registration, which is the opposite of what LOOP_STATE_v8.json had to say about its free check and for the same reason: the record must match what happened. Guarded by tests/test_loop_state_addendum.py, which re-reads every number here from outputs/wit02_chartG/ and fails on a disagreement."
+  },
+  "one_tree_one_commit": {
+    "honoured": true,
+    "note": "the pilot, the refinement, the recount, the register, the HIST-01 repair and the documents were produced by one tree, and that tree is the champion commit."
+  },
+  "measurements": {
+    "WITNESS-04": {
+      "question": "do chart L's 37 witness pairs survive the refinement battery, and does the barrier classification move when they are recounted over the survivors?",
+      "authorised_by": "operator directive of 2026-08-28 sections 7 and 8",
+      "preregistered": true,
+      "preregistration": "outputs/g11/wit02_chartL/preregister.json",
+      "invocation": "PYTHONPATH=src python scripts/run_wit02_chartL.py",
+      "set": "chart_L_d16",
+      "n_pairs_offered": 37,
+      "n_refined": 37,
+      "n_surviving": 26,
+      "n_separated": 11,
+      "coverage_before": 0.0,
+      "coverage_after": 1.0,
+      "count_class": "PARTIAL",
+      "classification": "BASIN",
+      "classification_at_generation_10": "BASIN",
+      "flipped": false,
+      "median_in_floor_units": 222.81004103367198,
+      "median_in_floor_units_at_generation_10": 212.0137057465094,
+      "fraction_below_floor_barrier": 0.0,
+      "wall_clock_s": 287.6357320999996,
+      "controls": {
+        "R1_reproduction": "PASS. 37 of 37 pairs reproduce the committed N=301 distance bit-identically. Weaker than chart G's in a stated way: it compares this code path against the artefact it reads, not against a second implementation.",
+        "N1_negative": "PASS. A chart-L null-control pair -- consecutive ordinary draws forming no witness pair -- through the same battery does NOT survive, at 0.4507 against a floor of 0.02.",
+        "P1_positive": "PASS. Two identical devices survive at distance exactly zero at every row. This is the control chart G's run did not have: a battery that rejected everything would make every 'separates' verdict vacuous.",
+        "D1_determinism": "PASS. One pair's battery re-run; all six distances bit-identical.",
+        "B1_barrier_reproduction": "PASS. All 37 of 37 barrier depths and the median reproduce outputs/g10/ridge_basin.json bit-identically.",
+        "S1_self_consistency": "PASS. Every counted pair's depth in the subset run equals its depth in the full run.",
+        "all_controls_pass": true
+      },
+      "what_it_does_not_say": "anything about connectivity. WIT-02 tests witnesses, not paths. Every barrier is still a straight line in one chart's coordinates and therefore an UPPER bound, both d=16 results are still search statements, and the minimum-energy path was not computed. PATH-01 and AH-13 are untouched by full coverage.",
+      "the_median_rose_and_that_is_bookkeeping": "the pairs that separated were the shallow ones, so the median deepened from 212.0 to 222.8 floor units and the shallowest survivor from 22.6 to 132.2. This is not a stronger basin: a basin is a statement about pairs that ARE witnesses, and eleven of them turned out not to be."
+    },
+    "WITNESS-04_pilot": {
+      "why": "directive section 2: a U-BUDGET verdict without a measured pilot is void. Declaring a hard thing impossible is the cheapest way to finish, and this is what takes the option away.",
+      "invocation": "PYTHONPATH=src python scripts/pilot_wit02_chartL.py --pairs 3",
+      "per_pair_mean_s": 7.5220587999998925,
+      "per_pair_spread_factor": 1.0688354348281908,
+      "projected_all_pairs_s": 278.31617559999603,
+      "actually_taken_s": 287.6357320999996,
+      "projection_error_percent": 3.34855007256132,
+      "verdict": "AFFORDABLE, so U-BUDGET was unavailable and the rung was not descended from."
+    },
+    "HIST-01_repair": {
+      "invocation": "PYTHONPATH=src python scripts/repair_hist01.py",
+      "mechanism": "git filter-repo rewrote this branch on 2026-08-28 09:16, renaming every commit from c115757 forward. The objects were never lost.",
+      "recorded_hashes": 26,
+      "resolved": 26,
+      "resolved_through_the_map": 25,
+      "unresolved": 0,
+      "verifications": {
+        "V1_existence": {
+          "checked": 26,
+          "passes": true
+        },
+        "V2_agreement": {
+          "checked": 16,
+          "passes": true
+        },
+        "V3_chain": {
+          "checked": 9,
+          "passes": true
+        }
+      },
+      "rewritten_commits_preserved": 35,
+      "guards_restored_from_failing": 8,
+      "guards_restored_from_silently_skipping": 3,
+      "why_the_map_is_tracked": ".git/ is not tracked, so the map existed in one place on one disk and cannot be rebuilt once gone. Copying it into docs/ is the repair.",
+      "it_is_a_supersession_not_a_mutation": "no LOOP_STATE file was edited. Directive section 6 reserves mutation of a ledger entry; the recorded hashes stay as recorded."
+    },
+    "headroom_free_check": {
+      "status": "DESCRIPTION, not pre-registered (AH-14). new_solves = 0",
+      "invocation": "PYTHONPATH=src python scripts/check_headroom_g11.py",
+      "premise_tested": "docs/CLOSE_RULING.md section 2 (b), ratified: what predicts refinement survival is headroom against the distinguishability floor",
+      "chart_G_concordance": 1.0,
+      "chart_J_concordance": 1.0,
+      "chart_L_concordance": 0.479020979020979,
+      "chart_L_spearman": -0.033228888017745054,
+      "chart_L_p": 0.8452052149909229,
+      "holds_on_every_set": false,
+      "the_sets_it_holds_on_are_the_sets_it_was_formed_on": true,
+      "reading": "the premise is FALSIFIED AS A GENERAL RULE and stands only on the two sets that formed it. On chart L -- the largest set, 37 pairs with 11 separating, and the only one that did not help form the rule -- committed headroom carries no information about survival: concordance 0.479 against 0.500 for a coin, spearman -0.033 at p=0.845. The surviving and separating bands overlap across half the floor.",
+      "what_it_strengthens": "the close's refusal to adopt a margin band. That refusal rested on the band being 1.4 percentage points wide and therefore tuned (PH-11). Chart L is the stronger reason: across 37 pairs there is no band to tune, because survivors reach 0.996 floor units and separators start at 0.533. The decision was right and its recorded reason was weaker than the truth."
+    },
+    "IA_2_archive_rerun": {
+      "generations_rerun": 4,
+      "controls_compared": 16,
+      "all_identical": true,
+      "drift_detected": false,
+      "reading": "no drift. Every measured quantity reproduces bit-for-bit across four generations of controls; the only differences anywhere are wall-clock timings, which is what makes dropping them safe rather than convenient.",
+      "artefact": "outputs/g11/archive_rerun/summary.json"
+    }
+  },
+  "wit02_register": {
+    "version": 3,
+    "artefact": "outputs/close/wit02_register_v3.json",
+    "supersedes": "outputs/close/wit02_register_v2.json",
+    "sets": {
+      "chart_G_d4": {
+        "n_pairs_offered": 13,
+        "n_refined": 13,
+        "n_surviving": 12,
+        "coverage": 1.0,
+        "compliant": true
+      },
+      "chart_L_d16": {
+        "n_pairs_offered": 37,
+        "n_refined": 37,
+        "n_surviving": 26,
+        "coverage": 1.0,
+        "compliant": true
+      },
+      "chart_J_d16": {
+        "n_pairs_offered": 13,
+        "n_refined": 13,
+        "n_surviving": 7,
+        "coverage": 1.0,
+        "compliant": true
+      }
+    },
+    "all_compliant": true,
+    "how_to_say_it": "WIT-02 is satisfied on all three committed witness sets",
+    "what_full_coverage_does_not_mean": "it does not make any d=16 result a separation. Every barrier is still an upper bound along a straight line in one chart's coordinates and the minimum-energy path is still not computed; PATH-01 and AH-13 are untouched by refining witnesses. Full coverage means every counted pair has been through the battery, and nothing more than that.",
+    "untouched_sets_reproduce_version_2": true
+  },
+  "baselines": {
+    "pytest": {
+      "invocation": "PYTHONPATH=src python -m pytest tests -q",
+      "tool_version": "pytest 9.1.1",
+      "collected": 1018,
+      "passed": 1000,
+      "skipped": 18,
+      "failed": 0,
+      "rerunnable": false,
+      "conditions": "taken at champion_commit with LOOP_STATE_v10.json NOT yet in the tree, which is why the OBS-01 guard skips and the counts differ from a post-state-commit run. Stated rather than smoothed over, as at generations 9 and 10.",
+      "measured_at_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+      "environment": "CPython 3.11.9, win32",
+      "failures_are": "none. HIST-01's eight are repaired and the three silent skips are restored; this is the first generation since generation 7 whose suite has no failing test."
+    },
+    "ruff_whole_tree": {
+      "invocation": "python -m ruff check .",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true
+    },
+    "ruff_scoped": {
+      "invocation": "python -m ruff check src tests scripts",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true,
+      "note": "the invocation .github/workflows/ci.yml and the Makefile run."
+    },
+    "mypy_tracked_tree": {
+      "invocation": "mypy src tests scripts",
+      "tool_version": "mypy 2.3.1",
+      "findings": 150,
+      "files_checked": 134,
+      "rerunnable": false,
+      "conditions": "THE CARRIED BASELINE. Unchanged at 150 while the checked surface grew from 125 files to 134: every module added this generation is clean under this invocation, which the generation-9 guard enforces by failing if the count moves.",
+      "measured_at_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+      "was_at_close": {
+        "findings": 150,
+        "files_checked": 123
+      },
+      "was_at_close_addendum": {
+        "findings": 150,
+        "files_checked": 125
+      }
+    },
+    "mypy_package": {
+      "invocation": "mypy src",
+      "tool_version": "mypy 2.3.1",
+      "findings": 25,
+      "files_checked": 45,
+      "rerunnable": false,
+      "conditions": "advisory in the Makefile (dash-prefixed), so its exit code is not a gate. Not the carried baseline. DOC-08: 25 is `mypy src`; 150 is `mypy src tests scripts`.",
+      "measured_at_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b"
+    },
+    "python_support_floor_scan": {
+      "invocation": "PYTHONPATH=src python scripts/check_python_support_floor.py",
+      "files_scanned": 132,
+      "syntax_rejections": 0,
+      "api_uses_newer_than_floor": 0,
+      "runtime_pep604_unions": 0,
+      "obstruction_found": 0,
+      "rerunnable": false,
+      "conditions": "static analysis at a floor of 3.9. It can only FALSIFY a floor, never confirm one. The scanned surface is the CI-01 cost statement and it grew again.",
+      "measured_at_commit": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+      "was_at_close": 121,
+      "was_at_close_addendum": 123
+    }
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e",
+    "g7": "922c2cc",
+    "g8": "0f22ecc",
+    "g9": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+    "g10": "5424d99a61e12ace186f352b081ad479deac14fd",
+    "close": "6b3f4c0a8e5515318e7d822ca739c05a8fc73b6d",
+    "close_addendum": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+    "g11": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b"
+  },
+  "hist01_note": "every hash in champion_per_generation from g0 through close predates the 2026-08-28 rewrite and resolves through docs/COMMIT_HASH_MAP_g11.json. They are left exactly as recorded; the map is a forward correction, not an edit.",
+  "spec_clause_status": {
+    "WIT-02": "ENACTED at close and now SATISFIED ON ALL THREE COMMITTED SETS. Chart G closed at the addendum, chart J at generation 9, chart L here. Every one of the three lost members: 1 of 13, 6 of 13, 11 of 37. Register version 3.",
+    "WIT-01": "UNCHANGED and NOT WITHDRAWN, and still vacuous: admissibility ratio 1.000 on all three sets, so it removes nothing anywhere.",
+    "WITNESS-04": "CLOSED by measurement at generation 11.",
+    "OBS-01": "ENACTED at generation 11. Guard tests/test_inherited_obstructions_g11.py with both controls and a measured limitation.",
+    "DOC-08": "UNCHANGED and enforced; every count here carries its denominator.",
+    "SPEC-g0-3b-windows": "OPERATOR-BLOCKED (hard), unchanged; substitute evidence docs/WINDOWS_RISK_g6.md. A remote now exists, which changes CI-01's status and not this clause's."
+  },
+  "open_findings": [
+    {
+      "id": "MECH-01",
+      "severity": "HIGH",
+      "status": "OPEN, DESCRIBED BUT NOT EXPLAINED",
+      "note": "Narrowed once more at close, by arithmetic rather than by measurement. Generation 10 killed the localisation mechanism and left the question 'why is the leading direction fixed while the ones behind it cross the noise floor'. The free check answers the descriptive half: the leading direction is not merely fixed, it is FALLING -- by a factor of 1.195 and 1.148, spearman -1.000 and -0.983 -- which is the wrong direction to raise a count against an absolute cutoff, and the climb is carried entirely by the trailing values rising toward it. 95.6% to 97.9% of each trailing value's motion is in the normalised spectrum. So the phenomenon is the spectrum FLATTENING, and the open question is why widening the bias window compresses the sensitivity spectrum toward its own leading direction. Nothing here answers that and the ruling forbids chasing it. Untouched by the addendum, which measured no spectrum."
+    },
+    {
+      "id": "PATH-01",
+      "severity": "MEDIUM",
+      "status": "OPEN, AND ITS CONSEQUENCE IS NOW PAID",
+      "note": "Unchanged as a finding; what changed is that its consequence has been taken rather than noted. Every barrier walks a straight line in that chart's own coordinates, so every depth is an UPPER bound. The closing ruling section 3 follows that all the way: it STRENGTHENS the chart-G ridge, whose true barrier is then at most at the floor, and WEAKENS both d=16 results to search statements -- no connecting path below the floor was found along the straight line, which is not separation. The test that would settle it is a minimum-energy path, string method or NEB against the same oracle with the same floor barrier as the criterion. It was not run and is out of budget. AH-13 applies in its usual direction. Untouched by the addendum: refining witnesses does not compute a minimum-energy path, and chart G's recounted median is an upper bound exactly as its predecessor was. The bound direction is what makes the recounted median's fall a strengthening rather than a change of sign."
+    },
+    {
+      "id": "WITNESS-04",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT at generation 11",
+      "note": "chart L's 37 witness pairs went through the refinement battery: 37 of 37 refined, 26 surviving, 11 separating. All three committed sets now satisfy WIT-02 and every one lost members. The classification over the survivors is BASIN, unchanged, and the full set reproduces generation 10's depths bit-identically. What this does NOT close is PATH-01: coverage tests witnesses, not connectivity. docs/G11_RESULT.md section 1."
+    },
+    {
+      "id": "GEOM-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT, reading amended at close",
+      "note": "'The geometry of the degeneracy is chart-dependent' stays withdrawn. What replaces it is amended in one word: the two d=16 cells are cells in which no path below the floor was FOUND, so 'basin' names the observed shape and not a demonstrated separation."
+    },
+    {
+      "id": "BOUND-01",
+      "severity": "LOW",
+      "status": "RESOLVED",
+      "note": "Opened and closed at generation 10. The claim surface said LOWER and the state file said UPPER with the same justification clause on both; upper is correct. Recorded because a wrong statement of a bound's direction is the class of error that survives review, being one word in a sentence everybody agrees with -- and because, followed through at close, that one word costs two results their strength."
+    },
+    {
+      "id": "DOC-03a",
+      "severity": "LOW",
+      "status": "RESOLVED at close",
+      "note": "The generation-10 entry stated that the badge text could not be changed without breaking its guard's own regex. It could. The regex now accepts either word and the check asserts the one it measures, so the badge reads 'collected' and guard and badge agree on WHAT is being counted rather than only on the integer. Recorded because an untested obstruction written in the same voice as a measured one is a smaller instance of the defect this loop exists to catch. The class it named recurred at generation 11 as HIST-01, which is why OBS-01 was enacted rather than the observation being recorded a second time."
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "OPERATOR-BLOCKED (reverted from ACCEPTED-PERMANENT)",
+      "note": "the generation-9 default fired on the condition 'there will be no remote'. A remote exists, so the reversion condition recorded in docs/OPERATOR_TASKS.md applies. The cost statement is superseded forward, not deleted. Nothing is closed: .github/workflows/ci.yml has still never executed on any leg.",
+      "cost_statement": "docs/G9_RESULT.md section 1.4, superseded forward by docs/OPERATOR_TASKS.md OT-1 reversion and docs/G11_RESULT.md section 4.1. The statically-scanned surface grew again, to 132 files.",
+      "cost_grown_since_assignment": true,
+      "last_tested": {
+        "generation": 11,
+        "check": "git remote -v; git log --oneline origin/main; stat .git/config",
+        "result": "origin present at https://github.com/Raar1999/bayespinn-inv.git, origin/main resolves to the root commit, .git/config stamped 2026-08-28 09:20"
+      }
+    },
+    {
+      "id": "CHART-03",
+      "severity": "MEDIUM",
+      "status": "OPEN, AMENDED",
+      "note": "Unchanged from generation 10. Chart-invariance at matched d is confined to a (device, bias window) cell, and charts L and J at d=16 differ 13x in witness-to-null barrier ratio with matched path lengths on both sides. What makes a cell one or the other is still not known."
+    },
+    {
+      "id": "FALSIFIER-01",
+      "severity": "MEDIUM",
+      "status": "PARTIALLY-ADDRESSED",
+      "note": "Unchanged. The close exercised its own predicates through controls, one of which failed and changed the claim; that is evidence the controls are live and is not the audit the finding asks for."
+    },
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "last_tested": {
+        "generation": 11,
+        "check": "re-read docs/gen/GEN_g6.md section 2 against the tree: the bifurcation is structural in the adopted history and no artefact in outputs/ carries a pre-adoption provenance chain",
+        "result": "unchanged and permanent by construction; nothing in this generation's artefacts depends on the missing chain"
+      }
+    },
+    {
+      "id": "PROV-07",
+      "severity": "HIGH",
+      "status": "OPERATOR-BLOCKED (reclassified from MITIGATED-PENDING-CI)",
+      "note": "'pending' was the wrong word for nine generations: nothing was pending, because nothing was going to happen without an action reserved to the human. Validated on win32 only; linux and darwin unvalidated and stated as such in every manifest.",
+      "last_tested": {
+        "generation": 11,
+        "check": "PYTHONPATH=src python scripts/check_python_support_floor.py, and the same git remote inspection as CI-01",
+        "result": "132 files scanned, 0 obstructions found at a 3.9 floor -- which can only falsify a floor, never confirm one. No leg of the matrix has ever executed"
+      }
+    },
+    {
+      "id": "CHART-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-STRUCTURALLY"
+    },
+    {
+      "id": "CHART-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "ORDER-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-BY-FALSIFICATION"
+    },
+    {
+      "id": "SPEC-11",
+      "severity": "MEDIUM",
+      "status": "MITIGATED",
+      "note": "Unchanged. tests/test_claim_surface_g7.py still reads the licensed denominators from outputs/g8/ranks.json rather than keying them on the (chart, d, device, bias window) cell. Not taken at close either."
+    },
+    {
+      "id": "DOC-07-a",
+      "severity": "LOW",
+      "status": "MITIGATED",
+      "note": "Unchanged. The widened guard was run against both of the close's commit messages before either was written."
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z",
+      "last_tested": {
+        "generation": 11,
+        "check": "the HIST-01 sweep covered the same ground: git fsck --lost-found, D:/bayespinn-inv/_preserve_g0_B, the scratchpad preserve_A copy, D:/bayespinn-inv/bayespinn-inv.zip and origin",
+        "result": "still unrecoverable, and now for a measured reason. A commit hash is recoverable through the rewrite map; the WORKING TREE that produced outputs/identifiability/ on 2026-08-19 was never a commit, so no map can name it. The two preservation copies carry no .git and the zip is the pre-loop repository"
+      }
+    },
+    {
+      "id": "EOL-01",
+      "severity": "LOW",
+      "status": "OPEN, mechanism identified",
+      "note": "fired twice on this generation's own edits and the mechanism is now named rather than re-observed: Python's text mode rewrites an LF blob as CRLF on win32, so every write_text to a tracked file is a violation waiting to happen. Every write in this generation's scripts now pins newline='\\n', which makes a re-run idempotent. The finding stays OPEN because the repository's own convention is mixed -- some tracked blobs are CRLF, some LF -- and nothing enforces which a new file should use."
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-04",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    },
+    {
+      "id": "HIST-01",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT at generation 11",
+      "note": "not unrepairable and never was. git filter-repo rewrote the branch on 2026-08-28 09:16 and left its commit map in .git/, where three generations did not look. All 26 recorded hashes resolve under three verifications; the map is tracked because .git/ is not. Eight failing guards pass and three silently skipping ones run. docs/HIST01_REPAIR_g11.md.",
+      "last_tested": {
+        "generation": 11,
+        "check": "PYTHONPATH=src python scripts/repair_hist01.py; also git fsck --lost-found, both preservation copies, the pre-loop zip and origin, all of which were dead ends",
+        "result": "26 of 26 hashes resolve; V1, V2 and V3 all pass"
+      }
+    }
+  ],
+  "ruling_premises_corrected": [
+    "RATIFIED by the closing ruling section 1. Generation 10 section 5's SPEC-g10-2 falsifier was INVERTED: the outcome indicating a dimension effect is the one measured -- both d=16 cells basins, only d=4 a ridge -- not the one the ruling named. The correction was registered with its hash BEFORE the third set was measured, which is what makes it a correction rather than a reading of the result.",
+    "RATIFIED. Generation 10 section 2's account of g9-3 does not hold. What predicts refinement survival is headroom below the floor, not sub-grid junctions: the 7 survivors are exactly the 7 smallest distances at N=301 and the 6 that separate are exactly the 6 largest. No margin band was adopted from it -- the split is 1.4 percentage points wide and a threshold inside it is tuned (PH-11) -- and WIT-02 replaces it.",
+    "RATIFIED. WIT-01 read literally rejects almost every real witness, including the generation-8 headline pair, because two devices sharing a junction are separated by exactly zero in that coordinate. The implemented reading applies the rule to the separation that QUALIFIES the pair.",
+    "Generation 10 section 6's paper spine item 4 is superseded twice: once at generation 10, which replaced 'a ridge in one chart, isolated basins in another' with the dimension reading, and once at close, which weakens the d=16 half to a search statement. The spine as it now stands is docs/CLOSE_RULING.md section 5.",
+    {
+      "premise": "the ruling of 2026-08-28 section 4 dictates spine item 2 as 'sigma_1 falls x1.195 while sigma_2..sigma_4 rise x47.5-x535'",
+      "status": "CORRECTED, and the correction is arithmetic rather than a reading",
+      "measured": "x47.5 is the SMALLEST rise at the generation-8 device and x534.5 the LARGEST at device_p50, so the dictated range spans no single device. Across both devices the range is x20.9 to x534.5 -- sigma_2 rises x47.5 and x20.9, sigma_3 x55.4 and x87.1, sigma_4 x315 and x535 -- which is what docs/CLOSE_RULING.md already said and continues to say as x21-x535. Computed from outputs/close/spectrum_shape.json, whose devices[*].width_axis.sigma_leading rows are the source; the artefact was not re-run. The dictated x1.195 for sigma_1 is one of the two device values and the spine states both, 1.195 and 1.148.",
+      "why_it_is_recorded": "the ruling's other numbers were adopted verbatim. A range that was silently widened at one end and narrowed at the other would have been indistinguishable from the measured one to any reader, which is the class DOC-08 was enacted against, one level up."
+    },
+    {
+      "premise": "docs/CLOSE_RULING.md section 2 (b), ratified: what predicts refinement survival is headroom against the distinguishability floor",
+      "status": "FALSIFIED AS A GENERAL RULE at generation 11",
+      "measured": "concordance 1.000 on chart G and chart J -- the two 13-pair sets that formed the rule -- and 0.479 on chart L, the 37-pair set that did not. 0.500 is a coin. Spearman -0.033 at p=0.845. The bands overlap from 0.53 to 1.00 floor units.",
+      "traced_forward_to": "spine item 3's clause 'survival is predicted by headroom against the floor, not by geometry, in both refined sets'. Amended in docs/G11_RESULT.md section 5 to 'what predicts survival is not known'.",
+      "what_it_strengthens": "the refusal to adopt a margin band. The close refused because the band was 1.4 percentage points wide and would be tuned; chart L shows there is no band at all."
+    },
+    {
+      "premise": "HIST-01 is unrepairable from inside the tree (generations 8, 9, 10 and the close)",
+      "status": "FALSE, and untested when first written",
+      "measured": "the repair was .git/filter-repo/commit-map, present since before the finding was last restated. All 26 recorded hashes resolve under three verifications.",
+      "traced_forward_to": "eight failing guards and three silently skipping ones, including the DOC-07 commit-message guard, which was not running over the range it was written for."
+    },
+    {
+      "premise": "CI-01 is ACCEPTED-PERMANENT because there will be no remote (generation 9 default)",
+      "status": "PREMISE FALSE; status reverted per its own condition",
+      "measured": "git remote -v names origin at https://github.com/Raar1999/bayespinn-inv.git, .git/config stamped 2026-08-28 09:20, and refs/remotes/origin/main resolves, so it was fetched from as well as configured.",
+      "traced_forward_to": "CI-01 and PROV-07 both OPERATOR-BLOCKED, and OT-1 executable for the first time in nine generations. Nothing is closed: CI has still never run."
+    }
+  ],
+  "highest_remaining_scientific_risk": "MECH-01, and it is now the entire distance to ladder rung L0. Why widening the bias window compresses the sensitivity spectrum toward its leading direction is unknown. One method -- localisation of the leading direction over parameters -- has been tried and falsified. The next generation attacks the observation side: which bias points carry sigma_2..sigma_4, and whether the points a widening window adds are the ones that carry them.",
+  "second_remaining_scientific_risk": "PATH-01, unchanged and untouched by full WIT-02 coverage. Every barrier is a straight line in one chart's coordinates and therefore an upper bound; both d=16 results are searches that found no path below the floor, not separations. The minimum-energy path is the single measurement that would settle it and it is still not computed.",
+  "third_remaining_scientific_risk": "what predicts refinement survival is now an open question rather than a settled one. The rule that was ratified as the answer is falsified on the largest set, and no replacement is proposed -- which is the honest state, not a gap to be filled with the next correlation that fits three points.",
+  "not_supported_and_not_to_be_written": [
+    "any statement that the members of a d=16 witness pair are SEPARATED, or that a basin demonstrates separation; the straight-line barrier is an UPPER bound and both d=16 results are searches that found no connecting path below the floor. The minimum-energy path was not computed. AH-13",
+    "any barrier depth as a property of the landscape rather than of the straight line between two points in one chart's coordinates, and none compared across charts without its null control and its path length beside it",
+    "any witness count without its WIT-02 refinement coverage beside it; guarded by tests/test_witness_refinement_close.py. In particular, 'all tested pairs survive refinement' of the chart-G set, which is true of three of its thirteen pairs and reads as a statement about all thirteen",
+    "any witness count without its admissibility ratio, guarded by tests/test_witness_admissibility_g10.py",
+    "any claim that the free check identifies a mechanism, or that it was pre-registered; it is arithmetic over artefacts that predate the question, and it says what moves and not why",
+    "any statement resting on the fifth singular value at the wide bias windows; it sits at or below the estimator's spectral floor in four of the eighteen width cells, which is why the free check's claim stops at the fourth",
+    "any ordering of the four sensitivities (observation set, junction, dimension, interpolant) as a general claim -- withdrawn by measurement at nine further operating points at generation 9",
+    "'the geometry of the degeneracy is chart-dependent', or 'a ridge in one chart and isolated basins in another' -- withdrawn at generation 10",
+    "any statement that two devices have junctions 0.425 nm apart and are indistinguishable; the grid node is 3.333 nm and the representation does not carry that difference",
+    "any claim that the right singular vectors localise, or delocalise, with bias-window width -- falsified at two devices under a criterion hashed before the measurement",
+    "any statement that the solver fails, or that identifiability changes, above 0.90 V; that range is UNTESTED (PH-15), which is not the same sentence",
+    "'the chart does not move the local spectrum at matched d', with or without the interpolant-family qualifier",
+    "13 chart-J witness pairs, without the refinement result beside it; 7 survive N=301->1201 at tol_carrier=1e-12",
+    "44% as the observable-space distance between the two compared chart cells; the measured value is at most 2.67%",
+    "any rank fraction on the claim surface without the observation set it was measured over, guarded by tests/test_claim_surface_g9.py",
+    "any rank fraction compared across charts -- three charts, and the rank moves with the device and the window inside a single chart",
+    "any frequency or probability of degeneracy in any chart",
+    "any contraction number at the instrument's own 2% noise",
+    "any bare integer rank whose cell has no measured population gap; the licence is a property of the (chart, d, device, bias window) cell, and the free check shows the gap that licenses it collapsing from 230.6x to 4.99x as the window widens",
+    "any full-spectrum comparison involving chart J without stating junction_scale",
+    "any statement that an identifiable rank is a property of the device; it is a property of the (device, observation set) pair, and the observation-set half is a curve",
+    "any claim evidenced on an interpreter other than CPython 3.11 or an operating system other than win32; none has been",
+    "'all tested X' or any bare universal over a set filtered by having been tested, refined, examined or sampled, without its denominator. DOC-08, guarded by tests/test_quantifier_scope_doc08.py.",
+    "a lint, type-check or test count on the claim surface without the invocation or the scope that produced it. 25 is `mypy src`; 150 is `mypy src tests scripts`. DOC-08.",
+    "'the chart-G witnesses survive refinement' without the coverage beside it. It is 13 of 13 refined and 12 surviving; one pair separated and is withdrawn.",
+    "'WIT-02 is satisfied' unqualified. It is satisfied on chart G and chart J and unmet on chart L, whose 37 pairs have never been refined.",
+    "'the chart-G ridge is confirmed by refinement' as though the refinement tested the ridge. It tested the witnesses; the ridge is a recount over the survivors under a criterion registered a generation earlier, and it remains an upper-bound statement.",
+    "failed: 0 for the pytest baseline in this clone. Eight guards fail on commit hashes that are not in its object graph -- HIST-01 -- and a baseline that rounds them away is the CI-01 shape.",
+    "'survival is predicted by headroom against the floor' as a general claim, or any threshold or margin band derived from it. It holds on the two sets that formed it and carries no information on the third (concordance 0.479). outputs/g11/headroom.json",
+    "'WIT-02 is satisfied' without the consequence beside it: full coverage tests witnesses, not connectivity, and converts no d=16 search statement into a separation",
+    "'chart L is a basin' without 'no connecting path below the floor was found along the straight line', and without the coverage: 37 of 37 refined, 26 surviving",
+    "any statement that HIST-01's repair recovers a lost working tree. It recovers commit names. REPRO-01 is untouched",
+    "'the loop's history was lost' or any variant; it was renamed by a recorded rewrite and every hash resolves",
+    "CI-01 as ACCEPTED-PERMANENT, or PROV-07 as MITIGATED-PENDING-CI; both are OPERATOR-BLOCKED since a remote exists",
+    "any claim that a remote existing means CI has run. It has not, on any leg"
+  ],
+  "operator_tasks": [
+    "OT-1 push and run CI -- NOW EXECUTABLE FOR THE FIRST TIME. A remote exists, so the command block in docs/OPERATOR_TASKS.md runs as written from `git push -u origin loop/champion` onward. CI-01 is OPERATOR-BLOCKED, not ACCEPTED-PERMANENT. R-4 and directive section 6 both reserve the push.",
+    "OT-2 apply papers/CORRIGENDA_g6.md -- still unapplied; papers/draft.md line 255 unchanged. R-3 reserves papers/**. Seven cycles.",
+    "OT-3 preservation -- sharpened by this generation. The HIST-01 repair depended on one untracked file on one disk, and the same argument applies to the repository itself. Seven cycles."
+  ],
+  "what_gets_written": "the spine as amended in docs/G11_RESULT.md section 5: items 3 and 4 carry chart L's coverage and the withdrawal of the headroom clause; items 1, 2, 5 and 6 are unchanged from docs/CLOSE_RULING.md section 5.",
+  "next_generation": {
+    "target": "MECH-01, second distinct method: the observation side",
+    "first_clause": "which bias points carry sigma_2..sigma_4 in the normalised spectrum, and whether the points a widening window adds are the ones that carry them. Row-side leverage, against generation 10's falsified column-side localisation.",
+    "why_it_beats_the_others": "it is the only remaining item on the ladder. PATH-01 is larger scientifically but changes no rung and needs a string solver; CI-01 and PROV-07 are reserved; CHART-03 and SPEC-11 are MEDIUM and move nothing on the spine.",
+    "pilot_first": true
+  },
+  "halt": null
+}
