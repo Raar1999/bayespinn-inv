@@ -1,0 +1,42 @@
+{
+  "outcome": "GENERIC_ROW_COUNT",
+  "meaning": "the nested windows track the null. Flattening the spectrum is a consequence of row count alone, with nothing device-specific or regime-specific in it. This is a COMPLETE answer to MECH-01's question and the ruling of 2026-08-28 \u00a73 requires it to be written as one: a deflationary answer is still an answer, not a failure",
+  "measure_hash": "61ce9ac936e469a30be5ce1aad04e724ff4ff91586b1b3067763505b0eaf4e86",
+  "outcomes_hash": "898c28f0e8a250aea5020c246c7917acfbf23033fbefe5ce3a62932517b90546",
+  "hashes_match_preregistration": true,
+  "reproduction_control_R1": {
+    "pass": true,
+    "n_identical": 16,
+    "of": 16
+  },
+  "held_out": {
+    "device_p10": {
+      "T": 0.8095192307692306,
+      "p_value": 0.1485,
+      "clears_alpha": false,
+      "direction": "less flat than the null"
+    },
+    "device_p90": {
+      "T": 0.98925,
+      "p_value": 0.0,
+      "clears_alpha": true,
+      "direction": "less flat than the null"
+    }
+  },
+  "contrast_devices": {
+    "g8_control": {
+      "T": 0.9669374999999999,
+      "p_value": 0.004,
+      "clears_alpha": true
+    },
+    "device_p50": {
+      "T": 0.9683541666666667,
+      "p_value": 0.004,
+      "clears_alpha": true
+    }
+  },
+  "decision_rule": "IDENTITY_MATTERS iff p <= 0.05 at BOTH held-out devices, as in pass 3. Any other result, including one device clearing and the other not, is GENERIC_ROW_COUNT",
+  "closes_mech01": true,
+  "new_solves": 0,
+  "arithmetic_only": true
+}
