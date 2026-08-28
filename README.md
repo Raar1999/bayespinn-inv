@@ -192,6 +192,12 @@ SELF-TEST: PASS
 Other subcommands: `bayespinn info` (version, git commit, environment — put
 this in bug reports), `bayespinn iv`, `bayespinn identifiability`.
 
+If you intend to commit to this repository, activate the tracked commit-message
+hook, which strips AI-attribution trailers: `git config core.hooksPath scripts/hooks`.
+Cloning does not set it — `core.hooksPath` is per-clone configuration, so the
+hook is inert until you run that command. `tests/test_commit_hook_tracked.py`
+runs the script itself and is what keeps this instruction honest.
+
 ## Quick start
 
 ```python
