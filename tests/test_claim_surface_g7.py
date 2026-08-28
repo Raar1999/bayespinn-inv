@@ -86,6 +86,10 @@ CLAIM_SURFACE_G7 = (
     # that states the result and is not on this list is unguarded, which is the
     # defect this tuple exists to prevent.
     "docs/CLOSE_RULING.md",
+    # The one bounded refinement authorised after the close. It publishes the
+    # chart-G witness coverage and the recounted ridge, so it publishes the
+    # result and joins the list on the same reasoning as the line above.
+    "docs/CLOSE_ADDENDUM.md",
 )
 
 #: Excluded, with the reason. Each of these *describes* the rule or records the

@@ -1,0 +1,1113 @@
+{
+  "records": [
+    {
+      "pair_index": 0,
+      "member_indices": [
+        159,
+        1475
+      ],
+      "separation_decades": 0.9125150783578668,
+      "g8_observational_distance": 0.012254760252752345,
+      "headroom_fraction_of_floor": 0.6127380126376173,
+      "previously_refined_at_generation_6": true,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.012254760252752345,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.012254760252752345,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.012368512029011668,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.012368512029011668,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.008608856638555297,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.008608856638555297,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.012254760252752345,
+      "distance_at_1201_tight": 0.008608856638555297,
+      "distance_rose": false,
+      "relative_change": -0.29750917512875863,
+      "survives_refinement": true,
+      "wall_clock_s": 7.025874599999952
+    },
+    {
+      "pair_index": 1,
+      "member_indices": [
+        743,
+        1536
+      ],
+      "separation_decades": 0.30253534449837716,
+      "g8_observational_distance": 0.013788224487543424,
+      "headroom_fraction_of_floor": 0.6894112243771712,
+      "previously_refined_at_generation_6": true,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013788224487543424,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013788224501646094,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013556956595348705,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013556956608144948,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013442016366699778,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013442016371745209,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.013788224487543424,
+      "distance_at_1201_tight": 0.013442016371745209,
+      "distance_rose": false,
+      "relative_change": -0.025108970057093803,
+      "survives_refinement": true,
+      "wall_clock_s": 7.218084699999963
+    },
+    {
+      "pair_index": 2,
+      "member_indices": [
+        619,
+        1085
+      ],
+      "separation_decades": 0.32805190826584507,
+      "g8_observational_distance": 0.014223591577103359,
+      "headroom_fraction_of_floor": 0.7111795788551679,
+      "previously_refined_at_generation_6": true,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014223591577103359,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014223591577103359,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014425695862653298,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014425695862653298,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014520826042279241,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014520826042279241,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.014223591577103359,
+      "distance_at_1201_tight": 0.014520826042279241,
+      "distance_rose": true,
+      "relative_change": 0.020897286284173137,
+      "survives_refinement": true,
+      "wall_clock_s": 7.0465979999999035
+    },
+    {
+      "pair_index": 3,
+      "member_indices": [
+        1174,
+        1742
+      ],
+      "separation_decades": 0.5421133024675555,
+      "g8_observational_distance": 0.014926755711088615,
+      "headroom_fraction_of_floor": 0.7463377855544308,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014926755711088615,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014926760181134447,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017095142810097844,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017095147186126602,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018177519726375185,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018177524059908277,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.014926755711088615,
+      "distance_at_1201_tight": 0.018177524059908277,
+      "distance_rose": true,
+      "relative_change": 0.21778130571298682,
+      "survives_refinement": true,
+      "wall_clock_s": 9.432118799999444
+    },
+    {
+      "pair_index": 4,
+      "member_indices": [
+        984,
+        1110
+      ],
+      "separation_decades": 0.3077227676635985,
+      "g8_observational_distance": 0.015319545886537224,
+      "headroom_fraction_of_floor": 0.7659772943268612,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015319545886537224,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015319543308425873,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015273349750549132,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015273347185877209,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015251091247335063,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015251088688857732,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.015319545886537224,
+      "distance_at_1201_tight": 0.015251088688857732,
+      "distance_rose": false,
+      "relative_change": -0.004468617946413919,
+      "survives_refinement": true,
+      "wall_clock_s": 5.710334699999294
+    },
+    {
+      "pair_index": 5,
+      "member_indices": [
+        1043,
+        1842
+      ],
+      "separation_decades": 0.32666403988094217,
+      "g8_observational_distance": 0.016533548731450343,
+      "headroom_fraction_of_floor": 0.8266774365725171,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016533548731450343,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01653354864287737,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01650894141379558,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016508941334750633,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016496614456827166,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016496614381614136,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.016533548731450343,
+      "distance_at_1201_tight": 0.016496614381614136,
+      "distance_rose": false,
+      "relative_change": -0.002233903346227811,
+      "survives_refinement": true,
+      "wall_clock_s": 6.327350999999908
+    },
+    {
+      "pair_index": 6,
+      "member_indices": [
+        758,
+        846
+      ],
+      "separation_decades": 0.3206588260117442,
+      "g8_observational_distance": 0.01752904763771505,
+      "headroom_fraction_of_floor": 0.8764523818857525,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01752904763771505,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017529047611650393,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017519471974488235,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017519471947878812,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01751487113359448,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017514871108146018,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.01752904763771505,
+      "distance_at_1201_tight": 0.017514871108146018,
+      "distance_rose": false,
+      "relative_change": -0.000808744996421271,
+      "survives_refinement": true,
+      "wall_clock_s": 7.174262900000031
+    },
+    {
+      "pair_index": 7,
+      "member_indices": [
+        496,
+        604
+      ],
+      "separation_decades": 0.40208598278747587,
+      "g8_observational_distance": 0.018450585325744347,
+      "headroom_fraction_of_floor": 0.9225292662872173,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018450585325744347,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018450585273508763,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018314293726483778,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018314293676849072,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01824635471569186,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018246354668235036,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.018450585325744347,
+      "distance_at_1201_tight": 0.018246354668235036,
+      "distance_rose": false,
+      "relative_change": -0.011069061165465837,
+      "survives_refinement": true,
+      "wall_clock_s": 6.912480500000129
+    },
+    {
+      "pair_index": 8,
+      "member_indices": [
+        785,
+        1357
+      ],
+      "separation_decades": 1.2352838058646682,
+      "g8_observational_distance": 0.018680964321856786,
+      "headroom_fraction_of_floor": 0.9340482160928393,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018680964321856786,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01868096580902065,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019146632587454266,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019146634108879672,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019378683236908143,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01937868477547137,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.018680964321856786,
+      "distance_at_1201_tight": 0.01937868477547137,
+      "distance_rose": true,
+      "relative_change": 0.037349273923629876,
+      "survives_refinement": true,
+      "wall_clock_s": 7.627913299999818
+    },
+    {
+      "pair_index": 9,
+      "member_indices": [
+        1013,
+        1476
+      ],
+      "separation_decades": 0.30826139838941913,
+      "g8_observational_distance": 0.018860749037720115,
+      "headroom_fraction_of_floor": 0.9430374518860057,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018860749037720115,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018860749037720115,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018528945645401973,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018528945645401973,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01826073557390736,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01832214644244748,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.018860749037720115,
+      "distance_at_1201_tight": 0.01832214644244748,
+      "distance_rose": false,
+      "relative_change": -0.02855679772820635,
+      "survives_refinement": true,
+      "wall_clock_s": 8.560423899999478
+    },
+    {
+      "pair_index": 10,
+      "member_indices": [
+        1089,
+        1992
+      ],
+      "separation_decades": 0.708449716208726,
+      "g8_observational_distance": 0.019536235788203255,
+      "headroom_fraction_of_floor": 0.9768117894101628,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019536235788203255,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019536235788203255,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01972044505594247,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01972044505594247,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01981212099655743,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01981212099655743,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.019536235788203255,
+      "distance_at_1201_tight": 0.01981212099655743,
+      "distance_rose": true,
+      "relative_change": 0.014121717783564247,
+      "survives_refinement": true,
+      "wall_clock_s": 7.141192000000046
+    },
+    {
+      "pair_index": 11,
+      "member_indices": [
+        670,
+        1000
+      ],
+      "separation_decades": 0.5314929845851104,
+      "g8_observational_distance": 0.01954300007502341,
+      "headroom_fraction_of_floor": 0.9771500037511704,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01954300007502341,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019543000082845288,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019362534365872704,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01936253437510225,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01927362436807868,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019273624377649665,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.01954300007502341,
+      "distance_at_1201_tight": 0.019273624377649665,
+      "distance_rose": false,
+      "relative_change": -0.013783743352588697,
+      "survives_refinement": true,
+      "wall_clock_s": 6.308373799999572
+    },
+    {
+      "pair_index": 12,
+      "member_indices": [
+        1763,
+        1795
+      ],
+      "separation_decades": 0.3921295257232167,
+      "g8_observational_distance": 0.019779228607372638,
+      "headroom_fraction_of_floor": 0.9889614303686318,
+      "previously_refined_at_generation_6": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019779228607372638,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019779228607372638,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019402224201080044,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019402224201080044,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.021931775146268973,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.021931775146268973,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "distance_at_301_default": 0.019779228607372638,
+      "distance_at_1201_tight": 0.021931775146268973,
+      "distance_rose": true,
+      "relative_change": 0.10882863945937615,
+      "survives_refinement": false,
+      "wall_clock_s": 6.183449699999983
+    }
+  ],
+  "reproduction_control": {
+    "rows": [
+      {
+        "pair_index": 0,
+        "separation_decades": 0.9125150783578668,
+        "generation_6_distance_at_301_default": 0.012254760252752345,
+        "here": 0.012254760252752345,
+        "identical": true,
+        "relative_difference": 0.0,
+        "generation_6_survives": true,
+        "here_survives": true,
+        "verdict_agrees": true
+      },
+      {
+        "pair_index": 1,
+        "separation_decades": 0.30253534449837716,
+        "generation_6_distance_at_301_default": 0.013788224487543424,
+        "here": 0.013788224487543424,
+        "identical": true,
+        "relative_difference": 0.0,
+        "generation_6_survives": true,
+        "here_survives": true,
+        "verdict_agrees": true
+      },
+      {
+        "pair_index": 2,
+        "separation_decades": 0.32805190826584507,
+        "generation_6_distance_at_301_default": 0.014223591577103359,
+        "here": 0.014223591577103359,
+        "identical": true,
+        "relative_difference": 0.0,
+        "generation_6_survives": true,
+        "here_survives": true,
+        "verdict_agrees": true
+      }
+    ],
+    "n": 3,
+    "all_identical": true,
+    "all_verdicts_agree": true,
+    "why": "the three pairs generation 6 refined are re-run here through generation 9's code path. Their N=301 default distances must reproduce outputs/witness_falsifier_g6/witness_falsifier.json exactly. If they do not, the ten new pairs are not commensurate with the three old ones and the coverage figure would be summing two different measurements",
+    "what_it_controls_for": "two code paths. Generation 6 solved through run_witness_falsifier.solve_profile; this runs through run_g9.build_solver and run_g9.iv. Bit-identical distances mean the ten new pairs and the three old ones are one measurement."
+  },
+  "negative_control": {
+    "pair": [
+      0,
+      1
+    ],
+    "construction": "one chart-G null-control pair -- consecutive ordinary prior draws in draw order that form no witness pair, the same construction run_g10._barrier_set uses for its null -- through the same battery. It must NOT survive. A battery that reports two distinguishable devices as inseparable cannot evidence that a witness pair is",
+    "refinements": [
+      {
+        "grid_n": 301,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.9777023539954567,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 301,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.9777023539954567,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.9779652246243371,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.9779652246243371,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.9788070614411003,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.9788070614411003,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      }
+    ],
+    "distance_at_301_default": 0.9777023539954567,
+    "distance_at_1201_tight": 0.9788070614411003,
+    "n_rows_below_floor": 0,
+    "survives_refinement": false,
+    "floor": 0.02,
+    "if_it_survives": "reported as measured and NOT swapped for another pair. A null pair below the floor is not a broken battery, it is a witness the generation-6 search missed, and re-picking until the control behaves is the tuning PH-11 forbids",
+    "passes": true
+  },
+  "headroom_check": {
+    "generation_10_reading": "on chart J, survival was predicted exactly by headroom against the floor: the 7 survivors were the 7 smallest distances at N=301 (max 0.01844) and the 6 that separated were the 6 largest (min 0.01873)",
+    "max_distance_among_survivors": 0.01954300007502341,
+    "min_distance_among_separated": 0.019779228607372638,
+    "perfectly_ordered": true,
+    "n_survivors": 12,
+    "n_separated": 1,
+    "status": "a free check on an existing artefact set, reported either way; it is not what this run was authorised to establish"
+  },
+  "battery": {
+    "grids": [
+      301,
+      601,
+      1201
+    ],
+    "tolerances": [
+      "default",
+      "tight"
+    ],
+    "tol_carrier_tight": 1e-12,
+    "inherited_from": "run_g9.REFINEMENT_GRIDS and run_g9.REFINEMENT_TOLS, imported rather than restated; generation 9 inherited them from scripts/run_witness_falsifier.py, which is the battery generation 6 ran on the three pairs"
+  },
+  "verdict": {
+    "set": "chart_G_d4",
+    "n_pairs": 13,
+    "n_refined_here": 13,
+    "n_surviving": 12,
+    "n_separated_by_refinement": 1,
+    "surviving_pair_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "separated_pair_indices": [
+      12
+    ],
+    "coverage_after_this_run": 1.0,
+    "floor": 0.02
+  }
+}

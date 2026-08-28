@@ -4,6 +4,64 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — close addendum: `WIT-02` for chart G (2026-08-28)
+
+No API changes. The closing ruling of 2026-08-26 ended the technical work; the
+operator ruling of 2026-08-28 §2 authorised one bounded refinement afterwards and
+nothing else — chart G's ten untested witness pairs, the barriers recounted over
+what survives, the register updated, chart L excluded by name. It ran.
+`docs/CLOSE_ADDENDUM.md`.
+
+**12 of 13 chart-G witness pairs survive refinement; one separates.** All
+thirteen went through generation 6's battery — `N = 301 → 601 → 1201` crossed
+with the default tolerance and `tol_carrier = 1e-12` — and a pair survives only
+if it stays below the 2% distinguishability floor at all six rows. Pair 12, the
+one with the least headroom at `1.978e-02` (98.9% of the floor), rises to
+`2.193e-02` at the finest grid and is withdrawn as a solver artefact. Reproduce:
+`PYTHONPATH=src python scripts/run_wit02_chartG.py`.
+
+**The ridge stands, and its margin moves the safe way.** Recounted over the 12
+survivors through the same imported function and the same registered classifier,
+globally in chart G at `d=4`: 6 of 12 pairs at or below the floor barrier
+(0.500 against a pre-registered `ridge_fraction` of 1/3), median barrier
+**6.46 log-units = 0.81 floor units**. The unrefined 13-pair set gave 1.04 floor
+units — a median 19.2% *below* the floor barrier where it had been 3.9% above.
+The outcome table was hashed to disk before the first solve and the ruling
+pre-registered the reporting: a flip would have been reported in the same
+paragraph as the classification.
+
+**Three controls, and one of them is what makes the ten new pairs countable.**
+The three pairs generation 6 refined were re-run through generation 9's code
+path and reproduce bit-identically, so two code paths measured one thing. A
+chart-G null-control pair went through the same battery and did not survive
+(distance `9.777e-01` against a floor of `2.0e-02`), which is what a battery
+must do before its negative results mean anything. All thirteen barrier depths
+reproduce `outputs/g10/ridge_basin.json` bit for bit before the recount, and the
+whole pipeline was run twice with identical artefacts.
+
+**`WIT-02` register, version 2.** Chart G moves from 3 of 13 to 13 of 13 and
+becomes compliant; chart J was already 13 of 13 (7 surviving); **chart L is
+untouched at 0 of 37** and `WITNESS-04` stays open, load-bearing, and narrowed
+to that one set. `outputs/close/wit02_register_v2.json`; version 1 stays on disk
+as the record of the coverage at enactment.
+
+**`DOC-08` enacted: no bare universal quantifier over a filtered set.** *"All
+tested X"* is written *"n of N X tested, all surviving"*; every count carries its
+denominator and every metric its scope. The sweep found three live instances,
+all in a spine item or a headline — *"survives refinement in every chart tested"*
+in `docs/CLOSE_RULING.md` and `docs/G10_RESULT.md`, and *"at every operating
+point tested"* in `docs/G9_RESULT.md` — and the generator that produced the
+flagship sentence was fixed: `scripts/run_witness_falsifier.py` no longer caps
+its loop at three pairs silently, and its verdict now reads *"n of N pairs
+tested"*. Guarded by `tests/test_quantifier_scope_doc08.py`, whose positive
+controls are the real defects rather than proxies.
+
+**`HIST-01`, new and pre-existing.** Every state file since generation 8 records
+champion and machinery commits that are **not in this clone's object graph**, so
+eight guards fail here that passed where those baselines were taken. Recorded
+rather than papered over: the pytest baseline in `LOOP_STATE_v9.json` carries the
+failures with their cause.
+
 ## [Unreleased] — close of the audit loop (2026-08-26)
 
 No API changes. The closing ruling permits one arithmetic check over existing

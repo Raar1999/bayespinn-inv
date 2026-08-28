@@ -1,0 +1,1731 @@
+{
+  "criterion": {
+    "metric": "profile likelihood barrier depth, straight line in chart coordinates",
+    "n_points": 11,
+    "noise_rel": 0.02,
+    "floor_reference": "0.5 * B_certified log-units, the cost of a curve one noise unit away at every bias",
+    "threshold_multiples_of_floor": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      25.0,
+      50.0,
+      100.0,
+      250.0,
+      1000.0
+    ],
+    "null_control": "the same criterion over the same number of ordinary prior draws that form no witness pair, taken in draw order",
+    "criterion_hash": "9631b4711f99a6319504b5c50185a26cb4f6dc2427024816831fa0846184c56f"
+  },
+  "decision": {
+    "floor_barrier": "0.5 * B_certified log-units, inherited unchanged from BarrierCriterion",
+    "ridge_fraction": 0.3333333333333333,
+    "classifier": "RIDGE if at least ridge_fraction of witness pairs are at or below the floor barrier; BASIN if none is; MIXED otherwise",
+    "matched_cell": "chart L, d=16 -- matched in d to chart J, matched in interpolant family to chart G",
+    "if_matched_cell_is_ridge": "chart effect: two charts at one d disagree",
+    "if_matched_cell_is_basin": "dimension effect: both d=16 cells are basins and the only ridge is d=4",
+    "if_matched_cell_is_mixed": "neither; one more cell was not enough",
+    "rulings_stated_falsifier": "chart L d=16 sits at the floor like chart G d=4, which would make the ridge/basin split a dimension effect rather than a chart effect",
+    "rulings_stated_falsifier_is_inverted": true,
+    "why_inverted": "chart L at the floor while chart J at the same d is not means two charts at one dimension disagree, and d=4 and d=16 land on the same side; that is a chart effect. The dimension reading requires chart L to behave like chart J, not like chart G.",
+    "reproduction_control": "chart G d=4 and chart J d=16 are re-measured here through the same imported function; their barrier medians must reproduce generation 9's",
+    "decision_hash": "88748b9f6d4e3ed84a70e3e704ff96d9ba0c84b206d071d3e4508666600565a2"
+  },
+  "rule": {
+    "barriers_are": "generation 9's BarrierCriterion, imported unchanged, at the production grid N=301 -- the criterion outputs/g10/ridge_basin.json was measured under",
+    "recompute_through": "run_g10._barrier_set, imported; the same function that produced outputs/g10/ridge_basin.json",
+    "refinement_changes": "which pairs are counted, and nothing else",
+    "reproduction_control": "the full thirteen-pair set is re-measured first and every per-pair depth must reproduce outputs/g10/ridge_basin.json bit-identically. A recount over depths that do not reproduce is a new measurement wearing the old one's name",
+    "counted_set": "the pairs that survive the battery, in their committed order",
+    "null_control": "as in run_g10._barrier_set: consecutive non-witness draws taken in draw order, one per counted witness pair. A smaller counted set takes a prefix of the same ordered list, so the null is not re-drawn",
+    "classifier": "run_g10.classify against RidgeBasinDecision, unchanged: RIDGE if at least ridge_fraction of counted pairs are at or below the floor barrier, BASIN if none is, MIXED otherwise",
+    "ridge_fraction": 0.3333333333333333,
+    "what_is_not_recomputed": "chart L and chart J. Their sets are untouched, so generation 10's numbers for them stand and the three-set comparison stays one measurement rather than two spliced together",
+    "rule_hash": "c365f4f48c86ad4fe392345031c5c1b384066b02199eef74d03f81c140a8a261"
+  },
+  "all_thirteen": {
+    "tag": "chart_G_d4__all_13",
+    "chart": "G",
+    "chart_label": "G(d=4)",
+    "d": 4,
+    "n_witness_pairs": 13,
+    "floor_barrier_log_units": 8.0,
+    "witness_pair_barriers": [
+      {
+        "pair": [
+          159,
+          1475
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -31.8147230696389,
+          -102.88928902872206,
+          -178.02020298736153,
+          -229.36391133028746,
+          -241.3529122410378,
+          -212.39263905760913,
+          -153.3791986928255,
+          -83.57931073640816,
+          -25.36997437053679,
+          -0.5905769203058111
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -241.3529122410378,
+        "barrier_depth": 241.3529122410378,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 30.169114030129727
+      },
+      {
+        "pair": [
+          743,
+          1536
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.13516127542125494,
+          -0.4816077434052587,
+          -0.9129127596799835,
+          -1.3400968656966692,
+          -1.7245191770194999,
+          -2.000433057962395,
+          -2.1065227122862265,
+          -2.0858588031941507,
+          -1.8945630283152866,
+          -1.6072894359586984
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2.1065227122862265,
+        "barrier_depth": 2.1065227122862265,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.2633153390357783
+      },
+      {
+        "pair": [
+          619,
+          1085
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.13476182343554274,
+          -0.38074269146316503,
+          -0.5780017534679268,
+          -0.6479001310494781,
+          -0.5773791579891576,
+          -0.4042446241240735,
+          -0.24236415325092847,
+          -0.27000523821013367,
+          -0.6803185842565773,
+          -1.7214817774905544
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -0.6803185842565773,
+        "barrier_depth": 0.6803185842565773,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.08503982303207216
+      },
+      {
+        "pair": [
+          1174,
+          1742
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1.6669177299245057,
+          -5.491973595083534,
+          -9.807900232447144,
+          -13.157896947952462,
+          -14.380995045469755,
+          -13.280906737455668,
+          -10.012207229353626,
+          -5.607404893222121,
+          -2.0261717659001617,
+          -1.7167475745719167
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -14.380995045469755,
+        "barrier_depth": 14.380995045469755,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1.7976243806837193
+      },
+      {
+        "pair": [
+          984,
+          1110
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.9165411695099902,
+          -2.989030401651768,
+          -5.34719164171943,
+          -7.306984500500482,
+          -8.253676592995099,
+          -8.314616217138337,
+          -7.189261460690446,
+          -5.396360185182159,
+          -3.2901210625289425,
+          -1.5118984918118556
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -8.314616217138337,
+        "barrier_depth": 8.314616217138337,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1.039327027142292
+      },
+      {
+        "pair": [
+          1043,
+          1842
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.03544117131866579,
+          -0.1234438626940424,
+          -0.263105889161428,
+          -0.41710902224615765,
+          -0.6056401567143637,
+          -0.802043966759582,
+          -0.9794776606411502,
+          -1.1792600390561807,
+          -1.3721457459752568,
+          -1.5481307595357545
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -1.3721457459752568,
+        "barrier_depth": 1.3721457459752568,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.1715182182469071
+      },
+      {
+        "pair": [
+          758,
+          846
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.08079355033191307,
+          -0.2688661224295502,
+          -0.49391351090935476,
+          -0.6982927331199591,
+          -0.8810575798042192,
+          -1.0176130929310825,
+          -1.119662169987057,
+          -1.1936030574533691,
+          -1.2957328619202824,
+          -1.454649059074295
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -1.2957328619202824,
+        "barrier_depth": 1.2957328619202824,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.1619666077400353
+      },
+      {
+        "pair": [
+          496,
+          604
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.49578313707204286,
+          -1.5854744819830362,
+          -2.792706286695877,
+          -3.7992042739727303,
+          -4.431238077871241,
+          -4.611288304458867,
+          -4.37119904090124,
+          -3.8044412241580012,
+          -3.079413111560995,
+          -2.408850819836267
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -4.611288304458867,
+        "barrier_depth": 4.611288304458867,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.5764110380573584
+      },
+      {
+        "pair": [
+          785,
+          1357
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -217.68247213406286,
+          -775.5355533113782,
+          -1465.4342573481604,
+          -2028.3235058096402,
+          -2239.2136407879734,
+          -2013.0664165083087,
+          -1449.5918428299613,
+          -774.8710756865181,
+          -233.5236916223604,
+          -2.7342040750203473
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2239.2136407879734,
+        "barrier_depth": 2239.2136407879734,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 279.9017050984967
+      },
+      {
+        "pair": [
+          1013,
+          1476
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.10160434308545654,
+          -0.3139984983700912,
+          -0.5241998812322106,
+          -0.6542027200622729,
+          -0.6585640339164861,
+          -0.5882524171581809,
+          -0.5013445967940504,
+          -0.5548189032048053,
+          -0.9396956767340616,
+          -1.9080518503542514
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -0.9396956767340616,
+        "barrier_depth": 0.9396956767340616,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.1174619595917577
+      },
+      {
+        "pair": [
+          1089,
+          1992
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -3.7723541402140515,
+          -12.361890168193145,
+          -21.874909724195312,
+          -28.97640122349256,
+          -31.372722632797842,
+          -28.27861032137042,
+          -20.61548739997651,
+          -10.90888442347882,
+          -3.2799352734278227,
+          -2.8166134072369062
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -31.372722632797842,
+        "barrier_depth": 31.372722632797842,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 3.9215903290997303
+      },
+      {
+        "pair": [
+          670,
+          1000
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -5.760061038461247,
+          -19.408652335707952,
+          -35.47123435074172,
+          -48.92463782903015,
+          -55.82434648435415,
+          -54.544368644644436,
+          -44.846860427676916,
+          -29.323776826459273,
+          -12.853946532032285,
+          -2.307559036007298
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -55.82434648435415,
+        "barrier_depth": 55.82434648435415,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 6.978043310544269
+      },
+      {
+        "pair": [
+          1763,
+          1795
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1.2174191661591407,
+          -4.071251265019757,
+          -7.409461443714255,
+          -10.629259298835624,
+          -12.869980093381644,
+          -13.571248179437674,
+          -12.924312921508367,
+          -10.765083665064832,
+          -7.748613692209174,
+          -4.391077646536182
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -13.571248179437674,
+        "barrier_depth": 13.571248179437674,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1.6964060224297093
+      }
+    ],
+    "null_control_pair_barriers": [
+      {
+        "pair": [
+          0,
+          1
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1403.089949091091,
+          -4339.790057242693,
+          -7901.543237710472,
+          -11947.080604796913,
+          -16600.855039453658,
+          -22010.313308027147,
+          -28269.755138318564,
+          -35398.55745971896,
+          -43324.284799979374,
+          -51863.039698347704
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -43324.284799979374,
+        "barrier_depth": 43324.284799979374,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 5415.535599997422
+      },
+      {
+        "pair": [
+          2,
+          3
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -717.5467065137848,
+          -3373.965083601628,
+          -8680.593760279135,
+          -16958.76881931324,
+          -27680.331706532634,
+          -39366.14931858518,
+          -50097.73923081986,
+          -58318.83941325291,
+          -63285.88361776807,
+          -65054.21835578641
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -63285.88361776807,
+        "barrier_depth": 63285.88361776807,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 7910.735452221009
+      },
+      {
+        "pair": [
+          4,
+          5
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -24.041017202675782,
+          -182.46163570278839,
+          -928.0802863760456,
+          -3522.9176608632565,
+          -11212.216329625084,
+          -32818.499158255494,
+          -95149.56176624092,
+          -290120.6413348351,
+          -949534.9762978198,
+          -3183233.151660365
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -949534.9762978198,
+        "barrier_depth": 949534.9762978198,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 118691.87203722747
+      },
+      {
+        "pair": [
+          6,
+          7
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -85.6293527955678,
+          -313.7378086605141,
+          -643.2351256810152,
+          -1038.186768281757,
+          -1466.8512103994613,
+          -1899.9219453020546,
+          -2311.3215940495206,
+          -2678.765893632424,
+          -2977.3160525269004,
+          -3188.1245715229784
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2977.3160525269004,
+        "barrier_depth": 2977.3160525269004,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 372.16450656586255
+      },
+      {
+        "pair": [
+          8,
+          9
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -245.67430000089118,
+          -881.8105412509863,
+          -1788.8918366895841,
+          -2879.8041633296025,
+          -4092.280534709442,
+          -5378.60031167846,
+          -6706.494422943183,
+          -8047.347272026669,
+          -9379.16641434583,
+          -10683.963678645896
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -9379.16641434583,
+        "barrier_depth": 9379.16641434583,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1172.3958017932287
+      },
+      {
+        "pair": [
+          10,
+          11
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -40.9992062485118,
+          -174.10168888688858,
+          -404.1400024261545,
+          -723.4454847513466,
+          -1117.6918731875485,
+          -1570.7257438648026,
+          -2068.248627453655,
+          -2598.7615237986843,
+          -3153.994140985251,
+          -3727.61609082453
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -3153.994140985251,
+        "barrier_depth": 3153.994140985251,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 394.24926762315636
+      },
+      {
+        "pair": [
+          12,
+          13
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1505.0659879988566,
+          -6983.15681897145,
+          -17383.283753412157,
+          -31732.741983042833,
+          -46442.915614551675,
+          -57489.89815699462,
+          -63686.9599931417,
+          -67151.89458130318,
+          -71454.82875710719,
+          -80299.40949524374
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -71454.82875710719,
+        "barrier_depth": 71454.82875710719,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 8931.853594638398
+      },
+      {
+        "pair": [
+          14,
+          15
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -121.98782602803408,
+          -428.3531543125291,
+          -824.8615232741688,
+          -1229.7624269001967,
+          -1587.527265286768,
+          -1874.4422253408761,
+          -2099.286128991398,
+          -2301.0982373499673,
+          -2545.0696269212876,
+          -2916.68680950296
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2545.0696269212876,
+        "barrier_depth": 2545.0696269212876,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 318.13370336516095
+      },
+      {
+        "pair": [
+          16,
+          17
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -368.82000011407126,
+          -1816.1995241651996,
+          -5054.026806679367,
+          -11152.955128689115,
+          -21604.341670156165,
+          -38284.89788360685,
+          -63190.08366505116,
+          -97910.65394403462,
+          -143062.75277343206,
+          -197725.64334438252
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -143062.75277343206,
+        "barrier_depth": 143062.75277343206,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 17882.844096679008
+      },
+      {
+        "pair": [
+          18,
+          19
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -187.22318587584027,
+          -655.4243344666887,
+          -1293.9197045296653,
+          -2031.1820019595143,
+          -2815.0901801024957,
+          -3609.7988892074018,
+          -4399.240139985527,
+          -5173.743025339876,
+          -5922.118886453393,
+          -6643.875080151089
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -5922.118886453393,
+        "barrier_depth": 5922.118886453393,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 740.2648608066742
+      },
+      {
+        "pair": [
+          20,
+          21
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.9239495831719038,
+          -2.2391732475861685,
+          -3.088189493905966,
+          -5.489480635226739,
+          -14.94852639567759,
+          -40.440023439114505,
+          -93.99412459169451,
+          -189.50331419395826,
+          -338.9328036766252,
+          -555.4235207578749
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -338.9328036766252,
+        "barrier_depth": 338.9328036766252,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 42.36660045957815
+      },
+      {
+        "pair": [
+          22,
+          23
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -41.09832982314485,
+          -156.26100771664858,
+          -337.5667365194397,
+          -575.6939126530729,
+          -863.2120505568028,
+          -1193.1464889476247,
+          -1562.8187919795741,
+          -1962.1041483845347,
+          -2382.908823012304,
+          -2823.4964640020453
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2382.908823012304,
+        "barrier_depth": 2382.908823012304,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 297.863602876538
+      },
+      {
+        "pair": [
+          24,
+          25
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1255.0959502332594,
+          -6475.6358884254805,
+          -18929.796334605835,
+          -44019.31773880264,
+          -89803.54496809114,
+          -166140.09132196291,
+          -280629.75501776615,
+          -430540.51123927213,
+          -597241.1262862165,
+          -750321.1400433828
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -597241.1262862165,
+        "barrier_depth": 597241.1262862165,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 74655.14078577707
+      }
+    ],
+    "witness_depth_median": 8.314616217138337,
+    "witness_depth_min": 0.6803185842565773,
+    "witness_depth_max": 2239.2136407879734,
+    "witness_median_in_floor_units": 1.039327027142292,
+    "null_depth_median": 9379.16641434583,
+    "null_depth_min": 338.9328036766252,
+    "null_median_in_floor_units": 1172.3958017932287,
+    "witness_pairs_below_the_floor_barrier": 6,
+    "fraction_below_the_floor_barrier": 0.46153846153846156,
+    "path_lengths": {
+      "note": "descriptive context for the barrier depths, not part of the registered classifier: the barrier walks a straight line in this chart's coordinates, so a set whose pairs are further apart has longer lines",
+      "witness_l2_median": 0.6101095452358644,
+      "witness_l2_min": 0.3425885858349703,
+      "witness_l2_max": 2.070476863069015,
+      "witness_max_coordinate_separation_median": 0.3921295257232167,
+      "null_l2_median": 1.51212172168382,
+      "witness_depth_per_unit_path_median": 15.349662415824845
+    },
+    "classification": {
+      "class": "RIDGE",
+      "fraction_below_floor": 0.46153846153846156,
+      "threshold": 0.3333333333333333
+    }
+  },
+  "reproduction_control": {
+    "rows": [
+      {
+        "pair": [
+          159,
+          1475
+        ],
+        "generation_10_depth": 241.3529122410378,
+        "here": 241.3529122410378,
+        "identical": true
+      },
+      {
+        "pair": [
+          743,
+          1536
+        ],
+        "generation_10_depth": 2.1065227122862265,
+        "here": 2.1065227122862265,
+        "identical": true
+      },
+      {
+        "pair": [
+          619,
+          1085
+        ],
+        "generation_10_depth": 0.6803185842565773,
+        "here": 0.6803185842565773,
+        "identical": true
+      },
+      {
+        "pair": [
+          1174,
+          1742
+        ],
+        "generation_10_depth": 14.380995045469755,
+        "here": 14.380995045469755,
+        "identical": true
+      },
+      {
+        "pair": [
+          984,
+          1110
+        ],
+        "generation_10_depth": 8.314616217138337,
+        "here": 8.314616217138337,
+        "identical": true
+      },
+      {
+        "pair": [
+          1043,
+          1842
+        ],
+        "generation_10_depth": 1.3721457459752568,
+        "here": 1.3721457459752568,
+        "identical": true
+      },
+      {
+        "pair": [
+          758,
+          846
+        ],
+        "generation_10_depth": 1.2957328619202824,
+        "here": 1.2957328619202824,
+        "identical": true
+      },
+      {
+        "pair": [
+          496,
+          604
+        ],
+        "generation_10_depth": 4.611288304458867,
+        "here": 4.611288304458867,
+        "identical": true
+      },
+      {
+        "pair": [
+          785,
+          1357
+        ],
+        "generation_10_depth": 2239.2136407879734,
+        "here": 2239.2136407879734,
+        "identical": true
+      },
+      {
+        "pair": [
+          1013,
+          1476
+        ],
+        "generation_10_depth": 0.9396956767340616,
+        "here": 0.9396956767340616,
+        "identical": true
+      },
+      {
+        "pair": [
+          1089,
+          1992
+        ],
+        "generation_10_depth": 31.372722632797842,
+        "here": 31.372722632797842,
+        "identical": true
+      },
+      {
+        "pair": [
+          670,
+          1000
+        ],
+        "generation_10_depth": 55.82434648435415,
+        "here": 55.82434648435415,
+        "identical": true
+      },
+      {
+        "pair": [
+          1763,
+          1795
+        ],
+        "generation_10_depth": 13.571248179437674,
+        "here": 13.571248179437674,
+        "identical": true
+      }
+    ],
+    "all_identical": true,
+    "median_here": 8.314616217138337,
+    "median_at_generation_10": 8.314616217138337,
+    "median_identical": true,
+    "below_floor_here": 6,
+    "below_floor_at_generation_10": 6,
+    "why": "the full thirteen-pair set is re-measured first and every per-pair depth must reproduce outputs/g10/ridge_basin.json bit-identically. A recount over depths that do not reproduce is a new measurement wearing the old one's name",
+    "wall_clock_s": 119.1502559999999
+  },
+  "surviving_set": {
+    "tag": "chart_G_d4__WIT02",
+    "chart": "G",
+    "chart_label": "G(d=4)",
+    "d": 4,
+    "n_witness_pairs": 12,
+    "floor_barrier_log_units": 8.0,
+    "witness_pair_barriers": [
+      {
+        "pair": [
+          159,
+          1475
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -31.8147230696389,
+          -102.88928902872206,
+          -178.02020298736153,
+          -229.36391133028746,
+          -241.3529122410378,
+          -212.39263905760913,
+          -153.3791986928255,
+          -83.57931073640816,
+          -25.36997437053679,
+          -0.5905769203058111
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -241.3529122410378,
+        "barrier_depth": 241.3529122410378,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 30.169114030129727
+      },
+      {
+        "pair": [
+          743,
+          1536
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.13516127542125494,
+          -0.4816077434052587,
+          -0.9129127596799835,
+          -1.3400968656966692,
+          -1.7245191770194999,
+          -2.000433057962395,
+          -2.1065227122862265,
+          -2.0858588031941507,
+          -1.8945630283152866,
+          -1.6072894359586984
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2.1065227122862265,
+        "barrier_depth": 2.1065227122862265,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.2633153390357783
+      },
+      {
+        "pair": [
+          619,
+          1085
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.13476182343554274,
+          -0.38074269146316503,
+          -0.5780017534679268,
+          -0.6479001310494781,
+          -0.5773791579891576,
+          -0.4042446241240735,
+          -0.24236415325092847,
+          -0.27000523821013367,
+          -0.6803185842565773,
+          -1.7214817774905544
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -0.6803185842565773,
+        "barrier_depth": 0.6803185842565773,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.08503982303207216
+      },
+      {
+        "pair": [
+          1174,
+          1742
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1.6669177299245057,
+          -5.491973595083534,
+          -9.807900232447144,
+          -13.157896947952462,
+          -14.380995045469755,
+          -13.280906737455668,
+          -10.012207229353626,
+          -5.607404893222121,
+          -2.0261717659001617,
+          -1.7167475745719167
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -14.380995045469755,
+        "barrier_depth": 14.380995045469755,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1.7976243806837193
+      },
+      {
+        "pair": [
+          984,
+          1110
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.9165411695099902,
+          -2.989030401651768,
+          -5.34719164171943,
+          -7.306984500500482,
+          -8.253676592995099,
+          -8.314616217138337,
+          -7.189261460690446,
+          -5.396360185182159,
+          -3.2901210625289425,
+          -1.5118984918118556
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -8.314616217138337,
+        "barrier_depth": 8.314616217138337,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1.039327027142292
+      },
+      {
+        "pair": [
+          1043,
+          1842
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.03544117131866579,
+          -0.1234438626940424,
+          -0.263105889161428,
+          -0.41710902224615765,
+          -0.6056401567143637,
+          -0.802043966759582,
+          -0.9794776606411502,
+          -1.1792600390561807,
+          -1.3721457459752568,
+          -1.5481307595357545
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -1.3721457459752568,
+        "barrier_depth": 1.3721457459752568,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.1715182182469071
+      },
+      {
+        "pair": [
+          758,
+          846
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.08079355033191307,
+          -0.2688661224295502,
+          -0.49391351090935476,
+          -0.6982927331199591,
+          -0.8810575798042192,
+          -1.0176130929310825,
+          -1.119662169987057,
+          -1.1936030574533691,
+          -1.2957328619202824,
+          -1.454649059074295
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -1.2957328619202824,
+        "barrier_depth": 1.2957328619202824,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.1619666077400353
+      },
+      {
+        "pair": [
+          496,
+          604
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.49578313707204286,
+          -1.5854744819830362,
+          -2.792706286695877,
+          -3.7992042739727303,
+          -4.431238077871241,
+          -4.611288304458867,
+          -4.37119904090124,
+          -3.8044412241580012,
+          -3.079413111560995,
+          -2.408850819836267
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -4.611288304458867,
+        "barrier_depth": 4.611288304458867,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.5764110380573584
+      },
+      {
+        "pair": [
+          785,
+          1357
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -217.68247213406286,
+          -775.5355533113782,
+          -1465.4342573481604,
+          -2028.3235058096402,
+          -2239.2136407879734,
+          -2013.0664165083087,
+          -1449.5918428299613,
+          -774.8710756865181,
+          -233.5236916223604,
+          -2.7342040750203473
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2239.2136407879734,
+        "barrier_depth": 2239.2136407879734,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 279.9017050984967
+      },
+      {
+        "pair": [
+          1013,
+          1476
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.10160434308545654,
+          -0.3139984983700912,
+          -0.5241998812322106,
+          -0.6542027200622729,
+          -0.6585640339164861,
+          -0.5882524171581809,
+          -0.5013445967940504,
+          -0.5548189032048053,
+          -0.9396956767340616,
+          -1.9080518503542514
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -0.9396956767340616,
+        "barrier_depth": 0.9396956767340616,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 0.1174619595917577
+      },
+      {
+        "pair": [
+          1089,
+          1992
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -3.7723541402140515,
+          -12.361890168193145,
+          -21.874909724195312,
+          -28.97640122349256,
+          -31.372722632797842,
+          -28.27861032137042,
+          -20.61548739997651,
+          -10.90888442347882,
+          -3.2799352734278227,
+          -2.8166134072369062
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -31.372722632797842,
+        "barrier_depth": 31.372722632797842,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 3.9215903290997303
+      },
+      {
+        "pair": [
+          670,
+          1000
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -5.760061038461247,
+          -19.408652335707952,
+          -35.47123435074172,
+          -48.92463782903015,
+          -55.82434648435415,
+          -54.544368644644436,
+          -44.846860427676916,
+          -29.323776826459273,
+          -12.853946532032285,
+          -2.307559036007298
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -55.82434648435415,
+        "barrier_depth": 55.82434648435415,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 6.978043310544269
+      }
+    ],
+    "null_control_pair_barriers": [
+      {
+        "pair": [
+          0,
+          1
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1403.089949091091,
+          -4339.790057242693,
+          -7901.543237710472,
+          -11947.080604796913,
+          -16600.855039453658,
+          -22010.313308027147,
+          -28269.755138318564,
+          -35398.55745971896,
+          -43324.284799979374,
+          -51863.039698347704
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -43324.284799979374,
+        "barrier_depth": 43324.284799979374,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 5415.535599997422
+      },
+      {
+        "pair": [
+          2,
+          3
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -717.5467065137848,
+          -3373.965083601628,
+          -8680.593760279135,
+          -16958.76881931324,
+          -27680.331706532634,
+          -39366.14931858518,
+          -50097.73923081986,
+          -58318.83941325291,
+          -63285.88361776807,
+          -65054.21835578641
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -63285.88361776807,
+        "barrier_depth": 63285.88361776807,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 7910.735452221009
+      },
+      {
+        "pair": [
+          4,
+          5
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -24.041017202675782,
+          -182.46163570278839,
+          -928.0802863760456,
+          -3522.9176608632565,
+          -11212.216329625084,
+          -32818.499158255494,
+          -95149.56176624092,
+          -290120.6413348351,
+          -949534.9762978198,
+          -3183233.151660365
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -949534.9762978198,
+        "barrier_depth": 949534.9762978198,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 118691.87203722747
+      },
+      {
+        "pair": [
+          6,
+          7
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -85.6293527955678,
+          -313.7378086605141,
+          -643.2351256810152,
+          -1038.186768281757,
+          -1466.8512103994613,
+          -1899.9219453020546,
+          -2311.3215940495206,
+          -2678.765893632424,
+          -2977.3160525269004,
+          -3188.1245715229784
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2977.3160525269004,
+        "barrier_depth": 2977.3160525269004,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 372.16450656586255
+      },
+      {
+        "pair": [
+          8,
+          9
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -245.67430000089118,
+          -881.8105412509863,
+          -1788.8918366895841,
+          -2879.8041633296025,
+          -4092.280534709442,
+          -5378.60031167846,
+          -6706.494422943183,
+          -8047.347272026669,
+          -9379.16641434583,
+          -10683.963678645896
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -9379.16641434583,
+        "barrier_depth": 9379.16641434583,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 1172.3958017932287
+      },
+      {
+        "pair": [
+          10,
+          11
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -40.9992062485118,
+          -174.10168888688858,
+          -404.1400024261545,
+          -723.4454847513466,
+          -1117.6918731875485,
+          -1570.7257438648026,
+          -2068.248627453655,
+          -2598.7615237986843,
+          -3153.994140985251,
+          -3727.61609082453
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -3153.994140985251,
+        "barrier_depth": 3153.994140985251,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 394.24926762315636
+      },
+      {
+        "pair": [
+          12,
+          13
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -1505.0659879988566,
+          -6983.15681897145,
+          -17383.283753412157,
+          -31732.741983042833,
+          -46442.915614551675,
+          -57489.89815699462,
+          -63686.9599931417,
+          -67151.89458130318,
+          -71454.82875710719,
+          -80299.40949524374
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -71454.82875710719,
+        "barrier_depth": 71454.82875710719,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 8931.853594638398
+      },
+      {
+        "pair": [
+          14,
+          15
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -121.98782602803408,
+          -428.3531543125291,
+          -824.8615232741688,
+          -1229.7624269001967,
+          -1587.527265286768,
+          -1874.4422253408761,
+          -2099.286128991398,
+          -2301.0982373499673,
+          -2545.0696269212876,
+          -2916.68680950296
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2545.0696269212876,
+        "barrier_depth": 2545.0696269212876,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 318.13370336516095
+      },
+      {
+        "pair": [
+          16,
+          17
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -368.82000011407126,
+          -1816.1995241651996,
+          -5054.026806679367,
+          -11152.955128689115,
+          -21604.341670156165,
+          -38284.89788360685,
+          -63190.08366505116,
+          -97910.65394403462,
+          -143062.75277343206,
+          -197725.64334438252
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -143062.75277343206,
+        "barrier_depth": 143062.75277343206,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 17882.844096679008
+      },
+      {
+        "pair": [
+          18,
+          19
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -187.22318587584027,
+          -655.4243344666887,
+          -1293.9197045296653,
+          -2031.1820019595143,
+          -2815.0901801024957,
+          -3609.7988892074018,
+          -4399.240139985527,
+          -5173.743025339876,
+          -5922.118886453393,
+          -6643.875080151089
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -5922.118886453393,
+        "barrier_depth": 5922.118886453393,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 740.2648608066742
+      },
+      {
+        "pair": [
+          20,
+          21
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -0.9239495831719038,
+          -2.2391732475861685,
+          -3.088189493905966,
+          -5.489480635226739,
+          -14.94852639567759,
+          -40.440023439114505,
+          -93.99412459169451,
+          -189.50331419395826,
+          -338.9328036766252,
+          -555.4235207578749
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -338.9328036766252,
+        "barrier_depth": 338.9328036766252,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 42.36660045957815
+      },
+      {
+        "pair": [
+          22,
+          23
+        ],
+        "n_points": 11,
+        "n_uncertified": 0,
+        "certified": true,
+        "loglik": [
+          -0.0,
+          -41.09832982314485,
+          -156.26100771664858,
+          -337.5667365194397,
+          -575.6939126530729,
+          -863.2120505568028,
+          -1193.1464889476247,
+          -1562.8187919795741,
+          -1962.1041483845347,
+          -2382.908823012304,
+          -2823.4964640020453
+        ],
+        "endpoint_max": -0.0,
+        "interior_min": -2382.908823012304,
+        "barrier_depth": 2382.908823012304,
+        "floor_barrier_log_units": 8.0,
+        "depth_in_floor_units": 297.863602876538
+      }
+    ],
+    "witness_depth_median": 6.462952260798602,
+    "witness_depth_min": 0.6803185842565773,
+    "witness_depth_max": 2239.2136407879734,
+    "witness_median_in_floor_units": 0.8078690325998252,
+    "null_depth_median": 7650.642650399612,
+    "null_depth_min": 338.9328036766252,
+    "null_median_in_floor_units": 956.3303312999515,
+    "witness_pairs_below_the_floor_barrier": 6,
+    "fraction_below_the_floor_barrier": 0.5,
+    "path_lengths": {
+      "note": "descriptive context for the barrier depths, not part of the registered classifier: the barrier walks a straight line in this chart's coordinates, so a set whose pairs are further apart has longer lines",
+      "witness_l2_median": 0.575895133529268,
+      "witness_l2_min": 0.3425885858349703,
+      "witness_l2_max": 2.070476863069015,
+      "witness_max_coordinate_separation_median": 0.36506894552666047,
+      "null_l2_median": 1.4784120728244414,
+      "witness_depth_per_unit_path_median": 11.453897066221666
+    },
+    "classification": {
+      "class": "RIDGE",
+      "fraction_below_floor": 0.5,
+      "threshold": 0.3333333333333333
+    }
+  },
+  "self_consistency": {
+    "rows": [
+      {
+        "pair": [
+          159,
+          1475
+        ],
+        "depth_in_full_run": 241.3529122410378,
+        "depth_in_counted_run": 241.3529122410378,
+        "identical": true
+      },
+      {
+        "pair": [
+          743,
+          1536
+        ],
+        "depth_in_full_run": 2.1065227122862265,
+        "depth_in_counted_run": 2.1065227122862265,
+        "identical": true
+      },
+      {
+        "pair": [
+          619,
+          1085
+        ],
+        "depth_in_full_run": 0.6803185842565773,
+        "depth_in_counted_run": 0.6803185842565773,
+        "identical": true
+      },
+      {
+        "pair": [
+          1174,
+          1742
+        ],
+        "depth_in_full_run": 14.380995045469755,
+        "depth_in_counted_run": 14.380995045469755,
+        "identical": true
+      },
+      {
+        "pair": [
+          984,
+          1110
+        ],
+        "depth_in_full_run": 8.314616217138337,
+        "depth_in_counted_run": 8.314616217138337,
+        "identical": true
+      },
+      {
+        "pair": [
+          1043,
+          1842
+        ],
+        "depth_in_full_run": 1.3721457459752568,
+        "depth_in_counted_run": 1.3721457459752568,
+        "identical": true
+      },
+      {
+        "pair": [
+          758,
+          846
+        ],
+        "depth_in_full_run": 1.2957328619202824,
+        "depth_in_counted_run": 1.2957328619202824,
+        "identical": true
+      },
+      {
+        "pair": [
+          496,
+          604
+        ],
+        "depth_in_full_run": 4.611288304458867,
+        "depth_in_counted_run": 4.611288304458867,
+        "identical": true
+      },
+      {
+        "pair": [
+          785,
+          1357
+        ],
+        "depth_in_full_run": 2239.2136407879734,
+        "depth_in_counted_run": 2239.2136407879734,
+        "identical": true
+      },
+      {
+        "pair": [
+          1013,
+          1476
+        ],
+        "depth_in_full_run": 0.9396956767340616,
+        "depth_in_counted_run": 0.9396956767340616,
+        "identical": true
+      },
+      {
+        "pair": [
+          1089,
+          1992
+        ],
+        "depth_in_full_run": 31.372722632797842,
+        "depth_in_counted_run": 31.372722632797842,
+        "identical": true
+      },
+      {
+        "pair": [
+          670,
+          1000
+        ],
+        "depth_in_full_run": 55.82434648435415,
+        "depth_in_counted_run": 55.82434648435415,
+        "identical": true
+      }
+    ],
+    "all_identical": true,
+    "why": "the same pair walked twice by a deterministic function must give the same depth; if it does not, the counted set is not a subset of the full one"
+  },
+  "verdict": {
+    "counted_pairs": 12,
+    "of_offered": 13,
+    "coverage": 1.0,
+    "classification_over_the_surviving_set": "RIDGE",
+    "classification_at_generation_10": "RIDGE",
+    "flipped": false,
+    "fraction_below_floor_here": 0.5,
+    "fraction_below_floor_at_generation_10": 0.46153846153846156,
+    "ridge_fraction": 0.3333333333333333,
+    "reading": "the ridge stands and is no longer a claim about three pairs. Spine item 4 keeps its classification and gains its coverage: 13 of 13 refined, n surviving, at the recounted margin. The 3.9% margin the ruling flagged is either confirmed or moves, and the moved value is the one reported",
+    "reading_was_registered_before_the_run": true,
+    "outcomes_hash": "52df5f7694cd0a37524a10a70430ae7b25f0cc57af43bc26a32c65bc123b5aab",
+    "median_depth_over_the_surviving_set": 6.462952260798602,
+    "median_in_floor_units": 0.8078690325998252,
+    "median_at_generation_10": 8.314616217138337,
+    "median_in_floor_units_at_generation_10": 1.039327027142292,
+    "margin_against_the_floor_barrier_percent": -19.213096740017477,
+    "margin_at_generation_10_percent": 3.932702714229208
+  }
+}

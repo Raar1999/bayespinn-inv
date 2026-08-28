@@ -266,7 +266,7 @@ Read the columns rather than the rows.
   0.173 – 4.560 (×26), dimension 0.026 – 0.558 (×21), interpolant 0.026 – 1.015
   (×39).
 * **So the ordering is not four-way. It is one-against-three.** *What you measure
-  dominates the local spectrum at every operating point tested; how you
+  dominates the local spectrum at all twelve operating points tested; how you
   parameterise, at what dimension, and where the junction sits trade places among
   themselves depending on the device and the window.* That is a claim the nine
   points support and the one point could not have.

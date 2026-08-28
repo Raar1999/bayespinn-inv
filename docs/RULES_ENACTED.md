@@ -436,3 +436,85 @@ tested pairs survive 4× grid refinement"* of a set in which 3 of 13 pairs had
 ever been tested. That sentence is true and reads as its opposite. It is the
 reason the rule is worth having even though it closes nothing: before `WIT-02`,
 "not refined" and "refined, fine" were the same sentence on the claim surface.
+
+---
+
+## `DOC-08` — no bare universal quantifier over a filtered set
+
+**Enacted** operator ruling of 2026-08-28 §3.
+
+> No bare universal quantifier over a filtered set. "All tested X" is written
+> "n of N X tested, all surviving". Every count carries its denominator; every
+> metric carries its scope.
+
+**The defect that forced it.** `README.md` said *"all tested pairs survive 4×
+grid refinement"* of a set in which 3 of 13 pairs had ever been tested. The
+sentence is **true and reads as its opposite**, which is what makes the class
+worth naming: no reviewer catches it, because nothing in it is false.
+
+It is the third instance of one family, not a third slip. The other two are the
+generation-8 baseline's bare `"ruff_exit": 0`, which carried neither scope nor
+command and so said nothing about which paths were linted, and the same
+baseline's `mypy_findings: 25`, which carried a *stated* scope that was the
+wrong one — 25 is `mypy src` over 44 files, and the tracked tree is 150. Each
+was found by a different generation looking for something else. **The family is
+a quantifier or metric stated without its denominator or scope, where the
+natural reading is the false one**, and it had already cost three findings when
+the rule was written.
+
+**What the sweep found.** Three live instances on the claim surface, all of the
+same postmodifier shape the flagship sentence has:
+
+| document | sentence | population |
+|---|---|---|
+| `docs/CLOSE_RULING.md` §5 item 3 | *"survives refinement in every chart tested"* | two of the three committed witness sets had been through the battery; chart L never has |
+| `docs/G10_RESULT.md` §7 item 3 | the same sentence | the same |
+| `docs/G9_RESULT.md` §1 | *"at every operating point tested"* | twelve |
+
+All three were in a **spine item or a headline**, which is where the family
+concentrates: the sentence that compresses a result is the sentence that drops
+the denominator. The generator was fixed too —
+`scripts/run_witness_falsifier.py` capped its loop at `pairs[:3]` and wrote the
+verdict *"all tested pairs survive grid refinement and a tighter tolerance"*.
+The cap is now an argument that defaults to every offered pair, and the verdict
+reads *"n of N pairs tested; all n survive"*.
+
+**Enforced by** `tests/test_quantifier_scope_doc08.py`, over
+`CLAIM_SURFACE_G10` plus `docs/CLOSE_ADDENDUM.md`. Two arms: a universal
+quantifier attached to a set marked as selected by having been *tested*,
+*refined*, *examined* and the rest, in a unit stating no denominator; and a
+`mypy`, `ruff` or `pytest` count on the claim surface with neither its
+invocation nor its scope, which is `REP-01`'s rule for the state file applied to
+prose.
+
+Its positive controls are the real defects rather than proxies: the exact
+`README.md` sentence for the first arm, and both of the operator's two examples
+for the second — `"ruff_exit": 0`, and a `mypy` count of 25 quoted with no
+scope beside it, where the tracked-tree scope gives 150 over 125 files. Its negative controls
+are the statement of `WIT-02` itself (*"every witness is refined before it is
+counted"*, which is the forbidden shape and is also the sentence enacting the
+forbidding), a prohibition list quoting the pattern, and a measured false
+positive: `docs/CHART_RECONCILIATION_g7.md`'s *"each direction probed **by** an
+object drawn in its own source chart"*, which describes a method and asserts
+nothing about a subset. That sentence was flagged by the first version of the
+pattern and is why a participle followed by an agent is excluded.
+
+**Its second arm overlaps an existing guard, and the overlap is deliberate.**
+`tests/test_mypy_scope_g10.py` already enforces the same scope requirement for
+`mypy` alone, enacted at generation 10 under `REP-01`. `DOC-08`'s arm generalises it to `ruff`
+and `pytest` and states the class; the `mypy` guard is narrower, has the better
+error message for its own case, and stays. Two guards firing on one sentence is
+a cost worth paying over a class that has produced three findings — and the
+overlap was measured, not assumed: writing this section tripped the generation-10
+guard on the sentence quoting the defect.
+
+**What it does not reach, measured rather than assumed.** A count spelled as a
+word with no denominator — *"All three pairs put through the falsifier
+survived"*, where the population is thirteen — is an instance of the family and
+the patterns do not catch it. `test_a_worded_count_is_a_recorded_limit_of_this_guard`
+pins that limit so it stays visible. The widening that would catch it also
+catches *"admissibility ratio 1.000 in all three charts"*, where three **is** the
+population, and a guard demanding "3 of 3" there is a guard about typography.
+The sentence itself was repaired by the sweep; the class it belongs to is
+recorded as open.
+

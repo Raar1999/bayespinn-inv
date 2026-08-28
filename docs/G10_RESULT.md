@@ -510,11 +510,19 @@ to the draft.
 2. Bias-window **width** sets the rank (1 → 4); spacing moves the spectrum
    (19.8%) and not the rank. The two are separable and had been fused.
    *Unchanged.*
-3. The degeneracy is real and survives refinement in every chart tested — 8.18×
-   and 14.75× in doping, 694 nm against 271 nm in junction depth, the last
-   falling 1.7% under `N = 301 → 1201`. *Unchanged, with the account of which
-   pairs do **not** survive corrected: it is proximity to the floor, not sub-grid
-   junctions.*
+3. The degeneracy is real and survives refinement in each of the committed
+   witness sets that had been through the battery at this generation — globally,
+   in **chart G** at `d=4`, 3 of 13 pairs refined and all 3 surviving; in
+   **chart J** at `d=16`, 13 of 13 refined and 7 surviving; **chart L** at
+   `d=16` stood at 0 of 37 and had never been tested. 8.18× and 14.75× in
+   doping, 694 nm against 271 nm in junction depth, the last falling 1.7% under
+   `N = 301 → 1201`. *Unchanged, with the account of which pairs do **not**
+   survive corrected: it is proximity to the floor, not sub-grid junctions.
+   Denominators added after the fact under `DOC-08`; the sentence read "in every
+   chart tested", which was true over two sets and read as three. The chart-G
+   figures were superseded at the close addendum — `docs/CLOSE_ADDENDUM.md`,
+   13 of 13 refined and 12 surviving — and are left here as what this generation
+   measured.*
 4. ~~Its geometry is not universal: a ridge in one chart, isolated basins in
    another.~~ **Its geometry follows the dimension, not the chart.** Only `d=4`
    puts witness pairs at the instrument's own floor; at both charts tested at

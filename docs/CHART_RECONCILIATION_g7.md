@@ -368,7 +368,9 @@ mode it started nearest, with no indication that the other exists.
 * **Chart G, `d = 4`.** 13 witness pairs among 1,999,000 examined; the closest
   differs by 8.18× in doping and 1.23% in I–V, at 61.3% of the 2.0e-02
   distinguishability floor, and survives 4× grid refinement and a tighter solver
-  tolerance. **3 of 13 refined** under `WIT-02`; the other 10 have never been.
+  tolerance. **13 of 13 refined** under `WIT-02`, **12 surviving**; the
+  thirteenth separates at `N = 1201` and is withdrawn
+  (`docs/CLOSE_ADDENDUM.md`).
 * **Chart L, `d = 16`.** 37 witness pairs among 719,400 examined at a stated
   budget of 1200 prior draws; the closest differs by 14.75× in doping and 0.88%
   in I–V, at 44.1% of the same floor. Chart L is globally non-identifiable on its

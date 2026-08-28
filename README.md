@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-894%20collected-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-975%20collected-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
@@ -49,7 +49,7 @@ interval.
 | **UQ calibration** | ±1.64σ coverage 46% → **90%** after variance inflation T=2.09 (nominal 90%, n=140, same test set) | `run_results.py` |
 | **Is the uncertainty useful?** | Spearman ρ(σ, \|error\|) = **+0.82** (n=200); σ inflates **15.7×** on extrapolation while error inflates 11.8× | `run_results.py` |
 | **Identifiability** (***local***, **chart L**) | **Local** identifiability in **chart L** at **d=16** — the rank of the Jacobian at one operating point, over the reachable set of that chart (`log10\|C\|` at 16 anchors, arithmetic interpolation of the signed doping; `bayespinn_inv.inverse.charts`). At the reference point (1 µm Si PN junction, N_A=N_D=1e22 m⁻³, 19 bias points over 0–0.9 V, 2% noise, P=16), I–V determines only **3–4 of 16** doping dof; **1–6 across every tested variation**, median 3, over 88 measurements; **the rank does not grow with the parameterisation** (P=8→32 leaves it at 3–4) | `run_identifiability.py`, `run_identifiability_robustness.py` |
-| **Identifiability** (***global***, **chart G**) | **Demonstrated by witness, not inferred.** In **chart G** at **d=4** (geometric interpolation of the magnitude; `bayespinn_inv.inverse.charts`), log-uniform prior 1e21–1e23 m⁻³, 16 biases over 0.15–0.90 V, distinguishability floor **2.0e-02** = max(noise 2.0e-02, solver 1.5e-03): **13 witness pairs** among 1,999,000 examined. Closest differs by **8.18× in doping** yet only **1.23%** in I–V. **3 of 13 refined** under `WIT-02` (`outputs/close/wit02_register.json`); all 3 **survive 4× grid refinement and a tighter tolerance** and the other 10 have never been refined. Oracle-arbitrated; the surrogate is never used (ADR-0007) | `run_global_identifiability.py`, `run_witness_falsifier.py` |
+| **Identifiability** (***global***, **chart G**) | **Demonstrated by witness, not inferred.** In **chart G** at **d=4** (geometric interpolation of the magnitude; `bayespinn_inv.inverse.charts`), log-uniform prior 1e21–1e23 m⁻³, 16 biases over 0.15–0.90 V, distinguishability floor **2.0e-02** = max(noise 2.0e-02, solver 1.5e-03): **13 witness pairs** among 1,999,000 examined. Closest differs by **8.18× in doping** yet only **1.23%** in I–V. **13 of 13 refined** under `WIT-02` (`outputs/close/wit02_register_v2.json`); **12 of 13 survive** 4× grid refinement and a tighter tolerance and **1 separates** at the finest grid and is withdrawn. Oracle-arbitrated; the surrogate is never used (ADR-0007) | `run_global_identifiability.py`, `run_wit02_chartG.py` |
 | **Surrogate speed** vs SG | **152×** faster per I–V curve (0.85 ms vs 129 ms, M=5 ensemble) | `run_results.py` |
 | **Surrogate *gradient* fidelity** | directional derivatives agree with SG **only inside** the identifiable subspace: mean cosine **+0.50 inside vs −0.00 outside**, unchanged by a 33× training-budget increase | `run_gradient_fidelity.py` |
 | **UQ backend comparison** | deep ensemble beats tuned MC-dropout and tuned SWAG on every uncertainty axis; σ inflates **21.3×** off-distribution vs 1.4×/2.5× | `run_uq_benchmark.py`, `run_uq_tuning.py` |
@@ -74,10 +74,13 @@ interval.
    distant parameter sets fit equally well — is no longer open: at d=4 over a
    1e21–1e23 m⁻³ log-uniform prior, a search over 1,999,000 pairs found **13**
    whose I–V curves differ by less than the 2% distinguishability floor, the
-   closest differing by **8.18× in doping** for a **1.23%** change in I–V. Those
-   witnesses survive 4× grid refinement and a tighter solver tolerance, so they
-   are degeneracies of the device rather than of the solver
-   ([`docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`](docs/S1_GLOBAL_IDENTIFIABILITY_g6.md)).
+   closest differing by **8.18× in doping** for a **1.23%** change in I–V. Of
+   those 13, **13 of 13** have been through the refinement battery under
+   `WIT-02` and **12 survive** 4× grid refinement and a tighter solver
+   tolerance, so those twelve are degeneracies of the device rather than of the
+   solver; the thirteenth separates at `N = 1201` and is withdrawn
+   ([`docs/S1_GLOBAL_IDENTIFIABILITY_g6.md`](docs/S1_GLOBAL_IDENTIFIABILITY_g6.md),
+   [`docs/CLOSE_ADDENDUM.md`](docs/CLOSE_ADDENDUM.md)).
    The two numbers were measured in different **charts** — the local rank in
    **chart L** at d=16, the global contraction in **chart G** at d=4 — and
    neither chart contains the other, so their fractions are over different
@@ -455,7 +458,7 @@ configuration — so any number can be traced to what produced it.
 |---|---|---|
 | 1 | Terminal-current noise floor ~2e-6 A/m² near equilibrium; the true current there is zero and the oracle cannot resolve it. | Measured and reported per solve. Removing it needs a quasi-Fermi reformulation (ADR-0002). |
 | 2 | The surrogate extrapolates poorly outside its training doping band (38% median error) and does not transfer to unseen profile families (84%). | Measured; the honest operating envelope. |
-| 3 | Profile recovery from terminal I–V is ill-posed **locally and globally**. Locally, in **chart L** at **d=16**: 3–4 of 16 dof identifiable at 2% noise at the reference point. Globally, in **chart G** at **d=4**: 13 witness pairs (up to **8.18×** apart in doping, **1.23%** apart in I–V) found by search. The two fractions are over different charts and are not comparable; at matched d the rank is the same in both charts (`docs/CHART_RECONCILIATION_g7.md`), but that invariance holds only within the one interpolant family those two charts span — a third chart with a free junction, and the observation set, both move the spectrum far more ([`docs/G8_RESULT.md`](docs/G8_RESULT.md)). | Local Jacobian rank stress-tested across six axes plus a bootstrap; global witnesses found by oracle-arbitrated search over 1,999,000 pairs, of which **3 of 13 refined** under `WIT-02` and all 3 **survive 4× grid refinement**. ADR-0007. |
+| 3 | Profile recovery from terminal I–V is ill-posed **locally and globally**. Locally, in **chart L** at **d=16**: 3–4 of 16 dof identifiable at 2% noise at the reference point. Globally, in **chart G** at **d=4**: 13 witness pairs (up to **8.18×** apart in doping, **1.23%** apart in I–V) found by search. The two fractions are over different charts and are not comparable; at matched d the rank is the same in both charts (`docs/CHART_RECONCILIATION_g7.md`), but that invariance holds only within the one interpolant family those two charts span — a third chart with a free junction, and the observation set, both move the spectrum far more ([`docs/G8_RESULT.md`](docs/G8_RESULT.md)). | Local Jacobian rank stress-tested across six axes plus a bootstrap; global witnesses found by oracle-arbitrated search over 1,999,000 pairs, of which **13 of 13 refined** under `WIT-02` and **12 of 13 survive** 4× grid refinement. ADR-0007. |
 | 4 | Uncertainty-driven bias acquisition is **worse** than random for inverse identifiability (−0.31 rank, 9 losses / 20). | Measured negative result; information-based design (+0.39) is the working alternative. AUDIT_MASTER DES-01. |
 | 4b | The surrogate's **gradients** are usable only inside the identifiable subspace (mean cosine +0.50 inside, −0.00 outside) — and more training does not fix it. | Measured; this bounds gradient-based inverse design and any Jacobian-based experiment design. AUDIT_MASTER GRAD-01. |
 | 4c | The pure-physics PINN does not work as a forward model (100% median relative error). | Retained as legacy + a documented negative result. ADR-0004. |

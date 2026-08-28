@@ -1,0 +1,98 @@
+{
+  "rule": {
+    "id": "WIT-02",
+    "text": "every witness is refined before it is counted -- not the ones near the floor, all of them",
+    "enacted": "closing operator ruling of 2026-08-26 section 2",
+    "supersedes": null,
+    "relationship_to_WIT01": "WIT-01 is not withdrawn. It stays for the sub-grid case it does catch. Retro-applied it removes nothing -- admissibility ratio 1.000 in all three charts -- because every pair qualifies on a doping magnitude and magnitudes reach the grid exactly, so it is not sufficient either.",
+    "why_no_threshold": "the observed refinement split sits between 92.2% and 93.65% of the distinguishability floor, 1.4 percentage points. A threshold inside a band that narrow is tuned; PH-11 forbids it. Refining every witness needs no threshold to defend."
+  },
+  "supersedes": {
+    "register": "outputs/close/wit02_register.json",
+    "kept": "version 1 stays on disk unchanged. It is the record of what the coverage was when WIT-02 was enacted, and the gap it reports is the reason this run exists.",
+    "what_moved": "chart G only: 3 of 13 refined becomes 13 of 13. Chart L and chart J are untouched."
+  },
+  "authorisation": "operator ruling of 2026-08-28 section 2. Narrow: chart G only.",
+  "provenance": {
+    "inputs_sha256": {
+      "outputs/g10/wit01.json": "ab895bc9a4d21c626f67d82ee87f39b6bb8750d9a53dc5b96da0ea2e3fa216d3",
+      "outputs/close/wit02_register.json": "bc19daaf10d38f740200e53e6a06cf87a17cd4462bbc620c9e4d2813707f359e",
+      "outputs/wit02_chartG/refine.json": "63b1064338e19b74cf6cd533093df80f9ea6222b0ac63ba97020850d41e0aa3d",
+      "outputs/g9/junction_refine.json": "bd7b296d6ee375ebd66032ed2f292083ce00442161b6478159bd914618588d59"
+    },
+    "input_manifests": [
+      "outputs/wit02_chartG/manifest.json",
+      "outputs/g10/manifest.json",
+      "outputs/g9/manifest.json"
+    ],
+    "python": "3.11.9",
+    "platform": "win32",
+    "validated_platforms": [
+      "win32"
+    ],
+    "unvalidated": "linux and darwin -- PROV-07, open and unchanged"
+  },
+  "sets": {
+    "chart_G_d4": {
+      "chart": "G",
+      "d": 4,
+      "n_pairs_offered": 13,
+      "admissibility_ratio_WIT01": 1.0,
+      "refinement_artefact": "outputs/wit02_chartG/refine.json",
+      "n_refined": 13,
+      "n_surviving": 12,
+      "coverage": 1.0,
+      "compliant": true,
+      "carries": "the ridge result",
+      "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+      "n_records_in_artefact": 13,
+      "n_records_not_matched_to_this_set": 0
+    },
+    "chart_L_d16": {
+      "chart": "L",
+      "d": 16,
+      "n_pairs_offered": 37,
+      "admissibility_ratio_WIT01": 1.0,
+      "refinement_artefact": null,
+      "n_refined": 0,
+      "n_surviving": null,
+      "coverage": 0.0,
+      "compliant": false,
+      "carries": "the chart-L basin search statement, and through it the reading that the ridge/basin split follows the dimension",
+      "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set"
+    },
+    "chart_J_d16": {
+      "chart": "J",
+      "d": 16,
+      "n_pairs_offered": 13,
+      "admissibility_ratio_WIT01": 1.0,
+      "refinement_artefact": "outputs/g9/junction_refine.json",
+      "n_refined": 13,
+      "n_surviving": 7,
+      "coverage": 1.0,
+      "compliant": true,
+      "carries": "the junction degeneracy, and the chart-J basin search statement",
+      "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+      "n_records_in_artefact": 13,
+      "n_records_not_matched_to_this_set": 0
+    }
+  },
+  "untouched_sets_reproduce_version_1": {
+    "rows": {
+      "chart_L_d16": true,
+      "chart_J_d16": true
+    },
+    "all": true,
+    "why": "this register is built by a second implementation of the same match. The two sets that did not move must come out identical, which is what makes the one that did move a measurement rather than a difference between two builders."
+  },
+  "verdict": {
+    "n_sets": 3,
+    "n_compliant": 2,
+    "non_compliant": [
+      "chart_L_d16"
+    ],
+    "all_compliant": false,
+    "what_changed_since_version_1": "chart G: 3 of 13 refined at close, 13 of 13 here.",
+    "why_chart_L_is_still_uncovered": "the ruling authorised chart G and named chart L as excluded. Its 37 pairs have still never been refined, its median barrier is 212 floor units, and WITNESS-04 stays open and load-bearing."
+  }
+}

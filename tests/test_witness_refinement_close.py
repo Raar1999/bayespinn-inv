@@ -10,12 +10,21 @@ What this guard can and cannot be
 ---------------------------------
 It cannot refine anything. Refining a witness pair costs oracle solves across
 three grids and two tolerances, the closing ruling allows *arithmetic on
-existing artefacts only*, and there is no generation 11. So what ``WIT-02`` gets
+existing artefacts only*, and there is no generation 11. So what ``WIT-02`` got
 at close is a **register** -- ``outputs/close/wit02_register.json``, built by
 ``scripts/run_close.py`` -- and this module guards the register rather than the
 rule's satisfaction. That is the honest shape for a rule enacted over a corpus
 it postdates: the alternative is a green suite over an unmet rule, which is the
 ``CI-01`` failure mode in miniature.
+
+**One set was then refined.** The operator ruling of 2026-08-28 §2 authorised
+one bounded run on the set with the tightest margin -- chart G, whose ridge
+stood on 3 of 13 refined pairs at 3.9% above the floor barrier -- and
+``scripts/run_wit02_chartG.py`` put all thirteen through the battery. Twelve
+survive. The live register is ``outputs/close/wit02_register_v2.json``; version
+1 stays on disk and :class:`TestTheRegisterSupersedesRatherThanOverwrites`
+guards that it does, because the gap version 1 records is what authorised the
+run that closed it. **Chart L, at 0 of 37, is untouched and still uncovered.**
 
 The register is measured, not written down
 ------------------------------------------
@@ -56,8 +65,22 @@ from test_claim_surface_g7 import _PROHIBITION, CLAIM_SURFACE_G7, _read, _units
 from test_witness_admissibility_g10 import _WITNESS_COUNT
 
 REPO = Path(__file__).resolve().parents[1]
-REGISTER = REPO / "outputs" / "close" / "wit02_register.json"
+
+#: The live register. Version 2 supersedes version 1 rather than replacing it:
+#: the operator ruling of 2026-08-28 §2 authorised one bounded refinement, chart
+#: G's ten untested pairs went through the battery, and its row moved from 3 of
+#: 13 to 13 of 13. Version 1 stays on disk as the record of what the coverage was
+#: when ``WIT-02`` was enacted, which is the gap that authorised the run --
+#: :class:`TestTheRegisterSupersedesRatherThanOverwrites` guards that it does.
+REGISTER = REPO / "outputs" / "close" / "wit02_register_v2.json"
+REGISTER_V1 = REPO / "outputs" / "close" / "wit02_register.json"
 WIT01 = REPO / "outputs" / "g10" / "wit01.json"
+
+#: Where a refinement artefact keeps the pair's separation in decades. Three
+#: artefacts, written three generations apart, spell it two ways; the key is
+#: chosen by which one the record actually has rather than by which artefact it
+#: is, so a fourth artefact does not need this module edited to be matchable.
+_SEPARATION_KEYS = ("separation_decades", "separation_magnitudes_only")
 
 #: What makes the refinement status available to the reader.
 #:
@@ -66,7 +89,7 @@ WIT01 = REPO / "outputs" / "g10" / "wit01.json"
 #: three describe the generation-6 battery in the abstract; a pattern that took
 #: those as a citation would pass documents that never state a coverage.
 _REGISTER_CITATION = re.compile(
-    r"WIT-02|refinement\s+register|outputs/close/wit02_register\.json"
+    r"WIT-02|refinement\s+register|outputs/close/wit02_register(?:_v\d+)?\.json"
     r"|\bsurviv\w*\s+(?:grid\s+)?refinement\b|\bof\s+13\s+separated\b"
     r"|\b\d{1,3}\s+of\s+\d{1,3}\s+refined\b",
     re.I)
@@ -75,8 +98,8 @@ _REGISTER_CITATION = re.compile(
 @pytest.fixture(scope="module")
 def register() -> dict:
     if not REGISTER.is_file():
-        pytest.skip("outputs/close/wit02_register.json not written yet; "
-                    "run PYTHONPATH=src python scripts/run_close.py")
+        pytest.skip("outputs/close/wit02_register_v2.json not written yet; "
+                    "run PYTHONPATH=src python scripts/run_wit02_chartG.py")
     return json.loads(REGISTER.read_text(encoding="utf-8"))
 
 
@@ -113,8 +136,11 @@ class TestTheRegisterIsDerivedNotDeclared:
             seps = {p["max_separation"] for p in sets[label]["pairs"]}
             doc = json.loads(path.read_text(encoding="utf-8"))
             key = "pairs" if "pairs" in doc else "records"
-            sep_key = ("separation_decades" if key == "pairs"
-                       else "separation_magnitudes_only")
+            sep_key = next((k for k in _SEPARATION_KEYS if k in doc[key][0]),
+                           None)
+            assert sep_key, (
+                label + ": " + src + " records no separation this module can "
+                "match on, so its coverage cannot be re-derived here")
             matched = [r for r in doc[key] if r[sep_key] in seps]
             assert entry["n_refined"] == len(matched), (
                 label + ": the register says " + str(entry["n_refined"])
@@ -282,3 +308,50 @@ class TestTheNonComplianceIsVisibleOnTheClaimSurface:
 
     def test_this_modules_own_source_is_out_of_scope(self) -> None:
         assert "tests/test_witness_refinement_close.py" not in CLAIM_SURFACE_G7
+
+
+class TestTheRegisterSupersedesRatherThanOverwrites:
+    """Version 1 is evidence, not a draft.
+
+    The gap version 1 records -- chart G at 3 of 13 -- is what authorised the
+    refinement that closed it. Deleting or rewriting it would remove the reason
+    the run happened and leave a register that has always been compliant, which
+    is precisely the shape ``WIT-02`` was enacted against.
+    """
+
+    def test_version_1_is_still_on_disk(self) -> None:
+        assert REGISTER_V1.is_file(), (
+            "outputs/close/wit02_register.json is gone. It is the record of "
+            "the coverage at enactment and the reason the chart-G refinement "
+            "was authorised; the superseding register does not replace it")
+
+    def test_version_1_still_records_the_gap_it_recorded(self) -> None:
+        v1 = json.loads(REGISTER_V1.read_text(encoding="utf-8"))
+        g = v1["sets"]["chart_G_d4"]
+        assert (g["n_refined"], g["n_pairs_offered"]) == (3, 13)
+        assert g["compliant"] is False
+
+    def test_the_new_register_names_what_it_supersedes(self, register) -> None:
+        assert register.get("supersedes", {}).get("register") == (
+            "outputs/close/wit02_register.json")
+
+    def test_the_untouched_sets_are_unchanged(self, register) -> None:
+        """The control that makes the moved row a measurement.
+
+        Version 2 is built by a second implementation of the same match. The two
+        sets the refinement did not touch must come out identical to version
+        1's; if they do not, the difference in chart G's row could be a
+        difference between two builders rather than a difference in coverage.
+        """
+        v1 = json.loads(REGISTER_V1.read_text(encoding="utf-8"))
+        for label in ("chart_L_d16", "chart_J_d16"):
+            for field in ("n_refined", "n_surviving", "coverage", "compliant",
+                          "refinement_artefact", "n_pairs_offered"):
+                assert register["sets"][label][field] == v1["sets"][label][field], (
+                    label + " field " + field + " moved between register "
+                    "versions, and the refinement did not touch that set")
+
+    def test_chart_L_is_still_the_uncovered_one(self, register) -> None:
+        """`WITNESS-04` is narrowed to one set, not closed."""
+        entry = register["sets"]["chart_L_d16"]
+        assert entry["n_refined"] == 0 and entry["compliant"] is False

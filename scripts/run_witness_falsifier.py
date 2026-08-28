@@ -80,6 +80,15 @@ def main() -> int:
     ap.add_argument("--study", default="outputs/global_identifiability_g6/global_identifiability.json")
     ap.add_argument("--out", default="outputs/witness_falsifier_g6")
     ap.add_argument("--grids", type=int, nargs="+", default=[301, 601, 1201])
+    # DOC-08. This used to be a bare ``pairs[:3]`` in the loop below: the run
+    # tested three of thirteen pairs and reported "all tested pairs survive",
+    # which is true and reads as its opposite. The cap is now an argument, it
+    # defaults to testing every offered pair, and the payload records how many
+    # of how many were tested so the verdict cannot be quoted without them.
+    ap.add_argument("--max-pairs", type=int, default=None,
+                    help="test only the first N pairs. The generation-6 run "
+                         "used 3 and its artefact records that; the default "
+                         "here is every offered pair.")
     args = ap.parse_args()
 
     study = json.loads(Path(args.study).read_text(encoding="utf-8"))
@@ -99,19 +108,24 @@ def main() -> int:
             print("no pairs to test"); return 1
         pairs, label = [closest], "closest-far-pair (no witness was found)"
 
+    n_offered = len(pairs)
+    tested = pairs if args.max_pairs is None else pairs[:args.max_pairs]
+
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     man = RunManifest.create(
         "witness_falsifier",
         config={"grids": args.grids, "floor": floor, "source_study": args.study,
-                "n_pairs": len(pairs), "label": label},
+                "n_pairs": n_offered, "n_pairs_tested": len(tested),
+                "max_pairs": args.max_pairs, "label": label},
         seed=cfg.seed,
         notes="Section 4.6 falsifier: does the pair survive grid refinement and a "
               "tighter tolerance, or was it a solver artefact?",
     )
 
-    print(f"testing {len(pairs)} {label} pair(s) against floor {floor:.3e}\n")
+    print(f"testing {len(tested)} of {n_offered} {label} pair(s) against "
+          f"floor {floor:.3e}\n")
     records = []
-    for k, pair in enumerate(pairs[:3]):
+    for k, pair in enumerate(tested):
         a = np.asarray(pair["profile_a_log10"], dtype=float)
         b = np.asarray(pair["profile_b_log10"], dtype=float)
         print(f"--- pair {k}: separation {pair['separation_decades']:.3f} decades, "
@@ -136,10 +150,21 @@ def main() -> int:
                         "refinements": rows, "survives_refinement": survived})
         print(f"      -> {'SURVIVES: consistent with a physical degeneracy' if survived else 'SEPARATES: was a solver artefact'}\n")
 
-    verdict = ("all tested pairs survive grid refinement and a tighter tolerance"
-               if records and all(r["survives_refinement"] for r in records)
-               else "at least one pair separated under refinement")
+    # DOC-08: the verdict carries its denominator. The generation-6 wording,
+    # "all tested pairs survive grid refinement and a tighter tolerance", was
+    # true over three of thirteen and read as a statement about thirteen.
+    n_survive = sum(1 for r in records if r["survives_refinement"])
+    verdict = (
+        f"{len(records)} of {n_offered} pairs tested; "
+        + (f"all {n_survive} survive grid refinement and a tighter tolerance"
+           if records and n_survive == len(records)
+           else f"{n_survive} survive and {len(records) - n_survive} separated "
+                f"under refinement")
+        + (f"; the remaining {n_offered - len(records)} were not tested"
+           if len(records) < n_offered else ""))
     payload = {"label": label, "floor": floor, "grids": args.grids,
+               "n_pairs_offered": n_offered, "n_pairs_tested": len(records),
+               "n_surviving": n_survive,
                "pairs": records, "verdict": verdict}
     man.add_result("falsifier", payload)
     (out / "witness_falsifier.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")

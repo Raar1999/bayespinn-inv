@@ -11,6 +11,16 @@ one free check, the corrections of §1 recorded as ratified, `WIT-02` enacted as
 and §6's spine as the measurements now support it. `R-3` reserves `papers/**`,
 so the spine here is the spine — not an edit to the draft.
 
+**Amended once, on 2026-08-28.** The operator ruling of that date authorised one
+bounded refinement — chart G's ten unrefined witness pairs, the barriers
+recounted over what survives, the register updated, chart L excluded by name —
+because `WIT-02` had opened a coverage gap under the ridge, the one claim §3
+below declares safe. It ran and the ridge stands, strengthened.
+`docs/CLOSE_ADDENDUM.md` is the measurement; §3, §4, §5 and §6 here carry its
+consequence, and every number this document states that the refinement moved is
+marked where it appears. The same ruling enacted `DOC-08`, under which the
+denominators below were added.
+
 **Measurement conditions, once, for every number below.** Nothing was solved for
 this document. Every number already existed in `outputs/g9/` and `outputs/g10/`
 at machinery commit `e05d463`, and the arithmetic that re-reads them is
@@ -201,15 +211,26 @@ violated:
 
 | global witness set | witness pairs | refined under `WIT-02` | what rests on it |
 |---|---|---|---|
-| **chart G**, `d = 4` | 13 witness pairs | **3 of 13** (23.1%) — generation 6's battery; all 3 survive | the ridge result |
+| **chart G**, `d = 4` | 13 witness pairs | **13 of 13** — generation 6's battery on 3, the close addendum on all 13; **12 survive**, 1 separates | the ridge result |
 | **chart L**, `d = 16` | 37 witness pairs | **0 of 37** (0.0%) — no refinement of this set has ever been run | the chart-L basin search statement, and the dimension reading |
 | **chart J**, `d = 16` | 13 witness pairs | **13 of 13** — `N = 301/601/1201`, `tol_carrier = 1e-12`; 7 survive | the junction degeneracy, the chart-J basin search statement |
 
-The register is **measured, not asserted**: `outputs/close/wit02_register.json`
-matches each refinement record to its witness pair by exact equality of the
-separation in decades against `WIT-01`'s `max_separation` for the same set, so
-"three of the thirteen" is a coverage figure and not a recollection. Coverage is
-0.231, 0.000 and 1.000; **one set of three is compliant**.
+**Chart G's row was closed after this document was first written.** The operator
+ruling of 2026-08-28 §2 authorised one bounded refinement — chart G's remaining
+ten pairs, the barriers recounted over what survives, the register updated, and
+nothing else. It ran: 12 of 13 pairs survive, one separates, and the ridge
+stands with its margin moving from **+3.9%** above the floor barrier on 3 of 13
+to **−19.2%** below it on 13 of 13. `docs/CLOSE_ADDENDUM.md` carries the
+measurement and `outputs/close/wit02_register_v2.json` the register;
+`outputs/close/wit02_register.json` is left as the record of the coverage at
+enactment. **Chart L is unchanged and still uncovered**, and it is the set the
+dimension reading rests on.
+
+The register is **measured, not asserted**: it matches each refinement record to
+its witness pair by exact equality of the separation in decades against
+`WIT-01`'s `max_separation` for the same set, so a coverage figure is a fraction
+and not a recollection. Coverage is 1.000, 0.000 and 1.000; **two sets of three
+are compliant**.
 
 `tests/test_witness_refinement_close.py` guards the register: it re-derives the
 coverage from the artefacts, fails if a set silently becomes compliant without a
@@ -236,6 +257,15 @@ The closing ruling §3 follows that direction all the way, and it is asymmetric:
 log-units against a floor barrier of 8.0, with 6 of 13 witness pairs at or below
 it. If that is an upper bound, the true barrier is *at most* at the floor.
 Nothing to weaken.
+
+**And it strengthened again when the set was refined in full.** That paragraph
+was written over 3 of 13 refined pairs at a 3.9% margin, which is what the
+2026-08-28 ruling identified as the exposed claim — exposed on *coverage*, not
+on the bound direction, which was and is right. Over the 12 of 13 pairs that
+survive refinement the median is **6.46 log-units, 0.81 floor units**, and 6 of
+12 sit at or below the floor barrier: a median 19.2% *below* the floor barrier
+rather than 3.9% above it. The bound direction and the refinement push the same
+way. `docs/CLOSE_ADDENDUM.md`.
 
 **Both basin results are weakened to search statements.** Globally, in chart J
 at `d = 16` (median 468 log-units, 59× the floor, 0 of 13 witness pairs within
@@ -280,29 +310,43 @@ shape* and no longer as a claim about connectivity.
    twelve operating points, with junction, dimension and interpolant permuting
    freely between them.
 
-2. **Bias-window *width* sets the rank; spacing moves the spectrum and not the
-   rank.** Over 16 bias points at 2% noise the identifiable count runs 1 → 4 as
-   the window widens from 0.10 V to 0.75 V about a fixed 0.525 V centre, while
-   running linear-to-geometric spacing over a fixed 0.15–0.90 V window moves the
-   spectrum by 19.8% and the rank not at all (`rank(observation set)`,
-   `outputs/g9/rank_obs.json`). The climb is **not** the leading singular
-   direction broadening — `v₁`'s spatial extent moves under 2.5% on a
-   0.0625–1.000 scale and recedes from the junction where it moves — it is the
-   **spectrum flattening**: `σ₁` nearly fixed and falling, `σ₂…σ₄` rising by
-   ×21–×535 in the normalised spectrum, 95.6%–97.9% of the motion in shape.
+2. **Bias-window *width* sets the rank, and the climb is the spectrum
+   flattening toward its leading direction; spacing moves the spectrum and not
+   the rank.** Over 16 bias points at 2% noise the identifiable count runs 1 → 4
+   as the window widens from 0.10 V to 0.75 V about a fixed 0.525 V centre. The
+   climb is **not** the leading singular direction broadening — `v₁`'s spatial
+   extent moves under 2.5% on a 0.0625–1.000 scale and recedes from the junction
+   where it moves at all — it is the **spectrum flattening**: `σ₁` nearly fixed
+   and *falling*, by ×1.195 and ×1.148 at the two devices, while `σ₂…σ₄` rise by
+   ×21–×535 in the normalised spectrum, with 95.6%–97.9% of the motion in the
+   shape term at every device and every index. Along the spacing axis the same
+   log-decay slope moves **2.1% and 2.8%** against width's 56% and 58%, the
+   spectrum moves 19.8%, and the rank does not move at all
+   (`rank(observation set)`, `outputs/g9/rank_obs.json`).
 
-3. **The degeneracy is real and survives refinement in every chart tested** —
-   8.18× and 14.75× in doping, 694 nm against 271 nm in junction depth falling
-   1.7% under `N = 301 → 1201`. Survival is predicted by **headroom against the
-   floor**, not by geometry.
+3. **The degeneracy is real and survives refinement in the two of three
+   committed witness sets that have been through the battery** — globally, in
+   **chart G** at `d=4`, **13 of 13** pairs refined and **12 surviving**; in
+   **chart J** at `d=16`, **13 of 13** refined and **7 surviving**; **chart L**
+   at `d=16` is at **0 of 37** and has never been tested. 8.18× and 14.75× in
+   doping, 694 nm against 271 nm in junction depth falling 1.7% under
+   `N = 301 → 1201`. Survival is predicted by **headroom against the floor**,
+   not by geometry, in both refined sets — and the *location* of the split
+   differs between them, 93.65% of the floor in chart J against 98.9% in
+   chart G, which is why the ordering is reported and no margin band was
+   adopted (`docs/CLOSE_ADDENDUM.md`).
 
 4. **Its geometry is dimension-dependent, not chart-dependent**: pairs sit at the
-   instrument floor at `d=4` and do not at `d=16` in either chart tested. What
-   the chart moves at matched `d` is the **depth** — 13× in witness-to-null ratio
-   between two charts with matched path lengths. **The `d=16` results are search
-   statements against an upper-bound barrier, not separation proofs**: no
-   connecting path below the floor was found along the straight line, and the
-   minimum-energy path was not computed.
+   instrument floor at `d=4` and do not at `d=16` in either chart tested. The
+   ridge is now measured on a fully refined set — globally, in **chart G** at
+   `d=4`, **13 of 13** refined, **12 surviving**, 6 of 12 at or below the floor
+   barrier, median **0.81 floor units**; **chart J** at `d=16` is 13 of 13
+   refined at 59 floor units and **chart L** at `d=16` is **0 of 37** refined at
+   212. What the chart moves at matched `d` is the **depth** — 13× in
+   witness-to-null ratio between two charts with matched path lengths. **The
+   `d=16` results are search statements against an upper-bound barrier, not
+   separation proofs**: no connecting path below the floor was found along the
+   straight line, and the minimum-energy path was not computed.
 
 5. **Local analysis is structurally incapable of detecting any of (3) or (4).**
 
@@ -310,6 +354,18 @@ shape* and no longer as a claim about connectivity.
    convergence sweep and has never been validated as a limit (`PH-15`). The
    largest bias any artefact under `outputs/` was ever evaluated at is 0.9 V,
    across 74 JSON files read. *"Unvalidated above"* is not *"fails above"*.
+
+### 5.1 One line for the methods
+
+**Inherited obstructions were being carried as claims and never tested.**
+`DOC-03a` is the instance that made it visible: generation 10 recorded that the
+README's test badge could not be reworded without breaking its own guard's
+regex, and at close the obstruction turned out to be false — the regex was
+changed in one line and the badge now names what it counts. Nothing had ever
+tried it. An obstruction inherited from an earlier generation is a claim about
+the tree, it is exactly as checkable as any other claim about the tree, and this
+loop found that they were not being checked. One sentence in the methods, where
+the reproduction protocol is described.
 
 ---
 
@@ -321,10 +377,12 @@ shape* and no longer as a claim about connectivity.
 * **The barrier is an upper bound and the minimum-energy path was not
   computed.** Both `d=16` results are searches that found nothing, not
   separations. `PATH-01` open.
-* **Two of the three committed witness sets do not satisfy `WIT-02`** — chart G
-  at 3 of 13 and chart L at 0 of 37, the latter being the set the dimension
-  reading rests on. In the one set that was refined in full, 6 of 13 pairs
-  separated. `WIT-02` §3, `WITNESS-04` open and load-bearing.
+* **One of the three committed witness sets does not satisfy `WIT-02`** — chart
+  L at **0 of 37**, and it is the set the dimension reading rests on. Chart G was
+  closed to 13 of 13 by the 2026-08-28 addendum (12 surviving) and chart J was
+  already at 13 of 13 (7 surviving), so both refined sets lost members: 1 of 13
+  and 6 of 13. Whether chart L would lose members is unknown and unmeasured.
+  `WIT-02` §3, `WITNESS-04` open, load-bearing, and now narrowed to one set.
 * **The upper bias boundary is untested.** Not tested and found sound — never
   tested. `PH-15`.
 * **No claim in this repository has been evidenced on any interpreter but
@@ -340,7 +398,9 @@ shape* and no longer as a claim about connectivity.
 
 ## 7. What closes, and what does not
 
-**Closed.** The technical work. Ten generations. No generation 11.
+**Closed.** The technical work. Ten generations. No generation 11. One bounded
+refinement was authorised afterwards and has run — `docs/CLOSE_ADDENDUM.md`,
+chart G only — and with it the technical work ends for good.
 
 **Not closed, and not the loop's to close.** `OT-1` (push and run CI, reversion
 condition unchanged), `OT-2` (apply `papers/CORRIGENDA_g6.md`; five cycles
@@ -348,6 +408,8 @@ unapplied, `papers/draft.md` line 255 unchanged), `OT-3` (preservation: two
 copies on one disk is one failure from losing ten generations). `R-3` reserves
 the writing.
 
-The open findings are carried forward as they stand in `LOOP_STATE_v8.json`.
-None of them is downgraded by this document, and `WIT-02` and the search-form
-rewrite each add one that was previously invisible.
+The open findings are carried forward as they stand in `LOOP_STATE_v9.json`.
+None of them is downgraded by this document. `WIT-02` and the search-form
+rewrite each added one that was previously invisible; the addendum closes
+`WIT-02` on one of the two sets that carried it and leaves `WITNESS-04` open on
+chart L, where the coverage is still 0 of 37.

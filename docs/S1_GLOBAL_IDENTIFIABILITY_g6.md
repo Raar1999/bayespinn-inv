@@ -31,13 +31,18 @@ decades yet whose oracle I–V curves differ by **less than the 2% distinguishab
 floor**. The most extreme differs by **8.18× in doping at one anchor** and produces
 an I–V difference of **1.23%** — 61% of the floor.
 
-All three pairs put through the falsifier **survived** 4× grid refinement and a
-tightened solver tolerance, with all 16 bias points certified at every level. They
-are consistent with physical degeneracy, not solver artefact.
+At this generation, **3 of the 13** pairs were put through the falsifier and all
+3 **survived** 4× grid refinement and a tightened solver tolerance, with all 16
+bias points certified at every level. The other 10 were not tested here, and
+that gap stood until `WIT-02` was enacted at close and discharged for this set
+by `docs/CLOSE_ADDENDUM.md`: **13 of 13** refined, **12 surviving**, one pair
+separating at `N = 1201` and withdrawn. Twelve of the thirteen are consistent
+with physical degeneracy rather than solver artefact; one was a solver artefact.
 
 This upgrades the project's central scientific claim. Before: *identifiability is
 local, and global non-identifiability is unmeasured.* Now: *global
-non-identifiability is measured, with exhibited witnesses that survive refinement.*
+non-identifiability is measured in **chart G** at **d=4**, with 12 of 13
+exhibited witnesses surviving refinement.*
 
 ---
 

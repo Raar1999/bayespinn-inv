@@ -1371,3 +1371,66 @@ slips.
 Also: commit `1a090f0` carried a message stating "420 passed" when the suite was
 437 passed / 1 failed. `R-4` forbids amending, so the error stands in history and
 is corrected in `d3b7693`.
+
+---
+
+## 12. Close addendum (2026-08-28) — the one bounded refinement
+
+Authorised by the operator ruling of 2026-08-28 §2 after the loop had closed:
+chart G's ten untested witness pairs, the barriers recounted over what survives,
+the register updated, chart L excluded by name. `docs/CLOSE_ADDENDUM.md`.
+
+### WITNESS-04 - narrowed to chart L, not resolved
+| **Severity** | MEDIUM | **Status** | OPEN, LOAD-BEARING, NARROWED |
+
+`WIT-02` was enacted at close over a corpus in which two of the three committed
+witness sets had never been fully refined. Chart G is now 13 of 13 refined with
+12 surviving, so the finding no longer covers it. **Chart L remains at 0 of 37
+and has never been through the battery**, and it is the set the dimension
+reading rests on. Both sets that have been refined lost members - 1 of 13 in
+chart G and 6 of 13 in chart J - so the base rate of loss is not zero and what
+chart L would lose is unknown.
+
+### DOC-08 - a quantifier or metric without its denominator or scope
+| **Severity** | LOW | **Status** | ENACTED AND GUARDED |
+
+Third instance of one family, after the bare `ruff_exit: 0` and the wrongly
+scoped mypy count: a statement that is true as written and reads as its
+opposite. The flagship was *"all tested pairs survive 4x grid refinement"* over
+a set in which 3 of 13 pairs had been tested. The sweep found three live
+instances, every one of them in a spine item or a headline, which is where the
+family concentrates - the sentence that compresses a result is the sentence that
+drops the denominator. Rule and guard: `docs/RULES_ENACTED.md`,
+`tests/test_quantifier_scope_doc08.py`.
+
+### HIST-01 - the recorded champion commits are not in this clone's history
+| **Severity** | MEDIUM | **Status** | OPEN |
+
+Every `LOOP_STATE` file from generation 8 onward records `champion_commit` and
+`machinery_commit` hashes that `git cat-file` cannot resolve in this working
+tree, and `champion_per_generation` names none that it can. Eight guards fail
+because of it, and they failed **before** any change in this session - measured
+by stashing the working tree and running the suite against the tree as
+committed: 894 collected, 878 passed, 8 failed, 8 skipped.
+
+The baselines those files carry record `failed: 0`, which was true where they
+were taken and is not true here. Nothing in the tree can repair it: the objects
+are absent, `R-4` forbids rewriting the commits that would have contained them,
+and inventing hashes that resolve would be worse than the gap. What is done
+instead is to state it - `LOOP_STATE_v9.json`'s pytest baseline carries the
+failure count with its cause, and `tests/test_loop_state_addendum.py` fails if a
+future state file claims zero failures without saying which are pre-existing.
+
+Adjacent to `REPRO-01` and distinct from it: `REPRO-01` lost a *working tree*,
+this loses the *object graph* the state files point into.
+
+### The recount did not weaken anything, and that is checkable
+| **Severity** | (process) | **Status** | RECORDED |
+
+The barrier criterion and the ridge/basin classifier were imported with their
+hashes checked against `outputs/g9/preregister.json` and
+`outputs/g10/preregister.json`, and the run refuses to start on a mismatch. All
+thirteen depths reproduce generation 10's bit for bit before the subset is
+taken, so the recount is a recount rather than a re-measurement. The outcome
+table was hashed to disk before the first solve, keyed on the classifier's own
+output, so no reading was available that the classifier does not produce.
