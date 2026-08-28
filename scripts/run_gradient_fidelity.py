@@ -214,7 +214,7 @@ def main() -> int:
         print("  " + line)
 
     (out / "gradient_fidelity.json").write_text(
-        json.dumps(results, indent=2, default=float), encoding="utf-8")
+        json.dumps(results, indent=2, default=float), encoding="utf-8", newline="\n")
     man.add_result("verdict", results["verdict"])
     man.add_artifact("json", out / "gradient_fidelity.json")
     _write_markdown(out, results, budgets)
@@ -314,7 +314,7 @@ def _write_markdown(out: Path, r: dict, budgets: List[int]) -> None:
                      + (f"{cos:+.3f}" if np.isfinite(cos) else "-")
                      + f" | {row['norm_ratio']:.3g} |")
         L.append("")
-    (out / "gradient_fidelity.md").write_text("\n".join(L), encoding="utf-8")
+    (out / "gradient_fidelity.md").write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

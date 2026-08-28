@@ -349,7 +349,7 @@ class TestNoSecondPathCanBeIntroduced:
             "    x_in = np.linspace(0.0, 1.0, doping_si.shape[0])\n"
             "    x_grid = np.linspace(0.0, 1.0, grid_N)\n"
             "    return np.interp(x_grid, x_in, doping_si)\n",
-            encoding="utf-8")
+            encoding="utf-8", newline="\n")
         assert scan([planted]) == {str(planted).replace("\\", "/"): 1}
 
     def test_the_guard_does_not_fire_on_prose_describing_it(self, tmp_path):
@@ -371,7 +371,7 @@ class TestNoSecondPathCanBeIntroduced:
             '"""\n'
             'FORBIDDEN = "np.interp(x_grid, x_in, doping_si)"\n'
             'ALSO_FORBIDDEN = "scipy.interpolate.interp1d(x, y)"\n',
-            encoding="utf-8")
+            encoding="utf-8", newline="\n")
         assert scan([prose]) == {}
         assert "np.interp" in prose.read_text(encoding="utf-8")
 

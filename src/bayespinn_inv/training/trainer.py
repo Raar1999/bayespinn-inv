@@ -365,7 +365,7 @@ class PINNTrainer:
 
         if self.out_dir is not None:
             self.save_checkpoint(self.out_dir / "ckpt_final.pt")
-            with open(self.out_dir / "history.json", "w", encoding="utf-8") as f:
+            with open(self.out_dir / "history.json", "w", encoding="utf-8", newline="\n") as f:
                 json.dump(self.history, f, indent=2, default=float)
         return self.history
 

@@ -299,9 +299,9 @@ def main():
         tex_parts.append(_defect_block(def_));     tex_parts.append("")
         md_parts.append(_defect_md(def_));         md_parts.append("")
 
-    with open(out_tex, "w", encoding="utf-8") as f:
+    with open(out_tex, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(tex_parts))
-    with open(out_md, "w", encoding="utf-8") as f:
+    with open(out_md, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(md_parts))
     print(f"  -> {out_tex}")
     print(f"  -> {out_md}")

@@ -232,7 +232,7 @@ def main() -> int:
         print("  " + line)
 
     (out / "experiment_design.json").write_text(
-        json.dumps(results, indent=2, default=float), encoding="utf-8")
+        json.dumps(results, indent=2, default=float), encoding="utf-8", newline="\n")
     man.add_result("verdict", verdict)
     man.add_artifact("json", out / "experiment_design.json")
     _write_markdown(out, results, budgets)
@@ -309,7 +309,7 @@ def _write_markdown(out: Path, r: dict, budgets: List[int]) -> None:
         L.append(f"| `{dname}` | {d['jacobian_agreement_surrogate_vs_sg']:+.3f} | "
                  f"{d['n_trustworthy_biases']} |")
     L.append("")
-    (out / "experiment_design.md").write_text("\n".join(L), encoding="utf-8")
+    (out / "experiment_design.md").write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

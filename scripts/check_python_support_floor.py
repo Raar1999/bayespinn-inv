@@ -280,7 +280,7 @@ def main() -> int:
     print(f"  obstruction found           : {report['obstruction_found']}")
     print(f"  {report['verdict_meaning']}")
     if args.json:
-        Path(args.json).write_text(json.dumps(report, indent=2), encoding="utf-8")
+        Path(args.json).write_text(json.dumps(report, indent=2), encoding="utf-8", newline="\n")
         print(f"  wrote {args.json}")
     return 1 if report["obstruction_found"] else 0
 

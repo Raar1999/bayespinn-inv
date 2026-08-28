@@ -143,7 +143,7 @@ def main():
     print(f"\nC_ox = {C_ox*1e3:.3f} mF/m^2")
     print(f"max C/C_ox = {np.max(C_hf)/C_ox:.3f} (accumulation should approach 1)")
 
-    with open(out_dir / "cv_data.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "cv_data.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(results, f, indent=2)
 
     # ---------------- Figures ----------------

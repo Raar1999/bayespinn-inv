@@ -248,7 +248,7 @@ def main():
             writer.writeheader()
             writer.writerows(rows)
         print(f"  summary -> {out_dir / 'summary.csv'}")
-    with open(out_dir / "raw_results.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "raw_results.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(raw, f, indent=2, default=str)
 
     # Aggregate by (parameterization, noise)
@@ -270,7 +270,7 @@ def main():
             "coverage_90_mean":  float(np.mean(cov)),
             "coverage_90_median": float(np.median(cov)),
         }
-    with open(out_dir / "aggregate.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "aggregate.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(summary, f, indent=2, default=str)
 
     # Headline print

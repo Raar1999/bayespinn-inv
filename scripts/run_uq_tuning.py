@@ -195,7 +195,7 @@ def main() -> int:
     }
 
     (out / "uq_tuning.json").write_text(json.dumps(results, indent=2, default=float),
-                                        encoding="utf-8")
+                                        encoding="utf-8", newline="\n")
     man.add_result("final", final)
     man.add_artifact("uq_tuning_json", out / "uq_tuning.json")
     _write_markdown(out, results)
@@ -238,7 +238,7 @@ def _write_markdown(out: Path, r: dict) -> None:
                  f"{o['error_inflation_vs_interp']:.1f}x | {c['train_seconds']:.1f} |")
     L += ["", f"Selected: MC-dropout `{r['selection']['mc_dropout_best']}`, "
               f"SWAG `{r['selection']['swag_best']}`.", ""]
-    (out / "uq_tuning.md").write_text("\n".join(L), encoding="utf-8")
+    (out / "uq_tuning.md").write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

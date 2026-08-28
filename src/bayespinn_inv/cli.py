@@ -76,7 +76,7 @@ def cmd_iv(args: argparse.Namespace) -> int:
               f" {st.current_is_trustworthy()!s:>6} {st.converged!s:>6}")
 
     if args.json:
-        with open(args.json, "w", encoding="utf-8") as fh:
+        with open(args.json, "w", encoding="utf-8", newline="\n") as fh:
             json.dump(rows, fh, indent=2)
         print(f"\nwrote {args.json}")
     return 0

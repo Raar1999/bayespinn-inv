@@ -715,3 +715,70 @@ exists on every skip in this repository and none of them was enough — the two
 went unnoticed for a generation. The reason was never the missing part. What was
 missing is a place where the *set* of accepted skips is written down, so that a
 new one has to be added deliberately.
+
+---
+
+## `EOL-02` — every text-mode write states its line ending
+
+**Enacted** operator ruling of 2026-08-28 §5.
+
+> Every text-mode write states its line ending explicitly — `open(p, "w",
+> newline="\n")`, or `newline=""` where a writer manages its own.
+
+**The defect that forced it.** The line-ending category had bitten three times,
+and the operator's diagnosis is the part worth keeping: **`.gitattributes` binds
+git, not the interpreter.** `tests/test_line_endings_g6.py` proves a checkout
+returns the committed bytes, and that guard is sound and stays. It says nothing
+about the bytes this project *writes*. Both recent incidents were on that side —
+Python's text mode translates `"\n"` to `os.linesep` on write, so on Windows a
+bare `open(p, "w")` or `Path.write_text(s)` emits CRLF while the author reads the
+source and sees LF. The artefact then differs by platform, and a hash over it
+differs with it.
+
+Nothing in `.gitattributes` can reach that, because the file never goes through
+git on the way out. Only the call site can.
+
+**The rule is explicitness, not LF.** `newline=""` is what `csv` requires, since
+its writers emit CRLF themselves and would double it under any translation. Two
+call sites in this tree — `scripts/run_benchmark_sweep.py` and
+`scripts/run_inverse_sweep.py` — already relied on exactly that, predate the rule
+and pass the guard unchanged. A test asserts they still open that way, so a later
+mechanical rewrite cannot quietly turn their `newline=""` into a line feed.
+
+**Enforced by** `tests/test_eol02_line_endings_g13.py`, over the AST per `SW-20`,
+with both controls: a planted module whose code performs both forbidden writes is
+caught, and a module whose *text* contains every construct the scan looks for and
+whose *code* contains none of them is not. Its own source is excluded from scope
+and the exclusion is asserted rather than trusted — and, separately, the scan is
+run over this module's own AST to show that the exclusion is not what is saving
+it.
+
+**What the enactment changed.** 68 call sites across 41 files in `src/`,
+`scripts/` and `tests/`. All 68 were text-mode writes with no explicit newline;
+none was a csv writer.
+
+**A trap found while enacting it, and worth recording.** The first mechanical
+pass added the keyword correctly and then wrote every file back through Python's
+text mode, turning 25 CRLF files into LF — 9,832 lines changed to fix 68.
+`.gitattributes` is `* -text`, so the CRLF/LF mixture in the index is the
+committed truth, and `test_line_endings_g6.py` records it deliberately as *what
+was measured*. The enactment was redone over bytes, preserving each file's
+existing endings, asserting per file that its CRLF and LF counts are unchanged.
+**A rule about line endings is exactly the rule most likely to damage line
+endings while being applied.** What caught it was reading the diffstat, not the
+guard, which went green either way.
+
+**The same trap, twice more, in this document.** Writing this section through a
+shell heredoc collapsed four backslash escapes into real line breaks, and one of
+them put a literal CR into a file that is LF in the index — `git ls-files --eol`
+reported `w/mixed` and `test_line_endings_g6.py` failed on the very document
+describing the rule. It is the `OPS-03` shape again: the artefact that describes
+a line-ending rule is unusually good at violating it.
+
+**A measured limitation.** The scan reaches `open` (including `Path.open`) and
+`Path.write_text` — the constructs through which this tree opens a text stream
+for writing. Writers that own their handle end to end and never expose a mode —
+`DataFrame.to_csv`, `numpy.savetxt`, `Figure.savefig` — are out of scope, because
+the rule reaches call sites and those are not call sites where a line ending can
+be stated. A `mode=` computed at runtime rather than written as a literal is also
+invisible to it; there is none in the tree today.

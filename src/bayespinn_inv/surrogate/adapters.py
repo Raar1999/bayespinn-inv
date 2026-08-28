@@ -202,7 +202,7 @@ def save_surrogate_ensemble(
         },
     }
     mpath = out_dir / "manifest.json"
-    mpath.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    mpath.write_text(json.dumps(manifest, indent=2), encoding="utf-8", newline="\n")
     return mpath
 
 

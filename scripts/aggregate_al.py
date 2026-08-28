@@ -112,7 +112,7 @@ def main():
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as f:
+    with open(out_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(aggregated, f, indent=2, default=str)
     print(f"Aggregated {sum(len(v) for v in by_strategy.values())} runs "
           f"across {len(by_strategy)} strategies -> {out_path}")

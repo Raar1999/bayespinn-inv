@@ -37,7 +37,7 @@ def _check(tmp_path: Path) -> dict:
 
 def _write(tmp_path: Path, name: str, body: str) -> Path:
     p = tmp_path / name
-    p.write_text(body, encoding="utf-8")
+    p.write_text(body, encoding="utf-8", newline="\n")
     return p
 
 

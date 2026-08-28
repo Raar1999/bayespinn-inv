@@ -238,7 +238,7 @@ def main() -> int:
     print(f"  rank saturates as P grows: {verdict['rank_saturates_in_P']}")
 
     (out / "identifiability_robustness.json").write_text(
-        json.dumps(results, indent=2, default=float), encoding="utf-8")
+        json.dumps(results, indent=2, default=float), encoding="utf-8", newline="\n")
     man.add_result("verdict", verdict)
     man.add_artifact("robustness_json", out / "identifiability_robustness.json")
     _write_markdown(out, results)
@@ -305,7 +305,7 @@ def _write_markdown(out: Path, r: dict) -> None:
                  f"{row['rank_p05']:.0f} | {row['rank_p95']:.0f} | "
                  f"{row['rank_min']} | {row['rank_max']} | `{row['histogram']}` |")
     L.append("")
-    (out / "identifiability_robustness.md").write_text("\n".join(L), encoding="utf-8")
+    (out / "identifiability_robustness.md").write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

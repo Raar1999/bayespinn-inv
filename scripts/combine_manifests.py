@@ -78,7 +78,7 @@ def main():
         "checkpoints": combined_ckpts,
         "combined_from": [str(Path(p).resolve()) for p in args.manifests],
     }
-    with open(out_path, "w", encoding="utf-8") as f:
+    with open(out_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(combined, f, indent=2, default=str)
     print(f"Combined {len(manifests)} manifests "
           f"({len(combined_seeds)} members) -> {out_path}")

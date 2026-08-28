@@ -205,9 +205,9 @@ def main():
                 if target["true_doping_si"] is not None else np.array([]),
               true_x_si=target["true_x_si"]
                 if target["true_x_si"] is not None else np.array([]))
-    with open(out_dir / "history.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "history.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(result.history, f, indent=2)
-    with open(out_dir / "config_used.yaml", "w", encoding="utf-8") as f:
+    with open(out_dir / "config_used.yaml", "w", encoding="utf-8", newline="\n") as f:
         yaml.safe_dump(cfg, f)
     print(f"Final loss: {result.final_loss:.3e}")
     print(f"Outputs -> {out_dir}/")

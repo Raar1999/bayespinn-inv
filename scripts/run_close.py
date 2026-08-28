@@ -736,12 +736,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     doc = build()
     path = ROOT / args.out
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     reg = wit02_register()
     reg_path = ROOT / args.register
     reg_path.parent.mkdir(parents=True, exist_ok=True)
-    reg_path.write_text(json.dumps(reg, indent=2) + "\n", encoding="utf-8")
+    reg_path.write_text(json.dumps(reg, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     bar = "=" * 74
     print(bar)

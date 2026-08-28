@@ -172,7 +172,7 @@ def main():
         "checkpoints":  [str(member_dir / "ckpt_final.pt")],
         "swag_recorder": str(out_dir / "swag_recorder.pt"),
     }
-    with open(out_dir / "manifest.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "manifest.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, indent=2, default=str)
     print(f"\nDone -> {out_dir}")
     print(f"  manifest: {out_dir / 'manifest.json'}")

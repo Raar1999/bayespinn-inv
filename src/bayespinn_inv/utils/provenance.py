@@ -296,5 +296,5 @@ class RunManifest:
         out_dir.mkdir(parents=True, exist_ok=True)
         path = out_dir / "manifest.json"
         path.write_text(json.dumps(self.to_dict(), indent=2, default=str),
-                        encoding="utf-8")
+                        encoding="utf-8", newline="\n")
         return path

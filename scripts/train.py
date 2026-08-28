@@ -122,7 +122,7 @@ def main_from_dict(cfg: dict) -> None:
         "member_seeds": member_seeds,
         "checkpoints": ckpts,
     }
-    with open(out_dir / "manifest.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "manifest.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, indent=2, default=str)
     print(f"\nTraining complete. Manifest: {out_dir / 'manifest.json'}")
 

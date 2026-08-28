@@ -193,7 +193,7 @@ def main() -> int:
           f"max {sc['max']:.2f}   (0 = exact steady state)")
 
     (out / "pinn_vs_surrogate.json").write_text(
-        json.dumps(results, indent=2, default=float), encoding="utf-8")
+        json.dumps(results, indent=2, default=float), encoding="utf-8", newline="\n")
     man.add_result("head_to_head", summary)
     man.add_artifact("json", out / "pinn_vs_surrogate.json")
     man.write(out)

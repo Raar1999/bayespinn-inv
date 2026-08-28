@@ -904,7 +904,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         target = (ROOT / REGISTER_V2) if name == "register" else (
             out / f"{name}.json")
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(json.dumps(doc, indent=2), encoding="utf-8")
+        target.write_text(json.dumps(doc, indent=2), encoding="utf-8", newline="\n")
         man.add_result(name, doc)
         print(f"  -> {target.relative_to(ROOT).as_posix()}")
 

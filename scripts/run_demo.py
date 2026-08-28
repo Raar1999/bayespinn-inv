@@ -230,7 +230,7 @@ for name, dop in test_doping_list:
     print(f"  time_per_solve: SG={res.time_per_solve_sg*1e3:.1f} ms, "
           f"PINN={res.time_per_solve_pinn*1e3:.1f} ms")
 
-with open(OUT_DIR / "benchmark.json", "w", encoding="utf-8") as f:
+with open(OUT_DIR / "benchmark.json", "w", encoding="utf-8", newline="\n") as f:
     json.dump(benchmark_results, f, indent=2)
 
 # Device-state plot for one test bias
@@ -331,7 +331,7 @@ np.savez(OUT_DIR / "inverse_result.npz",
           target_currents=result.target_currents_si.numpy(),
           predicted_currents=result.predicted_currents_si.numpy(),
           C_true=np.interp(inv_x.numpy(), true_x_si, true_doping_si.numpy()))
-with open(OUT_DIR / "inverse_history.json", "w", encoding="utf-8") as f:
+with open(OUT_DIR / "inverse_history.json", "w", encoding="utf-8", newline="\n") as f:
     json.dump(result.history, f, indent=2)
 
 # ---------------------------------------------------------------------------
@@ -396,7 +396,7 @@ fig = plot_active_learning_convergence(
 )
 fig.savefig(FIG_DIR / "05_al_convergence.png")
 print("\nAL convergence plot -> figures/05_al_convergence.png")
-with open(OUT_DIR / "al_results.json", "w", encoding="utf-8") as f:
+with open(OUT_DIR / "al_results.json", "w", encoding="utf-8", newline="\n") as f:
     json.dump(al_logs_serializable, f, indent=2)
 
 # ---------------------------------------------------------------------------
@@ -499,7 +499,7 @@ metrics_summary = {
         "sharpness": report_T.sharpness,
     },
 }
-with open(OUT_DIR / "metrics_summary.json", "w", encoding="utf-8") as f:
+with open(OUT_DIR / "metrics_summary.json", "w", encoding="utf-8", newline="\n") as f:
     json.dump(metrics_summary, f, indent=2)
 
 print()

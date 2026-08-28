@@ -167,7 +167,7 @@ def main() -> int:
                "n_surviving": n_survive,
                "pairs": records, "verdict": verdict}
     man.add_result("falsifier", payload)
-    (out / "witness_falsifier.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    (out / "witness_falsifier.json").write_text(json.dumps(payload, indent=2), encoding="utf-8", newline="\n")
     man.write(out)
     print("VERDICT:", verdict)
     return 0

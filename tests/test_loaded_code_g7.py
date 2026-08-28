@@ -77,9 +77,9 @@ def test_positive_control_planted_shadow_outside_tree(tmp_path):
     """Plant a package outside the tree, import from it, and confirm it fires."""
     shadow = tmp_path / "shadow"
     (shadow / "bayespinn_inv").mkdir(parents=True)
-    (shadow / "bayespinn_inv" / "__init__.py").write_text("", encoding="utf-8")
+    (shadow / "bayespinn_inv" / "__init__.py").write_text("", encoding="utf-8", newline="\n")
     (shadow / "bayespinn_inv" / "planted.py").write_text(
-        "VALUE = 'this did not come from the tracked tree'\n", encoding="utf-8")
+        "VALUE = 'this did not come from the tracked tree'\n", encoding="utf-8", newline="\n")
 
     v = _run_probe(f"""
         sys.path.insert(0, r"{shadow}")
@@ -121,7 +121,7 @@ def test_positive_control_in_tree_untracked_module():
     probe = ROOT / "src" / "bayespinn_inv" / "_g7_untracked_probe.py"
     if probe.exists():
         pytest.skip("probe path already occupied; refusing to overwrite")
-    probe.write_text("VALUE = 'untracked but in-tree'\n", encoding="utf-8")
+    probe.write_text("VALUE = 'untracked but in-tree'\n", encoding="utf-8", newline="\n")
     try:
         tracked = subprocess.run(
             ["git", "ls-files", "--error-unmatch", str(probe)],

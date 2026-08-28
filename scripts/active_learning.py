@@ -121,14 +121,14 @@ def main():
                   measurements=res["measurements"],
                   final_doping=res["final_doping"],
                   true_doping=C_true, true_x=x_true)
-        with open(sdir / "log.json", "w", encoding="utf-8") as f:
+        with open(sdir / "log.json", "w", encoding="utf-8", newline="\n") as f:
             json.dump([asdict(l) for l in res["log"]], f, indent=2)
         all_results[strategy] = [asdict(l) for l in res["log"]]
         print(f"  final relative L2 error: {res['log'][-1].doping_error_relative:.4f}")
 
-    with open(out_dir / "summary.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "summary.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(all_results, f, indent=2)
-    with open(out_dir / "config_used.yaml", "w", encoding="utf-8") as f:
+    with open(out_dir / "config_used.yaml", "w", encoding="utf-8", newline="\n") as f:
         yaml.safe_dump(cfg, f)
     print(f"\nAll strategies complete. Outputs -> {out_dir}/")
 

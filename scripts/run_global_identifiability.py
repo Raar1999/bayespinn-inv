@@ -136,7 +136,7 @@ def main() -> int:
     for key, value in results.items():
         man.add_result(key, value)
     (out / "global_identifiability.json").write_text(
-        json.dumps(results, indent=2), encoding="utf-8")
+        json.dumps(results, indent=2), encoding="utf-8", newline="\n")
     man.write(out)
     print(f"\nwrote {out}/global_identifiability.json and manifest.json")
     return 0

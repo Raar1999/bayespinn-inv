@@ -247,7 +247,7 @@ def main() -> int:
                        v["identifiable_rank_at_2pct"])
 
     path = out / "identifiability.json"
-    path.write_text(json.dumps(report_json, indent=2), encoding="utf-8")
+    path.write_text(json.dumps(report_json, indent=2), encoding="utf-8", newline="\n")
     man.add_artifact("identifiability_json", path)
     man.write(out)
     print()

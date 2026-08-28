@@ -130,7 +130,7 @@ def _tree_with_config(tmp_path: Path, notebook_source: str) -> Path:
     shutil.copyfile(PYPROJECT, tmp_path / "pyproject.toml")
     nb_dir = tmp_path / "notebooks"
     nb_dir.mkdir()
-    (nb_dir / "control.ipynb").write_text(notebook_source, encoding="utf-8")
+    (nb_dir / "control.ipynb").write_text(notebook_source, encoding="utf-8", newline="\n")
     return nb_dir / "control.ipynb"
 
 

@@ -413,7 +413,7 @@ def main() -> int:
     results["ece_floor_T30"] = ece_floor_for_ensemble(T_SAMPLES)
 
     (out / "uq_benchmark.json").write_text(json.dumps(results, indent=2, default=float),
-                                           encoding="utf-8")
+                                           encoding="utf-8", newline="\n")
     man.add_result("uq_benchmark", results["methods"])
     man.add_artifact("uq_benchmark_json", out / "uq_benchmark.json")
     _write_markdown(out, results)
@@ -501,7 +501,7 @@ def _write_markdown(out: Path, r: dict) -> None:
     L += ["", f"ECE estimator floor at M=5: {r['ece_floor_M5']:.3f}; "
               f"at T=30: {r['ece_floor_T30']:.3f}. An ECE at the floor is "
               "not evidence of miscalibration.", ""]
-    (out / "uq_benchmark.md").write_text("\n".join(L), encoding="utf-8")
+    (out / "uq_benchmark.md").write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

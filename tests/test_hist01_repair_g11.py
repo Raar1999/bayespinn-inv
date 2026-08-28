@@ -217,7 +217,7 @@ class TestTheResolverFailsClosed:
         broken = tmp_path / "broken_map.json"
         doc = load_map() or {}
         doc["verification"]["V2_agreement"]["passes"] = False
-        broken.write_text(json.dumps(doc), encoding="utf-8")
+        broken.write_text(json.dumps(doc), encoding="utf-8", newline="\n")
         monkeypatch.setattr(commit_map, "MAP", broken)
         assert not commit_map.map_is_verified()
         rewritten = [e["recorded"] for e in (load_map() or {}).get("entries", [])

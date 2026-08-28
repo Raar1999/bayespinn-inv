@@ -56,7 +56,7 @@ def repo(tmp_path: Path) -> Path:
     _run(r, "config", "user.email", "test@example.invalid")
     _run(r, "config", "user.name", "test")
     _run(r, "config", "core.autocrlf", "false")
-    (r / "tracked.py").write_text("x = 1\n", encoding="utf-8")
+    (r / "tracked.py").write_text("x = 1\n", encoding="utf-8", newline="\n")
     _run(r, "add", "-A")
     _run(r, "commit", "-q", "-m", "initial")
     return r
@@ -69,12 +69,12 @@ class TestDirtyDetectionSeesUntrackedFiles:
         assert git_is_dirty(repo=repo) is False
 
     def test_tracked_modification_is_dirty(self, repo: Path) -> None:
-        (repo / "tracked.py").write_text("x = 2\n", encoding="utf-8")
+        (repo / "tracked.py").write_text("x = 2\n", encoding="utf-8", newline="\n")
         assert git_is_dirty(repo=repo) is True
 
     def test_untracked_source_file_is_dirty(self, repo: Path) -> None:
         """The generation-0 defect, in one assertion."""
-        (repo / "identifiability.py").write_text("y = 2\n", encoding="utf-8")
+        (repo / "identifiability.py").write_text("y = 2\n", encoding="utf-8", newline="\n")
         assert git_is_dirty(repo=repo) is True, (
             "AUDIT_g0 PROV-02 -- an untracked source file leaves the tree "
             "unreproducible from the commit, so the tree is dirty"
@@ -82,7 +82,7 @@ class TestDirtyDetectionSeesUntrackedFiles:
 
     def test_ignored_file_is_not_dirty(self, repo: Path) -> None:
         """Ignored build output is not divergence; it must not raise a false alarm."""
-        (repo / ".gitignore").write_text("junk/\n", encoding="utf-8")
+        (repo / ".gitignore").write_text("junk/\n", encoding="utf-8", newline="\n")
         _run(repo, "add", "-A")
         _run(repo, "commit", "-q", "-m", "ignore junk")
         (repo / "junk").mkdir()
@@ -100,9 +100,9 @@ class TestStatusCountsSeparateTheTwoKinds:
         assert git_status_counts(repo=repo) == {"tracked_modified": 0, "untracked": 0}
 
     def test_counts_are_reported_separately(self, repo: Path) -> None:
-        (repo / "tracked.py").write_text("x = 3\n", encoding="utf-8")
-        (repo / "a.py").write_text("a = 1\n", encoding="utf-8")
-        (repo / "b.py").write_text("b = 1\n", encoding="utf-8")
+        (repo / "tracked.py").write_text("x = 3\n", encoding="utf-8", newline="\n")
+        (repo / "a.py").write_text("a = 1\n", encoding="utf-8", newline="\n")
+        (repo / "b.py").write_text("b = 1\n", encoding="utf-8", newline="\n")
         assert git_status_counts(repo=repo) == {"tracked_modified": 1, "untracked": 2}
 
     def test_outside_a_checkout_returns_none(self, tmp_path: Path) -> None:
@@ -117,16 +117,16 @@ class TestTreeDigestDistinguishesContent:
 
     def test_digest_changes_when_untracked_content_is_added(self, repo: Path) -> None:
         before = git_tree_digest(repo=repo)
-        (repo / "new_module.py").write_text("z = 1\n", encoding="utf-8")
+        (repo / "new_module.py").write_text("z = 1\n", encoding="utf-8", newline="\n")
         assert git_tree_digest(repo=repo) != before
 
     def test_digest_changes_when_tracked_content_changes(self, repo: Path) -> None:
         before = git_tree_digest(repo=repo)
-        (repo / "tracked.py").write_text("x = 99\n", encoding="utf-8")
+        (repo / "tracked.py").write_text("x = 99\n", encoding="utf-8", newline="\n")
         assert git_tree_digest(repo=repo) != before
 
     def test_digest_ignores_ignored_files(self, repo: Path) -> None:
-        (repo / ".gitignore").write_text("junk/\n", encoding="utf-8")
+        (repo / ".gitignore").write_text("junk/\n", encoding="utf-8", newline="\n")
         _run(repo, "add", "-A")
         _run(repo, "commit", "-q", "-m", "ignore junk")
         before = git_tree_digest(repo=repo)

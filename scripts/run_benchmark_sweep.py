@@ -216,7 +216,7 @@ def main():
         "n_rows":    len(rows),
         "elapsed_s": elapsed,
     }
-    with open(out_dir / "summary.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "summary.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(summary, f, indent=2, default=str)
     print(f"  summary -> {out_dir / 'summary.json'}")
 

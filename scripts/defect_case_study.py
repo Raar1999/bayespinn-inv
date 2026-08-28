@@ -189,7 +189,7 @@ def main():
         "mean_loss":        float(np.mean(per_member_loss)),
         "M":                ens.M,
     }
-    with open(out_dir / "metrics.json", "w", encoding="utf-8") as f:
+    with open(out_dir / "metrics.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(metrics, f, indent=2)
 
     # 7) Hero figure

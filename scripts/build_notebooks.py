@@ -109,7 +109,7 @@ def make_nb(name, title, intro, cells):
         "language_info": {"name": "python"},
         "colab": {"provenance": []},
     }
-    (NB_DIR / name).write_text(nbf.writes(nb), encoding="utf-8")
+    (NB_DIR / name).write_text(nbf.writes(nb), encoding="utf-8", newline="\n")
     print(f"  wrote {name} ({len(nb.cells)} cells)")
 
 

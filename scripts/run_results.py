@@ -593,7 +593,7 @@ def main() -> int:
     for k in ("H1_forward_accuracy", "H2_inverse_vs_noise", "H3_calibration"):
         man.add_result(k, results[k])
     (out / "results.json").write_text(json.dumps(results, indent=2),
-                                      encoding="utf-8")
+                                      encoding="utf-8", newline="\n")
     man.add_artifact("results_json", out / "results.json")
     _write_markdown(out, results, decades)
     man.add_artifact("results_summary", out / "results_summary.md")
@@ -709,7 +709,7 @@ def _write_markdown(out: Path, r: dict, decades: float) -> None:
               f"error inflates "
               f"**{h5['error_inflation_extrap_over_interp']:.1f}x**. "
               f"{h5['verdict']}.", ""]
-    (out / "results_summary.md").write_text("\n".join(L), encoding="utf-8")
+    (out / "results_summary.md").write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

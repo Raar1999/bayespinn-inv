@@ -1046,7 +1046,7 @@ def main() -> int:
             r = phase_negative_control(sg, x_si, cfg)
         else:
             raise SystemExit(f"unknown phase {name!r}")
-        path.write_text(json.dumps(r, indent=2), encoding="utf-8")
+        path.write_text(json.dumps(r, indent=2), encoding="utf-8", newline="\n")
         results[name] = r
         man.add_artifact(name, path)
         print(f"  wrote {path}")
