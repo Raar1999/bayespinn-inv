@@ -133,6 +133,29 @@ def test_hook_is_tracked_and_non_empty() -> None:
     )
 
 
+def test_hook_is_executable_in_the_index() -> None:
+    """Git must record mode ``100755``, not ``100644``.
+
+    Git execs a hook directly; on Linux a hook without the executable bit is
+    silently not run, and ``core.hooksPath`` reports nothing wrong. The first
+    commit of this file recorded ``100644``, because ``core.filemode`` is
+    ``false`` on the Windows machine that wrote it -- the working-tree
+    permission bits are meaningless there, so only the **index** mode is worth
+    asserting. Checked here rather than on disk for that reason.
+    """
+    entry = subprocess.run(
+        ["git", "ls-files", "-s", "scripts/hooks/commit-msg"],
+        cwd=REPO, capture_output=True, text=True, check=True,
+    ).stdout.strip()
+    assert entry, "scripts/hooks/commit-msg has no index entry"
+
+    mode = entry.split()[0]
+    assert mode == "100755", (
+        f"the hook is recorded as {mode}; git will not execute it on a Linux "
+        "clone. Fix with: git update-index --chmod=+x scripts/hooks/commit-msg"
+    )
+
+
 def test_readme_records_how_to_activate_the_hook() -> None:
     """A tracked hook nobody knows to switch on protects nobody.
 
