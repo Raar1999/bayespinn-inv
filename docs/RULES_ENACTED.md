@@ -841,3 +841,122 @@ confined to nine files is invisible to it, and a wide hand edit will be flagged
 and need a register entry saying it was not mechanical. The first is the real
 gap and it is stated rather than papered over: the rule reaches the *shape* of a
 sweep, not its intent, because intent is not visible to a test.
+
+---
+
+## `PRE-01` — a pre-registration's outcome space is checked before it is hashed
+
+**Enacted** operator ruling of 2026-08-29 §3 (the close ruling).
+
+> Before a pre-registration is hashed, its outcome space is enumerated and
+> checked for two properties: **exhaustiveness** — every possible measurement
+> result maps to exactly one label, with no gap and no overlap — and
+> **entailment** — each label's stated meaning is implied by the branch condition
+> that produces it, not merely associated with it. Any factual claim inside the
+> justification (an attainable `p`, a bound, a count) is verified before hashing,
+> because it cannot be corrected after. The devil's-advocate pass reviews the
+> pre-registration, not only the result.
+
+**The defect that forced it — two of them, in consecutive generations.** The
+ruling's justification is the executor's own sentence and it is adopted verbatim:
+**hashing fixes the prose around a statistic; it does not make that prose
+correct.**
+
+* **Generation 13** defended `minimum_cells = 4` with *"below four admissible
+  cells on either axis the exact test cannot reach p = 0.05 one-sided"*. Under
+  the exact null every assignment of ranks is equally likely, so there are
+  `C(6,3) = 20` of them and perfect separation attains `p = 1/20 = 0.05`
+  exactly — attainable, not unreachable. At 2 against 5 it is `1/21 = 0.048`,
+  lower still. The rule it justified is still a sound conservative floor and was
+  inert at that measurement; the sentence defending it reads like a derivation
+  and is not one.
+* **Generation 14** registered `GENERIC_ROW_COUNT` to mean *"the nested windows
+  track the null … nothing device-specific or regime-specific in it"* while its
+  branch condition was *everything that is not `IDENTITY_MATTERS`*. The
+  measurement landed exactly in the gap between those two sentences: all four
+  devices above the chain null in the same direction, three at `p ≤ 0.005`, with
+  one held-out device clearing and the other not. The instrument returned a label
+  whose registered meaning its own measurement refutes.
+
+Both were hashed, and both were correctly left uncorrected — a pre-registration
+edited after the result is read is not a pre-registration. Neither could be fixed
+afterwards, which is exactly why the check has to happen **before**.
+
+**Both would have been caught by the first property alone.** The generation-14
+outcome space was three-way — more flat, indistinguishable, less flat — and the
+decision rule was two-way. The pre-registration's own threshold clause names the
+third possibility (*"flattening LESS than random would equally refute
+genericity"*, which is why the test was two-sided) and the decision rule never
+reads it.
+
+**Why a mechanism and not a checklist.** A checklist is what was already being
+done; two generations running, it passed a defect a reading would have caught.
+"The outcome space is exhaustive" is not a claim a person verifies reliably by
+looking at prose. So the outcome space is written down as **axes with finite
+levels** and each label as a **predicate over those axes**. The product of the
+levels is the enumeration the rule asks for; the predicates are evaluated over
+every point in it. A gap is a point no label claims, an overlap is a point two
+labels claim, and an entailment failure is a point where a label fires and its
+own stated meaning is false — reported as *that specific measurement result*,
+not as a warning.
+
+The predicate language is tiny and **interpreted, never evaluated** — no `eval`,
+no `exec`. A pre-registration is a governance artefact, and a register that
+executes strings out of one is a register that can be made to say anything.
+
+**Enforced by** `docs/PREREG_REGISTER.json`, `scripts/check_prereg.py` and
+`tests/test_pre01_preregistration_close.py`.
+
+Self-enforcing rather than declarative, which is `SKIP-01`'s lesson and
+`DIFF-01`'s design: every `outputs/**/preregister*.json` in the tree must appear
+in the register by path, so a new pre-registration cannot be written without one.
+The two known-defective pre-registrations are registered as **positive controls
+from history** — the checker must go on identifying them as defective, and if it
+stops, the detector has gone vacuous.
+
+`SW-20`'s AST clause does not apply: this guard's subject is a JSON register, not
+source code. Its purpose does, and both controls ship. The negative control is a
+well-formed pre-registration that must come back clean, because a checker that
+rejects everything also looks correct. A third, **discriminating** control takes
+the generation-14 entry and changes *only* `GENERIC_ROW_COUNT`'s stated meaning to
+what its branch condition actually admits: the entailment finding must then
+disappear, which shows the finding is produced by the meaning rather than by the
+machinery.
+
+**What enacting it found, which the ruling did not have.** Applying the checker
+to generation 13 surfaces a defect nobody had recorded: `DOES_NOT_SEPARATE`'s
+registered meaning contains *"the 3.1–3.5× of pass 2 was … not a property of the
+system"*, which its branch condition — *not both devices clearing* — does not
+imply. It is the same defect class as generation 14's, one generation earlier.
+**Unlike generation 14's, it fired.** `device_p10` cleared at `p = 0.00062` and
+`device_p90` did not at `p = 0.30629`, so the label was written to
+`outputs/g13/mech01_pass3/verdict.json` carrying a sentence that one of the two
+held-out devices contradicts at `p = 0.0006`.
+
+**Scope of that finding, stated rather than left open.** It did not propagate.
+`docs/UEMPIR_MECH01_g14.md` rests method 2's falsification on the measured
+confound — `corr(dz, b)` of −0.95 to −0.98 and a device offset spread of 1.572
+against a largest axis difference of 0.22 at matched `b` — and quotes both
+p-values explicitly instead of leaning on the label's prose. The `U-EMPIR`
+verdict and the `L0 → L1` descent are undisturbed; one meaning field in one
+verdict artefact is not. Nothing is edited: `R-4` and the hashing discipline both
+forbid it, and the correction is forward — the sentence is not repeated in the
+paper.
+
+**A milder second finding, in both pre-registrations.** `UNDETERMINED` and the
+substantive labels are stated with no precedence between them, so a control
+failure coinciding with any p-value pattern satisfies two labels at once. One
+clause — *"`UNDETERMINED` takes precedence"* — closes it. It never fired: the
+reproduction controls passed 8 of 8 and 16 of 16 respectively.
+
+**A measured limitation.** The check reaches an outcome space that has been
+*written down* as axes and predicates. It cannot reach one that exists only in
+prose, and it cannot tell whether the axes enumerated are the axes the
+measurement actually has — a dimension nobody thought of is invisible to it,
+exactly as a mechanical edit confined to nine files is invisible to `DIFF-01`.
+What it does guarantee is that the enumeration an author *did* write is
+consistent with the labels they wrote against it, and that any factual claim they
+cited is either recomputed here or explicitly declared unverifiable. The eight
+pre-registrations that predate this rule are listed in the register and **not**
+checked: reconstructing outcome spaces their authors never wrote down would be
+inventing the enumeration and then checking the invention.

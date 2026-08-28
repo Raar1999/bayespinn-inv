@@ -1,0 +1,143 @@
+{
+  "rule": "PRE-01",
+  "what_this_is": "every pre-registration artefact in this repository, with its outcome space written down as axes and predicates so that the two properties PRE-01 requires -- exhaustiveness and entailment -- can be checked mechanically rather than read for. Enforced by scripts/check_prereg.py and tests/test_pre01_preregistration_close.py.",
+  "why_a_register_and_not_a_checklist": "a checklist is what was already being done, and two generations running it passed a pre-registration containing a defect that a reading would have caught. Both were hashed and neither could be corrected afterwards without destroying the thing hashing exists to protect. What was missing is a mechanism that consumes the outcome space as DATA and names the specific measurement result that breaks it.",
+  "the_two_properties": {
+    "exhaustiveness": "every point of the enumerated outcome space maps to exactly one label -- no gap, no overlap. A gap is a measurement result the rule does not classify. An overlap is one it classifies twice, which means evaluation order decides the answer and the pre-registration does not state that order.",
+    "entailment": "each label's stated meaning is IMPLIED by the branch condition that produces it, not merely associated with it. This is the property a hash cannot supply. Hashing fixes the prose around a statistic; it does not make that prose correct."
+  },
+  "the_third_clause": "any factual claim inside the justification -- an attainable p, a bound, a count -- is verified before hashing, because it cannot be corrected after. A claim is either mechanically checked here or explicitly declared NOT-MECHANICALLY-CHECKABLE; it is never merely present.",
+  "enacted_at_subject": "close: PRE-01 -- a pre-registration's outcome space is checked before it is hashed",
+  "scope_note": "commits and artefacts BEFORE the enactment are out of scope for compliance, following DOC-07's and DIFF-01's design: R-4 makes history uncorrectable and a guard that fails on history nobody can fix is a guard people switch off. The two known-defective pre-registrations below are registered as POSITIVE CONTROLS FROM HISTORY -- the checker must continue to identify them as defective, and if it stops doing so the detector has gone vacuous. Every other pre-registration artefact in the tree is listed as historical, so that a NEW one cannot appear without a register entry.",
+  "self_enforcing_hook": "every outputs/**/preregister*.json in the tree must appear in entries[] by artefact path. The guard walks the tree and fails on any that does not.",
+  "predicate_language": "interpreted, never evaluated -- no eval, no exec. {\"const\": bool} | {\"var\": axis, \"is\": level} | {\"var\": axis, \"in\": [levels]} | {\"all\": [..]} | {\"any\": [..]} | {\"not\": ..}. A pre-registration is a governance artefact and a register that executes strings from one is a register that can be made to say anything.",
+
+  "entries": [
+    {
+      "id": "mech01-pass4-g14",
+      "generation": 14,
+      "artefact": "outputs/g14/mech01_pass4/preregister.json",
+      "status": "HISTORICAL -- POSITIVE CONTROL",
+      "expected_verdict": "DEFECTIVE",
+      "what_it_measured": "MECH-01 pass 4: nested bias-window subsets against a random-row null matched on row count, at two held-out devices.",
+      "hashed_before_the_first_subset_was_drawn": true,
+      "outcome_space": {
+        "axes": {
+          "p10_clears": ["clears", "does_not_clear"],
+          "p90_clears": ["clears", "does_not_clear"],
+          "direction": ["more_flat_than_null", "less_flat_than_null"],
+          "controls": ["passed", "failed"]
+        },
+        "axes_note": "direction is a real dimension of the measurement -- the test is two-sided and the pre-registration's own threshold clause says flattening LESS than random 'would equally refute genericity'. It is declared here because the measurement can produce it. Whether any label READS it is the question the check answers."
+      },
+      "labels": [
+        {
+          "name": "IDENTITY_MATTERS",
+          "condition": {"all": [{"var": "p10_clears", "is": "clears"}, {"var": "p90_clears", "is": "clears"}]},
+          "meaning": "the nested windows depart from the random-subset null at both held-out devices. Which biases arrive carries the flattening, not merely how many.",
+          "meaning_holds_when": {"all": [{"var": "p10_clears", "is": "clears"}, {"var": "p90_clears", "is": "clears"}]}
+        },
+        {
+          "name": "GENERIC_ROW_COUNT",
+          "condition": {"not": {"all": [{"var": "p10_clears", "is": "clears"}, {"var": "p90_clears", "is": "clears"}]}},
+          "meaning": "the nested windows track the null. Flattening the spectrum is a consequence of row count alone, with nothing device-specific or regime-specific in it.",
+          "meaning_holds_when": {"all": [{"var": "p10_clears", "is": "does_not_clear"}, {"var": "p90_clears", "is": "does_not_clear"}]},
+          "meaning_holds_when_why": "'track the null' is a claim of NO departure. It is false wherever either device departs, whichever direction it departs in."
+        },
+        {
+          "name": "UNDETERMINED",
+          "condition": {"var": "controls", "is": "failed"},
+          "meaning": "the reproduction control failed, or fewer than the pre-registered minimum of admissible k was available. A failure to measure, not a negative result.",
+          "meaning_holds_when": {"var": "controls", "is": "failed"}
+        }
+      ],
+      "factual_claims": [],
+      "findings": {
+        "entailment": "THE DEFECT THAT FORCED THE RULE. GENERIC_ROW_COUNT's branch condition fires at 8 of the 16 points where its own stated meaning is false -- every point at which exactly one device departs. The measurement landed on one of them: device_p90 at p < 0.0001, device_p10 at p = 0.1485, all four devices above the chain null in the SAME direction, three at p <= 0.005. The instrument returned a label whose registered meaning its own measurement contradicts.",
+        "unused_axis": "the checker reports 'direction' as declared and unread. That is the operator's diagnosis made mechanical: the outcome space is three-way -- more flat, indistinguishable, less flat -- and the decision rule is two-way. The threshold clause names direction; the decision rule never reads it.",
+        "overlap": "a milder second defect, and real: UNDETERMINED's condition and the other two labels' conditions are stated with no precedence, so a control failure that coincides with any p-value pattern satisfies two labels at once. One clause -- 'UNDETERMINED takes precedence' -- fixes it. It did not fire: the reproduction control passed 16 of 16."
+      },
+      "what_was_done_about_it": "nothing, and that is correct. The pre-registration is hashed and stays hashed; a pre-registration corrected after reading the result is not a pre-registration. The loop declined to write EITHER label and said why, which is the only move that leaves the record true.",
+      "reported_in": ["docs/G14_RESULT.md", "docs/UEMPIR_MECH01_g14.md", "docs/RULES_ENACTED.md"]
+    },
+
+    {
+      "id": "mech01-pass3-g13",
+      "generation": 13,
+      "artefact": "outputs/g13/mech01_pass3/preregister.json",
+      "status": "HISTORICAL -- POSITIVE CONTROL",
+      "expected_verdict": "DEFECTIVE",
+      "what_it_measured": "MECH-01 pass 3: a standardised row-side magnitude statistic, width axis against spacing axis, exact one-sided Mann-Whitney at two held-out devices.",
+      "hashed_before_the_held_out_data_was_touched": true,
+      "outcome_space": {
+        "axes": {
+          "p10_clears": ["clears", "does_not_clear"],
+          "p90_clears": ["clears", "does_not_clear"],
+          "admissible_cells": ["at_least_four", "fewer_than_four"],
+          "reproduction_control": ["passed", "failed"]
+        }
+      },
+      "labels": [
+        {
+          "name": "SEPARATES",
+          "condition": {"all": [{"var": "p10_clears", "is": "clears"}, {"var": "p90_clears", "is": "clears"}]},
+          "meaning": "the standardised gap is larger along the axis where the rank climbs than along the axis where it does not, at both held-out devices.",
+          "meaning_holds_when": {"all": [{"var": "p10_clears", "is": "clears"}, {"var": "p90_clears", "is": "clears"}]}
+        },
+        {
+          "name": "DOES_NOT_SEPARATE",
+          "condition": {"not": {"all": [{"var": "p10_clears", "is": "clears"}, {"var": "p90_clears", "is": "clears"}]}},
+          "meaning": "the standardised gap does not separate the axes out of sample. The 3.1-3.5x of pass 2 was a description of the discovery sample and of the split ratio it confounded, NOT A PROPERTY OF THE SYSTEM.",
+          "meaning_holds_when": {"all": [{"var": "p10_clears", "is": "does_not_clear"}, {"var": "p90_clears", "is": "does_not_clear"}]},
+          "meaning_holds_when_why": "the second sentence is the one that fails. 'Not a property of the system' is refuted by any device at which the standardised gap does separate."
+        },
+        {
+          "name": "UNDETERMINED",
+          "condition": {"any": [{"var": "reproduction_control", "is": "failed"}, {"var": "admissible_cells", "is": "fewer_than_four"}]},
+          "meaning": "the reproduction control failed, or fewer than four admissible cells were available on an axis at a held-out device. A failure to measure.",
+          "meaning_holds_when": {"any": [{"var": "reproduction_control", "is": "failed"}, {"var": "admissible_cells", "is": "fewer_than_four"}]}
+        }
+      ],
+      "factual_claims": [
+        {
+          "id": "pass3-minimum-cells",
+          "quoted": "below four admissible cells on either axis the exact test cannot reach p = 0.05 one-sided, so the measurement would be incapable of the outcome it is run to look for",
+          "check": "min_attainable_one_sided_p_exact_mwu",
+          "args": {"n1": 3, "n2": 3},
+          "computed_value": 0.05,
+          "claim_asserts": {"op": ">", "value": 0.05},
+          "verdict": "FALSE",
+          "why": "under the exact null every assignment of ranks is equally likely, so there are C(6,3) = 20 of them and perfect separation attains p = 1/20 = 0.05 exactly -- which clears alpha = 0.05. At 2 against 5 the minimum is 1/21 = 0.0476, lower still. Confirmed two ways: the combinatorial identity above, and scipy.stats.mannwhitneyu(method='exact') over perfectly separated samples.",
+          "what_it_did_not_invalidate": "the RULE minimum_cells = 4 is still a sound conservative floor -- it is stricter than necessary, never looser -- and it was inert at this measurement, because every device came in at 8 admissible width cells and 7 spacing cells. The defect is that a sentence reading like a derivation was hashed without being one."
+        }
+      ],
+      "findings": {
+        "factual_claim": "THE FIRST OF THE TWO DEFECTS THE RULE'S THIRD CLAUSE ADDRESSES. Recorded at the time in docs/G13_RESULT.md and correctly left uncorrected.",
+        "entailment": "NOT PREVIOUSLY IDENTIFIED, and found by applying this checker to generation 13. DOES_NOT_SEPARATE fires at 8 points where its own stated meaning is false -- the same defect class as pass 4's, one generation earlier. Unlike pass 4's, IT FIRED: device_p10 cleared at p = 0.00062 and device_p90 did not at p = 0.30629, which is exactly a point where the label's second sentence is refuted, and the label was written to outputs/g13/mech01_pass3/verdict.json with that sentence in its meaning field.",
+        "scope_of_that_finding": "it did NOT propagate. docs/UEMPIR_MECH01_g14.md rests method 2's falsification on the measured confound -- corr(dz, b) of -0.95 to -0.98 and a device offset spread of 1.572 against a largest axis difference of 0.22 at matched b -- and states both p-values explicitly rather than leaning on the label's prose. The U-EMPIR verdict and the L0 -> L1 descent are undisturbed. What is disturbed is one meaning field in one verdict artefact.",
+        "overlap": "same mild precedence gap as pass 4. Did not fire: the reproduction control passed 8 of 8 and every device had at least 7 admissible cells."
+      },
+      "what_is_done_about_it": "nothing is edited. R-4 and the hashing discipline both forbid it. The finding is recorded here and in docs/RULES_ENACTED.md, and the correction is forward: the sentence is not repeated in the paper.",
+      "reported_in": ["docs/G13_RESULT.md", "docs/RULES_ENACTED.md"]
+    },
+
+    {
+      "id": "historical-out-of-scope",
+      "status": "HISTORICAL -- NOT CHECKED",
+      "outcome_space": null,
+      "why_not_checked": "these pre-registrations predate PRE-01 and their outcome spaces were never written down as axes and predicates. Reconstructing them now would be inventing the enumeration their authors did not make and then checking the invention, which proves nothing about what was hashed. They are listed so that the register knows every pre-registration artefact in the tree and a NEW one cannot appear unregistered.",
+      "artefacts": [
+        "outputs/g9/preregister.json",
+        "outputs/g10/preregister.json",
+        "outputs/g11/wit02_chartL/preregister.json",
+        "outputs/g11/archive_rerun/g9/preregister.json",
+        "outputs/g11/archive_rerun/g10/preregister.json",
+        "outputs/g11/archive_rerun/wit02_chartG/preregister.json",
+        "outputs/g12/mech01_rows/preregister.json",
+        "outputs/wit02_chartG/preregister.json"
+      ]
+    }
+  ],
+
+  "for_whoever_picks_this_up": "MECH-01 is open at L1 and the reachability conditions are in docs/UEMPIR_MECH01_g14.md. Any new pre-registration gets an entry here BEFORE it is hashed, with its axes, its labels as predicates, and every factual claim in its justification either checked or declared uncheckable. The checker is scripts/check_prereg.py; run it and read the report, then hash."
+}

@@ -1,0 +1,768 @@
+{
+  "generation": 14,
+  "step": "the close ruling of 2026-08-29 enacted: PRE-01, the archive accession record, and EXT-04's remote. No generation 15 ran",
+  "designation": "closed at L1; the ruling enacted, and the loop stopped",
+  "terminated": true,
+  "closed": true,
+  "governance": {
+    "directive": "operator directive of 2026-08-28, authority fused",
+    "ruling": "operator ruling of 2026-08-29, close at L1",
+    "ladder": "LADDER.md",
+    "ladder_sha256": "184e1ef0f10617303556ecb2a9e9029659c7fdce170fe4d97b394aa9672d2efe",
+    "ladder_edited_since_instantiation": true,
+    "rung_at_start": "L1",
+    "rung_at_end": "L1",
+    "movement": "HELD -- TERMINAL",
+    "unreachability_verdicts_issued": [
+      {
+        "id": "U-EMPIR-MECH-01-g14",
+        "class": "U-EMPIR",
+        "finding": "MECH-01",
+        "document": "docs/UEMPIR_MECH01_g14.md",
+        "sha256": "e34c812fe7401ca3f1efe164e521455b376850445781f9004a4d6ada81b9cd40",
+        "written_before_fallback_work": true,
+        "u_0_note": "U-0 requires the verdict to precede the fallback work. It does: the verdict document was written and hashed before docs/G14_RESULT.md existed",
+        "expires_after_generation": 16,
+        "reversible": true,
+        "methods": [
+          {
+            "n": 1,
+            "name": "spatial localisation of the singular vectors (SPEC-g10-1)",
+            "generation": 10,
+            "verdict": "FALSIFIED",
+            "mechanism": "the vectors localise MORE as the window widens, the opposite of the prediction, tracking width at -0.433"
+          },
+          {
+            "n": 2,
+            "name": "the row side -- which bias rows carry the trailing directions",
+            "generation": "12-13",
+            "verdict": "FALSIFIED out of sample",
+            "mechanism": "confounded with the split ratio b; the two axes do not overlap in it. corr(dz, b) -0.95 to -0.98, device offset spread 1.572 against a largest axis difference of 0.22"
+          },
+          {
+            "n": 3,
+            "name": "row-subset growth against a random-row null, matched on row count",
+            "generation": 14,
+            "verdict": "INCONCLUSIVE",
+            "mechanism": "the pre-registered rule returned GENERIC_ROW_COUNT but its registered MEANING is contradicted -- all four devices depart from the null in the same direction, three at p <= 0.005. The departure is mostly bias spread, a smoothness property; the residual after spread is regressed out splits 0.492 against 0.947 across the two held-out devices, so the non-generic part is not reproducible"
+          }
+        ],
+        "reachability_condition": "any one of: (1) a pre-registered measurement over more than two devices, enough to say whether the surviving residual is a property of devices or of noise; (2) a fourth method distinct in kind -- all three so far read the SAME Jacobians, so a design that perturbs the physics rather than re-reading the spectrum would not share their failure mode; (3) an instrument in which bias spread and bias identity are independently variable, which this repository's observation sets cannot provide"
+      }
+    ],
+    "why_none": null,
+    "distance_to_L0": "L0 is abandoned under U-EMPIR, not reached. It becomes attainable again when any of the three reachability conditions is satisfied; LD-5 obliges every future Phase A to re-evaluate them",
+    "ladder_edit_note": "one row appended to the descent/climb log, which the file itself declares append-only. The RUNGS block is byte-identical before and after -- sha256 fdc1b0e76acd95ed5442c4afec19fc8dae6ef9882caaf93ca059a89e9a208f83 -- so LD-1 is satisfied and shown rather than asserted. File hash moved a2596365... -> 184e1ef0..., exactly one line changed",
+    "why_terminal": "the ruling closes the loop. L0 is abandoned under the generation-14 U-EMPIR verdict, which remains reversible: LD-5 obliges any future Phase A to re-evaluate its three reachability conditions, and the verdict expires after generation 16. Terminating here is not a claim that L0 is unreachable, and LD-6 does not apply because the loop did not terminate at the L3 floor"
+  },
+  "champion_commit": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
+  "machinery_commit": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
+  "results_commit": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
+  "bookkeeping_commit": null,
+  "champion_branch": "loop/champion",
+  "schema": {
+    "champion_commit": "The last CONTENT commit, by definition. Never the commit that wrote this file: a state file cannot name its own commit, because its bytes are part of the tree that commit hashes. Guarded by tests/test_loop_state_close.py.",
+    "bookkeeping_commit": "null at write time, always. Nothing may fill this during the commit that writes the file, because the value would be that commit's own hash.",
+    "machinery_commit": "Equal to champion_commit. The addendum's measurement ran against the working tree that became that commit, byte for byte: the run executed, then the artefacts and the code that produced them were committed together. The distinction the earlier files draw between the tree a measurement ran against and the tree carrying its results does not arise, and each artefact additionally pins its inputs by SHA-256.",
+    "results_commit": "Equal to champion_commit.",
+    "baselines": "REP-01 as amended at generation 9 section 3: every entry is an OBJECT carrying the invocation that produced it, never a bare scalar. Entries marked rerunnable are re-run and compared; entries that are not carry conditions and measured_at_commit instead.",
+    "free_check": "The one measurement the closing ruling section 5 permits. Recorded separately from `spec_clause_status` because it is a DESCRIPTION and not a clause: it was ordered after the data existed, so no pre-registration is possible and none is claimed.",
+    "addendum": "The one solving step authorised after the close. Recorded as a MEASUREMENT with a pre-registration, which is the opposite of what LOOP_STATE_v8.json had to say about its free check and for the same reason: the record must match what happened. Guarded by tests/test_loop_state_addendum.py, which re-reads every number here from outputs/wit02_chartG/ and fails on a disagreement."
+  },
+  "pre_push_runbook": {
+    "authorised_by": "operator ruling of 2026-08-28 \u00a71",
+    "push_was_run": false,
+    "why_not": "steps 1-6 do not all pass, which is the ruling's own condition. Step 1 (the map off this machine) is a human action; step 6's home-path arm is not clean.",
+    "steps": {
+      "1_map_off_machine": {
+        "status": "HUMAN ACTION, NOT DONE",
+        "artefact": "docs/COMMIT_HASH_MAP_g11.json",
+        "sha256": "5486343309bbeefeaf99a99edc0cb1b320f39f9eec837cf34362bd952ab6f970",
+        "sharpened_by_step_5": "no preservation copy holds pre-rewrite objects, so this map is the SOLE surviving trace of the pre-rewrite identity of ten generations"
+      },
+      "2_rewrite_achieved_its_purpose": {
+        "status": "PASS",
+        "co_authored_by": 0,
+        "generated_with": 0,
+        "generated_by": 0,
+        "ai_assisted": 0,
+        "claude": 0,
+        "reading": "provenance was not broken for nothing"
+      },
+      "3_hook_installed": {
+        "status": "PASS",
+        "path": "C:\\Users\\abhis\\.git-hooks",
+        "outside_the_repository": true,
+        "installed": [
+          {
+            "name": "commit-msg",
+            "executable": true,
+            "mtime": "2026-08-28T09:06:36",
+            "sha256": "3a650d9859f2ee941f235d6726dc423f2c74b217d60e5341f09b098d7f94324d"
+          }
+        ],
+        "ordering": "the hook was installed at 09:06:36, TEN MINUTES BEFORE the 09:16:38 rewrite. They were not alternatives; the ruling's concern that the rewrite was done instead of the hook does not hold",
+        "tested_not_assumed": "both controls: a planted Co-Authored-By is stripped and the body survives; an ordinary message containing 'generated' and 'co-author' is byte-identical afterwards"
+      },
+      "4_remote_state": {
+        "status": "PASS",
+        "refs_on_remote": [
+          "refs/heads/main"
+        ],
+        "remote_main": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+        "rewrite_touched_it": false,
+        "why_no_force_is_needed": "filter-repo's commit-map maps the root commit to ITSELF, local main is byte-identical to remote main, and it is an ancestor of loop/champion. The push adds 38 commits on a new branch and rewrites nothing",
+        "commits_the_push_would_add": 38
+      },
+      "5_preservation_copies": {
+        "status": "PASS, and the finding is the absence",
+        "preserve_A_has_git": false,
+        "preserve_B_has_git": false,
+        "zip_is_the_pre_loop_repository": true,
+        "pre_rewrite_objects_anywhere": 0,
+        "reading": "the copies are NOT an independent record of the original SHAs, because no such record exists anywhere. Nothing to relabel"
+      },
+      "6_SW_18": {
+        "status": "credentials PASS; home paths FAIL",
+        "credential_shaped_literals": 0,
+        "keyword_hits_all_false_positives": 4,
+        "author_identity": "Raar1999@users.noreply.github.com",
+        "home_paths": {
+          "posix_pattern_from_the_ruling": "/(home|Users)/[a-zA-Z0-9_.-]+",
+          "posix_hits": 10,
+          "windows_pattern_the_ruling_could_not_match": "C:[\\\\/]+Users[\\\\/]+[A-Za-z0-9_.-]+",
+          "windows_hits": 71,
+          "windows_files": [
+            "PRESERVE_MANIFEST_g0.meta.json",
+            "docs/G12_RESULT.md",
+            "docs/audit/AUDIT_g0.md",
+            "notebooks/05_inverse_design.ipynb",
+            "notebooks/08_active_learning.ipynb",
+            "notebooks/12_demo.ipynb",
+            "outputs/chart_reconciliation_g7/manifest.json",
+            "outputs/g10/manifest.json",
+            "outputs/g11/wit02_chartL/manifest.json",
+            "outputs/g12/operator_actions.json",
+            "outputs/g8/manifest.json",
+            "outputs/g9/manifest.json",
+            "outputs/results/manifest.json",
+            "outputs/wit02_chartG/manifest.json"
+          ],
+          "n_windows_files": 14,
+          "note": "the ruling's regex is forward-slash only, so it finds the eight /home/claude/ occurrences of SW-18a and none of the Windows ones. This is not a criticism of the ruling; it is why the check was run rather than assumed"
+        },
+        "consequence": "does not block a PRIVATE push; blocks the repository being public, which is what the ruling made it a precondition of"
+      }
+    },
+    "what_the_operator_must_do": [
+      "move docs/COMMIT_HASH_MAP_g11.json off this machine, two copies, verified against the digest above",
+      "decide repository visibility given the 67 home-path occurrences, or authorise a private push with them present"
+    ]
+  },
+  "measurements": {
+    "PROV-08_archive_protocol": {
+      "authorised_by": "operator ruling of 2026-08-28 \u00a71 (pass 4 ruling)",
+      "roles": {
+        "accession": {
+          "path": "F:\\backups\\extgit-20260828",
+          "files_read_only": 854,
+          "policy": "no write command, ever. Verified after locking: every repository still resolves its full survivor count",
+          "not_pristine": "generation 13's ruling ordered fsck --lost-found, which materialised .git/lost-found/ inside them. That is the accession's state as accessioned"
+        },
+        "derivative": {
+          "path": "F:\\backups\\extgit-20260828-derivative",
+          "refs_written": {
+            "AIEF": 1,
+            "fabkg-bench": 7,
+            "invspec": 3,
+            "EXT-04": 60
+          },
+          "dangling_left": 0,
+          "note": "the eleven refs across the three rewritten trees pin all 536 of their dangling survivors, as the tip analysis predicted. EXT-04's 60 are its own separate danglers; its 1,073 mapped survivors were already reachable"
+        },
+        "bundle": {
+          "path": "F:\\backups\\extgit-20260828-bundles",
+          "carried_vs_census": {
+            "AIEF": [
+              63,
+              63
+            ],
+            "fabkg-bench": [
+              393,
+              393
+            ],
+            "invspec": [
+              80,
+              80
+            ],
+            "EXT-04": [
+              1073,
+              1073
+            ]
+          },
+          "all_verify_okay": true,
+          "note": "each bundle was cloned back into a fresh bare repository and re-counted. Nothing in a bundle can be pruned, because nothing in it is unreachable"
+        }
+      }
+    },
+    "MECH-01_pass_4": {
+      "question": "does widening flatten the spectrum because of WHICH biases arrive, or merely because MORE arrive?",
+      "invocation": "PYTHONPATH=src python scripts/run_mech01_pass4.py",
+      "artefact": "outputs/g14/mech01_pass4/",
+      "measure_hash": "61ce9ac936e469a30be5ce1aad04e724ff4ff91586b1b3067763505b0eaf4e86",
+      "outcomes_hash": "898c28f0e8a250aea5020c246c7917acfbf23033fbefe5ce3a62932517b90546",
+      "hashed_before_first_draw": true,
+      "pilot": {
+        "per_cell_s": 15.349535299996205,
+        "projected_s": 61.398362899977656,
+        "n_cells": 4
+      },
+      "distinct_in_kind": "not a contrast. A null matched on row count by construction, which is the property pass 3 proved the spacing axis lacks",
+      "reproduction_control_R1_prime_prime": {
+        "n_identical": 16,
+        "of": 16,
+        "pass": true
+      },
+      "jacobians_now_stored": "the thing passes 2 and 3 each had to recompute because nobody had written it down. outputs/g14/mech01_pass4/jacobians.json",
+      "null_calibration": {
+        "device_p10": 0.4945796826923076,
+        "device_p90": 0.50188044375,
+        "g8_control": 0.4983441770833333,
+        "device_p50": 0.49831910416666664
+      },
+      "per_device": {
+        "device_p10": {
+          "T": 0.8095192307692306,
+          "p_value": 0.1485,
+          "clears_alpha": false,
+          "direction": "less flat than the null"
+        },
+        "device_p90": {
+          "T": 0.98925,
+          "p_value": 0.0,
+          "clears_alpha": true,
+          "direction": "less flat than the null"
+        },
+        "g8_control": {
+          "T": 0.9669374999999999,
+          "p_value": 0.004,
+          "clears_alpha": true,
+          "direction": "less flat than the null"
+        },
+        "device_p50": {
+          "T": 0.9683541666666667,
+          "p_value": 0.004,
+          "clears_alpha": true,
+          "direction": "less flat than the null"
+        }
+      },
+      "verdict": "GENERIC_ROW_COUNT",
+      "verdict_cannot_be_written_as_the_answer": "GENERIC_ROW_COUNT was registered to mean 'the nested windows track the null ... nothing device-specific or regime-specific in it'. They do not track it: all four devices sit above the chain null in the same direction, three at p <= 0.005, with the nested windows consistently LESS flat than random subsets of equal size. The instrument returned a label whose registered meaning is false, and the loop may not relabel after the fact. That is inconclusive for the registered instrument, which under the ruling's \u00a74 makes this method three",
+      "mechanism_of_the_inconclusiveness": {
+        "artefact": "outputs/g14/mech01_pass4/mechanism.json",
+        "is_a_test": false,
+        "corr_gap_spread": {
+          "device_p10": -0.3119396089990714,
+          "device_p90": -0.5881697191565894,
+          "g8_control": -0.4915474187682973,
+          "device_p50": -0.45001395111504755
+        },
+        "raw_vs_residual_percentile": {
+          "device_p10": [
+            0.8095192307692306,
+            0.4915192307692307
+          ],
+          "device_p90": [
+            0.98925,
+            0.947125
+          ],
+          "g8_control": [
+            0.9669374999999999,
+            0.8801666666666667
+          ],
+          "device_p50": [
+            0.9683541666666667,
+            0.8918750000000001
+          ]
+        },
+        "reading": "the nested sequence is contiguous by construction and a random subset of the same size is scattered; closely spaced biases give nearly collinear rows, which is a property of any smooth response. Regressing gap on the subset's bias range, device_p10's departure vanishes (residual percentile 0.492, exactly ordinary) while the other three keep a residual. The two HELD-OUT devices disagree, 0.492 against 0.947, so the non-generic part of the departure is not reproducible"
+      },
+      "defect_in_the_preregistration": "the threshold clause says flattening LESS than random 'would equally refute genericity' -- which is why the test is two-sided -- while the decision rule maps everything short of IDENTITY_MATTERS onto GENERIC_ROW_COUNT. Those are inconsistent and the observed pattern fell in the gap between them. Hashed, and it stays: a pre-registration corrected after reading the result is not a pre-registration. Second such defect in two generations, after pass 3's minimum_cells justification. The pattern: hashing fixes the prose around a statistic, it does not make that prose correct",
+      "new_solves": "the capture phase solves once per device because nothing stored the Jacobian; everything after is arithmetic at new_solves = 0, AST-guarded and shown non-vacuous by scanning the capture path with the same predicate"
+    },
+    "DIFF-01_enactment": {
+      "rule": "docs/RULES_ENACTED.md",
+      "register": "docs/SWEEP_REGISTER.json",
+      "guard": "tests/test_diff01_blast_radius_g14.py",
+      "self_enforcing_via": "a commit touching at least ten files is sweep-shaped and must appear in the register by subject. Hand edits are deep and narrow; codemods are shallow and wide",
+      "founding_entry": "the generation-13 EOL-02 sweep, 9832 lines to fix 68, which also serves as the guard's positive control from history"
+    }
+  },
+  "declined_measurements": [
+    {
+      "id": "MECH-01-magnitude-preregistered",
+      "measurement": "the magnitude statistic of \u00a74.3, pre-registered, with the spacing axis as the null",
+      "why_declined": "NOT on a plausibility argument. A statistic cannot be pre-registered against cells that have already been seen, so making this a test needs NEW cells -- a third device, or a held-out axis. That is a generation-13 measurement with its own pre-registration, not a re-read of this generation's artefacts.",
+      "pilot": {
+        "invocation": "PYTHONPATH=src python scripts/run_mech01_rows.py --phases pilot",
+        "per_cell_mean_s": 7.861010650000026,
+        "cells_required": 36,
+        "projected_total_s": 282.9963834000009,
+        "verdict": "AFFORDABLE"
+      },
+      "not_a_budget_decline": "the price is minutes and is recorded so that nobody can later mistake this for one. PILOT-01 exists because chart L was declined for three generations without anyone measuring that it cost five minutes."
+    },
+    {
+      "id": "SW-18-manifest-redaction",
+      "measurement": "redacting the home-directory prefix at manifest-write time so future manifests carry ~ rather than C:\\Users\\<user>",
+      "why_declined": "deferred to generation 13, and it is a code change rather than a measurement, so it carries an effort note rather than a solve pilot. It cannot repair the 67 existing occurrences: directive \u00a76 reserves mutation of an existing manifest, so those are superseded forward or left, and that is an operator decision tied to repository visibility.",
+      "pilot": {
+        "invocation": "git grep -nIE 'C:[\\\\/]+Users[\\\\/]+[A-Za-z0-9_.-]+' -- .",
+        "occurrences": 67,
+        "files_affected": 12,
+        "new_solves": 0
+      }
+    }
+  ],
+  "baselines": {
+    "pytest": {
+      "invocation": "PYTHONPATH=src python -m pytest tests -q",
+      "tool_version": "pytest 9.1.1",
+      "collected": 1051,
+      "passed": 1039,
+      "skipped": 10,
+      "failed": 2,
+      "rerunnable": false,
+      "conditions": "taken at champion_commit with LOOP_STATE_v11.json NOT yet in the tree, so the guards that read it skip. Stated rather than smoothed over.",
+      "measured_at_commit": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
+      "environment": "CPython 3.11.9, win32"
+    },
+    "ruff_whole_tree": {
+      "invocation": "python -m ruff check .",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true
+    },
+    "mypy_tracked_tree": {
+      "invocation": "mypy src tests scripts",
+      "tool_version": "mypy 2.3.1",
+      "findings": 150,
+      "files_checked": 143,
+      "rerunnable": false,
+      "conditions": "THE CARRIED BASELINE, unchanged at 150 while the checked surface grew again. Every module added this generation is clean under this invocation.",
+      "measured_at_commit": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
+      "was_at_generation_11": {
+        "findings": 150,
+        "files_checked": 134
+      }
+    }
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e",
+    "g7": "922c2cc",
+    "g8": "0f22ecc",
+    "g9": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+    "g10": "5424d99a61e12ace186f352b081ad479deac14fd",
+    "close": "6b3f4c0a8e5515318e7d822ca739c05a8fc73b6d",
+    "close_addendum": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+    "g11": "b251755e7a3cc48c9bd08be4f4c882d29ea0618b",
+    "g12": "a22d41d0617e50fa08fcc289135b1e16f5cce44d"
+  },
+  "spec_clause_status": {
+    "WIT-02": "ENACTED at close and now SATISFIED ON ALL THREE COMMITTED SETS. Chart G closed at the addendum, chart J at generation 9, chart L here. Every one of the three lost members: 1 of 13, 6 of 13, 11 of 37. Register version 3.",
+    "WIT-01": "UNCHANGED and NOT WITHDRAWN, and still vacuous: admissibility ratio 1.000 on all three sets, so it removes nothing anywhere.",
+    "WITNESS-04": "CLOSED by measurement at generation 11.",
+    "OBS-01": "ENACTED at generation 11. Guard tests/test_inherited_obstructions_g11.py with both controls and a measured limitation.",
+    "DOC-08": "UNCHANGED and enforced; every count here carries its denominator.",
+    "SPEC-g0-3b-windows": "OPERATOR-BLOCKED (hard), unchanged; substitute evidence docs/WINDOWS_RISK_g6.md. A remote now exists, which changes CI-01's status and not this clause's.",
+    "OPS-02": "ENACTED at generation 12. Guard tests/test_operator_actions_g12.py, both controls, and its first run recovered the 09:06 / 09:16 / 09:20 ordering of three undetected operator actions.",
+    "PILOT-01": "ENACTED at generation 12 and applied the same generation: MECH-01's second method was priced before it was decided on. Guard tests/test_pilot_first_g12.py.",
+    "SKIP-01": "ENACTED at generation 12. docs/SKIP_REGISTER.json, scripts/report_skips.py, tests/test_skip_register_g12.py.",
+    "MECH-01": "OPEN. Second method inconclusive as pre-registered -- the discriminator was too blunt, not the hypothesis wrong. U-EMPIR stands at one falsified method."
+  },
+  "open_findings": [
+    {
+      "id": "MECH-01",
+      "severity": "HIGH",
+      "status": "CLOSED BY VERDICT (U-EMPIR), not by answer",
+      "note": "three distinct methods, two falsified and one inconclusive, each with its failure mechanism measured. U-EMPIR issued at generation 14, docs/UEMPIR_MECH01_g14.md. The effect MECH-01 asks about is real and reproduces bit-for-bit; what is unreached is the mechanism. The finding is NOT withdrawn and the verdict expires after generation 16, at which point it must be re-tested or re-issued",
+      "last_tested": {
+        "generation": 14,
+        "check": "PYTHONPATH=src python scripts/run_mech01_pass4.py; then scripts/mech01_pass4_mechanism.py",
+        "result": "R1'' 8 of 8 bit-identical to generation 9; verdict GENERIC_ROW_COUNT whose registered meaning the measurement contradicts"
+      }
+    },
+    {
+      "id": "PATH-01",
+      "severity": "MEDIUM",
+      "status": "OPEN, AND ITS CONSEQUENCE IS NOW PAID",
+      "note": "Unchanged as a finding; what changed is that its consequence has been taken rather than noted. Every barrier walks a straight line in that chart's own coordinates, so every depth is an UPPER bound. The closing ruling section 3 follows that all the way: it STRENGTHENS the chart-G ridge, whose true barrier is then at most at the floor, and WEAKENS both d=16 results to search statements -- no connecting path below the floor was found along the straight line, which is not separation. The test that would settle it is a minimum-energy path, string method or NEB against the same oracle with the same floor barrier as the criterion. It was not run and is out of budget. AH-13 applies in its usual direction. Untouched by the addendum: refining witnesses does not compute a minimum-energy path, and chart G's recounted median is an upper bound exactly as its predecessor was. The bound direction is what makes the recounted median's fall a strengthening rather than a change of sign."
+    },
+    {
+      "id": "WITNESS-04",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT at generation 11",
+      "note": "chart L's 37 witness pairs went through the refinement battery: 37 of 37 refined, 26 surviving, 11 separating. All three committed sets now satisfy WIT-02 and every one lost members. The classification over the survivors is BASIN, unchanged, and the full set reproduces generation 10's depths bit-identically. What this does NOT close is PATH-01: coverage tests witnesses, not connectivity. docs/G11_RESULT.md section 1."
+    },
+    {
+      "id": "GEOM-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT, reading amended at close",
+      "note": "'The geometry of the degeneracy is chart-dependent' stays withdrawn. What replaces it is amended in one word: the two d=16 cells are cells in which no path below the floor was FOUND, so 'basin' names the observed shape and not a demonstrated separation."
+    },
+    {
+      "id": "BOUND-01",
+      "severity": "LOW",
+      "status": "RESOLVED",
+      "note": "Opened and closed at generation 10. The claim surface said LOWER and the state file said UPPER with the same justification clause on both; upper is correct. Recorded because a wrong statement of a bound's direction is the class of error that survives review, being one word in a sentence everybody agrees with -- and because, followed through at close, that one word costs two results their strength."
+    },
+    {
+      "id": "DOC-03a",
+      "severity": "LOW",
+      "status": "RESOLVED at close",
+      "note": "The generation-10 entry stated that the badge text could not be changed without breaking its guard's own regex. It could. The regex now accepts either word and the check asserts the one it measures, so the badge reads 'collected' and guard and badge agree on WHAT is being counted rather than only on the integer. Recorded because an untested obstruction written in the same voice as a measured one is a smaller instance of the defect this loop exists to catch. The class it named recurred at generation 11 as HIST-01, which is why OBS-01 was enacted rather than the observation being recorded a second time."
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "OPERATOR-BLOCKED (reverted from ACCEPTED-PERMANENT)",
+      "note": "the generation-9 default fired on the condition 'there will be no remote'. A remote exists, so the reversion condition recorded in docs/OPERATOR_TASKS.md applies. The cost statement is superseded forward, not deleted. Nothing is closed: .github/workflows/ci.yml has still never executed on any leg.",
+      "cost_statement": "docs/G9_RESULT.md section 1.4, superseded forward by docs/OPERATOR_TASKS.md OT-1 reversion and docs/G11_RESULT.md section 4.1. The statically-scanned surface grew again, to 132 files.",
+      "cost_grown_since_assignment": true,
+      "last_tested": {
+        "generation": 11,
+        "check": "git remote -v; git log --oneline origin/main; stat .git/config",
+        "result": "origin present at https://github.com/Raar1999/bayespinn-inv.git, origin/main resolves to the root commit, .git/config stamped 2026-08-28 09:20"
+      }
+    },
+    {
+      "id": "CHART-03",
+      "severity": "MEDIUM",
+      "status": "OPEN, AMENDED",
+      "note": "Unchanged from generation 10. Chart-invariance at matched d is confined to a (device, bias window) cell, and charts L and J at d=16 differ 13x in witness-to-null barrier ratio with matched path lengths on both sides. What makes a cell one or the other is still not known."
+    },
+    {
+      "id": "FALSIFIER-01",
+      "severity": "MEDIUM",
+      "status": "PARTIALLY-ADDRESSED",
+      "note": "Unchanged. The close exercised its own predicates through controls, one of which failed and changed the claim; that is evidence the controls are live and is not the audit the finding asks for."
+    },
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "last_tested": {
+        "generation": 11,
+        "check": "re-read docs/gen/GEN_g6.md section 2 against the tree: the bifurcation is structural in the adopted history and no artefact in outputs/ carries a pre-adoption provenance chain",
+        "result": "unchanged and permanent by construction; nothing in this generation's artefacts depends on the missing chain"
+      }
+    },
+    {
+      "id": "PROV-07",
+      "severity": "HIGH",
+      "status": "OPERATOR-BLOCKED (reclassified from MITIGATED-PENDING-CI)",
+      "note": "'pending' was the wrong word for nine generations: nothing was pending, because nothing was going to happen without an action reserved to the human. Validated on win32 only; linux and darwin unvalidated and stated as such in every manifest.",
+      "last_tested": {
+        "generation": 11,
+        "check": "PYTHONPATH=src python scripts/check_python_support_floor.py, and the same git remote inspection as CI-01",
+        "result": "132 files scanned, 0 obstructions found at a 3.9 floor -- which can only falsify a floor, never confirm one. No leg of the matrix has ever executed"
+      }
+    },
+    {
+      "id": "CHART-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-STRUCTURALLY"
+    },
+    {
+      "id": "CHART-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "ORDER-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-BY-FALSIFICATION"
+    },
+    {
+      "id": "SPEC-11",
+      "severity": "MEDIUM",
+      "status": "MITIGATED",
+      "note": "Unchanged. tests/test_claim_surface_g7.py still reads the licensed denominators from outputs/g8/ranks.json rather than keying them on the (chart, d, device, bias window) cell. Not taken at close either."
+    },
+    {
+      "id": "DOC-07-a",
+      "severity": "LOW",
+      "status": "MITIGATED",
+      "note": "Unchanged. The widened guard was run against both of the close's commit messages before either was written."
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z",
+      "last_tested": {
+        "generation": 11,
+        "check": "the HIST-01 sweep covered the same ground: git fsck --lost-found, D:/bayespinn-inv/_preserve_g0_B, the scratchpad preserve_A copy, D:/bayespinn-inv/bayespinn-inv.zip and origin",
+        "result": "still unrecoverable, and now for a measured reason. A commit hash is recoverable through the rewrite map; the WORKING TREE that produced outputs/identifiability/ on 2026-08-19 was never a commit, so no map can name it. The two preservation copies carry no .git and the zip is the pre-loop repository"
+      }
+    },
+    {
+      "id": "EOL-01",
+      "severity": "LOW",
+      "status": "OPEN, mechanism identified, git side complete",
+      "note": "re-verified at generation 12 under the ruling \u00a73: 350 of 350 tracked files resolve to attr/-text, so COVERAGE is complete and the diagnosis that it was not is corrected. The incomplete half is the tool side -- Python's text mode rewrites an LF blob as CRLF on win32 and no .gitattributes can prevent it. Generation 11 pinned newline in its own scripts; nothing enforces it across the tree.",
+      "last_tested": {
+        "generation": 12,
+        "check": "git ls-files --eol, counting attr/-text against tracked files, and comparing index against working-tree eol",
+        "result": "350 of 350 -text; no index/worktree disagreement; the .gitattributes comment's counts are stale by growth (119/74/2 recorded, 178/157/2 measured)"
+      }
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-04",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN, and larger than recorded",
+      "note": "recorded as two manifests carrying absolute home paths. Measured at generation 12 on both separator conventions: 8 posix occurrences and 67 Windows ones across 12 files, ten of them added by this loop at generation 11. Repair is forward-only; directive \u00a76 reserves mutating an existing manifest.",
+      "last_tested": {
+        "generation": 12,
+        "check": "git grep -nIE '/(home|Users)/[a-zA-Z0-9_.-]+' and git grep -nIE 'C:[\\\\/]+Users[\\\\/]+[A-Za-z0-9_.-]+'",
+        "result": "8 and 67 occurrences respectively"
+      }
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    },
+    {
+      "id": "HIST-01",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT at generation 11",
+      "note": "not unrepairable and never was. git filter-repo rewrote the branch on 2026-08-28 09:16 and left its commit map in .git/, where three generations did not look. All 26 recorded hashes resolve under three verifications; the map is tracked because .git/ is not. Eight failing guards pass and three silently skipping ones run. docs/HIST01_REPAIR_g11.md.",
+      "last_tested": {
+        "generation": 11,
+        "check": "PYTHONPATH=src python scripts/repair_hist01.py; also git fsck --lost-found, both preservation copies, the pre-loop zip and origin, all of which were dead ends",
+        "result": "26 of 26 hashes resolve; V1, V2 and V3 all pass"
+      }
+    },
+    {
+      "id": "PREREG-02",
+      "severity": "MEDIUM",
+      "status": "OPEN, RECORDED, NOT REPAIRABLE",
+      "note": "found by enacting PRE-01 and applying its checker to generation 13. DOES_NOT_SEPARATE's registered meaning carries 'the 3.1-3.5x of pass 2 was ... not a property of the system', which its branch condition -- not both devices clearing -- does not imply. Unlike the generation-14 instance the loop caught, THIS ONE FIRED: device_p10 cleared at p = 0.00062 while device_p90 did not at p = 0.30629, so the sentence was written into outputs/g13/mech01_pass3/verdict.json. Not repairable: R-4 and the hashing discipline both forbid editing it",
+      "scope": "it did not propagate. docs/UEMPIR_MECH01_g14.md rests method 2's falsification on the measured b confound and quotes both p-values, so the U-EMPIR verdict and the L0 -> L1 descent are undisturbed. One meaning field in one verdict artefact is not",
+      "forward_correction": "the sentence is not repeated in the paper",
+      "last_tested": {
+        "generation": "close",
+        "check": "python scripts/check_prereg.py",
+        "result": "mech01-pass3-g13 DEFECTIVE as expected; 8 entailment failures naming DOES_NOT_SEPARATE"
+      }
+    },
+    {
+      "id": "PROV-09",
+      "severity": "MEDIUM",
+      "status": "OPEN, RECORDED, DELIBERATELY UNREPAIRED",
+      "note": "the generation-13 order to run git fsck --lost-found wrote into two repositories this loop declared it had no authority over. 13 files in D:/Fable built Fabkg Final/.../fabkg-bench at 15:53 and 3 in D:/p3/invspec/invspec at 22:09, both 2026-08-28. The standing description of the EXT survey as 'read-only from the surveyed repositories' perspective -- a copy out, no write' is therefore not accurate for those two",
+      "why_not_repaired": "deleting them would be a second write to fix the first, in repositories this loop still has no authority over. Recorded in the archive's own README instead",
+      "what_the_write_does_not_do": ".git/lost-found/ is not under refs/, so it makes nothing reachable and protects nothing from gc. It is an inventory, not a rescue",
+      "last_tested": {
+        "generation": "close",
+        "check": "find <each repo>/.git/lost-found -type f | wc -l",
+        "result": "fabkg-bench 13, invspec 3, AIEF 0, EXT-04 0"
+      }
+    }
+  ],
+  "ruling_premises_corrected": [
+    "RATIFIED by the closing ruling section 1. Generation 10 section 5's SPEC-g10-2 falsifier was INVERTED: the outcome indicating a dimension effect is the one measured -- both d=16 cells basins, only d=4 a ridge -- not the one the ruling named. The correction was registered with its hash BEFORE the third set was measured, which is what makes it a correction rather than a reading of the result.",
+    "RATIFIED. Generation 10 section 2's account of g9-3 does not hold. What predicts refinement survival is headroom below the floor, not sub-grid junctions: the 7 survivors are exactly the 7 smallest distances at N=301 and the 6 that separate are exactly the 6 largest. No margin band was adopted from it -- the split is 1.4 percentage points wide and a threshold inside it is tuned (PH-11) -- and WIT-02 replaces it.",
+    "RATIFIED. WIT-01 read literally rejects almost every real witness, including the generation-8 headline pair, because two devices sharing a junction are separated by exactly zero in that coordinate. The implemented reading applies the rule to the separation that QUALIFIES the pair.",
+    "Generation 10 section 6's paper spine item 4 is superseded twice: once at generation 10, which replaced 'a ridge in one chart, isolated basins in another' with the dimension reading, and once at close, which weakens the d=16 half to a search statement. The spine as it now stands is docs/CLOSE_RULING.md section 5.",
+    {
+      "premise": "the ruling of 2026-08-28 section 4 dictates spine item 2 as 'sigma_1 falls x1.195 while sigma_2..sigma_4 rise x47.5-x535'",
+      "status": "CORRECTED, and the correction is arithmetic rather than a reading",
+      "measured": "x47.5 is the SMALLEST rise at the generation-8 device and x534.5 the LARGEST at device_p50, so the dictated range spans no single device. Across both devices the range is x20.9 to x534.5 -- sigma_2 rises x47.5 and x20.9, sigma_3 x55.4 and x87.1, sigma_4 x315 and x535 -- which is what docs/CLOSE_RULING.md already said and continues to say as x21-x535. Computed from outputs/close/spectrum_shape.json, whose devices[*].width_axis.sigma_leading rows are the source; the artefact was not re-run. The dictated x1.195 for sigma_1 is one of the two device values and the spine states both, 1.195 and 1.148.",
+      "why_it_is_recorded": "the ruling's other numbers were adopted verbatim. A range that was silently widened at one end and narrowed at the other would have been indistinguishable from the measured one to any reader, which is the class DOC-08 was enacted against, one level up."
+    },
+    {
+      "premise": "docs/CLOSE_RULING.md section 2 (b), ratified: what predicts refinement survival is headroom against the distinguishability floor",
+      "status": "FALSIFIED AS A GENERAL RULE at generation 11",
+      "measured": "concordance 1.000 on chart G and chart J -- the two 13-pair sets that formed the rule -- and 0.479 on chart L, the 37-pair set that did not. 0.500 is a coin. Spearman -0.033 at p=0.845. The bands overlap from 0.53 to 1.00 floor units.",
+      "traced_forward_to": "spine item 3's clause 'survival is predicted by headroom against the floor, not by geometry, in both refined sets'. Amended in docs/G11_RESULT.md section 5 to 'what predicts survival is not known'.",
+      "what_it_strengthens": "the refusal to adopt a margin band. The close refused because the band was 1.4 percentage points wide and would be tuned; chart L shows there is no band at all."
+    },
+    {
+      "premise": "HIST-01 is unrepairable from inside the tree (generations 8, 9, 10 and the close)",
+      "status": "FALSE, and untested when first written",
+      "measured": "the repair was .git/filter-repo/commit-map, present since before the finding was last restated. All 26 recorded hashes resolve under three verifications.",
+      "traced_forward_to": "eight failing guards and three silently skipping ones, including the DOC-07 commit-message guard, which was not running over the range it was written for."
+    },
+    {
+      "premise": "CI-01 is ACCEPTED-PERMANENT because there will be no remote (generation 9 default)",
+      "status": "PREMISE FALSE; status reverted per its own condition",
+      "measured": "git remote -v names origin at https://github.com/Raar1999/bayespinn-inv.git, .git/config stamped 2026-08-28 09:20, and refs/remotes/origin/main resolves, so it was fetched from as well as configured.",
+      "traced_forward_to": "CI-01 and PROV-07 both OPERATOR-BLOCKED, and OT-1 executable for the first time in nine generations. Nothing is closed: CI has still never run."
+    },
+    {
+      "premise": "operator ruling of 2026-08-28 \u00a73: three line-ending incidents mean the .gitattributes fix is incomplete in COVERAGE",
+      "status": "CORRECTED -- the fix is incomplete, but not there",
+      "measured": "350 of 350 tracked files resolve to attr/-text, every generation-11 and -12 module included. Coverage is total and cannot miss a class, because `* -text` is a wildcard.",
+      "what_is_actually_incomplete": "-text binds git, not tools. Incidents 2 and 3 were both Python's text mode rewriting an LF blob as CRLF on win32, which no .gitattributes can prevent. Generation 11 pinned newline in its own scripts; nothing enforces it."
+    },
+    {
+      "premise": "generation 12's own pre-registered discriminator for MECH-01: the SIGN of trailing-minus-head excess separates the width axis from the control axis",
+      "status": "FALSIFIED BY ITS OWN CONTROL, in the same run",
+      "measured": "the sign returns NEW_ROWS at 16 of 16 width cells and also at 16 of 18 spacing cells, where the rank does not move. The discriminator does not discriminate.",
+      "what_was_done_about_it": "the pre-registered verdict is left standing in outputs/g12/mech01_rows/verdict.json exactly as produced. Changing the classification rule after seeing the control would be the violation pre-registration exists to prevent. The magnitude comparison that does separate the axes is recorded as a DESCRIPTION under AH-14."
+    },
+    {
+      "premise": "operator ruling \u00a71.6's regex /(home|Users)/[a-zA-Z0-9_.-]+ finds the absolute home paths",
+      "status": "INCOMPLETE, and this is why the check was run",
+      "measured": "forward-slash only, so it finds 8 occurrences and misses 67 Windows-separator ones across 12 files, ten of which this loop's own generation-11 manifest added."
+    },
+    {
+      "premise": "operator ruling of 2026-08-29 \u00a72: --lost-found wrote 'Fifteen'",
+      "status": "NOT REPRODUCED -- the direction is right, the count is not",
+      "measured": "across the accession: AIEF 1 file, fabkg-bench 13, invspec 3, EXT-04 65, total 82 files in 10 directories. In the originals: fabkg-bench 13 and invspec 3, total 16. No reading of the filesystem gives fifteen",
+      "what_is_actually_the_case": "the ruling's point stands and is larger than the number it quotes: --lost-found writes, and it wrote into two ORIGINAL repositories as well as into the accession copies. Recorded as PROV-09"
+    },
+    {
+      "premise": "operator ruling of 2026-08-29 \u00a75: check whether EXT-04 has a remote, and if so remove it",
+      "status": "CONFIRMED, and the obvious enactment would have done harm",
+      "measured": "EXT-04 had remote 'origin' pointing at the REWRITTEN sibling by local path. git remote remove would also have deleted 82 refs/remotes/origin/* refs, orphaning 14 preserved commits, 2 of them the last copies",
+      "what_was_done": "hand edit of .git/config removing only the [remote \"origin\"] section. 89 refs and 1,075 reachable commits before and after"
+    }
+  ],
+  "highest_remaining_scientific_risk": "MECH-01, unchanged and now with one falsified method and one inconclusive one. The row-side signal is real in description -- 3.1x to 3.5x larger on the width axis than anywhere on the control axis, peaking at 0.15 V where the rank is climbing -- but its statistic was chosen after the fact and a pre-registered version needs new cells.",
+  "second_remaining_scientific_risk": "PATH-01, unchanged and untouched by full WIT-02 coverage. Every barrier is a straight line in one chart's coordinates and therefore an upper bound; both d=16 results are searches that found no path below the floor, not separations. The minimum-energy path is the single measurement that would settle it and it is still not computed.",
+  "third_remaining_scientific_risk": "the claim surface carries 67 absolute home paths, ten of them added by this loop at generation 11. Not a scientific risk to the results; a publication risk that the ruling made a precondition of the repository being public.",
+  "not_supported_and_not_to_be_written": [
+    "any statement that the members of a d=16 witness pair are SEPARATED, or that a basin demonstrates separation; the straight-line barrier is an UPPER bound and both d=16 results are searches that found no connecting path below the floor. The minimum-energy path was not computed. AH-13",
+    "any barrier depth as a property of the landscape rather than of the straight line between two points in one chart's coordinates, and none compared across charts without its null control and its path length beside it",
+    "any witness count without its WIT-02 refinement coverage beside it; guarded by tests/test_witness_refinement_close.py. In particular, 'all tested pairs survive refinement' of the chart-G set, which is true of three of its thirteen pairs and reads as a statement about all thirteen",
+    "any witness count without its admissibility ratio, guarded by tests/test_witness_admissibility_g10.py",
+    "any claim that the free check identifies a mechanism, or that it was pre-registered; it is arithmetic over artefacts that predate the question, and it says what moves and not why",
+    "any statement resting on the fifth singular value at the wide bias windows; it sits at or below the estimator's spectral floor in four of the eighteen width cells, which is why the free check's claim stops at the fourth",
+    "any ordering of the four sensitivities (observation set, junction, dimension, interpolant) as a general claim -- withdrawn by measurement at nine further operating points at generation 9",
+    "'the geometry of the degeneracy is chart-dependent', or 'a ridge in one chart and isolated basins in another' -- withdrawn at generation 10",
+    "any statement that two devices have junctions 0.425 nm apart and are indistinguishable; the grid node is 3.333 nm and the representation does not carry that difference",
+    "any claim that the right singular vectors localise, or delocalise, with bias-window width -- falsified at two devices under a criterion hashed before the measurement",
+    "any statement that the solver fails, or that identifiability changes, above 0.90 V; that range is UNTESTED (PH-15), which is not the same sentence",
+    "'the chart does not move the local spectrum at matched d', with or without the interpolant-family qualifier",
+    "13 chart-J witness pairs, without the refinement result beside it; 7 survive N=301->1201 at tol_carrier=1e-12",
+    "44% as the observable-space distance between the two compared chart cells; the measured value is at most 2.67%",
+    "any rank fraction on the claim surface without the observation set it was measured over, guarded by tests/test_claim_surface_g9.py",
+    "any rank fraction compared across charts -- three charts, and the rank moves with the device and the window inside a single chart",
+    "any frequency or probability of degeneracy in any chart",
+    "any contraction number at the instrument's own 2% noise",
+    "any bare integer rank whose cell has no measured population gap; the licence is a property of the (chart, d, device, bias window) cell, and the free check shows the gap that licenses it collapsing from 230.6x to 4.99x as the window widens",
+    "any full-spectrum comparison involving chart J without stating junction_scale",
+    "any statement that an identifiable rank is a property of the device; it is a property of the (device, observation set) pair, and the observation-set half is a curve",
+    "any claim evidenced on an interpreter other than CPython 3.11 or an operating system other than win32; none has been",
+    "'all tested X' or any bare universal over a set filtered by having been tested, refined, examined or sampled, without its denominator. DOC-08, guarded by tests/test_quantifier_scope_doc08.py.",
+    "a lint, type-check or test count on the claim surface without the invocation or the scope that produced it. 25 is `mypy src`; 150 is `mypy src tests scripts`. DOC-08.",
+    "'the chart-G witnesses survive refinement' without the coverage beside it. It is 13 of 13 refined and 12 surviving; one pair separated and is withdrawn.",
+    "'WIT-02 is satisfied' unqualified. It is satisfied on chart G and chart J and unmet on chart L, whose 37 pairs have never been refined.",
+    "'the chart-G ridge is confirmed by refinement' as though the refinement tested the ridge. It tested the witnesses; the ridge is a recount over the survivors under a criterion registered a generation earlier, and it remains an upper-bound statement.",
+    "failed: 0 for the pytest baseline in this clone. Eight guards fail on commit hashes that are not in its object graph -- HIST-01 -- and a baseline that rounds them away is the CI-01 shape.",
+    "'survival is predicted by headroom against the floor' as a general claim, or any threshold or margin band derived from it. It holds on the two sets that formed it and carries no information on the third (concordance 0.479). outputs/g11/headroom.json",
+    "'WIT-02 is satisfied' without the consequence beside it: full coverage tests witnesses, not connectivity, and converts no d=16 search statement into a separation",
+    "'chart L is a basin' without 'no connecting path below the floor was found along the straight line', and without the coverage: 37 of 37 refined, 26 surviving",
+    "any statement that HIST-01's repair recovers a lost working tree. It recovers commit names. REPRO-01 is untouched",
+    "'the loop's history was lost' or any variant; it was renamed by a recorded rewrite and every hash resolves",
+    "CI-01 as ACCEPTED-PERMANENT, or PROV-07 as MITIGATED-PENDING-CI; both are OPERATOR-BLOCKED since a remote exists",
+    "any claim that a remote existing means CI has run. It has not, on any leg",
+    "'the new directions live on the added bias points' as a measured result. The sign test that would have established it fires equally on the control axis; what is left is a magnitude description chosen after the fact. outputs/g12/mech01_discriminator.json",
+    "NEW_ROWS as MECH-01's answer, or any statement that MECH-01 is narrowed by a test rather than by a description",
+    "'two methods have failed' for MECH-01. One was falsified (generation 10, column side) and one was inconclusive; counting the second as a failure inflates the count toward a U-EMPIR verdict",
+    "'the push checks passed'. Five of six passed; step 1 is a human action not done and step 6's home-path arm is not clean",
+    "'the repository is safe to make public'. 67 absolute home paths naming a user are on the claim surface"
+  ],
+  "operator_tasks": [
+    "OT-1 push and run CI -- the pull request loop/champion -> main is the operator's, per the close ruling \u00a76, and remains outstanding. CI-01/CI-02 stay open until it runs.",
+    "OT-2 apply papers/CORRIGENDA_g6.md -- still unapplied. R-3 reserves papers/**. Nine cycles.",
+    "OT-3 preservation -- DISCHARGED for the four repositories that were copied. Accession, derivative and bundles exist, are verified against the census by mirror-clone, and the archive now documents itself. EXT-05 is reserved to the operator by the close ruling \u00a76 and is the only preservation item left open."
+  ],
+  "next_generation": {
+    "there_is_none": "the loop is closed at L1 by the ruling of 2026-08-29. What remains is writing, not measuring",
+    "if_it_ever_resumes": [
+      "LD-5: re-evaluate all three of the U-EMPIR reachability conditions before anything else, and climb if one is satisfied",
+      "the U-EMPIR verdict expires after generation 16. A resumption after that must re-test or re-issue it, not inherit it",
+      "PRE-01 applies to any new pre-registration: an entry in docs/PREREG_REGISTER.json, checked by scripts/check_prereg.py, BEFORE it is hashed"
+    ],
+    "blocked_on": [],
+    "halt": null
+  },
+  "halt": null,
+  "close_enactment": {
+    "ruling": "operator ruling of 2026-08-29",
+    "enacted_on": "2026-08-29",
+    "sections": {
+      "S1_neither_label": {
+        "status": "RATIFIED, nothing to do",
+        "note": "the refusal to write either of pass 4's registered labels stands. outputs/g14/mech01_pass4/verdict.json is left exactly as produced"
+      },
+      "S2_accession_record": {
+        "status": "ENACTED",
+        "artefact": "F:/backups/extgit-20260828/README.md",
+        "note": "the archive now documents itself: census, verification method, handling rules, and the handling provenance the accessioning process itself created. Pointer READMEs written beside the derivative and the bundles",
+        "not_in_this_repository": "the README lives on F: with the archive it documents. An accession whose only documentation is in another repository is not documented, which is the whole reason the ruling asked for it there"
+      },
+      "S3_PRE_01": {
+        "status": "ENACTED",
+        "register": "docs/PREREG_REGISTER.json",
+        "register_sha256": "9af7466235e98958cbccc53fbe71904230a21db24cad2f521658ed386967f48a",
+        "checker": "scripts/check_prereg.py",
+        "guard": "tests/test_pre01_preregistration_close.py",
+        "rule_text": "docs/RULES_ENACTED.md"
+      },
+      "S4_paper_paragraph": {
+        "status": "NOT STARTED -- queued behind the operator's items",
+        "note": "the ruling assigns the pull request and EXT-05 to the operator and the paper to this loop after them. The MECH-01 paragraph is fixed in the ruling's \u00a74 and is not restated here, so there is one copy of it"
+      },
+      "S5_ext04_remote": {
+        "status": "ENACTED",
+        "repository": "D:/FabKG_LoopLogs/s12/trackCF/clone",
+        "removed": "remote 'origin' -> D:/Fable built Fabkg Final/fabkg-bench_snapshot_FINAL_v5/fabkg-bench",
+        "method": "hand edit of .git/config, NOT git remote remove",
+        "why_not_git_remote_remove": "it deletes refs/remotes/origin/* along with the remote. Measured before the edit: 14 preserved commits are reachable in EXT-04 only through those refs, all 14 in the fabkg map, and 2 of the 14 resolve in no other repository on this machine -- aff7a314 and dbab122b, both hanging off refs/remotes/origin/sprint/GOV-D056-is6-rolling-wave-expansion. The convenient way to perform the authorised write would have orphaned them where they are unique",
+        "verified": {
+          "refs_before": 89,
+          "refs_after": 89,
+          "reachable_before": 1075,
+          "reachable_after": 1075,
+          "remotes_after": 0,
+          "sole_copy_commits_still_resolve": true,
+          "carried_by_bundle": true
+        },
+        "original_config_preserved_at": "F:/backups/extgit-20260828/EXT-04/.git/config"
+      }
+    }
+  }
+}

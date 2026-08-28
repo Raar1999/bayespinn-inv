@@ -1672,6 +1672,20 @@ no `gc`, no `prune`, no config change, no ref moved. The same standing statement
 as the `EXT` survey applies unchanged — this loop has no authority over those
 trees and did not acquire any by copying them.
 
+> **SUPERSEDED IN PART, close ruling of 2026-08-29 — `PROV-09`.** The sentence
+> above is **not accurate for two of the four**. Generation 13's own order to run
+> `git fsck --no-progress --lost-found` writes: it materialises a
+> `.git/lost-found/` directory, and one exists in the *originals* of
+> `fabkg-bench` (13 files, 2026-08-28 15:53) and `invspec` (3 files, 22:09).
+> `AIEF` and `EXT-04` are clean of it. **16 files were created in repositories
+> this loop declared it had no authority over**, and the copy-out was therefore
+> not the only thing that touched them. Not repaired — deleting them would be a
+> second write to fix the first, in trees this loop still has no authority over.
+> The write makes nothing reachable and protects nothing from `gc`, because
+> `.git/lost-found/` is not under `refs/`; it is an inventory, not a rescue.
+> Recorded here, in `LOOP_STATE_v14.json` and in the archive's own README at
+> `F:ackups\extgit-20260828\README.md`.
+
 **The census is over every mapped commit, not a sample.** Generation 12's figures
 came from sampling; `git cat-file --batch-check` over the full old-side of each
 map is cheap and there was no reason to keep estimating.

@@ -59,6 +59,16 @@
       "description": "MECH-01 pass 4 landing: the runner, the mechanism description, its guard, one interpolation-allowlist entry, and the six pre-registered artefacts.",
       "commit_subject": "g14: MECH-01 pass 4 -- a null matched on row count, and what it returned",
       "why_not_mechanical": "no file was edited by a script. It is wide because new modules and their artefacts land together, which is depth-1 breadth rather than a sweep."
+    },
+    {
+      "id": "close-ruling-enactment",
+      "generation": "close",
+      "enacting_rule": "PRE-01",
+      "kind": "not-mechanical",
+      "description": "the close ruling of 2026-08-29 enacted: the PRE-01 register, checker, guard and rule text; the terminal loop state and its writer; the README badge; a superseding note in the audit master; and the changelog entry.",
+      "commit_subject": "close: the ruling enacted -- PRE-01, the accession record, and EXT-04's remote",
+      "why_not_mechanical": "no file was edited by a script. Every change was made deliberately at its own site. It is wide because a rule enactment lands its register, its checker, its guard and its documentation together, which is depth-1 breadth rather than a sweep.",
+      "registered_although_below_the_trigger": "at nine files the commit sits exactly in the blind spot DIFF-01 states for itself -- 'a mechanical edit confined to nine files is invisible to it'. Adding this entry makes the commit ten files and therefore sweep-shaped, so the guard now sees what it is looking at. Declaring it is cheaper than a commit that is silent because it happened to be one file under the threshold."
     }
   ],
   "kinds": {

@@ -4,6 +4,83 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — the close ruling enacted, loop terminated at `L1` (2026-08-29)
+
+No API changes. Run under the operator ruling of 2026-08-29, which closed the
+loop at `L1`. No generation 15 ran; what follows the loop is writing. State in
+[`LOOP_STATE_v14.json`](LOOP_STATE_v14.json), `closed: true`.
+
+**`PRE-01` enacted — a pre-registration's outcome space is checked before it is
+hashed.** Two generations running had hashed a pre-registration carrying a defect
+a reading would have caught, and neither could be corrected afterwards without
+destroying what hashing protects. The rule's justification is the sentence the
+ruling adopts: *hashing fixes the prose around a statistic; it does not make that
+prose correct.* The enactment is a mechanism rather than a checklist — an outcome
+space is written down as **axes with finite levels** and each label as a
+**predicate over those axes**, the product is enumerated, and the specific
+measurement result that breaks it is named. The predicate language is interpreted
+and never evaluated: no `eval`, no `exec`. Register
+[`docs/PREREG_REGISTER.json`](docs/PREREG_REGISTER.json), checker
+[`scripts/check_prereg.py`](scripts/check_prereg.py), guard
+`tests/test_pre01_preregistration_close.py`. Reproduce:
+`python scripts/check_prereg.py`.
+
+**Enacting it found a third defect, one generation earlier and previously
+unrecorded.** Generation 13's `DOES_NOT_SEPARATE` was registered to mean, in
+part, *"…not a property of the system"* — which its branch condition, *not both
+devices clearing*, does not imply. Unlike generation 14's instance, which the
+loop caught and declined to write, **this one fired**: `device_p10` cleared at
+*p* = 0.00062 while `device_p90` did not at *p* = 0.30629, so the sentence went
+into `outputs/g13/mech01_pass3/verdict.json`. It does not propagate —
+[`docs/UEMPIR_MECH01_g14.md`](docs/UEMPIR_MECH01_g14.md) rests method 2's
+falsification on the measured `b` confound and quotes both p-values — so the
+`U-EMPIR` verdict and the `L0 → L1` descent are undisturbed. Nothing is edited;
+`R-4` and the hashing discipline both forbid it. Tracked as `PREREG-02`.
+
+**The archive documents itself.** The accession at `F:\backups\extgit-20260828\`
+now carries a README with the census, the verification method, the handling
+rules, and the handling provenance the accessioning process itself created. All
+four bundles re-verified 2026-08-29 by **mirror**-cloning into fresh bare
+repositories and looking every mapped pre-rewrite id up with `cat-file`: `AIEF`
+63/63, `fabkg-bench` 393/393, `invspec` 80/80, `EXT-04` 1073/1073. The redundancy
+figures were re-derived from the bundles alone, with no live repository
+consulted: 393 held by both, **680 by `EXT-04` only**, 0 by `fabkg-bench` only,
+33 held nowhere. A plain `git clone --bare` from a bundle under-reports — 1,061
+of 1,073 for `EXT-04` — because it takes `refs/heads` only; `--mirror` is
+required, and that trap is recorded in the README.
+
+**`PROV-09` — the accessioning process wrote outside the archive.** Generation
+13's order to run `git fsck --lost-found` writes, and a `.git/lost-found/` exists
+in the *originals* of `fabkg-bench` (13 files) and `invspec` (3). The audit's
+standing description of the `EXT` survey as *"read-only from the surveyed
+repositories' perspective"* is not accurate for those two, and
+[`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md) is superseded in part rather than
+edited. Not repaired: deleting them would be a second write to fix the first, in
+trees this loop has no authority over. The write protects nothing either —
+`.git/lost-found/` is not under `refs/`, so it is an inventory, not a rescue.
+
+**`EXT-04`'s remote removed, by hand and not by `git remote remove`.** The frozen
+pre-rewrite clone had `origin` pointing at its **rewritten** sibling, so a pull
+would have entangled the only copy of 680 commits with rewritten history and a
+push would have undone the trailer cleanup. `git remote remove` also deletes
+`refs/remotes/origin/*`, and **14 preserved commits are reachable in `EXT-04`
+only through those refs — 2 of them resolve in no other repository on this
+machine**. The `[remote "origin"]` section was removed from `.git/config`
+directly instead: 89 refs and 1,075 reachable commits before and after, both
+sole-copy commits still resolving, and the original config preserved in the
+accession.
+
+**Ladder: `L1`, held, terminal.** No movement. `L0` remains abandoned under the
+generation-14 `U-EMPIR` verdict, which is reversible — `LD-5` obliges any future
+Phase A to re-evaluate its three reachability conditions, and it expires after
+generation 16. Terminating here is not a claim that `L0` is unreachable, and
+`LD-6` does not apply because the loop did not terminate at the `L3` floor.
+
+Suite: 1,146 collected, 1,136 passed, 10 skipped. `ruff check .` clean;
+`mypy src tests scripts` unchanged at 150 findings over 157 files, so every
+module added here is clean under it. Reproduce:
+`PYTHONPATH=src python -m pytest tests -q`.
+
 ## [Unreleased] — generation 14 of the audit loop (2026-08-28)
 
 No API changes. Run under the operator ruling of 2026-08-28 (`MECH-01` pass 4).
