@@ -340,6 +340,42 @@ Three, all from the ruling, each with a guard and both controls
 
 ---
 
+## 5.1 The restored `DOC-07` guard caught the loop that restored it
+
+Generation 11 found `tests/test_commit_messages_g7.py` **silently skipping** —
+`HIST-01` had made its range unresolvable, so it had not policed a commit
+message since the 2026-08-28 rewrite — and restored it through the correction
+map. This generation is the first in which it has actually run.
+
+The first thing it did was fail, on **this generation's own repair commit**
+`f00b6a0`, whose message contains the phrase *"Two findings from the suite"*.
+`DOC-07` as widened at generation 8 forbids a commit message asserting a
+spelled-out count of something a run or a scan measured. The message asserts
+one.
+
+**It cannot be fixed.** `R-4` makes a commit message permanent, and the operator
+ruling of 2026-08-28 §1 prohibits `--amend` and history rewriting *"without
+exception"*. So the violation stands, permanently, in the history.
+
+**It is parked rather than erased or excluded.** `PARKED_DOC07_VIOLATIONS` names
+the commit and quotes the offending phrase. Moving the guard's range to exclude
+it, or loosening the pattern, would be exactly the standards drift `IA-2` exists
+to catch — and would be a worse outcome than the violation.
+
+The parking is built to fail in **both directions**, on the precedent of
+`tests/test_claim_surface_g0.py::TestParkedPapersInstance`: a parked entry must
+*still* offend. Since `R-4` forbids rewriting history, a parked violation that
+stops offending means the commit it names was rewritten — so the register is
+also a history-rewrite detector, and the only thing in the suite that would
+notice one at this granularity.
+
+This is the clearest evidence available that the `HIST-01` repair mattered. A
+guard that had been reporting green for a generation resumed work and
+immediately found a real violation in the work of the generation that restored
+it.
+
+---
+
 ## 6. Limitations
 
 * **`MECH-01` is open**, and this generation's contribution to it is a

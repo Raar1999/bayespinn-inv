@@ -54,7 +54,7 @@ PREMISES:   what this ruling rests on that has not itself been measured
 |---|---|---|---|
 | (pre-fusion g0–close addendum) | operator-written; not counted under `SR-2` | — | — |
 | `g11` | **9** — three of them errors in this loop's own rulings, two of them errors of mine made during the generation | 0 | no |
-| `g12` | **6** — three of them mine, including the pre-registered discriminator its own control killed | 0 | no |
+| `g12` | **7** — four of them mine, including the pre-registered discriminator its own control killed and a DOC-07 violation the guard I restored caught in my own commit | 0 | no |
 
 ---
 
@@ -369,6 +369,23 @@ matters.
    verdict. The flag is accurate about the three it names and misleading about
    the run, and it is left as produced with this correction beside it rather
    than recomputed.
+
+7. **The `DOC-07` guard I restored caught me, in the generation that restored
+   it.** `tests/test_commit_messages_g7.py` had been silently skipping since the
+   rewrite; generation 11 restored it through the correction map; this is the
+   first generation in which it has run. It failed on this generation's own
+   repair commit `f00b6a0`, whose message asserts a spelled-out count of
+   something the suite measured.
+
+   `R-4` and the operator ruling's *"without exception"* both forbid amending
+   it, so the violation is permanent. It is **parked and quoted**, not erased
+   and not excluded by moving the guard's range, which would be the drift
+   `IA-2` exists to catch. The parking fails in both directions: a parked entry
+   must still offend, so it doubles as a history-rewrite detector.
+
+   I would rather record this than any of the successes above. A guard reported
+   green for a generation while not running, was repaired, and immediately
+   found a real defect in the repairer's own work.
 
 ## `ENACTED`
 

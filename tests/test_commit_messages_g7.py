@@ -210,6 +210,29 @@ def test_fires_on_each_forbidden_shape(text: str):
 # The widened rule
 # ---------------------------------------------------------------------------
 
+#: `DOC-07` violations that are on the record permanently.
+#:
+#: `R-4` makes a commit message permanent, and the operator ruling of
+#: 2026-08-28 prohibits `--amend` and history rewriting "without exception", so
+#: a violation committed after the widening cannot be removed. It is parked
+#: here -- named, with its exact offending phrase -- rather than erased, or
+#: excluded by moving the guard's range, which is the standards drift `IA-2`
+#: exists to catch.
+#:
+#: Each entry must STILL offend, which makes this dict a history-rewrite
+#: detector as well as a record: if a parked violation stops offending, the
+#: commit it names was rewritten. Both directions, exactly like
+#: `test_claim_surface_g0.py::TestParkedPapersInstance`.
+PARKED_DOC07_VIOLATIONS = {
+    "f00b6a025": (
+        '"Two findings from the suite" -- generation 12. Caught by this guard '
+        "in the same generation that restored it: HIST-01 had left it skipping "
+        "since the 2026-08-28 rewrite, so it had not policed a commit message "
+        "for a generation. The first thing it did on being restored was catch "
+        "the loop that restored it."),
+}
+
+
 def test_no_commit_since_the_widening_asserts_a_spelled_out_count():
     widened_at = _sha_of_subject(WIDENED_AT_SUBJECT)
     if widened_at is None:
@@ -223,11 +246,22 @@ def test_no_commit_since_the_widening_asserts_a_spelled_out_count():
         sha, _, body = record.partition("\x1f")
         claims = offending_claims_wide(body)
         if claims:
-            offenders.append(f"{sha.strip()[:9]}: {claims}")
-    assert not offenders, (
+            offenders.append((sha.strip(), claims))
+
+    unparked = [f"{sha[:9]}: {claims}" for sha, claims in offenders
+                if sha[:9] not in PARKED_DOC07_VIOLATIONS]
+    assert not unparked, (
         "DOC-07, widened at generation 8 -- a commit message asserts a count of "
         "something a run or a scan measured. R-4 makes it permanent. Reference "
-        "the manifest or the artefact:\n  " + "\n  ".join(offenders))
+        "the manifest or the artefact:\n  " + "\n  ".join(unparked))
+
+    still_offending = {sha[:9] for sha, _ in offenders}
+    vanished = sorted(set(PARKED_DOC07_VIOLATIONS) - still_offending)
+    assert not vanished, (
+        f"a parked DOC-07 violation no longer offends: {vanished}. R-4 makes "
+        "these permanent, so the only way one disappears is a history rewrite. "
+        "If the rewrite was authorised, delete the parked entry in the same "
+        "commit and say so; if it was not, this is an OPS-02 finding.")
 
 
 def test_the_widened_guard_catches_the_message_that_forced_it():
