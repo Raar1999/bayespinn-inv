@@ -95,3 +95,4 @@ verdict or the satisfied reachability condition that licensed it.
 | generation | from | to | licensed by |
 |---|---|---|---|
 | — | — | `L2` (held at instantiation) | not a movement; the starting position, recorded before generation 11 |
+| 14 | `L0` (the target, under attempt since generation 11) | `L1` (terminal) | `U-EMPIR` on `MECH-01` — `docs/UEMPIR_MECH01_g14.md`, sha256 `e34c812fe7401ca3f1efe164e521455b376850445781f9004a4d6ada81b9cd40`. Three distinct methods, two falsified and one inconclusive, each characterised by measurement. `LD-3` satisfied; the reachability condition is `LD-4` §3 of that document |
