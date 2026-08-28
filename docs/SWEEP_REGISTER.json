@@ -1,0 +1,68 @@
+{
+  "rule": "DIFF-01",
+  "what_this_is": "the set of mechanical or sweep edits this repository has made, each with the changed-line count that was expected BEFORE it ran and the count it actually produced. Enforced by tests/test_diff01_blast_radius_g14.py.",
+  "why_a_register_and_not_a_diff_review": "the EOL-02 first pass changed 9,832 lines to fix 68 -- 145 times its intent -- and the suite was green before and after, because every file was individually correct. Correct-per-file and catastrophic-in-aggregate are the same operation for a codemod, and no guard in this repository measured aggregate. A reviewer reading the diffstat caught it, which is not a mechanism.",
+  "thresholds": {
+    "halt_ratio": 2.0,
+    "halt_ratio_meaning": "actual / expected. Above this the edit halts and is reported, whatever the suite says.",
+    "sweep_shaped_files_changed": 10,
+    "sweep_shaped_meaning": "a commit touching at least this many files is sweep-shaped and must appear here, by commit_subject, if it lands at or after the enactment commit. The count is the signature of a mechanical edit: hand edits are deep and narrow, codemods are shallow and wide."
+  },
+  "enacted_at_subject": "g14: DIFF-01 -- a sweep edit states its blast radius before it runs",
+  "scope_note": "commits BEFORE the enactment commit are out of scope, following DOC-07's own design: R-4 makes history uncorrectable and a guard that fails on history nobody can fix is a guard people switch off. The generation-13 EOL-02 sweep is registered below as the founding entry and is used by the guard as its positive control from history.",
+  "entries": [
+    {
+      "id": "eol02-first-pass",
+      "generation": 13,
+      "enacting_rule": "EOL-02",
+      "kind": "mechanical",
+      "description": "add an explicit newline= to every text-mode write in src/, scripts/ and tests/. The keyword was added correctly at every site; the files were then written back through Python's own text mode, which normalised 25 CRLF files to LF.",
+      "expected_changed_lines": 68,
+      "expected_stated_before_running": true,
+      "expected_basis": "the AST scan found 68 violating call sites; one line changes at each.",
+      "actual_changed_lines": 9832,
+      "ratio": 144.6,
+      "outcome": "HALTED",
+      "committed": false,
+      "suite_was_green": true,
+      "caught_by": "reading the diffstat",
+      "reported_in": [
+        "docs/RULES_ENACTED.md",
+        "docs/G13_RESULT.md"
+      ]
+    },
+    {
+      "id": "eol02-byte-preserving-redo",
+      "generation": 13,
+      "enacting_rule": "EOL-02",
+      "kind": "mechanical",
+      "description": "the same edit redone over bytes, asserting per file that its CRLF and LF counts are unchanged.",
+      "expected_changed_lines": 68,
+      "expected_stated_before_running": true,
+      "expected_basis": "unchanged from the first pass: 68 call sites, one line each.",
+      "actual_changed_lines": 68,
+      "ratio": 1.0,
+      "outcome": "COMPLETED",
+      "committed": true,
+      "commit_subject": "g13: EOL-02 -- every text-mode write states its line ending",
+      "commit_changed_lines": 464,
+      "commit_changed_lines_note": "the commit is larger than the sweep because it also carries the new rule text in docs/RULES_ENACTED.md and the new guard module. The sweep itself is the 68 above; DIFF-01 governs the sweep, not the commit it travels in.",
+      "reported_in": [
+        "docs/G13_RESULT.md"
+      ]
+    },
+    {
+      "id": "mech01-pass4-landing",
+      "generation": 14,
+      "enacting_rule": null,
+      "kind": "not-mechanical",
+      "description": "MECH-01 pass 4 landing: the runner, the mechanism description, its guard, one interpolation-allowlist entry, and the six pre-registered artefacts.",
+      "commit_subject": "g14: MECH-01 pass 4 -- a null matched on row count, and what it returned",
+      "why_not_mechanical": "no file was edited by a script. It is wide because new modules and their artefacts land together, which is depth-1 breadth rather than a sweep."
+    }
+  ],
+  "kinds": {
+    "mechanical": "a codemod, normalisation or rule enactment applied across files by a script. DIFF-01 governs it and the full expected/actual accounting is required.",
+    "not-mechanical": "a wide commit that is not a sweep -- typically new files landing together. It appears here because the file-count trigger cannot see intent, and it must say why it is not mechanical. This is the false-positive path the rule's stated limitation predicts, and declaring it is the intended response; splitting a commit to slip under the threshold would be gaming the guard."
+  }
+}

@@ -782,3 +782,62 @@ for writing. Writers that own their handle end to end and never expose a mode �
 the rule reaches call sites and those are not call sites where a line ending can
 be stated. A `mode=` computed at runtime rather than written as a literal is also
 invisible to it; there is none in the tree today.
+
+---
+
+## `DIFF-01` — a mechanical edit states its blast radius before it runs
+
+**Enacted** operator ruling of 2026-08-28 §5 (the pass-4 ruling).
+
+> Any mechanical or sweep edit states its expected changed-line count before it
+> runs. A result exceeding the expectation by more than 2× halts the edit and is
+> reported, regardless of whether the suite is green. Applies to normalisations,
+> codemods, and rule enactments — the three places where correct-per-file and
+> catastrophic-in-aggregate are the same operation.
+
+**The defect that forced it.** The `EOL-02` enactment's first pass changed
+**9,832 lines to fix 68** — 145× its own intent. It added the keyword correctly
+at every one of the 68 call sites and then wrote every touched file back through
+Python's text mode, normalising 25 CRLF files to LF. `.gitattributes` is
+`* -text`, so that mixture is the committed truth and
+`tests/test_line_endings_g6.py` records it deliberately as *what was measured*.
+
+**The suite was green before the sweep and green after it.** That is the whole
+point. Every file was individually correct; the damage existed only in
+aggregate, and no guard in this repository measured aggregate. What caught it
+was a reviewer reading the diffstat — a person, not a mechanism, and the
+operator's word for that is the right one: a guard that passes a change two
+orders of magnitude larger than its intent is not measuring blast radius.
+
+**Why a ratio and not a line count.** Blast radius is relative to intent. A
+three-line edit that touches forty lines is an incident; a four-thousand-line
+edit that touches four thousand two hundred is not. A guard keyed to an absolute
+count would miss the small-but-runaway case, which is the more common one.
+
+**Enforced by** `docs/SWEEP_REGISTER.json` and
+`tests/test_diff01_blast_radius_g14.py`.
+
+A register nobody updates guards nothing — that is `SKIP-01`'s lesson, and
+`SKIP-01` avoids it by comparing its register against the skips the suite
+actually emits. There is no equivalent signal for "a sweep happened", so this
+guard manufactures one from git: **a commit touching at least ten files is
+sweep-shaped** and must appear in the register by subject. Hand edits are deep
+and narrow; codemods are shallow and wide, and the file count is that signature.
+
+Both controls ship: a planted overrun that did not halt is caught, and a sweep
+that stayed within its estimate is not flagged — the second matters because a
+guard that rejects everything also looks correct. A third control asserts the
+threshold is a ratio rather than a count, by exhibiting one case of each kind.
+
+**Scope**, following `DOC-07`'s own design: commits before the enactment commit
+are out of scope, because `R-4` makes history uncorrectable and a guard that
+fails on history nobody can fix is a guard people switch off. The generation-13
+`EOL-02` sweep is registered as the founding entry and doubles as the guard's
+**positive control from history** — the detector must still identify it as
+sweep-shaped, and if it stops doing so the detector has gone vacuous.
+
+**A measured limitation.** The file-count trigger is a proxy. A mechanical edit
+confined to nine files is invisible to it, and a wide hand edit will be flagged
+and need a register entry saying it was not mechanical. The first is the real
+gap and it is stated rather than papered over: the rule reaches the *shape* of a
+sweep, not its intent, because intent is not visible to a test.
