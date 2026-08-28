@@ -4,6 +4,66 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — generation 13 of the audit loop (2026-08-28)
+
+No API changes. Run under the operator ruling of 2026-08-28 (`PROV-08` / `CI-02`
+/ `MECH-01` pass 3). Full record in [`docs/G13_RESULT.md`](docs/G13_RESULT.md).
+
+**1,216 pre-rewrite commits preserved off the tree.** Four `.git` directories
+copied to `F:\backups\extgit-20260828\` — read-only from the surveyed
+repositories' perspective, no `gc`, no `prune`, no config change. The census is
+over every mapped commit rather than a sample: `AIEF` 63 of 63, `fabkg-bench` 393
+of 1,106, `invspec` 80 of 122, `EXT-04` 1,073 of 1,106, each copy resolving
+exactly what its original resolves, `git fsck` clean in all four. Reproduce:
+`git cat-file --batch-check` over the old side of each `commit-map` in both.
+**`EXT-04` turns out to be a superset, not a second record** — it holds all 393
+of `fabkg-bench`'s survivors plus 680 more that exist nowhere else — so the
+ruling's freeze on it is load-bearing. 33 commits are lost everywhere.
+`docs/AUDIT_MASTER.md`, `PROV-08` rescue.
+
+**`MECH-01`'s row-side method is falsified out of sample.** The magnitude gap
+that generation 12 reported as 3.1–3.5× was confounded with the split ratio
+`b = n_out/n_rows`: the width axis sweeps `b` over 0.0625–0.875 and peaks at
+0.375–0.50, while the control axis only ever visits 0.857–0.929, so the axes were
+compared where they do not overlap. Pass 3 standardises against the
+`Beta(n_out/2, n_in/2)` null that `b` induces, excludes cells whose null is
+degenerate (`n_out ≥ 2` and `n_in ≥ 2` — which removes exactly the narrowest
+width cell), pre-registers an exact one-sided Mann-Whitney at `α = 0.05`
+requiring **both** held-out devices to clear, and hashes all of it before
+touching them. `device_p10` clears at *p* = 0.00062; `device_p90` does not at
+*p* = 0.30629. **`DOES_NOT_SEPARATE`.** The discovery sample clears at both
+(0.0019, 0.0047), which is the point. Reproduce: `PYTHONPATH=src python
+scripts/run_mech01_pass3.py`.
+
+**The mechanism of that failure is measured, not asserted.** `dz` correlates with
+`b` at **−0.95, −0.97, −0.98 and −0.71** along the width axis, and the
+device-to-device offset spread is **1.572** against a largest axis difference at
+matched `b` of **0.22**. The statistic was varying with the window and with which
+device it is. Reproduce: `PYTHONPATH=src python
+scripts/mech01_pass3_mechanism.py`. `U-EMPIR` now stands at **two** distinct
+falsified methods and requires three; no unreachability verdict is written and
+`MECH-01` stays open. Ladder `L1` held.
+
+**`EOL-02` enacted: 68 text-mode writes across 41 files now state their line
+ending.** `.gitattributes` binds git, not the interpreter, so `open(p, "w")` and
+`Path.write_text(s)` were emitting CRLF on Windows while the source read LF.
+Guarded by `tests/test_eol02_line_endings_g13.py` over the AST with both `SW-20`
+controls; the two `csv` call sites that need `newline=""` are left alone and now
+have a test protecting them. The first mechanical pass rewrote 25 CRLF files as
+LF — 9,832 lines changed to fix 68 — and was redone over bytes with a per-file
+assertion that CRLF and LF counts are unchanged. `docs/RULES_ENACTED.md`.
+
+**The sweep exposed a character scan over source code, which is what `SW-20`
+forbids.** `tests/test_notebooks.py` guarded `BUG-14` by matching the exact
+substring `write_text(nbf.writes(nb), encoding="utf-8")` in the generator.
+`EOL-02` appended `newline="
+"` to that call: the write stayed correct and the
+guard failed anyway, because it was matching a spelling rather than a property.
+Rewritten over the AST — every `write_text` in the generator must pass
+`encoding`, in any argument order — and it now fails loudly if the generator
+stops calling `write_text` at all, which the substring form could not tell from
+a rename.
+
 ## [Unreleased] — close addendum: `WIT-02` for chart G (2026-08-28)
 
 No API changes. The closing ruling of 2026-08-26 ended the technical work; the

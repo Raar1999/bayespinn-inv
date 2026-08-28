@@ -62,12 +62,30 @@ class TestNotebooksMatchTheirGenerator:
         Asserted on the source rather than by running the generator, so the
         invariant is stated even where the platform default is already UTF-8
         and the bug would be invisible.
+
+        ``SW-20``, retrofitted at generation 13. This was a **character** scan
+        for the exact substring ``write_text(nbf.writes(nb), encoding="utf-8")``
+        and it broke the moment ``EOL-02`` appended a ``newline=`` argument to
+        that very call -- the write was still correct, the guard still failed.
+        A guard whose subject is source code is written over the AST, and over
+        the AST the question is "does every ``write_text`` in this module pass
+        ``encoding``", which is what BUG-14 was ever about. Argument order and
+        the presence of other keywords are none of its business.
         """
-        src = BUILDER.read_text(encoding="utf-8")
-        assert 'write_text(nbf.writes(nb), encoding="utf-8")' in src, (
-            "build_notebooks.py must write with an explicit utf-8 encoding; "
-            "without it the generator cannot run on a cp1252 default"
-        )
+        import ast
+        tree = ast.parse(BUILDER.read_text(encoding="utf-8"))
+        writes = [
+            n for n in ast.walk(tree)
+            if isinstance(n, ast.Call)
+            and getattr(n.func, "attr", None) == "write_text"]
+        assert writes, (
+            "build_notebooks.py no longer calls write_text at all; this guard "
+            "has gone vacuous and BUG-14 is unguarded")
+        for call in writes:
+            kwargs = {k.arg for k in call.keywords}
+            assert "encoding" in kwargs, (
+                "build_notebooks.py:%d writes without an explicit encoding; "
+                "the generator cannot run on a cp1252 default" % call.lineno)
 
     def test_no_text_io_omits_an_encoding(self):
         """The same defect class, swept across src/ and scripts/ (BUG-14).
