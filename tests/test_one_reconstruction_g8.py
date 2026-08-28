@@ -236,6 +236,14 @@ INTERPOLATION_ALLOWLIST = {
            "singular vectors SPEC-g10-1 localises. It lands on an anchor "
            "vector that is then handed to a Chart, so the solver grid is still "
            "reached only through charts._lerp."),
+    "scripts/run_mech01_rows.py": (
+        2, "g12: the same anchor-to-anchor collocation as g9 and g10 -- chart "
+           "G d=4 coordinates onto the d=16 anchor lattice, once per device "
+           "for MECH-01's row-side measurement. Verified rather than asserted: "
+           "both calls produce `m16`, which is only ever passed to "
+           "run_g9.cell_spectrum as a chart-relative theta, and this module "
+           "contains no .charted, no .reconstruct and no solver call, so the "
+           "grid is still reached only through charts._lerp."),
     "scripts/defect_case_study.py": (
         1, "grid -> anchors for the L2 comparison against the recovery."),
     "scripts/run_inverse_sweep.py": (

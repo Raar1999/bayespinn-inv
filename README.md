@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-1018%20collected-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-1051%20collected-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-research-blueviolet.svg)
 
 **Uncertainty-aware inverse design of semiconductor devices from terminal I–V,
