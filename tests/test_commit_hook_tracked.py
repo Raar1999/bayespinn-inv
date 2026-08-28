@@ -137,11 +137,20 @@ def test_hook_is_executable_in_the_index() -> None:
     """Git must record mode ``100755``, not ``100644``.
 
     Git execs a hook directly; on Linux a hook without the executable bit is
-    silently not run, and ``core.hooksPath`` reports nothing wrong. The first
-    commit of this file recorded ``100644``, because ``core.filemode`` is
-    ``false`` on the Windows machine that wrote it -- the working-tree
-    permission bits are meaningless there, so only the **index** mode is worth
-    asserting. Checked here rather than on disk for that reason.
+    silently not run, and ``core.hooksPath`` reports nothing wrong.
+
+    The first commit of this file recorded ``100644`` despite the file having
+    been ``chmod +x``-ed. NTFS carries no Unix executable bit: the MSYS layer
+    synthesises one for ``ls``, git's own ``stat`` does not see it, and this
+    repository had ``core.filemode=true`` -- so git faithfully recorded the
+    absence of a bit the filesystem cannot store. ``core.filemode`` is now
+    ``false`` locally, which is the standard Windows remedy and stops the file
+    reading as permanently modified; the index mode was set once with
+    ``git update-index --chmod=+x``.
+
+    The index is therefore the only place the executable bit exists on this
+    platform, and the only place worth asserting. A filesystem check here would
+    pass on Linux, fail on Windows, and tell neither anything useful.
     """
     entry = subprocess.run(
         ["git", "ls-files", "-s", "scripts/hooks/commit-msg"],

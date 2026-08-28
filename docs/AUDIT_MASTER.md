@@ -1434,3 +1434,226 @@ thirteen depths reproduce generation 10's bit for bit before the subset is
 taken, so the recount is a recount rather than a re-measurement. The outcome
 table was hashed to disk before the first solve, keyed on the classifier's own
 output, so no reading was available that the classifier does not produce.
+
+---
+
+## 13. Housekeeping pass (2026-08-28) — durability, the hook, and nine other trees
+
+Not a generation. No `LOOP_STATE` increment, no ladder movement, no specification.
+A scoped work order with five tasks, of which three produced findings against this
+repository and one produced a survey of repositories this loop does not own.
+
+### BAK-01 — every copy of this repository lived on one physical device
+| **Severity** | HIGH | **Status** | **RESOLVED (2026-08-28)** |
+
+`C:`, `D:` and `E:` are partitions of `DiskNumber 0`, a single NVMe device
+(`UMIS RPJYJ1T24MML1AWY`). The working tree, the `20260828T201434Z` bundle and the
+`E:\backup\bayespinn-inv-20260828` copy were therefore three copies inside one
+failure domain, and the loop had been treating them as redundancy. A controller
+failure takes all three, and the bundle is the only artefact carrying the
+post-rewrite object graph.
+
+The bundle is now on `DiskNumber 1`, a USB-attached JMicron enclosure
+(`F:\backups\bayespinn-inv-20260828\`), and on `C:\Users\abhis\OneDrive\backups\`.
+Both copies were verified by digest against the recorded `CAE7…8EFF`, and the `F:`
+copy additionally passes `git bundle verify`, which reports a complete history and
+the refs the bundle was cut from.
+
+Two honest limits on this status. The USB enclosure reports `DriveType Fixed`
+rather than `Removable` — it is a separate device on a separate bus, but it is not
+detached media, so an event that takes the machine can still take it while it is
+attached. And **OneDrive upload completion is not verifiable from this machine**:
+the file is in the sync folder, which is not the same as being in the cloud.
+Neither destination is an offsite copy in the sense a backup policy would mean, and
+no claim is made here that one exists.
+
+### HOOK-01 — the attribution hook was machine-global, untracked, and asserted to have been tested
+| **Severity** | HIGH | **Status** | **RESOLVED (2026-08-28)** |
+
+The `commit-msg` hook that strips AI-attribution trailers was selected by a
+**machine-global** `core.hooksPath` pointing at `~/.git-hooks`. That location is
+outside the repository, outside the bundle and outside the `E:` copy, so a clone of
+this tree on any other machine inherited none of the protection, and nothing in the
+tree said so. `OPS-02`'s audit reports `core.hooksPath` precisely because a
+repository-local check cannot see it; what the audit did not say is that the hook
+would not travel.
+
+Two facts make this worse than an omission. `LOOP_STATE_v11.json` records the hook
+under generation 12 as `tested_not_assumed`, with the phrase "both controls: a
+planted `Co-Authored-By` is stripped and the body survives; an ordinary message
+containing 'generated' and 'co-author' is byte-identical afterwards". No test module
+in this tree carried that verification. It was done once, by hand, and left no
+artefact — so nothing re-ran it, and nothing would have noticed it breaking. That is
+`SW-20`'s failure mode one level up: not a guard that cannot fire, but a guard that
+exists only inside a status claim.
+
+Resolved by `scripts/hooks/commit-msg`, tracked byte-identically to the installed
+copy, with the activation command in `README.md` and
+`tests/test_commit_hook_tracked.py` executing the tracked script as a subprocess
+against a temporary file. The guard deliberately never reads `core.hooksPath`: the
+property under test is what a cloner receives, not what this machine has switched
+on. Both `SW-20` controls were demonstrated by mutation rather than asserted — a
+no-op hook fails every positive control and no negative one, an over-broad hook
+fails the prose control alone. A missing `bash` is a hard failure rather than a
+skip, because `HIST-01` is the standing lesson about guards that quietly stop
+running.
+
+**A defect inside the fix.** The first commit of the hook recorded mode `100644`.
+NTFS carries no Unix executable bit, so git recorded the absence of a bit the
+filesystem cannot store, and a Linux clone would have received a hook that was
+present, activated, and never executed — the exact failure being closed, reproduced
+by its own repair. The index mode is now `100755` and is asserted by
+`test_hook_is_executable_in_the_index`, which checks the index rather than the
+filesystem because the filesystem is not authoritative on this platform.
+
+### OPS-03 — the `DOC-07` guard cannot distinguish a claim from a quotation of one
+| **Severity** | LOW | **Status** | **RECORDED, permanent under `R-4`** |
+
+> **Namespace note.** `OPS-01` and `OPS-02` in `docs/RULES_ENACTED.md` are
+> **operator rulings**. This entry is an **audit finding of this housekeeping
+> pass**, not an enacted rule, and this loop has no standing to enact one. The
+> prefix collides because the identifier was written into a commit message before
+> the collision was noticed, and `R-4` makes that message permanent. Recorded here
+> rather than quietly renumbered.
+
+The work order carrying this pass named `DOC-07` and said, in as many words, no
+spelled-out counts. The commit updating the README badge spelled one out anyway.
+Writing a number as a word rather than a digit is not a way around the rule; it is
+the shape the generation-8 widening exists to catch, and the widened guard caught it
+on the next run. Parked as `f34edc138`.
+
+The instructive part is what happened next. The commit that *parked* that violation
+was itself flagged, because its message repeated the offending phrase while
+explaining it. The detector matches text, so a message asserting a count and a
+message describing one that was asserted are indistinguishable to it. Under `R-4`
+that message is permanent too, so it is parked as `8e7983868` rather than reworded,
+and the chain terminates only because the next message was written to avoid
+restating the phrase.
+
+**The rule for authors, which is the whole content of this finding:** an explanation
+of a parked entry points at the register and never restates the phrase, or the
+register grows one entry per explanation. No guard enforces this — a guard that
+could would need the use/mention distinction the detector lacks — so it is recorded
+as a practice, and the two parked entries are its evidence.
+
+### CI-02 — the branch is pushed and still untested; `CI-01`'s reversion condition is only half met
+| **Severity** | MEDIUM | **Status** | **OPEN** |
+
+`loop/champion` is now on the remote, the first push this repository has made.
+`CI-01` was set `ACCEPTED-PERMANENT` at generation 9 on the reasoning that `R-4`
+prohibited pushing, with `OT-1` recording that the status reverts if the situation
+changes. It has changed, and the status does **not** revert, because pushing was
+necessary but not sufficient.
+
+`.github/workflows/ci.yml` triggers on `push` to `main`, on `pull_request`, and on
+`workflow_dispatch`. Pushing a branch that is none of those runs nothing:
+`gh run list` reports no runs of any kind for this repository. The Windows job that
+`BUG-14` exists to keep honest, and the ubuntu legs that are the only evidence this
+tree has ever run on Linux, remain unevaluated. What changed is that the code is now
+*reachable* by CI; what has not changed is that CI has not seen it.
+
+Clearing this needs one of: a pull request from `loop/champion`, a manual
+`workflow_dispatch`, a `push:` trigger covering more than `main`, or a merge to
+`main`. All four are operator decisions about a remote, and none is taken here.
+`main` on the remote is untouched at `6577f4b`, no force was used, and this push
+added commits on a new branch and rewrote nothing.
+
+### PROV-08 — three other rewritten repositories still hold their pre-rewrite objects, unreferenced
+| **Severity** | HIGH | **Status** | **REPORTED — no authority to act, and time-critical** |
+
+The `git filter-repo` run of 2026-08-28 covered four repositories. In the three
+other than this one, commits listed on the **old** side of the `commit-map` still
+resolve locally while being reachable from no ref: sampled against each map,
+`AIEF_Product_Development` retains all 63 of 63, `invspec` 80 of 122, and
+`fabkg-bench` 84 of 200 sampled. Of the fifteen surviving objects checked with
+`git branch -a --contains`, none is reachable from any branch. They are dangling,
+and `git gc`, `git prune`, a reclone, or a deferred cleanup destroys them without
+warning.
+
+This repository is the counter-example that dates the window: it retains 1 of its 35
+mapped commits, and that one is the identity-mapped root reachable from `main`.
+Generation 12 recorded that no pre-rewrite objects survive here and concluded the
+commit-map was the sole surviving trace of ten generations' identity. That
+conclusion was correct **for this tree** and does not generalise: in the other three
+the objects themselves are still on disk today.
+
+Every map found was copied to `F:\backups\bayespinn-inv-20260828\` as
+`commit-map__<repo>__20260828.txt`, with the `ref-map` beside it because it carries
+the branch and tag movement the commit-map does not. Copying the *objects* was not
+done: that is repair, this pass is a survey, and it is not this loop's tree.
+
+### EXT-01 … EXT-09 — survey of the other repositories on this machine
+
+**Standing statement, applying to every `EXT` row below: this loop has no authority
+over that tree.** Nothing was committed, rewritten, pushed, collected, pruned,
+checked out or modified in any of them. The commands issued were `git rev-parse`,
+`git grep`, `git cat-file`, `git log`, `git remote` and `git for-each-ref`, all
+read-only, plus a copy of each `commit-map` and `ref-map` *out* to `F:`. Every
+classification below is a report. None is a repair, and none authorises one.
+
+Discovery was bounded as specified: `D:\` and `C:\Users\abhis\`, maximum depth 4,
+excluding `node_modules`, `.venv`, `venv`, `site-packages`, `AppData` and `build`.
+Ten repositories were found, of which nine are surveyed here.
+
+| ID | repository | rewritten today | map | refs seen / unresolved / of those, mapped | remote | trailers | class |
+|---|---|---|---|---|---|---|---|
+| `EXT-01` | `D:\AIEF_Product_Development` | yes, 11:43:00 | 63 entries | 19 / 10 / **0** | `Raar1999/AIEF-Fusion`, force-pushed | 0 of 63 | **CLEAN** |
+| `EXT-02` | `D:\Fable built Fabkg Final\…\fabkg-bench` | yes, 11:43:57 | 1106 entries | 814 / 603 / **249** | `Raar1999/fabkg-bench`, force-pushed | 0 of 1106 | **BROKEN, MAP PRESENT** |
+| `EXT-03` | `D:\p3\invspec\invspec` | yes, 11:45:23 | 122 entries | 35 / 21 / **8** | `Raar1999/invspec`, force-pushed | 0 of 141 | **BROKEN, MAP PRESENT** |
+| `EXT-04` | `D:\FabKG_LoopLogs\s12\trackCF\clone` | no | — | 779 / 328 / n/a | `D:/Fable` (local path) | **1011 of 1075** | **CLEAN of rewrite damage** |
+| `EXT-05` | `D:\Fable built Fabkg Final\FabKG-Application` | no | — | 72 / 61 / n/a | none | **138 of 169** | **CLEAN of rewrite damage** |
+| `EXT-06` | `D:\Fusion Projects\SEWCP_Master_Assembly` | no | — | 138 / 59 / n/a | `Raar1999/SEWCP_Master_Assembly` | 0 of 56 | **CLEAN of rewrite damage** |
+| `EXT-07` | `D:\fab-ops-analytics-complete\…\project5-fab-operations-analytics` | no | — | 16 / 13 / n/a | `Raar1999/fab-ops-intelligence` | 0 of 59 | **CLEAN of rewrite damage** |
+| `EXT-08` | `C:\Users\abhis\.codex\.tmp\plugins` | no | — | 446 / 446 / n/a | `openai/plugins` | 0 of 1 | **CLEAN of rewrite damage** |
+| `EXT-09` | `C:\Users\abhis\OneDrive\Documents\GitHub\NAFA-Europe dataset` | no | — | 0 / 0 / n/a | `Raar1999/NAFA-Europe-dataset` | 0 of 2 | **CLEAN** |
+
+**How the three columns of numbers were obtained, because the naive count is
+wrong.** The specified probe, `\b[0-9a-f]{7,40}\b` over `*.md`, `*.json`, `*.yml`,
+`*.yaml`, `*.toml`, matches any run of seven to forty characters drawn from
+`[0-9a-f]`. In these trees that includes decimal integers (`1073741819`), ISBNs
+(`9780133440492`) and the mantissas of scientific notation — `1.048317650695026e-05`
+contains `048317650695026e`, which the pattern matches with word boundaries at both
+ends. Run as written it reported `invspec` as having 80,806 candidate references,
+substantially all of them arithmetic, and classified nine of nine repositories as
+broken.
+
+The counts above therefore mask numeric spans out of each line first and require a
+candidate to carry at least two hex letters *and* a digit. The third column is what
+actually decides repairability, and it is exact rather than sampled: **of the
+strings that no longer resolve, how many does that repository's own commit-map list
+on its old side** — that is, how many were genuinely its commits before today,
+rather than references to other projects, foreign digests, or numbers.
+
+That distinction is what separates `EXT-01` from `EXT-02` and `EXT-03`.
+`AIEF_Product_Development` has ten unresolved candidates and its map claims none of
+them: they sit in `docs/COMPATIBILITY.md`, `docs/EVIDENCE_MODEL.md` and
+`docs/user/01-installation.md`, were not commits of that repository at any point, so
+the rewrite did not break them and repairing them is not a coherent operation.
+`fabkg-bench` has 249 unresolved references its map does identify as former commits,
+with concrete corrections available — `5b4661f2` in
+`artifacts/audit/AUDIT_DIGEST_v1.json` maps to `33aa1c6abc6c`, and so on. `invspec`
+has 8, including `be56c6b4` in `audit/ledger.v10.yaml` and `audit/errata.md`.
+
+**`EXT-04` is a finding in its own right, and it is the good kind.**
+`D:\FabKG_LoopLogs\s12\trackCF\clone` was not rewritten and holds **146 of 150**
+sampled pre-rewrite commits of `EXT-02`. For the fabkg lineage the pre-rewrite object
+graph therefore survives independently of the commit-map — which is exactly what
+generation 12 searched for in this repository and did not find. `EXT-05` resolved 0
+of the same 150 and is a different history despite the shared branch name.
+
+The same repository is a finding of the other kind. `EXT-04` and `EXT-05` between
+them carry **1,149 commits whose messages contain a `Co-Authored-By` trailer**, while
+`EXT-02` — the rewritten sibling — carries none. Whatever the rewrite was for, the
+trailers still exist in local copies on this machine, and one of those copies has 81
+remote-tracking refs.
+
+**Reconciliation with the work order's premise.** The order describes the rewrite as
+1,237 commits and 108 branches across four repositories, three force-pushed. The
+branch figure and the force-push figure reconcile exactly: the four `ref-map` files
+list 109 heads, of which 108 moved — this repository's `main` is the one identity
+mapping — and the three repositories whose remote refs sit on rewritten commits are
+`EXT-01`, `EXT-02` and `EXT-03`, this repository's `origin/main` being untouched. The
+commit figure does not reconcile: the four commit-maps hold 35, 63, 1106 and 122
+entries, totalling 1,326. The difference of 89 is not explained by anything
+measurable from here, and is recorded as unexplained rather than reconciled by
+assumption.
