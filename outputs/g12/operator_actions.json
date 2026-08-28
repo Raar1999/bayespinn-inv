@@ -1,8 +1,8 @@
 {
   "rule": "OPS-02",
   "what_this_is": "the Phase A audit of operator actions on the repository. An operator action on the tree is an unattested change to the object of study, and this loop was built on the premise that those get detected",
-  "audited_at": "2026-08-28T16:47:13",
-  "head": "9fac86ba2a56d49185343410aacc97f39589e6e1",
+  "audited_at": "2026-08-28T17:32:22",
+  "head": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
   "surfaces": {
     "remote": {
       "surface": "remote",
@@ -68,7 +68,7 @@
     },
     "reflog": {
       "surface": "reflog",
-      "n_entries": 6,
+      "n_entries": 9,
       "n_not_a_commit": 2,
       "not_a_commit": [
         {
