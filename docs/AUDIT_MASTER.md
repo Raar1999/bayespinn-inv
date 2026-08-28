@@ -1559,7 +1559,7 @@ Clearing this needs one of: a pull request from `loop/champion`, a manual
 added commits on a new branch and rewrote nothing.
 
 ### PROV-08 — three other rewritten repositories still hold their pre-rewrite objects, unreferenced
-| **Severity** | HIGH | **Status** | **REPORTED — no authority to act, and time-critical** |
+| **Severity** | HIGH | **Status** | **SUPERSEDED by the PROV-08 rescue below — objects copied, generation 13** |
 
 The `git filter-repo` run of 2026-08-28 covered four repositories. In the three
 other than this one, commits listed on the **old** side of the `commit-map` still
@@ -1657,3 +1657,94 @@ commit figure does not reconcile: the four commit-maps hold 35, 63, 1106 and 122
 entries, totalling 1,326. The difference of 89 is not explained by anything
 measurable from here, and is recorded as unexplained rather than reconciled by
 assumption.
+
+### PROV-08 rescue — the objects are copied, and the census is larger than the sample said
+| **Severity** | HIGH | **Status** | **OBJECTS PRESERVED — 1,216 pre-rewrite commits copied to `F:`** |
+
+Generation 13, under the operator ruling of 2026-08-28 §1. The ruling's reading
+was right and the window was still open: nothing had touched these objects, and
+`git gc --auto` would have taken them during any ordinary operation.
+
+Four `.git` directories were copied with `robocopy /E /XJ` to
+`F:\backups\extgit-20260828\<name>\.git` — 92 MB in total against 685 GB free.
+**Read-only from the surveyed repositories' perspective**: a copy out, no write,
+no `gc`, no `prune`, no config change, no ref moved. The same standing statement
+as the `EXT` survey applies unchanged — this loop has no authority over those
+trees and did not acquire any by copying them.
+
+**The census is over every mapped commit, not a sample.** Generation 12's figures
+came from sampling; `git cat-file --batch-check` over the full old-side of each
+map is cheap and there was no reason to keep estimating.
+
+| repository | pre-rewrite ids in map | original resolves | copy resolves | |
+|---|---|---|---|---|
+| `EXT-01` `AIEF_Product_Development` | 63 | 63 | 63 | **MATCH** |
+| `EXT-02` `fabkg-bench` | 1,106 | 393 | 393 | **MATCH** |
+| `EXT-03` `invspec` | 122 | 80 | 80 | **MATCH** |
+| `EXT-04` `trackCF\clone` | 1,106 (fabkg lineage) | 1,073 | 1,073 | **MATCH** |
+
+`fabkg-bench` at 393 of 1,106 is 35.5%, against the 84-of-200 sample's 42%. The
+sample was not wrong at its own precision; the full census is simply the number,
+and it is the one that should be quoted.
+
+`git fsck --no-progress` reports **zero errors and zero corruption in all four
+copies**. Each copy resolves exactly what its original resolves.
+
+**`EXT-04` is a superset, not a second opinion — which changes the §2 ruling's
+force, in its favour.** The ruling froze `EXT-04` to preserve "the redundancy
+that makes fabkg-bench's damage repairable by two routes instead of one". The
+measurement says it is not redundancy at all:
+
+* commits held by **both** `EXT-02` and `EXT-04`: **393**
+* held by `EXT-04` **only**: **680**
+* held by `EXT-02` **only**: **0**
+* in the map and held **nowhere**: **33**
+
+`EXT-02` contributes nothing `EXT-04` does not already have. For 680 of
+fabkg-bench's pre-rewrite commits `EXT-04` is not the second route, it is the
+**only** route. Freezing it was right and is now load-bearing rather than
+prudent: a `filter-repo` run in `EXT-04` destroys 680 commits that exist in no
+other repository on this machine.
+
+**And `EXT-04` is the only one of the four that is structurally safe.** Sampled
+eight survivors per repository against `git branch -a --contains`:
+
+| | refs | survivors sampled | reachable from a branch |
+|---|---|---|---|
+| `AIEF` | 17 | 8 | **0** |
+| `fabkg-bench` | 169 | 8 | **0** |
+| `invspec` | 50 | 8 | **0** |
+| `EXT-04` | 89 | 8 | **8** |
+
+In the three rewritten trees the survivors are dangling and a `gc` ends them. In
+`EXT-04` they are ordinary reachable history, because `EXT-04` was never
+rewritten — it is a pre-rewrite clone. That is why it holds 1,073 where its
+rewritten sibling holds 393, and it is the property that makes the freeze
+sufficient rather than merely helpful.
+
+**The dangling survivors hang off very few tips**, which is worth recording
+because it is what makes any future rescue cheap. `fsck --lost-found`
+materialised 1 dangling commit tip in `AIEF`, 7 in `fabkg-bench`, 3 in `invspec`
+— and walking parents from those tips reaches **every** survivor: 63 of 63, 393
+of 393, 80 of 80. Eleven refs would pin all 536 dangling commits permanently.
+
+**What is preserved and what is still exposed.** The copies on `F:` are
+byte-faithful and hold everything the originals hold. They are still *archives of
+dangling objects*: a `git` command run inside one of them that triggers
+`gc --auto` would prune them there too, exactly as in the original. That risk is
+small — nothing runs git in a backup directory — and it is **not** closed here,
+because closing it means writing refs into the archive and that is a change to
+evidence this loop was told to copy, not to edit. Recorded as an open
+recommendation: creating eleven `refs/rescue/*` refs in the three copies, or a
+separate bare rescue repository beside them, converts "preserved" into "durable".
+That is the operator's call.
+
+**The 33 lost everywhere** are lost from this machine's four fabkg-lineage
+repositories. `EXT-05` was not examined for them; whether it holds any is
+unmeasured, and the ruling reserves `EXT-05` to the operator, so it stays
+unmeasured here rather than being surveyed under a §1 that did not ask for it.
+
+**Scoping the generalisation, as the ruling directed.** Generation 12's finding
+that no pre-rewrite SHA survives is true **of this tree only** — this repository
+retains 1 of its 35 mapped commits and that one is the identity-mapped root
+reachable from `main`. It was stated without that scope and is now scoped.
