@@ -1659,7 +1659,7 @@ measurable from here, and is recorded as unexplained rather than reconciled by
 assumption.
 
 ### PROV-08 rescue — the objects are copied, and the census is larger than the sample said
-| **Severity** | HIGH | **Status** | **OBJECTS PRESERVED — 1,216 pre-rewrite commits copied to `F:`** |
+| **Severity** | HIGH | **Status** | **SUPERSEDED by the PROV-08 durability record below — accession, derivative and bundle, generation 14** |
 
 Generation 13, under the operator ruling of 2026-08-28 §1. The ruling's reading
 was right and the window was still open: nothing had touched these objects, and
@@ -1755,3 +1755,70 @@ than being surveyed under a §1 that did not ask for it.
 that no pre-rewrite SHA survives is true **of this tree only** — this repository
 retains 1 of its 35 mapped commits and that one is the identity-mapped root
 reachable from `main`. It was stated without that scope and is now scoped.
+
+### PROV-08 durability — accession, derivative, bundle
+| **Severity** | HIGH | **Status** | **PRESERVED AND DURABLE — the gc exposure is closed** |
+
+Generation 14, under the operator ruling of 2026-08-28 §1 (the pass-4 ruling).
+
+Generation 13 left one thing open and stated it as a binary: the copies on `F:`
+were byte-faithful archives **of dangling objects**, so a `git` command run inside
+one that triggered `gc --auto` would prune them there exactly as in the original.
+Writing refs to fix that would have edited evidence the loop was told to copy.
+
+Archival practice separates the two roles, and the ruling applied it. The binary
+was false.
+
+**Accession — `F:\backups\extgit-20260828\`.** The four `.git` copies as taken.
+**854 files set read-only** at the filesystem level. No write command has been run
+in them and none ever will be; `gc --auto` fires on `commit`, `merge`, `rebase`
+and `receive-pack`, never on `fsck` or `cat-file`, so generation 13's verification
+never endangered them. Verified *after* locking: every repository still resolves
+its full survivor count.
+
+**They are not pristine copies of the originals, and that is recorded rather than
+glossed.** Generation 13's ruling ordered `fsck --no-progress --lost-found`, which
+materialised `.git/lost-found/` inside each. That is the accession's state *as
+accessioned*, and it is what the derivative and the bundles inherit.
+
+**Derivative — `F:\backups\extgit-20260828-derivative\`.** File-count parity with
+the accession confirmed before anything was written. Then the rescue refs, from
+the chain tips generation 13's tip analysis identified:
+
+| | refs written | survivors | reachable after | dangling left |
+|---|---|---|---|---|
+| `AIEF` | 1 | 63 | 63 | **0** |
+| `fabkg-bench` | 7 | 393 | 393 | **0** |
+| `invspec` | 3 | 80 | 80 | **0** |
+| `EXT-04` | 60 | 1,073 | 1,073 | **0** |
+
+The **eleven** refs across the three rewritten trees pin all **536** of their
+dangling survivors, exactly as the tip analysis predicted — one ref per chain tip,
+every survivor an ancestor of one. `EXT-04`'s 60 are its own separate danglers;
+its 1,073 mapped survivors were already reachable from branches, which is the
+property that made freezing it sufficient where the others needed a copy.
+
+**Bundle — `F:\backups\extgit-20260828-bundles\`.** `git bundle create … --all`
+from each derivative. Verified by cloning each back into a **fresh bare
+repository** and re-counting against the full census rather than by trusting the
+ref list:
+
+| bundle | census | carried | `git bundle verify` |
+|---|---|---|---|
+| `AIEF` | 63 | **63** | okay |
+| `fabkg-bench` | 393 | **393** | okay |
+| `invspec` | 80 | **80** | okay |
+| `EXT-04` | 1,073 | **1,073** | okay |
+
+**Every bundle carries its full census, and nothing in a bundle can be pruned by
+anything, because nothing in it is unreachable.** A bundle is a single file with
+no `gc` to run inside it.
+
+Sizes: 91 MB accession, 92 MB derivative, 83 MB bundles, against 686 GB free.
+
+**What is still not closed.** `EXT-02` and `EXT-03` are `BROKEN, MAP PRESENT` in
+their own repositories, on their own schedule, by whoever owns them — this loop
+has no authority there and did not acquire any by copying them. The 33
+fabkg-lineage commits absent as pre-rewrite objects are still absent; their
+content survives under rewritten identities, and `EXT-05` remains unexamined and
+reserved to the operator.
