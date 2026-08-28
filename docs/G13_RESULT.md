@@ -45,9 +45,12 @@ survivors are reachable from refs — it was never rewritten — where the other
 three hold theirs as dangling objects that a `gc` ends. That is why the freeze is
 sufficient for `EXT-04` and why a copy was necessary for the others.
 
-**33 commits are in the fabkg map and in none of the four repositories.** Lost,
-and recorded as lost rather than as unexamined. `EXT-05` was not surveyed for
-them, because the ruling reserves `EXT-05` to the operator and §1 did not ask.
+**33 commits are in the fabkg map and in none of the four repositories — as
+pre-rewrite objects.** All 33 have a non-zero `new` SHA and all 33 resolve on the
+new side, so none was dropped by the rewrite: what is gone is the original
+object and the identity it carried, not the content. `EXT-05` was not surveyed
+for them, because the ruling reserves `EXT-05` to the operator and §1 did not
+ask.
 
 **One thing is preserved but not yet durable, and it is left as a
 recommendation.** The three copies of rewritten repositories are byte-faithful

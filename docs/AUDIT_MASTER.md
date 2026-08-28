@@ -1739,10 +1739,17 @@ recommendation: creating eleven `refs/rescue/*` refs in the three copies, or a
 separate bare rescue repository beside them, converts "preserved" into "durable".
 That is the operator's call.
 
-**The 33 lost everywhere** are lost from this machine's four fabkg-lineage
-repositories. `EXT-05` was not examined for them; whether it holds any is
-unmeasured, and the ruling reserves `EXT-05` to the operator, so it stays
-unmeasured here rather than being surveyed under a §1 that did not ask for it.
+**The 33 are not lost work, and the distinction matters.** Every one of them has
+a non-zero `new` SHA in the map and **all 33 resolve on the new side** in the
+rewritten repository. None was dropped by the rewrite. What has been lost for
+those 33 is the **pre-rewrite object** — the original SHA, and whatever the
+rewrite stripped from it — not the content, which survives under the rewritten
+identity. For the other 1,073 both identities survive and the original commit can
+be read as it was written.
+
+`EXT-05` was not examined for the 33. Whether it holds any is unmeasured, the
+ruling reserves `EXT-05` to the operator, and it stays unmeasured here rather
+than being surveyed under a §1 that did not ask for it.
 
 **Scoping the generalisation, as the ruling directed.** Generation 12's finding
 that no pre-rewrite SHA survives is true **of this tree only** — this repository
