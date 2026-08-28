@@ -239,6 +239,16 @@ PARKED_DOC07_VIOLATIONS = {
         "generation-8 widening was written to catch, and it caught it. R-4 "
         "makes the message permanent; the badge itself is the artefact the "
         "message should have pointed at."),
+    "8e7983868": (
+        "generation 13, and not a claim at all -- the message that parked "
+        "f34edc138 above, which the guard flagged because it QUOTES the "
+        "offending phrase while explaining it. The detector matches text, so "
+        "it cannot separate use from mention: a message asserting a count and "
+        "a message describing one that was asserted look identical to it. "
+        "Parking rather than rewording, because R-4 applies to this message "
+        "too. The practical consequence is recorded as OPS-03 in "
+        "docs/AUDIT_MASTER.md: a message about a parked violation must not "
+        "restate the phrase, or the register grows one entry per explanation."),
 }
 
 
