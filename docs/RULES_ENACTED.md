@@ -592,3 +592,126 @@ not caught, and `CHART-03` is close to that shape. Widening the predicate to
 note text was tried and rejected: it fires on every note that *describes* an
 impossibility it does not assert, including this rule's own entry. Recorded as a
 limit rather than papered over.
+
+---
+
+## `OPS-02` — Phase A audits the operator's actions on the repository
+
+**Enacted** operator ruling of 2026-08-28 §1, after the reserved-item report.
+
+> An operator action on the tree is an unattested change to the object of study.
+> Phase A audits `git remote -v`, `.git/config` mtime and its commit-defining
+> settings, `.git/hooks/` **and** `core.hooksPath`, `filter-repo` artefacts, and
+> reflog head movement not attributable to the loop's own commits.
+
+**The defect that forced it.** On 2026-08-28 the operator ran `git filter-repo`
+at **09:16:38** and added a remote at **09:20:50**. The loop noticed neither
+until generation 11 went looking — nine hours and one whole generation later. In
+between, the close addendum ran and closed while eight guards were failing on
+hashes the rewrite had renamed, three more were silently skipping for the same
+reason, and `CI-01` was carried as `ACCEPTED-PERMANENT` on the premise that no
+remote would ever exist, while a remote existed.
+
+This loop was built on the premise that unattested changes to the object of
+study get detected. They were not.
+
+**Why `core.hooksPath` is named explicitly.** The `commit-msg` hook that strips
+attribution trailers lives at `~/.git-hooks`, outside the repository. `ls
+.git/hooks` reports nothing, and a repository-local check would conclude no hook
+is installed while one is running on every commit. A surface that is only
+visible from outside the repository is exactly the surface an in-repository
+audit misses.
+
+**Enforced by** `tests/test_operator_actions_g12.py`, over
+`outputs/g12/operator_actions.json` produced by
+`scripts/audit_operator_actions.py`. Both controls: a planted audit missing one
+of the five surfaces is caught, and a planted audit whose `filter_repo` surface
+reports absent while `.git/filter-repo/` exists is caught — that being the
+plausible failure, an audit that runs and reports nothing.
+
+**What it deliberately does not do.** It does not judge whether an operator
+action was correct; that is the operator's authority, and a detector that
+editorialised is a detector people switch off. It records *what changed*.
+
+**A measured limitation.** It cannot see actions that leave no trace — a file
+edited and reverted, a config set and unset, a hook installed and removed
+between generations. The artefact says so in `what_it_cannot_see` rather than
+implying completeness.
+
+---
+
+## `PILOT-01` — a measurement is never declined on a plausibility argument
+
+**Enacted** operator ruling of 2026-08-28 §2.
+
+> Either a measurement is priced by pilot and then declined on `U-BUDGET` with
+> the number, or it is run. *"It will not change the answer"* is a prediction,
+> and predictions are cheap where the measurement is cheap.
+
+**The defect that forced it.** Chart L's 37 witness pairs were published as a
+`WIT-02` gap across three generations, and the closing ruling declined the
+measurement on the argument that a basin at 212 floor units cannot become a
+ridge. The reasoning was right about the outcome and **irrelevant to the
+decision**: the pilot came out at 7.5 s per pair and the run took 288 seconds.
+Nobody had measured what a five-minute measurement cost.
+
+The operator recorded this as the ninth operator error and the shape of it is
+worth keeping: a plausibility argument about the *result* was used to settle a
+question about the *cost*.
+
+**How it interacts with `U-BUDGET`.** The unreachability standard already voids
+a budget verdict that carries no measured pilot. `PILOT-01` closes the other
+half: without it, a measurement could be declined with no verdict at all, simply
+by never being proposed. The rule makes the pilot the precondition of the
+decision rather than of the verdict.
+
+**Enforced by** `tests/test_pilot_first_g12.py`. Any measurement a state file
+records as declined, deferred or out of scope must carry a `pilot` block with a
+measured number and the invocation that produced it. Both controls: a planted
+decline whose justification is a plausibility argument with no pilot is caught,
+and a planted decline carrying a real pilot passes — the latter would fail if
+the predicate rejected everything.
+
+**A measured limitation.** It reaches declines that are *recorded*. A
+measurement nobody proposes is invisible to it, and chart L was in that state
+for two of its three generations. The rule shortens the gap; it does not close
+it.
+
+---
+
+## `SKIP-01` — a skip is a failure unless it carries a reason and an expiry
+
+**Enacted** operator ruling of 2026-08-28 §3.
+
+> The suite reports skip counts with reasons in the same line as passes, and any
+> guard that skips is reported as not guarding.
+
+**The defect that forced it.** `HIST-01` made eight guards fail and **three
+skip**. The eight were loud. The three were not, and two of them were
+`tests/test_commit_messages_g7.py` — the guard that polices `DOC-07` — which
+had stopped running over the range it was written for because its helper turns a
+non-zero `git` exit into `pytest.skip`. A green suite reported that as green.
+
+The operator placed it in the same family as a positive control that passes
+whatever the rule does: **a failing guard is loud, a skipping guard reports
+green**, and the second is the more dangerous of the two.
+
+**What it requires.** Every skip the suite emits is registered in
+`docs/SKIP_REGISTER.json` with the reason pattern, why the skip is legitimate,
+and an **expiry** — the condition or generation after which it is a finding
+rather than a skip. An unregistered skip is a failure. An expired registration
+is a failure.
+
+**Enforced by** `tests/test_skip_register_g12.py`, over
+`outputs/g12/skips.json` produced by `scripts/report_skips.py`, which runs the
+suite and records every skip with its reason. Both controls: a planted
+unregistered skip reason is caught, and a planted registration whose expiry has
+passed is caught. The positive control is that the real skip set passes, which
+would fail if the matcher matched nothing.
+
+**Why the register is a file and not a decorator.** A `reason=` string already
+exists on every skip in this repository and none of them was enough — the two
+`DOC-07` skips carried a perfectly clear reason, in `git`'s own words, and still
+went unnoticed for a generation. The reason was never the missing part. What was
+missing is a place where the *set* of accepted skips is written down, so that a
+new one has to be added deliberately.

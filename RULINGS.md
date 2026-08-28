@@ -54,6 +54,7 @@ PREMISES:   what this ruling rests on that has not itself been measured
 |---|---|---|---|
 | (pre-fusion g0–close addendum) | operator-written; not counted under `SR-2` | — | — |
 | `g11` | **9** — three of them errors in this loop's own rulings, two of them errors of mine made during the generation | 0 | no |
+| `g12` | **6** — three of them mine, including the pre-registered discriminator its own control killed | 0 | no |
 
 ---
 
@@ -269,3 +270,196 @@ What this ruling rests on that has not itself been measured.
 6. **Reserved items are assumed to remain reserved.** `PROV-07`'s exemption from
    `L0` rests on `git push` being the human's. If that changes, `L0`'s distance
    changes with it.
+
+---
+
+# `RULING g12` — the pre-push audit, and a discriminator killed by its own control
+
+**Written** 2026-08-28, under the operator ruling of the same date that answered
+the reserved item. **Ladder** `LADDER.md`, unedited, hash unchanged.
+**Measurement** `docs/G12_RESULT.md`.
+
+---
+
+## `RATIFIED`
+
+**The push runbook ran in full, and the push did not.** Five of six steps pass.
+Step 2 is clean on every pattern — the rewrite achieved exactly what it was for,
+so provenance was not broken for nothing. Step 3 passes and reorders the story:
+the `commit-msg` hook was installed at **09:06:36**, ten minutes *before* the
+09:16:38 rewrite, so the two were not alternatives and the ruling's concern that
+the rewrite was done *instead of* the hook does not hold. Step 4 passes on a
+distinction worth stating: the remote's only ref is the one commit `filter-repo`
+mapped **to itself**, so the push is a plain fast-forward of a new branch and no
+force is required or would be.
+
+**`MECH-01`'s second method reproduced its object exactly.** 72 of 72 singular
+values bit-identical to generation 9. Whatever else this generation did or did
+not establish, it was operating on the Jacobian generation 9 measured.
+
+**`PILOT-01` was applied the same generation it was enacted**, and it worked in
+the direction it was meant to: the row-side measurement was priced at 7.9 s per
+cell before anything was decided about it, so no plausibility argument was
+available.
+
+**`OPS-02`'s first run recovered what the reserved-item report had to assemble
+by hand**: hook 09:06:36, rewrite 09:16:38, remote 09:20:50 — three operator
+actions inside fifteen minutes, none detected for a generation. It also reports
+what an in-repository check structurally cannot: a hooks path outside the tree,
+and a reflog shorter than the history.
+
+## `CORRECTED`
+
+Six. The first is mine, made inside this generation, and it is the one that
+matters.
+
+1. **My own pre-registered discriminator did not discriminate, and its own
+   control proved it.** The row-side method registered a **sign** —
+   `NEW_ROWS` iff the trailing directions sit further outside the core window
+   than the head — and it returned `NEW_ROWS` at 16 of 16 width cells. `C1`
+   then returned the same sign at **16 of 18 cells of the spacing axis**, where
+   `SPEC-g9-2` measured the rank as not moving at all.
+
+   A statistic that fires just as readily on the axis where nothing happens is
+   describing a property these Jacobians have generally, not detecting an
+   effect. **The verdict is void as a verdict.**
+
+   What was done about it is the part I want on the record: the pre-registered
+   verdict is **left standing, unedited**, in
+   `outputs/g12/mech01_rows/verdict.json`. Rewriting the classification rule
+   after seeing the control is precisely the violation pre-registration exists
+   to prevent, and the fact that the rewritten rule would have produced a
+   *weaker* claim does not make it permissible.
+
+2. **The ruling's §3 diagnosis is corrected.** Three line-ending incidents do
+   mean the fix is incomplete, but not in coverage: **350 of 350** tracked files
+   resolve to `attr/-text`, every generation-11 and -12 module included, and `*
+   -text` is a wildcard that cannot miss a class. `-text` binds **git**.
+   Incidents 2 and 3 were both **tools** — Python's text mode rewriting an LF
+   blob as CRLF on `win32` — which no `.gitattributes` can prevent. The
+   incomplete half is the tool side, and generation 11's fix was local to its own
+   scripts with nothing enforcing it.
+
+3. **The ruling's §1.6 regex could not find what §1.6 is for.**
+   `/(home|Users)/[a-zA-Z0-9_.-]+` is forward-slash only: 8 hits, all the known
+   `SW-18a`. Extended to Windows separators, **67 occurrences across 12 files**,
+   ten of them added by *this loop* in generation 11's own manifest. `SW-18a`
+   was recorded as two manifests; it is twelve files.
+
+4. **Step 5's premise does not hold, and the finding is the absence.** The
+   ruling asks whether the preservation copies hold pre-rewrite objects and says
+   that if so they are the only independent record. Neither copy contains a
+   `.git` at all, and the archive zip is the **pre-loop** repository. No
+   pre-rewrite object survives anywhere. `docs/COMMIT_HASH_MAP_g11.json` is
+   therefore not the bridge to an independent record — it **is** the record, the
+   sole surviving trace of ten generations' pre-rewrite identity, on one disk.
+   This makes step 1 more urgent than it reads, not less.
+
+5. **`.gitattributes` states counts about the tree that nobody re-measures.**
+   Its comment says the index holds 119 CRLF, 74 LF and 2 mixed; measured now,
+   **178, 157 and 2**. Stale by growth rather than wrong in kind, and the
+   argument the comment makes does not depend on them — but a number in a
+   document nobody re-derives is the exact surface `DOC-07` objects to.
+   Recorded rather than edited, because rewriting a line-ending policy file to
+   fix its own prose is the risk that file describes.
+
+6. **I under-specified `all_controls_pass` in my own instrument.** It gates on
+   `R1`, `N1` and `P1` and *not* on `C1` — so the artefact reports
+   `all_controls_pass: true` for a run whose control axis invalidated its
+   verdict. The flag is accurate about the three it names and misleading about
+   the run, and it is left as produced with this correction beside it rather
+   than recomputed.
+
+## `ENACTED`
+
+Three, all from the ruling, each with a guard and both controls
+(`docs/RULES_ENACTED.md`).
+
+* **`OPS-02`** — Phase A audits the operator's actions.
+  `tests/test_operator_actions_g12.py`. The negative control is *an audit that
+  runs and reports nothing*, which is the plausible failure for a detector
+  rather than the malformed one, and it is what a detector looks like after
+  someone has made it stop complaining.
+* **`PILOT-01`** — a measurement is never declined on a plausibility argument.
+  `tests/test_pilot_first_g12.py`. Its negative control plants the closing
+  ruling's own sentence about chart L. It also forces the state file to carry
+  `declined_measurements` even when empty, so that a generation has to say out
+  loud that it declined nothing.
+* **`SKIP-01`** — a skip is a failure unless it carries a reason and an expiry.
+  `docs/SKIP_REGISTER.json`, `scripts/report_skips.py`,
+  `tests/test_skip_register_g12.py`. Its negative control plants the exact skip
+  text that hid `HIST-01` for a generation and requires the guard to catch it.
+
+## `LADDER`
+
+**`L1` held.** Not climbed, not descended, and **no unreachability verdict was
+issued or was available**.
+
+`L0` needs `MECH-01` answered. It is not, and the count of failed methods is
+**one, not two**. The row-side method was *inconclusive as pre-registered* — the
+hypothesis was not falsified, the discriminator was too blunt — and a sharpened
+version is the same method with a better statistic. Counting it as a second
+failure would be inflating the count toward a `U-EMPIR` verdict, which is the
+cheapest way to finish and the thing §2 of the directive exists to make
+unavailable.
+
+## `NEXT`
+
+**`MECH-01`, third pass: the magnitude statistic, pre-registered, against new
+cells.**
+
+Priced at 7.9 s per cell. It needs *new* cells — a third device, or a held-out
+axis — because a statistic cannot be pre-registered against data already seen,
+and re-reading this generation's 36 cells with a statistic chosen from them
+would be the same error dressed as a fix.
+
+`SR-3`, the devil's advocate against what this generation promotes — *the width
+axis carries a row-side concentration three times anything on the control axis,
+peaking where the rank climbs*:
+
+> The strongest case against it is that the comparison is between a **maximum**
+> and a **maximum** over nine points each, with no distributional model and no
+> pre-registered threshold. A ratio of 3.1–3.5× between two sample maxima drawn
+> from curves with ranges 0.21 and 0.08 is not obviously outside what two
+> unequal-variance curves would produce. Worse, the width curve's peak sits at
+> 0.15 V — the *second* point on the axis — and a peak at the second of nine
+> points is exactly where a boundary artefact would sit: at width 0.10 the core
+> window and the measurement window are the **same set**, so `n_out = 1` of 16
+> and the statistic is nearly degenerate there by construction. The rise from
+> 0.10 to 0.15 may be that degeneracy relaxing rather than physics arriving.
+
+Answered, and the answer is the next generation's first clause rather than a
+rebuttal. The `n_out = 1` degeneracy at the narrowest width is real and is
+visible in the artefact; it is why the pre-registered rule excluded the
+narrowest window from the verdict in the first place. But it does **not**
+explain the decay from 0.15 to 0.75, where `n_out` grows monotonically and the
+statistic weakens — the opposite of what a shrinking-denominator artefact would
+do. What would settle it: the same statistic computed with the core window
+**held out of the measurement window entirely**, so no cell shares rows with the
+reference. That is measurable, it is cheap, and it is registered here as the
+third pass's first clause rather than argued about now.
+
+## `PREMISES`
+
+1. **The left singular vectors are the right object for "where a direction
+   lives".** `|U[:,k]|²` over rows is a natural reading and it is not the only
+   one; row leverage, or the influence of deleting a row on `σ_k`, would answer
+   a related question differently and neither was computed.
+2. **The reference core window is the right null.** It was fixed by
+   `SPEC-g9-2` rather than chosen here, which protects against tuning but does
+   not make it correct — and §`NEXT` names the specific way it may be biased.
+3. **`N1` at ρ = −0.583 against a 0.7 bound is a pass.** It is, by the
+   pre-registered rule, and it is the least comfortable margin in this
+   generation. One Haar draw per width bounds gullibility; it does not estimate
+   a null.
+4. **The commit map is trusted as `filter-repo`'s honest output**, unchanged
+   from generation 11 and now load-bearing for more: with no pre-rewrite objects
+   surviving anywhere, nothing can cross-check it except the commit messages,
+   which `V2` already uses.
+5. **`git ls-remote` reflects the remote's real state.** One read, unauthenticated,
+   at one moment. If the remote gains refs before a push, step 4's conclusion
+   changes and must be re-run rather than recalled.
+6. **The home-path count is a property of the tracked tree, not of what a
+   reader would see.** 67 occurrences is what `git grep` finds; a published
+   repository also exposes commit metadata, and that was checked separately
+   (`Raar1999@users.noreply.github.com`) rather than assumed to be covered.

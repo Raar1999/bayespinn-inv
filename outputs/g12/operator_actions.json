@@ -1,0 +1,101 @@
+{
+  "rule": "OPS-02",
+  "what_this_is": "the Phase A audit of operator actions on the repository. An operator action on the tree is an unattested change to the object of study, and this loop was built on the premise that those get detected",
+  "audited_at": "2026-08-28T16:47:13",
+  "head": "9fac86ba2a56d49185343410aacc97f39589e6e1",
+  "surfaces": {
+    "remote": {
+      "surface": "remote",
+      "n_remotes": 1,
+      "remotes": [
+        "origin"
+      ],
+      "urls": [
+        "https://github.com/Raar1999/bayespinn-inv.git"
+      ],
+      "present": true,
+      "why_it_matters": "a remote appearing reverts CI-01 from ACCEPTED-PERMANENT to OPERATOR-BLOCKED by its own recorded condition. One appeared on 2026-08-28 and no generation noticed until generation 11"
+    },
+    "config": {
+      "surface": "config",
+      "path": ".git/config",
+      "mtime": "2026-08-28T09:20:50",
+      "sha256": "f311632cf8e7d2af10ad633320a4a6b18fa86ff71e01279b85e103e465c70e32",
+      "watched": {
+        "core.autocrlf": "false",
+        "core.hooksPath": "C:\\Users\\abhis/.git-hooks",
+        "core.filemode": "true",
+        "user.name": "Raar1999",
+        "user.email": "Raar1999@users.noreply.github.com",
+        "commit.gpgsign": "false"
+      },
+      "why_it_matters": "core.autocrlf at system level with no .gitattributes was the first of three line-ending incidents; core.hooksPath decides whether the repository's hooks are the ones that run"
+    },
+    "hooks": {
+      "surface": "hooks",
+      "core_hooksPath": "C:\\Users\\abhis/.git-hooks",
+      "hooks_directory_in_use": "C:\\Users\\abhis\\.git-hooks",
+      "is_outside_the_repository": true,
+      "installed": [
+        {
+          "name": "commit-msg",
+          "executable": true,
+          "mtime": "2026-08-28T09:06:36",
+          "sha256": "3a650d9859f2ee941f235d6726dc423f2c74b217d60e5341f09b098d7f94324d"
+        }
+      ],
+      "n_installed": 1,
+      "why_it_matters": "the commit-msg hook that strips attribution trailers lives outside this repository, so `ls .git/hooks` reports nothing and a repository-local check would conclude no hook is installed"
+    },
+    "filter_repo": {
+      "surface": "filter_repo",
+      "present": true,
+      "directory": ".git/filter-repo",
+      "why_it_matters": "its presence IS the record that history was rewritten. It is also the only surviving trace of the pre-rewrite SHAs: no preservation copy holds a .git, and the archive zip is the pre-loop repository",
+      "mtime": "2026-08-28T09:16:38",
+      "files": [
+        "already_ran",
+        "changed-refs",
+        "commit-map",
+        "first-changed-commits",
+        "ref-map",
+        "suboptimal-issues"
+      ],
+      "rewritten_commits": 35,
+      "unchanged_by_the_rewrite": 1,
+      "tracked_copy": "docs/COMMIT_HASH_MAP_g11.json",
+      "tracked_copy_present": true
+    },
+    "reflog": {
+      "surface": "reflog",
+      "n_entries": 6,
+      "n_not_a_commit": 2,
+      "not_a_commit": [
+        {
+          "sha": "701821c",
+          "ref": "HEAD@{2026-08-28 13:56:13 +0530}",
+          "operation": "reset: moving to HEAD",
+          "date": "2026-08-26 18:49:53 +0530"
+        },
+        {
+          "sha": "701821c",
+          "ref": "HEAD@{2026-08-28 13:55:51 +0530}",
+          "operation": "reset: moving to HEAD",
+          "date": "2026-08-26 18:49:53 +0530"
+        }
+      ],
+      "oldest_entry": "2026-08-26 18:49:53 +0530",
+      "why_it_matters": "head movement that is not the loop committing is an operator action. filter-repo also EXPIRES the reflog, so a reflog that starts later than the repository's own first commit is itself evidence of a rewrite",
+      "reflog_is_shorter_than_the_history": true
+    }
+  },
+  "surfaces_audited": [
+    "config",
+    "filter_repo",
+    "hooks",
+    "reflog",
+    "remote"
+  ],
+  "what_it_cannot_see": "actions that leave no trace -- a file edited and reverted, a config set and unset, a hook installed and removed between generations. It reports the surfaces it can read and does not imply completeness",
+  "it_does_not_judge": "whether an operator action was correct is the operator's authority. This records what changed, so that a generation cannot run on a tree that moved under it without saying so"
+}

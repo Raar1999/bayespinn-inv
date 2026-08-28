@@ -1,0 +1,101 @@
+{
+  "rule": "SKIP-01",
+  "what_this_is": "the set of skips this suite is allowed to emit. An unregistered skip is a failure; an expired registration is a failure. Enforced by tests/test_skip_register_g12.py over outputs/g12/skips.json.",
+  "why_a_register_and_not_a_stricter_reason_string": "every skip in this repository already carried a reason, and the two that hid HIST-01 for a generation carried a perfectly clear one -- git's own error text. The reason was never the missing part. What was missing is a place where the SET of accepted skips is written down, so that a new one has to be added deliberately by someone who has thought about whether it should exist.",
+  "expiry_kinds": {
+    "generation": "an integer. At or past it, the entry is expired and the skip becomes a failure. Use when the skip is waiting on work the loop will do.",
+    "condition": "a stated condition. Use when the skip is waiting on something outside the loop's control, or is structural. A condition must be checkable by a reader; 'when we get round to it' is not one."
+  },
+  "entries": [
+    {
+      "id": "claim-surface-doc-quotes-no-rank",
+      "module": "tests/test_claim_surface_g9.py",
+      "reason_pattern": "quotes no rank",
+      "why_legitimate": "the guard iterates every claim-surface document and checks that any rank fraction it quotes carries the observation set it was measured over. A document that quotes no rank at all has nothing for the guard to check, and skipping is the correct report: the guard did not decline to run, it ran and found no subject.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "structural. It expires only if the guard is rewritten to assert over documents rather than over quoted ranks -- at which point a document quoting no rank would be a pass, not a skip."
+      }
+    },
+    {
+      "id": "claim-surface-doc-quotes-no-witness-count",
+      "module": null,
+      "reason_pattern": "quotes no witness count",
+      "why_legitimate": "same shape as the rank guard, in tests/test_witness_admissibility_g10.py and tests/test_witness_refinement_close.py: a document that quotes no witness count has no subject for a guard about witness counts. Registered without a module because two independent guards emit it.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "structural, as above."
+      }
+    },
+    {
+      "id": "chart-G-record-is-historical",
+      "module": "tests/test_witness_refinement_close.py",
+      "reason_pattern": "chart G has been refined in full; record is historical",
+      "why_legitimate": "the assertion tested a coverage gap in chart G that the 2026-08-28 addendum closed. The guard reads register version 2, which is frozen as the record of the coverage at that time, so the assertion is true of the artefact and no longer live. The skip is the guard saying its subject has been resolved.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "expires if register version 2 stops being the frozen record -- that is, if anything ever writes to outputs/close/wit02_register_v2.json again. tests/test_witness_refinement_g11.py asserts it does not."
+      }
+    },
+    {
+      "id": "g12-artefact-not-yet-written",
+      "module": null,
+      "reason_pattern": "not written yet; run",
+      "why_legitimate": "module-level skipif on a generation-12 artefact that its own script produces. Before the artefact exists the guard has nothing to read, and a failure there would be indistinguishable from the guard being broken. The skip names the exact command that removes it.",
+      "expiry": {
+        "kind": "generation",
+        "generation": 14
+      }
+    },
+    {
+      "id": "loop-state-written-by-the-state-commit",
+      "module": null,
+      "reason_pattern": "is written by the (generation|closing|addendum)",
+      "why_legitimate": "a loop-state guard cannot read its state file until the state commit writes it, and the state commit is by construction the second of the generation's two commits. This is the fixed-point the schema describes: a state file cannot name its own commit.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "structural. It expires only if the two-commit convention changes."
+      }
+    },
+    {
+      "id": "no-filter-repo-artefacts-in-this-clone",
+      "module": "tests/test_operator_actions_g12.py",
+      "reason_pattern": "filter-repo",
+      "why_legitimate": "the OPS-02 controls that test blindness to a history rewrite need a real rewrite to be blind to. A fresh clone carries no .git/filter-repo, so the control has no subject. docs/COMMIT_HASH_MAP_g11.json is the tracked record for exactly that case.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "expires if .git/filter-repo reappears in a clone that previously lacked it, which would itself be an OPS-02 finding."
+      }
+    },
+    {
+      "id": "hooks-path-unset",
+      "module": "tests/test_operator_actions_g12.py",
+      "reason_pattern": "core\\.hooksPath unset",
+      "why_legitimate": "the assertion that an out-of-repository hooks path is flagged as such has no subject when core.hooksPath is unset and .git/hooks is in use. Registered rather than asserted away because on this machine it IS set, and the skip firing would mean the configuration changed.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "expires the moment core.hooksPath is set, which OPS-02's audit reports."
+      }
+    },
+    {
+      "id": "no-remote-configured",
+      "module": "tests/test_operator_actions_g12.py",
+      "reason_pattern": "no remote configured",
+      "why_legitimate": "the assertion that the audit reproduces the remote nobody noticed has no subject when there is no remote. On this machine there is one, so this skip firing would mean the remote was removed -- itself an OPS-02 finding.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "expires when a remote exists, which is now the case; if this skip ever fires, the remote was removed."
+      }
+    },
+    {
+      "id": "skip-report-stale",
+      "module": "tests/test_skip_register_g12.py",
+      "reason_pattern": "skip report predates HEAD",
+      "why_legitimate": "the skip report is a measurement of one tree and costs a full suite run to take. Reporting staleness as a skip is how the guard refuses to trust an artefact from a different commit, rather than silently accepting it. It names the command that refreshes it.",
+      "expiry": {
+        "kind": "condition",
+        "condition": "expires whenever scripts/report_skips.py is re-run at HEAD. A skip that persists across generations means nobody is refreshing the report, which is itself the finding."
+      }
+    }
+  ]
+}
