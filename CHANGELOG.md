@@ -4,6 +4,79 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — generation 14 of the audit loop (2026-08-28)
+
+No API changes. Run under the operator ruling of 2026-08-28 (`MECH-01` pass 4).
+Full record in [`docs/G14_RESULT.md`](docs/G14_RESULT.md). **Ladder: `L0 → L1`,
+descended under `U-EMPIR`.**
+
+**The pre-rewrite archive is now durable, without editing the evidence.** The
+ruling's accession/derivative split resolves what generation 13 left as a binary.
+The four `.git` copies on `F:` are the accession, set read-only at the filesystem
+level and verified after locking to still resolve every survivor. A duplicate
+carries the rescue refs — 1, 7 and 3 across the rewritten trees, pinning all 536
+dangling survivors, plus 60 of `EXT-04`'s own — leaving **zero dangling** in all
+four. Each was then bundled, cloned back into a fresh bare repository and
+re-counted: `AIEF` 63/63, `fabkg-bench` 393/393, `invspec` 80/80, `EXT-04`
+1073/1073, every bundle verifying okay. Nothing in a bundle can be pruned,
+because nothing in it is unreachable.
+
+**`MECH-01`'s third method ran, and the loop declined both of its own labels.**
+Pass 4 dropped the two-axis contrast that sank passes 2 and 3 — the axes never
+overlapped in the nuisance — for a null **matched on row count by construction**:
+the nested bias sequence at the widest window against uniformly random subsets of
+the same size from the same universe. `R1''` reproduces generation 9's singular
+values 8 of 8 bit-identically, and the chain null is calibrated at 0.4946–0.5019.
+The pre-registered rule required both held-out devices to clear; `device_p90`
+clears at *p* < 0.0001 and `device_p10` does not at *p* = 0.1485, so the verdict
+is `GENERIC_ROW_COUNT`. Reproduce: `PYTHONPATH=src python
+scripts/run_mech01_pass4.py`.
+
+**But that outcome's registered meaning is contradicted by the measurement that
+produced it.** `GENERIC_ROW_COUNT` was registered to mean "the nested windows
+track the null"; they do not — all four devices sit above the chain null in the
+same direction, three at *p* ≤ 0.005, with the nested windows consistently *less*
+flat than random subsets of equal size. Writing the deflationary answer would put
+a claim in the spine that this loop's own measurement contradicts; claiming the
+other outcome would be changing the rule after reading the result. Neither
+registered label describes what happened, which is inconclusive for the
+registered instrument.
+
+**The inconclusiveness is measured, not shrugged at.** The nested sequence is
+contiguous by construction and closely spaced biases give nearly collinear rows —
+a property of any smooth response. `corr(gap, spread)` runs −0.31 to −0.59.
+Regressing the gap on the subset's bias range, `device_p10`'s departure vanishes
+entirely (residual percentile 0.492, exactly ordinary) while the other three keep
+a residual (0.880–0.947). **The two held-out devices disagree, 0.492 against
+0.947**, so the non-generic part is not reproducible. Reproduce:
+`PYTHONPATH=src python scripts/mech01_pass4_mechanism.py`.
+
+**`U-EMPIR` issued for `MECH-01`**, written before the fallback work per `U-0`:
+[`docs/UEMPIR_MECH01_g14.md`](docs/UEMPIR_MECH01_g14.md), sha256 `e34c812f…`.
+Three distinct methods — spatial localisation, the row side, the matched-count
+null — each named with why it was expected to work and the measured mechanism of
+its failure. The ladder descended `L0 → L1`; the rungs block is byte-identical
+across the append, so `LD-1` is shown rather than asserted. The verdict is
+reversible and **expires after generation 16**. Its reachability conditions are
+recorded in the document.
+
+**A second pre-registration defect, left in deliberately.** Pass 4's threshold
+clause says flattening *less* than random "would equally refute genericity" while
+its decision rule maps everything short of `IDENTITY_MATTERS` onto
+`GENERIC_ROW_COUNT`; the observed pattern fell in the gap between those two
+sentences. It stays hashed and uncorrected, as pass 3's did. The pattern is worth
+the name: **hashing fixes the prose around a statistic, it does not make that
+prose correct.**
+
+**`DIFF-01` enacted** — a mechanical edit states its expected changed-line count
+before it runs, and a result over 2× halts and is reported whatever the suite
+says. Forced by the `EOL-02` first pass changing 9,832 lines to fix 68 while the
+suite stayed green both times. Made self-enforcing rather than declarative: a
+commit touching at least ten files is sweep-shaped and must appear in
+`docs/SWEEP_REGISTER.json` by subject, because hand edits are deep and narrow
+while codemods are shallow and wide. Three controls, including one asserting the
+threshold is a ratio and not a line count. `docs/RULES_ENACTED.md`.
+
 ## [Unreleased] — generation 13 of the audit loop (2026-08-28)
 
 No API changes. Run under the operator ruling of 2026-08-28 (`PROV-08` / `CI-02`
