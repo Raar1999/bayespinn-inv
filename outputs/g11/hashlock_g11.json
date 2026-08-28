@@ -1,0 +1,24 @@
+{
+  "note": "IA-4 hash lock, taken at the head of generation 11 before any measurement. Kernel, ladder, spec, gate battery and acceptance suite are locked together; a mismatch by a candidate that is not an authorised repair is an automatic discard.",
+  "taken_at": "2026-08-28, before generation 11 Phase A",
+  "governance": {
+    "LADDER.md": "a2596365f4ec053ba7fda37901c1bd8a11db264f4954a080f6801446743a7926",
+    "RULINGS.md_at_instantiation": "43f7182d77c8f66e73a8fe1dce60233833cd5497c3c3c5b7888ae819277f6fe1"
+  },
+  "inherited": {
+    "docs/CLOSE_RULING.md": "61cf2d10cd91e620387e0b3c9e4cc0aeb0f25c99435921d8a6f221879ea3f7b6",
+    "docs/CLOSE_ADDENDUM.md": "e849ceb4414ad6c0e61d65d8035a41170a79716a59a94ae73c817486f67c6003",
+    "docs/RULES_ENACTED.md": "0705795d11fe96c3d765d90d882d3c6717273042f5b67c166bec11e440fa33d3",
+    "LOOP_STATE_v9.json": "999ded1c501f7c0b5b4c9c9b16303d2188cb353cbf229582439f9c6c7626f87c",
+    "scripts/run_g9.py": "2b3be93a1a6697b047f0fce61fec2ec5f6da7a96ca58118b325dc2cd216c6ba4",
+    "scripts/run_g10.py": "c8eb8608a43b81ccf4d3b280178fae842f472ffa643d5fecc21f6aeb3ce890d0",
+    "scripts/run_wit02_chartG.py": "eb4bbcbb37f33d0649a256aace2ddf2acaef98067825ca2ee24e384ed3516621",
+    "scripts/run_close.py": "f18f62511bad5663c7fcacef7ed28d52cc4bd98354216e408a87c0a41995f455",
+    "outputs/g9/preregister.json": "88cf577948b88a6075bb50ae4c04e82f8e6b5698a547e623f0e1132cd032fbec",
+    "outputs/g10/preregister.json": "392ef891e5b549c597e5c899ec21d5d44a8f3966e79c4d07d8006ab4192ae5bf",
+    "outputs/g10/ridge_basin.json": "1058b994639aa595be4d1b32566428becacf179428ed8e20671f48a482b7a2cb",
+    "outputs/g10/wit01.json": "ab895bc9a4d21c626f67d82ee87f39b6bb8750d9a53dc5b96da0ea2e3fa216d3",
+    "outputs/close/wit02_register_v2.json": "549b63d72c2639ee7e258a5f0dec8435b0348efe61e1b7dd9b8c7a7108c38240",
+    "outputs/wit02_chartG/preregister.json": "ca30ac72e1edf998daf2e59b3d97197a75343a361b759b6feee3d77d478c9865"
+  }
+}

@@ -21,6 +21,20 @@ consequence, and every number this document states that the refinement moved is
 marked where it appears. The same ruling enacted `DOC-08`, under which the
 denominators below were added.
 
+**Amended a second time, at generation 11, 2026-08-28.** The operator directive
+of that date fused operator authority into the loop and supplied a condition
+ladder whose rung `L1` requires every spine item on full refinement coverage.
+Chart L was the only set that was not, and a **measured pilot** — 7.5 s per pair
+against 37 pairs, 278 s projected — made a `U-BUDGET` verdict unavailable, so it
+was refined rather than written off. **`WIT-02` is now satisfied on all three
+committed witness sets.** `docs/G11_RESULT.md` is the measurement.
+
+Three things below are superseded and each is marked where it appears: §3's
+chart-L row and §6's `WIT-02` bullet (chart L is no longer uncovered), and §2's
+premise **(b)** together with the spine item 3 clause that rests on it — **the
+headroom rule is falsified on chart L**, the first set to meet it without having
+helped form it. §5's spine as amended is `docs/G11_RESULT.md` §5.
+
 **Measurement conditions, once, for every number below.** Nothing was solved for
 this document. Every number already existed in `outputs/g9/` and `outputs/g10/`
 at machinery commit `e05d463`, and the arithmetic that re-reads them is
@@ -212,7 +226,7 @@ violated:
 | global witness set | witness pairs | refined under `WIT-02` | what rests on it |
 |---|---|---|---|
 | **chart G**, `d = 4` | 13 witness pairs | **13 of 13** — generation 6's battery on 3, the close addendum on all 13; **12 survive**, 1 separates | the ridge result |
-| **chart L**, `d = 16` | 37 witness pairs | **0 of 37** (0.0%) — no refinement of this set has ever been run | the chart-L basin search statement, and the dimension reading |
+| **chart L**, `d = 16` | 37 witness pairs | **superseded at generation 11: 37 of 37**; **26 survive**, 11 separate. Was **0 of 37** when this document was written | the chart-L basin search statement, and the dimension reading |
 | **chart J**, `d = 16` | 13 witness pairs | **13 of 13** — `N = 301/601/1201`, `tol_carrier = 1e-12`; 7 survive | the junction degeneracy, the chart-J basin search statement |
 
 **Chart G's row was closed after this document was first written.** The operator
@@ -226,10 +240,22 @@ measurement and `outputs/close/wit02_register_v2.json` the register;
 enactment. **Chart L is unchanged and still uncovered**, and it is the set the
 dimension reading rests on.
 
+**Chart L's row was closed at generation 11, after both of the above were
+written.** The directive of 2026-08-28 §7 required the item be *piloted* before
+any unreachability verdict; the pilot measured the whole experiment at under five
+minutes, which is what made the verdict unavailable. It ran: **37 of 37 refined,
+26 survive, 11 separate**, the recount over the survivors is still `BASIN` at
+**222.8 floor units** with **0 of 26** at the floor barrier, and the
+classification did not flip. `docs/G11_RESULT.md` §1 carries the measurement and
+`outputs/close/wit02_register_v3.json` the register;
+`outputs/close/wit02_register_v2.json` is left as the record of the coverage
+while chart L was still the uncovered set. **All three sets are now compliant,
+and every one of the three lost members** — 1 of 13, 6 of 13, 11 of 37.
+
 The register is **measured, not asserted**: it matches each refinement record to
 its witness pair by exact equality of the separation in decades against
 `WIT-01`'s `max_separation` for the same set, so a coverage figure is a fraction
-and not a recollection. Coverage is 1.000, 0.000 and 1.000; **two sets of three
+and not a recollection. Coverage was 1.000, 0.000 and 1.000; **two sets of three
 are compliant**.
 
 `tests/test_witness_refinement_close.py` guards the register: it re-derives the
@@ -328,13 +354,19 @@ shape* and no longer as a claim about connectivity.
    committed witness sets that have been through the battery** — globally, in
    **chart G** at `d=4`, **13 of 13** pairs refined and **12 surviving**; in
    **chart J** at `d=16`, **13 of 13** refined and **7 surviving**; **chart L**
-   at `d=16` is at **0 of 37** and has never been tested. 8.18× and 14.75× in
-   doping, 694 nm against 271 nm in junction depth falling 1.7% under
-   `N = 301 → 1201`. Survival is predicted by **headroom against the floor**,
-   not by geometry, in both refined sets — and the *location* of the split
-   differs between them, 93.65% of the floor in chart J against 98.9% in
-   chart G, which is why the ordering is reported and no margin band was
-   adopted (`docs/CLOSE_ADDENDUM.md`).
+   at `d=16` is **superseded at generation 11: 37 of 37 refined and 26
+   surviving**, where it read *0 of 37 and never tested* when this was written.
+   8.18× and 14.75× in doping, 694 nm against 271 nm in junction depth falling
+   1.7% under `N = 301 → 1201`. **The next sentence is superseded.** It read
+   *survival is predicted by headroom against the floor, not by geometry, in
+   both refined sets*, with the split at 93.65% of the floor in chart J against
+   98.9% in chart G. That was true of the two 13-pair sets and is **false on
+   chart L**, the 37-pair set and the only one that did not help form the rule:
+   concordance **0.479** against 0.500 for a coin, and the surviving and
+   separating bands overlap from 0.53 to 1.00 floor units. **What predicts
+   survival is not known.** No margin band was adopted and none is defensible —
+   a conclusion this strengthens (`docs/G11_RESULT.md` §3,
+   `outputs/g11/headroom.json`).
 
 4. **Its geometry is dimension-dependent, not chart-dependent**: pairs sit at the
    instrument floor at `d=4` and do not at `d=16` in either chart tested. The
@@ -377,12 +409,16 @@ the reproduction protocol is described.
 * **The barrier is an upper bound and the minimum-energy path was not
   computed.** Both `d=16` results are searches that found nothing, not
   separations. `PATH-01` open.
-* **One of the three committed witness sets does not satisfy `WIT-02`** — chart
-  L at **0 of 37**, and it is the set the dimension reading rests on. Chart G was
-  closed to 13 of 13 by the 2026-08-28 addendum (12 surviving) and chart J was
-  already at 13 of 13 (7 surviving), so both refined sets lost members: 1 of 13
-  and 6 of 13. Whether chart L would lose members is unknown and unmeasured.
-  `WIT-02` §3, `WITNESS-04` open, load-bearing, and now narrowed to one set.
+* **Superseded at generation 11 — all three committed witness sets now satisfy
+  `WIT-02`.** This bullet read *one of the three does not* — chart L at 0 of 37,
+  the set the dimension reading rests on, with *whether chart L would lose
+  members* recorded as unknown and unmeasured. It was measured: **37 of 37
+  refined, 26 surviving, 11 separating**, so **every one of the three sets lost
+  members** — 1 of 13, 6 of 13, 11 of 37. `WITNESS-04` is closed
+  (`docs/G11_RESULT.md` §1). **Full coverage buys less than it sounds like it
+  does**: `WIT-02` tests witnesses, not connectivity, so both `d=16` results are
+  still search statements against an upper-bound barrier and `PATH-01` is
+  untouched.
 * **The upper bias boundary is untested.** Not tested and found sound — never
   tested. `PH-15`.
 * **No claim in this repository has been evidenced on any interpreter but

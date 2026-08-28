@@ -38,6 +38,7 @@ from pathlib import Path
 from typing import List, Optional
 
 import pytest
+from commit_map import is_real_commit, resolution_note
 from test_loop_state_g9 import baseline_offenders
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,10 +77,12 @@ class TestTheFixedPointIsStillDefinedAway:
         assert state["bookkeeping_commit"] is None
 
     def test_the_champion_is_a_real_reachable_commit(self, state) -> None:
-        assert git("cat-file", "-t", state["champion_commit"]) == "commit"
+        champ = state["champion_commit"]
+        assert is_real_commit(champ), resolution_note(champ)
 
     def test_the_machinery_commit_is_real(self, state) -> None:
-        assert git("cat-file", "-t", state["machinery_commit"]) == "commit"
+        mach = state["machinery_commit"]
+        assert is_real_commit(mach), resolution_note(mach)
 
 
 class TestEveryBaselineCarriesItsInvocation:

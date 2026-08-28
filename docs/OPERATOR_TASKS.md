@@ -137,3 +137,62 @@ unqualified passages at **1** and fails in **both** directions. When the
 corrigendum is applied the count drops to 0 and that test fails **by design** —
 that failure is the signal to move `papers/draft.md` into `CLAIM_SURFACE` and
 delete the parked-instance test.
+
+---
+
+## OT-1 reversion — **the remote now exists** · generation 11, 2026-08-28
+
+**Status of `CI-01`** `ACCEPTED-PERMANENT` → **`OPERATOR-BLOCKED`**, by the
+reversion condition this file already carried.
+
+Append-only, so nothing above is edited. What follows supersedes the
+generation-9 resolution forward, which is the discipline that resolution itself
+named:
+
+> *If a remote is added later the status reverts and the cost statement is
+> superseded forward, not deleted.*
+
+**A remote was added.** `git remote -v` is no longer empty:
+
+```
+origin  https://github.com/Raar1999/bayespinn-inv.git (fetch)
+origin  https://github.com/Raar1999/bayespinn-inv.git (push)
+```
+
+`.git/config` carries `[remote "origin"]`, and `refs/remotes/origin/main`
+resolves to `6577f4b`, this repository's root commit — so the remote was not
+only configured but fetched from. The mtime on `.git/config` is 2026-08-28
+09:20, four minutes after the `git filter-repo` run at 09:16 that `HIST-01`
+turns out to have been about (`docs/HIST01_REPAIR_g11.md`). Both were one
+operator action on the morning of 2026-08-28, and the loop noticed neither until
+generation 11 went looking.
+
+**Three consequences, and only the third is the loop's to act on.**
+
+1. **`CI-01` reverts to `OPERATOR-BLOCKED`.** It is no longer a permanent
+   acceptance. The condition that made it permanent — *there will be no remote*
+   — is false, and a status that outlived its own premise is exactly the defect
+   this file exists to record.
+2. **The correction paragraph above is now wrong in one sentence.** *"`git
+   remote -v` is empty on this host, so the command block below — written as
+   though `origin` existed — describes something that cannot run."* It is not
+   empty and the block can run, unedited, from `git push -u origin
+   loop/champion` onward. The `git remote add origin <url>` line it begins with
+   is the only line that is now redundant.
+3. **The push is still reserved and still not done.** `R-4` prohibits
+   `git push`; the operator directive of 2026-08-28 §6 reserves it again by
+   name, along with anything needing credentials. **A remote existing is not
+   CI having run.** `.github/workflows/ci.yml` has still never executed, the
+   3.9 floor is still a static scan, and `PROV-07` is still validated on
+   `win32` only. Nothing about this entry closes anything.
+
+**What is now newly true is only this: the action is available.** For nine
+generations `OT-1` named a command that could not be run because its
+precondition did not exist. It exists. The command block above is unchanged and
+is now executable as written.
+
+**`PROV-07` is reclassified with it**, from `MITIGATED-PENDING-CI` to
+`OPERATOR-BLOCKED`. *Pending* was the wrong word for nine generations and is
+still the wrong word: nothing was pending, because nothing was going to happen
+without a reserved action. Naming the reservation is what makes the status
+describe the world.

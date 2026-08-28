@@ -29,15 +29,27 @@ import subprocess
 from pathlib import Path
 
 import pytest
+from commit_map import resolve_commit
 
 REPO = Path(__file__).resolve().parents[1]
 
-#: The commit that enacts DOC-07 in this tree. Messages from here forward are
-#: in scope; anything earlier is uncorrectable history.
-ENACTED_AT = "3e05c9da55e152c8305838ff1da4166207051826"
+#: The commit that enacts DOC-07 in this tree, **as recorded**. Messages from
+#: here forward are in scope; anything earlier is uncorrectable history.
+#:
+#: ``HIST-01``: ``git filter-repo`` renamed every commit on 2026-08-28, so both
+#: hashes below stopped resolving and this module's two live assertions silently
+#: **skipped** -- ``_git`` turns a non-zero git exit into ``pytest.skip``. The
+#: guard that polices ``DOC-07`` was therefore not running over the range it was
+#: written for, and a green suite said nothing about it. The recorded hashes are
+#: kept verbatim and resolved through the verified correction map at point of
+#: use (``docs/COMMIT_HASH_MAP_g11.json``, ``docs/HIST01_REPAIR_g11.md``).
+ENACTED_AT_AS_RECORDED = "3e05c9da55e152c8305838ff1da4166207051826"
+ENACTED_AT = resolve_commit(ENACTED_AT_AS_RECORDED) or ENACTED_AT_AS_RECORDED
 
 #: The generation-6 message that forced the rule. Its own text is the control.
-POSITIVE_CONTROL = "1a090f0"
+POSITIVE_CONTROL_AS_RECORDED = "1a090f0"
+POSITIVE_CONTROL = (resolve_commit(POSITIVE_CONTROL_AS_RECORDED)
+                    or POSITIVE_CONTROL_AS_RECORDED)
 
 #: Assertions of a measured count or metric. Deliberately narrow: it targets the
 #: shape ``1a090f0`` used, not every digit in a message. A commit that says

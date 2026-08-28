@@ -1,0 +1,377 @@
+{
+  "experiment": "wit02_chartL",
+  "created_utc": "2026-08-28T10:30:57+00:00",
+  "git": {
+    "commit": "385bf90ee4b8f1abaf3ef68b036be166e77e26e4",
+    "dirty": true,
+    "tracked_modified": 9,
+    "untracked": 13,
+    "tree_digest": "82e8cde78f9269a27f59a3a951694affec6195618b7ce29cc670417f8e652ae7"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "git_autocrlf": "false",
+    "git_eol": null,
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "loaded_code": {
+    "package": "bayespinn_inv",
+    "tree_root": "D:\\bayespinn-inv\\bayespinn-inv",
+    "git_ls_files_available": true,
+    "n_modules_imported": 17,
+    "modules": {
+      "bayespinn_inv": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.charts": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\charts.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.global_identifiability": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\global_identifiability.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.identifiability": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\identifiability.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.modes": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\modes.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.witness_admissibility": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\witness_admissibility.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.constants": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\constants.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.scaling": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\scaling.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers.grid_2d": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\grid_2d.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers.mos_cap_2d": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\mos_cap_2d.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers.scharfetter_gummel": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\scharfetter_gummel.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.loaded_code": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\loaded_code.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.provenance": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\provenance.py",
+        "inside_tree": true,
+        "tracked": true
+      }
+    },
+    "outside_tree": [],
+    "inside_tree_untracked": [],
+    "flagged": false,
+    "sys_path": [
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\python311.zip",
+        "resolved": "C:\\Program Files\\Python311\\python311.zip",
+        "exists": false,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\DLLs",
+        "resolved": "C:\\Program Files\\Python311\\DLLs",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib",
+        "resolved": "C:\\Program Files\\Python311\\Lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311",
+        "resolved": "C:\\Program Files\\Python311",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "resolved": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "resolved": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      }
+    ],
+    "editable_install_markers": [
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.bayespinn_inv-0.1.0.dev0.pth",
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.fab_ops_analytics-0.1.0.pth"
+    ],
+    "platform_assumptions": {
+      "os": "win32",
+      "path_separator": "\\",
+      "resolution": "Path.resolve(): follows symlinks, Windows junctions and substituted drives; a module reached through a link landing outside the tree is reported OUTSIDE",
+      "case_comparison": "os.path.normcase -- case-folded on Windows, identity on POSIX",
+      "filesystem_case_sensitive_probed": false,
+      "validated_on": "win32 / python 3.11.9",
+      "unvalidated_platforms": [
+        "linux",
+        "darwin"
+      ]
+    }
+  },
+  "seed": 0,
+  "config": {
+    "phases": [
+      "register"
+    ],
+    "grid_n": 301,
+    "biases": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9
+    ],
+    "distinguishability_floor": 0.02,
+    "set": "chart_L_d16",
+    "authorisation": "operator directive of 2026-08-28 sections 7 and 8 -- chart L only, after the pilot made U-BUDGET unavailable"
+  },
+  "results": {
+    "register": {
+      "rule": {
+        "id": "WIT-02",
+        "text": "every witness is refined before it is counted -- not the ones near the floor, all of them",
+        "enacted": "closing operator ruling of 2026-08-26 section 2",
+        "supersedes": null,
+        "relationship_to_WIT01": "WIT-01 is not withdrawn. It stays for the sub-grid case it does catch. Retro-applied it removes nothing -- admissibility ratio 1.000 in all three charts -- because every pair qualifies on a doping magnitude and magnitudes reach the grid exactly, so it is not sufficient either.",
+        "why_no_threshold": "the observed refinement split sits between 92.2% and 93.65% of the distinguishability floor, 1.4 percentage points. A threshold inside a band that narrow is tuned; PH-11 forbids it. Refining every witness needs no threshold to defend."
+      },
+      "supersedes": {
+        "register": "outputs/close/wit02_register_v2.json",
+        "kept": "versions 1 and 2 stay on disk unchanged. Version 1 is the record of the coverage when WIT-02 was enacted; version 2 is the record of it after chart G was closed and while chart L was still the uncovered set.",
+        "what_moved": "chart L only: 0 of 37 refined becomes 37 of 37. Chart G and chart J are untouched."
+      },
+      "authorisation": "operator directive of 2026-08-28 sections 7 and 8, under fused operator authority. Ladder rung L1 requires every spine item on full coverage; chart L was the only set that was not, and the pilot made a U-BUDGET verdict unavailable.",
+      "provenance": {
+        "inputs_sha256": {
+          "outputs/g10/wit01.json": "ab895bc9a4d21c626f67d82ee87f39b6bb8750d9a53dc5b96da0ea2e3fa216d3",
+          "outputs/close/wit02_register_v2.json": "549b63d72c2639ee7e258a5f0dec8435b0348efe61e1b7dd9b8c7a7108c38240",
+          "outputs/wit02_chartG/refine.json": "63b1064338e19b74cf6cd533093df80f9ea6222b0ac63ba97020850d41e0aa3d",
+          "outputs/g11/wit02_chartL/refine.json": "df7eb67e2440385ca068189ac089b4077969205428c1a8cf9eb83e42443e1e35",
+          "outputs/g9/junction_refine.json": "bd7b296d6ee375ebd66032ed2f292083ce00442161b6478159bd914618588d59"
+        },
+        "input_manifests": [
+          "outputs/g11/wit02_chartL/manifest.json",
+          "outputs/wit02_chartG/manifest.json",
+          "outputs/g10/manifest.json",
+          "outputs/g9/manifest.json"
+        ],
+        "python": "3.11.9",
+        "platform": "win32",
+        "validated_platforms": [
+          "win32"
+        ],
+        "unvalidated": "linux and darwin -- PROV-07, open and unchanged"
+      },
+      "sets": {
+        "chart_G_d4": {
+          "chart": "G",
+          "d": 4,
+          "n_pairs_offered": 13,
+          "admissibility_ratio_WIT01": 1.0,
+          "refinement_artefact": "outputs/wit02_chartG/refine.json",
+          "n_refined": 13,
+          "n_surviving": 12,
+          "coverage": 1.0,
+          "compliant": true,
+          "carries": "the ridge result",
+          "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+          "n_records_in_artefact": 13,
+          "n_records_not_matched_to_this_set": 0
+        },
+        "chart_L_d16": {
+          "chart": "L",
+          "d": 16,
+          "n_pairs_offered": 37,
+          "admissibility_ratio_WIT01": 1.0,
+          "refinement_artefact": "outputs/g11/wit02_chartL/refine.json",
+          "n_refined": 37,
+          "n_surviving": 26,
+          "coverage": 1.0,
+          "compliant": true,
+          "carries": "the chart-L basin search statement, and through it the reading that the ridge/basin split follows the dimension",
+          "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+          "n_records_in_artefact": 37,
+          "n_records_not_matched_to_this_set": 0
+        },
+        "chart_J_d16": {
+          "chart": "J",
+          "d": 16,
+          "n_pairs_offered": 13,
+          "admissibility_ratio_WIT01": 1.0,
+          "refinement_artefact": "outputs/g9/junction_refine.json",
+          "n_refined": 13,
+          "n_surviving": 7,
+          "coverage": 1.0,
+          "compliant": true,
+          "carries": "the junction degeneracy, and the chart-J basin search statement",
+          "matched_by": "exact equality of the separation in decades against WIT-01's max_separation for the same set",
+          "n_records_in_artefact": 13,
+          "n_records_not_matched_to_this_set": 0
+        }
+      },
+      "untouched_sets_reproduce_version_2": {
+        "rows": {
+          "chart_G_d4": true,
+          "chart_J_d16": true
+        },
+        "all": true,
+        "why": "this register is built by a third implementation of the same match. The two sets that did not move must come out identical, which is what makes the one that did move a measurement rather than a difference between two builders."
+      },
+      "verdict": {
+        "n_sets": 3,
+        "n_compliant": 3,
+        "non_compliant": [],
+        "all_compliant": true,
+        "what_changed_since_version_2": "chart L: 0 of 37 refined at close, 37 of 37 here, 26 surviving.",
+        "how_to_say_it": "WIT-02 is satisfied on all three committed witness sets",
+        "what_full_coverage_does_not_mean": "it does not make any d=16 result a separation. Every barrier is still an upper bound along a straight line in one chart's coordinates and the minimum-energy path is still not computed; PATH-01 and AH-13 are untouched by refining witnesses. Full coverage means every counted pair has been through the battery, and nothing more than that."
+      }
+    },
+    "wall_clock_s": 0.0032198999979300424
+  },
+  "artifacts": {},
+  "notes": "WIT-02 compliance for chart L: the 37 witness pairs that had never been refined, and the barrier recount over what survives. WITNESS-04."
+}

@@ -1,0 +1,3072 @@
+{
+  "records": [
+    {
+      "pair_index": 0,
+      "member_indices": [
+        500,
+        1154
+      ],
+      "separation_decades": 1.1687575066162061,
+      "g8_observational_distance": 0.008813702322268633,
+      "headroom_fraction_of_floor": 0.44068511611343164,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.008813702322268633,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.008813702322268633,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.00881827994759253,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.00881827994759253,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013003930301440229,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013003930301440229,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.013003930301440229,
+      "worst_in_floor_units": 0.6501965150720115,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 1,
+      "member_indices": [
+        107,
+        873
+      ],
+      "separation_decades": 1.558157541904972,
+      "g8_observational_distance": 0.009001411630028041,
+      "headroom_fraction_of_floor": 0.45007058150140206,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.009001411630028041,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.009001411765802799,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.009002176095416436,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.00900217621659619,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.012551225993859149,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.012551225993859149,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.012551225993859149,
+      "worst_in_floor_units": 0.6275612996929574,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 2,
+      "member_indices": [
+        443,
+        861
+      ],
+      "separation_decades": 1.7340329871048077,
+      "g8_observational_distance": 0.010668213378639026,
+      "headroom_fraction_of_floor": 0.5334106689319513,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.010668213378639026,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.010668213378639026,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016250776452572745,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016250776452572745,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.04122880066427317,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.04122880066427317,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.04122880066427317,
+      "worst_in_floor_units": 2.061440033213658,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 3,
+      "member_indices": [
+        192,
+        654
+      ],
+      "separation_decades": 1.6803002713663453,
+      "g8_observational_distance": 0.013081251834781463,
+      "headroom_fraction_of_floor": 0.6540625917390731,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013081251834781463,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013081251834781463,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013551763279001872,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013551763279001872,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.027749395164883273,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.027749395164883273,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.027749395164883273,
+      "worst_in_floor_units": 1.3874697582441637,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 4,
+      "member_indices": [
+        368,
+        932
+      ],
+      "separation_decades": 1.4627754832625044,
+      "g8_observational_distance": 0.013313573072314188,
+      "headroom_fraction_of_floor": 0.6656786536157094,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013313573072314188,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013313573072314188,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013265332018845598,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013265332018845598,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018147712298987876,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018147712298987876,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.018147712298987876,
+      "worst_in_floor_units": 0.9073856149493937,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 5,
+      "member_indices": [
+        47,
+        571
+      ],
+      "separation_decades": 1.4582324231936177,
+      "g8_observational_distance": 0.013843141082205525,
+      "headroom_fraction_of_floor": 0.6921570541102763,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.013843141082205525,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.013843141082205525,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014480138446950248,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014480138446950248,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.011747222252432682,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.011747221940198869,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.014480138446950248,
+      "worst_in_floor_units": 0.7240069223475124,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 6,
+      "member_indices": [
+        16,
+        669
+      ],
+      "separation_decades": 1.2566475057392346,
+      "g8_observational_distance": 0.014350056253306936,
+      "headroom_fraction_of_floor": 0.7175028126653468,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014350056253306936,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014350056255173198,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014362268874527516,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014362268876047845,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014365312831611288,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014365312833252729,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.014365312833252729,
+      "worst_in_floor_units": 0.7182656416626364,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 7,
+      "member_indices": [
+        301,
+        430
+      ],
+      "separation_decades": 1.4819052308782403,
+      "g8_observational_distance": 0.014591508402476158,
+      "headroom_fraction_of_floor": 0.7295754201238078,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014591508402476158,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014591510797794322,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014725862310726177,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014725864710228598,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014759460225384312,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01475946262810808,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01475946262810808,
+      "worst_in_floor_units": 0.737973131405404,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 8,
+      "member_indices": [
+        415,
+        876
+      ],
+      "separation_decades": 1.4280048065778672,
+      "g8_observational_distance": 0.014800638346884078,
+      "headroom_fraction_of_floor": 0.7400319173442039,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014800638346884078,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014800638109700252,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014784719007435033,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014784718772294743,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014780740687697644,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014780740455351434,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.014800638346884078,
+      "worst_in_floor_units": 0.7400319173442039,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 9,
+      "member_indices": [
+        603,
+        646
+      ],
+      "separation_decades": 1.6619263791900067,
+      "g8_observational_distance": 0.015040988944446086,
+      "headroom_fraction_of_floor": 0.7520494472223043,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015040988944446086,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015040986397494835,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01504293417505271,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015042931629034237,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015043280568784581,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01504327802310725,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.015043280568784581,
+      "worst_in_floor_units": 0.752164028439229,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 10,
+      "member_indices": [
+        880,
+        889
+      ],
+      "separation_decades": 0.7268982052677337,
+      "g8_observational_distance": 0.015048551349698956,
+      "headroom_fraction_of_floor": 0.7524275674849478,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015048551349698956,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015048551349698956,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017033525053950106,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017033525053950106,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.029970208686286654,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.029970208686286654,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.029970208686286654,
+      "worst_in_floor_units": 1.4985104343143327,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 11,
+      "member_indices": [
+        438,
+        551
+      ],
+      "separation_decades": 1.5697679922910872,
+      "g8_observational_distance": 0.01524201558924716,
+      "headroom_fraction_of_floor": 0.762100779462358,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01524201558924716,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01524201658537553,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015252385387851031,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015252386384483337,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015255031141912363,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01525503213941134,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01525503213941134,
+      "worst_in_floor_units": 0.762751606970567,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 12,
+      "member_indices": [
+        43,
+        945
+      ],
+      "separation_decades": 1.6135184050002174,
+      "g8_observational_distance": 0.015545592202037628,
+      "headroom_fraction_of_floor": 0.7772796101018814,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015545592202037628,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015545592202037628,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.0155893560583424,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0155893560583424,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015600296953964496,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015600297209695309,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.015600297209695309,
+      "worst_in_floor_units": 0.7800148604847654,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 13,
+      "member_indices": [
+        449,
+        973
+      ],
+      "separation_decades": 1.82025375511979,
+      "g8_observational_distance": 0.015610055105275614,
+      "headroom_fraction_of_floor": 0.7805027552637807,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015610055105275614,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015610055105275614,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015772778325590906,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015826562138685243,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.020670412165633714,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.020670412165633714,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.020670412165633714,
+      "worst_in_floor_units": 1.0335206082816857,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 14,
+      "member_indices": [
+        258,
+        348
+      ],
+      "separation_decades": 1.5965836215783789,
+      "g8_observational_distance": 0.01568664111944111,
+      "headroom_fraction_of_floor": 0.7843320559720556,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01568664111944111,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01568664111944111,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015259101536356226,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015259101536356226,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.025040290659518287,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.025040290659518287,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.025040290659518287,
+      "worst_in_floor_units": 1.2520145329759143,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 15,
+      "member_indices": [
+        822,
+        1166
+      ],
+      "separation_decades": 1.6469592883567614,
+      "g8_observational_distance": 0.015927916050840037,
+      "headroom_fraction_of_floor": 0.7963958025420018,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015927916050840037,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01592791578494391,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018242951923512447,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018242951923512447,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015939013842511857,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015939013576868857,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.018242951923512447,
+      "worst_in_floor_units": 0.9121475961756224,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 16,
+      "member_indices": [
+        349,
+        814
+      ],
+      "separation_decades": 1.4536481245410293,
+      "g8_observational_distance": 0.01647931186438656,
+      "headroom_fraction_of_floor": 0.8239655932193279,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01647931186438656,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016479313919241595,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016446622030865433,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0164466240886942,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016438442848113723,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01643844490046558,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.016479313919241595,
+      "worst_in_floor_units": 0.8239656959620797,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 17,
+      "member_indices": [
+        537,
+        1115
+      ],
+      "separation_decades": 1.16187298354658,
+      "g8_observational_distance": 0.01652419133283165,
+      "headroom_fraction_of_floor": 0.8262095666415825,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01652419133283165,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016524190580680404,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016526925392242018,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016526924642098716,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01652764117111042,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016527640419912667,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01652764117111042,
+      "worst_in_floor_units": 0.8263820585555209,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 18,
+      "member_indices": [
+        157,
+        784
+      ],
+      "separation_decades": 1.7361292595113902,
+      "g8_observational_distance": 0.016594095023358714,
+      "headroom_fraction_of_floor": 0.8297047511679356,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016594095023358714,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01659409490798724,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016563938802385703,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016563939213199992,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01824711088175391,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01655640032813554,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01824711088175391,
+      "worst_in_floor_units": 0.9123555440876955,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 19,
+      "member_indices": [
+        494,
+        1162
+      ],
+      "separation_decades": 1.2683342957544284,
+      "g8_observational_distance": 0.017237411365881805,
+      "headroom_fraction_of_floor": 0.8618705682940903,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017237411365881805,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017237411365881805,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01724242083049912,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01724242083049912,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017279092376241225,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017296077267961726,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.017296077267961726,
+      "worst_in_floor_units": 0.8648038633980862,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 20,
+      "member_indices": [
+        981,
+        1169
+      ],
+      "separation_decades": 1.408523946951032,
+      "g8_observational_distance": 0.017298660723983537,
+      "headroom_fraction_of_floor": 0.8649330361991768,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017298660723983537,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017298660723983537,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.020237899452704957,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.020237899452704957,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01743968100270123,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01743968100270123,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.020237899452704957,
+      "worst_in_floor_units": 1.0118949726352477,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 21,
+      "member_indices": [
+        377,
+        746
+      ],
+      "separation_decades": 1.7830215051618623,
+      "g8_observational_distance": 0.01731372508283961,
+      "headroom_fraction_of_floor": 0.8656862541419804,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01731372508283961,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017313727550786234,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017297436264762146,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01729743873372413,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.020980347660384348,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.020980347660384348,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.020980347660384348,
+      "worst_in_floor_units": 1.0490173830192173,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 22,
+      "member_indices": [
+        456,
+        886
+      ],
+      "separation_decades": 1.475440111121113,
+      "g8_observational_distance": 0.017504467562640163,
+      "headroom_fraction_of_floor": 0.8752233781320081,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017504467562640163,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017504466741612826,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017485833134672554,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017485832314285268,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.039768422039566244,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.039768422039566244,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.039768422039566244,
+      "worst_in_floor_units": 1.9884211019783122,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 23,
+      "member_indices": [
+        655,
+        1161
+      ],
+      "separation_decades": 1.6843665149744034,
+      "g8_observational_distance": 0.0182780022902705,
+      "headroom_fraction_of_floor": 0.913900114513525,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.0182780022902705,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0182780022902705,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018234174974586823,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018234174974586823,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01859795472963981,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01859795472963981,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01859795472963981,
+      "worst_in_floor_units": 0.9298977364819905,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 24,
+      "member_indices": [
+        14,
+        592
+      ],
+      "separation_decades": 1.4393663350910657,
+      "g8_observational_distance": 0.01862285593123238,
+      "headroom_fraction_of_floor": 0.931142796561619,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01862285593123238,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01862285593123238,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018623553327228926,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018623553327228926,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018623724094517465,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018623723925342502,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.018623724094517465,
+      "worst_in_floor_units": 0.9311862047258732,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 25,
+      "member_indices": [
+        223,
+        796
+      ],
+      "separation_decades": 1.6411672437844729,
+      "g8_observational_distance": 0.0187651235163717,
+      "headroom_fraction_of_floor": 0.938256175818585,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.0187651235163717,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018765124853594578,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.0188080641129056,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01880806544746438,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018818925106023194,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018818926440511627,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.018818926440511627,
+      "worst_in_floor_units": 0.9409463220255814,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 26,
+      "member_indices": [
+        86,
+        218
+      ],
+      "separation_decades": 1.7129238768796,
+      "g8_observational_distance": 0.01890032648241201,
+      "headroom_fraction_of_floor": 0.9450163241206005,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01890032648241201,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018900326490202797,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01896025839769582,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01896025835272465,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.029159777740299268,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.029159777740299268,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.029159777740299268,
+      "worst_in_floor_units": 1.4579888870149633,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 27,
+      "member_indices": [
+        54,
+        946
+      ],
+      "separation_decades": 1.3750645299236055,
+      "g8_observational_distance": 0.019281716069126948,
+      "headroom_fraction_of_floor": 0.9640858034563474,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019281716069126948,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01928171608501707,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019178551505295145,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019178551560486073,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019152803044690133,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019152802970507542,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01928171608501707,
+      "worst_in_floor_units": 0.9640858042508536,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 28,
+      "member_indices": [
+        163,
+        815
+      ],
+      "separation_decades": 1.4085717960434216,
+      "g8_observational_distance": 0.019488565081026785,
+      "headroom_fraction_of_floor": 0.9744282540513393,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019488565081026785,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019488565081026785,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019410921485480497,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019410921485480497,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01960075057455438,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01960075057455438,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01960075057455438,
+      "worst_in_floor_units": 0.980037528727719,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 29,
+      "member_indices": [
+        162,
+        1154
+      ],
+      "separation_decades": 1.4976456045536395,
+      "g8_observational_distance": 0.019569485127019535,
+      "headroom_fraction_of_floor": 0.9784742563509767,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019569485127019535,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01956948492370588,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019593519236678895,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019593519033607162,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.022439444533964032,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.022439444533964032,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.022439444533964032,
+      "worst_in_floor_units": 1.1219722266982015,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 30,
+      "member_indices": [
+        175,
+        349
+      ],
+      "separation_decades": 1.402263830251826,
+      "g8_observational_distance": 0.019671459039217937,
+      "headroom_fraction_of_floor": 0.9835729519608968,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019671459039217937,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019671458414972934,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019661381623184683,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0196613809993742,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019658874120378002,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01965887349483493,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.019671459039217937,
+      "worst_in_floor_units": 0.9835729519608968,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 31,
+      "member_indices": [
+        162,
+        500
+      ],
+      "separation_decades": 1.726728194171507,
+      "g8_observational_distance": 0.019734712641783277,
+      "headroom_fraction_of_floor": 0.9867356320891638,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019734712641783277,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0197347125073728,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019732678341721682,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01973267820805645,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019732164640443278,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019732164504304386,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.019734712641783277,
+      "worst_in_floor_units": 0.9867356320891638,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 32,
+      "member_indices": [
+        505,
+        873
+      ],
+      "separation_decades": 1.42955969289185,
+      "g8_observational_distance": 0.019743745087216373,
+      "headroom_fraction_of_floor": 0.9871872543608187,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019743745087216373,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01974374325803312,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019765188043378894,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0197651862145055,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.0327832947380181,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0327832947380181,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": false
+        }
+      ],
+      "worst_distance": 0.0327832947380181,
+      "worst_in_floor_units": 1.639164736900905,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 33,
+      "member_indices": [
+        880,
+        1169
+      ],
+      "separation_decades": 1.060080393733358,
+      "g8_observational_distance": 0.019860109995498584,
+      "headroom_fraction_of_floor": 0.9930054997749291,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019860109995498584,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019860110139591595,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019881424539197456,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019881424682907683,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019886742178470182,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01988674232476564,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01988674232476564,
+      "worst_in_floor_units": 0.994337116238282,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 34,
+      "member_indices": [
+        399,
+        993
+      ],
+      "separation_decades": 1.30281866969003,
+      "g8_observational_distance": 0.019880966689431963,
+      "headroom_fraction_of_floor": 0.9940483344715981,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019880966689431963,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019880966689431963,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019873975954590686,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0198739929553246,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019872229995436405,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01987222976408048,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.019880966689431963,
+      "worst_in_floor_units": 0.9940483344715981,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 35,
+      "member_indices": [
+        237,
+        1122
+      ],
+      "separation_decades": 1.6986351161904132,
+      "g8_observational_distance": 0.019910016981342635,
+      "headroom_fraction_of_floor": 0.9955008490671318,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019910016981342635,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019910016981342635,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019839599673661494,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019839599673661494,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01901861923832827,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019069985447298037,
+          "n_biases_certified": 15,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.019910016981342635,
+      "worst_in_floor_units": 0.9955008490671318,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 36,
+      "member_indices": [
+        79,
+        235
+      ],
+      "separation_decades": 1.4723232500259726,
+      "g8_observational_distance": 0.01991412903808938,
+      "headroom_fraction_of_floor": 0.995706451904469,
+      "previously_refined": false,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01991412903808938,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019914126118021524,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019909078540011598,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019909075620056296,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019907830512522526,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019907827592406165,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "below_floor": true
+        }
+      ],
+      "worst_distance": 0.01991412903808938,
+      "worst_in_floor_units": 0.995706451904469,
+      "survives_refinement": true
+    }
+  ],
+  "reproduction_control_R1": {
+    "rows": [
+      {
+        "pair_index": 0,
+        "committed_distance": 0.008813702322268633,
+        "here_at_N301_default": 0.008813702322268633,
+        "identical": true
+      },
+      {
+        "pair_index": 1,
+        "committed_distance": 0.009001411630028041,
+        "here_at_N301_default": 0.009001411630028041,
+        "identical": true
+      },
+      {
+        "pair_index": 2,
+        "committed_distance": 0.010668213378639026,
+        "here_at_N301_default": 0.010668213378639026,
+        "identical": true
+      },
+      {
+        "pair_index": 3,
+        "committed_distance": 0.013081251834781463,
+        "here_at_N301_default": 0.013081251834781463,
+        "identical": true
+      },
+      {
+        "pair_index": 4,
+        "committed_distance": 0.013313573072314188,
+        "here_at_N301_default": 0.013313573072314188,
+        "identical": true
+      },
+      {
+        "pair_index": 5,
+        "committed_distance": 0.013843141082205525,
+        "here_at_N301_default": 0.013843141082205525,
+        "identical": true
+      },
+      {
+        "pair_index": 6,
+        "committed_distance": 0.014350056253306936,
+        "here_at_N301_default": 0.014350056253306936,
+        "identical": true
+      },
+      {
+        "pair_index": 7,
+        "committed_distance": 0.014591508402476158,
+        "here_at_N301_default": 0.014591508402476158,
+        "identical": true
+      },
+      {
+        "pair_index": 8,
+        "committed_distance": 0.014800638346884078,
+        "here_at_N301_default": 0.014800638346884078,
+        "identical": true
+      },
+      {
+        "pair_index": 9,
+        "committed_distance": 0.015040988944446086,
+        "here_at_N301_default": 0.015040988944446086,
+        "identical": true
+      },
+      {
+        "pair_index": 10,
+        "committed_distance": 0.015048551349698956,
+        "here_at_N301_default": 0.015048551349698956,
+        "identical": true
+      },
+      {
+        "pair_index": 11,
+        "committed_distance": 0.01524201558924716,
+        "here_at_N301_default": 0.01524201558924716,
+        "identical": true
+      },
+      {
+        "pair_index": 12,
+        "committed_distance": 0.015545592202037628,
+        "here_at_N301_default": 0.015545592202037628,
+        "identical": true
+      },
+      {
+        "pair_index": 13,
+        "committed_distance": 0.015610055105275614,
+        "here_at_N301_default": 0.015610055105275614,
+        "identical": true
+      },
+      {
+        "pair_index": 14,
+        "committed_distance": 0.01568664111944111,
+        "here_at_N301_default": 0.01568664111944111,
+        "identical": true
+      },
+      {
+        "pair_index": 15,
+        "committed_distance": 0.015927916050840037,
+        "here_at_N301_default": 0.015927916050840037,
+        "identical": true
+      },
+      {
+        "pair_index": 16,
+        "committed_distance": 0.01647931186438656,
+        "here_at_N301_default": 0.01647931186438656,
+        "identical": true
+      },
+      {
+        "pair_index": 17,
+        "committed_distance": 0.01652419133283165,
+        "here_at_N301_default": 0.01652419133283165,
+        "identical": true
+      },
+      {
+        "pair_index": 18,
+        "committed_distance": 0.016594095023358714,
+        "here_at_N301_default": 0.016594095023358714,
+        "identical": true
+      },
+      {
+        "pair_index": 19,
+        "committed_distance": 0.017237411365881805,
+        "here_at_N301_default": 0.017237411365881805,
+        "identical": true
+      },
+      {
+        "pair_index": 20,
+        "committed_distance": 0.017298660723983537,
+        "here_at_N301_default": 0.017298660723983537,
+        "identical": true
+      },
+      {
+        "pair_index": 21,
+        "committed_distance": 0.01731372508283961,
+        "here_at_N301_default": 0.01731372508283961,
+        "identical": true
+      },
+      {
+        "pair_index": 22,
+        "committed_distance": 0.017504467562640163,
+        "here_at_N301_default": 0.017504467562640163,
+        "identical": true
+      },
+      {
+        "pair_index": 23,
+        "committed_distance": 0.0182780022902705,
+        "here_at_N301_default": 0.0182780022902705,
+        "identical": true
+      },
+      {
+        "pair_index": 24,
+        "committed_distance": 0.01862285593123238,
+        "here_at_N301_default": 0.01862285593123238,
+        "identical": true
+      },
+      {
+        "pair_index": 25,
+        "committed_distance": 0.0187651235163717,
+        "here_at_N301_default": 0.0187651235163717,
+        "identical": true
+      },
+      {
+        "pair_index": 26,
+        "committed_distance": 0.01890032648241201,
+        "here_at_N301_default": 0.01890032648241201,
+        "identical": true
+      },
+      {
+        "pair_index": 27,
+        "committed_distance": 0.019281716069126948,
+        "here_at_N301_default": 0.019281716069126948,
+        "identical": true
+      },
+      {
+        "pair_index": 28,
+        "committed_distance": 0.019488565081026785,
+        "here_at_N301_default": 0.019488565081026785,
+        "identical": true
+      },
+      {
+        "pair_index": 29,
+        "committed_distance": 0.019569485127019535,
+        "here_at_N301_default": 0.019569485127019535,
+        "identical": true
+      },
+      {
+        "pair_index": 30,
+        "committed_distance": 0.019671459039217937,
+        "here_at_N301_default": 0.019671459039217937,
+        "identical": true
+      },
+      {
+        "pair_index": 31,
+        "committed_distance": 0.019734712641783277,
+        "here_at_N301_default": 0.019734712641783277,
+        "identical": true
+      },
+      {
+        "pair_index": 32,
+        "committed_distance": 0.019743745087216373,
+        "here_at_N301_default": 0.019743745087216373,
+        "identical": true
+      },
+      {
+        "pair_index": 33,
+        "committed_distance": 0.019860109995498584,
+        "here_at_N301_default": 0.019860109995498584,
+        "identical": true
+      },
+      {
+        "pair_index": 34,
+        "committed_distance": 0.019880966689431963,
+        "here_at_N301_default": 0.019880966689431963,
+        "identical": true
+      },
+      {
+        "pair_index": 35,
+        "committed_distance": 0.019910016981342635,
+        "here_at_N301_default": 0.019910016981342635,
+        "identical": true
+      },
+      {
+        "pair_index": 36,
+        "committed_distance": 0.01991412903808938,
+        "here_at_N301_default": 0.01991412903808938,
+        "identical": true
+      }
+    ],
+    "all_identical": true,
+    "n_identical": 37,
+    "of": 37,
+    "why": "chart L has NO previously refined pairs -- that is what 0 of 37 means -- so chart G's cross-generation control is unavailable. The substitute: every pair's N=301 default-tolerance distance must reproduce outputs/g8/reproduce.json's committed witness_pair_distance bit-identically. Weaker than chart G's in a stated way: it tests this code path against the artefact it reads, not against a second independent implementation, so it cannot detect a defect already present when that artefact was written"
+  },
+  "negative_control_N1": {
+    "construction": "one chart-L null-control pair -- consecutive ordinary prior draws in draw order that form no witness pair, the same construction run_g10._barrier_set uses for its null -- through the same battery. It must NOT survive. A battery that reports two ordinary draws as inseparable cannot evidence that a witness pair is",
+    "pair": [
+      0,
+      1
+    ],
+    "rows": [
+      {
+        "grid_n": 301,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.42621746571965063,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 301,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.42621746571965063,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.4267147013904199,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.4267147013904199,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.45072876340647383,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.4327180537166767,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": false
+      }
+    ],
+    "worst_distance": 0.45072876340647383,
+    "survives": false,
+    "passes": true,
+    "if_it_survives": "reported as measured and NOT swapped for another pair. A null pair below the floor is not a broken battery, it is a witness the generation-8 search missed, and re-picking until the control behaves is the tuning PH-11 forbids"
+  },
+  "positive_control_P1": {
+    "construction": "two IDENTICAL chart-L devices through the same battery. They must survive, at distance exactly zero at every row. This is the control that fails if the battery does nothing but reject: a rule that separates everything is as useless as one that separates nothing, and IA-1 requires a positive control that would fail if the rule did nothing",
+    "rows": [
+      {
+        "grid_n": 301,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.0,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": true
+      },
+      {
+        "grid_n": 301,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.0,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": true
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.0,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": true
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.0,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": true
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "default",
+        "tol_carrier": 1e-08,
+        "observational_distance": 0.0,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": true
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "tight",
+        "tol_carrier": 1e-12,
+        "observational_distance": 0.0,
+        "n_biases_certified": 16,
+        "n_biases": 16,
+        "below_floor": true
+      }
+    ],
+    "survives": true,
+    "all_distances_exactly_zero": true,
+    "passes": true,
+    "why_this_is_the_positive_control": "IA-1 requires a control that would FAIL if the rule did nothing. A battery that rejected everything would separate two identical devices, and every 'separates' verdict above would be vacuous. This is the control the WIT-01 prose guard's first positive control was not"
+  },
+  "determinism_control_D1": {
+    "construction": "one pair's battery is run a second time and every one of its six distances must be bit-identical. The battery has no seed and no state; if it is not deterministic, no survival verdict is stable",
+    "pair_index": 0,
+    "rows": [
+      {
+        "grid_n": 301,
+        "tolerance": "default",
+        "first": 0.008813702322268633,
+        "second": 0.008813702322268633,
+        "identical": true
+      },
+      {
+        "grid_n": 301,
+        "tolerance": "tight",
+        "first": 0.008813702322268633,
+        "second": 0.008813702322268633,
+        "identical": true
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "default",
+        "first": 0.00881827994759253,
+        "second": 0.00881827994759253,
+        "identical": true
+      },
+      {
+        "grid_n": 601,
+        "tolerance": "tight",
+        "first": 0.00881827994759253,
+        "second": 0.00881827994759253,
+        "identical": true
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "default",
+        "first": 0.013003930301440229,
+        "second": 0.013003930301440229,
+        "identical": true
+      },
+      {
+        "grid_n": 1201,
+        "tolerance": "tight",
+        "first": 0.013003930301440229,
+        "second": 0.013003930301440229,
+        "identical": true
+      }
+    ],
+    "passes": true
+  },
+  "all_refine_controls_pass": true,
+  "battery": {
+    "grids": [
+      301,
+      601,
+      1201
+    ],
+    "tolerances": [
+      "default",
+      "tight"
+    ],
+    "tol_carrier_tight": 1e-12,
+    "inherited_from": "run_g9.REFINEMENT_GRIDS and run_g9.REFINEMENT_TOLS, imported rather than restated; the same objects run_wit02_chartG.py used for chart G and run_g9.phase_junction_refine used for chart J"
+  },
+  "wall_clock_s": 287.6357320999996,
+  "verdict": {
+    "set": "chart_L_d16",
+    "n_pairs": 37,
+    "n_refined_here": 37,
+    "n_surviving": 26,
+    "n_separated_by_refinement": 11,
+    "surviving_pair_indices": [
+      0,
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      15,
+      16,
+      17,
+      18,
+      19,
+      23,
+      24,
+      25,
+      27,
+      28,
+      30,
+      31,
+      33,
+      34,
+      35,
+      36
+    ],
+    "separated_pair_indices": [
+      2,
+      3,
+      10,
+      13,
+      14,
+      20,
+      21,
+      22,
+      26,
+      29,
+      32
+    ],
+    "coverage_after_this_run": 1.0,
+    "coverage_before_this_run": 0.0,
+    "floor": 0.02,
+    "count_class": "PARTIAL",
+    "count_reading": "a partial loss: the set survives with members removed, and every count is reported with its denominator per DOC-08",
+    "count_reading_was_registered_before_the_run": true
+  }
+}

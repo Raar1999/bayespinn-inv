@@ -32,6 +32,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+from commit_map import is_real_commit, resolution_note, resolve_commit
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "LOOP_STATE_v5.json"
@@ -91,16 +92,18 @@ class TestTheFixedPointIsDefinedAway:
         if head is None:
             pytest.skip("not a git checkout")
         champ = state["champion_commit"]
-        assert git("cat-file", "-t", champ) == "commit", (
-            f"champion_commit {champ[:8]} is not a commit in this repository")
-        merge_base = git("merge-base", "--is-ancestor", champ, "HEAD")
+        resolved = resolve_commit(champ)
+        assert resolved is not None, resolution_note(champ)
+        merge_base = git("merge-base", "--is-ancestor", resolved, "HEAD")
         assert merge_base is not None, (
-            f"champion_commit {champ[:8]} is not an ancestor of HEAD")
+            f"champion_commit {champ[:8]} resolves to {resolved[:8]}, which is "
+            "not an ancestor of HEAD")
 
     def test_the_champion_carries_content(self, state):
         """"Last *content* commit" is a claim about what it changed."""
         champ = state["champion_commit"]
-        files = git("show", "--name-only", "--format=", champ)
+        files = git("show", "--name-only", "--format=",
+                    resolve_commit(champ) or champ)
         if files is None:
             pytest.skip("champion commit not available")
         touched = [f for f in files.splitlines() if f.strip()]
@@ -116,7 +119,7 @@ class TestTheStateFileIsInternallyConsistent:
 
     def test_the_per_generation_champions_are_all_real(self, state):
         for gen, commit in state["champion_per_generation"].items():
-            assert git("cat-file", "-t", commit) == "commit", f"{gen}: {commit}"
+            assert is_real_commit(commit), f"{gen}: {resolution_note(commit)}"
 
     def test_this_generations_champion_matches_the_pointer(self, state):
         gen = str(state["generation"])

@@ -48,6 +48,7 @@ import sys
 from pathlib import Path
 
 import pytest
+from commit_map import is_real_commit, resolution_note
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "LOOP_STATE_v6.json"
@@ -110,10 +111,12 @@ class TestTheFixedPointIsStillDefinedAway:
         assert state["bookkeeping_commit"] is None
 
     def test_the_champion_is_a_real_reachable_commit(self, state):
-        assert git("cat-file", "-t", state["champion_commit"]) == "commit"
+        champ = state["champion_commit"]
+        assert is_real_commit(champ), resolution_note(champ)
 
     def test_the_machinery_commit_is_real_and_is_not_the_champion(self, state):
-        assert git("cat-file", "-t", state["machinery_commit"]) == "commit"
+        mach = state["machinery_commit"]
+        assert is_real_commit(mach), resolution_note(mach)
         assert state["machinery_commit"] != state["champion_commit"], (
             "one tree, one commit: every measurement ran against the machinery "
             "commit and the results were written afterwards, so the two cannot "

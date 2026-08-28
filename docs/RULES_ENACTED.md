@@ -518,3 +518,77 @@ population, and a guard demanding "3 of 3" there is a guard about typography.
 The sentence itself was repaired by the sweep; the class it belongs to is
 recorded as open.
 
+
+---
+
+## `OBS-01` — an inherited obstruction is re-tested before it is re-asserted
+
+**Enacted** generation 11, 2026-08-28, under fused operator authority
+(`RULINGS.md`, ruling `g11`).
+
+> A finding whose status asserts that something **cannot** be done is a claim
+> about the tree. It carries the check that establishes it and the generation
+> that ran that check, and a generation that re-asserts it without re-running
+> the check is making a claim it did not test.
+
+**The defect that forced it.** `HIST-01` was carried for three generations as
+`OPEN, PRE-EXISTING, UNREPAIRABLE FROM INSIDE THE TREE`. The repair was
+`.git/filter-repo/commit-map`, a file that had been sitting in this repository
+since before the finding was last restated. Nobody ran `ls .git`. Eight guards
+failed and three more silently skipped — including the `DOC-07` commit-message
+guard, which was therefore not running over the range it was written to police —
+for want of a check nobody performed because the impossibility had already been
+written down. `docs/HIST01_REPAIR_g11.md`.
+
+**It is the second instance of the class, and the first was already named.**
+`docs/CLOSE_RULING.md` §5.1 recorded `DOC-03a` one generation earlier: the
+README badge that generation 10 recorded as unchangeable, which turned out to be
+changeable in one line, because *nothing had ever tried it*. That section drew
+exactly the right conclusion —
+
+> An obstruction inherited from an earlier generation is a claim about the tree,
+> it is exactly as checkable as any other claim about the tree, and this loop
+> found that they were not being checked.
+
+— and then did not enact anything, so the next generation inherited a larger
+instance of the same defect. `OPS-01` says a rule that lives only in a ruling
+does not exist; this is what happens when a *finding* that should have been a
+rule is left as prose.
+
+**What it requires.** Any open finding in a `LOOP_STATE` file whose `status`
+asserts impossibility — the words `UNREPAIRABLE`, `UNRESOLVABLE`, `IMPOSSIBLE`,
+`CANNOT`, `PERMANENT`, `BY-CONSTRUCTION` — must carry a `last_tested` object:
+
+```json
+"last_tested": {
+  "generation": 11,
+  "check": "the command or inspection that was actually run",
+  "result": "what it returned"
+}
+```
+
+Not a citation of the ruling that assigned the status. **The check.** A status
+whose evidence is another document asserting the same status is the thing this
+rule exists to stop.
+
+**Enforced by** `tests/test_inherited_obstructions_g11.py`, over the current
+state file, with both controls: a planted finding asserting impossibility with
+no `last_tested` is caught, and a planted finding carrying one whose `check`
+merely cites a document rather than naming a command is also caught. The
+positive control is that the real findings pass, which would fail if the
+predicate matched nothing.
+
+**What it does not do, stated so it is not over-read.** It does not require the
+check to be *cheap*, or to be re-run every generation — `PROV-03` and
+`REPRO-01` are genuinely permanent and re-running their checks proves nothing
+new. It requires that the check exist, be named, and be attributable to a
+generation that ran it, so that a reader can see the difference between *tested
+and impossible* and *never tried*. `HIST-01` sat in the second category while
+reading like the first.
+
+**A measured limitation.** The rule reaches statuses, not prose. A finding whose
+`status` is `OPEN` while its `note` argues at length that nothing can be done is
+not caught, and `CHART-03` is close to that shape. Widening the predicate to
+note text was tried and rejected: it fires on every note that *describes* an
+impossibility it does not assert, including this rule's own entry. Recorded as a
+limit rather than papered over.

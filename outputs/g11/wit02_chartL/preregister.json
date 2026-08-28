@@ -1,0 +1,75 @@
+{
+  "what_this_is": "WIT-02 applied to the one committed witness set that has never satisfied it. WITNESS-04, open since generation 7, load-bearing since generation 10",
+  "authorised_by": "operator directive of 2026-08-28 sections 7 and 8; ladder rung L1 requires every spine item on full coverage and chart L is the only set that is not",
+  "why_not_a_U_BUDGET_verdict": {
+    "the_directive_required_a_pilot": "section 2: a budget verdict without a measured pilot is void",
+    "pilot_artefact": "outputs/g11/pilot_chartL.json",
+    "per_pair_mean_s": 7.5220587999998925,
+    "per_pair_spread_factor": 1.0688354348281908,
+    "projected_all_pairs_s": 278.31617559999603,
+    "verdict": "AFFORDABLE. The pilot measured the experiment at under five minutes of refinement, so U-BUDGET is unavailable and the rung is not descended from"
+  },
+  "scope": {
+    "set_label": "chart_L_d16",
+    "source_artefact": "outputs/g8/reproduce.json",
+    "charts_touched": [
+      "L"
+    ],
+    "n_pairs_offered": 37,
+    "refined_before_this_run": [],
+    "battery_grids": [
+      301,
+      601,
+      1201
+    ],
+    "battery_tolerances": [
+      "default",
+      "tight"
+    ],
+    "tol_carrier_tight": 1e-12,
+    "max_outer_tight": 200,
+    "survives_iff": "the observational distance is below the distinguishability floor at every one of the six refinement rows -- three grids by two tolerances. Identical to the rule chart G and chart J were judged by",
+    "battery_inherited_from": "run_g9.REFINEMENT_GRIDS and run_g9.REFINEMENT_TOLS, imported rather than restated; the same objects run_wit02_chartG.py used for chart G and run_g9.phase_junction_refine used for chart J",
+    "reproduction_control": "chart L has NO previously refined pairs -- that is what 0 of 37 means -- so chart G's cross-generation control is unavailable. The substitute: every pair's N=301 default-tolerance distance must reproduce outputs/g8/reproduce.json's committed witness_pair_distance bit-identically. Weaker than chart G's in a stated way: it tests this code path against the artefact it reads, not against a second independent implementation, so it cannot detect a defect already present when that artefact was written",
+    "negative_control": "one chart-L null-control pair -- consecutive ordinary prior draws in draw order that form no witness pair, the same construction run_g10._barrier_set uses for its null -- through the same battery. It must NOT survive. A battery that reports two ordinary draws as inseparable cannot evidence that a witness pair is",
+    "negative_control_if_it_survives": "reported as measured and NOT swapped for another pair. A null pair below the floor is not a broken battery, it is a witness the generation-8 search missed, and re-picking until the control behaves is the tuning PH-11 forbids",
+    "positive_control": "two IDENTICAL chart-L devices through the same battery. They must survive, at distance exactly zero at every row. This is the control that fails if the battery does nothing but reject: a rule that separates everything is as useless as one that separates nothing, and IA-1 requires a positive control that would fail if the rule did nothing",
+    "determinism_control": "one pair's battery is run a second time and every one of its six distances must be bit-identical. The battery has no seed and no state; if it is not deterministic, no survival verdict is stable",
+    "scope_note": "no new witnesses, no new charts, no new windows, no chart G, no chart J. The pairs are read from the committed set; none is constructed here except the three named controls, which are labelled as controls and are never counted as witnesses",
+    "scope_hash": "dd3309fbbfd1270d7da043f059c4a067b49d410068f548cab76485a0dd3c8091"
+  },
+  "recount_rule": {
+    "barriers_are": "generation 9's BarrierCriterion, imported unchanged, at the production grid N=301 -- the criterion outputs/g10/ridge_basin.json was measured under",
+    "recompute_through": "run_g10._barrier_set, imported; the same function that produced outputs/g10/ridge_basin.json",
+    "refinement_changes": "which pairs are counted, and nothing else",
+    "reproduction_control": "the full 37-pair set is re-measured first and every per-pair depth must reproduce outputs/g10/ridge_basin.json bit-identically. A recount over depths that do not reproduce is a new measurement wearing the old one's name",
+    "counted_set": "the pairs that survive the battery, in their committed order",
+    "null_control": "as in run_g10._barrier_set: consecutive non-witness draws taken in draw order, one per counted witness pair. A smaller counted set takes a prefix of the same ordered list, so the null is not re-drawn",
+    "classifier": "run_g10.classify against RidgeBasinDecision, unchanged: RIDGE if at least ridge_fraction of counted pairs are at or below the floor barrier, BASIN if none is, MIXED otherwise",
+    "ridge_fraction": 0.3333333333333333,
+    "the_barrier_is_an_upper_bound": "BOUND-01 and PATH-01, carried rather than re-derived. Every depth is the barrier along a STRAIGHT LINE in this chart's own coordinates, so it is an UPPER bound and a shallower path may exist. For chart L this direction is the unfavourable one: a basin statement rests on finding NO path below the floor, and an upper bound cannot establish that none exists. Refinement does not repair this and is not claimed to",
+    "what_is_not_recomputed": "chart G and chart J. Their sets are untouched, so their numbers stand and the three-set comparison stays one measurement rather than two spliced together",
+    "rule_hash": "dc5fb62ab579929c2fc5cb5328bd1ed118f7765824822ce76ae17be0688bd546"
+  },
+  "inherited_hashes": {
+    "barrier_criterion_here": "9631b4711f99a6319504b5c50185a26cb4f6dc2427024816831fa0846184c56f",
+    "barrier_criterion_at_generation_9": "9631b4711f99a6319504b5c50185a26cb4f6dc2427024816831fa0846184c56f",
+    "ridge_basin_decision_here": "88748b9f6d4e3ed84a70e3e704ff96d9ba0c84b206d071d3e4508666600565a2",
+    "ridge_basin_decision_at_generation_10": "88748b9f6d4e3ed84a70e3e704ff96d9ba0c84b206d071d3e4508666600565a2",
+    "criterion_unmoved": true,
+    "decision_unmoved": true
+  },
+  "outcomes": {
+    "BASIN": "chart L stays a basin and gains its coverage. Spine items 3 and 4 keep their classification and WIT-02 becomes satisfied on all three committed sets, which is what ladder rung L1 requires. The basin remains a SEARCH statement against an upper-bound barrier -- refinement tests the witnesses, not the connectivity -- and the minimum-energy path is still not computed",
+    "RIDGE": "the dimension reading DIES. That reading is precisely the claim that d=4 is the only dimension whose pairs sit at the instrument floor; a chart-L ridge at d=16 is a counter-example to it in the set the reading rests on. Spine item 4 is rewritten in the same paragraph as the classification, not in a limitations list, and the ridge/basin split reverts to being unexplained rather than dimensional",
+    "MIXED": "chart L becomes provisional at the recounted fraction: some pairs sit at the floor and fewer than ridge_fraction of them do. Spine item 4 reports the fraction and the coverage, the word basin is retired from it as a classification, and the dimension reading is weakened to a statement about medians rather than about every cell",
+    "UNDETERMINED": "no counted pair has a certified barrier. Reported as a failure to measure, and generation 10's classification stands with its 0-of-37 coverage unchanged and still uncovered"
+  },
+  "count_outcomes": {
+    "FULL": "no pair separates. Recorded as measured, and noted as the first set of the three to lose nothing -- chart G lost 1 of 13 and chart J 6 of 13 -- which is itself a fact about d=16 in this chart and not a vindication of the search",
+    "THIN": "the surviving set falls below 7 pairs, the size of chart J's surviving set, which is the smallest set any committed classification currently rests on. The classification is still reported but the count is stated beside it everywhere, and the dimension reading is reported as resting on a set that refinement more than halved",
+    "EMPTY": "every pair separates. Chart L then has NO witnesses at d=16, the chart-L basin statement has no set left to stand on, and the dimension reading loses one of its two d=16 cells. This is reported as the destruction of the evidence, NOT as a deeper basin: an empty set is not a strong result in the same direction"
+  },
+  "outcomes_note": "pre-registered before the first solve of this run, under the operator directive of 2026-08-28 section 3 (SR-3) and AH-14. Reported either way (AH-04, AH-13). The RIDGE branch is stated as plainly as the BASIN one because the BASIN one is the expected result and AH-13 is about the other kind",
+  "outcomes_hash": "8a3e9e3ed0da3cda4597e12a8d8c10ab8bc478eef83de38447b34f329d8fb33e"
+}
