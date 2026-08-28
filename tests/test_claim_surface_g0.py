@@ -215,15 +215,22 @@ class TestPublishedSolverQualityIsReproducible:
 # identifiability result without the word "local".
 # ---------------------------------------------------------------------------
 
-#: Documents this loop is permitted to correct. `papers/**` is excluded here and
-#: handled by :class:`TestParkedPapersInstance` below -- it is protected from
-#: edits by operator ruling R-3, so its one unqualified passage is pinned rather
-#: than fixed. Excluding it from this tuple narrows the guard's *reach*, never its
-#: *strictness*: the papers instance is asserted on, not skipped.
+#: Documents this loop is permitted to correct.
+#:
+#: ``papers/draft.md`` was excluded from generation 0 until the close and handled
+#: instead by a ``TestParkedPapersInstance`` class that pinned its one unqualified
+#: passage at 1, because operator ruling ``R-3`` reserved ``papers/**`` and the
+#: loop could not fix it. ``papers/CORRIGENDA_g6.md`` COR-1 states what to do when
+#: that changes: applying the correction drops the count to zero, the pinned test
+#: fails *by design*, and the document moves into this tuple while the parked class
+#: is deleted. The close ruling released the paper, the correction was applied, and
+#: that is what happened here. A pinned count is a placeholder for a guard; this is
+#: the guard.
 CLAIM_SURFACE = (
     "README.md",
     "docs/RELEASE_READINESS.md",
     "docs/CLAIM_EVIDENCE_MATRIX.md",
+    "papers/draft.md",
 )
 
 #: A statement of the identifiable-rank result, e.g. "3-4 of 16 dof".
@@ -272,52 +279,3 @@ class TestIdentifiabilityIsLabelledLocal:
             if "local" not in "\n".join(lines).lower()
         ]
         assert found == [0]
-
-
-class TestParkedPapersInstance:
-    """`papers/draft.md` carries one unqualified rank claim. It is parked, not fixed.
-
-    Operator ruling R-3 makes `papers/**` reserved: this loop may not mutate it.
-    AUDIT_g0 SCI-11 is therefore only partly closable, and the honest record is a
-    pinned count rather than a silent exclusion.
-
-    The document *does* label the result `local` three times (lines 23, 73 and an
-    explicit limitation at 349), so a reader of the whole paper is not misled. The
-    passage below is unqualified within its own paragraph, which is what PH-21
-    addresses -- a reader quoting that sentence does not carry line 349 with it.
-
-    This test fails in **both** directions on purpose:
-
-    - if the count rises, a new unqualified claim entered the protected document;
-    - if it falls to zero, the operator has released R-3 or fixed the passage, and
-      `papers/draft.md` should be moved into ``CLAIM_SURFACE`` and this test deleted.
-    """
-
-    #: Pinned at generation 0. See docs/gen/DECISIONS.md DEC-g0-4.
-    KNOWN_UNQUALIFIED = 1
-
-    def _unqualified(self):
-        lines = _read("papers/draft.md").splitlines()
-        out = []
-        for i, line in _rank_claim_lines("\n".join(lines)):
-            lo = max(0, i - _CONTEXT)
-            hi = min(len(lines), i + _CONTEXT + 1)
-            if "local" not in "\n".join(lines[lo:hi]).lower():
-                out.append((i + 1, line.strip()))
-        return out
-
-    def test_count_is_exactly_what_generation_0_measured(self) -> None:
-        found = self._unqualified()
-        assert len(found) == self.KNOWN_UNQUALIFIED, (
-            f"papers/draft.md unqualified rank claims: expected "
-            f"{self.KNOWN_UNQUALIFIED} (parked under R-3), found {len(found)}:\n  "
-            + "\n  ".join(f"line {n}: {t[:110]}" for n, t in found)
-        )
-
-    def test_the_document_does_label_the_result_elsewhere(self) -> None:
-        """The parked instance is a passage-level defect, not a missing caveat."""
-        text = _read("papers/draft.md").lower()
-        assert text.count("local") >= 3, (
-            "papers/draft.md no longer labels the identifiability result as local "
-            "anywhere -- this is now a document-level defect, not a parked passage"
-        )

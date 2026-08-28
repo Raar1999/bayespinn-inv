@@ -115,8 +115,17 @@ support it.
 
 ## OT-2 — apply `papers/CORRIGENDA_g6.md` · closes the standing `R-3` escalation
 
-**Status** `OPERATOR-BLOCKED` · **Blocks** the last instance of `SCI-11`
-**Why the loop cannot do it** `R-3` makes `papers/**` reserved.
+**Status** **DISCHARGED 2026-08-29** · closed `SCI-11`, its last instance
+**What released it** the close ruling of 2026-08-29 §4 assigned the paper to the
+loop, which lifted `R-3` over `papers/**`. COR-1 was applied the same day, the
+parked-instance guard was replaced by putting `papers/draft.md` on the claim
+surface, and `papers/CORRIGENDA_g6.md` records both. Nine cycles blocked.
+
+The original entry follows, unedited.
+
+**Status (as recorded while open)** `OPERATOR-BLOCKED` · **Blocks** the last
+instance of `SCI-11`
+**Why the loop could not do it** `R-3` makes `papers/**` reserved.
 
 One line in `papers/draft.md` states the identifiable-rank result without its
 local/global qualifier, which `PH-21` forbids. Six other instances were corrected

@@ -87,3 +87,73 @@ Declining the correction is also a resolution, provided it is recorded. The
 argument for declining would be that line 349 already carries the limitation and
 §4.6 does not rest on the distinction. The argument against is that a sentence
 readers quote in isolation should be true in isolation.
+
+---
+
+## COR-1 — **APPLIED**, 2026-08-29
+
+**Applied under** the operator ruling of 2026-08-29 §4, which closed the loop and
+assigned the paper to it: *"Nothing further is ordered. Mine: the pull request,
+and `EXT-05`. Yours: the paper."* That released `R-3` over `papers/**`, which is
+the condition this corrigendum was waiting on — nine cycles.
+
+**What was written.** The corrigendum's minimal change is the inserted
+operating-point clause, and it is in. Two further qualifiers were added at the
+same site, and they are *not* part of COR-1 — they are the price of the guard
+transition below, and are recorded here so the difference is visible:
+
+> If terminal I–V determines only 3–4 of 16 doping directions in **chart L** at
+> `d=16` **at a given operating point**, over the 0–0.9 V bias window and at 2%
+> measurement noise — a *local* Jacobian rank, not a global claim, and one that
+> `rank(observation set)` shows moving with the window — then a surrogate trained
+> only on I–V is constrained only in that subspace.
+
+`SCI-11` is closed. It was the seventh and last instance, and the only one the
+loop could not touch.
+
+**The guard transition the corrigendum predicted, carried out.** COR-1 stated
+that applying it drops `TestParkedPapersInstance`'s count to zero and that the
+test then *fails by design*, as the signal to move `papers/draft.md` into
+`CLAIM_SURFACE` and delete the parked class. Both were done. A pinned count is a
+placeholder for a guard; the guard is now the thing.
+
+**And the paper joined the wider claim surface**, which COR-1 did not ask for and
+which is a judgement rather than an instruction. `papers/draft.md` is now in
+`CLAIM_SURFACE_G7` — and so, by cascade, in `_G9`, `_G10` and `_DOC08` — because
+the close-ruling rewrite gave it the local rank, the observation-set result and
+the witness sets. That tuple's own stated rule is *"a document that publishes the
+result and is not on this list is unguarded"*, and the paper was outside it only
+because `R-3` had reserved it. Leaving the strongest statements of the result in
+the one document nobody guarded would have inverted the point of the guard.
+
+Joining cost four real corrections, each named by a guard rather than by a
+reviewer:
+
+| guard | what it caught |
+|---|---|
+| `test_claim_surface_g7` | the abstract's global paragraph named no chart; contribution 3 named no chart and no dimension |
+| `test_claim_surface_g9` | the repaired COR-1 sentence quoted a rank without its observation window — the defect COR-1 is *about*, in a different coordinate |
+| `test_quantifier_scope_doc08` | *"at every operating point tested"*, twice, with no denominator |
+
+The second row is worth keeping. The sentence this corrigendum exists to repair,
+once repaired, was still unguarded in a second dimension: it carried its regime
+and not its window. A correction written a generation before the guard that would
+have caught the rest of it is a correction that fixes what was visible at the
+time, and that is an argument for guards over corrigenda, not against this one.
+
+### Evidence
+
+```bash
+PYTHONPATH=src python -m pytest tests/test_claim_surface_g0.py \
+    tests/test_claim_surface_g7.py tests/test_claim_surface_g9.py \
+    tests/test_quantifier_scope_doc08.py \
+    tests/test_witness_admissibility_g10.py \
+    tests/test_witness_refinement_close.py -q
+```
+
+| | |
+|---|---|
+| **Result** | 217 passed, 9 skipped |
+| **Applied at** | 2026-08-29, after the close ruling |
+| **Closes** | `SCI-11`, `OT-2` |
+| **Supersedes nothing** | this file stays append-only; the entry above is the record of what was written, not a replacement for it |

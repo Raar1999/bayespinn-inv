@@ -69,6 +69,18 @@
       "commit_subject": "close: the ruling enacted -- PRE-01, the accession record, and EXT-04's remote",
       "why_not_mechanical": "no file was edited by a script. Every change was made deliberately at its own site. It is wide because a rule enactment lands its register, its checker, its guard and its documentation together, which is depth-1 breadth rather than a sweep.",
       "registered_although_below_the_trigger": "at nine files the commit sits exactly in the blind spot DIFF-01 states for itself -- 'a mechanical edit confined to nine files is invisible to it'. Adding this entry makes the commit ten files and therefore sweep-shaped, so the guard now sees what it is looking at. Declaring it is cheaper than a commit that is silent because it happened to be one file under the threshold."
+    },
+    {
+      "id": "paper-after-the-close",
+      "generation": "close",
+      "enacting_rule": null,
+      "kind": "not-mechanical",
+      "description": "papers/draft.md brought up to the close ruling's spine, COR-1 applied, the paper put on the claim surface and the parked-instance guard deleted, with the corrigenda record, the operator-task discharge, the post-close state file and its writer, the badge and the changelog.",
+      "commit_subject": "close: the paper -- the spine written up, COR-1 applied, and the draft put on the claim surface",
+      "why_not_mechanical": "no file was edited by a script in the sense DIFF-01 governs. The prose edits were applied through a script for byte-level control of CRLF -- papers/draft.md is CRLF in the index and .gitattributes is `* -text`, so a text-mode rewrite would have normalised it, which is exactly the EOL-02 trap DIFF-01 was enacted after. Each edit was written individually and asserted to match exactly once; the script is a delivery mechanism, not a codemod.",
+      "expected_changed_lines": null,
+      "registered_although_below_the_trigger": "at nine files this sits in the blind spot DIFF-01 states for itself, the same as the preceding close commit. Registered on the same reasoning: a commit that is silent because it happened to be one file under the threshold is the failure the register exists to prevent.",
+      "line_endings_asserted": "papers/draft.md CRLF before and after; every other touched file LF before and after. Checked with git ls-files --eol."
     }
   ],
   "kinds": {

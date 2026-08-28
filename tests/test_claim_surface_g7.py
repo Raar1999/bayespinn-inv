@@ -90,6 +90,12 @@ CLAIM_SURFACE_G7 = (
     # chart-G witness coverage and the recounted ridge, so it publishes the
     # result and joins the list on the same reasoning as the line above.
     "docs/CLOSE_ADDENDUM.md",
+    # The paper, joined at the close. It publishes the local rank, the
+    # observation-set result and the witness sets, so by this tuple's own stated
+    # rule -- a document that states the result and is not on this list is
+    # unguarded -- it belongs here. It was absent only because ``R-3`` reserved
+    # ``papers/**``; the close ruling released it.
+    "papers/draft.md",
 )
 
 #: Excluded, with the reason. Each of these *describes* the rule or records the
@@ -101,7 +107,6 @@ EXEMPT = {
     "src/bayespinn_inv/inverse/charts.py": "defines the rule",
     "docs/gen/DECISIONS.md": "decision ledger; quotes the forbidden pattern",
     "docs/audit/AUDIT_g7.md": "audit record; quotes findings verbatim",
-    "papers/draft.md": "R-3 reserved; handled by test_claim_surface_g0",
 }
 
 #: A rank fraction: "3-4 of 16", "3 of 4", "1 of 8". Two restrictions, both

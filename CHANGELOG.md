@@ -4,6 +4,53 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — the paper, written after the close (2026-08-29)
+
+No API changes. Written under the close ruling of 2026-08-29 §4, which ratified
+the close and assigned the paper to the loop — the assignment that lifted `R-3`
+over `papers/**` after nine cycles. No generation ran and none is reopened:
+[`LOOP_STATE_v15.json`](LOOP_STATE_v15.json) keeps `closed: true` and the ladder
+at `L1`.
+
+**The paper now states what fourteen generations measured.** Two sections are
+new. §4.2 reports that the local identifiable rank is a property of the
+*(device, observation set)* pair rather than of the device: the observation set
+is the only one of four candidate sensitivities large at all twelve operating
+points tested (×1.17 end to end, against ×21–×39 for junction position,
+parameterisation dimension and interpolant, which permute freely among
+themselves); bias-window **width** sets the rank while spacing does not; and the
+climb is the spectrum **flattening**, with `σ₁` moving ×1.148–1.195 *downward*
+and 95.6%–97.9% of each trailing value's motion in the shape term. §4.3 reports
+the degeneracy as **global** as well as local — witness pairs in chart G at
+`d=4` and charts J and L at `d=16`, every set refined in full under `WIT-02` and
+every set losing members, admissibility ratio 1.000 — written in the **search**
+form the measurement supports, never as separation.
+
+**`MECH-01` is in the paper as an open question, with its three failures
+characterised.** The ruling's paragraph is reproduced as a block quote so the
+repository holds exactly one copy of it. The conditioning hypothesis is named as
+future work and explicitly not claimed.
+
+**`COR-1` applied; `SCI-11` and `OT-2` closed.** The corrigendum had been waiting
+nine cycles on an authority the loop did not have. Its own success condition was
+that `TestParkedPapersInstance`'s count falls to zero and the test then fails *by
+design*, as the signal to move `papers/draft.md` into `CLAIM_SURFACE` and delete
+the parked class. Both were done. Record in
+[`papers/CORRIGENDA_g6.md`](papers/CORRIGENDA_g6.md), which stays append-only.
+
+**The paper joined the wider claim surface, and that cost four corrections.**
+`papers/draft.md` is now in `CLAIM_SURFACE_G7` and by cascade in `_G9`, `_G10`
+and `_DOC08`, on that tuple's own stated rule that a document publishing the
+result and absent from the list is unguarded. Joining it caught: two passages
+naming no chart or dimension; a rank quoted without its observation window **in
+the very sentence `COR-1` exists to repair**; and two bare universals over a
+tested set. Each was a real defect in new prose, and each was named by a guard
+rather than by a reviewer.
+
+Suite: 1,157 collected. `ruff check .` clean; `mypy src tests scripts` unchanged
+at 150 findings over 158 files. Reproduce:
+`PYTHONPATH=src python -m pytest tests -q`.
+
 ## [Unreleased] — the close ruling enacted, loop terminated at `L1` (2026-08-29)
 
 No API changes. Run under the operator ruling of 2026-08-29, which closed the
