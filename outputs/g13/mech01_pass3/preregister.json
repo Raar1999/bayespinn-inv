@@ -1,0 +1,50 @@
+{
+  "what_this_is": "MECH-01 pass 3. The pass-2 magnitude statistic, standardised against the null that the split ratio induces, pre-registered with a threshold and both outcomes, and tested on devices the row side has never seen",
+  "authorised_by": "operator ruling of 2026-08-28 \u00a75",
+  "pilot": {
+    "solver_build_s": 8.229999366449192e-05,
+    "per_cell_s": 24.287515899995924,
+    "n_cells_required": 36,
+    "projected_s": 874.3506546998469,
+    "measured_not_estimated": true,
+    "rule": "PILOT-01: a measurement is priced by a measured pilot before it is decided on, never by an estimate"
+  },
+  "same_method_not_a_third": "this is the row-side method with a sharper statistic. It is NOT a third distinct method, and it may not be counted as one for U-EMPIR whatever it returns",
+  "ah_06": "the statistic was suggested by the pass-2 cells, so those cells cannot test it. They are re-analysed in phase 'insample' for contrast and that re-analysis is not evidence for or against the hypothesis",
+  "new_solves": "not zero. outputs/g9 stores singular values, never U, so the Jacobian is recomputed at the held-out devices. The ANALYSIS phases -- insample and verdict -- are arithmetic over stored w_out at new_solves = 0, and that is AST-guarded by tests/test_mech01_pass3_g13.py",
+  "measure": {
+    "quantity": "dz(cell) = mean(z(2), z(3), z(4)) - z(1), where z(k) = (w_out(k) - b) / sqrt(2 b (1 - b) / (n_rows + 2)), b = n_out/n_rows, and w_out(k) is the share of |U[:, k]|**2 on bias rows outside the reference core window",
+    "null_model": "under H0 the direction has no row preference, so U[:, k] is uniform on the unit sphere in R**n_rows, the squared coordinates are Dirichlet(1/2, ..., 1/2), and w_out ~ Beta(n_out/2, n_in/2) with mean b and variance 2 b (1 - b) / (n_rows + 2). z is therefore mean 0 and variance 1 under H0 at every cell, whatever b is",
+    "why_not_pass_2s_statistic": "pass 2 subtracted the mean and kept the raw scale, which is b-dependent. The width axis sweeps b over 0.0625..0.875 and peaks at b = 0.375..0.50; the spacing axis only ever visits b in 0.857..0.929. The axes were compared where they do not overlap, and the reported 3.1-3.5x is substantially a statement about b rather than about rank",
+    "admissibility": "a cell enters iff n_out >= 2 AND n_in >= 2, i.e. both Beta shape parameters are at least 1 and the null has a finite non-U-shaped density. Derived from the null, not chosen. At the SPEC-g9-2 geometry this excludes exactly the narrowest width cell (n_out = 1 of 16), which is the degeneracy the ruling of 2026-08-28 identified",
+    "reference_core_V": [
+      0.47500000000000003,
+      0.5750000000000001
+    ],
+    "reference_core_is_not_chosen_here": "the narrowest window of SPEC-g9-2's width axis, whose centre, widths and bias count were fixed at generation 9, two generations before this question was asked",
+    "shared_cell_handling": "alpha = 0 and width = 0.75 are one observation set reached by two code paths (generation 9's C4). Dropped from the spacing side; kept on the width side; never counted twice",
+    "test": "one-sided exact Mann-Whitney U per device, width cells vs spacing cells, alternative 'width greater', alpha = 0.05. Rank-based so no scale is assumed, exact so nothing asymptotic is claimed at n < 10",
+    "decision_rule": "SEPARATES iff p <= 0.05 at BOTH held-out devices. Any other result, including one device clearing and the other not, is DOES_NOT_SEPARATE. Requiring both is what stops a single device from carrying the claim",
+    "held_out_devices": [
+      "device_p10",
+      "device_p90"
+    ],
+    "why_these_are_out_of_sample": "pass 2 measured row weights at g8_operating_point and device_p50 only. device_p10 and device_p90 were selected by SPEC-g9-1's pre-registered percentile rule at generation 9 and have never had a row weight computed on them. They are also the far devices: 1.22 and 1.41 decades of profile distance from the generation-8 device, against device_p50's 0.64",
+    "indices": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "minimum_cells": 4,
+    "minimum_cells_why": "below four admissible cells on either axis the exact test cannot reach p = 0.05 one-sided, so the measurement would be incapable of the outcome it is run to look for. Fewer than four is UNDETERMINED, reported as a failure to measure rather than as a negative",
+    "measure_hash": "1627cf4d7dc109a12c5d7f8fe2734f78f4c98fd97f4d7144764ddc227af153f4"
+  },
+  "outcomes": {
+    "SEPARATES": "the standardised gap is larger along the axis where the rank climbs than along the axis where it does not, at both held-out devices, at alpha = 0.05. The pass-2 description survives standardisation and survives devices it was not built on. MECH-01 narrows from an open question to a measured claim -- the trailing directions are carried by the bias rows the widening adds, and the mechanism is about COVERAGE rather than about conditioning. L0 becomes reachable",
+    "DOES_NOT_SEPARATE": "the standardised gap does not separate the axes out of sample. The 3.1-3.5x of pass 2 was a description of the discovery sample and of the split ratio it confounded, not a property of the system. This is the row-side method FAILING, characterised -- not inconclusive as pass 2 was. U-EMPIR then stands at two distinct falsified methods, and a third distinct method or a U-INSTR verdict naming the missing instrument is what MECH-01 needs next",
+    "UNDETERMINED": "the reproduction control failed, or fewer than four admissible cells were available on an axis at a held-out device. Reported as a failure to measure. It is not a negative result and may not be read as one"
+  },
+  "outcomes_note": "pre-registered under the operator ruling of 2026-08-28 \u00a75, which required the exact form, the threshold and both outcomes stated and hashed before the held-out data is touched. Neither outcome is the good outcome (AH-04, AH-13). DOES_NOT_SEPARATE is the more useful of the two for U-EMPIR, which is a reason to be careful of it, not a reason to want it",
+  "outcomes_hash": "f51f8d0c66a205e06cdea8a01b12020502291a4d711039b4e596aad8688548e7"
+}

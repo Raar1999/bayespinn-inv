@@ -244,6 +244,15 @@ INTERPOLATION_ALLOWLIST = {
            "run_g9.cell_spectrum as a chart-relative theta, and this module "
            "contains no .charted, no .reconstruct and no solver call, so the "
            "grid is still reached only through charts._lerp."),
+    "scripts/run_mech01_pass3.py": (
+        2, "g13: the same anchor-to-anchor collocation as g9, g10 and g12 -- "
+           "chart G d=4 coordinates onto the d=16 anchor lattice, once in "
+           "phase_pilot and once in phase_measure for MECH-01 pass 3. "
+           "Verified rather than asserted: both calls produce `m16`, which is "
+           "only ever passed to run_g9.cell_spectrum as a chart-relative "
+           "theta, and this module contains no .charted, no .reconstruct and "
+           "no solver call of its own, so the grid is still reached only "
+           "through charts._lerp."),
     "scripts/defect_case_study.py": (
         1, "grid -> anchors for the L2 comparison against the recovery."),
     "scripts/run_inverse_sweep.py": (

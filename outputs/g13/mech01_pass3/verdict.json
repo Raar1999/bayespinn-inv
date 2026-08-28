@@ -1,0 +1,381 @@
+{
+  "outcome": "DOES_NOT_SEPARATE",
+  "meaning": "the standardised gap does not separate the axes out of sample. The 3.1-3.5x of pass 2 was a description of the discovery sample and of the split ratio it confounded, not a property of the system. This is the row-side method FAILING, characterised -- not inconclusive as pass 2 was. U-EMPIR then stands at two distinct falsified methods, and a third distinct method or a U-INSTR verdict naming the missing instrument is what MECH-01 needs next",
+  "measure_hash": "1627cf4d7dc109a12c5d7f8fe2734f78f4c98fd97f4d7144764ddc227af153f4",
+  "outcomes_hash": "f51f8d0c66a205e06cdea8a01b12020502291a4d711039b4e596aad8688548e7",
+  "hashes_match_preregistration": true,
+  "reproduction_control_R1": {
+    "pass": true,
+    "n_identical": 8,
+    "of": 8
+  },
+  "devices": {
+    "device_p10": {
+      "width": [
+        {
+          "param": 0.1,
+          "n_rows": 16,
+          "n_out": 1,
+          "b": 0.0625,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 0.15,
+          "n_rows": 16,
+          "n_out": 6,
+          "b": 0.375,
+          "admissible": true,
+          "dz": 1.5089193602236002
+        },
+        {
+          "param": 0.2,
+          "n_rows": 16,
+          "n_out": 8,
+          "b": 0.5,
+          "admissible": true,
+          "dz": 1.2581783023210735
+        },
+        {
+          "param": 0.3,
+          "n_rows": 16,
+          "n_out": 11,
+          "b": 0.6875,
+          "admissible": true,
+          "dz": 0.5275015857185332
+        },
+        {
+          "param": 0.4,
+          "n_rows": 16,
+          "n_out": 12,
+          "b": 0.75,
+          "admissible": true,
+          "dz": 0.3861354761479535
+        },
+        {
+          "param": 0.5,
+          "n_rows": 16,
+          "n_out": 13,
+          "b": 0.8125,
+          "admissible": true,
+          "dz": -0.1595825325243455
+        },
+        {
+          "param": 0.6,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.20122340848206857
+        },
+        {
+          "param": 0.7,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.3725125543923313
+        },
+        {
+          "param": 0.75,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.44971698614285616
+        }
+      ],
+      "spacing": [
+        {
+          "param": 0.125,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.31955260827627857
+        },
+        {
+          "param": 0.25,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.5575436745481687
+        },
+        {
+          "param": 0.375,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.45718660122092736
+        },
+        {
+          "param": 0.5,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.7311534072717973
+        },
+        {
+          "param": 0.625,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.6411476109281575
+        },
+        {
+          "param": 0.75,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.573487879858475
+        },
+        {
+          "param": 0.875,
+          "n_rows": 16,
+          "n_out": 15,
+          "b": 0.9375,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 1.0,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": -0.8772870642854295
+        }
+      ],
+      "test": {
+        "n_width_admissible": 8,
+        "n_spacing_admissible": 7,
+        "width_dz": [
+          1.5089193602236002,
+          1.2581783023210735,
+          0.5275015857185332,
+          0.3861354761479535,
+          -0.1595825325243455,
+          -0.20122340848206857,
+          -0.3725125543923313,
+          -0.44971698614285616
+        ],
+        "spacing_dz": [
+          -0.31955260827627857,
+          -0.5575436745481687,
+          -0.45718660122092736,
+          -0.7311534072717973,
+          -0.6411476109281575,
+          -0.573487879858475,
+          -0.8772870642854295
+        ],
+        "width_median": 0.113276471811804,
+        "spacing_median": -0.573487879858475,
+        "b_overlap": {
+          "width_b_range": [
+            0.375,
+            0.875
+          ],
+          "spacing_b_range": [
+            0.875,
+            0.875
+          ]
+        },
+        "test_ran": true,
+        "u_statistic": 54.0,
+        "p_value": 0.0006216006216006216,
+        "alpha": 0.05,
+        "clears_alpha": true
+      }
+    },
+    "device_p90": {
+      "width": [
+        {
+          "param": 0.1,
+          "n_rows": 16,
+          "n_out": 1,
+          "b": 0.0625,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 0.15,
+          "n_rows": 16,
+          "n_out": 6,
+          "b": 0.375,
+          "admissible": true,
+          "dz": 1.6180292261613258
+        },
+        {
+          "param": 0.2,
+          "n_rows": 16,
+          "n_out": 8,
+          "b": 0.5,
+          "admissible": true,
+          "dz": 1.436086026193391
+        },
+        {
+          "param": 0.3,
+          "n_rows": 16,
+          "n_out": 11,
+          "b": 0.6875,
+          "admissible": true,
+          "dz": 1.0722055913044928
+        },
+        {
+          "param": 0.4,
+          "n_rows": 16,
+          "n_out": 12,
+          "b": 0.75,
+          "admissible": true,
+          "dz": 1.1574762570156483
+        },
+        {
+          "param": 0.5,
+          "n_rows": 16,
+          "n_out": 13,
+          "b": 0.8125,
+          "admissible": true,
+          "dz": 1.1318728093721575
+        },
+        {
+          "param": 0.6,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 1.1535169286918892
+        },
+        {
+          "param": 0.7,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 1.2762159232592236
+        },
+        {
+          "param": 0.75,
+          "n_rows": 13,
+          "n_out": 11,
+          "b": 0.8461538461538461,
+          "admissible": true,
+          "dz": 1.3705714757963898
+        }
+      ],
+      "spacing": [
+        {
+          "param": 0.125,
+          "n_rows": 13,
+          "n_out": 11,
+          "b": 0.8461538461538461,
+          "admissible": true,
+          "dz": 1.4393543124481207
+        },
+        {
+          "param": 0.25,
+          "n_rows": 13,
+          "n_out": 11,
+          "b": 0.8461538461538461,
+          "admissible": true,
+          "dz": 1.1998398515372644
+        },
+        {
+          "param": 0.375,
+          "n_rows": 13,
+          "n_out": 11,
+          "b": 0.8461538461538461,
+          "admissible": true,
+          "dz": 1.2599103854875593
+        },
+        {
+          "param": 0.5,
+          "n_rows": 13,
+          "n_out": 11,
+          "b": 0.8461538461538461,
+          "admissible": true,
+          "dz": 0.9426125072010914
+        },
+        {
+          "param": 0.625,
+          "n_rows": 12,
+          "n_out": 10,
+          "b": 0.8333333333333334,
+          "admissible": true,
+          "dz": 1.162676316226583
+        },
+        {
+          "param": 0.75,
+          "n_rows": 12,
+          "n_out": 10,
+          "b": 0.8333333333333334,
+          "admissible": true,
+          "dz": 1.2091807343351628
+        },
+        {
+          "param": 0.875,
+          "n_rows": 11,
+          "n_out": 10,
+          "b": 0.9090909090909091,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 1.0,
+          "n_rows": 11,
+          "n_out": 9,
+          "b": 0.8181818181818182,
+          "admissible": true,
+          "dz": 1.040739376639018
+        }
+      ],
+      "test": {
+        "n_width_admissible": 8,
+        "n_spacing_admissible": 7,
+        "width_dz": [
+          1.6180292261613258,
+          1.436086026193391,
+          1.0722055913044928,
+          1.1574762570156483,
+          1.1318728093721575,
+          1.1535169286918892,
+          1.2762159232592236,
+          1.3705714757963898
+        ],
+        "spacing_dz": [
+          1.4393543124481207,
+          1.1998398515372644,
+          1.2599103854875593,
+          0.9426125072010914,
+          1.162676316226583,
+          1.2091807343351628,
+          1.040739376639018
+        ],
+        "width_median": 1.216846090137436,
+        "spacing_median": 1.1998398515372644,
+        "b_overlap": {
+          "width_b_range": [
+            0.375,
+            0.8666666666666667
+          ],
+          "spacing_b_range": [
+            0.8181818181818182,
+            0.8461538461538461
+          ]
+        },
+        "test_ran": true,
+        "u_statistic": 33.0,
+        "p_value": 0.30629370629370634,
+        "alpha": 0.05,
+        "clears_alpha": false
+      }
+    }
+  },
+  "decision_rule": "SEPARATES iff p <= 0.05 at BOTH held-out devices. Any other result, including one device clearing and the other not, is DOES_NOT_SEPARATE. Requiring both is what stops a single device from carrying the claim",
+  "new_solves": 0,
+  "arithmetic_only": true
+}
