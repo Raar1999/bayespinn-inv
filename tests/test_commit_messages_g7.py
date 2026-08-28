@@ -230,6 +230,15 @@ PARKED_DOC07_VIOLATIONS = {
         "since the 2026-08-28 rewrite, so it had not policed a commit message "
         "for a generation. The first thing it did on being restored was catch "
         "the loop that restored it."),
+    "f34edc138": (
+        '"twelve tests" -- generation 13 housekeeping, the commit that updated '
+        "the README badge after the commit-hook guard was added. The work order "
+        "carrying that task named DOC-07 and said in as many words: no "
+        "spelled-out counts. Spelling the number as a word rather than a digit "
+        "is not a way around the rule -- that is precisely the shape the "
+        "generation-8 widening was written to catch, and it caught it. R-4 "
+        "makes the message permanent; the badge itself is the artefact the "
+        "message should have pointed at."),
 }
 
 
