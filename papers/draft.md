@@ -117,6 +117,24 @@ protocol are correct.
 6. A full audit ledger with a regression test for every defect, and an open
    question — why the spectrum flattens — left open, with the three methods
    that failed to close it characterised.
+7. The observation that ties the pipeline together: the identifiability
+   spectrum **predicts, direction by direction, where a learned surrogate's
+   gradients can be trusted**. A surrogate accurate in *value* has directional
+   derivatives that agree with the reference solver inside the identifiable
+   subspace and are uncorrelated with it outside, and a 33× training-budget
+   control excludes undertraining as the explanation. Its placement last in this
+   list is an artefact of when it was added, not a judgement of its weight.
+
+**How to read this paper.** §3.2 fixes the vocabulary the rest of it depends on:
+a rank is measured *in a chart, at a dimension, over an observation set*, and
+numbers carrying different labels are not comparable term by term. §4.1 and §4.2
+are the local identifiability measurement and are the paper's centre; §4.3 puts
+the same question over finite distances in **chart G** at `d=4` and in **chart
+J** and **chart L** at `d=16`; §4.8 is where the measurement earns its keep, by
+predicting something about a system it was not measured on. §4.4–§4.7 and §4.9
+are the surrounding evaluation, and §4.10 is the audit that produced the
+discipline all of it is reported under. A reader with limited time should read
+§4.2, §4.3 and §4.8 and treat the rest as support.
 
 ## 2. Background
 
@@ -127,15 +145,57 @@ $$\nabla\!\cdot(\varepsilon\nabla\phi)=-q(p-n+C),\quad \nabla\!\cdot J_n = qR,\q
 with $J_n=q\mu_n(nE + V_T\nabla n)$, $J_p=q\mu_p(pE - V_T\nabla p)$, SRH
 recombination and ohmic Dirichlet contacts. De Mari scaling throughout.
 
-### 2.2 Prior work on inverse doping
+### 2.2 Related work
 
+Four strands bear on this paper. Two are well covered by work we cite; two are
+strands this draft has **not yet engaged**, and they are marked as such rather
+than papered over. Every citation below was checked against a retrievable source
+(`docs/NOVELTY_AUDIT.md`); an unverifiable one was removed from this project once
+already and the rule that followed is that a reference we cannot open does not
+appear.
+
+**(a) Inverse doping recovery from terminal measurements — covered.**
 Identification of doping profiles in the stationary drift–diffusion system, its
 identifiability and its ill-posedness, are established results
 (Burger, Engl, Leitão & Markowich, *Inverse Problems* **17**, 1765, 2001;
-*Milan J. Math.* **72**, 273, 2004). Bayesian inversion for this exact problem
-(arXiv:2408.11485) and ML surrogates for doping reconstruction (2024) both
-exist. Inverse device modelling for doping extraction dates to *Solid-State
-Electronics* (1990–91). We add measurement, not method.
+*Milan J. Math.* **72**, 273, 2004; Burger, Engl, Markowich & Pietra, *Inverse
+Doping Problems for Semiconductor Devices*, Springer, 2002). Bayesian inversion
+for this exact problem (arXiv:2408.11485) and ML surrogates for doping
+reconstruction (2024) both exist. Inverse device modelling for doping extraction
+dates to *Solid-State Electronics* (1990–91). **We add measurement, not method**,
+and "recovering doping from I–V is ill-posed" is a known result rather than a
+finding of ours.
+
+**(b) Optimal experiment design — covered.** The criteria §4.6 compares are
+textbook (Fedorov, 1972; Atkinson & Donev, 1992), and D-/A-optimal design for
+infinite-dimensional Bayesian linear inverse problems of exactly this class is
+established and scaled (Alexanderian, Petra, Stadler & Ghattas, 2014;
+arXiv:1711.05878; arXiv:1802.06517), including goal-oriented and sequential
+variants for surrogate-based inversion (arXiv:2402.16520). Our contribution in
+that section is a **negative** result about one acquisition function, not a
+design method.
+
+**(c) Global and structural identifiability — gap, open.** §4.3 conducts a
+direct search over finite distances — in **chart G** at `d=4` and in **chart J**
+and **chart L** at `d=16`, and reported there as a local-to-global contrast — and
+its barrier measurement is a profile-likelihood construction. Both belong to a
+substantial methodological literature: structural identifiability by
+differential-algebraic and series methods, and practical identifiability by
+profile likelihood. This draft engages **none of it**. What the section needs is
+a positioning of the search against that machinery: what a formal result would
+establish that a search cannot, and why a search is nonetheless the available
+instrument when the forward map is a PDE solve. The gap is recorded in
+`docs/PAPER_AUDIT_g15.md` §6 and is **not** filled with plausible references
+here.
+
+**(d) Parameterisation choice in inverse problems — gap, open.** The *chart*
+construction of §3.2 — that a rank is undefined until the parameterisation, its
+dimension and the observation set are all fixed — is the paper's own framing and
+carries no citation. Discretisation of an ill-posed problem is itself a
+regularisation, and how the recovered object depends on that choice is a studied
+question; this draft asserts the dependence and measures it without locating
+either in the literature. Same treatment as (c): recorded in
+`docs/PAPER_AUDIT_g15.md` §6, not filled.
 
 ### 2.3 Forward model
 
@@ -240,6 +300,13 @@ locally changes the I–V by 0.02–1.3% — below a 2% noise floor. Two physica
 distinct devices, one measurement.
 
 ### 4.2 The rank is a property of the measurement, not of the device
+
+*Shape of this section.* Three measurements, then three failures. The
+measurements come first and stand on their own; the failures are three
+pre-registered attempts to explain the third of them, and they are reported at
+length because a characterised failure is the useful form of a negative result.
+The statement we are willing to defend is set apart at the end of the section,
+and a reader who wants only that should skip to it.
 
 The number in §4.1 is a property of a *pair* — the device and the observation
 set — and the observation-set half is a curve rather than a constant. Two
@@ -637,6 +704,14 @@ the paper does not claim one.
 
 - Burger, Engl, Leitão & Markowich (2001). Identification of doping profiles in semiconductor devices. *Inverse Problems* **17**, 1765.
 - Burger, Engl, Leitão & Markowich (2004). On inverse problems for semiconductor equations. *Milan J. Math.* **72**, 273.
+- Burger, Engl, Markowich & Pietra (2002). *Inverse Doping Problems for Semiconductor Devices*. Springer.
+- Bayesian inversion for the identification of the doping profile in unipolar semiconductor devices (2024). arXiv:2408.11485.
+- Data-driven solutions of ill-posed inverse problems arising from doping reconstruction in semiconductors (2024). *Applied Mathematics in Science and Engineering*.
+- A problem-specific inverse method for two-dimensional doping profile determination from C–V measurements (1991). *Solid-State Electron.*
+- Physical parameter extraction by inverse device modelling: 1D and 2D doping profiling (1990). *Solid-State Electron.*
+- Efficient D-optimal design of experiments for infinite-dimensional Bayesian linear inverse problems. arXiv:1711.05878.
+- Goal-oriented optimal design of experiments for large-scale Bayesian linear inverse problems. arXiv:1802.06517.
+- Sequential design for surrogate modeling in Bayesian inverse problems. arXiv:2402.16520.
 - Scharfetter & Gummel (1969). Large-signal analysis of a silicon Read diode oscillator. *IEEE Trans. Electron Devices* **16**, 64.
 - De Mari (1968). An accurate numerical steady-state one-dimensional solution of the P-N junction. *Solid-State Electron.* **11**, 33.
 - Aster, Borchers & Thurber (2018). *Parameter Estimation and Inverse Problems*, 3rd ed.

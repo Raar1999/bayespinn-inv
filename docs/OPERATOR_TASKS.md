@@ -205,3 +205,222 @@ is now executable as written.
 still the wrong word: nothing was pending, because nothing was going to happen
 without a reserved action. Naming the reservation is what makes the status
 describe the world.
+
+---
+
+## OT-3 — `EXT-05` attribution trailers · **RULED: LEAVE IT ALONE, PERMANENTLY**
+
+**Status** **CLOSED — DECLINED ON COST, 2026-08-29** · **Delegated** to the loop
+by the operator close-out order of 2026-08-29 §T2, which reserved the decision
+and then made it
+**What was reserved** `D:\Fable built Fabkg Final\FabKG-Application`, surveyed as
+`EXT-05` in `docs/AUDIT_MASTER.md` §`PROV-08`, was held back from every earlier
+sweep. `docs/G13_RESULT.md` §1 declined to survey it, and `AUDIT_MASTER` records
+it twice as *unexamined and reserved to the operator*. This entry discharges the
+reservation by declining the action, not by performing it.
+
+**The action declined.** Rewriting `EXT-05`'s history with `git filter-repo` to
+strip `Co-Authored-By` trailers from the 138 of its 169 commits that carry one.
+
+**Why it is declined, and the reasoning is a cost comparison rather than a
+principle.** Four facts decide it, and all four are already measured:
+
+1. **It was never rewritten.** The survey table classes it `CLEAN of rewrite
+   damage`: no `filter-repo` run, no commit-map, no force-pushed remote. There
+   are no pre-rewrite objects at risk in it, because nothing has put any at
+   risk. A rewrite would *create* the exposure that every other entry in that
+   table is a record of somebody else having already created.
+2. **It has no remote.** The `remote` column reads `none`. Nothing downstream
+   holds its object identities, so nothing downstream breaks — and equally,
+   nothing downstream reads it. The trailers are visible to whoever opens that
+   directory on this machine and to nobody else.
+3. **It has no recovery role.** It resolved none of the 150 sampled pre-rewrite
+   commits of `EXT-02` — a different history that happens to share a branch
+   name. `EXT-04`, which resolved 146 of the same 150, is the tree that carries
+   the fabkg lineage's surviving object graph, and it is frozen under a separate
+   record for exactly that reason. `EXT-05` is not a backup of anything.
+4. **The cost is known, because this repository paid it.** The 2026-08-28
+   `filter-repo` run at 09:16:38 produced `HIST-01`, eight failing guards, three
+   more that silently skipped, and a full generation of repair
+   (`docs/HIST01_REPAIR_g11.md`, `docs/G13_RESULT.md`). That is the price of a
+   history rewrite in a tree that is watched. `EXT-05` is not watched, so the
+   same rewrite would buy less and could only be discovered later.
+
+**What the trade actually is.** Spend a generation of repair risk on a local
+directory nobody reads, to remove lines that stop being generated anyway. The
+`commit-msg` hook at `C:\Users\abhis\.git-hooks\commit-msg` was installed
+2026-08-28 09:06:36 and is machine-wide via `core.hooksPath`; from that moment
+forward no new trailer is written in any tree on this host, `EXT-05` included.
+The rewrite would address only commits already made, in the one place where
+their being addressed changes nothing.
+
+**The standing prohibition, stated once so it does not have to be re-derived.**
+`git filter-repo` is **not run again in any of these trees** — not `EXT-01`
+through `EXT-09`, not this repository, not any tree reached from them. Neither
+is `git gc --prune`, `git remote remove`, or any force-push. The rewrite that
+has already happened is a fact to be recorded and worked around, and the
+recording is done. Nothing is gained by a second one and `HIST-01` is what is
+lost.
+
+**`OT-2` was discharged separately** on 2026-08-29 by the close ruling §4, which
+assigned the paper to the loop and lifted `R-3` over `papers/**`; `COR-1` was
+applied the same day and `papers/CORRIGENDA_g6.md` records it. Its entry above
+carries that status and is not edited here.
+
+**This is a record, not an operation.** No command was run against `EXT-05` to
+produce it. Every number in it is read from `docs/AUDIT_MASTER.md`'s survey
+table, which was taken at a commit that document names. `EXT-05` remains
+unexamined in the sense generation 13 meant — the 33 absent pre-rewrite objects
+were never looked for in it — and it now stays that way by decision rather than
+by deferral.
+
+---
+
+## OT-1 executed — **the run exists and no job started** · close-out, 2026-08-29
+
+**Status of `CI-01`** `OPERATOR-BLOCKED`, **unchanged — and the blocker is now a
+different one.** `SPEC-g0-3b` unchanged.
+**What was delegated** the close-out order of 2026-08-29 §T1 delegated `OT-1` to
+the loop by name, lifting `R-4`'s prohibition on `git push` and `SK-09`'s on
+network access for this one command sequence.
+
+Append-only, so nothing above is edited. This entry supersedes forward.
+
+### What was run
+
+```
+git push origin loop/champion          # 8a74b7a..65bef05, fast-forward, no force
+gh pr create --base main --head loop/champion \
+  --title "Audit loop: generations 0-14" --body "CI trigger. Not for merge."
+```
+
+Fast-forward was verified before pushing (`git merge-base --is-ancestor
+origin/loop/champion HEAD`). **No merge, no force-push, no history rewriting.**
+The pull request is open and is **not** for merge.
+
+* Pull request: https://github.com/Raar1999/bayespinn-inv/pull/1
+* Run: https://github.com/Raar1999/bayespinn-inv/actions/runs/33235695610
+* Head: `65bef0598a0c5fdc4528878ccd861122d6591af1` — the current champion
+* Duration: **5 seconds**
+
+### Every leg
+
+| leg | conclusion | steps executed | job |
+|---|---|---:|---|
+| tests (py3.11, ubuntu-latest) | **failure** | **0** | [99056176181](https://github.com/Raar1999/bayespinn-inv/actions/runs/33235695610/job/99056176181) |
+| tests (py3.12, ubuntu-latest) | **failure** | **0** | [99056176161](https://github.com/Raar1999/bayespinn-inv/actions/runs/33235695610/job/99056176161) |
+| **tests (py3.11, windows-latest)** | **failure** | **0** | [99056176138](https://github.com/Raar1999/bayespinn-inv/actions/runs/33235695610/job/99056176138) |
+| clean-environment install + selftest | **failure** | **0** | [99056176075](https://github.com/Raar1999/bayespinn-inv/actions/runs/33235695610/job/99056176075) |
+
+**Zero steps ran on any leg.** Every job carries the same annotation:
+
+> *The job was not started because recent account payments have failed or your
+> spending limit needs to be increased. Please check the 'Billing & plans'
+> section in your settings*
+
+`gh api …/jobs` confirms `steps: 0` on all four. **No checkout happened, no
+interpreter was installed, and not one line of this repository was executed on
+any machine.** `failure` here is a billing state, not a test result, and reading
+these four reds as evidence about the code would be the same class of false
+closure that created this file.
+
+### Why, and it is an account-level fact rather than a repository one
+
+`Raar1999/bayespinn-inv` is **private**. Private repositories draw Actions
+minutes from the account's quota; the quota is exhausted or the payment method
+has failed. Nothing in `.github/workflows/ci.yml`, in the tree, or in the push
+caused this, and no change to any of them can clear it.
+
+**Two operator actions would clear it, and both are reserved.** Restore the
+billing method or raise the spending limit; or make the repository public, for
+which Actions minutes are free. The second is an irreversible disclosure of the
+whole tree and its history to the internet and **is not taken by the loop under
+any delegation short of one that names it**.
+
+### `CI-01` and `SPEC-g0-3b`
+
+**Neither closes.** `CI-01` closes only with a retrievable log for every leg; the
+logs are retrievable and they record that nothing ran. `SPEC-g0-3b` requires a
+retrievable run log **per matrix leg**, and a job that never started produces no
+such log.
+
+**The exact failure that blocks them** is now recorded and it is not the one that
+blocked them for eleven generations. The sequence has moved:
+
+| generation | blocker |
+|---|---|
+| 0–7 | no remote existed |
+| 8–10 | remote decision unanswered; `ACCEPTED-PERMANENT` by default trigger |
+| 11–14 | remote existed, push reserved to the operator |
+| **close-out** | **push done, PR open, run triggered — Actions billing at the account level** |
+
+`CI-01`'s generation-9 `ACCEPTED-PERMANENT` cost statement is **superseded
+forward, not deleted**, exactly as the generation-11 reversion required. It
+remains in `docs/G9_RESULT.md` §1 as what was true on its date.
+
+### The 3.9 leg — the order's premise is stale, and so is this file's own table
+
+The close-out order directs attention to *"the 3.9 leg specifically"*, green or
+red. **There is no 3.9 leg.** `.github/workflows/ci.yml` at `65bef05` runs
+`python-version: ["3.11", "3.12"]` on ubuntu plus one windows 3.11 job. 3.9 was
+removed at `AUDIT_g7` together with the support claim it existed to evidence, and
+`requires-python = ">=3.11"` now makes a 3.9 leg fail at *install* rather than at
+test — which would be noise, not evidence.
+
+**So neither branch of the order's disjunction can fire, and the floor does not
+move.** `pyproject.toml`'s `>=3.11` stays where it is, and it stays there on the
+reasoning already recorded at `DEC-g7-2`: only versions the suite has actually
+run on are declared. That is neither of the two outcomes the order anticipated —
+it is not *green, floor moves back* and it is not *red, floor stays on evidence*.
+It is *the experiment the order describes is not in the matrix*.
+
+**The leg table in this file, above, is stale in the same way.** Its first row
+reads *"ubuntu × 3.9 — the `requires-python >=3.9` floor is real"*, and both the
+leg and the `>=3.9` floor it names were removed at generation 7. The table has
+described a matrix that does not exist for eight generations. Append-only, so the
+row is not edited; this paragraph supersedes it. **The live leg list is the four
+rows of the table in this entry.**
+
+This is `AGE-01` twice over — the operator's own order and this file's own table
+each written against a rule set that had already moved. Neither was wrong on its
+date. Both stopped describing the tree.
+
+**What the 3.12 leg would have settled.** 3.12 is the analogue: it installs under
+the current floor, it has still never executed anywhere, and a green 3.12 leg is
+what restores its classifier. It did not start either, so the classifier stays
+withdrawn and the reason is unchanged.
+
+### `WINDOWS_RISK_g6.md` — first opportunity to score it, and it scores nothing
+
+That document was static analysis standing in for a run that had never happened.
+The Windows job started no steps, so **none of its five ranked predictions is
+confirmed or refuted**, and it remains static analysis.
+
+| rank | prediction | scored? |
+|---|---|---|
+| 1 | Text I/O using the platform encoding · FOUND, FIXED, GUARDED | **no** — no test ran |
+| 2 | Line-ending conversion altering file content · FOUND, FIXED, GUARDED | **no** — no checkout happened |
+| 3 | **`NB-02`: the notebook step destroys committed evidence, and CI is green only because the test step precedes it** | **no**, and it is the one that only a real run could ever score. Steps 5 and 6 both did not execute, so the ordering dependency the document predicts is untested. |
+| 4 | POSIX-only commands in the Makefile · CRASH CLASS | **no** — CI does not invoke the Makefile |
+| 5 | `/tmp` and `bin/` in the clean-install job · SCOPED SAFE | **no** — the clean-install job did not start |
+
+`SPEC-g0-3a`'s standing verdict — *passes for the 3.11 leg only, locally* — is
+unchanged. The 3.12 and Windows legs remain **unevaluated, not passing**, which
+is the distinction this file exists to protect.
+
+### Defects revealed
+
+**None.** No repository code executed. The order directs that a real defect be
+reported and not fixed here; there is nothing to report, and the absence of a
+finding is not evidence of correctness. The local suite on Windows / CPython
+3.11.9 remains the only evidence that exists, and `PROV-07` is still validated on
+`win32` only.
+
+### What is now newly true
+
+Only this: **the workflow has been triggered.** For fifteen generations
+`.github/workflows/ci.yml` had never been reached by any trigger. It has now been
+reached, a run object exists at a retrievable URL, and the matrix expanded to the
+four legs the workflow declares. The run then stopped at the billing gate before
+a single step. That is a smaller step than closing `CI-01` and it is a real one:
+the failure mode has moved from *nobody has tried* to *one named account setting*.

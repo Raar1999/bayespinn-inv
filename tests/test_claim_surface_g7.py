@@ -149,6 +149,26 @@ EXEMPT = {
     "docs/gen/GEN_g6.md": "generation record, superseded by the result documents",
     "papers/CORRIGENDA_g6.md": "corrigenda record; quotes the defective text in "
                               "order to correct it",
+    # --- Added by the close-out order of 2026-08-29 T3-T6, under ``AGE-01``. --
+    # The order asked for two new documents and did not name this obligation,
+    # because it was written against the rules of its own date and the rule it
+    # needed was enacted in the commit it was written against. Deciding is the
+    # cheap half; noticing the decision was needed is the rule.
+    #
+    # Verified load-bearing, 2026-08-29: with these two entries removed,
+    # ``tests/test_age01_surface_coverage_close.py`` fails and names both files
+    # with the claim kinds it found in them --- ``ordering,rank,spectral`` and
+    # ``ordering,spectral``. The guard that makes this dict load-bearing is that
+    # file, not this one; ``test_claim_surface_g7.py`` alone stays green either
+    # way. Checked rather than assumed, which is the only reason to trust it.
+    "docs/PAPER_AUDIT_g15.md": "editorial audit; quotes the paper's claims in "
+                               "order to assess how they read, and publishes "
+                               "none of its own",
+    "docs/PAPER_RECOMMENDATIONS_g15.md": "proposal record; quotes current and "
+                                         "proposed claim text side by side. "
+                                         "Nothing in it is applied, so a "
+                                         "sentence in it is a proposal rather "
+                                         "than a statement",
 }
 
 #: A rank fraction: "3-4 of 16", "3 of 4", "1 of 8". Two restrictions, both
