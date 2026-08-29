@@ -424,3 +424,72 @@ reached, a run object exists at a retrievable URL, and the matrix expanded to th
 four legs the workflow declares. The run then stopped at the billing gate before
 a single step. That is a smaller step than closing `CI-01` and it is a real one:
 the failure mode has moved from *nobody has tried* to *one named account setting*.
+
+---
+
+## `CI-01` — the blocker narrowed to one setting, and the cheapest fix is to wait
+
+**Status of `CI-01`** `OPERATOR-BLOCKED`, unchanged · **`SPEC-g0-3b`** unchanged
+**Recorded under** the operator close-out ruling of 2026-08-29 §2, which ruled on
+the visibility question and named two checks. Both are operator actions and
+neither is the loop's; this entry records them so they are executable without
+re-deriving them.
+
+Append-only. Nothing above is edited.
+
+### The visibility question is closed, permanently
+
+**The repository stays private.** Making it public would make Actions minutes
+free and clear the blocker, and it is refused. The trade is an irreversible
+disclosure of the whole tree and its history to the internet — including **67
+absolute home paths under `C:\Users\abhis\`** in the manifests, which cannot be
+scrubbed because mutating a manifest is reserved under `R-3` — against saving a
+billing setting. That is not close, and the earlier visibility ruling stands.
+
+Recorded as permanent so it is not re-proposed each time the blocker is met.
+
+### Check one — which blocker it actually is
+
+`github.com/settings/billing` distinguishes two states that produce the same
+annotation on a job that never started:
+
+* a **failed payment method**; or
+* an **exhausted free allowance** with the spending limit still at its `$0`
+  default.
+
+The distinction matters because only the second resolves itself. Private
+repositories draw Actions minutes from the account allowance and public ones do
+not, which is why this appeared on the first run of a private repository and had
+never appeared before.
+
+### Check two — if it is the allowance, it resets, and that costs nothing
+
+The allowance resets at the start of the month. From the date of this entry that
+is **two days away**. The pull request is already open at
+`https://github.com/Raar1999/bayespinn-inv/pull/1` and its head is the champion,
+so re-running is one click and needs no push, no new commit and no change to
+`.github/workflows/ci.yml`.
+
+**Recommended order:** look at the billing page; if it is the allowance, wait for
+the reset and re-run the existing run; if it is the payment method, fix that.
+Raising the spending limit is only needed if the allowance is exhausted *and* the
+reset is too far away to wait for.
+
+### What the loop did instead, and what it did not buy
+
+Everything scoreable without a runner has now been scored, and it is recorded in
+`docs/WINDOWS_LEG_SCORED_g15.md`. Four of `WINDOWS_RISK_g6.md`'s five predictions
+are confirmed, `NB-02` is reproduced with a log, and the three `run` steps of
+`ci.yml` execute clean on this host at the current commit
+(`outputs/ci_local_g15/`).
+
+**None of that moves `CI-01` or `SPEC-g0-3b`, and it is important that it does
+not.** `SPEC-g0-3b` requires a retrievable remote run log **per matrix leg**.
+Local hand-execution on the development machine is not a clean-runner run: no
+fresh checkout, no dependency resolution, no isolated environment, and a host
+fifteen generations of work have shaped. The three Linux legs remain entirely
+unevidenced, and Linux — not Windows — was always the untested platform.
+
+So the position is: the blocker is one named account setting, the cheapest
+response is to wait two days, and the work that could be done without it has
+been done and is not a substitute for it.

@@ -214,12 +214,16 @@ recombination and ohmic Dirichlet contacts. De Mari scaling throughout.
 
 ### 2.2 Related work
 
-Four strands bear on this paper. Two are well covered by work we cite; two are
-strands this draft has **not yet engaged**, and they are marked as such rather
-than papered over. Every citation below was checked against a retrievable source
-(`docs/NOVELTY_AUDIT.md`); an unverifiable one was removed from this project once
-already and the rule that followed is that a reference we cannot open does not
-appear.
+Four strands bear on this paper, and all four are engaged below. Two of them —
+identifiability methodology and parameterisation-as-regularisation — locate
+instruments this paper *uses*, and engaging them costs us something in each case,
+which is stated rather than left for a reader to notice. One gap remains open and
+is marked as a gap at the end rather than papered over.
+
+Every citation here was checked against a retrievable source and each was opened
+and read for the specific claim it is cited for; an unverifiable reference was
+removed from this project once already, and the rule that followed is that a
+reference we cannot open does not appear, however plausible it sounds.
 
 **(a) Inverse doping recovery from terminal measurements — covered.**
 Identification of doping profiles in the stationary drift–diffusion system, its
@@ -242,27 +246,71 @@ variants for surrogate-based inversion (arXiv:2402.16520). Our contribution in
 that section is a **negative** result about one acquisition function, not a
 design method.
 
-**(c) Global and structural identifiability — gap, open.** §4.3 conducts a
-direct search over finite distances — in **chart G** at `d=4` and in **chart J**
-and **chart L** at `d=16`, and reported there as a local-to-global contrast — and
-its barrier measurement is a profile-likelihood construction. Both belong to a
-substantial methodological literature: structural identifiability by
-differential-algebraic and series methods, and practical identifiability by
-profile likelihood. This draft engages **none of it**. What the section needs is
-a positioning of the search against that machinery: what a formal result would
-establish that a search cannot, and why a search is nonetheless the available
-instrument when the forward map is a PDE solve. The gap is recorded in
-`docs/PAPER_AUDIT_g15.md` §6 and is **not** filled with plausible references
-here.
+**(c) Structural and practical identifiability — covered, and it locates two of
+our instruments.** §4.3's barrier measurement is a **profile-likelihood**
+construction, and profile likelihood is a named and developed method for exactly
+this purpose, principally out of systems biology. Raue et al. (2009) introduced
+it as a way to diagnose non-identifiability in partially observed dynamical
+models and — the distinction this paper also turns on — to separate *structural*
+non-identifiability, which is a property of the model, from *practical*
+non-identifiability, which arises from the amount and quality of the data;
+Kreutz et al. (2013) review its use. We use the construction and inherit its
+known limitation, which Wieland et al. (2021) state: a profile along a
+**straight line in a chosen parameterisation** is a one-dimensional slice, and it
+bounds the barrier from above rather than locating a minimum-energy path. §4.3
+says the same thing in its own voice, and we note here that the limitation is the
+method's rather than ours.
 
-**(d) Parameterisation choice in inverse problems — gap, open.** The *chart*
-construction of §3.2 — that a rank is undefined until the parameterisation, its
-dimension and the observation set are all fixed — is the paper's own framing and
-carries no citation. Discretisation of an ill-posed problem is itself a
-regularisation, and how the recovered object depends on that choice is a studied
-question; this draft asserts the dependence and measures it without locating
-either in the literature. Same treatment as (c): recorded in
-`docs/PAPER_AUDIT_g15.md` §6, not filled.
+That review also bears on §4.1, and not in our favour. Wieland et al. argue that
+the classical Fisher-information approach to practical identifiability has severe
+shortcomings and that profile likelihood is the better instrument. Our local
+analysis is a singular-value spectrum of the forward Jacobian, which is the same
+family of object. We use it because it is cheap enough to sweep across devices,
+windows and parameterisations — which is what §4.2 needs and what a profile
+likelihood at every cell would not have afforded — and the honest reading is that
+§4.1 buys breadth at the price of the sharper instrument.
+
+**Structural identifiability, and why we did not compute one.** The formal
+question — whether the map from doping to terminal current is injective at all,
+independent of noise and of data — has a standard machinery: differential-algebra
+elimination, following Ljung & Glad (1994), with tool support such as DAISY
+(Bellu et al., 2007). A structural result would be strictly stronger than
+anything §4.3 reports: it would settle **global** non-identifiability as a
+property of the model itself, rather than exhibiting witness pairs in **chart G**
+at `d=4` and in **chart J** and **chart L** at `d=16` under a declared prior, and
+it would not depend on a search budget. **We did not compute one, and the reason is a mismatch of class
+rather than of effort.** Those methods take systems of ODEs with polynomial or
+rational right-hand sides and eliminate unobserved states symbolically to reach
+an input–output relation in the parameters. Our forward map is a *stationary
+boundary-value problem* — coupled Poisson and continuity equations solved
+numerically under Scharfetter–Gummel discretisation — with the unknown appearing
+as a spatially varying coefficient field, not as a finite parameter vector in a
+polynomial ODE. There is no input–output equation to eliminate to without first
+discretising, and after discretising the object is a `d`-dimensional
+parameterisation whose choice is itself part of the claim (strand (d)). A
+structural treatment of this problem is a research programme, not a missing
+paragraph, and the search in §4.3 is what is available in its absence.
+
+**(d) Parameterisation choice as regularisation — covered, and it is the closest
+prior work to the chart construction.** The *chart* framing of §3.2 — that a rank
+is undefined until the parameterisation, its dimension and the observation set are
+all fixed — is not a new observation about ill-posed problems, and the reason is
+Natterer (1977): for an ill-posed problem solved by projection, **regularisation
+is carried out by choosing the discretisation parameter**, which is shown there
+to be as efficient as Tikhonov–Phillips regularisation. So the discretisation
+level *is* a regularisation level. That is exactly why a doping profile recovered
+at `d=16` is not the same claim as one recovered at `d=4`, and why an identifiable
+count carries its `d`. Our contribution on this axis is not the idea but the
+measurement: we vary the interpolant family and the dimension separately, and
+report how far each moves the spectrum (§4.2), which the projection-regularisation
+literature establishes in principle without quantifying for this problem.
+
+What we have **not** found and therefore do not cite is a treatment of
+singular-value analysis of the doping-to-measurement map *specifically* — the
+generic method is textbook (Aster, Borchers & Thurber), and whether its
+application here is standard practice or a small contribution is a question this
+draft cannot settle. It is recorded as an open gap in
+`docs/PAPER_AUDIT_g15.md` §6 rather than filled with a plausible reference.
 
 ### 2.3 Forward model
 
@@ -902,6 +950,12 @@ supported by one system is a hypothesis, not a finding.
 - Sequential design for surrogate modeling in Bayesian inverse problems. arXiv:2402.16520.
 - Scharfetter & Gummel (1969). Large-signal analysis of a silicon Read diode oscillator. *IEEE Trans. Electron Devices* **16**, 64.
 - De Mari (1968). An accurate numerical steady-state one-dimensional solution of the P-N junction. *Solid-State Electron.* **11**, 33.
+- Raue, Kreutz, Maiwald, Bachmann, Schilling, Klingmüller & Timmer (2009). Structural and practical identifiability analysis of partially observed dynamical models by exploiting the profile likelihood. *Bioinformatics* **25**(15), 1923–1929. doi:10.1093/bioinformatics/btp358.
+- Kreutz, Raue, Kaschek & Timmer (2013). Profile likelihood in systems biology. *The FEBS Journal* **280**(11), 2564–2571. doi:10.1111/febs.12276.
+- Wieland, Hauber, Rosenblatt, Tönsing & Timmer (2021). On structural and practical identifiability. *Current Opinion in Systems Biology* **25**, 60–69. doi:10.1016/j.coisb.2021.03.005. arXiv:2102.05100.
+- Ljung & Glad (1994). On global identifiability for arbitrary model parametrizations. *Automatica* **30**(2), 265–276. doi:10.1016/0005-1098(94)90029-9.
+- Bellu, Saccomani, Audoly & D'Angiò (2007). DAISY: A new software tool to test global identifiability of biological and physiological systems. *Computer Methods and Programs in Biomedicine* **88**(1), 52–61. doi:10.1016/j.cmpb.2007.07.002.
+- Natterer (1977). Regularisierung schlecht gestellter Probleme durch Projektionsverfahren. *Numerische Mathematik* **28**(3), 329–341. doi:10.1007/BF01389972.
 - Aster, Borchers & Thurber (2018). *Parameter Estimation and Inverse Problems*, 3rd ed.
 - Higham (2002). *Accuracy and Stability of Numerical Algorithms*, 2nd ed.
 - Lakshminarayanan, Pritzel & Blundell (2017). Deep ensembles. *NeurIPS*.

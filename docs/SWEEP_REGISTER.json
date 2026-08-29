@@ -81,6 +81,18 @@
       "expected_changed_lines": null,
       "registered_although_below_the_trigger": "at nine files this sits in the blind spot DIFF-01 states for itself, the same as the preceding close commit. Registered on the same reasoning: a commit that is silent because it happened to be one file under the threshold is the failure the register exists to prevent.",
       "line_endings_asserted": "papers/draft.md CRLF before and after; every other touched file LF before and after. Checked with git ls-files --eol."
+    },
+    {
+      "id": "paper-figures-and-two-corrections-g15",
+      "generation": "g15",
+      "enacting_rule": null,
+      "kind": "not-mechanical",
+      "description": "the first three figures and the script that draws them; the floor-sensitivity script and its artefact; COR-2 and COR-3 applied to papers/draft.md with their corrigenda entries; section 4.2 reordered, the abstract given a lede, section 5 given the four limitations it was missing; the Windows-leg scoring document and its evidence directories; and the .gitignore exceptions that let the figures resolve.",
+      "commit_subject": "g15: the paper gets figures, a floor sensitivity, and two corrections it needed",
+      "why_not_mechanical": "twenty-five files, twenty of which are new: two scripts, one document, and seventeen generated artefacts (three figures in two formats each, two manifests, and the two evidence directories). Only five existing files were edited -- .gitignore, papers/draft.md, papers/CORRIGENDA_g6.md and, in the preceding commit, the test module -- and each was edited at its own site by hand. No script rewrote any tracked file. The breadth is new artefacts landing with the code that produces them, which is the false-positive path the rule states for itself.",
+      "expected_changed_lines": null,
+      "line_endings_asserted": "papers/draft.md CRLF in index and worktree before and after -- the corrections were applied with the editing tool rather than a text-mode rewrite, and git ls-files --eol confirms i/crlf w/crlf afterwards. Every other touched text file LF before and after. The six figure files are binary and .gitattributes marks *.png and *.pdf binary.",
+      "artefacts_are_regenerable": "python scripts/make_figures_g15.py and python scripts/floor_sensitivity_g15.py. Neither performs a solve; both read committed artefacts and digest every input into their manifest, so a figure can be traced to the bytes it was drawn from."
     }
   ],
   "kinds": {
