@@ -18,101 +18,53 @@ conjecture: it rests on one PDE family with no second system tested.
 **Two simulated devices whose metallurgical junctions sit 423 nm apart in a
 1000 nm device produce terminal I–V curves that differ by at most 1.79% across a
 0.15–0.90 V sweep** — indistinguishable on a 2% instrument (Figure 1). That is a
-**global** statement, found by direct search in **chart J** at `d=16` and not
-inferred from any local analysis; the pair survives grid refinement, and it is
-one of the **7 of 13** chart-J pairs that do. So terminal I–V does not locate the
-junction, and the useful
-question is not whether doping recovery is ill-posed — it is known to be — but
-**which specific directions the measurement determines, and what that costs the
-tools built on top of it.** This paper answers that with a measurement: the
-singular spectrum of the I–V → doping map, computed through a solver that
-reports its own numerical error bar. Its sharpest consequence is that a learned
-surrogate's *gradients* — what gradient-based inverse design actually consumes —
-agree with the reference solver only in the directions that spectrum calls
-identifiable, and are uncorrelated with it everywhere else, at any training
-budget. If you extract doping from terminal I–V, that spectrum tells you which
-part of your answer came from the data and which part came from your prior.
+**global** statement, found by direct search in **chart J** at `d=16` rather than
+inferred from any local analysis, and the pair is one of the **7 of 13** chart-J
+pairs that survive grid refinement. Terminal I–V does not locate the junction. So
+the useful question is not *whether* doping recovery is ill-posed — it is known to
+be — but **which directions the measurement determines, and what that costs the
+tools built on it.**
 
-The rest of this abstract puts numbers on four things this area usually states
-qualitatively, from an audited and reproducible pipeline.
+We answer with a measurement: the singular spectrum of the I–V → doping map,
+taken through a Scharfetter–Gummel solver that reports its own numerical error
+bar, which we show is predictive and tracks the solver's actual precision as
+`1/SNR` across five decades. In **chart L** at `d=16`, a 19-point forward-bias
+sweep over an 0–0.9 V window at 2% relative noise determines only **3–4 of 16**
+profile degrees of freedom — a *local* rank, at four device families — and
+improving the instrument by four orders of magnitude roughly doubles it. The
+limit is the structure of the forward map, not the noise.
 
-First, our Scharfetter–Gummel reference solver **reports its own numerical
-trustworthy range**. Because `div(J_n + J_p) = 0` holds exactly in steady state,
-the face-to-face spread of the total current is an assumption-free estimate of
-the numerical error on the terminal current; we show this estimate is
-*predictive*, tracking the solver's actual relative precision as `1/SNR` across
-five decades.
+**That number is a property of the measurement, not of the device.** Of four
+candidate sensitivities, only the observation set is large at all twelve
+operating points tested (×1.17 end to end, against ×21–×39 for junction position,
+dimension and interpolant, which permute freely among themselves). Bias-window
+*width* sets the local rank in **chart G** at `d=16` — 1 to 4 and 2 to 4 at two
+devices — while the same points spaced differently leave it unmoved. The climb is
+the spectrum **flattening** rather than the leading direction broadening.
+**Why it flattens is open**, and we report the measured failure mechanism of each
+of three pre-registered attempts rather than a plausible story.
 
-Second, we measure the **local identifiability** of the doping profile from an
-I–V sweep by taking the SVD of the forward Jacobian computed through that
-solver. In **chart L** at `d=16` — 16 log-doping anchors, the parameterisation
-this project uses — a 19-point forward-bias sweep over an 0–0.9 V observation
-window at 2% relative measurement noise determines only **3–4 of 16** profile
-degrees of freedom, for four device families (1–6, median 3, across 88
-measurements spanning six robustness axes; the rank does not grow with the
-parameterisation dimension). Improving the instrument by four orders of
-magnitude roughly doubles it — the limit is the structure of the forward map,
-not the noise — and we exhibit concrete *equivalence twins*: devices differing
-by up to 1.26× in local doping whose I–V curves differ by 0.02–1.3%.
-
-Third, that number is **a property of the measurement and not of the device**.
-The observation set is the only one of four candidate sensitivities that is
-large at all twelve operating points tested — ×1.17 end to end, against ×21–×39
-for junction position, parameterisation dimension and interpolant, which permute
-freely among themselves. Bias-window *width* sets the local rank in **chart G**
-at `d=16` — 1 to 4 and 2 to 4 at two devices, at 2% noise, as the window widens
-about a fixed centre — while the same number of points spaced differently
-leaves it unmoved. The climb is the spectrum **flattening**, not the leading
-direction broadening: `σ₁` moves by only ×1.148–1.195 and moves *downward*,
-with 95.6%–97.9% of each trailing value's motion in the shape term. **Why it
-flattens is open.** Three pre-registered methods failed to answer it and we
-report the failure mechanism of each rather than a plausible story.
-
-The degeneracy is also **global**, which no local analysis can detect.
-Searches in **chart G** at `d=4` and in **chart J** and **chart L** at `d=16`
-return witness pairs — profiles up to **8.18×** and **14.75×** apart in doping
-whose I–V curves differ by about 1%, below the noise floor — and every one is
-refined before it is counted (`WIT-02`), which costs all three sets members.
-Their geometry depends on the dimension rather than the chart, and the `d=16`
-results are **searches that found no connecting path below the floor along a
-straight line**, not separation proofs.
-
-Finally — and this is the observation that ties the pipeline together — the
-identifiability spectrum **predicts where the learned surrogate's gradients can
-be trusted**. A surrogate that reproduces I–V to 2.6% median relative error has
-directional derivatives that agree with the reference solver only *inside* the
-identifiable subspace (mean cosine +0.50) and are uncorrelated with it outside
-(−0.00). A 33× increase in training budget cuts the value error 4.5× and leaves
-the outside-subspace agreement at zero, excluding undertraining: there is no
-signal to learn there. Since those derivatives are exactly what gradient-based
-inverse design and Jacobian-based experiment design consume, "the surrogate is
-accurate" and "the surrogate's gradients are usable" are different claims, and
+**The sharpest consequence is for surrogates.** A surrogate reproducing I–V to
+2.6% median error has directional derivatives that agree with the solver only
+*inside* the identifiable subspace (mean cosine +0.50) and are uncorrelated with
+it outside (−0.00); a 33× training-budget increase cuts value error 4.5× and
+leaves the outside agreement at zero, which excludes undertraining. Since those
+derivatives are what gradient-based inverse design consumes, *"the surrogate is
+accurate"* and *"the surrogate's gradients are usable"* are different claims, and
 the spectrum says which directions the second one covers.
 
-Along the way, auditing the pipeline against these criteria uncovered fourteen
-defects in its first two cycles, seven of which were critical and all of which
-were present while the test suite of the day passed; two documented "physics
-limitations" turned out to be solver bugs. Fourteen further audit generations
-followed, and their most transferable output is not the defect list but the
-habit: several of the claims above are weaker than the versions we first wrote,
-and each was weakened by a falsifier we had registered against ourselves before
-running it. In this problem class a plausible-looking result and a correct one
-are hard to tell apart without invariants the code is forced to satisfy, and
-harder still without a written-down statement, made in advance, of what would
-count as being wrong.
-
-**We claim no new method, and we are specific about what that concedes.** Every
-component — SVD of a forward Jacobian, profile-likelihood barriers, D-optimal
-design, deep ensembles — is standard, and inverse doping recovery is a mature
-field. What is not standard is using the identifiability spectrum as a
-*predictor*, direction by direction, of where a learned surrogate's gradients can
-be trusted, with a training-budget control that excludes undertraining as the
-explanation; the nearest prior comparison of surrogate gradients against true
-kernels is in another domain, reaches a more optimistic conclusion, and carries
-no such control. That is a diagnostic framing and a measured result rather than a
-method, and the mechanism is unsurprising once stated — which is a point in its
-favour. The rest of the contribution is validation, measurement and
-reproducibility.
+**We claim no new method, and are specific about what that concedes.** Every
+component is standard and inverse doping recovery is a mature field. What is not
+standard is using the identifiability spectrum as a direction-by-direction
+*predictor* of surrogate gradient trustworthiness, with a budget control
+excluding undertraining; the nearest prior comparison is in another domain,
+reaches a more optimistic conclusion, and has no such control. That is a
+diagnostic framing and a measured result, not a method. The rest is validation,
+measurement and reproducibility — conducted as an adversarial audit that found
+fourteen defects in its first two cycles, seven critical, every one present while
+the test suite of the day passed. Several claims here are weaker than the
+versions we first wrote, each weakened by a falsifier we registered against
+ourselves before running it.
 
 ## 1. Introduction
 
