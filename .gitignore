@@ -50,6 +50,25 @@ outputs/*
 outputs/results/*
 !outputs/results/results.json
 !outputs/results/results_summary.md
+# The paper's figures, on the same reasoning as the results summaries: a draft
+# whose figures are not in the tree is a draft whose figures do not resolve.
+# PNG for reading, PDF for typesetting, and the manifest that records which
+# artefact digests each was drawn from. Regenerable by
+# `python scripts/make_figures_g15.py`.
+!outputs/figures_g15/
+outputs/figures_g15/*
+!outputs/figures_g15/*.png
+!outputs/figures_g15/*.pdf
+!outputs/figures_g15/manifest.json
+# Cited by papers/draft.md section 4.3. Regenerable by
+# `python scripts/floor_sensitivity_g15.py`; reads committed artefacts only.
+!outputs/floor_sensitivity_g15/
+outputs/floor_sensitivity_g15/*
+!outputs/floor_sensitivity_g15/floor_sensitivity.json
+!outputs/floor_sensitivity_g15/manifest.json
+# The Windows-leg scoring evidence of docs/WINDOWS_LEG_SCORED_g15.md.
+!outputs/ci_local_g15/
+!outputs/nb02_ordering_g15/
 
 # Trained model checkpoints (regenerable)
 *.pt

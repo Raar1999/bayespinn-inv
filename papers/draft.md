@@ -1,6 +1,10 @@
 # BayesPINN-Inv: A Validated Drift–Diffusion Reference Solver and a Measured Identifiability Analysis for Inverse Semiconductor Design
 
-**Target venue.** ML4PS-style workshop (reproducibility / negative-results track).
+**Target venue.** A device/TCAD audience — the headline is what terminal I–V can
+and cannot determine about a doping profile, and the identifiability analysis is
+the instrument that establishes it rather than the contribution being sold. The
+generalisation past semiconductors is confined to §6 and marked there as
+conjecture: it rests on one PDE family with no second system tested.
 
 > **Revision note.** This draft was rewritten after a full adversarial audit of
 > the codebase (`docs/AUDIT_MASTER.md`). The previous version presented a
@@ -11,9 +15,26 @@
 
 ## Abstract
 
-We present an audited, reproducible pipeline for inverse semiconductor doping
-recovery from terminal current–voltage measurements, and use it to put numbers
-on four things this area usually states qualitatively.
+**Two simulated devices whose metallurgical junctions sit 423 nm apart in a
+1000 nm device produce terminal I–V curves that differ by at most 1.79% across a
+0.15–0.90 V sweep** — indistinguishable on a 2% instrument (Figure 1). That is a
+**global** statement, found by direct search in **chart J** at `d=16` and not
+inferred from any local analysis; the pair survives grid refinement, and it is
+one of the **7 of 13** chart-J pairs that do. So terminal I–V does not locate the
+junction, and the useful
+question is not whether doping recovery is ill-posed — it is known to be — but
+**which specific directions the measurement determines, and what that costs the
+tools built on top of it.** This paper answers that with a measurement: the
+singular spectrum of the I–V → doping map, computed through a solver that
+reports its own numerical error bar. Its sharpest consequence is that a learned
+surrogate's *gradients* — what gradient-based inverse design actually consumes —
+agree with the reference solver only in the directions that spectrum calls
+identifiable, and are uncorrelated with it everywhere else, at any training
+budget. If you extract doping from terminal I–V, that spectrum tells you which
+part of your answer came from the data and which part came from your prior.
+
+The rest of this abstract puts numbers on four things this area usually states
+qualitatively, from an audited and reproducible pipeline.
 
 First, our Scharfetter–Gummel reference solver **reports its own numerical
 trustworthy range**. Because `div(J_n + J_p) = 0` holds exactly in steady state,
@@ -38,8 +59,8 @@ Third, that number is **a property of the measurement and not of the device**.
 The observation set is the only one of four candidate sensitivities that is
 large at all twelve operating points tested — ×1.17 end to end, against ×21–×39
 for junction position, parameterisation dimension and interpolant, which permute
-freely among themselves. Bias-window *width* sets the local rank in chart L at
-`d=16` — 1 to 4 and 2 to 4 at two devices, at 2% noise, as the window widens
+freely among themselves. Bias-window *width* sets the local rank in **chart G**
+at `d=16` — 1 to 4 and 2 to 4 at two devices, at 2% noise, as the window widens
 about a fixed centre — while the same number of points spaced differently
 leaves it unmoved. The climb is the spectrum **flattening**, not the leading
 direction broadening: `σ₁` moves by only ×1.148–1.195 and moves *downward*,
@@ -80,8 +101,17 @@ are hard to tell apart without invariants the code is forced to satisfy, and
 harder still without a written-down statement, made in advance, of what would
 count as being wrong.
 
-**We claim no new method.** Every component is standard, and inverse doping
-recovery is a mature field. The contribution is validation, measurement and
+**We claim no new method, and we are specific about what that concedes.** Every
+component — SVD of a forward Jacobian, profile-likelihood barriers, D-optimal
+design, deep ensembles — is standard, and inverse doping recovery is a mature
+field. What is not standard is using the identifiability spectrum as a
+*predictor*, direction by direction, of where a learned surrogate's gradients can
+be trusted, with a training-budget control that excludes undertraining as the
+explanation; the nearest prior comparison of surrogate gradients against true
+kernels is in another domain, reaches a more optimistic conclusion, and carries
+no such control. That is a diagnostic framing and a measured result rather than a
+method, and the mechanism is unsurprising once stated — which is a point in its
+favour. The rest of the contribution is validation, measurement and
 reproducibility.
 
 ## 1. Introduction
@@ -112,8 +142,11 @@ protocol are correct.
 4. An evaluation protocol with disjoint interpolation / extrapolation /
    family-transfer splits, labels filtered by the oracle's trust flag, and `n`
    and confidence intervals on every reported statistic.
-5. A negative result: uncertainty-driven bias acquisition does not beat random
-   selection on this task at any measured budget.
+5. A negative result: uncertainty-driven bias acquisition is **worse than
+   random** selection on this task — `max_std` costs −0.31 mean identifiable
+   rank against random over 20 (family, budget) cells, winning 2 and losing 9.
+   An earlier version of this project reported the weaker claim that it merely
+   failed to beat random; that framing is withdrawn and §4.6 records why.
 6. A full audit ledger with a regression test for every defect, and an open
    question — why the spectrum flattens — left open, with the three methods
    that failed to close it characterised.
@@ -135,6 +168,40 @@ predicting something about a system it was not measured on. §4.4–§4.7 and §
 are the surrounding evaluation, and §4.10 is the audit that produced the
 discipline all of it is reported under. A reader with limited time should read
 §4.2, §4.3 and §4.8 and treat the rest as support.
+
+**Contribution 7 is last in the list and first in weight.** The list above is in
+the order the work happened, and item 7 was added after items 1–6 had already
+been published with their numbering; renumbering would break dated references to
+"item 6" elsewhere in the project record, so it stays where it is. Read by
+importance rather than by accession, the order is item 7, then item 2, then
+item 3: §4.8 first, then the identifiability measurement of §4.1–§4.2 that it
+rests on, then §4.3. Item 1, the solver's convergence contract, is the
+engineering that makes the other three checkable rather than a reason to read
+the paper.
+
+**The result in one figure.** Figure 1 is a pair of simulated devices whose
+metallurgical junctions sit **423 nm apart in a 1000 nm device** and whose
+terminal I–V curves differ by at most **1.79%** over the whole 0.15–0.90 V
+window — inside a 2% instrument. Everything else in this paper is an attempt to
+say precisely how general that picture is, and under exactly which stated
+conditions it holds.
+
+![Two doping profiles with junctions at 694 nm and 271 nm, and their two indistinguishable I–V curves](../outputs/figures_g15/F4.png)
+
+**Figure 1. Two devices, one measurement.** A **global** degeneracy: these two
+profiles are far apart, not infinitesimally separated, so no local analysis
+could have found them. *Top:* the doping profiles of a
+witness pair in chart J at `d=16`, junctions at **694 nm** and **271 nm**.
+*Bottom:* their terminal I–V curves over 16 forward biases, with the ±2% band
+about device A shaded — narrower than the plotted line at this scale, so the
+inset gives the point-by-point relative difference against the 2% level. Every
+bias sits below it; the pair's observational distance is **0.0176**, under the
+**0.02** distinguishability floor. This pair survives grid refinement
+(`N = 301 → 1201`) and is one of the 7 chart-J survivors of §4.3. Generated by
+`python scripts/make_figures_g15.py` from `outputs/g8/chart_j.json` and
+`outputs/g9/junction_refine.json`; the artefact is `F4.png`, which is its
+identifier in `docs/PAPER_AUDIT_g15.md` §5 and is kept stable across documents
+rather than renumbered to match the paper.
 
 ## 2. Background
 
@@ -301,17 +368,23 @@ distinct devices, one measurement.
 
 ### 4.2 The rank is a property of the measurement, not of the device
 
-*Shape of this section.* Three measurements, then three failures. The
-measurements come first and stand on their own; the failures are three
-pre-registered attempts to explain the third of them, and they are reported at
-length because a characterised failure is the useful form of a negative result.
-The statement we are willing to defend is set apart at the end of the section,
-and a reader who wants only that should skip to it.
+*Shape of this section.* Three measurements, then the statement we defend, then
+how we failed to explain it. The measurements come first and stand on their own;
+the boxed paragraph after them is the whole of what this section claims, and a
+reader who wants only that can stop there. Everything after it is three
+pre-registered attempts to explain the third measurement, reported at length
+because a characterised failure is the useful form of a negative result — and
+kept after the claim rather than before it, because they qualify the explanation
+and not the finding.
 
 The number in §4.1 is a property of a *pair* — the device and the observation
 set — and the observation-set half is a curve rather than a constant. Two
-measurements make that concrete, both in **chart L** at `d=16` and both at 2%
-relative noise.
+measurements make that concrete, both at 2% relative noise. Their scopes differ
+and the difference matters: the first varies the parameterisation *itself* as
+one of the four axes it compares, so it is not conducted inside any single
+chart; the second is in **chart G** at `d=16`. Neither is the chart-L
+measurement of §4.1, and a rank from one is not comparable term by term with a
+rank from another (§3.2).
 
 **The observation set dominates three other candidate sensitivities.** We
 compared four axes — which biases are measured, where the junction sits, the
@@ -324,20 +397,26 @@ interpolant ×39. So the picture is not a four-way ordering but
 dominates the local spectrum, while the other three trade places among
 themselves depending on the device and the window.
 
-This was pre-registered the other way round. Generation 8 of the audit reported a
-*ranking* of the four axes from a single operating point; `SPEC-g9-1` registered
-the falsifier that the ranking must reproduce at further points, and it fired —
-**2 of 12** points reproduce the original order under one statistic and **0 of
-12** under the other. The surviving claim is the weaker and more useful one
-above. We report it this way because the stronger version was ours.
-
 **Bias-window *width* sets the rank; spacing does not.** Over 16 bias points at
-2% noise in chart L at `d=16`, widening the window from 0.10 V to 0.75 V about a
+2% noise in **chart G** at `d=16`, widening the window from 0.10 V to 0.75 V about a
 fixed 0.525 V centre takes the identifiable count from **1 to 4** at one device
 and **2 to 4** at a second. Redistributing the same number of points at a
 different spacing moves the log-decay slope by **2.1% and 2.8%** at those two
 devices, against **56% and 58%** along the width axis, and moves the rank not at
-all (`rank(observation set)`, `outputs/g9/rank_obs.json`).
+all (`rank(observation set)`, `outputs/g9/rank_obs.json`). **Figure 2** is the
+whole of this measurement: one curve that rises and one that does not, on a
+shared axis.
+
+![Identifiable count against bias-window width and against spacing, two devices, chart G at d=16](../outputs/figures_g15/F2.png)
+
+**Figure 2. The rank is a property of the measurement.** *Left:* identifiable
+directions against bias-window width, widened about a fixed 0.525 V centre, at
+two devices. *Right:* the control — the same number of bias points over the same
+fixed 0.15–0.90 V window, redistributed from linear to geometric spacing. Both
+panels share a y-axis, because the result is that one curve rises and the other
+does not. Chart G at `d=16`, 2% relative noise, 16 bias points throughout.
+Generated by `python scripts/make_figures_g15.py` from
+`outputs/g9/rank_obs.json`; artefact `F2.png`.
 
 **The climb is the spectrum flattening, not the leading direction broadening.**
 The identifiable count is the number of singular values above an *absolute*
@@ -350,6 +429,28 @@ term puts **95.6%–97.9%** of it in the shape term, at every device and every
 index. Nor is it the leading right singular vector broadening to cover more of
 the profile: `v₁`'s spatial extent moves under 2.5% on a 0.0625–1.000 scale, and
 where it moves at all it *recedes* from the junction.
+
+**The statement we are willing to put our name to is this one.**
+
+> The rank climb is spectrum flattening rather than the leading direction
+> broadening. The flattening exceeds what row count alone produces — nested
+> windows are consistently *less* flat than random row-subsets of equal size —
+> but the excess is largely attributable to the spread of the biases in the
+> window, a smoothness property, and the residual after removing it does not
+> reproduce across held-out devices. **The mechanism remains open.**
+
+Everything above is measurement and the paragraph above is the claim. The rest
+of this section is provenance and failure: where the framing came from, and the
+three pre-registered attempts to close the mechanism that did not close it. It
+qualifies the *explanation*; none of it qualifies the three measurements.
+
+**The first measurement was pre-registered the other way round.** Generation 8 of
+the audit reported a *ranking* of the four axes from a single operating point;
+`SPEC-g9-1` registered the falsifier that the ranking must reproduce at further
+points, and it fired — **2 of 12** points reproduce the original order under one
+statistic and **0 of 12** under the other. The surviving claim is the weaker and
+more useful one above. We report it this way because the stronger version was
+ours.
 
 **Why the spectrum flattens is open, and we say so rather than supplying a
 plausible story.** Three methods were tried across four generations of the audit,
@@ -381,14 +482,8 @@ percentiles at two contrast devices, but **0.492 — exactly ordinary — at one
 held-out device against 0.947 at the other**. The two held-out devices disagree,
 so the part of the departure that is not generic smoothness does not reproduce.
 
-The paragraph we are willing to put our name to is therefore this one:
-
-> The rank climb is spectrum flattening rather than the leading direction
-> broadening. The flattening exceeds what row count alone produces — nested
-> windows are consistently *less* flat than random row-subsets of equal size —
-> but the excess is largely attributable to the spread of the biases in the
-> window, a smoothness property, and the residual after removing it does not
-> reproduce across held-out devices. **The mechanism remains open.**
+That is the whole of the evidence behind the boxed paragraph above, and it is
+why that paragraph ends where it does.
 
 One hypothesis survives and we name it as future work without claiming it.
 Contiguous bias windows have more collinear Jacobian rows than scattered ones, so
@@ -410,7 +505,7 @@ by **1.23%**, below the 2% noise floor. A second search in **chart J** at `d=16`
 returned **13 witness pairs** at up to **14.75×**, and a third in **chart L** at
 `d=16` returned **37**. Two of the headline pair's members have junction depths
 of **694 nm and 271 nm** — a difference that survives grid refinement, moving
-1.7% under `N = 301 → 1201`.
+1.7% under `N = 301 → 1201`. That pair is **Figure 1**.
 
 Existence transfers between searches; frequency does not. Three searches at three
 budgets over three priors are existence proofs, and we do not compare how *often*
@@ -431,6 +526,29 @@ one of them is checkable.
 **Full coverage buys less than it sounds like it does.** `WIT-02` tests
 witnesses, not connectivity. It converts no `d=16` result into a separation, and
 that distinction is the next paragraph.
+
+**How much of this rests on the 2% figure.** The floor is the noise level, so
+every witness distance can be re-read as the instrument at which that pair stops
+being a witness, and the sets can be reported as a sensitivity rather than at a
+single point. Taking each surviving pair's **worst** distance over the six-point
+refinement battery — the conservative direction, since it is the earliest floor
+at which the pair could separate under any configuration already run — the
+committed sets retain an indistinguishable pair down to **1.24%** relative noise
+in chart G at `d=4`, **1.52%** in chart J at `d=16` and **1.26%** in chart L at
+`d=16`. So the global degeneracy statement survives a **1.6× better instrument**
+than the one it is stated at, and the conclusion is not poised on the 2%.
+
+Two things that number does *not* say, both of which cut against us. First, the
+sets are not intact over that range: every set begins losing members almost
+immediately, since its widest pairs sit at **0.99–1.00 floor units**, and what
+persists to 1.24% is the *tightest* pair rather than the set. Second, and more
+important, this is a sensitivity of **these pairs**, not of the phenomenon. A
+search conducted at a lower floor would draw new candidates and could return
+pairs tighter than any here; nothing in this analysis bounds that, and it is a
+different experiment rather than a rescaling of this one. The same caveat applies
+to the noise *model*: the arithmetic here moves the level of a relative-Gaussian
+floor and says nothing about a floor of another shape (`floor(sensitivity)`,
+`outputs/floor_sensitivity_g15/floor_sensitivity.json`).
 
 **What the barrier measurement does and does not establish.** For each pair we
 compute the profile-likelihood barrier along the straight line between its
@@ -568,7 +686,26 @@ The control excludes the obvious alternative explanation. Over a 33×
 increase in training budget the surrogate's *value* error falls 4.5×, while
 its agreement outside the identifiable subspace stays pinned at zero. There is
 nothing to learn there, so more training does not help — which is what
-ill-posedness predicts.
+ill-posedness predicts. **Figure 3** shows both budgets against every direction,
+one panel per device family, with each device's own cutoff drawn: the two
+budgets separate inside the identifiable subspace and lie on top of each other
+outside it, which is the control in one glance.
+
+![Cosine agreement between reference and surrogate directional derivatives against singular direction index, four device families, two training budgets](../outputs/figures_g15/F6.png)
+
+**Figure 3. Where a surrogate's gradients can be trusted.** Cosine between the
+SG solver's and the surrogate's directional derivatives along each right
+singular direction $v_j$, for four device families at two training budgets. The
+shaded region and the dashed line mark each device's *own* identifiable rank —
+a property of the reference Jacobian, not of the surrogate, and identical at
+every budget. Agreement is high inside the subspace and indistinguishable from
+zero outside it, and the 33× budget increase moves the inside and leaves the
+outside where it was. The scattered large cosines at the highest few $j$ carry no
+information and should be read as absent rather than as disagreement: those
+directions have $\sigma_j$ **exactly zero** and reference derivative norms of
+order $10^{-17}$, so the quantity being plotted is the angle between two vectors
+that are numerically zero. Generated by `python scripts/make_figures_g15.py` from
+`outputs/gradient_fidelity/gradient_fidelity.json`; artefact `F6.png`.
 
 The nearest prior work we found is Yu, Cai & Liu (arXiv:2604.04107), who
 compare autodiff gradients of a neural surrogate against theoretical
@@ -665,10 +802,14 @@ while the test suite of the day passed:
   convergence sweep and it has never been validated as a limit. *Unvalidated
   above* is not *fails above*, and we make no claim about either.
 - **No result in this paper has been evidenced on any interpreter but CPython
-  3.11 or any operating system but the development one.** The CI matrix that was
-  supposed to evidence portability has never executed; the 3.9 support floor is
-  a static scan, and Linux and macOS are unvalidated and say so in every
-  manifest.
+  3.11 or any operating system but the development one**, which is Windows. The
+  declared floor is `>=3.11`, and it is there because only versions the suite has
+  actually been run on are declared. The CI matrix has been triggered but has
+  never *executed*: no job has started, for an account-level reason unrelated to
+  the code, so the 3.12 and clean-runner legs are **unevaluated, not passing**.
+  Linux and macOS are unvalidated and say so in every manifest — and since three
+  of the four matrix legs are Linux, portability is the least-evidenced claim in
+  this paper.
 - The gradient-fidelity result (§4.8) is measured on four device families in
   1D with one surrogate architecture. Whether the inside/outside separation is
   as sharp for other architectures or in 2D is untested.
@@ -679,6 +820,37 @@ while the test suite of the day passed:
   zero current (§4.10).
 - 1D transport only; the 2D solver handles Poisson without continuity.
 - Boltzmann statistics, constant mobility, no interface traps.
+- **Those model restrictions are stated but their effect on the conclusion is
+  untested.** Listing them is not the same as knowing the identifiability result
+  survives them, and we have not asked the question in 2D, with field-dependent
+  mobility, or with interface traps. The restrictions bound what the numbers
+  describe; they do not bound how much the numbers would move.
+- **The noise model is assumed, not argued.** Every count in this paper is a
+  threshold against independent Gaussian noise in *relative* current at 2%, and
+  we have no measurement or reference justifying that shape. Real I–V is not
+  relative-Gaussian across ten decades — near the floor it is closer to additive,
+  and an instrument switches ranges — so the honest statement is that the results
+  are conditional on a noise model we chose for tractability. §4.3 reports how
+  far the *level* can move before the global conclusion changes; nothing here
+  tests a change of *shape*, which would need a different search rather than a
+  rescaling of this one.
+- **The measurement chain is absent from the forward model, and this is the
+  sharpest of these limitations.** There is no series resistance, no
+  self-heating, no contact non-ideality and no temperature drift. That matters
+  more than a generic simulation caveat, because §4.2's rank gain comes from
+  *widening the bias window*, and the top of that window is exactly where series
+  resistance and self-heating dominate a real diode's I–V. The mechanism that
+  produces this paper's observation-set result is the mechanism a real
+  measurement chain would most distort. We do not know the direction or the size
+  of the effect, and nothing in this work bounds it.
+- **The global results depend on a prior and we do not know how much.** The
+  witness pairs are drawn from a stated uniform prior over log-doping anchors
+  (hashed with the run; chart J's junction coordinate carries its own prior and
+  its own hash), and nothing establishes anything outside it — a narrower
+  physical prior could exclude these witnesses entirely. Existence transfers
+  between searches and frequency does not, so we report the pairs as existence
+  proofs under a declared prior and make no claim about how common the
+  degeneracy is under any other.
 
 ## 6. Conclusion
 
@@ -699,6 +871,22 @@ failure mechanism, because a characterised failure is more useful to the next
 person than a plausible mechanism we could not test. None of it is a new
 method, and
 the paper does not claim one.
+
+**A conjecture, labelled as one, about what might transfer.** Everything above is
+evidenced on a single PDE family — stationary drift–diffusion in one dimension —
+and we have tested no second system. What we would *expect* to transfer, and are
+explicitly not claiming, is the bookkeeping rather than any number: that in an
+ill-posed inverse problem the parameterisation is not a presentational choice but
+part of the claim, so that an identifiable count is undefined until the chart,
+the dimension and the observation set are fixed; and that where a surrogate's
+gradients can be trusted is predicted by the identifiable subspace of the map it
+was trained on, rather than by its value accuracy. Both are statements about
+discretised ill-posed problems in general and neither is specific to
+semiconductors, which is exactly why neither is established by the evidence here.
+Testing them needs a second forward model with a different physics and the same
+protocol, and that experiment has not been run. We flag this because a reader
+may find the framing more portable than the device result, and a portable framing
+supported by one system is a hypothesis, not a finding.
 
 ## References
 

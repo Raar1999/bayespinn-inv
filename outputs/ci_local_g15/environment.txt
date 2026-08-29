@@ -1,0 +1,7 @@
+commit         : 157a785b4c929b974023ef8034c2b24623f6213b
+python         : 3.11.9 MSC v.1938 64 bit (AMD64)
+platform       : Windows-10-10.0.26200-SP0
+sys.platform   : win32
+preferredenc   : cp1252
+autocrlf system: true
+autocrlf local : false

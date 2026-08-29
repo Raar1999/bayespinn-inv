@@ -1,0 +1,10 @@
+....F....                                                                [100%]
+================================== FAILURES ===================================
+_ TestNotebooksHaveExecutedOutputs.test_every_notebook_has_at_least_one_output _
+tests\test_notebooks.py:123: in test_every_notebook_has_at_least_one_output
+    assert not blank, (
+E   AssertionError: these notebooks ship with no executed outputs: 01_setup.ipynb, 02_physics_validation.ipynb, 03_sg_solver.ipynb, 04_forward_surrogate.ipynb, 05_inverse_design.ipynb, 06_mc_dropout.ipynb, 07_deep_ensemble.ipynb, 08_active_learning.ipynb, 09_calibration.ipynb, 10_benchmarking.ipynb, 11_visualization.ipynb, 12_demo.ipynb
+E   assert not ['01_setup.ipynb', '02_physics_validation.ipynb', '03_sg_solver.ipynb', '04_forward_surrogate.ipynb', '05_inverse_design.ipynb', '06_mc_dropout.ipynb', ...]
+=========================== short test summary info ===========================
+FAILED tests/test_notebooks.py::TestNotebooksHaveExecutedOutputs::test_every_notebook_has_at_least_one_output
+1 failed, 8 passed in 3.69s

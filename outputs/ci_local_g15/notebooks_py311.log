@@ -1,0 +1,14 @@
+  wrote 01_setup.ipynb (7 cells)
+  wrote 02_physics_validation.ipynb (8 cells)
+  wrote 03_sg_solver.ipynb (8 cells)
+  wrote 04_forward_surrogate.ipynb (8 cells)
+  wrote 05_inverse_design.ipynb (6 cells)
+  wrote 06_mc_dropout.ipynb (6 cells)
+  wrote 07_deep_ensemble.ipynb (6 cells)
+  wrote 08_active_learning.ipynb (6 cells)
+  wrote 09_calibration.ipynb (6 cells)
+  wrote 10_benchmarking.ipynb (6 cells)
+  wrote 11_visualization.ipynb (8 cells)
+  wrote 12_demo.ipynb (11 cells)
+
+All notebooks generated.
