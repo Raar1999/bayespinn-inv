@@ -89,10 +89,19 @@ def _style() -> None:
 
 
 def _save(fig: plt.Figure, out: Path, name: str) -> Dict[str, str]:
+    """Write PNG and PDF, both bit-reproducible across runs.
+
+    The PNGs were already identical on re-run; the PDFs were not, because
+    matplotlib stamps a ``CreationDate`` into the PDF info dictionary and it is
+    the only byte that moves. Setting it to ``None`` drops the key. Without
+    this, every regeneration of a figure produces a diff that says nothing,
+    which is how a real change stops being visible.
+    """
     paths = {}
     for ext in ("png", "pdf"):
         p = out / f"{name}.{ext}"
-        fig.savefig(p)
+        meta = {"CreationDate": None} if ext == "pdf" else None
+        fig.savefig(p, metadata=meta)
         paths[f"{name}.{ext}"] = str(p.relative_to(REPO)).replace("\\", "/")
     plt.close(fig)
     return paths

@@ -249,6 +249,17 @@ PARKED_DOC07_VIOLATIONS = {
         "too. The practical consequence is recorded as OPS-03 in "
         "docs/AUDIT_MASTER.md: a message about a parked violation must not "
         "restate the phrase, or the register grows one entry per explanation."),
+    "eaf7d1ad2": (
+        '"three guard limitations this exposed" -- the close-out paper work of '
+        "2026-08-29, in the message committing docs/PAPER_WORK_g15.md. The "
+        "count is of something a scan measured, and the document's own section "
+        "3 is the artefact the message should have pointed at instead of "
+        "restating it. Exactly the shape the generation-8 widening was written "
+        "to catch -- and caught in a message whose subject was a document about "
+        "guards that check presence rather than correctness, which is the same "
+        "defect class one level up. R-4 and the 2026-08-28 prohibition on "
+        "--amend both apply, so it is parked rather than reworded. Per OPS-03 "
+        "the message parking it does not restate the phrase."),
 }
 
 

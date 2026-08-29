@@ -1,12 +1,12 @@
 {
   "experiment": "figures_g15",
-  "created_utc": "2026-08-29T09:14:43+00:00",
+  "created_utc": "2026-08-29T09:59:45+00:00",
   "git": {
-    "commit": "157a785b4c929b974023ef8034c2b24623f6213b",
+    "commit": "eaf7d1ad2505f3d0a4b1438315d9fbf9d6df283c",
     "dirty": true,
-    "tracked_modified": 3,
-    "untracked": 2,
-    "tree_digest": "1afae767b7bc20ad4194b34a8b179652eb9de56ba50fe756ffe69271d349ed5a"
+    "tracked_modified": 5,
+    "untracked": 0,
+    "tree_digest": "a317c33980da6e8fcf775cddb68e60c32a3fc979611d8110165e1c8363befd5c"
   },
   "environment": {
     "python": "3.11.9",
