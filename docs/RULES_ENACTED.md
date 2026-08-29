@@ -960,3 +960,103 @@ cited is either recomputed here or explicitly declared unverifiable. The eight
 pre-registrations that predate this rule are listed in the register and **not**
 checked: reconstructing outcome spaces their authors never wrote down would be
 inventing the enumeration and then checking the invention.
+
+---
+
+## `AGE-01` — an artefact encodes the rule set of its own date
+
+**Enacted** operator close-out query of 2026-08-29. Named after `COR-1` exposed
+the class while being applied.
+
+> A correction, an exemption, or an enumeration is written against the rules in
+> force on its own date, and is complete only against those. Before one is
+> applied or relied on, it is re-checked against the rules in force **now**, and
+> any gap the intervening rules opened is closed in the same act. Two artefact
+> classes carry this risk by construction: a **deferred correction**, which
+> repairs only what was nameable when it was written; and a **frozen
+> enumeration** — a claim surface, an exemption list, a register of what is in
+> scope — which stops covering the tree as the tree grows, without ever being
+> wrong about any entry it contains.
+
+**The defect that forced it, and it is a correction rather than a bug.** `COR-1`
+was written at generation 6 against `PH-21` — *a local Jacobian rank is never
+reported as an identifiability result without the word `local`* — and applied at
+the close, nine cycles later. It repaired the regime label, which was the whole
+of what `PH-21` could name in it. By the time it was applied, `SPEC-g9-2` also
+required the observation window, because generation 9 had measured the rank
+moving from 4 to 2 when the window narrows with everything else held. **The
+sentence `COR-1` exists to repair was still unguarded in that dimension after
+`COR-1` repaired it**, and the guard said so within a minute of the document
+joining the claim surface.
+
+Nothing was wrong with `COR-1`. It was right on the day it was written and
+incomplete on the day it was applied, and the interval is the whole of the
+mechanism. **The longer a correction waits, the less of the defect it repairs.**
+
+**The second instance, found while looking for the first.** `CLAIM_SURFACE_G7`
+grew to `docs/G10_RESULT.md` and stopped, while the loop ran to generation 14.
+Off-surface at the close-out audit, each stating a result to a reader:
+
+| document | stating | off-surface since |
+|---|---|---|
+| `papers/draft.md` | rank, witness count, spectral, ordering | generation 0, under `R-3` |
+| `docs/G11_RESULT.md` | a witness count with its chart and dimension | generation 11 |
+| `docs/adr/ADR-0007-…` | the local rank, in its Context paragraph | generation 6 |
+
+Every entry in the tuple was correct. The tuple was simply never asked whether it
+was still complete, which is a different question from whether it is right — and
+it is the question no guard was posing. The claim-surface guards each check the
+documents *on* the list; not one of them checked what was *off* it.
+
+**Enforced by** `tests/test_age01_surface_coverage_close.py`, for the half that
+can be.
+
+The guard makes the pair (`CLAIM_SURFACE_G7` and its cascade, `EXEMPT`)
+**exhaustive over the tracked tree**: a document may state a rank, a witness
+count, or a spectral or ordering claim only if it is on one list or the other. A
+new document that publishes a result now fails the suite until someone decides
+which it is — and deciding is cheap. Noticing that a decision was needed is what
+was not happening.
+
+Both surfaces are **read from the modules that define them** rather than restated
+in the guard, because a restatement would be a third enumeration with exactly
+this failure mode.
+
+`EXEMPT` grew from four entries to twenty in the same act, and that is the
+substance rather than bookkeeping: sixteen documents were stating a result and
+sitting on neither list, and each now carries the reason it is a record rather
+than a publication. Three of those reasons are worth keeping:
+
+* `docs/G12_RESULT.md`, `G13`, `G14` — their rank-shaped text is
+  **reproduction-control counts**, `8 of 8` and `72 of 72`. `_RANK` cannot
+  distinguish `8 of 8 singular values bit-identical` from `4 of 16 directions
+  identifiable`, because both are *n* of a licensed denominator. Putting these
+  documents on the surface would have forced rewriting true, clear sentences to
+  satisfy a pattern that had misread them.
+* `docs/gen/FINAL_REPORT_v2.md` — a **dated, terminated** report of generations
+  0–6. Adding chart labels invented at generation 7 to a generation-6 report is
+  overwriting a historical record, not scoping a live claim. The same reasoning
+  keeps `R-4` in force over commit history.
+* `CHANGELOG.md` — dated history, whose entries state what was true at their
+  date, including the identifiability claim later corrected from `3–5 of 16` to
+  `3–4 of 16`. A changelog that carried today's scope on every past entry would
+  no longer be a changelog.
+
+**What is not enforced, and it is the half the rule is named for.** Whether a
+*correction* is stale by later rules cannot be tested. It needs a reading of what
+the correction repairs against what the rules now require, and no artefact
+carries the first — a corrigendum states its replacement text, not the set of
+rules it was answering. That half is procedural: **a deferred correction is
+re-derived at apply time, not applied as written.** `papers/CORRIGENDA_g6.md`
+records `COR-1` under that discipline, separating the corrigendum's own minimal
+change from the additional scope the current rules required, so the difference is
+visible rather than absorbed.
+
+**A measured limitation.** The detectors reach the vocabulary this repository
+uses today. `SPECTRAL` and `ORDERING` had to be written for this guard because no
+earlier one had them — the claim-surface rules grew to cover generation 9's
+vocabulary and stopped, while the spectrum-shape result arrived at the close of
+generation 10. That is `AGE-01` operating on the guards themselves, and the
+honest reading is that this module is now the artefact most likely to go stale
+next. It knows the words for the results that exist. It does not know the words
+for a result nobody has measured yet.

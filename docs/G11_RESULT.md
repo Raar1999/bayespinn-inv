@@ -23,9 +23,12 @@ claim here has been evidenced on any other interpreter or operating system
 ## 1. `WITNESS-04` is closed — chart L refined in full, 37 of 37
 
 `WITNESS-04` has been open since generation 7 and load-bearing since generation
-10. Chart L's 37 witness pairs at `d = 16` carry the chart-L basin search
-statement and, through it, the **dimension reading** — and no refinement of that
-set had ever been run. `docs/CLOSE_RULING.md` §3 registered the non-compliance
+10. Globally, chart L's 37 witness pairs at `d = 16` carry the chart-L basin
+search statement and, through it, the **dimension reading** — and no refinement
+of that set had ever been run. Under `WIT-01` the admissibility ratio is
+**1.000** in all three charts, so admissibility removes none of them; the
+distinguishability floor is **2.0e-02** = max(noise 2.0e-02, solver
+discretisation 1.5e-03). `docs/CLOSE_RULING.md` §3 registered the non-compliance
 rather than repairing it, because refining 37 pairs was new solving the close
 forbade.
 
@@ -70,6 +73,9 @@ therefore unavailable, no rung was descended, and the work was done.
 `outputs/close/wit02_register_v3.json`; versions 1 and 2 stay on disk unchanged.
 
 ### 1.3 Controls
+
+All four are global statements in chart L at `d = 16`, the cell the refinement
+covered.
 
 | | control | result |
 |---|---|---|

@@ -96,6 +96,18 @@ CLAIM_SURFACE_G7 = (
     # unguarded -- it belongs here. It was absent only because ``R-3`` reserved
     # ``papers/**``; the close ruling released it.
     "papers/draft.md",
+    # Added at the close-out audit of 2026-08-29, which asked which documents
+    # publish a result and are not on this list. These two do and were not.
+    #
+    # ``docs/G11_RESULT.md`` is the same class as the G8, G9 and G10 result
+    # documents already here -- the tuple simply stopped growing at G10 while the
+    # loop ran to G14.
+    #
+    # ``ADR-0007`` is Accepted, superseded by nothing, and its Context paragraph
+    # publishes the local rank. A live decision record a reader consults is a
+    # claim surface whatever its directory is called.
+    "docs/G11_RESULT.md",
+    "docs/adr/ADR-0007-the-oracle-arbitrates-global-identifiability.md",
 )
 
 #: Excluded, with the reason. Each of these *describes* the rule or records the
@@ -107,6 +119,36 @@ EXEMPT = {
     "src/bayespinn_inv/inverse/charts.py": "defines the rule",
     "docs/gen/DECISIONS.md": "decision ledger; quotes the forbidden pattern",
     "docs/audit/AUDIT_g7.md": "audit record; quotes findings verbatim",
+    # --- Added by the close-out audit of 2026-08-29, under ``AGE-01``. --------
+    # Each states a result somewhere and none publishes one: they are dated
+    # records of what was measured, ruled or corrected at a moment. Listing them
+    # is what makes this dict and CLAIM_SURFACE_G7 *exhaustive* over the tree, so
+    # a document can no longer state a result and be on neither list -- which is
+    # how ``papers/draft.md``, ``docs/G11_RESULT.md`` and ``ADR-0007`` came to sit
+    # off-surface for several generations each.
+    "CHANGELOG.md": "dated history; entries state what was true at their date, "
+                    "including claims later withdrawn",
+    "RULINGS.md": "self-ruling record; ratifies and quotes",
+    "docs/AUDIT_MASTER.md": "the findings ledger; records and quotes findings",
+    "docs/RULES_ENACTED.md": "states the rules, and quotes the shapes they forbid",
+    "docs/G12_RESULT.md": "generation record. Its rank-shaped text is reproduction "
+                          "controls -- '8 of 8' -- not an identifiability result",
+    "docs/G13_RESULT.md": "generation record; same, '8 of 8 identical'",
+    "docs/G14_RESULT.md": "generation record; same, '8 of 8' singular values",
+    "docs/HIST01_REPAIR_g11.md": "repair record; quotes a commit subject",
+    "docs/REPRO01_LEAF_AUDIT_g6.md": "artefact-leaf audit; quotes published "
+                                     "numbers to check them against artefacts",
+    "docs/audit/AUDIT_g0.md": "audit record; quotes the defective rows verbatim",
+    "docs/audit/AUDIT_g6.md": "audit record; re-measurement table",
+    "docs/audit/AUDIT_g10.md": "audit record; quotes the ruling's clause",
+    "docs/gen/FINAL_REPORT_v1.md": "superseded by FINAL_REPORT_v2",
+    "docs/gen/FINAL_REPORT_v2.md": "dated report of generations 0-6, TERMINATED. "
+                                   "Adding chart labels invented at generation 7 "
+                                   "to a generation-6 report would be overwriting "
+                                   "a historical record, not scoping a live claim",
+    "docs/gen/GEN_g6.md": "generation record, superseded by the result documents",
+    "papers/CORRIGENDA_g6.md": "corrigenda record; quotes the defective text in "
+                              "order to correct it",
 }
 
 #: A rank fraction: "3-4 of 16", "3 of 4", "1 of 8". Two restrictions, both

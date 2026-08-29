@@ -10,9 +10,13 @@
 ## Context
 
 Every identifiability number this project publishes is **local**: the numerical
-rank of the forward Jacobian at one operating point. 3–4 of 16 doping degrees of
-freedom at 2% noise; 1–6 (median 3) across 88 measurements spanning six axes; and
-the rank does not grow with the parameterisation (P = 8 → 32 leaves it at 3–4).
+rank of the forward Jacobian at one operating point. In **chart L** at `d=16`,
+over the 0–0.9 V bias window and at 2% noise, 3–4 of 16 doping degrees of
+freedom; 1–6 (median 3) across 88 measurements spanning six axes; and the rank
+does not grow with the parameterisation (P = 8 → 32 leaves it at 3–4). The
+single window is one point of a measured curve — `rank(observation set)`,
+`outputs/g9/rank_obs.json` — and generation 9 found the window matters more than
+the parameterisation does.
 
 A local rank says which directions are flat *here*. It says nothing about whether
 a distant profile fits the same I–V equally well. Nothing in the repository has
@@ -87,9 +91,11 @@ competes with discretisation.
 
 The first implementation weighted prior samples by a Gaussian likelihood at the
 instrument's 2% noise and reported one variance ratio per direction. On a smoke
-run it returned **"4 of 4 directions contract"** with an **effective sample size
-of 1.0** — the weight had collapsed onto a single draw, the weighted variance had
-gone to zero, and every direction trivially "contracted".
+run, globally in **chart G** at `d=4` over the 16-bias 0.15–0.90 V observation
+window, it returned **"4 of 4 directions contract"** with an **effective sample
+size of 1.0** — the weight had collapsed
+onto a single draw, the weighted variance had gone to zero, and every direction
+trivially "contracted".
 
 That number was an artefact of the estimator, not a property of the device, and it
 is the S-1 equivalent of quoting an ECE below its M=5 floor (`API-04`). It was

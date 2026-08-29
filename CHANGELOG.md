@@ -4,6 +4,55 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — `AGE-01` named, and the claim surface made exhaustive (2026-08-29)
+
+No API changes. Close-out query of 2026-08-29; no generation ran and no
+`LOOP_STATE` was written. The loop stays closed at `L1`.
+
+**`AGE-01` enacted — an artefact encodes the rule set of its own date.** `COR-1`
+was written at generation 6 against `PH-21`, which could name only the regime
+label, and applied nine cycles later under rules that also required the
+observation window. It repaired what it could name, and the sentence it exists to
+repair was **still** unguarded in the other dimension after the repair. Nothing
+was wrong with the corrigendum; the interval is the mechanism. Rule text in
+[`docs/RULES_ENACTED.md`](docs/RULES_ENACTED.md).
+
+**The second instance was the claim surface itself.** `CLAIM_SURFACE_G7` grew to
+`docs/G10_RESULT.md` and stopped while the loop ran to generation 14. The
+claim-surface guards each check the documents *on* the list; none checked what was
+*off* it. Scanning every tracked markdown document for a rank, a witness count,
+or a spectral or ordering claim found 31 that state one, of which 18 were on
+neither the surface nor `EXEMPT`.
+
+**Two were publications and are now on the surface:** `docs/G11_RESULT.md`, the
+same class as the G8/G9/G10 result documents already there, and
+[`ADR-0007`](docs/adr/ADR-0007-the-oracle-arbitrates-global-identifiability.md),
+which is `Accepted`, superseded by nothing, and publishes the local rank in its
+Context paragraph. Joining cost each of them the scope they had been missing —
+chart, dimension and observation window — all of it true and none of it new.
+
+**Sixteen were records and are now in `EXEMPT` with their reason**, which grew
+that dict from four entries to twenty. Three reasons are load-bearing:
+`docs/G12_RESULT.md`, `G13` and `G14` surface only through **reproduction-control
+counts** — `8 of 8`, `72 of 72` — that `_RANK` cannot distinguish from a rank
+fraction, so adding them would have forced rewriting true sentences to satisfy a
+pattern that had misread them; `docs/gen/FINAL_REPORT_v2.md` is a dated,
+terminated report of generations 0–6, and back-fitting generation-7 chart
+vocabulary into it would overwrite a historical record; `CHANGELOG.md` is dated
+history whose entries state what was true at their date.
+
+**Enforced by** `tests/test_age01_surface_coverage_close.py`, which makes the pair
+(surface, `EXEMPT`) exhaustive over the tracked tree: a document may state a
+result only if it is on one list or the other. Both surfaces are read from the
+modules that define them, because a restatement would be a third enumeration with
+the same failure mode. The other half of `AGE-01` — whether a correction is stale
+by later rules — is procedural and stated as unenforceable, because no artefact
+records which rules a corrigendum was answering.
+
+Suite: 1,192 collected. `ruff check .` clean; `mypy src tests scripts` unchanged
+at 150 findings over 159 files. Reproduce:
+`PYTHONPATH=src python -m pytest tests -q`.
+
 ## [Unreleased] — the paper, written after the close (2026-08-29)
 
 No API changes. Written under the close ruling of 2026-08-29 §4, which ratified
