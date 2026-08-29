@@ -260,6 +260,17 @@ PARKED_DOC07_VIOLATIONS = {
         "defect class one level up. R-4 and the 2026-08-28 prohibition on "
         "--amend both apply, so it is parked rather than reworded. Per OPS-03 "
         "the message parking it does not restate the phrase."),
+    "2fc81c400": (
+        '"six\\nfiles" -- the message that parked eaf7d1ad2 above. It obeyed '
+        "OPS-03 to the letter, restating none of the parked phrase, and then "
+        "asserted a *different* count in the same breath: the figure artefacts "
+        "regenerating identically. So OPS-03 is necessary and not sufficient, "
+        "and the register grew anyway. The lesson the loop is recording against "
+        "itself: avoiding the named phrase is not the rule, and the rule is "
+        "that a message references the artefact instead of counting anything. "
+        "Note also that the phrase spans a line break -- the detector matches "
+        "across the wrap, so hand-wrapping a message cannot hide a count and "
+        "was not trying to. R-4 applies; parked, not reworded."),
 }
 
 
