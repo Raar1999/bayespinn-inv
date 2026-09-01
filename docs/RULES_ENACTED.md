@@ -1060,3 +1060,57 @@ generation 10. That is `AGE-01` operating on the guards themselves, and the
 honest reading is that this module is now the artefact most likely to go stale
 next. It knows the words for the results that exist. It does not know the words
 for a result nobody has measured yet.
+
+### Beside `AGE-01` — `FILL-01`, a presence check manufactures the value that satisfies it · recorded, not enacted
+
+**Recorded** by the operator ruling of 2026-09-02 §2, beside `AGE-01` and
+deliberately not as a rule of its own. `OPS-01` says a rule with no guard is not
+enacted; the ruling orders that no guard be built for this class, and the reason
+is the class itself. So this is a named failure class with one worked instance,
+placed where the next person writing a presence check will read it. It is a
+sub-entry under `AGE-01` rather than a section of its own because a section in
+this document is a promise of a guard, and this one is a statement that a guard
+is the wrong instrument.
+
+**The instance.** `COR-2` in `papers/CORRIGENDA_g6.md`. `SPEC-g7-6` requires a
+rank statement to carry a chart label. It checks that the label is *present*; it
+cannot check that the label is *right*, because nothing binds a sentence to the
+artefact its number came from. `COR-1`'s applied record shows the labels being
+added under that guard's pressure, and the label supplied at three sites was the
+paper's default — chart L, correct for §4.1 and carried into §4.2, where the
+measurement was in chart G at `d=16`. The guard did not merely fail to catch a
+wrong label. **It produced one.** Demanding a field it could not validate
+converted a *missing* label into a *wrong* one, and a wrong label is worse: it
+reads as scoped, so nobody re-checks it. The figure work found it
+(`docs/PAPER_WORK_g15.md` §2), because an axis cannot be drawn without deciding
+what it is.
+
+**The class.** Any presence check has this shape. Requiring a field induces
+filling it with whatever is nearest — the default, the value the previous
+sentence used, the one the template suggests — and the check then reports
+satisfaction. The pressure a presence check exerts is real and the correctness it
+certifies is not, so a presence check on a field whose correct value takes
+judgement will, over enough sites, manufacture wrong values at the rate the
+nearest value is wrong. One other check in this tree has the shape and has not
+been observed to manufacture anything: `SKIP-01` requires a reason and an expiry
+on a skip, and cannot tell a reason from a phrase. It is named here so that if it
+does, the record already says where to look.
+
+**Why no guard, stated so that one is not built later out of tidiness.** A guard
+that checked a chart label is *correct* would need the thing that decides
+correctness, which is the code that produced the number, which is what a figure
+already reads. That instrument exists: `scripts/make_figures_g15.py` takes its
+axis labels from the producing code and the artefact, not from the paper. A
+second, prose-side checker would be a presence check on the presence check. The
+mitigation is procedural and now sits in the paper's methods section
+(`papers/draft.md` §3.2, *a figure is labelled from the code; prose need not
+be*): a scope label on a result that has a figure is read from the figure's
+script, and a scope label on a result that has none has been checked for
+presence by a guard and for truth by nobody — which is what such a label means,
+and a reader should know it.
+
+**Relation to `AGE-01`.** `AGE-01` is an artefact encoding the rule set of its
+date; this is a guard inducing a *default* under the rules of its date. Both are
+ways a check passes on something other than what the check was for, and both
+were found by the same paper work in the same week, which is why they sit
+together.

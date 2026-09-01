@@ -169,6 +169,20 @@ EXEMPT = {
                                          "Nothing in it is applied, so a "
                                          "sentence in it is a proposal rather "
                                          "than a statement",
+    # --- Added by the operator ruling of 2026-09-02 (paper, final). ---------
+    # Verified load-bearing the same way: with these two entries removed and
+    # the files tracked, ``tests/test_age01_surface_coverage_close.py`` fails
+    # and names both with ``rank,spectral``.
+    "docs/UNDERCLAIM_SWEEP_g15.md": "sweep report; quotes result sentences from "
+                                    "the paper and the README beside the "
+                                    "artefact behind each, in order to compare "
+                                    "their strength. Report only: nothing in it "
+                                    "is applied and nothing in it is a claim",
+    "docs/PAPER_FINAL_g15.md": "ruling record; ledgers what the 2026-09-02 "
+                               "ruling ordered and quotes the paper in order "
+                               "to say what changed, including a proposed "
+                               "abstract that is a proposal rather than a "
+                               "statement",
 }
 
 #: A rank fraction: "3-4 of 16", "3 of 4", "1 of 8". Two restrictions, both

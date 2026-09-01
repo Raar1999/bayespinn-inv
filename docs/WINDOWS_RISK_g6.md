@@ -171,3 +171,52 @@ been a false closure once already, and it is not repeated here.
 
 `SPEC-g0-3b` — the retrievable remote run log — remains `OPERATOR-BLOCKED`. The
 exact commands are in `docs/OPERATOR_TASKS.md`.
+
+---
+
+## Rank 6 — a POSIX command name resolving to a different Windows binary · **FOUND AT SCORING, CRASH CLASS, RECORDED**
+
+**Added** 2026-09-02 by operator ruling (paper, final, §5), after
+`docs/WINDOWS_LEG_SCORED_g15.md` §3.4 scored rank 4 and found the half of it that
+rank 4 had not written down. This entry is dated so the document's own history
+stays visible: ranks 1–5 are the generation-6 sweep as written; rank 6 is what
+scoring that sweep on the platform it was written about taught.
+
+**Severity** LOW today · **Silent-wrong-answer risk** NONE on the instance found,
+and **not none by construction** — which is why it is a rank and not a footnote.
+
+Rank 4 predicted that `find . -name "*.pyc" -delete` fails under `cmd.exe`
+because `find` is a POSIX tool that Windows lacks. It does fail, but not for
+that reason. `C:\Windows\System32\find.exe` exists, shadows the POSIX tool,
+takes entirely different arguments, and is what runs. The failure is argument
+rejection by the wrong program — `File not found - -NAME`, `File not found -
+-DELETE` — not command-not-found. Nothing was deleted and the exit code was 1,
+so on this instance the class is a crash and rank 4's verdict stands.
+
+**Why it is `BUG-14`'s family.** `BUG-14` was *the same call doing something
+different on Windows*: text I/O picking up cp1252 without any line of code
+changing. This is that mechanism one level up, at the shell — the same command
+name reaching a different program. Rank 4's other recipe lines (`rm -rf`) are
+honest command-not-found; this one is a name collision, and a collision is what
+makes the risk non-zero in general. A POSIX name that shadows onto a Windows
+binary with *compatible* arguments would run, do something else, and exit 0,
+which is the silent shape this document ranks by. `find` happens to reject its
+arguments; the next such name might not.
+
+**Checked at this commit, so the absence is a finding rather than an
+assumption.** The other POSIX names with a Windows binary behind them — `sort`,
+`more`, `timeout`, `where` — appear in neither `Makefile` nor
+`.github/workflows/ci.yml`. `find` appears twice, both in the `clean` target
+(lines 134–135), both already covered by rank 4.
+
+**Not fixed, for rank 4's reason.** The recipe lines are a crash on Windows and
+the `Makefile` is not the instrument any generation has used on this host.
+**Guarded by nothing, and deliberately.** A guard over recipe names against a
+list of Windows shadows would be a presence check over a list that goes stale
+(`AGE-01`), the class recorded the same day as `FILL-01` beside it in
+`docs/RULES_ENACTED.md`. The record is the mitigation: anyone who reads
+`File not found - -NAME` from a Makefile now has this entry to find.
+
+**Scored:** yes, in the act of being found — `docs/WINDOWS_LEG_SCORED_g15.md`
+§3.4 ran the line against a scratch `.pyc` and the file survived. That is one
+instance, the loud one, and it is the only one measured.
