@@ -169,9 +169,12 @@ correct and must stay. No identifier is assigned; the ruling asked for a line in
 the register, not a rule.
 
 **Still open.** The `OPERATOR_TASKS.md` lines above are not repaired — the
-billing state underneath them is the operator's to settle. The abstract is still
-551 words and its cut is still blocked on a journal rather than an audience:
-`ADR-0008` chose the audience and the venue is unchosen. `CI-01` and
+billing state underneath them is the operator's to settle. The abstract stands
+at **558 words at `ba0b534`**, seven more than the 551 in
+`docs/PAPER_FINAL_g15.md` §6, because `COR-6` added the reference-conditions
+clause to it in this same commit — that table is a dated record, correctly still
+reads 551, and is not edited. The cut is still blocked on a journal rather than
+an audience: `ADR-0008` chose the audience and the venue is unchosen. `CI-01` and
 `SPEC-g0-3b` do not close; nothing here is a clean-runner CI run, and the
 allowance having reset on 2026-09-01 narrows the blocker rather than clearing
 it.
