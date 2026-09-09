@@ -30,9 +30,10 @@ taken through a Scharfetter–Gummel solver that reports its own numerical error
 bar, which we show is predictive and tracks the solver's actual precision as
 `1/SNR` across five decades. In **chart L** at `d=16`, a 19-point forward-bias
 sweep over an 0–0.9 V window at 2% relative noise determines only **3–4 of 16**
-profile degrees of freedom — a *local* rank, at four device families — and
-improving the instrument by four orders of magnitude roughly doubles it. The
-limit is the structure of the forward map, not the noise.
+profile degrees of freedom — a *local* rank, at four device families, at the
+reference analysis conditions of §4.1 — and improving the instrument by four
+orders of magnitude roughly doubles it. The limit is the structure of the
+forward map, not the noise.
 
 **That number is a property of the measurement, not of the device.** Of four
 candidate sensitivities, only the observation set is large at all twelve
@@ -77,11 +78,12 @@ protocol are correct.
 **Contributions.**
 
 1. A Scharfetter–Gummel 1D drift–diffusion solver with an *honest* convergence
-   contract: equilibrated continuity solves (1730× improvement in the
-   equilibrium mass-action law), a convergence test on carriers rather than the
-   potential alone, and a per-solve numerical error bar on the terminal
-   current with a demonstrated predictive relationship to the solver's actual
-   precision.
+   contract: equilibrated continuity solves — on the 1 µm N_A = N_D = 1e22 m⁻³
+   junction at zero bias the equilibrium mass-action violation max|np/n_i² − 1|
+   is 6.8e-3 with a plain `spsolve` and 9.7e-10 equilibrated — a convergence
+   test on carriers rather than the potential alone, and a per-solve numerical
+   error bar on the terminal current with a demonstrated predictive
+   relationship to the solver's actual precision.
 2. A quantitative local-identifiability analysis of the I–V → doping map,
    self-limited by its own estimated noise floor and validated against
    independent re-solves — together with the measurement that the resulting
@@ -331,10 +333,14 @@ we put two beside each other we say what licenses it.
 **Inherited obstructions are re-tested, not carried.** One habit is worth a
 sentence in the methods because it changed results. Where an earlier round of
 this work recorded that something could not be done, later rounds re-tested the
-obstruction rather than inheriting it — and at least one turned out to be false
-on the first attempt, having never been tried. An obstruction inherited from an
-earlier round is a claim about the code, exactly as checkable as any other, and
-we found they were not being checked.
+obstruction rather than inheriting it — and three, each from a different round,
+turned out to be false on the first attempt, having never been tried: a
+documentation badge recorded as unchangeable and then changed in one line; a
+history repair recorded as impossible from inside the repository while the file
+that performed it sat in `.git`; and a platform test leg recorded as
+unobtainable on this host, on a host that is that platform. An obstruction
+inherited from an earlier round is a claim about the code, exactly as checkable
+as any other, and we found they were not being checked.
 
 **A figure is labelled from the code; prose need not be.** The second habit is
 one we adopted late and would now adopt first. A sentence can carry a scope
@@ -386,10 +392,32 @@ floor is 1.5e-3 log-units.
 | graded (tanh, $L_g$ = 150 nm) | 10 | **3** |
 | LDD (three-segment) | 8 | **4** |
 
+*Analysis settings, and why the abstract says 3–4.* The four rows above are
+taken at a finite-difference step of 0.05 decades and an SNR threshold of 1e8.
+The **3–4 of 16** *local* range quoted in the abstract and in §6 is the same
+four families in chart L at `d=16`, over the same 19-point forward-bias
+observation window (0–0.9 V) at 2% relative noise, measured at the reference
+analysis conditions of the robustness sweep — step 0.01 decades, SNR threshold
+1e4 — where they give 3, 4, 3 and 3. A coarser step lowers the *analysis* noise
+floor rather than revealing more physics, and that is what lifts the
+asymmetric-step device to 5 in the table above; the reference conditions carry
+the claim and the table's rows are the raw counts.
+
 *Validation.* Predicted response $\|Jv\|$ vs an independent re-solve: ratios
-**0.995–1.04** for all resolved directions across all four families. Conclusion
-stable across finite-difference steps (0.01–0.05 decades) and SNR thresholds
-(1e4–1e8): identifiable rank 4, $\sigma_1/\sigma_2 = 6.11$–6.13.
+**0.995–1.04** for all resolved directions across all four families. The
+analysis-convergence study re-estimates the Jacobian on the reference device
+(symmetric step) at five combinations of finite-difference step (0.01–0.05
+decades) and oracle SNR threshold (1e4–1e8). The leading spectrum is stable
+across all five: $\sigma_1/\sigma_2 = 6.11$–6.12. The identifiable rank is
+**4 at four of them and 3 at the fifth**, which is the reference condition of
+the paragraph above — step 0.01 decades, SNR threshold 1e4, the loosest
+threshold of the five. It admits 15 bias rows where the other four keep 10–12,
+and the extra rows are the low-SNR ones: against the next setting at the same
+step (SNR 1e6) the estimated Jacobian entry noise is 440× larger and the
+spectral floor the rank is counted against 490× higher. The rank moves with the
+analysis floor rather than with the physics — the same mechanism that lifts the
+asymmetric-step device to 5 at the coarsest step in the table above, running the
+other way.
 
 *Rank vs instrument quality* (symmetric step, chart L, `d=16`, local): 2 dof at
 20% noise, 4 at 2%, 6 at 0.1%, 9 at 1e-4%. Four orders of magnitude of
@@ -643,7 +671,7 @@ grows, showing the ensemble spread captures epistemic uncertainty only and does
 not absorb measurement noise.
 
 Calibration, **pre and post on the identical test set** (n=140), variance
-inflation $T=2.08$ fitted on a disjoint split:
+inflation $T=2.09$ fitted on a disjoint split:
 
 | Interval | Raw | Recalibrated | Nominal |
 |---|---:|---:|---:|
@@ -771,8 +799,13 @@ grows ~12–13× for all three, but MC-dropout's and SWAG's σ is governed by
 their own hyperparameters — the dropout rate, the width of the SWA trajectory
 — which are properties of the model rather than of distance from the data. The
 ensemble's σ is functional disagreement between independently trained members,
-and that does grow. A budget-matched ensemble, trained *faster* than either
-single-network method, still beats both, so this is not a compute advantage.
+and that does grow. A budget-matched ensemble — the same 2500 total training
+epochs each single-network method receives, split across five members rather
+than multiplied by five — still beats both, so this is not a compute advantage.
+On the clock that ensemble takes 6.7 s against MC-dropout's 9.2 s and SWAG's
+6.3 s, faster than one and marginally slower than the other; the claim rests on
+the matched epoch budget rather than on the wall-clock, which this project
+excludes from its reproduction comparisons.
 
 A secondary observation worth recording: selecting UQ hyperparameters by
 in-distribution NLL systematically prefers small σ, and small σ is exactly
@@ -809,6 +842,22 @@ while the test suite of the day passed:
   two decades of the range the project claimed to support. The correct stable
   formulation already existed in a sibling module whose docstring claimed to
   "match the SG solver convention".
+
+**The audit did not stop at those two cycles, and what it found afterwards is
+about reproducibility rather than physics.** The ledger holds forty-seven
+findings; the fourteen above are the ones numbered as numerical or solver
+defects, and fifteen further rounds of review followed the second cycle. Those
+rounds found that the repository had bifurcated and `HEAD` was the pre-audit
+project, so the tree carrying the results was not the tree under version
+control; that forty-one published numbers can never be explained, because the
+working tree that produced them was never committed; that the repair for a
+finding carried three rounds as *unrepairable from inside the repository* had
+been sitting in `.git` throughout; and that a mechanical line-ending edit
+changed 9,832 lines to fix 68, with the suite green before and after, because
+every file was individually correct. The last two are the same lesson as the
+four defects above, one level up: a passing suite is evidence about the
+properties it was written to check and about nothing else, and aggregate blast
+radius was not one of them.
 
 ## 5. Limitations
 

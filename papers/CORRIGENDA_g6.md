@@ -9,6 +9,20 @@ Each entry gives: the exact line, its current text, the measured replacement, th
 command that reproduces the measurement, the manifest backing it, and the finding
 ID that forced it.
 
+**Correction, 2026-09-09 — the reservation named in the preamble above is no
+longer live, and the preamble is left as written.** `R-3` reserved `papers/**`
+until the close ruling of 2026-08-29 §4 assigned the paper to the loop and
+lifted it; `docs/OPERATOR_TASKS.md` `OT-2` is `DISCHARGED 2026-08-29` on that
+basis, `papers/draft.md` joined the claim surface in
+`tests/test_claim_surface_g7.py` at the same time, and `COR-1` through `COR-6`
+were applied to the draft directly rather than handed to an operator. Only the
+`outputs/**/manifest.json` half of `R-3` survives. The preamble's sentence was
+true on this file's date and is not edited, for the same reason `ADR-0001` was
+not edited under `COR-4`: it is a dated statement, and rewriting it would remove
+the evidence that a lifted reservation was carried forward for eleven days.
+Entries from `COR-7` on are written **and applied** in the same pass, and each
+says so.
+
 ---
 
 ## COR-1 — `papers/draft.md:255` · identifiable rank stated without its regime
@@ -358,3 +372,617 @@ neither exists — one binding a summary claim to the section that evidences it,
 and one that fails when a framing recorded as withdrawn still appears in the
 tree. The second is cheap and is worth building; it is named here and not built,
 because building it is a generation's work and this is a correction.
+
+---
+
+## COR-4 — `papers/draft.md` §1 contribution 1 and `README.md` · the equilibration gain is a withdrawn figure still asserted as live
+
+**Found by** `docs/UNDERCLAIM_SWEEP_g15.md` `U-1` (HIGH), 2026-09-02, which named
+this correction `COR-4` and did not write it. Applied 2026-09-07 under the
+operator handoff of that date, §5.2.
+**Rule** the same one `COR-3` runs on: a withdrawn figure is withdrawn
+everywhere, not only where the withdrawal was recorded.
+
+### Current text — two live sites
+
+**(a)** `papers/draft.md` §1, contribution 1:
+
+> equilibrated continuity solves (**1730×** improvement in the equilibrium
+> mass-action law)
+
+**(b)** `README.md`, the solver section:
+
+> Equilibration improves the equilibrium mass-action law by **1730×**
+> (ADR-0001).
+
+### Why it is wrong
+
+`docs/CLAIM_EVIDENCE_MATRIX.md` row `X17` withdrew the figure and says why in as
+many words:
+
+> The `1.32e-2` starting point is sound (measured `6.77e-3`, 1.95× — within
+> tolerance). The `7.62e-6` endpoint is not: the adopted solver reaches
+> `9.7e-10`, so the real gain is ~**7.0e6×**, not 1730×. The published figure
+> understated the improvement by ~4000×.
+
+Row `S1` carries the replacement. `1730×` was measured on the **pre-audit**
+solver; the solver the paper describes is the adopted one. Of the withdrawn
+literals listed in the matrix's §3, the sweep's search found this the **only one
+still asserted as live** anywhere on the fourteen-document claim surface — every
+other hit was a mention of a withdrawal, which is the correct way for a withdrawn
+literal to appear.
+
+Note the direction, which is `COR-3`'s again. The summary carried a superseded
+version's number after the ledger moved underneath it, and the error runs
+*against* the paper: it claims a solver improvement about four thousand times
+smaller than the one it has. The mechanism is indifferent to direction — nothing
+re-derives a summary when the ledger changes — and it happened to surface as an
+underclaim twice running.
+
+### Measured replacement — applied
+
+**Two residuals, not the ratio.** A ratio of about seven million invites the
+question of how hard the baseline was tried; two values, each with the quantity
+it measures and the configuration that produced it, are a measurement and answer
+that in advance.
+
+**(a)** `papers/draft.md` §1, contribution 1:
+
+> equilibrated continuity solves — on the 1 µm N_A = N_D = 1e22 m⁻³ junction at
+> zero bias the equilibrium mass-action violation max|np/n_i² − 1| is 6.8e-3
+> with a plain `spsolve` and 9.7e-10 equilibrated —
+
+**(b)** `README.md`, the solver section:
+
+> On the 1 µm N_A = N_D = 1e22 m⁻³ junction at zero bias the equilibrium
+> mass-action violation max|np/n_i² − 1| is **6.8e-3** with a plain `spsolve`
+> and **9.7e-10** equilibrated
+> (`test_sg_numerics.py::test_equilibration_beats_plain_spsolve`). ADR-0001
+> states **1730×** for the same comparison measured on the pre-audit solver;
+> that figure is withdrawn as `X17` in `docs/CLAIM_EVIDENCE_MATRIX.md`.
+
+### Evidence
+
+Run the body of the guarding test and read both sides, rather than only its
+assertion:
+
+```
+PYTHONPATH=src python -c "
+import sys, numpy as np
+sys.path.insert(0, 'tests')
+from test_sg_numerics import _setup, _pn
+from bayespinn_inv.solvers.scharfetter_gummel import ScharfetterGummel1D, SGConfig
+from bayespinn_inv.physics.constants import SILICON
+s, grid, _ = _setup()
+doping = _pn(s, grid)
+for eq in (False, True):
+    sg = ScharfetterGummel1D(grid, s, SILICON, SGConfig(equilibrate=eq, max_outer=60))
+    st = sg.solve(doping, bias=0.0)
+    r = (st.n / s.n_star) * (st.p / s.n_star)
+    print(eq, '%.4e' % float(np.max(np.abs(r - 1.0))))
+"
+```
+
+| | |
+|---|---|
+| **Measured 2026-09-07 on this tree** | plain `spsolve` `6.7705e-03`; equilibrated `9.7290e-10` |
+| **Ledger rows** | `X17` (withdrawal), `S1` (replacement), `docs/CLAIM_EVIDENCE_MATRIX.md` |
+| **Guarding test** | `tests/test_sg_numerics.py::TestGummelConvergenceIsHonest::test_equilibration_beats_plain_spsolve`, which asserts the ratio exceeds 100× and reports neither side |
+| **Reproduces** | `docs/UNDERCLAIM_SWEEP_g15.md` §3's re-measurement, to five digits |
+
+### `ADR-0001` is not corrected
+
+`docs/adr/ADR-0001-…md` lines 61 and 69 state `1730×` and keep it. It is a dated
+decision record, the figure was true on 2026-08-19, and the decision it justifies
+— equilibrate the continuity solves — is unaffected by the endpoint moving. It
+receives a **dated pointer**, appended 2026-09-07, giving the withdrawal, the two
+current residuals and the configuration, and nothing else. Correcting the record
+itself would destroy the thing an ADR is for.
+
+### After applying
+
+No guard changes state. Nothing in the tree binds contribution 1 to matrix row
+`S1`, which is why a withdrawn literal survived on the claim surface for the
+generations between `X17` and this entry. `docs/UNDERCLAIM_SWEEP_g15.md` §7 names
+the guard that would have caught it — one that fails when a literal recorded as
+withdrawn still appears live — and gives the reason it is not built here: its list
+of literals would be hand-maintained, which is a presence check that goes stale
+(`AGE-01`, `FILL-01`). The hand search that found this took under a minute and is
+recorded in that document's §1.
+
+---
+
+## COR-5 — `papers/draft.md` §4.9 · the compute claim rests on a wall-clock the ledger excludes, and is false as stated
+
+**Found by** `docs/UNDERCLAIM_SWEEP_g15.md` §5 `O-2`, an opposite-direction
+finding the underclaiming sweep reported rather than suppressed. Applied
+2026-09-07 under the operator handoff of that date, §5.1.
+**Rule** the general form of `AH-12`: a comparative word carries the comparison
+it was measured on.
+
+### Current text
+
+> A budget-matched ensemble, trained *faster* than either single-network
+> method, still beats both, so this is not a compute advantage.
+
+### Why it is wrong
+
+`outputs/uq_benchmark/uq_benchmark.json`, `cost.train_seconds`:
+
+| method | train_seconds |
+|---|---:|
+| deep ensemble, budget-matched | 6.655 |
+| MC-dropout (tuned) | 9.216 |
+| SWAG (tuned) | **6.259** |
+
+The ensemble is faster than MC-dropout and **slower than SWAG**, by 0.40 s of
+6.3 — about 6%. *Either* is false. Matrix row `D6` prints all three values
+(`6.7 s train (vs 9.2 s / 6.3 s)`) and the sentence read only the first.
+
+There is a second defect underneath the first, and it is the one that matters.
+`docs/CLAIM_EVIDENCE_MATRIX.md` §6 excludes timing fields from this project's
+reproduction comparisons in as many words — *"Wall-clock is not a scientific
+claim and the machine was under load throughout — `train_seconds` roughly doubled
+on several runs"*. So the sentence rested on the one class of number the ledger
+explicitly does not stand behind, and a re-run on a differently loaded machine
+could reverse it. The claim the experiment actually supports is about the
+**training budget**, which is exact and deterministic: `config.epochs` is 2500 for
+every method, and the budget-matched ensemble's own note records *"total epochs
+matched to the single-network methods (2500) rather than 5x it"*.
+
+### Measured replacement — applied
+
+> A budget-matched ensemble — the same 2500 total training epochs each
+> single-network method receives, split across five members rather than
+> multiplied by five — still beats both, so this is not a compute advantage.
+> On the clock that ensemble takes 6.7 s against MC-dropout's 9.2 s and SWAG's
+> 6.3 s, faster than one and marginally slower than the other; the claim rests on
+> the matched epoch budget rather than on the wall-clock, which this project
+> excludes from its reproduction comparisons.
+
+The conclusion — *this is not a compute advantage* — is unchanged, and is now
+carried by the number that supports it. The wall-clock is reported rather than
+dropped, with the caveat that makes it readable.
+
+### Evidence
+
+```
+PYTHONPATH=src python scripts/run_uq_benchmark.py
+```
+
+| | |
+|---|---|
+| **Artefact** | `outputs/uq_benchmark/uq_benchmark.json`, `methods.*.cost.train_seconds` and `config.epochs` |
+| **Matrix row** | `D6` |
+| **Timing exclusion** | `docs/CLAIM_EVIDENCE_MATRIX.md` §6 |
+| **Numbers changed** | none — all four were already in the artefact; three were not in the sentence |
+
+### After applying
+
+No guard changes state. No guard in this tree reads a comparative adjective
+against the artefact that would settle it, and `O-2` was found by a hand sweep
+rather than by a check. Recorded here so the absence is a known gap and not a
+silent one.
+
+### The two siblings not corrected here
+
+The same sweep reported `O-3` and `O-4`, both on the claim surface and neither in
+the operator handoff's §5.1 scope. They stay open and are named so they are not
+lost: `O-3`, §4.5's *"variance inflation T = 2.08"* against `2.0927` in
+`outputs/results/results.json` (README and matrix row `C10` both say 2.09); `O-4`,
+§4.1's *"Conclusion stable across finite-difference steps (0.01–0.05 decades) and
+SNR thresholds (1e4–1e8): identifiable rank 4"* against the
+`(min_snr = 1e4, rel_step = 0.01)` row of `analysis_convergence`, which gives 3.
+`O-4` is the same class as `COR-5` — a stability word contradicted by one row of
+the table it summarises — and is the larger of the two.
+
+---
+
+## COR-6 — the abstract's `3–4 of 16` against §4.1's own table · the licence was in the ledger and not in the paper
+
+**Found by** `docs/UNDERCLAIM_SWEEP_g15.md` §4, which reported it as a boundary
+case its method surfaced and then resolved against an artefact the paper does not
+cite. Applied 2026-09-07 under the operator handoff of that date, §5.3, which gave
+two options — state the licensing where the claim is made, or widen the range —
+and this entry takes the first.
+**Rule** `AGE-01`'s sibling in spirit: a narrowing that a ledger row licenses is
+licensed only where a reader can see the row.
+
+### Current text — a headline and a table at different analysis settings
+
+**(a)** Abstract:
+
+> …determines only **3–4 of 16** profile degrees of freedom — a *local* rank, at
+> four device families — and improving the instrument by four orders of
+> magnitude roughly doubles it.
+
+**(b)** §4.1's table, three paragraphs below it, gives **4**, **5**, **3**, **4**
+for the four families, and carries no statement of the analysis settings it was
+taken at.
+
+### Why it is wrong
+
+Both numbers are right and they are measured at **different analysis settings**,
+which the paper never says.
+
+| | source | `rel_step` | `min_snr` | the four families |
+|---|---|---:|---:|---|
+| §4.1's table | `outputs/identifiability/identifiability.json`, matrix `C12` | 0.05 | 1e8 | 4, 5, 3, 4 |
+| the abstract's range | `outputs/identifiability_robustness/identifiability_robustness.json`, matrix `D14` | 0.01 | 1e4 | 3, 4, 3, 3 |
+
+Matrix row `D14a` licenses the narrowing in as many words: *rank 5–6 appears only
+at larger finite-difference steps (0.02–0.05), which lower the **analysis** noise
+floor rather than revealing more physics*. The matrix also records that the
+headline `3–5` was **corrected to `3–4`** at the reference conditions, so widening
+the range back to 3–5 would restore a figure the ledger has already withdrawn.
+That is why the handoff's second option is not the one taken here.
+
+**The defect is the placement, not either number.** A reviewer who reads the
+table under the abstract sees 5 and 3–4 disagree, goes looking for the licence,
+and does not find it: `D14`, `D14a` and `IDENT-02` are in the ledger and none of
+them is in the paper.
+
+### Measured replacement — applied
+
+Two sites, one clause each way.
+
+**(a)** Abstract, the licence stated where the claim is made:
+
+> …determines only **3–4 of 16** profile degrees of freedom — a *local* rank, at
+> four device families, at the reference analysis conditions of §4.1 — and
+> improving the instrument by four orders of magnitude roughly doubles it.
+
+**(b)** §4.1, a new paragraph immediately under the table and before
+*Validation*:
+
+> *Analysis settings, and why the abstract says 3–4.* The four rows above are
+> taken at a finite-difference step of 0.05 decades and an SNR threshold of 1e8.
+> The **3–4 of 16** *local* range quoted in the abstract and in §6 is the same
+> four families in chart L at `d=16`, over the same 19-point forward-bias
+> observation window (0–0.9 V) at 2% relative noise, measured at the reference
+> analysis conditions of the robustness sweep — step 0.01 decades, SNR threshold
+> 1e4 — where they give 3, 4, 3 and 3. A coarser step lowers the *analysis*
+> noise floor rather than revealing more physics, and that is what lifts the
+> asymmetric-step device to 5 in the table above; the reference conditions carry
+> the claim and the table's rows are the raw counts.
+
+### Evidence
+
+```
+PYTHONPATH=src python scripts/run_identifiability.py
+PYTHONPATH=src python scripts/run_identifiability_robustness.py
+```
+
+| | |
+|---|---|
+| **Table settings, read 2026-09-07** | all four devices carry `min_snr_used = 1e8`, `rel_step = 0.05` in `outputs/identifiability/identifiability.json` |
+| **Reference conditions** | `config.base` of `outputs/identifiability_robustness/identifiability_robustness.json`: `P = 16`, `n_bias = 19`, `v_max = 0.9`, `grid_n = 301`, `rel_step = 0.01`, `min_snr = 1e4`, `level = 1e22`, noise 0.02 |
+| **Ranks at those conditions, read 2026-09-07** | step-symmetric 3, step-asymmetric 4, graded 3, LDD 3 |
+| **Matrix rows** | `C12` (the table), `D14` (the headline), `D14a` (the licence) |
+| **Numbers changed** | none — both sets were already measured; neither was in the paper beside the other |
+
+### The guards fired on the first attempt, and were not touched
+
+`docs/PAPER_RECOMMENDATIONS_g15.md`'s preamble predicts this and it happened
+exactly as predicted. The first draft of the §4.1 paragraph tripped three guards
+at once — `test_claim_surface_g0.py` (no local/global label),
+`test_claim_surface_g7.py` (missing the `regime` field), and
+`test_claim_surface_g9.py` (a rank fraction with no observation window). The
+paragraph was rewritten to carry the regime, the chart, the dimension and the
+window; no guard was edited, no exemption was added, and all three pass on the
+text above. That is the same sequence the two structural edits of the close-out
+order went through, recorded in that document's preamble.
+
+### Not corrected here — `O-4`, in the paragraph immediately below
+
+`docs/UNDERCLAIM_SWEEP_g15.md` §5 `O-4` reports that §4.1's *Validation*
+sentence — *"Conclusion stable across finite-difference steps (0.01–0.05
+decades) and SNR thresholds (1e4–1e8): identifiable rank 4, σ₁/σ₂ =
+6.11–6.13"* — is contradicted by its own artefact: the
+`(min_snr = 1e4, rel_step = 0.01)` row of `analysis_convergence` gives
+identifiable rank **3**, and the ratio runs 6.107–6.123, so 6.11–6.12. Read
+2026-09-07 on this tree, both hold.
+
+It is not corrected because the operator handoff of 2026-09-07 scoped §5.1 to two
+named overclaims and this is a third. It now sits one paragraph below a
+correction that publishes a 3 at exactly the settings that sentence calls stable
+at 4, which makes it the most visible remaining inconsistency in §4.1 rather than
+a buried one. Whoever takes it needs no new measurement: the mechanism is the
+same one this entry states — the smallest step at the loosest threshold has the
+highest analysis floor — and `D14a` already licenses the wording.
+
+---
+
+## COR-7 — `papers/draft.md` §4.1 *Validation* · the convergence study is called stable at a rank one of its own rows does not give
+
+**Forced by** `docs/UNDERCLAIM_SWEEP_g15.md` §5 `O-4` · **applied in this pass**
+
+### Current text
+
+> *Validation.* Predicted response $\|Jv\|$ vs an independent re-solve: ratios
+> **0.995–1.04** for all resolved directions across all four families.
+> Conclusion stable across finite-difference steps (0.01–0.05 decades) and SNR
+> thresholds (1e4–1e8): identifiable rank 4, $\sigma_1/\sigma_2 = 6.11$–6.13.
+
+### Why it is wrong
+
+Two defects in one sentence, both against `analysis_convergence` in
+`outputs/identifiability/identifiability.json`, which is the artefact the
+sentence summarises.
+
+**The rank.** The block holds five rows. `identifiable_rank` is 4 in four of
+them and **3** in the `(min_snr = 1e4, rel_step = 0.01)` row. *Stable … rank 4*
+is contradicted by a fifth of its own evidence.
+
+**Which row dissents is the part that matters.** `(1e4, 0.01)` is the reference
+condition of the robustness sweep, and therefore the condition `COR-6` had just
+finished naming in the paragraph immediately above as the one carrying the
+abstract's `3–4`. After `COR-6` the paper published a 3 at those settings one
+paragraph above a sentence calling them stable at 4. `COR-6` did not create the
+defect — the sentence was already false against its artefact — but it moved the
+contradiction inside a single page, which is why this entry is applied rather
+than carried.
+
+**The ratio.** `sigma_ratio_1_2` runs 6.1070–6.1230 across the five rows.
+Rounded to the two decimals the sentence uses, that is **6.11–6.12**: 6.123
+rounds to 6.12, not 6.13.
+
+### Measured replacement — applied
+
+> *Validation.* Predicted response $\|Jv\|$ vs an independent re-solve: ratios
+> **0.995–1.04** for all resolved directions across all four families. The
+> analysis-convergence study re-estimates the Jacobian on the reference device
+> (symmetric step) at five combinations of finite-difference step (0.01–0.05
+> decades) and oracle SNR threshold (1e4–1e8). The leading spectrum is stable
+> across all five: $\sigma_1/\sigma_2 = 6.11$–6.12. The identifiable rank is
+> **4 at four of them and 3 at the fifth**, which is the reference condition of
+> the paragraph above — step 0.01 decades, SNR threshold 1e4, the loosest
+> threshold of the five. It admits 15 bias rows where the other four keep
+> 10–12, and the extra rows are the low-SNR ones: against the next setting at
+> the same step (SNR 1e6) the estimated Jacobian entry noise is 440× larger and
+> the spectral floor the rank is counted against 490× higher. The rank moves
+> with the analysis floor rather than with the physics — the same mechanism
+> that lifts the asymmetric-step device to 5 at the coarsest step in the table
+> above, running the other way.
+
+Three things the replacement adds that the original asserted without support.
+The study is on **one device**, not four: `scripts/run_identifiability.py`
+carries `ref = devices["step_symmetric"]` under the comment *analysis-convergence
+study on the reference device*, and the *all four families* of the first
+sentence belongs to the re-solve ratios alone. The settings are a **diagonal of
+five**, not a grid of step × threshold. And the mechanism is named, so the row
+that gives 3 reads as the analysis floor moving rather than as a result in
+tension with the table.
+
+### Evidence
+
+```
+PYTHONPATH=src python scripts/run_identifiability.py
+```
+
+`analysis_convergence` in `outputs/identifiability/identifiability.json`, read
+2026-09-09 on this tree:
+
+| `min_snr` | `rel_step` | `n_rows` | `entry_noise` | `spectral_floor` | `identifiable_rank` | `sigma_ratio_1_2` |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1e4 | 0.01 | 15 | 2.5841e-3 | 4.0033e-2 | **3** | 6.1230 |
+| 1e6 | 0.01 | 12 | 5.8650e-6 | 8.1268e-5 | 4 | 6.1087 |
+| 1e6 | 0.03 | 12 | 1.9550e-6 | 2.7089e-5 | 4 | 6.1111 |
+| 1e7 | 0.03 | 11 | 4.4261e-7 | 5.8718e-6 | 4 | 6.1070 |
+| 1e8 | 0.05 | 10 | 3.3217e-8 | 4.2017e-7 | 4 | 6.1137 |
+
+| | |
+|---|---|
+| **440× and 490×** | `2.5841e-3 / 5.8650e-6 = 440.6` and `4.0033e-2 / 8.1268e-5 = 492.6`, both against the row at the same `rel_step`, so the comparison isolates the threshold |
+| **Reference device** | `scripts/run_identifiability.py`, `ref = devices["step_symmetric"]` |
+| **Reference conditions** | `config.base` of `outputs/identifiability_robustness/identifiability_robustness.json`: `rel_step = 0.01`, `min_snr = 1e4` — the same pair as the dissenting row |
+| **Matrix row** | `D14a`, which licenses the narrowing and states the mechanism this entry restates |
+| **Numbers changed** | none — every figure above was already in the artefact |
+
+### After applying
+
+§4.1 states a rank that varies with the analysis setting, states which setting
+gives which, and states why. The 3 in the *Validation* paragraph and the 3, 4, 3
+and 3 in the paragraph above it are now the same measurement at the same
+conditions rather than two numbers a reader must reconcile unaided. `O-4`
+closes.
+
+---
+
+## COR-8 — `papers/draft.md` §4.5 · the variance-inflation temperature is transcribed to the wrong second decimal
+
+**Forced by** `docs/UNDERCLAIM_SWEEP_g15.md` §5 `O-3` · **applied in this pass**
+
+### Current text
+
+> Calibration, **pre and post on the identical test set** (n=140), variance
+> inflation $T=2.08$ fitted on a disjoint split:
+
+### Why it is wrong
+
+`H3_calibration.temperature` in `outputs/results/results.json` is
+`2.0926970199407045`. To two decimals that is **2.09**. No artefact carries
+2.08, and the two other places that state the calibration temperature as a
+result — `README.md`'s results table and `docs/CLAIM_EVIDENCE_MATRIX.md` row
+`C10` — both say 2.09. This is a transcription into the paper, not a
+disagreement between artefacts.
+
+It is the smallest defect in this pass, and being on the claim surface is the
+whole of its justification for being here: a reader who spot-checks one number
+against the ledger may well check this one, and finding it wrong costs the
+sentences around it their credibility for no gain.
+
+### Four sites quote the old value and are deliberately not edited
+
+Correcting §4.5 makes `2.08` stale wherever another document describes what §4.5
+said. Each of those is a **dated record of a past comparison**, not a statement
+of the calibration result, and `AGE-01` is the reason to leave them:
+
+* `docs/PAPER_FINAL_g15.md` §2 — inside a block quotation. A quotation is not
+  editable without ceasing to be one.
+* `docs/PAPER_WORK_g15.md` §4 — the table that established the four unreferenced
+  PNGs came from a different run, `T = 5.07` against the paper's value at the
+  time. The comparison it records was made against 2.08 and was correct.
+* `docs/OPERATOR_RULINGS_INDEX.md` §3 row 21 and §4 row 18 — both restate that
+  same comparison as what caught the eighteenth operator defect.
+
+The mismatch those three record — a factor of about 2.4 between the PNG run and
+the results run — is unchanged by this correction, so nothing they conclude
+moves. Editing them would rewrite the evidence for a finding to make a later
+number agree with it, which is the move `docs/CLAIM_EVIDENCE_MATRIX.md`'s
+withdrawal discipline exists to prevent.
+
+### Measured replacement — applied
+
+> Calibration, **pre and post on the identical test set** (n=140), variance
+> inflation $T=2.09$ fitted on a disjoint split:
+
+### Evidence
+
+```
+PYTHONPATH=src python scripts/run_results.py
+```
+
+| | |
+|---|---|
+| **Artefact, read 2026-09-09** | `outputs/results/results.json`, `H3_calibration.temperature = 2.0926970199407045` |
+| **Agreeing sites** | `README.md` results table, `T=2.09`; `docs/CLAIM_EVIDENCE_MATRIX.md` `C10` |
+| **Precision** | two decimals, matching the sentence's existing convention and both agreeing sites; the further digits are not reported because nothing else reports them |
+| **Numbers changed** | one, toward the artefact |
+
+### After applying
+
+The coverage table beneath the sentence is unchanged — it was already right —
+and the paper agrees with the README and the matrix. `O-3` closes.
+
+---
+
+## COR-9 — `papers/draft.md` §3.2 · a methods claim hedged below the count the record holds
+
+**Forced by** `docs/UNDERCLAIM_SWEEP_g15.md` §3 `U-2` · **applied in this pass**
+
+### Current text
+
+> Where an earlier round of this work recorded that something could not be done,
+> later rounds re-tested the obstruction rather than inheriting it — and **at
+> least one** turned out to be false on the first attempt, having never been
+> tried.
+
+### Why it is wrong
+
+*At least one* is a hedge standing in front of a count the tree holds, which is
+the shape `U-1` and `COR-3` had in the other direction. The record names three,
+each dated, each from a different round:
+
+1. **`DOC-03a`** — the README badge that generation 10 recorded as unchangeable
+   and that changed in one line, *because nothing had ever tried it*
+   (`docs/RULES_ENACTED.md` `OBS-01`, quoting `docs/CLOSE_RULING.md` §5.1).
+2. **`HIST-01`** — carried three generations as `UNREPAIRABLE FROM INSIDE THE
+   TREE` while `.git/filter-repo/commit-map`, the file that performed the
+   repair, sat in the repository. Nobody ran `ls .git`
+   (`docs/HIST01_REPAIR_g11.md`).
+3. **The Windows leg** — carried eight generations as *not obtainable on this
+   host by any means*, on a host that is Windows
+   (`docs/WINDOWS_LEG_SCORED_g15.md` §1).
+
+The sentence is true as written and weaker than its evidence, and the hedge
+costs the paragraph its point: the paragraph argues that inherited obstructions
+go unchecked, and three instances argue that where one does not.
+
+### Measured replacement — applied
+
+> …later rounds re-tested the obstruction rather than inheriting it — and
+> **three, each from a different round**, turned out to be false on the first
+> attempt, having never been tried: a documentation badge recorded as
+> unchangeable and then changed in one line; a history repair recorded as
+> impossible from inside the repository while the file that performed it sat in
+> `.git`; and a platform test leg recorded as unobtainable on this host, on a
+> host that is that platform.
+
+The three are described rather than cited by ID, because `DOC-03a`, `HIST-01`
+and the Windows leg are this repository's finding names and mean nothing to a
+reader of the paper. Each description is specific enough to be matched to the
+ledger by anyone who has it.
+
+### Evidence
+
+| | |
+|---|---|
+| **Instance 1** | `docs/RULES_ENACTED.md` `OBS-01`: *"the README badge that generation 10 recorded as unchangeable, which turned out to be changeable in one line, because nothing had ever tried it"* |
+| **Instance 2** | `docs/RULES_ENACTED.md` `OBS-01` and `docs/HIST01_REPAIR_g11.md`; the finding was carried three generations |
+| **Instance 3** | `docs/WINDOWS_LEG_SCORED_g15.md` §1, quoting the close-out ruling: *"I wrote that the Windows leg was 'not obtainable on this host by any means' and carried it for eight generations. **The host is Windows.**"* |
+| **Denominator** | none is stated, because the record holds a count of instances found and no population of obstructions re-tested. `DOC-08` asks that a count carry its scope; the scope given is *each from a different round*, which is what the record supports and no more |
+| **Numbers changed** | none — the count was measured before the sweep and had not been carried into the paper |
+
+### After applying
+
+The methods paragraph states its count. `U-2` closes.
+
+---
+
+## COR-10 — `papers/draft.md` §4.10 · the audit section stops where the audit did not
+
+**Forced by** `docs/UNDERCLAIM_SWEEP_g15.md` §3 `U-4` · **applied in this pass**
+
+### Current text
+
+> Fourteen defects across two audit cycles. Four produced silently wrong physics
+> while the test suite of the day passed:
+
+followed by four bullets, and then §5.
+
+### Why it is wrong
+
+Neither sentence is false. Both are scoped — *across two audit cycles* — and
+`docs/AUDIT_MASTER.md` supports both: forty-seven findings, of which fourteen
+are numbered `BUG-xx`, seven of those CRITICAL. This is a scope finding. What
+the evidence supports and the paper did not say is that the audit ran on for
+fifteen further rounds, and that the later findings are the ones bearing on the
+reproducibility claims the paper makes elsewhere.
+
+§4.10's own headline is how easily plausible numbers survive a passing test
+suite. `PROV-06`, `REPRO-01` and `DIFF-01` are the sharpest instances of that in
+the tree and none of them was in the section.
+
+### Measured replacement — applied
+
+A paragraph after the four bullets and before §5:
+
+> **The audit did not stop at those two cycles, and what it found afterwards is
+> about reproducibility rather than physics.** The ledger holds forty-seven
+> findings; the fourteen above are the ones numbered as numerical or solver
+> defects, and fifteen further rounds of review followed the second cycle. Those
+> rounds found that the repository had bifurcated and `HEAD` was the pre-audit
+> project, so the tree carrying the results was not the tree under version
+> control; that forty-one published numbers can never be explained, because the
+> working tree that produced them was never committed; that the repair for a
+> finding carried three rounds as *unrepairable from inside the repository* had
+> been sitting in `.git` throughout; and that a mechanical line-ending edit
+> changed 9,832 lines to fix 68, with the suite green before and after, because
+> every file was individually correct. The last two are the same lesson as the
+> four defects above, one level up: a passing suite is evidence about the
+> properties it was written to check and about nothing else, and aggregate blast
+> radius was not one of them.
+
+**The abstract's half of `U-4` is not applied.** *"an adversarial audit that
+found fourteen defects in its first two cycles, seven critical"* is scoped, is
+true, and sits in the abstract, which is reserved to the operator pending a
+venue. It is left to that pass rather than corrected here, and it is consistent
+with the widened §4.10 as it stands.
+
+### Evidence
+
+| | |
+|---|---|
+| **Forty-seven, fourteen, seven** | `docs/AUDIT_MASTER.md` header: *"47 findings total, of which 14 are numbered `BUG-xx`… Seven are CRITICAL"* |
+| **Fifteen further rounds** | `LOOP_STATE_v15.json`, `generation = 14`; generations 0–14 are `docs/AUDIT_MASTER.md` §§9–13, all of which follow §8, the second cycle |
+| **Bifurcation** | `PROV-06`, `docs/AUDIT_MASTER.md` §9; `docs/PROVENANCE_BIFURCATION_g0.md` |
+| **Forty-one numbers** | `REPRO-01`, `docs/AUDIT_MASTER.md` §10 and `docs/REPRO01_LEAF_AUDIT_g6.md` |
+| **The repair in `.git`** | `HIST-01`, `docs/HIST01_REPAIR_g11.md`; carried three generations |
+| **9,832 lines to fix 68** | `docs/G13_RESULT.md`; `docs/SWEEP_REGISTER.json`, `actual_changed_lines = 9832`; `DIFF-01` enacted at generation 14 |
+| **Numbers changed** | none — every figure is transcribed from the ledger |
+
+### After applying
+
+§4.10 covers the audit it names. `U-4` closes for the body; the abstract's
+sentence is unchanged and left to the operator's abstract pass.

@@ -1114,3 +1114,50 @@ date; this is a guard inducing a *default* under the rules of its date. Both are
 ways a check passes on something other than what the check was for, and both
 were found by the same paper work in the same week, which is why they sit
 together.
+
+### Beside `AGE-01` — a relative time reference in a durable artefact is stale by construction · recorded, not enacted
+
+**Recorded** by the operator ruling on the handoff of 2026-09-07, beside
+`AGE-01` and `FILL-01` and deliberately not as a rule of its own. It carries no
+identifier because the ruling that recorded it gave it none — `FILL-01` was
+named by the ruling that recorded *it* — and this document does not mint one on
+its own account, for the reason `docs/OPERATOR_RULINGS_INDEX.md` §5 gives about
+identifiers assigned after the fact.
+
+**The instance.** `docs/OPERATOR_TASKS.md`'s CI-billing entry, written
+2026-08-29: *"The allowance resets at the start of the month. From the date of
+this entry that is **two days away**"*, and, closing the same entry, *"the
+cheapest response is to wait two days"*. Both were true on 2026-08-29. The reset
+happened on 2026-09-01. Since then the entry has read as advice to wait for
+something that has already occurred, and the question it was posed to answer —
+*is this the exhausted allowance or the failed payment method?* — changed its
+answer silently, because *wait for the reset* stopped being an available action
+the moment the reset passed.
+
+**The class, and why it is not `AGE-01`.** `AGE-01` is an artefact encoding the
+*rule set* of its date, and it is detectable: a reader who knows the rules moved
+goes looking for what the artefact assumed. A relative time reference encodes
+the *moment* of its date and is not detectable, because it never stops parsing.
+*Two days away* reads as well on 2026-09-09 as it did on 2026-08-29 and means
+something different; *resets on 2026-09-01* would have read as obviously spent. An
+absolute date ages visibly. A relative one ages invisibly, and that is the whole
+of the difference.
+
+**Why no guard, stated so one is not built later out of tidiness.** The shape is
+cheap to match — *two days*, *next week*, *tomorrow*, *by the end of the month*
+— and the match is not the defect. A relative reference inside a quotation,
+inside a dated record of what was said at the time, or inside prose describing
+this very class, is correct and has to stay. What separates the cases is whether
+the sentence is still being read as instruction, which is judgement. That is
+`FILL-01`'s argument arriving a second time: a check on a field whose correct
+value takes judgement manufactures wrong values at the rate the nearest value is
+wrong, and here the nearest value is a rewrite of a correctly dated quotation.
+The mitigation is what this entry is: write the absolute date, and know why.
+
+**The live instance is not repaired here.** The `OPERATOR_TASKS.md` lines above
+still read *two days*. Repairing them is an edit to an operator task document
+whose subject — which of two billing states is blocking Actions — is the
+operator's to settle, and the ruling that recorded this class did not order the
+edit. The class is recorded so that the next durable artefact written in this
+tree carries a date instead, which is the same disposition `FILL-01` was given
+and for the same reason.

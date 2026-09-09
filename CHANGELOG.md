@@ -4,6 +4,178 @@ All notable changes to this project. Numbers here are measured, and each entry
 names the command that reproduces it. Findings are tracked in
 [`docs/AUDIT_MASTER.md`](docs/AUDIT_MASTER.md).
 
+## [Unreleased] — the sweep's findings applied, and the operator record written (2026-09-09)
+
+No API changes. Operator handoff of 2026-09-07, and the operator ruling on that
+handoff, which released the rest of the sweep's findings and corrected the
+handoff itself. Applied 2026-09-09. No generation ran and no `LOOP_STATE` was
+written; the loop stays closed at `L1`.
+`python -m pytest tests -q` — 1179 passed, 13 skipped, before and after.
+
+**Seven corrections to the paper, all of them found by
+[`docs/UNDERCLAIM_SWEEP_g15.md`](docs/UNDERCLAIM_SWEEP_g15.md) and none of them
+applied when it was written.** The sweep was ordered as report-only. The handoff
+released the three named next; the ruling released the remaining four and set
+the scope that made them one pass — every claim on the claim surface
+contradicted by its own artefact, corrected at once. Each of the seven is
+recorded in [`papers/CORRIGENDA_g6.md`](papers/CORRIGENDA_g6.md).
+
+**`COR-4` — the equilibration gain.** `papers/draft.md` §1 contribution 1 and
+`README.md`'s solver section both stated `1730×`, a figure the claim-evidence
+matrix withdrew as `X17` because it was measured on the pre-audit solver. Both
+sites now report the two residuals instead of the ratio: on the 1 µm
+N_A = N_D = 1e22 m⁻³ junction at zero bias the equilibrium mass-action violation
+max|np/n_i² − 1| is 6.8e-3 with a plain `spsolve` and 9.7e-10 equilibrated. The
+ratio is about seven million and is deliberately not the headline — two values,
+each with its configuration, are a measurement; a seven-million-fold ratio
+invites the question of how hard the baseline was tried.
+
+Re-measured on this tree by running the body of
+`tests/test_sg_numerics.py::TestGummelConvergenceIsHonest::test_equilibration_beats_plain_spsolve`
+and reading both sides: `6.7705e-03` and `9.7290e-10`, reproducing the sweep's
+figures to five digits.
+
+**`ADR-0001` is not corrected.** `1730×` was true on 2026-08-19 and the decision
+it justifies is unchanged. It receives a dated pointer carrying the withdrawal,
+the two current residuals and the configuration, appended below its Validation
+section, and nothing else.
+
+**`COR-5` — the UQ compute claim.** §4.9 said a budget-matched ensemble was
+*"trained faster than either single-network method"*.
+`outputs/uq_benchmark/uq_benchmark.json` gives `cost.train_seconds` of 6.655 for
+that ensemble, 9.216 for MC-dropout and 6.259 for SWAG: faster than one, slower
+than the other. The sentence also rested on wall-clock, which
+[`docs/CLAIM_EVIDENCE_MATRIX.md`](docs/CLAIM_EVIDENCE_MATRIX.md) §6 excludes from
+this project's reproduction comparisons by name. It now rests on the matched
+epoch budget — `config.epochs` is 2500 for every method and the ensemble splits
+that across five members rather than multiplying it by five — and reports the
+three wall-clocks with the caveat that makes them readable. The conclusion,
+*this is not a compute advantage*, is unchanged.
+
+**`COR-6` — the abstract against §4.1's own table.** The abstract's `3–4 of 16`
+and the §4.1 table's `5` for the asymmetric-step device are measured at different
+analysis settings, which the paper did not say. The table's four rows carry
+`min_snr = 1e8`, `rel_step = 0.05`; the abstract's range is the robustness
+sweep's reference conditions, `rel_step = 0.01`, `min_snr = 1e4`, where the same
+four families give 3, 4, 3 and 3. Matrix row `D14a` licenses the narrowing and
+the licence was in the ledger and not in the paper. Stated now in one clause in
+the abstract and one paragraph under the table. Widening the range to 3–5 was the
+other option the handoff offered and is not taken: the matrix already corrected
+`3–5` to `3–4` at the reference conditions.
+
+Three claim-surface guards fired on the first draft of that paragraph —
+`test_claim_surface_g0.py`, `test_claim_surface_g7.py` and
+`test_claim_surface_g9.py`, for a missing regime label and a missing observation
+window. The paragraph was rewritten to carry both. No guard was edited and no
+exemption was added, which is the third time that sequence has been recorded.
+
+**`README.md`'s parameterisation-stability range corrected, at two sites.**
+Lines 51 and 112 said `P=8→32 leaves it at 3–4`.
+`outputs/identifiability_robustness/identifiability_robustness.json` gives
+`rank_by_P` as `{8: [4], 12: [3, 4], 16: [3, 4], 24: [2, 3, 4], 32: [3]}` — the
+range is **2–4**, and the symmetric step at `P = 24` is 2. `papers/draft.md` §5
+already said 2–4 and was right; only the README overstated the stability. Matrix
+row `D13` says 2–4.
+
+**[`docs/OPERATOR_RULINGS_INDEX.md`](docs/OPERATOR_RULINGS_INDEX.md) — the
+operator record.** Every operator ruling this loop cites, in date order, with what
+each decided and the tree file that records it; the corrections the loop wrote
+against those rulings, with their finding IDs where the tree assigns one; and the
+operator defects the tree holds. Two of the eighteen carry a number here — the
+ninth and the eighteenth — because those are the two the tree holds;
+`docs/PAPER_FINAL_g15.md` §2 already established that the numbered list lives in
+the rulings and the rulings are not files in this repository. The rest are
+omitted rather than reconstructed.
+
+The index found one thing about the record itself: **operator rulings have no
+identifier, so a citation is a date plus a section number, and both repeat.** The
+index lists four rulings dated 2026-08-26 and five dated 2026-08-28, and their
+section numbers collide — two different §2s on 2026-08-28, two different §3s on
+that date, two different §4s on 2026-08-26. This is `OPS-01`'s defect one level
+up: `OPS-01` gave every *rule*
+a home in the tree and left the *citation* of a ruling ambiguous. The fix is named
+in that document's §5 and is not built, for the same reason `FILL-01` was not.
+
+The index is added to `EXEMPT` in `tests/test_claim_surface_g7.py`, verified
+load-bearing first: with the entry absent and the file tracked,
+`tests/test_age01_surface_coverage_close.py` fails and names it with `witness`.
+That is `AGE-01` applied to this session's own output, and the obligation was
+again noticed by running the guard rather than by remembering it.
+
+**`COR-7` — §4.1's convergence study, called stable at a rank one of its own
+rows does not give.** *"Conclusion stable across finite-difference steps
+(0.01–0.05 decades) and SNR thresholds (1e4–1e8): identifiable rank 4,
+σ₁/σ₂ = 6.11–6.13."* The `analysis_convergence` block of
+`outputs/identifiability/identifiability.json` holds five rows;
+`identifiable_rank` is 4 in four of them and **3** in the
+`(min_snr = 1e4, rel_step = 0.01)` row. That row is the reference condition of
+the robustness sweep — the same conditions `COR-6` had just named, one paragraph
+above, as the ones carrying the abstract's `3–4`. The sentence was already false
+against its artefact before `COR-6`; `COR-6` moved the contradiction inside a
+single page, which is why it is corrected in the same commit rather than after
+it. §4.1 now states which setting gives which rank and why: the dissenting row
+keeps 15 bias rows against the others' 10–12, and against the row at the same
+step its estimated Jacobian entry noise is 440× larger and the spectral floor
+the rank is counted against 490× higher, so the count moves with the analysis
+floor rather than with the physics. `σ₁/σ₂` runs 6.1070–6.1230 across the five
+rows, which to two decimals is **6.11–6.12**; 6.123 rounds to 6.12.
+
+Two things the old sentence asserted without support are also gone. The study is
+on one device — `scripts/run_identifiability.py` carries
+`ref = devices["step_symmetric"]` — and the *all four families* of the preceding
+clause belongs to the re-solve ratios alone; and the settings are a diagonal of
+five, not a grid of step × threshold.
+
+**`COR-8` — the variance-inflation temperature.** §4.5 said `T = 2.08`.
+`H3_calibration.temperature` in `outputs/results/results.json` is
+`2.0926970199407045`, and `README.md` and `docs/CLAIM_EVIDENCE_MATRIX.md` `C10`
+both already said 2.09, so the paper was the only site carrying it wrong. Now
+`T = 2.09`. The coverage table beneath it was already correct and is unchanged.
+
+**`COR-9` — a methods claim hedged below its own record.** §3.2 said inherited
+obstructions were re-tested and *"at least one"* turned out to be false. The
+record names three, each from a different round: the README badge generation 10
+recorded as unchangeable and that changed in one line (`DOC-03a`); `HIST-01`,
+carried three generations as unrepairable from inside the tree while the file
+that performed the repair sat in `.git`; and the Windows leg, carried eight
+generations as not obtainable on this host, on a host that is Windows. The
+sentence now says three and describes each, which is what the paragraph's own
+argument needs. This is `U-1`'s mechanism in the same direction the sweep
+predicted: nothing re-derives a summary when the ledger moves.
+
+**`COR-10` — §4.10 stops where the audit did not.** *"Fourteen defects across
+two audit cycles"* is true as scoped, and `docs/AUDIT_MASTER.md` holds
+forty-seven findings across fifteen further rounds. The section now carries a
+closing paragraph naming what those rounds found — the bifurcated repository
+whose `HEAD` was the pre-audit project; the forty-one numbers that can never be
+explained because their producing tree was never committed; the repair that sat
+in `.git` for three rounds; and the line-ending codemod that changed 9,832 lines
+to fix 68 with the suite green on both sides — because §4.10's own headline is
+how easily plausible numbers survive a passing test suite, and those are the
+sharpest instances of it in the tree. The abstract's half of `U-4` is scoped,
+true, and left to the operator's abstract pass.
+
+**A class recorded in [`docs/RULES_ENACTED.md`](docs/RULES_ENACTED.md), beside
+`AGE-01` and `FILL-01`: a relative time reference in a durable artefact is stale
+by construction.** `docs/OPERATOR_TASKS.md`'s CI-billing entry, written
+2026-08-29, says the allowance reset is *"two days away"* and that the cheapest
+response is to *"wait two days"*. Both were true when written and the reset
+happened on 2026-09-01. `AGE-01` is detectable because a reader who knows the
+rules moved goes looking; a relative reference is not, because it never stops
+parsing — *two days away* reads as well today as it did then and means something
+else. No guard, on `FILL-01`'s argument: the shape is cheap to match and the
+match is not the defect, since the same words inside a dated quotation are
+correct and must stay. No identifier is assigned; the ruling asked for a line in
+the register, not a rule.
+
+**Still open.** The `OPERATOR_TASKS.md` lines above are not repaired — the
+billing state underneath them is the operator's to settle. The abstract is still
+551 words and its cut is still blocked on a journal rather than an audience:
+`ADR-0008` chose the audience and the venue is unchosen. `CI-01` and
+`SPEC-g0-3b` do not close; nothing here is a clean-runner CI run, and the
+allowance having reset on 2026-09-01 narrows the blocker rather than clearing
+it.
+
 ## [Unreleased] — `AGE-01` named, and the claim surface made exhaustive (2026-08-29)
 
 No API changes. Close-out query of 2026-08-29; no generation ran and no

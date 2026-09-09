@@ -183,6 +183,19 @@ EXEMPT = {
                                "to say what changed, including a proposed "
                                "abstract that is a proposal rather than a "
                                "statement",
+    # --- Added by the operator handoff of 2026-09-07 §6. --------------------
+    # Verified load-bearing the same way as the four entries above: with this
+    # entry removed and the file tracked,
+    # ``tests/test_age01_surface_coverage_close.py`` fails and names it with
+    # ``witness``. Checked before the entry was written, not after.
+    "docs/OPERATOR_RULINGS_INDEX.md": "index of operator rulings; quotes what "
+                                      "each ruling ordered and what the loop "
+                                      "later corrected against it, so its "
+                                      "witness counts are quotations of "
+                                      "rulings and of the audit documents "
+                                      "that answered them. It publishes no "
+                                      "result of its own and reconstructs "
+                                      "nothing",
 }
 
 #: A rank fraction: "3-4 of 16", "3 of 4", "1 of 8". Two restrictions, both

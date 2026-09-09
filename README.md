@@ -48,7 +48,7 @@ interval.
 | **Inverse recovery** (single level, well-posed) | **0.0018 decades** at 0% noise → 0.0072 at 10% noise (n=40 each) | `run_results.py` |
 | **UQ calibration** | ±1.64σ coverage 46% → **90%** after variance inflation T=2.09 (nominal 90%, n=140, same test set) | `run_results.py` |
 | **Is the uncertainty useful?** | Spearman ρ(σ, \|error\|) = **+0.82** (n=200); σ inflates **15.7×** on extrapolation while error inflates 11.8× | `run_results.py` |
-| **Identifiability** (***local***, **chart L**) | **Local** identifiability in **chart L** at **d=16** — the rank of the Jacobian at one operating point, over the reachable set of that chart (`log10\|C\|` at 16 anchors, arithmetic interpolation of the signed doping; `bayespinn_inv.inverse.charts`). At the reference point (1 µm Si PN junction, N_A=N_D=1e22 m⁻³, 19 bias points over 0–0.9 V, 2% noise, P=16), I–V determines only **3–4 of 16** doping dof; **1–6 across every tested variation**, median 3, over 88 measurements; **the rank does not grow with the parameterisation** (P=8→32 leaves it at 3–4) | `run_identifiability.py`, `run_identifiability_robustness.py` |
+| **Identifiability** (***local***, **chart L**) | **Local** identifiability in **chart L** at **d=16** — the rank of the Jacobian at one operating point, over the reachable set of that chart (`log10\|C\|` at 16 anchors, arithmetic interpolation of the signed doping; `bayespinn_inv.inverse.charts`). At the reference point (1 µm Si PN junction, N_A=N_D=1e22 m⁻³, 19 bias points over 0–0.9 V, 2% noise, P=16), I–V determines only **3–4 of 16** doping dof; **1–6 across every tested variation**, median 3, over 88 measurements; **the rank does not grow with the parameterisation** (P=8→32 leaves it at 2–4) | `run_identifiability.py`, `run_identifiability_robustness.py` |
 | **Identifiability** (***global***, **chart G**) | **Demonstrated by witness, not inferred.** In **chart G** at **d=4** (geometric interpolation of the magnitude; `bayespinn_inv.inverse.charts`), log-uniform prior 1e21–1e23 m⁻³, 16 biases over 0.15–0.90 V, distinguishability floor **2.0e-02** = max(noise 2.0e-02, solver 1.5e-03): **13 witness pairs** among 1,999,000 examined. Closest differs by **8.18× in doping** yet only **1.23%** in I–V. **13 of 13 refined** under `WIT-02` (`outputs/close/wit02_register_v2.json`); **12 of 13 survive** 4× grid refinement and a tighter tolerance and **1 separates** at the finest grid and is withdrawn. Oracle-arbitrated; the surrogate is never used (ADR-0007) | `run_global_identifiability.py`, `run_wit02_chartG.py` |
 | **Surrogate speed** vs SG | **152×** faster per I–V curve (0.85 ms vs 129 ms, M=5 ensemble) | `run_results.py` |
 | **Surrogate *gradient* fidelity** | directional derivatives agree with SG **only inside** the identifiable subspace: mean cosine **+0.50 inside vs −0.00 outside**, unchanged by a 33× training-budget increase | `run_gradient_fidelity.py` |
@@ -109,7 +109,7 @@ interval.
    across 88 measurements spanning parameterisation dimension, bias count,
    bias range, solver grid, doping level and finite-difference step. **The
    rank does not grow with the parameterisation dimension** — quadrupling the
-   number of profile parameters from P=8 to P=32 leaves it at 3–4 — so this is
+   number of profile parameters from P=8 to P=32 leaves it at 2–4 — so this is
    a property of the measurement, not of the discretisation. Two devices differing
    by up to 1.26× in local doping, in **chart L** at **d=16**, produce I–V curves
    differing by 0.02–1.3% — indistinguishable at realistic noise. Improving the instrument by four orders of magnitude
@@ -287,8 +287,12 @@ matter for everything downstream:
 
 - **The continuity systems are equilibrated before solution.** The matrix
   inherits the 12-decade carrier dynamic range; without two-sided ∞-norm
-  scaling the minority carrier is wrong by ~1%. Equilibration improves the
-  equilibrium mass-action law by **1730×** (ADR-0001).
+  scaling the minority carrier is wrong by ~1%. On the 1 µm N_A = N_D = 1e22 m⁻³
+  junction at zero bias the equilibrium mass-action violation max|np/n_i² − 1| is
+  **6.8e-3** with a plain `spsolve` and **9.7e-10** equilibrated
+  (`test_sg_numerics.py::test_equilibration_beats_plain_spsolve`). ADR-0001
+  states **1730×** for the same comparison measured on the pre-audit solver;
+  that figure is withdrawn as `X17` in `docs/CLAIM_EVIDENCE_MATRIX.md`.
 - **Convergence is tested on carriers, not just the potential.** φ settles
   within three sweeps while the carriers are still 1% off, so a `max|Δφ|` test
   reports success on a state whose continuity residual equals the entire

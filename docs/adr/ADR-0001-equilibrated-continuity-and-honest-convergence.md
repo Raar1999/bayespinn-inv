@@ -78,3 +78,33 @@ drifted −7.2e−7 → −2.2e−6 A/m² between 3 and 800 sweeps).
 < 1e−4, flat quasi-Fermi levels, `equilibrate=False` demonstrably worse by
 > 100×, an under-budgeted solve reports `converged=False`, over-iteration does
 not degrade. `test_core_invariants.py::test_mass_action` tightened 5e−2 → 1e−4.
+
+---
+
+## Dated pointer — 2026-09-07 · the `1730×` in this record is withdrawn
+
+**This ADR is not corrected.** `1730×` was true on 2026-08-19, on the solver as
+it stood that day, and the decision it justifies is unchanged: equilibrate the
+continuity solves. Every line above stays as written, including the two that
+carry the figure.
+
+What moved since is the solver, not the decision.
+`docs/CLAIM_EVIDENCE_MATRIX.md` row `X17` withdraws the `1.32e−2 → 7.62e−6`
+pair; row `S1` carries the adopted solver's measurement in its place.
+Re-measured on this tree on 2026-09-07 by running the body of
+`tests/test_sg_numerics.py::TestGummelConvergenceIsHonest::test_equilibration_beats_plain_spsolve`
+and reading both sides rather than only the assertion:
+
+| configuration | max \|np/n_i² − 1\| at equilibrium |
+|---|---:|
+| plain `spsolve` (`equilibrate=False`) | 6.7705e−3 |
+| equilibrated (`equilibrate=True`) | 9.7290e−10 |
+
+Same device in both rows: 1 µm silicon PN junction, N_A = N_D = 1e22 m⁻³,
+N = 201, zero bias, `max_outer = 60`.
+
+The two live sites that carried `1730×` onto the claim surface —
+`papers/draft.md` §1 contribution 1 and `README.md`'s solver section — are
+corrected under `COR-4` in `papers/CORRIGENDA_g6.md`. This pointer exists so
+that a reader who arrives here first is not sent back out with a withdrawn
+number.
