@@ -1447,14 +1447,14 @@ repository and one produced a survey of repositories this loop does not own.
 | **Severity** | HIGH | **Status** | **RESOLVED (2026-08-28)** |
 
 `C:`, `D:` and `E:` are partitions of `DiskNumber 0`, a single NVMe device
-(`UMIS RPJYJ1T24MML1AWY`). The working tree, the `20260828T201434Z` bundle and the
-`E:\backup\bayespinn-inv-20260828` copy were therefore three copies inside one
+(`<internal NVMe device>`). The working tree, the `20260828T201434Z` bundle and the
+`<secondary partition>/bayespinn-inv-20260828` copy were therefore three copies inside one
 failure domain, and the loop had been treating them as redundancy. A controller
 failure takes all three, and the bundle is the only artefact carrying the
 post-rewrite object graph.
 
 The bundle is now on `DiskNumber 1`, a USB-attached JMicron enclosure
-(`F:\backups\bayespinn-inv-20260828\`), and on `C:\Users\abhis\OneDrive\backups\`.
+(`<offline backup volume>/bayespinn-inv-20260828\`), and on `<cloud sync folder>`.
 Both copies were verified by digest against the recorded `CAE7…8EFF`, and the `F:`
 copy additionally passes `git bundle verify`, which reports a complete history and
 the refs the bundle was cut from.
@@ -1462,7 +1462,7 @@ the refs the bundle was cut from.
 Two honest limits on this status. The USB enclosure reports `DriveType Fixed`
 rather than `Removable` — it is a separate device on a separate bus, but it is not
 detached media, so an event that takes the machine can still take it while it is
-attached. And **OneDrive upload completion is not verifiable from this machine**:
+attached. And **cloud-sync upload completion is not verifiable from this machine**:
 the file is in the sync folder, which is not the same as being in the cloud.
 Neither destination is an offsite copy in the sense a backup policy would mean, and
 no claim is made here that one exists.
@@ -1564,8 +1564,8 @@ added commits on a new branch and rewrote nothing.
 The `git filter-repo` run of 2026-08-28 covered four repositories. In the three
 other than this one, commits listed on the **old** side of the `commit-map` still
 resolve locally while being reachable from no ref: sampled against each map,
-`AIEF_Product_Development` retains all 63 of 63, `invspec` 80 of 122, and
-`fabkg-bench` 84 of 200 sampled. Of the fifteen surviving objects checked with
+`EXT-01` retains all 63 of 63, `EXT-03` 80 of 122, and
+`EXT-02` 84 of 200 sampled. Of the fifteen surviving objects checked with
 `git branch -a --contains`, none is reachable from any branch. They are dangling,
 and `git gc`, `git prune`, a reclone, or a deferred cleanup destroys them without
 warning.
@@ -1577,7 +1577,7 @@ commit-map was the sole surviving trace of ten generations' identity. That
 conclusion was correct **for this tree** and does not generalise: in the other three
 the objects themselves are still on disk today.
 
-Every map found was copied to `F:\backups\bayespinn-inv-20260828\` as
+Every map found was copied to `<offline backup volume>/bayespinn-inv-20260828\` as
 `commit-map__<repo>__20260828.txt`, with the `ref-map` beside it because it carries
 the branch and tag movement the commit-map does not. Copying the *objects* was not
 done: that is repair, this pass is a survey, and it is not this loop's tree.
@@ -1591,21 +1591,21 @@ checked out or modified in any of them. The commands issued were `git rev-parse`
 read-only, plus a copy of each `commit-map` and `ref-map` *out* to `F:`. Every
 classification below is a report. None is a repair, and none authorises one.
 
-Discovery was bounded as specified: `D:\` and `C:\Users\abhis\`, maximum depth 4,
+Discovery was bounded as specified: `<data volume>` and `<home>`, maximum depth 4,
 excluding `node_modules`, `.venv`, `venv`, `site-packages`, `AppData` and `build`.
 Ten repositories were found, of which nine are surveyed here.
 
 | ID | repository | rewritten today | map | refs seen / unresolved / of those, mapped | remote | trailers | class |
 |---|---|---|---|---|---|---|---|
-| `EXT-01` | `D:\AIEF_Product_Development` | yes, 11:43:00 | 63 entries | 19 / 10 / **0** | `Raar1999/AIEF-Fusion`, force-pushed | 0 of 63 | **CLEAN** |
-| `EXT-02` | `D:\Fable built Fabkg Final\…\fabkg-bench` | yes, 11:43:57 | 1106 entries | 814 / 603 / **249** | `Raar1999/fabkg-bench`, force-pushed | 0 of 1106 | **BROKEN, MAP PRESENT** |
-| `EXT-03` | `D:\p3\invspec\invspec` | yes, 11:45:23 | 122 entries | 35 / 21 / **8** | `Raar1999/invspec`, force-pushed | 0 of 141 | **BROKEN, MAP PRESENT** |
-| `EXT-04` | `D:\FabKG_LoopLogs\s12\trackCF\clone` | no | — | 779 / 328 / n/a | `D:/Fable` (local path) | **1011 of 1075** | **CLEAN of rewrite damage** |
-| `EXT-05` | `D:\Fable built Fabkg Final\FabKG-Application` | no | — | 72 / 61 / n/a | none | **138 of 169** | **CLEAN of rewrite damage** |
-| `EXT-06` | `D:\Fusion Projects\SEWCP_Master_Assembly` | no | — | 138 / 59 / n/a | `Raar1999/SEWCP_Master_Assembly` | 0 of 56 | **CLEAN of rewrite damage** |
-| `EXT-07` | `D:\fab-ops-analytics-complete\…\project5-fab-operations-analytics` | no | — | 16 / 13 / n/a | `Raar1999/fab-ops-intelligence` | 0 of 59 | **CLEAN of rewrite damage** |
-| `EXT-08` | `C:\Users\abhis\.codex\.tmp\plugins` | no | — | 446 / 446 / n/a | `openai/plugins` | 0 of 1 | **CLEAN of rewrite damage** |
-| `EXT-09` | `C:\Users\abhis\OneDrive\Documents\GitHub\NAFA-Europe dataset` | no | — | 0 / 0 / n/a | `Raar1999/NAFA-Europe-dataset` | 0 of 2 | **CLEAN** |
+| `EXT-01` | `<EXT-01 tree>` | yes, 11:43:00 | 63 entries | 19 / 10 / **0** | `<private remote, EXT-01>`, force-pushed | 0 of 63 | **CLEAN** |
+| `EXT-02` | `<EXT-02 tree>` | yes, 11:43:57 | 1106 entries | 814 / 603 / **249** | `<private remote, EXT-02>`, force-pushed | 0 of 1106 | **BROKEN, MAP PRESENT** |
+| `EXT-03` | `<EXT-03 tree>` | yes, 11:45:23 | 122 entries | 35 / 21 / **8** | `<private remote, EXT-03>`, force-pushed | 0 of 141 | **BROKEN, MAP PRESENT** |
+| `EXT-04` | `<EXT-04 tree>` | no | — | 779 / 328 / n/a | `<local path>` | **1011 of 1075** | **CLEAN of rewrite damage** |
+| `EXT-05` | `<EXT-05 tree>` | no | — | 72 / 61 / n/a | none | **138 of 169** | **CLEAN of rewrite damage** |
+| `EXT-06` | `<EXT-06 tree>` | no | — | 138 / 59 / n/a | `<private remote, EXT-06>` | 0 of 56 | **CLEAN of rewrite damage** |
+| `EXT-07` | `<EXT-07 tree>` | no | — | 16 / 13 / n/a | `<private remote, EXT-07>` | 0 of 59 | **CLEAN of rewrite damage** |
+| `EXT-08` | `<EXT-08 tree>` | no | — | 446 / 446 / n/a | `<third-party public remote>` | 0 of 1 | **CLEAN of rewrite damage** |
+| `EXT-09` | `<EXT-09 tree>` | no | — | 0 / 0 / n/a | `<private remote, EXT-09>` | 0 of 2 | **CLEAN** |
 
 **How the three columns of numbers were obtained, because the naive count is
 wrong.** The specified probe, `\b[0-9a-f]{7,40}\b` over `*.md`, `*.json`, `*.yml`,
@@ -1613,7 +1613,7 @@ wrong.** The specified probe, `\b[0-9a-f]{7,40}\b` over `*.md`, `*.json`, `*.yml
 `[0-9a-f]`. In these trees that includes decimal integers (`1073741819`), ISBNs
 (`9780133440492`) and the mantissas of scientific notation — `1.048317650695026e-05`
 contains `048317650695026e`, which the pattern matches with word boundaries at both
-ends. Run as written it reported `invspec` as having 80,806 candidate references,
+ends. Run as written it reported `EXT-03` as having 80,806 candidate references,
 substantially all of them arithmetic, and classified nine of nine repositories as
 broken.
 
@@ -1625,18 +1625,18 @@ on its old side** — that is, how many were genuinely its commits before today,
 rather than references to other projects, foreign digests, or numbers.
 
 That distinction is what separates `EXT-01` from `EXT-02` and `EXT-03`.
-`AIEF_Product_Development` has ten unresolved candidates and its map claims none of
+`EXT-01` has ten unresolved candidates and its map claims none of
 them: they sit in `docs/COMPATIBILITY.md`, `docs/EVIDENCE_MODEL.md` and
 `docs/user/01-installation.md`, were not commits of that repository at any point, so
 the rewrite did not break them and repairing them is not a coherent operation.
-`fabkg-bench` has 249 unresolved references its map does identify as former commits,
+`EXT-02` has 249 unresolved references its map does identify as former commits,
 with concrete corrections available — `5b4661f2` in
-`artifacts/audit/AUDIT_DIGEST_v1.json` maps to `33aa1c6abc6c`, and so on. `invspec`
+`artifacts/audit/AUDIT_DIGEST_v1.json` maps to `33aa1c6abc6c`, and so on. `EXT-03`
 has 8, including `be56c6b4` in `audit/ledger.v10.yaml` and `audit/errata.md`.
 
 **`EXT-04` is a finding in its own right, and it is the good kind.**
-`D:\FabKG_LoopLogs\s12\trackCF\clone` was not rewritten and holds **146 of 150**
-sampled pre-rewrite commits of `EXT-02`. For the fabkg lineage the pre-rewrite object
+`<EXT-04 tree>` was not rewritten and holds **146 of 150**
+sampled pre-rewrite commits of `EXT-02`. For the EXT-02 lineage the pre-rewrite object
 graph therefore survives independently of the commit-map — which is exactly what
 generation 12 searched for in this repository and did not find. `EXT-05` resolved 0
 of the same 150 and is a different history despite the shared branch name.
@@ -1666,7 +1666,7 @@ was right and the window was still open: nothing had touched these objects, and
 `git gc --auto` would have taken them during any ordinary operation.
 
 Four `.git` directories were copied with `robocopy /E /XJ` to
-`F:\backups\extgit-20260828\<name>\.git` — 92 MB in total against 685 GB free.
+`<offline backup volume>/extgit-20260828\<name>\.git` — 92 MB in total against 685 GB free.
 **Read-only from the surveyed repositories' perspective**: a copy out, no write,
 no `gc`, no `prune`, no config change, no ref moved. The same standing statement
 as the `EXT` survey applies unchanged — this loop has no authority over those
@@ -1676,8 +1676,8 @@ trees and did not acquire any by copying them.
 > above is **not accurate for two of the four**. Generation 13's own order to run
 > `git fsck --no-progress --lost-found` writes: it materialises a
 > `.git/lost-found/` directory, and one exists in the *originals* of
-> `fabkg-bench` (13 files, 2026-08-28 15:53) and `invspec` (3 files, 22:09).
-> `AIEF` and `EXT-04` are clean of it. **16 files were created in repositories
+> `EXT-02` (13 files, 2026-08-28 15:53) and `EXT-03` (3 files, 22:09).
+> `EXT-01` and `EXT-04` are clean of it. **16 files were created in repositories
 > this loop declared it had no authority over**, and the copy-out was therefore
 > not the only thing that touched them. Not repaired — deleting them would be a
 > second write to fix the first, in trees this loop still has no authority over.
@@ -1692,12 +1692,12 @@ map is cheap and there was no reason to keep estimating.
 
 | repository | pre-rewrite ids in map | original resolves | copy resolves | |
 |---|---|---|---|---|
-| `EXT-01` `AIEF_Product_Development` | 63 | 63 | 63 | **MATCH** |
-| `EXT-02` `fabkg-bench` | 1,106 | 393 | 393 | **MATCH** |
-| `EXT-03` `invspec` | 122 | 80 | 80 | **MATCH** |
-| `EXT-04` `trackCF\clone` | 1,106 (fabkg lineage) | 1,073 | 1,073 | **MATCH** |
+| `EXT-01` | 63 | 63 | 63 | **MATCH** |
+| `EXT-02` | 1,106 | 393 | 393 | **MATCH** |
+| `EXT-03` | 122 | 80 | 80 | **MATCH** |
+| `EXT-04` | 1,106 (EXT-02 lineage) | 1,073 | 1,073 | **MATCH** |
 
-`fabkg-bench` at 393 of 1,106 is 35.5%, against the 84-of-200 sample's 42%. The
+`EXT-02` at 393 of 1,106 is 35.5%, against the 84-of-200 sample's 42%. The
 sample was not wrong at its own precision; the full census is simply the number,
 and it is the one that should be quoted.
 
@@ -1706,7 +1706,7 @@ copies**. Each copy resolves exactly what its original resolves.
 
 **`EXT-04` is a superset, not a second opinion — which changes the §2 ruling's
 force, in its favour.** The ruling froze `EXT-04` to preserve "the redundancy
-that makes fabkg-bench's damage repairable by two routes instead of one". The
+that makes EXT-02's damage repairable by two routes instead of one". The
 measurement says it is not redundancy at all:
 
 * commits held by **both** `EXT-02` and `EXT-04`: **393**
@@ -1715,7 +1715,7 @@ measurement says it is not redundancy at all:
 * in the map and held **nowhere**: **33**
 
 `EXT-02` contributes nothing `EXT-04` does not already have. For 680 of
-fabkg-bench's pre-rewrite commits `EXT-04` is not the second route, it is the
+EXT-02's pre-rewrite commits `EXT-04` is not the second route, it is the
 **only** route. Freezing it was right and is now load-bearing rather than
 prudent: a `filter-repo` run in `EXT-04` destroys 680 commits that exist in no
 other repository on this machine.
@@ -1725,9 +1725,9 @@ eight survivors per repository against `git branch -a --contains`:
 
 | | refs | survivors sampled | reachable from a branch |
 |---|---|---|---|
-| `AIEF` | 17 | 8 | **0** |
-| `fabkg-bench` | 169 | 8 | **0** |
-| `invspec` | 50 | 8 | **0** |
+| `EXT-01` | 17 | 8 | **0** |
+| `EXT-02` | 169 | 8 | **0** |
+| `EXT-03` | 50 | 8 | **0** |
 | `EXT-04` | 89 | 8 | **8** |
 
 In the three rewritten trees the survivors are dangling and a `gc` ends them. In
@@ -1738,7 +1738,7 @@ sufficient rather than merely helpful.
 
 **The dangling survivors hang off very few tips**, which is worth recording
 because it is what makes any future rescue cheap. `fsck --lost-found`
-materialised 1 dangling commit tip in `AIEF`, 7 in `fabkg-bench`, 3 in `invspec`
+materialised 1 dangling commit tip in `EXT-01`, 7 in `EXT-02`, 3 in `EXT-03`
 — and walking parents from those tips reaches **every** survivor: 63 of 63, 393
 of 393, 80 of 80. Eleven refs would pin all 536 dangling commits permanently.
 
@@ -1783,7 +1783,7 @@ Writing refs to fix that would have edited evidence the loop was told to copy.
 Archival practice separates the two roles, and the ruling applied it. The binary
 was false.
 
-**Accession — `F:\backups\extgit-20260828\`.** The four `.git` copies as taken.
+**Accession — `<offline backup volume>/extgit-20260828\`.** The four `.git` copies as taken.
 **854 files set read-only** at the filesystem level. No write command has been run
 in them and none ever will be; `gc --auto` fires on `commit`, `merge`, `rebase`
 and `receive-pack`, never on `fsck` or `cat-file`, so generation 13's verification
@@ -1795,15 +1795,15 @@ glossed.** Generation 13's ruling ordered `fsck --no-progress --lost-found`, whi
 materialised `.git/lost-found/` inside each. That is the accession's state *as
 accessioned*, and it is what the derivative and the bundles inherit.
 
-**Derivative — `F:\backups\extgit-20260828-derivative\`.** File-count parity with
+**Derivative — `<offline backup volume>/extgit-20260828-derivative\`.** File-count parity with
 the accession confirmed before anything was written. Then the rescue refs, from
 the chain tips generation 13's tip analysis identified:
 
 | | refs written | survivors | reachable after | dangling left |
 |---|---|---|---|---|
-| `AIEF` | 1 | 63 | 63 | **0** |
-| `fabkg-bench` | 7 | 393 | 393 | **0** |
-| `invspec` | 3 | 80 | 80 | **0** |
+| `EXT-01` | 1 | 63 | 63 | **0** |
+| `EXT-02` | 7 | 393 | 393 | **0** |
+| `EXT-03` | 3 | 80 | 80 | **0** |
 | `EXT-04` | 60 | 1,073 | 1,073 | **0** |
 
 The **eleven** refs across the three rewritten trees pin all **536** of their
@@ -1812,16 +1812,16 @@ every survivor an ancestor of one. `EXT-04`'s 60 are its own separate danglers;
 its 1,073 mapped survivors were already reachable from branches, which is the
 property that made freezing it sufficient where the others needed a copy.
 
-**Bundle — `F:\backups\extgit-20260828-bundles\`.** `git bundle create … --all`
+**Bundle — `<offline backup volume>/extgit-20260828-bundles\`.** `git bundle create … --all`
 from each derivative. Verified by cloning each back into a **fresh bare
 repository** and re-counting against the full census rather than by trusting the
 ref list:
 
 | bundle | census | carried | `git bundle verify` |
 |---|---|---|---|
-| `AIEF` | 63 | **63** | okay |
-| `fabkg-bench` | 393 | **393** | okay |
-| `invspec` | 80 | **80** | okay |
+| `EXT-01` | 63 | **63** | okay |
+| `EXT-02` | 393 | **393** | okay |
+| `EXT-03` | 80 | **80** | okay |
 | `EXT-04` | 1,073 | **1,073** | okay |
 
 **Every bundle carries its full census, and nothing in a bundle can be pruned by
@@ -1833,6 +1833,6 @@ Sizes: 91 MB accession, 92 MB derivative, 83 MB bundles, against 686 GB free.
 **What is still not closed.** `EXT-02` and `EXT-03` are `BROKEN, MAP PRESENT` in
 their own repositories, on their own schedule, by whoever owns them — this loop
 has no authority there and did not acquire any by copying them. The 33
-fabkg-lineage commits absent as pre-rewrite objects are still absent; their
+EXT-02-lineage commits absent as pre-rewrite objects are still absent; their
 content survives under rewritten identities, and `EXT-05` remains unexamined and
 reserved to the operator.
