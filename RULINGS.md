@@ -480,3 +480,181 @@ third pass's first clause rather than argued about now.
    reader would see.** 67 occurrences is what `git grep` finds; a published
    repository also exposes commit metadata, and that was checked separately
    (`Raar1999@users.noreply.github.com`) rather than assumed to be covered.
+
+---
+
+# `RULING release-01` — the visibility question reopened, and the permanent ruling reversed
+
+**Written** 2026-09-21, under the operator ruling of the same date.
+**Not a generation.** `LOOP_STATE` is not incremented, the loop stays closed at
+`L1`, and no `SR-2` ledger row is added, because corrections are counted per
+generation and this is not one.
+**Appended to** `RULINGS.md` at hash
+`94486224a01f1681e40c0ffc3a8aef9292f23ebaba39444b27c822a979f0f41f`.
+**Ladder** `LADDER.md` at
+`184e1ef0f10617303556ecb2a9e9029659c7fdce170fe4d97b394aa9672d2efe`, unedited.
+**Measurement** the two read-only passes of 2026-09-20, recorded in
+`docs/RELEASE_HOLD_g16.md` and `docs/MANIFEST_REDACTION_IMPACT_g16.md`.
+**Supersedes** the close-out ruling of 2026-08-29 §2 as recorded in
+`docs/OPERATOR_TASKS.md` under *"The visibility question is closed,
+permanently"*. That entry is **not edited**. It stands as written, correct on
+its own date, and this ruling supersedes it forward.
+
+---
+
+## `RATIFIED`
+
+**The repository goes public, and the disclosure is accepted in full rather
+than reduced.** What is accepted, measured at `82f5d90` and not inherited:
+
+* four private project names — `fab-ops-analytics-complete`, `fabkg-bench`,
+  `invspec`, `AIEF` — and the directory layouts they carry;
+* absolute home paths naming the developer's username;
+* `docs/COMMIT_HASH_MAP_g11.json`, published as an index to objects that exist
+  nowhere.
+
+All of it originates in this repository's own provenance capture and in the
+`T3` housekeeping survey. None of it arrived from an out-of-scope action.
+
+**Credentials are clean, and this was re-measured rather than carried
+forward.** Zero hits at `82f5d90` for `ghp_`, `gho_`, `ghs_`, `github_pat_`,
+`sk-`, `AKIA…`, `xox[baprs]-`, `AIza…` and the private-key header. The only
+non-`noreply` email literals in the tree are the hook guard's own fixtures in
+`tests/test_commit_hook_tracked.py`. Author and committer identity on every
+commit is `Raar1999@users.noreply.github.com`.
+
+**Manifest redaction was analysed and is declined, and the reason is not the
+one that was expected.** The eight tracked manifests are redactable *and*
+hash-preserving — the disclosure sits in three `loaded_code` paths that no hash
+in the repository covers, and `RunManifest.write()` computes no digest over the
+manifest at all. Redaction was declined because it would not work: the
+disclosure is in the committed history, which publication publishes, and the
+only instruments that reach history are `filter-repo` and force-push. Both stay
+forbidden unconditionally. **The eight manifests were not touched.**
+
+**The map is off this machine, and the pre-push runbook's step 1 is
+discharged.** `docs/COMMIT_HASH_MAP_g11.json` is present on
+`origin/loop/champion` at `65bef05`, byte-identical to the local copy and to
+the digest published in `docs/G12_RESULT.md` §1.1
+(`5486343309bbeefeaf99a99edc0cb1b320f39f9eec837cf34362bd952ab6f970`, 26,472
+bytes). `docs/G12_RESULT.md` records step 1 as *"human action, not done"*; that
+was true when written and was overtaken by the push of `loop/champion` to
+origin. The step is satisfied by a second copy existing off the disk, and one
+does.
+
+## `CORRECTED`
+
+**1. The reversal's stated basis was wrong, and the record gets the right
+one.** The ruling that ordered this reversal asks it to cite that the
+2026-08-29 premise — 67 home-path occurrences — *never reconciled against the
+repository at any commit*. Measured across all seventy-two commits on
+`loop/champion` before writing this: at `9fac86b`, the commit generation 12
+audited, the count is **exactly 67 across 12 files**. It reconciled precisely,
+at the commit it was taken on.
+
+The premise did not fail to reconcile. It **aged** — 67 across 12 at
+`9fac86b`, 102 across 23 at `82f5d90`, by the same regex. That is `AGE-01`
+operating on a ruling rather than on a guard, and it is a better reason for the
+reversal than the one offered, because it says the ruling was right and stopped
+being right rather than never having been right. A reversal resting on a false
+premise would have been a worse artefact than the one it replaced.
+
+**2. `R-3` is the wrong citation for the manifest reservation.**
+`docs/OPERATOR_TASKS.md` says the manifests *"cannot be scrubbed because
+mutating a manifest is reserved under `R-3`"*. `R-3` reserves `papers/**` —
+`LOOP_STATE_v1.json` `escalations_open[0]` pins it to `papers/draft.md:255`,
+every other citation agrees, and `LOOP_STATE_v15.json` records it **lifted** on
+2026-08-29, the day after that sentence was written. The manifest reservation
+is **directive §6**, per `docs/G12_RESULT.md`. The reservation is real; the
+label on it was not.
+
+**3. The disclosure question was scoped to one name and there are four.** The
+open decision carried into this release named `fab-ops-analytics-complete` in
+the `outputs/` manifests. `fabkg-bench`, `invspec` and `AIEF` also survive the
+`docs/AUDIT_MASTER.md` scrub, in `CHANGELOG.md`, the `LOOP_STATE_v12`–`v15`
+files, two generation records and three `write_loop_state` scripts. Accepting
+the narrow question would have authorised one name and carried three.
+
+**4. A second spelling was invisible to the search that scoped this.** Every
+one of the eight manifests carries `__editable__.fab_ops_analytics-0.1.0.pth` —
+underscored — which a search for the hyphenated name does not match.
+
+**5. The drafted scrub script does not run.** `scrub_audit_master_v2.py` as
+saved raises `SyntaxError`: a raw string literal ending in a backslash. The
+scrub applied by this ruling was therefore **verified as an artefact rather
+than reproduced from its generator**: identifiers and verdict vocabulary
+compared by multiset, every numeric token compared with multiplicity, residual
+scan over twenty-one identifier shapes plus the home-path regex, and the
+differing lines counted. That check is `verify_scrub.py`, and it is the thing
+that gated the edit — not the script that produced the candidate.
+
+**6. My own detector was vacuous, and it took a cross-read to catch.** The
+first census of the manifests reported zero home-path occurrences, and a
+residual assertion passed on that basis. A shell heredoc had collapsed `\\` to
+`\`, turning the character class `[\\/]` into slash-only, so the detector could
+not fire. It surfaced only because `git grep -c` disagreed. Every detector used
+after that carries a positive control asserted before the detector is trusted,
+which is what `SW-20` requires and what the first one lacked. This is `FILL-01`
+one level up: the check reported satisfaction on something other than what it
+was for.
+
+## `ENACTED`
+
+**Nothing.** No rule is enacted by this ruling, and that is deliberate. `OPS-01`
+holds that a rule without a guard does not exist, and the three candidates this
+work surfaced — write the absolute count rather than the relative one, carry a
+positive control on every detector, re-derive a premise before relying on it —
+are all restatements of `AGE-01`, `SW-20` and the deferred-correction
+discipline already in `docs/RULES_ENACTED.md`. Minting identifiers for them
+would be a fourth enumeration with the failure mode the third one has.
+
+**One edit is made against a standing rule and is recorded rather than taken
+quietly.** `docs/AUDIT_MASTER.md` is append-only under the standing rules, and
+the scrub rewrites forty-seven existing lines in it. That is ordered by the
+operator ruling of 2026-09-21 and is a de-identification, not a correction: no
+finding identifier, severity, verdict or measured value moves, and the check
+above is what establishes that rather than the intention behind it.
+
+## `LADDER`
+
+**`L1` held.** Not climbed, not descended. Publication is not a rung and no
+unreachability verdict was issued or was available. The loop remains closed;
+this ruling is an operator action on a closed loop, not a resumption of it.
+
+## `NEXT`
+
+**A DOI, and the paper's data-availability statement, in that order.** The
+repository becomes citable the moment it is public and the paper still points
+at nothing — no URL, no tag, no commit, no DOI, per
+`docs/PAPER_PACKAGE_STATUS_g16.md` §10(ii). Minting is a separate task and is
+explicitly not started here.
+
+Two smaller things that are now cheaper than they were:
+
+* `docs/OPERATOR_TASKS.md`'s CI-billing entry still reads *"two days away"* and
+  *"wait two days"* of a reset that happened on 2026-09-01. The class is
+  already recorded beside `AGE-01`; the instance is still live and is still the
+  operator's to settle.
+* `CI-01` and `SPEC-g0-3b` are unblocked by this ruling as a side effect rather
+  than by design — Actions minutes are free on a public repository, and the
+  three Linux legs have never run.
+
+## `PREMISES`
+
+1. **GitHub's visibility flip is complete and immediate.** The repository, its
+   history, its pull request and its refs all become readable at once. Not
+   independently verified; taken from the platform's documented behaviour.
+2. **The push timeline establishing that no pre-rewrite object was ever
+   orphaned** comes from the read-only passes of 2026-09-20 and was not
+   re-derived here. It is `[ART]` from those documents, not `[OBS]` for this
+   ruling.
+3. **`git grep` over the tracked tree is the right measure of what a reader
+   sees.** It is not the whole of it — commit metadata, the pull request and
+   the Actions logs are separate surfaces, and only the first was checked.
+4. **The four accepted project names are the operator's to disclose.** Three of
+   them name repositories this loop does not own. The ruling that accepted the
+   disclosure is the authority for that, and this record is not evidence that
+   the question was independently examined.
+5. **Publication is irreversible in practice.** Flipping back to private does
+   not unpublish anything already cloned, cached, forked or indexed. The
+   decision is treated as one-way and was made on that basis.
