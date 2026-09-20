@@ -106,7 +106,7 @@ Occurrences **outside** `docs/AUDIT_MASTER.md` at `82f5d90`: `[OBS]`
 | `fab-ops-analytics-complete` | **16** | the `outputs/` manifests (8 files) — the one §3 names |
 | `FabKG_LoopLogs` | 3 | `LOOP_STATE_v14`–`v15.json`, `scripts/write_loop_state_close.py` |
 | `AIEF_Product_Development` | 2 | `LOOP_STATE_v12.json`, `scripts/write_loop_state_g13.py` |
-| `SEWCP_Master_Assembly`, `NAFA-Europe`, `AIEF-Fusion`, `fab-ops-intelligence` | 0 | reached by the scrub |
+| the `EXT-01`, `EXT-06`, `EXT-07` and `EXT-09` names | 0 | reached by the scrub |
 
 `CHANGELOG.md` lines 315–318, 325, 368 and 436–441 name `AIEF`, `fabkg-bench` and
 `invspec` in running prose alongside their object-survival counts.
@@ -209,3 +209,19 @@ no git write operations; no config, data, network or external-system changes; no
 this document. Workspace verified unchanged at `82f5d90` — `git status` reports
 only the two untracked documents (`docs/PAPER_PACKAGE_STATUS_g16.md` from the
 prior pass, and this one).
+
+---
+
+## 8. Correction, 2026-09-21
+
+The table in §3 originally spelled out four project names in its final row —
+the row recording that the scrub had reduced them to zero. Writing them there
+put them back into the tracked tree, and those four sit **outside** the
+disclosure the operator accepted, which covers `fab-ops-analytics-complete`,
+`fabkg-bench`, `invspec` and `AIEF` only. They are now referred to by the
+`EXT-*` identifiers the scrub itself uses. Corrected before publication, so no
+reader outside this machine ever saw them.
+
+The defect is worth naming rather than quietly patching: a document written to
+report a disclosure surface enlarged it, in the one line asserting the surface
+was clear.
