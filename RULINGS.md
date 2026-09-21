@@ -758,3 +758,131 @@ that, and only the first is the one usually named:
 3. **The operator's account of how the flip was performed** — `gh repo edit
    --visibility public`, outside a tool session — is taken from the operator and
    is not independently evidenced. What is evidenced is the resulting state.
+
+---
+
+# `RULING release-02` — the historical `EXT-*` residue accepted, and measured before it was accepted
+
+**Written** 2026-09-21, under the operator decision of the same date.
+**Not a generation.** `LOOP_STATE` is not incremented, the loop stays closed at
+`L1`, and no `SR-2` row is added.
+**Appended to** `RULINGS.md` at hash
+`b7ad08d6aefdfde6a73323e6abb43d29ea1d56e9c2819869f5b464b3f26d1bf6`.
+**Ladder** `LADDER.md` unedited at
+`184e1ef0f10617303556ecb2a9e9029659c7fdce170fe4d97b394aa9672d2efe`.
+**Extends** `RULING release-01`'s acceptance of disclosure to a set that ruling
+did not cover. It supersedes nothing and edits nothing.
+**Measurement** this pass, against the tree and against GitHub. `[OBS]`
+
+---
+
+## `RATIFIED`
+
+**The four names `3c46f6b` removed are readable in published history, and the
+operator accepts that.** They are accepted on the same footing as the four names
+`release-01` accepted — `fab-ops-analytics-complete`, `fabkg-bench`, `invspec`
+and `AIEF` — rather than being carried as an unresolved gap.
+
+**What the names are, and what they name.** `[OBS]` Read from
+`docs/AUDIT_MASTER.md` at `82f5d90`, the last commit that carries the survey
+unredacted. Each is the GitHub remote of a tree the generation-13 housekeeping
+survey examined, and each row also carries that tree's absolute local path:
+
+| id | remote named | local path also disclosed on the same row |
+|---|---|---|
+| `EXT-01` | `Raar1999/AIEF-Fusion` | `D:\AIEF_Product_Development` |
+| `EXT-06` | `Raar1999/SEWCP_Master_Assembly` | `D:\Fusion Projects\SEWCP_Master_Assembly` |
+| `EXT-07` | `Raar1999/fab-ops-intelligence` | the `fab-ops-analytics-complete` tree, already accepted |
+| `EXT-09` | `Raar1999/NAFA-Europe-dataset` | a `OneDrive\Documents\GitHub` path under the developer's home |
+
+**Three of the four remotes are already public, and only one is not.** `[OBS]`
+Queried live with `gh repo view`: `SEWCP_Master_Assembly`,
+`fab-ops-intelligence` and `NAFA-Europe-dataset` are **PUBLIC** and are
+discoverable from the account's own profile without this repository.
+`AIEF-Fusion` is **PRIVATE**. So the disclosure this ruling accepts is, in its
+load-bearing part, **one private repository name** — not four — together with
+the local storage topology on the rows that name them. The wider framing is
+recorded because it is what was asked about; the narrower measurement is
+recorded because it is what is true, and a ruling that accepted more than it
+needed to would be the same defect `release-01` was written to avoid.
+
+**Where the residue sits.** `[OBS]` Twenty-five commits on `loop/champion` carry
+at least one of the four names in their tree, and they form two distinct
+residues rather than one:
+
+* **Twenty-four commits, `8a74b7a` (2026-08-28) through `82f5d90` (2026-09-09),
+  in `docs/AUDIT_MASTER.md`.** This is the original housekeeping survey and it
+  is the larger residue by far. `acd8472` de-identified it at the tip; history
+  keeps it.
+* **One commit, `143bf35`, in `docs/RELEASE_HOLD_g16.md`.** This is the
+  reintroduction `3c46f6b` corrected — a document reporting a disclosure surface
+  enlarged it, in the line asserting the surface was clear.
+
+All twenty-five are ancestors of `origin/loop/champion` and are retrievable from
+the public remote; `8a74b7a` was fetched through the API to confirm it rather
+than assumed. They are additionally reachable through `refs/pull/1/head`.
+
+**It cannot be undone.** The only instruments that reach history are
+`filter-repo` and force-push, both forbidden unconditionally in this repository,
+and `release-01` already records publication as one-way in practice: flipping
+back to private does not unpublish what has been cloned, cached, forked or
+indexed. Acceptance is therefore the only disposition available that is not a
+pretence.
+
+## `CORRECTED`
+
+**`docs/RELEASE_HOLD_g16.md` §8 states that no reader outside this machine ever
+saw the enlarged form. That was true when written and is no longer.** `[OBS]`
+The correction landed at `3c46f6b`, committed 2026-09-20T18:48:13Z and pushed
+two seconds later, while the repository was still private. The visibility change
+followed some hours after. So the sentence was accurate at the moment of
+writing, at the moment of commit, and at the moment of push — and publication
+then made the *history* readable, which is the surface the sentence did not
+speak to. It is not edited: it is a dated correction note, correct on its date,
+and this entry supersedes it forward.
+
+**`3c46f6b`'s commit message carries the same sentence and is uncorrectable.**
+Under `R-4` a commit message cannot be amended after the fact. This is the
+remedy `DOC-07`'s own founding defect was given: correct forward on the record,
+in the place a reader will look.
+
+**The framing "four private project names" is not accurate and is corrected
+here rather than repeated.** Three of the four are public repositories. The
+phrase entered through `3c46f6b`'s message, which called them names that "sit
+outside the disclosure the operator accepted" — true, and about scope rather
+than about privacy. Nothing measured their visibility until this pass.
+
+## `ENACTED`
+
+**Nothing.** No rule is enacted. The discipline this entry would restate —
+measure a premise before ruling on it — is `AGE-01` and `SW-20` already, and
+`OPS-01` holds that minting a fourth enumeration of an existing rule is the
+failure mode rather than the fix.
+
+## `LADDER`
+
+**`L1` held.** Not climbed, not descended. This is an operator decision recorded
+against a closed loop, not a resumption of it.
+
+## `NEXT`
+
+**Unchanged from `release-01`: a DOI, then the paper's data-availability
+statement.** This entry adds no work item. If the operator wishes the
+`AIEF-Fusion` name withdrawn rather than accepted, the only route is to rename
+or delete that repository on GitHub, which is an action outside this tree and
+does not touch this history.
+
+## `PREMISES`
+
+1. **The four names are the complete set `3c46f6b` removed.** Taken from that
+   commit's diff, which replaced one table row. A name disclosed elsewhere in
+   history under a different spelling would not be caught by this measurement.
+2. **The twenty-five-commit count is over `loop/champion` only.** `main` at
+   `6577f4b` was not scanned, and a name present on a branch not examined here
+   would not appear in the count.
+3. **Repository visibility was read once, authenticated as the owner.** A
+   repository the owner can see is not evidence of what an anonymous visitor
+   sees; the three reported public were not re-checked unauthenticated.
+4. **The operator's acceptance is the authority for the disclosure, and this
+   record is not evidence that the question was independently examined.** Three
+   of the four remotes name trees this loop does not own.
