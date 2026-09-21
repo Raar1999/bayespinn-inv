@@ -1,0 +1,169 @@
+{
+  "generation": 8,
+  "designation": "G8 (final technical generation; ordered post-termination, as G7-R was)",
+  "terminated": true,
+  "termination_condition": "T-1 was reached at generation 6 and is not re-opened. G8 was a single bounded generation ordered post-termination by the ruling of 2026-08-26. It resolved every SPEC-g8 clause and opened no new scientific scope; the ruling's own section 11 states that what remains after it is writing.",
+  "schema": {
+    "champion_commit": "The last CONTENT commit of the generation, by definition. Never the commit that wrote this file: a state file cannot name its own commit, because its bytes are part of the tree that commit hashes. Generation 7 walked into that fixed point and needed a second commit to repair the pointer; generation 8 defines it away. Guarded by tests/test_loop_state_g8.py.",
+    "bookkeeping_commit": "null at write time, always. Nothing may fill this during the commit that writes the file, because the value would be that commit's own hash. A later generation reading git history may fill it; the null is the record that this one did not.",
+    "machinery_commit": "The commit every measurement in this generation ran against. One tree, one commit: the run manifest records it with dirty=false.",
+    "results_commit": "The commit carrying the artefacts and the result documents. Equal to champion_commit when the generation ends with its results."
+  },
+  "champion_commit": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
+  "machinery_commit": "01f02812e367958ca81a73d4b0c48cf2622c42d7",
+  "results_commit": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
+  "bookkeeping_commit": null,
+  "champion_branch": "loop/champion",
+  "one_tree_one_commit": {
+    "honoured": true,
+    "note": "Every G8 measurement ran against 01f0281. outputs/g8/manifest.json records that commit with dirty=false, 0 tracked-modified, 0 untracked, and loaded_code.flagged=false across 16 imported modules."
+  },
+  "baselines": {
+    "tests_collected": 678,
+    "tests_passed": 678,
+    "tests_failed": 0,
+    "suite_wall_clock_s": [
+      374.1,
+      373.19,
+      370.94
+    ],
+    "suite_wall_clock_note": "Measured on a host running an unrelated compute job on the same cores, so these are longer than generation 7's 171-181 s for a reason that is not the suite. Reported as measured rather than re-measured on a quiet machine, because the quiet-machine number was not taken and inventing one would be worse than a slow one.",
+    "mypy_findings": 25,
+    "mypy_note": "25 over the tracked tree, reproducing the generation-7 baseline exactly. Generation 8 adds none. Measured by stashing the generation-8 changes and re-running, which is also how the generation-7 figure was confirmed rather than trusted.",
+    "ruff_exit": 0
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e",
+    "g7": "922c2cc",
+    "g8": "0f22ecc"
+  },
+  "spec_clause_status": {
+    "SPEC-g8-1": "PASS - CHART-01 closed structurally, not documented away. One reconstruction operator; the solver raises instead of interpolating; an AST guard fails when a second path appears, per call rather than per file. 24 profiles frozen from the deleted code path reproduce byte for byte, and both prior witness searches reproduce exactly. Falsifier (a second reconstruction path can be introduced without a test failing) does NOT fire.",
+    "SPEC-g8-2": "PASS, and the falsifier FIRES as the ruling anticipated. Chart J makes the junction a free continuous coordinate; at s=0 it is chart G at d-1 bit for bit (positive control). Displacing the junction moves the unit-homogeneous magnitude-block spectrum by 219% and 9.1% against chart G at d=15, versus 2.8% for the chart-G-to-chart-L change. The invariance claim is retired to its measured family.",
+    "SPEC-g8-3": "PASS, and the falsifier FIRES. Observation-set perturbation moves the leading spectrum by 19.8% (same 16 biases, same range, geometric instead of linear spacing) up to 97.4% (narrowed to 0.30-0.60 V), against 2.8% for the chart change. Unchanged after sqrt(rows-used) normalisation. The identifiable count itself falls from 4 to 2 over the narrowed range.",
+    "SPEC-g8-4": "PASS - rank(cutoff) curves for all six cells, with the spectrum, the chosen cutoff, the largest multiplicative gap and whether the cutoff sits inside it. A bare integer is licensed in 2 of 6 cells (G_d4, L_d4). Falsifier (one bare integer rank survives where no population gap exists) does NOT fire: the claim surface quotes none.",
+    "SPEC-g8-5": "PASS - criterion frozen, hashed and written to the artefact before any distance was computed; count reported as a curve over thresholds and stated as a lower bound. Basins at the pre-registered 0.3 decades: {\"chart_G_d4\": 20, \"chart_L_d16\": 67, \"chart_J_d16\": 26}. Falsifier (a count without its criterion, or a criterion chosen after seeing the clusters) does NOT fire.",
+    "SPEC-g8-negative-control": "REJECTED as required, four times, end to end through the same predicates: the witness search on a distinguishable pair, the chart discriminator on a pinned junction, the cluster criterion on known-answer sets, and the solver on a chartless parameter vector. all_controls_pass=True.",
+    "OPS-01": "PASS - REP-01, SPEC-11's rank-curve rule, OPS-01 itself and a marked-as-reconstructed PH-22 are in docs/RULES_ENACTED.md, each with a guard and both controls, and tests/test_rules_enacted_g8.py asserts that transitively. See the escalation in docs/audit/AUDIT_g8.md section 3.1: PH-22 cannot be backfilled as a quotation because its text is not in the tree.",
+    "SPEC-g0-3b-windows": "OPERATOR-BLOCKED (hard), unchanged; substitute evidence docs/WINDOWS_RISK_g6.md."
+  },
+  "open_findings": [
+    {
+      "id": "CHART-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-STRUCTURALLY",
+      "note": "One reconstruction operator in charts._lerp; a doping vector crosses API boundaries only as grid values or as ChartedDoping; ScharfetterGummel1D.solve raises DopingChartError otherwise; an AST guard with both SW-20 controls fails when a second path appears. The pre-fix census found the implicit resampler load-bearing at five call sites in src/ and nine in tests/, including the published local rank and the surrogate's training set - the ruling's model of the defect was too small, see AUDIT_g8 section 3.2."
+    },
+    {
+      "id": "CHART-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED",
+      "note": "Subsumed by CHART-01's fix. ScharfetterGummel1D.solve no longer resamples a short doping array at all, so there is no silent chart left to depend on."
+    },
+    {
+      "id": "SPEC-11",
+      "severity": "MEDIUM",
+      "status": "MITIGATED",
+      "note": "rank_cutoff_record is now the only way g8 machinery reports a rank, and it reports a curve. The ruling's 'which today means d=4 only' is corrected by measurement to 'chart G d=4 and chart L d=4 only' - the licence follows the gap, not the dimension (chart J at d=4 has no gap either)."
+    },
+    {
+      "id": "DOC-07-a",
+      "severity": "LOW",
+      "status": "MITIGATED",
+      "note": "The DOC-07 guard was too narrow to catch the generation-8 machinery commit, whose message asserts a measured count of this tree that the census contradicts. Under R-4 the message stands; the correction is forward in docs/G8_RESULT.md and docs/audit/AUDIT_g8.md. The guard is widened at generation 8 with that commit as its positive control."
+    },
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "cost_grown_since_assignment": false
+    },
+    {
+      "id": "PROV-07",
+      "severity": "HIGH",
+      "status": "MITIGATED-PENDING-CI",
+      "note": "Unchanged. Validated on win32 only; linux and darwin unvalidated and stated as such in every manifest."
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "OPERATOR-BLOCKED",
+      "action": "OT-1",
+      "note": "Still blocked, and the ruling's section 10 puts a decision ahead of the command: remote or no remote. Unanswered as of this champion. docs/OPERATOR_TASKS.md is corrected to state that OT-1 requires adding a remote first, so the file no longer describes a command that cannot run."
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z"
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "EOL-01",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "Amended by generation 8: writing with newline='' is only half the rule. Reading a CRLF file in text mode also normalises, so a read-modify-write round trip rewrites the whole file even when the write is careful. Generation 8 did exactly that to 20 tracked files and tests/test_line_endings_g6.py caught it before the commit. Tools that rewrite tracked files must open with newline='' on BOTH ends."
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    },
+    {
+      "id": "FALSIFIER-01",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "note": "Opened at generation 8. run_witness_falsifier.py re-derived chart G by hand instead of importing it, so the generation-6 falsifier was a copy of the study it falsified and could only have detected a solver-level error, never a chart-level one. The witness result survives - g8 re-ran both through one class and got identical counts - but the independence the falsifier was supposed to supply was never there. Both now call ChartG; what remains open is that no falsifier in this repository has been audited for the same defect."
+    }
+  ],
+  "ruling_premises_corrected": [
+    "Section 4's model of CHART-01 as 'two reconstruction operators ... silently selected by which entry point was called' understates it: five call sites in src/, nine in tests/, three grid resolutions, and a third hand-written copy of chart G inside the falsifier.",
+    "Section 5's 'a bare integer rank appears only where a gap justifies it - which today means d=4 only' is one word too strong. Chart J at d=4 has no gap at the cutoff, so the licence is chart G d=4 and chart L d=4, and d=4 is a coincidence of those two charts.",
+    "Section 7's retro-application of PH-22 cannot be honoured as a quotation: the operator's original text is not in the tree. It is recorded as a reconstruction from its points of use, marked as such, and its pre-SW-20 guard's missing controls are recorded rather than retro-fitted.",
+    "Section 8's test, generalised to 'the champion never touches a loop-state file', is false of correct history: 922c2cc, generation 7's own champion, modified LOOP_STATE_v4.json. The exact invariant - champion is not the commit that wrote the file - is what is asserted."
+  ],
+  "highest_remaining_scientific_risk": "Every identifiability number in this repository is measured at ONE operating point. Generation 8 showed the local spectrum moves by 97% when the bias range changes and by 219% when the junction moves, both far more than the 2.8% the chart change produces - but it did not vary the operating point itself. The whole matched-d table, in all three charts, sits at witness pair 0 member a or a projection of it. Nothing measured here establishes that the ordering (observation set > junction > dimension > interpolant) holds at a different device, and the one axis generation 8 did not perturb is the one every cell shares.",
+  "second_remaining_scientific_risk": "The basin counts of SPEC-g8-5 are weaker than they look, and the document says so. A null control - the same criterion over the same number of ordinary prior draws that form no witness pair - returns almost the member count in chart L at d=16, because two draws from a log-uniform box spanning two decades in each of sixteen coordinates are nearly certain to differ by more than 0.3 decades somewhere. The chart-L count is therefore close to trivial and is not quoted as anything else; the informative object there is the witness graph. What survives is only the qualitative answer: the witness set is not two devices. The barrier check that would settle it properly covers a stated sample rather than every pair, and walking every witness pair is the obvious next measurement.",
+  "not_supported_and_not_to_be_written": [
+    "any rank fraction compared across charts - now three charts, not two",
+    "any frequency or probability of degeneracy in any chart; the chart-J search is further apart still, because its prior is not the same kind of prior",
+    "any contraction number at the instrument's own 2% noise",
+    "any bare integer rank outside the licensed cells, which explicitly includes chart J at d=4; licensed today: G_d4, L_d4",
+    "any full-spectrum comparison involving chart J without stating junction_scale - the spectrum of a mixed-unit Jacobian is not units-free and moves by a factor of ten across defensible scalings",
+    "any statement that an identifiable rank is a property of the device; it is a property of the (device, observation set) pair",
+    "'the chart does not move the rank' unqualified - true within one interpolant family, false outside it",
+    "any ordering of the sensitivities (observation set > junction > dimension > interpolant) as a general claim; it is measured at one operating point"
+  ],
+  "operator_tasks": [
+    "OT-1 push and run CI - BLOCKED, and the ruling's section 10 decision (remote or no remote; if no remote, CI-01 becomes ACCEPTED-PERMANENT and owes a cost statement) is unanswered. docs/OPERATOR_TASKS.md now states that a remote must be added first.",
+    "OT-2 apply papers/CORRIGENDA_g6.md - still unapplied; papers/draft.md line 255 is unchanged. R-3 reserves papers/**.",
+    "OT-3 (ruling section 10.3) preservation: two copies on one disk is one failure from losing eight generations. Operator's."
+  ],
+  "halt": null
+}

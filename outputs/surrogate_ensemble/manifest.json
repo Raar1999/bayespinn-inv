@@ -1,0 +1,83 @@
+{
+  "type": "surrogate",
+  "material": {
+    "name": "Si",
+    "T": 300.0
+  },
+  "domain_si": [
+    0.0,
+    1e-06
+  ],
+  "doping_dim": 16,
+  "bias_range": [
+    0.0,
+    0.6
+  ],
+  "symlog_I0": 1e-06,
+  "normalizer": {
+    "mean": [
+      -0.5660277009010315,
+      -0.5660277009010315,
+      -0.5660277009010315,
+      -0.5660277009010315,
+      -0.5660277009010315,
+      -0.5660161972045898,
+      -0.4599039554595947,
+      -0.18534640967845917,
+      0.1684645265340805,
+      0.4233819246292114,
+      0.5688724517822266,
+      0.5688750147819519,
+      0.5688750147819519,
+      0.5688750147819519,
+      0.5688750147819519,
+      0.5688750147819519,
+      11.604654312133789
+    ],
+    "std": [
+      0.05978669971227646,
+      0.05978669971227646,
+      0.05978669971227646,
+      0.05978669971227646,
+      0.05978669971227646,
+      0.05979505553841591,
+      0.3403860330581665,
+      0.536151111125946,
+      0.5500058531761169,
+      0.3867109417915344,
+      0.05765228345990181,
+      0.057649172842502594,
+      0.057649172842502594,
+      0.057649172842502594,
+      0.057649172842502594,
+      0.057649172842502594,
+      7.236700057983398
+    ]
+  },
+  "checkpoints": [
+    "/home/claude/bayespinn-inv/outputs/surrogate_ensemble/surrogate_member_000.pt",
+    "/home/claude/bayespinn-inv/outputs/surrogate_ensemble/surrogate_member_001.pt",
+    "/home/claude/bayespinn-inv/outputs/surrogate_ensemble/surrogate_member_002.pt",
+    "/home/claude/bayespinn-inv/outputs/surrogate_ensemble/surrogate_member_003.pt",
+    "/home/claude/bayespinn-inv/outputs/surrogate_ensemble/surrogate_member_004.pt"
+  ],
+  "config": {
+    "material": {
+      "name": "Si",
+      "T": 300.0
+    },
+    "domain_si": [
+      0.0,
+      1e-06
+    ],
+    "network": {
+      "doping_dim": 16
+    },
+    "dataset": {
+      "bias_range": [
+        0.0,
+        0.6
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "what_this_is": "MECH-01 pass 4, the third distinct method. Row-subset growth against a random-row null, matched on row count by construction",
+  "authorised_by": "operator ruling of 2026-08-28 \u00a73 (pass 4)",
+  "terminal_condition": "ruling \u00a74: if this answers, MECH-01 closes and L0 is reached. If it is falsified or inconclusive it is method three, U-EMPIR is issued with all three methods and their mechanisms, the ladder descends to L1 with its reachability condition recorded, and the loop stops. No fourth method. Stated here, before the result",
+  "pilot": {
+    "solver_build_s": 0.00022169999283505604,
+    "per_cell_s": 15.349535299996205,
+    "n_cells_required": 4,
+    "projected_s": 61.398362899977656,
+    "measured_not_estimated": true,
+    "rule": "PILOT-01: priced by a measured pilot, never by an estimate"
+  },
+  "distinct_from_passes_2_and_3": "passes 2 and 3 contrasted two axes that do not overlap in the nuisance parameter b. Pass 4 compares one sequence against a null matched on row count by construction, so the defect that sank both is absent by design rather than corrected after the fact",
+  "new_solves": "the Jacobian is recomputed once per device because nothing in the tree stores it, and is WRITTEN TO DISK so no later pass needs a solve. The analysis -- subsets, sub-spectra, percentiles, chains, verdict -- is arithmetic at new_solves = 0, AST-guarded by tests/test_mech01_pass4_g14.py",
+  "measure": {
+    "universe": "the n certified bias rows of the WIDEST window (width 0.75 V = [0.15, 0.90]), which is generation 9's wide_0.15_0.90 window, at one device. One Jacobian; every subset below is a row selection from it",
+    "nested_sequence": "N_k = the k rows whose bias is closest to WIDTH_CENTRE = 0.525, ties to the lower bias. This is the order in which widening the window admits biases, so the nested sequence IS the width axis expressed as subsets of one matrix",
+    "null": "uniformly random k-subsets of the same universe, so row count is matched by construction. This is the property pass 3 proved the spacing axis lacks, and it is why nothing here needs standardising",
+    "statistic": "gap(S) = log10(sigma_1) - log10(sigma_2) of J[S, :]. Flatter is smaller. This is the gap behind the head",
+    "secondary": "slope(S) = OLS slope of log10(sigma_i) against i for i = 1..min(4, k), computed for k >= 4 and REPORTED ONLY. The decision rests on gap alone, so there is no multiplicity to exploit",
+    "k_range": "k from 2 to n-2 inclusive, and additionally C(n, k) >= 50 so the null has enough distinct subsets to place a percentile. k = n-1 and k = n are excluded because the nested set is then all but one row or the whole universe, where the null is nearly or exactly degenerate",
+    "percentile": "P_k = fraction of null draws at k whose gap is <= the nested set's gap. Under the hypothesis that only row COUNT matters, arrival order is exchangeable and P_k is uniform",
+    "test_statistic": "T = mean over admissible k of P_k",
+    "null_of_T": "random chains: a uniform permutation of the universe, its prefixes taken as a pseudo-nested sequence, scored against the SAME per-k null draws. p = the two-sided empirical position of T among chain values. This handles the dependence between nested sets at different k by construction, which combining per-k p-values under an independence assumption would not",
+    "threshold": "two-sided, alpha = 0.05. 'Flattens more than random' is the hypothesised direction and the direction is reported; flattening LESS than random would equally refute genericity, and a one-sided test would be choosing in advance which way the evidence is allowed to point",
+    "decision_rule": "IDENTITY_MATTERS iff p <= 0.05 at BOTH held-out devices, as in pass 3. Any other result, including one device clearing and the other not, is GENERIC_ROW_COUNT",
+    "held_out_devices": [
+      "device_p10",
+      "device_p90"
+    ],
+    "held_out_caveat": "device_p10 and device_p90 were naive to the row side before pass 3 and are not naive now. The ruling specifies them, and pass 4's statistic was derived from pass 3's FAILURE MECHANISM -- the nuisance confound -- not from these devices' values. Stated rather than glossed: they are held out from pass 4's construction, not unseen",
+    "n_null_draws": 4000,
+    "n_chain_draws": 4000,
+    "seed": 20260828,
+    "indices": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "minimum_k": 4,
+    "minimum_k_why": "fewer than four admissible k leaves T averaging over too little to place against the chain null. Reported as UNDETERMINED, which is a failure to measure and NOT a negative result. The threshold is a floor chosen to be conservative and is not claimed to be derived",
+    "why_not_a_contrast": "passes 2 and 3 contrasted two axes that do not overlap in the nuisance parameter b. Pass 4 compares one sequence against a null matched on row count by construction, so the defect that sank both is absent by design rather than corrected after the fact",
+    "measure_hash": "61ce9ac936e469a30be5ce1aad04e724ff4ff91586b1b3067763505b0eaf4e86"
+  },
+  "outcomes": {
+    "IDENTITY_MATTERS": "the nested windows depart from the random-subset null at both held-out devices. Which biases arrive carries the flattening, not merely how many. MECH-01 closes as a regime question with its next step named -- which biases, answerable from this same artefact -- and L0 is reached",
+    "GENERIC_ROW_COUNT": "the nested windows track the null. Flattening the spectrum is a consequence of row count alone, with nothing device-specific or regime-specific in it. This is a COMPLETE answer to MECH-01's question and the ruling of 2026-08-28 \u00a73 requires it to be written as one: a deflationary answer is still an answer, not a failure",
+    "UNDETERMINED": "the reproduction control failed, or fewer than the pre-registered minimum of admissible k was available at a held-out device. A failure to measure. It is not a negative result and may not be read as one"
+  },
+  "outcomes_note": "pre-registered under the operator ruling of 2026-08-28 \u00a73, hashed before the first subset was drawn. Neither outcome is the good outcome (AH-04, AH-13). Under that ruling's \u00a74 both IDENTITY_MATTERS and GENERIC_ROW_COUNT CLOSE MECH-01; only UNDETERMINED counts as method three and triggers the U-EMPIR verdict",
+  "outcomes_hash": "898c28f0e8a250aea5020c246c7917acfbf23033fbefe5ce3a62932517b90546"
+}

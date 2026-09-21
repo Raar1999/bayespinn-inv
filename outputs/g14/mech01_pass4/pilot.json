@@ -1,0 +1,8 @@
+{
+  "solver_build_s": 0.00022169999283505604,
+  "per_cell_s": 15.349535299996205,
+  "n_cells_required": 4,
+  "projected_s": 61.398362899977656,
+  "measured_not_estimated": true,
+  "rule": "PILOT-01: priced by a measured pilot, never by an estimate"
+}

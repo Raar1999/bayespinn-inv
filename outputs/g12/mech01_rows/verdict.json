@@ -1,0 +1,63 @@
+{
+  "classification": "NEW_ROWS",
+  "reading": "sigma_2..sigma_4 are carried by the bias points the widening adds. Flattening is new independent measurements entering the problem, and MECH-01 narrows to: which transport regimes do the added biases sample that the core window does not? The mechanism is about COVERAGE",
+  "reading_was_registered_before_the_first_svd": true,
+  "outcomes_hash": "5a4da674efdf16b20028806cad9a27476a722057133e2b0af0603018ebd85d44",
+  "measure_hash": "2d8525541d4b20e21461cd0756bc2c0c19067a08cc750b367bfee6583bbe00bc",
+  "per_device": {
+    "g8_operating_point": {
+      "n_widths_beyond_the_narrowest": 8,
+      "n_trailing_exceeds_head": 8,
+      "widths_where_trailing_exceeds_head": [
+        0.15,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.75
+      ],
+      "widths_where_it_does_not": [],
+      "all": true,
+      "none": false
+    },
+    "device_p50": {
+      "n_widths_beyond_the_narrowest": 8,
+      "n_trailing_exceeds_head": 8,
+      "widths_where_trailing_exceeds_head": [
+        0.15,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.75
+      ],
+      "widths_where_it_does_not": [],
+      "all": true,
+      "none": false
+    }
+  },
+  "controls": {
+    "R1_reproduction": "PASS, 72 of 72",
+    "N1_negative": "PASS",
+    "P1_positive": "PASS",
+    "C1_control_axis": {
+      "g8_operating_point": {
+        "n_cells": 9,
+        "n_trailing_exceeds_head": 7,
+        "fraction": 0.7777777777777778
+      },
+      "device_p50": {
+        "n_cells": 9,
+        "n_trailing_exceeds_head": 9,
+        "fraction": 1.0
+      }
+    }
+  },
+  "all_controls_pass": true,
+  "what_it_does_not_say": "it does not say WHY the added biases carry what they carry, nor does it convert MECH-01 from open to answered. It narrows the question by one step, which is what a second method is for. It also says nothing about any window wider than 0.75 V or any bias above 0.90 V (PH-15)",
+  "if_this_method_failed": "two distinct methods would have failed -- generation 10's column side and this row side. U-EMPIR needs three, so a third would be required before MECH-01 could be ruled unreachable, or an U-INSTR verdict naming the missing instrument"
+}

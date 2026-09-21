@@ -1,0 +1,102 @@
+{
+  "rule": "DIFF-01",
+  "what_this_is": "the set of mechanical or sweep edits this repository has made, each with the changed-line count that was expected BEFORE it ran and the count it actually produced. Enforced by tests/test_diff01_blast_radius_g14.py.",
+  "why_a_register_and_not_a_diff_review": "the EOL-02 first pass changed 9,832 lines to fix 68 -- 145 times its intent -- and the suite was green before and after, because every file was individually correct. Correct-per-file and catastrophic-in-aggregate are the same operation for a codemod, and no guard in this repository measured aggregate. A reviewer reading the diffstat caught it, which is not a mechanism.",
+  "thresholds": {
+    "halt_ratio": 2.0,
+    "halt_ratio_meaning": "actual / expected. Above this the edit halts and is reported, whatever the suite says.",
+    "sweep_shaped_files_changed": 10,
+    "sweep_shaped_meaning": "a commit touching at least this many files is sweep-shaped and must appear here, by commit_subject, if it lands at or after the enactment commit. The count is the signature of a mechanical edit: hand edits are deep and narrow, codemods are shallow and wide."
+  },
+  "enacted_at_subject": "g14: DIFF-01 -- a sweep edit states its blast radius before it runs",
+  "scope_note": "commits BEFORE the enactment commit are out of scope, following DOC-07's own design: R-4 makes history uncorrectable and a guard that fails on history nobody can fix is a guard people switch off. The generation-13 EOL-02 sweep is registered below as the founding entry and is used by the guard as its positive control from history.",
+  "entries": [
+    {
+      "id": "eol02-first-pass",
+      "generation": 13,
+      "enacting_rule": "EOL-02",
+      "kind": "mechanical",
+      "description": "add an explicit newline= to every text-mode write in src/, scripts/ and tests/. The keyword was added correctly at every site; the files were then written back through Python's own text mode, which normalised 25 CRLF files to LF.",
+      "expected_changed_lines": 68,
+      "expected_stated_before_running": true,
+      "expected_basis": "the AST scan found 68 violating call sites; one line changes at each.",
+      "actual_changed_lines": 9832,
+      "ratio": 144.6,
+      "outcome": "HALTED",
+      "committed": false,
+      "suite_was_green": true,
+      "caught_by": "reading the diffstat",
+      "reported_in": [
+        "docs/RULES_ENACTED.md",
+        "docs/G13_RESULT.md"
+      ]
+    },
+    {
+      "id": "eol02-byte-preserving-redo",
+      "generation": 13,
+      "enacting_rule": "EOL-02",
+      "kind": "mechanical",
+      "description": "the same edit redone over bytes, asserting per file that its CRLF and LF counts are unchanged.",
+      "expected_changed_lines": 68,
+      "expected_stated_before_running": true,
+      "expected_basis": "unchanged from the first pass: 68 call sites, one line each.",
+      "actual_changed_lines": 68,
+      "ratio": 1.0,
+      "outcome": "COMPLETED",
+      "committed": true,
+      "commit_subject": "g13: EOL-02 -- every text-mode write states its line ending",
+      "commit_changed_lines": 464,
+      "commit_changed_lines_note": "the commit is larger than the sweep because it also carries the new rule text in docs/RULES_ENACTED.md and the new guard module. The sweep itself is the 68 above; DIFF-01 governs the sweep, not the commit it travels in.",
+      "reported_in": [
+        "docs/G13_RESULT.md"
+      ]
+    },
+    {
+      "id": "mech01-pass4-landing",
+      "generation": 14,
+      "enacting_rule": null,
+      "kind": "not-mechanical",
+      "description": "MECH-01 pass 4 landing: the runner, the mechanism description, its guard, one interpolation-allowlist entry, and the six pre-registered artefacts.",
+      "commit_subject": "g14: MECH-01 pass 4 -- a null matched on row count, and what it returned",
+      "why_not_mechanical": "no file was edited by a script. It is wide because new modules and their artefacts land together, which is depth-1 breadth rather than a sweep."
+    },
+    {
+      "id": "close-ruling-enactment",
+      "generation": "close",
+      "enacting_rule": "PRE-01",
+      "kind": "not-mechanical",
+      "description": "the close ruling of 2026-08-29 enacted: the PRE-01 register, checker, guard and rule text; the terminal loop state and its writer; the README badge; a superseding note in the audit master; and the changelog entry.",
+      "commit_subject": "close: the ruling enacted -- PRE-01, the accession record, and EXT-04's remote",
+      "why_not_mechanical": "no file was edited by a script. Every change was made deliberately at its own site. It is wide because a rule enactment lands its register, its checker, its guard and its documentation together, which is depth-1 breadth rather than a sweep.",
+      "registered_although_below_the_trigger": "at nine files the commit sits exactly in the blind spot DIFF-01 states for itself -- 'a mechanical edit confined to nine files is invisible to it'. Adding this entry makes the commit ten files and therefore sweep-shaped, so the guard now sees what it is looking at. Declaring it is cheaper than a commit that is silent because it happened to be one file under the threshold."
+    },
+    {
+      "id": "paper-after-the-close",
+      "generation": "close",
+      "enacting_rule": null,
+      "kind": "not-mechanical",
+      "description": "papers/draft.md brought up to the close ruling's spine, COR-1 applied, the paper put on the claim surface and the parked-instance guard deleted, with the corrigenda record, the operator-task discharge, the post-close state file and its writer, the badge and the changelog.",
+      "commit_subject": "close: the paper -- the spine written up, COR-1 applied, and the draft put on the claim surface",
+      "why_not_mechanical": "no file was edited by a script in the sense DIFF-01 governs. The prose edits were applied through a script for byte-level control of CRLF -- papers/draft.md is CRLF in the index and .gitattributes is `* -text`, so a text-mode rewrite would have normalised it, which is exactly the EOL-02 trap DIFF-01 was enacted after. Each edit was written individually and asserted to match exactly once; the script is a delivery mechanism, not a codemod.",
+      "expected_changed_lines": null,
+      "registered_although_below_the_trigger": "at nine files this sits in the blind spot DIFF-01 states for itself, the same as the preceding close commit. Registered on the same reasoning: a commit that is silent because it happened to be one file under the threshold is the failure the register exists to prevent.",
+      "line_endings_asserted": "papers/draft.md CRLF before and after; every other touched file LF before and after. Checked with git ls-files --eol."
+    },
+    {
+      "id": "paper-figures-and-two-corrections-g15",
+      "generation": "g15",
+      "enacting_rule": null,
+      "kind": "not-mechanical",
+      "description": "the first three figures and the script that draws them; the floor-sensitivity script and its artefact; COR-2 and COR-3 applied to papers/draft.md with their corrigenda entries; section 4.2 reordered, the abstract given a lede, section 5 given the four limitations it was missing; the Windows-leg scoring document and its evidence directories; and the .gitignore exceptions that let the figures resolve.",
+      "commit_subject": "g15: the paper gets figures, a floor sensitivity, and two corrections it needed",
+      "why_not_mechanical": "twenty-five files, twenty of which are new: two scripts, one document, and seventeen generated artefacts (three figures in two formats each, two manifests, and the two evidence directories). Only five existing files were edited -- .gitignore, papers/draft.md, papers/CORRIGENDA_g6.md and, in the preceding commit, the test module -- and each was edited at its own site by hand. No script rewrote any tracked file. The breadth is new artefacts landing with the code that produces them, which is the false-positive path the rule states for itself.",
+      "expected_changed_lines": null,
+      "line_endings_asserted": "papers/draft.md CRLF in index and worktree before and after -- the corrections were applied with the editing tool rather than a text-mode rewrite, and git ls-files --eol confirms i/crlf w/crlf afterwards. Every other touched text file LF before and after. The six figure files are binary and .gitattributes marks *.png and *.pdf binary.",
+      "artefacts_are_regenerable": "python scripts/make_figures_g15.py and python scripts/floor_sensitivity_g15.py. Neither performs a solve; both read committed artefacts and digest every input into their manifest, so a figure can be traced to the bytes it was drawn from."
+    }
+  ],
+  "kinds": {
+    "mechanical": "a codemod, normalisation or rule enactment applied across files by a script. DIFF-01 governs it and the full expected/actual accounting is required.",
+    "not-mechanical": "a wide commit that is not a sweep -- typically new files landing together. It appears here because the file-count trigger cannot see intent, and it must say why it is not mechanical. This is the false-positive path the rule's stated limitation predicts, and declaring it is the intended response; splitting a commit to slip under the threshold would be gaming the guard."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "what_this_is": "MECH-01 second method, the row side. Generation 10 tested the column side and falsified it; this is distinct in kind, not a second guess",
+  "authorised_by": "operator ruling of 2026-08-28 \u00a75",
+  "pilot": {
+    "cells_piloted": 2,
+    "per_cell_s": [
+      6.01800379999986,
+      9.704017500000191
+    ],
+    "per_cell_mean_s": 7.861010650000026,
+    "per_cell_spread_factor": 1.6124977355448689,
+    "cells_required": 36,
+    "projected_total_s": 282.9963834000009,
+    "basis": "the narrowest and widest windows, which bracket the cost: the widest is the slowest because more of its biases converge slowly. Every other cell lies between them",
+    "verdict": "AFFORDABLE",
+    "note": "PILOT-01: a measurement is never declined on a plausibility argument. This prices it so that a U-BUDGET verdict would have a number behind it"
+  },
+  "pilot_rule": "PILOT-01, enacted by the same ruling: a measurement is never declined on a plausibility argument. Either it is priced by pilot and declined on U-BUDGET with the number, or it is run. This one was priced and run",
+  "measure": {
+    "quantity": "w_out(k, w): the share of |U[:, k]|**2 lying on bias rows OUTSIDE the reference core window, where U is the left singular basis of the chart-G d=16 Jacobian at window width w",
+    "reference_core_V": [
+      0.47500000000000003,
+      0.5750000000000001
+    ],
+    "reference_core_is_not_chosen_here": "it is the narrowest window of SPEC-g9-2's width axis, whose centre, widths and bias count were fixed at generation 9. Choosing a core here would be choosing the answer",
+    "baseline_uniform": "excess(k, w) = w_out(k, w) - n_out(w)/n_rows(w). A direction that spreads evenly over rows scores exactly n_out/n_rows, so excess is signed against 'no preference'",
+    "baseline_head": "excess(k, w) - excess(1, w). The stronger baseline: both terms come from one SVD of one J, so the row count, the certification mask and the window all cancel",
+    "indices": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "why_four": "the close stopped at sigma_1..sigma_4 because sigma_5 sits at or below the estimator's spectral floor in 4 of 18 width cells. Inherited, not re-litigated",
+    "verdict_is_a_sign": "NEW_ROWS iff mean(excess(2..4)) > excess(1) at EVERY width wider than the narrowest; CONDITIONING iff never; MIXED otherwise with the widths named. A sign, so PH-11 has no cutoff to forbid",
+    "rows_used_may_vary": "SNR certification drops rows at some widths -- 16 at 0.10 V and 15 at 0.75 V at the generation-8 device. This is why every statistic is normalised per matrix and why the head baseline is the one the verdict rests on; rows_used is reported at every cell",
+    "measure_hash": "2d8525541d4b20e21461cd0756bc2c0c19067a08cc750b367bfee6583bbe00bc"
+  },
+  "outcomes": {
+    "NEW_ROWS": "sigma_2..sigma_4 are carried by the bias points the widening adds. Flattening is new independent measurements entering the problem, and MECH-01 narrows to: which transport regimes do the added biases sample that the core window does not? The mechanism is about COVERAGE",
+    "CONDITIONING": "the new directions are carried across biases already present in the narrow window. Widening is not adding information so much as improving the conditioning of rows already there, and MECH-01 narrows to: what makes the existing rows less collinear when the window is wider? The mechanism is about COLLINEARITY",
+    "MIXED": "the sign changes across widths. Reported with the widths that go each way named, and MECH-01 stays open with the crossover as the new object of study rather than with a mechanism named",
+    "UNDETERMINED": "the reproduction control failed, so the Jacobian is not the one generation 9 measured and nothing here is about the same object. Reported as a failure to measure"
+  },
+  "outcomes_note": "pre-registered before the first SVD, under the operator ruling of 2026-08-28 \u00a75, which required both outcomes stated before measuring because both are informative. Neither is the good outcome (AH-04, AH-13)",
+  "outcomes_hash": "5a4da674efdf16b20028806cad9a27476a722057133e2b0af0603018ebd85d44",
+  "new_solves": "NOT zero. outputs/g9/rank_obs.json stores singular VALUES only, not the left singular vectors, so the Jacobians must be recomputed. The ruling's new_solves=0 guard was conditional on them already existing; they do not, and saying so is cheaper than a guard that would have to lie",
+  "reproduction_control_is_what_makes_that_safe": "R1 requires every recomputed sigma_1..sigma_4 to reproduce generation 9's stored values, so a recomputed Jacobian is held to being the same object rather than assumed to be"
+}

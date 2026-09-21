@@ -30,12 +30,11 @@ Post-hoc recalibration:
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, Dict, Optional, Sequence, Tuple
+from typing import Callable, Tuple
 
 import numpy as np
 
 from ..bayesian.ensembles import EnsemblePrediction
-
 
 # ============================================================================
 # Reliability diagram + ECE
@@ -69,6 +68,38 @@ def reliability_diagram_regression(
     return predicted_q, empirical_q
 
 
+def ece_floor_for_ensemble(M: int, n_bins: int = 10,
+                           n_samples: int = 20000) -> float:
+    """Smallest ECE a *perfectly calibrated* M-member ensemble can achieve.
+
+    :func:`reliability_diagram_regression` uses the raw ensemble ECDF as the
+    predictive distribution. With M members, the q-quantile is estimated from
+    M order statistics, so even for a flawless model
+    ``P(y <= min of M) ~ 1/(M+1)`` rather than 0. The reliability curve is
+    therefore biased at the extremes and ECE has a positive floor.
+
+    This function returns that floor (computed for the exactly-calibrated
+    case) so ECE differences smaller than it are not over-interpreted.
+    Measured floors (n_bins = 10): M=3 -> 0.13, M=5 -> 0.085, M=10 -> 0.046,
+    M=20 -> 0.027. The project previously reported "ECE 0.224 -> 0.086 after
+    temperature scaling" for an M=5 ensemble: 0.086 is *at* the M=5 floor, so
+    the recalibrated model is indistinguishable from perfectly calibrated by
+    this estimator, and the number should not be read as a calibration
+    quality. See AUDIT_MASTER API-04.
+    """
+    if M < 2:
+        return float("nan")
+    # Estimated by simulation rather than in closed form: the closed-form
+    # order-statistic argument is only approximate once np.quantile's linear
+    # interpolation is taken into account (it drifts by ~4x at M = 200),
+    # whereas simulating the *exact* estimator this module uses is both simple
+    # and exact. Fixed seed -> deterministic, cache-able.
+    rng = np.random.default_rng(12345)
+    samples = rng.standard_normal((M, n_samples))
+    y = rng.standard_normal(n_samples)
+    return expected_calibration_error(samples, y, n_bins=n_bins)
+
+
 def expected_calibration_error(
     samples: np.ndarray,
     y_true: np.ndarray,
@@ -76,7 +107,10 @@ def expected_calibration_error(
 ) -> float:
     """ECE = mean over bins of |predicted_q - empirical_q|.
 
-    Lower is better; 0.0 means perfectly calibrated.
+    Lower is better; 0.0 means perfectly calibrated -- but see
+    :func:`ece_floor_for_ensemble`: with a small ensemble this estimator
+    cannot reach 0 even for a perfect model. Compare any reported ECE against
+    that floor before claiming an improvement.
     """
     pq, eq = reliability_diagram_regression(samples, y_true, n_bins)
     return float(np.mean(np.abs(pq - eq)))
@@ -246,15 +280,16 @@ def report_calibration(
 
 
 __all__ = [
-    "reliability_diagram_regression",
-    "expected_calibration_error",
-    "maximum_calibration_error",
-    "crps_gaussian",
-    "crps_empirical",
-    "gaussian_nll",
-    "sharpness",
-    "fit_temperature_regression",
-    "fit_isotonic_recalibrator",
     "CalibrationReport",
+    "crps_empirical",
+    "crps_gaussian",
+    "ece_floor_for_ensemble",
+    "expected_calibration_error",
+    "fit_isotonic_recalibrator",
+    "fit_temperature_regression",
+    "gaussian_nll",
+    "maximum_calibration_error",
+    "reliability_diagram_regression",
     "report_calibration",
+    "sharpness",
 ]

@@ -33,6 +33,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from ..inverse.charts import anchor_signed_to_grid
 
 # ============================================================================
 # Symlog transform (handles the 13-orders-of-magnitude signed current range)
@@ -109,18 +110,29 @@ class IVSurrogate(nn.Module):
 
     def __init__(self, cfg: IVSurrogateConfig):
         super().__init__()
-        torch.manual_seed(cfg.seed)
         self.cfg = cfg
         d_in = cfg.doping_dim + 1
-        layers: List[nn.Module] = [nn.Linear(d_in, cfg.hidden), nn.SiLU()]
-        if cfg.dropout > 0:
-            layers.append(nn.Dropout(cfg.dropout))
-        for _ in range(cfg.n_layers - 1):
-            layers += [nn.Linear(cfg.hidden, cfg.hidden), nn.SiLU()]
+        # AUDIT_MASTER API-03: this used to call torch.manual_seed(cfg.seed)
+        # directly, so merely *constructing* a model silently reseeded the
+        # global RNG and changed every downstream random draw -- batch
+        # sampling, dropout masks, any caller's shuffling. We still seed for
+        # reproducible initial weights, but save and restore the global state
+        # so construction has no observable side effect. Weights produced are
+        # bit-identical to before.
+        _rng_state = torch.get_rng_state()
+        try:
+            torch.manual_seed(cfg.seed)
+            layers: List[nn.Module] = [nn.Linear(d_in, cfg.hidden), nn.SiLU()]
             if cfg.dropout > 0:
                 layers.append(nn.Dropout(cfg.dropout))
-        layers.append(nn.Linear(cfg.hidden, 1))
-        self.net = nn.Sequential(*layers)
+            for _ in range(cfg.n_layers - 1):
+                layers += [nn.Linear(cfg.hidden, cfg.hidden), nn.SiLU()]
+                if cfg.dropout > 0:
+                    layers.append(nn.Dropout(cfg.dropout))
+            layers.append(nn.Linear(cfg.hidden, 1))
+            self.net = nn.Sequential(*layers)
+        finally:
+            torch.set_rng_state(_rng_state)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """``x`` is the *normalized* feature vector(s), shape (..., doping_dim+1)."""
@@ -158,9 +170,13 @@ def build_sg_dataset(
     X, Y = [], []
     for C in profiles_si:
         latent = scaling.doping_to_net_input(C)
+        # CHART-01: the latent stays at anchor resolution -- it is the network
+        # input -- but the oracle integrates a grid profile, and which one was
+        # decided until generation 8 by the solver's resampler. Chart L, named.
+        C_grid = anchor_signed_to_grid(C, oracle.grid.N)
         prev = None
         for V in biases_si:
-            st = oracle.solve(C, float(V), initial_state=prev)
+            st = oracle.solve(C_grid, float(V), initial_state=prev)
             prev = st
             X.append(make_features(latent, V / VT))
             Y.append(symlog.forward(st.terminal_current))
@@ -181,18 +197,44 @@ def train_surrogate(
     weight_decay: float = 1e-5,
     batch_size: Optional[int] = None,
     verbose: bool = False,
+    seed: Optional[int] = None,
 ) -> List[float]:
-    """Train a single surrogate on (X, Y). Returns the loss history."""
+    """Train a single surrogate on (X, Y). Returns the loss history.
+
+    Parameters
+    ----------
+    seed
+        Seed for minibatch sampling. Defaults to ``model.cfg.seed``, so an
+        ensemble whose members differ only by ``cfg.seed`` also differs only by
+        ``cfg.seed`` in its batch draws. Ignored on the full-batch path, which
+        draws nothing.
+
+    Notes
+    -----
+    AUDIT_g0 API-05 / SW-09. Minibatch indices used to come from
+    ``torch.randint(0, n, (batch_size,))``, which reads the **global** torch RNG:
+    two consecutive calls with identical arguments produced different models, and
+    ensemble members differed by the ambient RNG state as well as by their seed.
+    Measured before the fix at ``cfg.seed=0``, 200 epochs, ``batch_size=32``:
+    state-dict hashes ``091450bf7c0965bb`` and ``cc67824aa4e606ff`` on successive
+    calls. Sampling now uses a local generator, so the global RNG is irrelevant
+    and no caller has to reseed it -- the same discipline ``PINNTrainer`` already
+    applies at ``trainer.py:132``.
+    """
     Xt = normalizer(torch.tensor(X, dtype=torch.float32))
     Yt = torch.tensor(Y, dtype=torch.float32).reshape(-1, 1)
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=epochs)
     n = Xt.shape[0]
     history = []
+    # Local generator, never the global RNG. Constructed unconditionally so the
+    # seed is resolved the same way whichever path runs.
+    batch_rng = torch.Generator()
+    batch_rng.manual_seed(int(model.cfg.seed if seed is None else seed))
     model.train()
     for ep in range(epochs):
         if batch_size and batch_size < n:
-            idx = torch.randint(0, n, (batch_size,))
+            idx = torch.randint(0, n, (batch_size,), generator=batch_rng)
             xb, yb = Xt[idx], Yt[idx]
         else:
             xb, yb = Xt, Yt
@@ -213,10 +255,26 @@ def train_surrogate(
 
 @dataclass
 class SurrogatePrediction:
+    """Ensemble prediction of an I--V curve.
+
+    Two different point estimates of the current exist and they are *not*
+    interchangeable across the ~11 decades this model spans (AUDIT_MASTER
+    API-01, where the codebase used both under the single name "mean"):
+
+    * :attr:`mean_current` -- ``symlog^-1(mean(symlog(I)))``. Because symlog
+      is monotone, this is the ensemble *median*-like estimate, and it is the
+      natural point estimate when the members disagree multiplicatively (which
+      is how they disagree here). This is what the reported metrics use.
+    * :attr:`mean_current_linear` -- the arithmetic mean of the members'
+      currents. Over many decades this is dominated by whichever member
+      predicts the largest current, so it is reported for completeness but is
+      rarely the estimator you want.
+    """
     mean_symlog: np.ndarray       # (B,)
     std_symlog: np.ndarray        # (B,)
-    mean_current: np.ndarray      # (B,) A/m^2
+    mean_current: np.ndarray      # (B,) A/m^2 -- inverse-symlog of the mean
     samples_symlog: np.ndarray    # (M, B)
+    mean_current_linear: np.ndarray = None   # (B,) A/m^2 -- arithmetic mean
 
 
 class SurrogateEnsemble:
@@ -253,12 +311,18 @@ class SurrogateEnsemble:
             mean_symlog=mean_s, std_symlog=std_s,
             mean_current=self.symlog.inverse(mean_s),
             samples_symlog=S,
+            mean_current_linear=self.symlog.inverse(S).mean(0),
         )
 
 
 __all__ = [
-    "SymlogTransform", "Normalizer",
-    "IVSurrogateConfig", "IVSurrogate",
-    "make_features", "build_sg_dataset", "train_surrogate",
-    "SurrogatePrediction", "SurrogateEnsemble",
+    "IVSurrogate",
+    "IVSurrogateConfig",
+    "Normalizer",
+    "SurrogateEnsemble",
+    "SurrogatePrediction",
+    "SymlogTransform",
+    "build_sg_dataset",
+    "make_features",
+    "train_surrogate",
 ]

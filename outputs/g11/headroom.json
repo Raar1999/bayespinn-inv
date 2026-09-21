@@ -1,0 +1,67 @@
+{
+  "floor": 0.02,
+  "rows": [
+    {
+      "set": "chart_G_d4",
+      "artefact": "outputs/wit02_chartG/refine.json",
+      "helped_form_the_premise": true,
+      "n": 13,
+      "n_surviving": 12,
+      "n_separating": 1,
+      "largest_surviving_in_floor_units": 0.9771500037511704,
+      "smallest_separating_in_floor_units": 0.9889614303686318,
+      "bands_overlap": false,
+      "spearman_rho": 0.46291004988627577,
+      "spearman_p": 0.11117295276905709,
+      "concordance": 1.0,
+      "degenerate": false
+    },
+    {
+      "set": "chart_J_d16",
+      "artefact": "outputs/g9/junction_refine.json",
+      "helped_form_the_premise": true,
+      "n": 13,
+      "n_surviving": 7,
+      "n_separating": 6,
+      "largest_surviving_in_floor_units": 0.9217878978475477,
+      "smallest_separating_in_floor_units": 0.9366432060135831,
+      "bands_overlap": false,
+      "spearman_rho": 0.8660254037844387,
+      "spearman_p": 0.00012940169548043983,
+      "concordance": 1.0,
+      "degenerate": false
+    },
+    {
+      "set": "chart_L_d16",
+      "artefact": "outputs/g11/wit02_chartL/refine.json",
+      "helped_form_the_premise": false,
+      "n": 37,
+      "n_surviving": 26,
+      "n_separating": 11,
+      "largest_surviving_in_floor_units": 0.995706451904469,
+      "smallest_separating_in_floor_units": 0.5334106689319513,
+      "bands_overlap": true,
+      "spearman_rho": -0.033228888017745054,
+      "spearman_p": 0.8452052149909229,
+      "concordance": 0.479020979020979,
+      "degenerate": false
+    }
+  ],
+  "verdict": {
+    "premise": "docs/CLOSE_RULING.md section 2 (b), ratified: what predicts refinement survival is headroom against the distinguishability floor",
+    "sets_where_it_holds_perfectly": [
+      "chart_G_d4",
+      "chart_J_d16"
+    ],
+    "sets_where_it_carries_no_information": [
+      "chart_L_d16"
+    ],
+    "holds_on_every_set": false,
+    "the_sets_it_holds_on_are_the_sets_it_was_formed_on": true,
+    "reading": "the premise is FALSIFIED AS A GENERAL RULE and stands only on the two sets that formed it. On chart L -- the largest set, 37 pairs with 11 separating, and the only one that did not help form the rule -- committed headroom carries no information about survival: concordance 0.479 against 0.500 for a coin, spearman -0.033 at p=0.845. The surviving and separating bands overlap across half the floor.",
+    "what_it_does_not_say": "it does not say the two 13-pair results were wrong. They reproduce. It says the rule read off them does not generalise, which is the same shape as generation 9's finding that a four-way ordering measured at one operating point did not survive nine more.",
+    "what_it_strengthens": "the close's refusal to adopt a margin band. That refusal rested on the band being 1.4 percentage points wide and therefore tuned (PH-11). Chart L is the stronger reason: across 37 pairs there is no band to tune, because survivors reach 0.996 floor units and separators start at 0.533. The decision was right and its recorded reason was weaker than the truth.",
+    "status": "DESCRIPTION, not a pre-registered test (AH-14)",
+    "new_solves": 0
+  }
+}

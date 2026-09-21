@@ -15,11 +15,10 @@ seaborn's "colorblind" cycle, fixed here so we don't depend on seaborn.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence
 
 import numpy as np
+
 
 # Defer matplotlib imports so importing this module doesn't open a backend
 def _mpl():
@@ -305,11 +304,12 @@ def plot_training_history(
 
 
 __all__ = [
-    "apply_style", "PALETTE",
-    "plot_device_state",
-    "plot_iv_with_uncertainty",
-    "plot_doping_recovery",
-    "plot_reliability_diagram",
+    "PALETTE",
+    "apply_style",
     "plot_active_learning_convergence",
+    "plot_device_state",
+    "plot_doping_recovery",
+    "plot_iv_with_uncertainty",
+    "plot_reliability_diagram",
     "plot_training_history",
 ]

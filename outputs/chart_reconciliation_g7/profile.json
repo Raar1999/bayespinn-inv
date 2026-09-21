@@ -1,0 +1,772 @@
+{
+  "parameterisation": "chart G, d=4, theta = log10|C| at 4 equally spaced anchors",
+  "path": "straight line in theta between witness pair 0 members, extended to t in [-0.25, 1.25]",
+  "endpoint_a_log10": [
+    22.052336061003242,
+    21.92875081578813,
+    21.445066677544368,
+    22.512934220719224
+  ],
+  "endpoint_b_log10": [
+    22.61289465164883,
+    21.016235737430264,
+    22.067308825254717,
+    22.022419910385203
+  ],
+  "reference_observation": "oracle I-V of endpoint a, noise-free; sigma = 0.02 relative, 16 biases",
+  "noise_model": "independent Gaussian in relative current",
+  "witness_path": [
+    {
+      "t": -0.25,
+      "loglik": -306.6344871986587,
+      "obs_distance_from_a": 0.15925890358349395,
+      "max_param_change_decades": 0.2281287695894676
+    },
+    {
+      "t": -0.225,
+      "loglik": -243.98131557775127,
+      "obs_distance_from_a": 0.1423124573009016,
+      "max_param_change_decades": 0.20531589263052297
+    },
+    {
+      "t": -0.2,
+      "loglik": -188.96374985804653,
+      "obs_distance_from_a": 0.1254993619267278,
+      "max_param_change_decades": 0.18250301567157123
+    },
+    {
+      "t": -0.175,
+      "loglik": -141.66533967869708,
+      "obs_distance_from_a": 0.1088300818596355,
+      "max_param_change_decades": 0.1596901387126266
+    },
+    {
+      "t": -0.15,
+      "loglik": -101.6233376139368,
+      "obs_distance_from_a": 0.09236655052077444,
+      "max_param_change_decades": 0.13687726175367843
+    },
+    {
+      "t": -0.125,
+      "loglik": -68.78311733715084,
+      "obs_distance_from_a": 0.07613085132945664,
+      "max_param_change_decades": 0.1140643847947338
+    },
+    {
+      "t": -0.09999999999999998,
+      "loglik": -42.83397554777626,
+      "obs_distance_from_a": 0.06017675255088333,
+      "max_param_change_decades": 0.09125150783578917
+    },
+    {
+      "t": -0.07499999999999998,
+      "loglik": -23.3898279074941,
+      "obs_distance_from_a": 0.04454591680984925,
+      "max_param_change_decades": 0.06843863087683744
+    },
+    {
+      "t": -0.04999999999999999,
+      "loglik": -10.062129013083606,
+      "obs_distance_from_a": 0.02927162245035112,
+      "max_param_change_decades": 0.04562575391789281
+    },
+    {
+      "t": -0.024999999999999994,
+      "loglik": -2.4377668107838186,
+      "obs_distance_from_a": 0.014409386877546273,
+      "max_param_change_decades": 0.022812876958944628
+    },
+    {
+      "t": 0.0,
+      "loglik": -0.0,
+      "obs_distance_from_a": 0.0,
+      "max_param_change_decades": 0.0
+    },
+    {
+      "t": 0.025000000000000022,
+      "loglik": -2.2544603676759043,
+      "obs_distance_from_a": 0.013734948117201561,
+      "max_param_change_decades": 0.02281287695894818
+    },
+    {
+      "t": 0.050000000000000044,
+      "loglik": -8.70901818761751,
+      "obs_distance_from_a": 0.026583220483436094,
+      "max_param_change_decades": 0.04562575391789281
+    },
+    {
+      "t": 0.07500000000000001,
+      "loglik": -18.735409832995938,
+      "obs_distance_from_a": 0.03856868383703457,
+      "max_param_change_decades": 0.06843863087683744
+    },
+    {
+      "t": 0.10000000000000003,
+      "loglik": -31.825285440593337,
+      "obs_distance_from_a": 0.04971702602060583,
+      "max_param_change_decades": 0.09125150783578917
+    },
+    {
+      "t": 0.125,
+      "loglik": -47.32287682111651,
+      "obs_distance_from_a": 0.06003438067926734,
+      "max_param_change_decades": 0.1140643847947338
+    },
+    {
+      "t": 0.15000000000000002,
+      "loglik": -64.68507845625015,
+      "obs_distance_from_a": 0.06953426915339429,
+      "max_param_change_decades": 0.13687726175368198
+    },
+    {
+      "t": 0.17500000000000004,
+      "loglik": -83.45179411765528,
+      "obs_distance_from_a": 0.07823560578660008,
+      "max_param_change_decades": 0.1596901387126266
+    },
+    {
+      "t": 0.2,
+      "loglik": -102.88928902872206,
+      "obs_distance_from_a": 0.08615917001203932,
+      "max_param_change_decades": 0.18250301567157123
+    },
+    {
+      "t": 0.22500000000000003,
+      "loglik": -122.49825985261921,
+      "obs_distance_from_a": 0.09331205273530686,
+      "max_param_change_decades": 0.20531589263052297
+    },
+    {
+      "t": 0.25,
+      "loglik": -141.90814097939636,
+      "obs_distance_from_a": 0.0997107482462528,
+      "max_param_change_decades": 0.2281287695894676
+    },
+    {
+      "t": 0.275,
+      "loglik": -160.59741591352832,
+      "obs_distance_from_a": 0.10536976653120346,
+      "max_param_change_decades": 0.2509416465484122
+    },
+    {
+      "t": 0.30000000000000004,
+      "loglik": -178.02020298736153,
+      "obs_distance_from_a": 0.11030788014320003,
+      "max_param_change_decades": 0.2737545235073604
+    },
+    {
+      "t": 0.32500000000000007,
+      "loglik": -193.90644051953947,
+      "obs_distance_from_a": 0.11454081324953318,
+      "max_param_change_decades": 0.29656740046630503
+    },
+    {
+      "t": 0.3500000000000001,
+      "loglik": -207.93838198515397,
+      "obs_distance_from_a": 0.11807955829797226,
+      "max_param_change_decades": 0.3193802774252532
+    },
+    {
+      "t": 0.375,
+      "loglik": -219.9024541743175,
+      "obs_distance_from_a": 0.12092609889710643,
+      "max_param_change_decades": 0.3421931543842014
+    },
+    {
+      "t": 0.4,
+      "loglik": -229.36391133028746,
+      "obs_distance_from_a": 0.1231015001454681,
+      "max_param_change_decades": 0.365006031343146
+    },
+    {
+      "t": 0.42500000000000004,
+      "loglik": -236.3257632008644,
+      "obs_distance_from_a": 0.1246286590003501,
+      "max_param_change_decades": 0.38781890830209065
+    },
+    {
+      "t": 0.45000000000000007,
+      "loglik": -240.66662363445596,
+      "obs_distance_from_a": 0.1255010097997023,
+      "max_param_change_decades": 0.4106317852610424
+    },
+    {
+      "t": 0.4750000000000001,
+      "loglik": -242.44329175300908,
+      "obs_distance_from_a": 0.1257438353342316,
+      "max_param_change_decades": 0.433444662219987
+    },
+    {
+      "t": 0.5,
+      "loglik": -241.3529122410378,
+      "obs_distance_from_a": 0.12536134889095096,
+      "max_param_change_decades": 0.45625753917893164
+    },
+    {
+      "t": 0.525,
+      "loglik": -237.69263163762298,
+      "obs_distance_from_a": 0.12450083276990166,
+      "max_param_change_decades": 0.4790704161378798
+    },
+    {
+      "t": 0.55,
+      "loglik": -231.57808205341178,
+      "obs_distance_from_a": 0.12304930045944026,
+      "max_param_change_decades": 0.501883293096828
+    },
+    {
+      "t": 0.5750000000000001,
+      "loglik": -223.01578496000667,
+      "obs_distance_from_a": 0.12097629846128362,
+      "max_param_change_decades": 0.5246961700557726
+    },
+    {
+      "t": 0.6000000000000001,
+      "loglik": -212.39263905760913,
+      "obs_distance_from_a": 0.11834307788032632,
+      "max_param_change_decades": 0.5475090470147208
+    },
+    {
+      "t": 0.625,
+      "loglik": -199.7778529031599,
+      "obs_distance_from_a": 0.11512562417688064,
+      "max_param_change_decades": 0.570321923973669
+    },
+    {
+      "t": 0.65,
+      "loglik": -185.58691525981655,
+      "obs_distance_from_a": 0.11190739340090942,
+      "max_param_change_decades": 0.5931348009326136
+    },
+    {
+      "t": 0.675,
+      "loglik": -170.0648900044368,
+      "obs_distance_from_a": 0.1082390143543036,
+      "max_param_change_decades": 0.6159476778915582
+    },
+    {
+      "t": 0.7000000000000001,
+      "loglik": -153.3791986928255,
+      "obs_distance_from_a": 0.10374587145528982,
+      "max_param_change_decades": 0.6387605548505064
+    },
+    {
+      "t": 0.7250000000000001,
+      "loglik": -136.13822432328192,
+      "obs_distance_from_a": 0.09906196709258552,
+      "max_param_change_decades": 0.6615734318094546
+    },
+    {
+      "t": 0.75,
+      "loglik": -118.4268943463938,
+      "obs_distance_from_a": 0.09352175738400018,
+      "max_param_change_decades": 0.6843863087683992
+    },
+    {
+      "t": 0.7750000000000001,
+      "loglik": -100.85136222903769,
+      "obs_distance_from_a": 0.08782451814939524,
+      "max_param_change_decades": 0.7071991857273474
+    },
+    {
+      "t": 0.8,
+      "loglik": -83.57931073640816,
+      "obs_distance_from_a": 0.08143217339341877,
+      "max_param_change_decades": 0.7300120626862956
+    },
+    {
+      "t": 0.825,
+      "loglik": -67.03018414403077,
+      "obs_distance_from_a": 0.07443199749115746,
+      "max_param_change_decades": 0.7528249396452402
+    },
+    {
+      "t": 0.8500000000000001,
+      "loglik": -51.58731665492485,
+      "obs_distance_from_a": 0.06702195985439893,
+      "max_param_change_decades": 0.7756378166041848
+    },
+    {
+      "t": 0.875,
+      "loglik": -37.5989981794222,
+      "obs_distance_from_a": 0.0592581178921036,
+      "max_param_change_decades": 0.798450693563133
+    },
+    {
+      "t": 0.9000000000000001,
+      "loglik": -25.353890570879877,
+      "obs_distance_from_a": 0.05070294227593938,
+      "max_param_change_decades": 0.8212635705220812
+    },
+    {
+      "t": 0.925,
+      "loglik": -15.244936451976468,
+      "obs_distance_from_a": 0.04185449152845439,
+      "max_param_change_decades": 0.8440764474810294
+    },
+    {
+      "t": 0.9500000000000002,
+      "loglik": -7.560648219330229,
+      "obs_distance_from_a": 0.032580056856738,
+      "max_param_change_decades": 0.866889324439974
+    },
+    {
+      "t": 0.9750000000000001,
+      "loglik": -2.581729005580897,
+      "obs_distance_from_a": 0.02271164635309515,
+      "max_param_change_decades": 0.8897022013989186
+    },
+    {
+      "t": 1.0,
+      "loglik": -0.5905769203058111,
+      "obs_distance_from_a": 0.012254760252752345,
+      "max_param_change_decades": 0.9125150783578668
+    },
+    {
+      "t": 1.0250000000000001,
+      "loglik": -1.8584023154014204,
+      "obs_distance_from_a": 0.014636635282609112,
+      "max_param_change_decades": 0.9353279553168115
+    },
+    {
+      "t": 1.05,
+      "loglik": -6.617352574585836,
+      "obs_distance_from_a": 0.02669530222697312,
+      "max_param_change_decades": 0.9581408322757596
+    },
+    {
+      "t": 1.0750000000000002,
+      "loglik": -15.080765001413555,
+      "obs_distance_from_a": 0.03896502130864428,
+      "max_param_change_decades": 0.9809537092347078
+    },
+    {
+      "t": 1.1,
+      "loglik": -27.45354297196008,
+      "obs_distance_from_a": 0.05142663361584796,
+      "max_param_change_decades": 1.0037665861936524
+    },
+    {
+      "t": 1.125,
+      "loglik": -43.915176218635196,
+      "obs_distance_from_a": 0.06405382195181128,
+      "max_param_change_decades": 1.0265794631526006
+    },
+    {
+      "t": 1.1500000000000001,
+      "loglik": -64.62130085415097,
+      "obs_distance_from_a": 0.0768271359515523,
+      "max_param_change_decades": 1.0493923401115453
+    },
+    {
+      "t": 1.175,
+      "loglik": -89.67244785322667,
+      "obs_distance_from_a": 0.08972689996090338,
+      "max_param_change_decades": 1.0722052170704934
+    },
+    {
+      "t": 1.2000000000000002,
+      "loglik": -119.2181135900065,
+      "obs_distance_from_a": 0.10273295285880846,
+      "max_param_change_decades": 1.0950180940294416
+    },
+    {
+      "t": 1.225,
+      "loglik": -153.35888759421752,
+      "obs_distance_from_a": 0.11582489940849781,
+      "max_param_change_decades": 1.1178309709883862
+    },
+    {
+      "t": 1.25,
+      "loglik": -192.10594900024287,
+      "obs_distance_from_a": 0.12898921919097123,
+      "max_param_change_decades": 1.1406438479473344
+    }
+  ],
+  "control_direction": {
+    "description": "most observable right singular direction of the chart-G d=4 Jacobian at endpoint a, same excursion length in theta",
+    "direction": [
+      0.6201187906721983,
+      0.7169731911170009,
+      0.13755580090293434,
+      0.28719423795178634
+    ],
+    "singular_value": 1.9233889205140295,
+    "points": [
+      {
+        "t": -0.25,
+        "loglik": -5476.658541280076,
+        "obs_distance_from_a": 0.4192196412907038,
+        "max_param_change_decades": 0.2387840490663855
+      },
+      {
+        "t": -0.225,
+        "loglik": -4155.766860397836,
+        "obs_distance_from_a": 0.3843102063488602,
+        "max_param_change_decades": 0.21490564415974944
+      },
+      {
+        "t": -0.2,
+        "loglik": -3079.812029143024,
+        "obs_distance_from_a": 0.3479126831699222,
+        "max_param_change_decades": 0.19102723925310983
+      },
+      {
+        "t": -0.175,
+        "loglik": -2215.279822866457,
+        "obs_distance_from_a": 0.3100324765963342,
+        "max_param_change_decades": 0.1671488343464702
+      },
+      {
+        "t": -0.15,
+        "loglik": -1530.7843595563563,
+        "obs_distance_from_a": 0.27060750641511444,
+        "max_param_change_decades": 0.1432704294398306
+      },
+      {
+        "t": -0.125,
+        "loglik": -1001.5796449394425,
+        "obs_distance_from_a": 0.22965442536932615,
+        "max_param_change_decades": 0.11939202453319453
+      },
+      {
+        "t": -0.09999999999999998,
+        "loglik": -604.4418134616751,
+        "obs_distance_from_a": 0.1870462337624727,
+        "max_param_change_decades": 0.09551361962655491
+      },
+      {
+        "t": -0.07499999999999998,
+        "loglik": -321.03754141627144,
+        "obs_distance_from_a": 0.14286234733761352,
+        "max_param_change_decades": 0.0716352147199153
+      },
+      {
+        "t": -0.04999999999999999,
+        "loglik": -134.8796805629428,
+        "obs_distance_from_a": 0.09695559771446019,
+        "max_param_change_decades": 0.04775680981327568
+      },
+      {
+        "t": -0.024999999999999994,
+        "loglik": -31.891133815754717,
+        "obs_distance_from_a": 0.0493385384976045,
+        "max_param_change_decades": 0.023878404906639616
+      },
+      {
+        "t": 0.0,
+        "loglik": -0.0,
+        "obs_distance_from_a": 0.0,
+        "max_param_change_decades": 0.0
+      },
+      {
+        "t": 0.025000000000000022,
+        "loglik": -28.689396677749265,
+        "obs_distance_from_a": 0.048697395008977205,
+        "max_param_change_decades": 0.023878404906639616
+      },
+      {
+        "t": 0.050000000000000044,
+        "loglik": -108.91279585892349,
+        "obs_distance_from_a": 0.09430578349352424,
+        "max_param_change_decades": 0.04775680981327568
+      },
+      {
+        "t": 0.07500000000000001,
+        "loglik": -232.89456193018782,
+        "obs_distance_from_a": 0.1372719860756568,
+        "max_param_change_decades": 0.0716352147199153
+      },
+      {
+        "t": 0.10000000000000003,
+        "loglik": -394.0190563064871,
+        "obs_distance_from_a": 0.1777118968694494,
+        "max_param_change_decades": 0.09551361962655491
+      },
+      {
+        "t": 0.125,
+        "loglik": -586.351539761107,
+        "obs_distance_from_a": 0.21580259676102118,
+        "max_param_change_decades": 0.11939202453319453
+      },
+      {
+        "t": 0.15000000000000002,
+        "loglik": -804.8586336426004,
+        "obs_distance_from_a": 0.25170925018502666,
+        "max_param_change_decades": 0.1432704294398306
+      },
+      {
+        "t": 0.17500000000000004,
+        "loglik": -1045.2957216878067,
+        "obs_distance_from_a": 0.2855883692991737,
+        "max_param_change_decades": 0.1671488343464702
+      },
+      {
+        "t": 0.2,
+        "loglik": -1303.893141612999,
+        "obs_distance_from_a": 0.3175652666164562,
+        "max_param_change_decades": 0.19102723925310983
+      },
+      {
+        "t": 0.22500000000000003,
+        "loglik": -1577.2105070368393,
+        "obs_distance_from_a": 0.3477676652863868,
+        "max_param_change_decades": 0.21490564415974944
+      },
+      {
+        "t": 0.25,
+        "loglik": -1862.1892200870648,
+        "obs_distance_from_a": 0.3763166574013828,
+        "max_param_change_decades": 0.2387840490663855
+      },
+      {
+        "t": 0.275,
+        "loglik": -2157.3599462531365,
+        "obs_distance_from_a": 0.4033117335873526,
+        "max_param_change_decades": 0.2626624539730251
+      },
+      {
+        "t": 0.30000000000000004,
+        "loglik": -2459.999505551981,
+        "obs_distance_from_a": 0.4288719625422493,
+        "max_param_change_decades": 0.28654085887966474
+      },
+      {
+        "t": 0.32500000000000007,
+        "loglik": -2768.0417590363104,
+        "obs_distance_from_a": 0.453060218641232,
+        "max_param_change_decades": 0.31041926378630436
+      },
+      {
+        "t": 0.3500000000000001,
+        "loglik": -3079.7702627873587,
+        "obs_distance_from_a": 0.47598928385299355,
+        "max_param_change_decades": 0.3342976686929404
+      },
+      {
+        "t": 0.375,
+        "loglik": -3395.2171123938347,
+        "obs_distance_from_a": 0.4977409851904137,
+        "max_param_change_decades": 0.35817607359958004
+      },
+      {
+        "t": 0.4,
+        "loglik": -3712.2175511235573,
+        "obs_distance_from_a": 0.518356685758413,
+        "max_param_change_decades": 0.38205447850621965
+      },
+      {
+        "t": 0.42500000000000004,
+        "loglik": -4029.1292698434336,
+        "obs_distance_from_a": 0.537923317471351,
+        "max_param_change_decades": 0.40593288341285927
+      },
+      {
+        "t": 0.45000000000000007,
+        "loglik": -4346.657971791601,
+        "obs_distance_from_a": 0.556498669460683,
+        "max_param_change_decades": 0.42981128831949533
+      },
+      {
+        "t": 0.4750000000000001,
+        "loglik": -4663.550280314796,
+        "obs_distance_from_a": 0.5741694748139281,
+        "max_param_change_decades": 0.45368969322613495
+      },
+      {
+        "t": 0.5,
+        "loglik": -4978.993077689187,
+        "obs_distance_from_a": 0.5909558281207211,
+        "max_param_change_decades": 0.47756809813277457
+      },
+      {
+        "t": 0.525,
+        "loglik": -5291.88191218654,
+        "obs_distance_from_a": 0.6069183888704315,
+        "max_param_change_decades": 0.5014465030394142
+      },
+      {
+        "t": 0.55,
+        "loglik": -5602.883488446567,
+        "obs_distance_from_a": 0.6221019685410586,
+        "max_param_change_decades": 0.5253249079460502
+      },
+      {
+        "t": 0.5750000000000001,
+        "loglik": -5909.804921970919,
+        "obs_distance_from_a": 0.6365573031588139,
+        "max_param_change_decades": 0.5492033128526899
+      },
+      {
+        "t": 0.6000000000000001,
+        "loglik": -6215.686560516295,
+        "obs_distance_from_a": 0.650315242867403,
+        "max_param_change_decades": 0.5730817177593295
+      },
+      {
+        "t": 0.625,
+        "loglik": -6517.917558116465,
+        "obs_distance_from_a": 0.6635159433349247,
+        "max_param_change_decades": 0.5969601226659655
+      },
+      {
+        "t": 0.65,
+        "loglik": -6815.390854316947,
+        "obs_distance_from_a": 0.6761585524247898,
+        "max_param_change_decades": 0.6208385275726052
+      },
+      {
+        "t": 0.675,
+        "loglik": -7110.797475992101,
+        "obs_distance_from_a": 0.6882175561970348,
+        "max_param_change_decades": 0.6447169324792448
+      },
+      {
+        "t": 0.7000000000000001,
+        "loglik": -7402.100097990761,
+        "obs_distance_from_a": 0.6997230326760788,
+        "max_param_change_decades": 0.6685953373858844
+      },
+      {
+        "t": 0.7250000000000001,
+        "loglik": -7689.080941346087,
+        "obs_distance_from_a": 0.710710008546942,
+        "max_param_change_decades": 0.6924737422925205
+      },
+      {
+        "t": 0.75,
+        "loglik": -7973.144380019972,
+        "obs_distance_from_a": 0.7211996208061328,
+        "max_param_change_decades": 0.7163521471991601
+      },
+      {
+        "t": 0.7750000000000001,
+        "loglik": -8252.38058870446,
+        "obs_distance_from_a": 0.7312234138132397,
+        "max_param_change_decades": 0.7402305521057997
+      },
+      {
+        "t": 0.8,
+        "loglik": -8527.331592695691,
+        "obs_distance_from_a": 0.7407999560955324,
+        "max_param_change_decades": 0.7641089570124393
+      },
+      {
+        "t": 0.825,
+        "loglik": -8798.56445512688,
+        "obs_distance_from_a": 0.7499565199618649,
+        "max_param_change_decades": 0.7879873619190754
+      },
+      {
+        "t": 0.8500000000000001,
+        "loglik": -9067.030288644723,
+        "obs_distance_from_a": 0.7587170803395588,
+        "max_param_change_decades": 0.811865766825715
+      },
+      {
+        "t": 0.875,
+        "loglik": -9329.692384616847,
+        "obs_distance_from_a": 0.7670978795438402,
+        "max_param_change_decades": 0.8357441717323546
+      },
+      {
+        "t": 0.9000000000000001,
+        "loglik": -9588.681697428001,
+        "obs_distance_from_a": 0.7751176136976221,
+        "max_param_change_decades": 0.8596225766389942
+      },
+      {
+        "t": 0.925,
+        "loglik": -9844.657145254987,
+        "obs_distance_from_a": 0.7827998351181368,
+        "max_param_change_decades": 0.8835009815456303
+      },
+      {
+        "t": 0.9500000000000002,
+        "loglik": -10093.9572449511,
+        "obs_distance_from_a": 0.7901536909888685,
+        "max_param_change_decades": 0.9073793864522699
+      },
+      {
+        "t": 0.9750000000000001,
+        "loglik": -10341.65666534815,
+        "obs_distance_from_a": 0.7972018164805206,
+        "max_param_change_decades": 0.9312577913589095
+      },
+      {
+        "t": 1.0,
+        "loglik": -10584.477811520486,
+        "obs_distance_from_a": 0.8039591711364885,
+        "max_param_change_decades": 0.9551361962655456
+      },
+      {
+        "t": 1.0250000000000001,
+        "loglik": -10824.166327332227,
+        "obs_distance_from_a": 0.8104331190071858,
+        "max_param_change_decades": 0.9790146011721852
+      },
+      {
+        "t": 1.05,
+        "loglik": -11059.036576571789,
+        "obs_distance_from_a": 0.8166466620765787,
+        "max_param_change_decades": 1.0028930060788248
+      },
+      {
+        "t": 1.0750000000000002,
+        "loglik": -11288.66320007529,
+        "obs_distance_from_a": 0.8226095479563371,
+        "max_param_change_decades": 1.0267714109854644
+      },
+      {
+        "t": 1.1,
+        "loglik": -11514.699922466463,
+        "obs_distance_from_a": 0.8283315064545371,
+        "max_param_change_decades": 1.0506498158921005
+      },
+      {
+        "t": 1.125,
+        "loglik": -11738.832536120899,
+        "obs_distance_from_a": 0.8338243004862468,
+        "max_param_change_decades": 1.07452822079874
+      },
+      {
+        "t": 1.1500000000000001,
+        "loglik": -11958.455470541205,
+        "obs_distance_from_a": 0.839100639197646,
+        "max_param_change_decades": 1.0984066257053797
+      },
+      {
+        "t": 1.175,
+        "loglik": -12170.110415805517,
+        "obs_distance_from_a": 0.8441706628551097,
+        "max_param_change_decades": 1.1222850306120193
+      },
+      {
+        "t": 1.2000000000000002,
+        "loglik": -12381.011552063694,
+        "obs_distance_from_a": 0.8490407212175382,
+        "max_param_change_decades": 1.1461634355186554
+      },
+      {
+        "t": 1.225,
+        "loglik": -12584.149569540947,
+        "obs_distance_from_a": 0.85372461768959,
+        "max_param_change_decades": 1.170041840425295
+      },
+      {
+        "t": 1.25,
+        "loglik": -12784.658377380994,
+        "obs_distance_from_a": 0.8582239858928322,
+        "max_param_change_decades": 1.1939202453319346
+      }
+    ]
+  },
+  "witness_path_loglik_range": [
+    -306.6344871986587,
+    -0.0
+  ],
+  "control_loglik_range": [
+    -12784.658377380994,
+    -0.0
+  ]
+}

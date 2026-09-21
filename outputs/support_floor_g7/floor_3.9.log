@@ -1,0 +1,7 @@
+floor 3.9  files 96
+  syntax rejections           : 0
+  API uses newer than floor   : 0
+  runtime PEP 604 unions      : 0
+  obstruction found           : False
+  This method can only FALSIFY the floor. A clean result means 'no obstruction found by static analysis', never 'the floor works'. Dependency resolution at the floor is invisible here and only a CI leg can settle it.
+  wrote outputs/support_floor_g7/floor_3.9.json

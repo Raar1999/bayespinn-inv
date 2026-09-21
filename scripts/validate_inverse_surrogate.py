@@ -12,19 +12,22 @@ forward (doping->I-V) accurate, inverse (I-V->doping) recovers truth,
 uncertainty quantified.
 """
 from __future__ import annotations
-import time
+
+import sys
+from pathlib import Path
+
 import numpy as np
 import torch
 import torch.nn as nn
 
-import sys
-from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
 )
 
 np.random.seed(0)
@@ -107,7 +110,7 @@ for m in range(3):
     head = Head(Xtr.shape[1]); opt = torch.optim.Adam(head.parameters(), lr=2e-3, weight_decay=1e-5)
     sch = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=2500)
     idx = np.random.RandomState(m).permutation(len(Xtr_n))  # bootstrap-ish order
-    for ep in range(2500):
+    for _ep in range(2500):
         opt.zero_grad()
         loss = nn.functional.mse_loss(head(Xtr_n[idx]), Ytr_t[idx])
         loss.backward(); opt.step(); sch.step()
@@ -142,7 +145,7 @@ recovered = []
 for m, head in enumerate(members):
     log10L = torch.tensor(21.5, requires_grad=True)  # initial guess (wrong)
     opt = torch.optim.Adam([log10L], lr=0.05)
-    for it in range(400):
+    for _it in range(400):
         opt.zero_grad()
         lat = encode_level_torch(log10L)
         preds = []
@@ -160,7 +163,7 @@ for m, head in enumerate(members):
 
 rec = np.array(recovered)
 truth = np.log10(test_level)
-print(f"\n=== Inverse recovery result ===")
+print("\n=== Inverse recovery result ===")
 print(f"  True doping:      log10(N) = {truth:.3f}  (N = {test_level:.2e})")
 print(f"  Recovered (mean): log10(N) = {rec.mean():.3f} +/- {rec.std():.3f}")
 print(f"  Recovered (N):    {10**rec.mean():.2e}  [band: {10**(rec.mean()-rec.std()):.2e}, {10**(rec.mean()+rec.std()):.2e}]")

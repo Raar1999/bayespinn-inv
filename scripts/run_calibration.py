@@ -34,27 +34,30 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict
 
 import numpy as np
 import torch
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.bayesian.ensembles import DeepEnsemble, EnsemblePrediction
+from bayespinn_inv.bayesian.ensembles import EnsemblePrediction
 from bayespinn_inv.bayesian.mc_dropout import MCDropoutPINN
-from bayespinn_inv.bayesian.swag import SWAG, SWAGRecorder, SWAGConfig
+from bayespinn_inv.bayesian.swag import SWAG, SWAGConfig, SWAGRecorder
 from bayespinn_inv.calibration.metrics import (
-    report_calibration, fit_temperature_regression,
     fit_isotonic_recalibrator,
-)
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    fit_temperature_regression,
+    report_calibration,
 )
 from bayespinn_inv.data.datasets import sample_doping
-
+from bayespinn_inv.inverse.charts import regrid_signed
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
 from bayespinn_inv.surrogate import load_forward_ensemble as load_ensemble
 
 
@@ -72,10 +75,13 @@ def _collect_predictions(uq_model, scaling, sg, sg_grid, profiles, biases):
         samples = np.asarray(pred.samples)
         if samples.shape != (M, len(biases)):
             samples = samples.reshape(M, len(biases))
-        # SG oracle for this profile
+        # SG oracle for this profile. CHART-01: the profile lives on its
+        # own abscissa (prof.x_si), the solver on its grid; regrid explicitly.
+        dop_grid = regrid_signed(
+            scaling.x_to_si(np.asarray(sg_grid.x)), prof.x_si, prof.doping_si)
         prev = None
         for b_idx, V in enumerate(biases):
-            s = sg.solve(prof.doping_si, float(V), initial_state=prev)
+            s = sg.solve(dop_grid, float(V), initial_state=prev)
             truth_all[idx] = s.terminal_current
             samples_all[:, idx] = samples[:, b_idx]
             prev = s
@@ -249,10 +255,9 @@ def main():
 
         # Isotonic recalibration of the CDF (optional / softer)
         try:
-            iso = fit_isotonic_recalibrator(v_samples, v_truth)
+            fit_isotonic_recalibrator(v_samples, v_truth)
             iso_status = "fit"
         except Exception as e:
-            iso = None
             iso_status = f"skipped ({e})"
         print(f"  isotonic: {iso_status}")
 
@@ -280,7 +285,7 @@ def main():
             "M_or_T": model.M,
         }
 
-    with open(out_dir / "summary.json", "w") as f:
+    with open(out_dir / "summary.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(summary, f, indent=2, default=float)
     print(f"\nDone -> {out_dir}/summary.json")
 

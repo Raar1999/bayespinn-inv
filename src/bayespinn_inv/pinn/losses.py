@@ -53,12 +53,11 @@ References
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Optional, Tuple, Dict
+from dataclasses import dataclass
+from typing import Dict, Optional, Tuple
 
 import torch
 import torch.nn as nn
-
 
 # ============================================================================
 # Autograd helpers
@@ -92,13 +91,24 @@ def ohmic_boundary_values(
         (i)  charge neutrality: n - p - C = 0
         (ii) equilibrium product: n * p = n_i^2  =>  n_s * p_s = 1
 
-    Solving the quadratic, using the equilibrium product to avoid the
-    catastrophic cancellation that arises in ``0.5 * (C + sqrt(C^2+4))``
-    when ``|C|`` is large (which is the normal regime: in scaled units,
-    Si at 10^17 cm^-3 doping gives |C_s| ~ 10^7):
+    Eliminating ``p`` gives ``n_s = (C_s + sqrt(C_s^2 + 4)) / 2``, which is
+    exactly ``exp(asinh(C_s / 2))``. Since this function returns logs, the
+    quadratic never has to be formed at all:
 
-        if C_s >= 0:  n_s = 0.5 * ( C_s + sqrt(C_s^2 + 4)),  p_s = 1 / n_s
-        if C_s <  0:  p_s = 0.5 * (-C_s + sqrt(C_s^2 + 4)),  n_s = 1 / p_s
+        log n_s = asinh(C_s / 2)        log p_s = -asinh(C_s / 2)
+
+    This is branchless and exact in every dtype. The earlier form selected the
+    majority carrier with ``torch.where`` over the two roots; ``torch.where``
+    evaluates both branches, and for large ``|C_s|`` the discarded root
+    ``0.5 * (-C_s + sqrt(C_s^2 + 4))`` underflows to exactly zero, so its
+    reciprocal was ``inf`` and the backward pass produced ``0 * inf = NaN``
+    in the *selected* branch. Measured onset: ``C_s ~ 1.4e8`` in float64 (the
+    top 21.4% of the documented 1e21-1e25 m^-3 doping range) and ``C_s ~ 7.1e3``
+    in float32 -- below the whole range, and float32 is the dtype the networks
+    train in. See AUDIT_g0 GRAD-02/GRAD-03 and ``tests/test_ohmic_gradient_g0.py``.
+
+    The derivative is ``d(log n_s)/dC_s = 1 / sqrt(4 + C_s^2)``, finite for
+    every finite ``C_s``.
 
     The Dirichlet potential is chosen so that the *left contact's*
     electron quasi-Fermi level is the reference (phi_n_left = 0):
@@ -122,22 +132,22 @@ def ohmic_boundary_values(
     dict with keys ``phi_s_left, phi_s_right, log_n_left, log_n_right,
     log_p_left, log_p_right``, broadcast to a common shape.
     """
-    sqrtL = torch.sqrt(C_s_left ** 2 + 4.0)
-    sqrtR = torch.sqrt(C_s_right ** 2 + 4.0)
-    # Compute the larger root first to avoid cancellation, then derive the
-    # smaller via the equilibrium product n_s * p_s = 1.
-    posL = C_s_left  >= 0
-    posR = C_s_right >= 0
-    n_s_L = torch.where(posL, 0.5 * ( C_s_left  + sqrtL),
-                              1.0 / (0.5 * (-C_s_left  + sqrtL)))
-    p_s_L = 1.0 / n_s_L
-    n_s_R = torch.where(posR, 0.5 * ( C_s_right + sqrtR),
-                              1.0 / (0.5 * (-C_s_right + sqrtR)))
-    p_s_R = 1.0 / n_s_R
-    log_n_L = torch.log(n_s_L)
-    log_p_L = torch.log(p_s_L)
-    log_n_R = torch.log(n_s_R)
-    log_p_R = torch.log(p_s_R)
+    # AUDIT_g0 GRAD-02/GRAD-03. Charge neutrality n - p - C = 0 with n*p = 1 gives
+    # n = (C + sqrt(C^2 + 4)) / 2, which is exactly exp(asinh(C / 2)). Working in
+    # log space removes the quadratic entirely:
+    #
+    #     log n = asinh(C / 2)      log p = -asinh(C / 2)
+    #
+    # There is no branch, no subtraction of nearly-equal numbers, and no root to
+    # discard, so nothing can overflow and no dtype has a cancellation threshold.
+    # The derivative is 1 / sqrt(4 + C^2), finite for every finite C -- where the
+    # previous torch.where form returned NaN above C_s ~ 1.4e8 in float64 and
+    # above C_s ~ 7.1e3 in float32 (i.e. below the whole documented envelope).
+    # The function already returns logs, so the exponential is never taken.
+    log_n_L = torch.asinh(0.5 * C_s_left)
+    log_p_L = -log_n_L
+    log_n_R = torch.asinh(0.5 * C_s_right)
+    log_p_R = -log_n_R
     phi_s_L = log_n_L                # reference choice (p-side grounded)
     # Same convention as SG: V_a > 0 = forward bias = barrier reduction.
     # For a P-on-left / N-on-right junction, that means phi_right is
@@ -354,7 +364,7 @@ class NTKAdaptiveWeights:
         self.names = list(names)
         self.alpha = float(alpha)
         self.clip_lo, self.clip_hi = clip
-        self.weights = {n: 1.0 for n in self.names}
+        self.weights = dict.fromkeys(self.names, 1.0)
 
     @staticmethod
     def _grad_norm(loss: torch.Tensor, params) -> float:
@@ -392,11 +402,11 @@ class NTKAdaptiveWeights:
 
 
 __all__ = [
-    "PhysicsParams",
     "LossWeights",
+    "NTKAdaptiveWeights",
+    "PhysicsParams",
+    "boundary_residuals",
     "ohmic_boundary_values",
     "pde_residuals",
-    "boundary_residuals",
     "total_loss",
-    "NTKAdaptiveWeights",
 ]

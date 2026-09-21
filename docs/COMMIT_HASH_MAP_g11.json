@@ -1,0 +1,515 @@
+{
+  "what_this_is": "the HIST-01 correction map. The hashes recorded in LOOP_STATE_v1 through v8 were rewritten by git filter-repo on 2026-08-28 at 09:16, not lost. This table says what each recorded hash now resolves to.",
+  "why_it_is_tracked": ".git/ is not tracked, so .git/filter-repo/commit-map exists in exactly one place on one disk and a fresh clone would not carry it. Once it is gone the map cannot be derived again. Committing it is the repair; OT-3's warning applied to the one artefact that makes ten generations of history readable.",
+  "what_it_does_not_do": "it does not edit any LOOP_STATE file. Directive section 6 reserves any mutation -- as opposed to supersession -- of a ledger entry. The recorded hashes stay as recorded; this is a forward correction, and a superseded statement leaves its trace.",
+  "rewrite": {
+    "tool": "git filter-repo",
+    "when": "2026-08-28 09:16 local, before the close addendum session",
+    "first_changed_commit": {
+      "old": "c115757f3e9829cd1feb8bb86d739bfd74ff2dcf",
+      "new": "6dd4b49cc0141b3d1d9f571e578a841df932053c",
+      "subject": "Adopt the post-audit working tree as attestable history"
+    },
+    "rewritten_commits": 35,
+    "source": ".git/filter-repo/commit-map",
+    "source_still_present": true,
+    "evidence_the_tree_was_not_otherwise_rewritten": "author date equals committer date on every commit in this branch, which a rebase or amend would not leave intact"
+  },
+  "full_commit_map": {
+    "note": "the COMPLETE old->new table filter-repo wrote, not only the hashes a LOOP_STATE file happens to cite. Preserving the subset would leave every other recorded hash in the tree -- in a document, a test module, a commit message -- unresolvable once .git/filter-repo/ is gone, which is the failure this artefact exists to prevent. tests/test_commit_messages_g7.py needs two hashes that appear in no state file, and it silently skipped for want of them.",
+    "n": 35,
+    "map": {
+      "01bb81342f91be36329f5af35279d9bfe430ece0": "3793067257772ac00e0488a73ffe2344db3061b0",
+      "01f02812e367958ca81a73d4b0c48cf2622c42d7": "35f5231966f56b882fbac159a25df9d1d4105177",
+      "06eb32fa618f6b824493070adc3e7d4d719ba4a4": "7ac7e7f4b44e019a6b11228d7540dc963cbacb56",
+      "0e20021c4d618e73aea0c40dc2949d52623b095b": "7b7e4f9d5db5b3e5b698ad79a55b8207e4eaaaf9",
+      "0f22ecc4e837476185e16c3fbea753bcdedda34d": "2e5da8486a6119274431c9d2bd7d164a810801ff",
+      "11c1fdcea7f24f7ed02b8340e4eccfca8b5158a3": "4f8eeb022753bb87574312928e480720402abc85",
+      "18177483afc1a69de1d5a670f53f96be14f2fb9b": "e6225fc832bc91a88ddc7a03d30f3bcb5c30d60e",
+      "1a090f0a02ce3566f24e3423620aaf6e6bb798dd": "75f9bd8316dd2ac60b336070d6e72a36ca0b8cab",
+      "33028173b880426f33118b4adb0c881a1f4d448f": "fa5cdb801957b0eef2af56d21acc72da33a2d266",
+      "3e05c9da55e152c8305838ff1da4166207051826": "363bba3b390951c8d2e58b081947a884fac2fac1",
+      "4baccf6826ceed91f543adce9fed0d43800ee8c8": "77f6f3fd60222d1f2171c44aae8efec3c1ebe919",
+      "5424d99a61e12ace186f352b081ad479deac14fd": "4dd047fae346ae1b72fc0811cbb6a25a4de71ef0",
+      "60323fb10815286b6e9b028d6c3fdee4b91460ef": "96e20cf23fd2a8b6e3e9f102d346079b66db405c",
+      "6577f4b87a65cd2c255062e42ea5181f04483e93": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+      "68f3d5d4a0265a3d99f57031af2442c1d0d820db": "ae09e4917d13de9d86bbdcfc2f5f8c67ad083239",
+      "6b3f4c0a8e5515318e7d822ca739c05a8fc73b6d": "94213e7bb3cc307ff95fd6427e9eb74759e6638c",
+      "6f1d939d231fbab96885e7d3d5ec84105172a443": "3a704edab961cb490bbda3bef40e978818285d65",
+      "7ef48c416554e78048c261b294a0ef00ffe0b52e": "877cca8b7645e06139fd52c41514b7451a3d8612",
+      "91f89b05465cfc54141438cd00cac4b10c38e40a": "4ac99d3a8462bb112d4fda43c82a62bd7d1756b2",
+      "922c2cc35f047f5c5556ba02e0305cf71c05e3cc": "c657502029e0370922bd85b4bff53fe7650ac6a8",
+      "9670bec32dc068069b35388f5bc929e47f4f060f": "6df00aa3fab770d7112b7f01a508aa681473e842",
+      "986e69f440ceb622cd3acefaf8437c988946406d": "cd6e6d22184f676fc7f21aa0082dcc85dc2cc070",
+      "a0fca7f67d7a6530201b9dc2317f62c07bb1504c": "701821c1d0ec49a85e798aad4745fa9779161ced",
+      "a59255e71ee92015bf43d325cc6dd05f805f6ff4": "a8bf371d9cfc5df6640e72fe493eba376139e94c",
+      "a6728fe58e94d89607edb248f8bbc4d73bb174ea": "8a5d6b3b982e983ffe523d07a5ada16afaea6b73",
+      "ac7aa8ec11d03368679aaea7f260f8a94e35088c": "f8b3c40a05a0a591376208b2ae8ad2bcf1894f66",
+      "aff919558d36cf0555d45d471b1f972a1037069e": "798a9be32bb4f1ca84b2b8341a1e9814bd03a7f0",
+      "b5218b104d3bf4823b84ff3433459f6c59bde7f0": "e8f0db21319f46bbfdfadce11c438e163d1e3b80",
+      "baf6c8cc2769c0c5dd995a34dacf91ecc1f9bcb5": "1963cbc28f4a42d94d7c0d3d44019e7bcc3a05ca",
+      "bf5aa2170bbdfbf7bded1a35cab21410af1534ac": "4263eac377e4697cd082f7100fbe80a9b95d027f",
+      "c115757f3e9829cd1feb8bb86d739bfd74ff2dcf": "6dd4b49cc0141b3d1d9f571e578a841df932053c",
+      "d3b769349af4b8a69ed6ac8ca12e242e19be813e": "d9670e91bd605b450e86740f93a39c2a45973862",
+      "de1b6f60642a70b65763de1957143b3ad6b6616b": "39fff5d09d4fdb5c19508d78a60c475ad9ae6afd",
+      "e05d463a5cdbbed7251d5691724ad4cc7aa6ea0d": "8320182374f2537f91533c154e0d6d5b5e305291",
+      "f807024df752fc52e0ccd1b7eefc6ca8b846ff46": "affbcce91b4e8609170f15e5e68a2e96ae34c815"
+    }
+  },
+  "entries": [
+    {
+      "recorded": "01f02812e367958ca81a73d4b0c48cf2622c42d7",
+      "resolves": "35f5231966f56b882fbac159a25df9d1d4105177",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "01f02812e367958ca81a73d4b0c48cf2622c42d7",
+      "recorded_at": [
+        "LOOP_STATE_v5.json:machinery_commit"
+      ],
+      "subject": "g8 machinery: one reconstruction operator, a third chart, and rank as a curve"
+    },
+    {
+      "recorded": "06eb32f",
+      "resolves": "7ac7e7f4b44e019a6b11228d7540dc963cbacb56",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "06eb32fa618f6b824493070adc3e7d4d719ba4a4",
+      "recorded_at": [
+        "LOOP_STATE_v3.json:champion_per_generation.g0",
+        "LOOP_STATE_v4.json:champion_per_generation.g0",
+        "LOOP_STATE_v5.json:champion_per_generation.g0",
+        "LOOP_STATE_v6.json:champion_per_generation.g0",
+        "LOOP_STATE_v7.json:champion_per_generation.g0",
+        "LOOP_STATE_v8.json:champion_per_generation.g0",
+        "LOOP_STATE_v9.json:champion_per_generation.g0"
+      ],
+      "subject": "g0 promote candidate g0c2: asinh reformulation closes GRAD-02 and GRAD-03"
+    },
+    {
+      "recorded": "06eb32fa61",
+      "resolves": "7ac7e7f4b44e019a6b11228d7540dc963cbacb56",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "06eb32fa618f6b824493070adc3e7d4d719ba4a4",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_per_generation.g0"
+      ],
+      "subject": "g0 promote candidate g0c2: asinh reformulation closes GRAD-02 and GRAD-03"
+    },
+    {
+      "recorded": "06eb32fa618f6b824493070adc3e7d4d719ba4a4",
+      "resolves": "7ac7e7f4b44e019a6b11228d7540dc963cbacb56",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "06eb32fa618f6b824493070adc3e7d4d719ba4a4",
+      "recorded_at": [
+        "LOOP_STATE_v1.json:champion_commit"
+      ],
+      "subject": "g0 promote candidate g0c2: asinh reformulation closes GRAD-02 and GRAD-03"
+    },
+    {
+      "recorded": "0f22ecc",
+      "resolves": "2e5da8486a6119274431c9d2bd7d164a810801ff",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
+      "recorded_at": [
+        "LOOP_STATE_v5.json:champion_per_generation.g8",
+        "LOOP_STATE_v6.json:champion_per_generation.g8",
+        "LOOP_STATE_v7.json:champion_per_generation.g8",
+        "LOOP_STATE_v8.json:champion_per_generation.g8",
+        "LOOP_STATE_v9.json:champion_per_generation.g8"
+      ],
+      "subject": "g8 RESULT: the observation set and a free junction both move the spectrum far more than the chart does"
+    },
+    {
+      "recorded": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
+      "resolves": "2e5da8486a6119274431c9d2bd7d164a810801ff",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
+      "recorded_at": [
+        "LOOP_STATE_v5.json:champion_commit",
+        "LOOP_STATE_v5.json:results_commit"
+      ],
+      "subject": "g8 RESULT: the observation set and a free junction both move the spectrum far more than the chart does"
+    },
+    {
+      "recorded": "3302817",
+      "resolves": "fa5cdb801957b0eef2af56d21acc72da33a2d266",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "33028173b880426f33118b4adb0c881a1f4d448f",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_per_generation.g3",
+        "LOOP_STATE_v3.json:champion_per_generation.g3",
+        "LOOP_STATE_v4.json:champion_per_generation.g3",
+        "LOOP_STATE_v5.json:champion_per_generation.g3",
+        "LOOP_STATE_v6.json:champion_per_generation.g3",
+        "LOOP_STATE_v7.json:champion_per_generation.g3",
+        "LOOP_STATE_v8.json:champion_per_generation.g3",
+        "LOOP_STATE_v9.json:champion_per_generation.g3"
+      ],
+      "subject": "g3 promote: API-05 -- minibatch sampling no longer reads the global RNG"
+    },
+    {
+      "recorded": "3e05c9da55e152c8305838ff1da4166207051826",
+      "resolves": "363bba3b390951c8d2e58b081947a884fac2fac1",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "3e05c9da55e152c8305838ff1da4166207051826",
+      "recorded_at": [
+        "LOOP_STATE_v4.json:machinery_commit"
+      ],
+      "subject": "g7 machinery: name the two charts, see the code that ran, measure the support floor"
+    },
+    {
+      "recorded": "5424d99a61e12ace186f352b081ad479deac14fd",
+      "resolves": "4dd047fae346ae1b72fc0811cbb6a25a4de71ef0",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "5424d99a61e12ace186f352b081ad479deac14fd",
+      "recorded_at": [
+        "LOOP_STATE_v7.json:champion_commit",
+        "LOOP_STATE_v7.json:champion_per_generation.g10",
+        "LOOP_STATE_v7.json:results_commit",
+        "LOOP_STATE_v8.json:champion_per_generation.g10",
+        "LOOP_STATE_v9.json:champion_per_generation.g10"
+      ],
+      "subject": "g10 RESULT: the mechanism is not localisation, and the ridge belongs to the dimension rather than the chart"
+    },
+    {
+      "recorded": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+      "resolves": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+      "route": "direct",
+      "recorded_at": [
+        "LOOP_STATE_v9.json:champion_commit",
+        "LOOP_STATE_v9.json:champion_per_generation.close_addendum",
+        "LOOP_STATE_v9.json:machinery_commit",
+        "LOOP_STATE_v9.json:results_commit"
+      ],
+      "subject": "addendum: the chart-G witness set is refined in full, the ridge is recounted over what survives, and DOC-08 is enacted"
+    },
+    {
+      "recorded": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+      "resolves": "ae09e4917d13de9d86bbdcfc2f5f8c67ad083239",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+      "recorded_at": [
+        "LOOP_STATE_v6.json:champion_commit",
+        "LOOP_STATE_v6.json:champion_per_generation.g9",
+        "LOOP_STATE_v6.json:results_commit",
+        "LOOP_STATE_v7.json:champion_per_generation.g9",
+        "LOOP_STATE_v8.json:champion_per_generation.g9",
+        "LOOP_STATE_v9.json:champion_per_generation.g9"
+      ],
+      "subject": "g9 RESULT: the ordering was a property of one operating point, and it does not survive nine more"
+    },
+    {
+      "recorded": "6b3f4c0a8e5515318e7d822ca739c05a8fc73b6d",
+      "resolves": "94213e7bb3cc307ff95fd6427e9eb74759e6638c",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "6b3f4c0a8e5515318e7d822ca739c05a8fc73b6d",
+      "recorded_at": [
+        "LOOP_STATE_v8.json:champion_commit",
+        "LOOP_STATE_v8.json:champion_per_generation.close",
+        "LOOP_STATE_v8.json:machinery_commit",
+        "LOOP_STATE_v8.json:results_commit",
+        "LOOP_STATE_v9.json:champion_per_generation.close"
+      ],
+      "subject": "close: the rank climb is the spectrum flattening, WIT-02 is enacted with its register, and the barrier direction is carried through the claim surface"
+    },
+    {
+      "recorded": "922c2cc",
+      "resolves": "c657502029e0370922bd85b4bff53fe7650ac6a8",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "922c2cc35f047f5c5556ba02e0305cf71c05e3cc",
+      "recorded_at": [
+        "LOOP_STATE_v4.json:champion_per_generation.g7",
+        "LOOP_STATE_v5.json:champion_per_generation.g7",
+        "LOOP_STATE_v6.json:champion_per_generation.g7",
+        "LOOP_STATE_v7.json:champion_per_generation.g7",
+        "LOOP_STATE_v8.json:champion_per_generation.g7",
+        "LOOP_STATE_v9.json:champion_per_generation.g7"
+      ],
+      "subject": "g7 RULE-01: the rules the operator enacts now live in the tree, and DOC-07 has a guard"
+    },
+    {
+      "recorded": "922c2cc35f047f5c5556ba02e0305cf71c05e3cc",
+      "resolves": "c657502029e0370922bd85b4bff53fe7650ac6a8",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "922c2cc35f047f5c5556ba02e0305cf71c05e3cc",
+      "recorded_at": [
+        "LOOP_STATE_v4.json:champion_commit"
+      ],
+      "subject": "g7 RULE-01: the rules the operator enacts now live in the tree, and DOC-07 has a guard"
+    },
+    {
+      "recorded": "9670bec",
+      "resolves": "6df00aa3fab770d7112b7f01a508aa681473e842",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "9670bec32dc068069b35388f5bc929e47f4f060f",
+      "recorded_at": [
+        "LOOP_STATE_v3.json:champion_per_generation.g1",
+        "LOOP_STATE_v4.json:champion_per_generation.g1",
+        "LOOP_STATE_v5.json:champion_per_generation.g1",
+        "LOOP_STATE_v6.json:champion_per_generation.g1",
+        "LOOP_STATE_v7.json:champion_per_generation.g1",
+        "LOOP_STATE_v8.json:champion_per_generation.g1",
+        "LOOP_STATE_v9.json:champion_per_generation.g1"
+      ],
+      "subject": "g1 promote: SEC-02 -- library code never executes code from a checkpoint"
+    },
+    {
+      "recorded": "9670bec32d",
+      "resolves": "6df00aa3fab770d7112b7f01a508aa681473e842",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "9670bec32dc068069b35388f5bc929e47f4f060f",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_per_generation.g1"
+      ],
+      "subject": "g1 promote: SEC-02 -- library code never executes code from a checkpoint"
+    },
+    {
+      "recorded": "a59255e",
+      "resolves": "a8bf371d9cfc5df6640e72fe493eba376139e94c",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "a59255e71ee92015bf43d325cc6dd05f805f6ff4",
+      "recorded_at": [
+        "LOOP_STATE_v3.json:champion_per_generation.g6",
+        "LOOP_STATE_v4.json:champion_per_generation.g6",
+        "LOOP_STATE_v5.json:champion_per_generation.g6",
+        "LOOP_STATE_v6.json:champion_per_generation.g6",
+        "LOOP_STATE_v7.json:champion_per_generation.g6",
+        "LOOP_STATE_v8.json:champion_per_generation.g6",
+        "LOOP_STATE_v9.json:champion_per_generation.g6"
+      ],
+      "subject": "g6 S-1 RESULT: global non-identifiability demonstrated by witness, and it survives falsification"
+    },
+    {
+      "recorded": "a59255e71ee92015bf43d325cc6dd05f805f6ff4",
+      "resolves": "a8bf371d9cfc5df6640e72fe493eba376139e94c",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "a59255e71ee92015bf43d325cc6dd05f805f6ff4",
+      "recorded_at": [
+        "LOOP_STATE_v3.json:champion_commit"
+      ],
+      "subject": "g6 S-1 RESULT: global non-identifiability demonstrated by witness, and it survives falsification"
+    },
+    {
+      "recorded": "a6728fe58e94d89607edb248f8bbc4d73bb174ea",
+      "resolves": "8a5d6b3b982e983ffe523d07a5ada16afaea6b73",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "a6728fe58e94d89607edb248f8bbc4d73bb174ea",
+      "recorded_at": [
+        "LOOP_STATE_v6.json:machinery_commit"
+      ],
+      "subject": "g9 machinery: one lint verdict, a pre-registered ordering battery, and a rank that carries its window"
+    },
+    {
+      "recorded": "aff9195",
+      "resolves": "798a9be32bb4f1ca84b2b8341a1e9814bd03a7f0",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "aff919558d36cf0555d45d471b1f972a1037069e",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_per_generation.g2",
+        "LOOP_STATE_v3.json:champion_per_generation.g2",
+        "LOOP_STATE_v4.json:champion_per_generation.g2",
+        "LOOP_STATE_v5.json:champion_per_generation.g2",
+        "LOOP_STATE_v6.json:champion_per_generation.g2",
+        "LOOP_STATE_v7.json:champion_per_generation.g2",
+        "LOOP_STATE_v8.json:champion_per_generation.g2",
+        "LOOP_STATE_v9.json:champion_per_generation.g2"
+      ],
+      "subject": "g2 promote: PKG-04 -- the library no longer execs a file from the checkout"
+    },
+    {
+      "recorded": "b5218b1",
+      "resolves": "e8f0db21319f46bbfdfadce11c438e163d1e3b80",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "b5218b104d3bf4823b84ff3433459f6c59bde7f0",
+      "recorded_at": [
+        "LOOP_STATE_v3.json:champion_per_generation.g5",
+        "LOOP_STATE_v4.json:champion_per_generation.g5",
+        "LOOP_STATE_v5.json:champion_per_generation.g5",
+        "LOOP_STATE_v6.json:champion_per_generation.g5",
+        "LOOP_STATE_v7.json:champion_per_generation.g5",
+        "LOOP_STATE_v8.json:champion_per_generation.g5",
+        "LOOP_STATE_v9.json:champion_per_generation.g5"
+      ],
+      "subject": "g5 promote: DOC-05, DOC-06 -- documentation that measurement contradicts"
+    },
+    {
+      "recorded": "b5218b104d",
+      "resolves": "e8f0db21319f46bbfdfadce11c438e163d1e3b80",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "b5218b104d3bf4823b84ff3433459f6c59bde7f0",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_per_generation.g5"
+      ],
+      "subject": "g5 promote: DOC-05, DOC-06 -- documentation that measurement contradicts"
+    },
+    {
+      "recorded": "b5218b104d3bf4823b84ff3433459f6c59bde7f0",
+      "resolves": "e8f0db21319f46bbfdfadce11c438e163d1e3b80",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "b5218b104d3bf4823b84ff3433459f6c59bde7f0",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_commit"
+      ],
+      "subject": "g5 promote: DOC-05, DOC-06 -- documentation that measurement contradicts"
+    },
+    {
+      "recorded": "de1b6f6",
+      "resolves": "39fff5d09d4fdb5c19508d78a60c475ad9ae6afd",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "de1b6f60642a70b65763de1957143b3ad6b6616b",
+      "recorded_at": [
+        "LOOP_STATE_v2.json:champion_per_generation.g4",
+        "LOOP_STATE_v3.json:champion_per_generation.g4",
+        "LOOP_STATE_v4.json:champion_per_generation.g4",
+        "LOOP_STATE_v5.json:champion_per_generation.g4",
+        "LOOP_STATE_v6.json:champion_per_generation.g4",
+        "LOOP_STATE_v7.json:champion_per_generation.g4",
+        "LOOP_STATE_v8.json:champion_per_generation.g4",
+        "LOOP_STATE_v9.json:champion_per_generation.g4"
+      ],
+      "subject": "g4 promote: SW-04a -- the environment probe no longer fails silently"
+    },
+    {
+      "recorded": "e05d463a5cdbbed7251d5691724ad4cc7aa6ea0d",
+      "resolves": "8320182374f2537f91533c154e0d6d5b5e305291",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "e05d463a5cdbbed7251d5691724ad4cc7aa6ea0d",
+      "recorded_at": [
+        "LOOP_STATE_v7.json:machinery_commit"
+      ],
+      "subject": "g10 machinery: resolution as a property of the chart, localisation as a hashed measure, and a barrier metric that is literally g9's"
+    },
+    {
+      "recorded": "f807024df752fc52e0ccd1b7eefc6ca8b846ff46",
+      "resolves": "affbcce91b4e8609170f15e5e68a2e96ae34c815",
+      "route": "filter-repo commit-map",
+      "rewritten_from": "f807024df752fc52e0ccd1b7eefc6ca8b846ff46",
+      "recorded_at": [
+        "LOOP_STATE_v4.json:results_commit"
+      ],
+      "subject": "g7 RESULT: the two identifiability numbers were measured in different charts"
+    }
+  ],
+  "unresolved": [],
+  "verification": {
+    "V1_existence": {
+      "checked": 26,
+      "failures": [],
+      "passes": true,
+      "what_it_checks": "every mapped target resolves as a commit"
+    },
+    "V2_agreement": {
+      "checked": 16,
+      "failures": [],
+      "passes": true,
+      "what_it_checks": "the mapped commit's own message names the generation the state file recorded it under. The messages predate the rewrite and the map was produced by filter-repo, so agreement is evidence and not restatement"
+    },
+    "V3_chain": {
+      "checked": 9,
+      "rows": [
+        {
+          "state_file": "LOOP_STATE_v1.json",
+          "recorded_champion": "06eb32fa618f6b824493070adc3e7d4d719ba4a4",
+          "maps_to": "7ac7e7f4b44e019a6b11228d7540dc963cbacb56",
+          "commit_that_last_wrote_the_file": "3a704edab961cb490bbda3bef40e978818285d65",
+          "its_parent": "7ac7e7f4b44e019a6b11228d7540dc963cbacb56",
+          "commit_that_added_the_file": "3a704edab961cb490bbda3bef40e978818285d65",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v2.json",
+          "recorded_champion": "b5218b104d3bf4823b84ff3433459f6c59bde7f0",
+          "maps_to": "e8f0db21319f46bbfdfadce11c438e163d1e3b80",
+          "commit_that_last_wrote_the_file": "cd6e6d22184f676fc7f21aa0082dcc85dc2cc070",
+          "its_parent": "e8f0db21319f46bbfdfadce11c438e163d1e3b80",
+          "commit_that_added_the_file": "cd6e6d22184f676fc7f21aa0082dcc85dc2cc070",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v3.json",
+          "recorded_champion": "a59255e71ee92015bf43d325cc6dd05f805f6ff4",
+          "maps_to": "a8bf371d9cfc5df6640e72fe493eba376139e94c",
+          "commit_that_last_wrote_the_file": "e6225fc832bc91a88ddc7a03d30f3bcb5c30d60e",
+          "its_parent": "a8bf371d9cfc5df6640e72fe493eba376139e94c",
+          "commit_that_added_the_file": "e6225fc832bc91a88ddc7a03d30f3bcb5c30d60e",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v4.json",
+          "recorded_champion": "922c2cc35f047f5c5556ba02e0305cf71c05e3cc",
+          "maps_to": "c657502029e0370922bd85b4bff53fe7650ac6a8",
+          "commit_that_last_wrote_the_file": "877cca8b7645e06139fd52c41514b7451a3d8612",
+          "its_parent": "c657502029e0370922bd85b4bff53fe7650ac6a8",
+          "commit_that_added_the_file": "96e20cf23fd2a8b6e3e9f102d346079b66db405c",
+          "was_amended_after_being_added": true,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v5.json",
+          "recorded_champion": "0f22ecc4e837476185e16c3fbea753bcdedda34d",
+          "maps_to": "2e5da8486a6119274431c9d2bd7d164a810801ff",
+          "commit_that_last_wrote_the_file": "7b7e4f9d5db5b3e5b698ad79a55b8207e4eaaaf9",
+          "its_parent": "2e5da8486a6119274431c9d2bd7d164a810801ff",
+          "commit_that_added_the_file": "2e5da8486a6119274431c9d2bd7d164a810801ff",
+          "was_amended_after_being_added": true,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v6.json",
+          "recorded_champion": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+          "maps_to": "ae09e4917d13de9d86bbdcfc2f5f8c67ad083239",
+          "commit_that_last_wrote_the_file": "1963cbc28f4a42d94d7c0d3d44019e7bcc3a05ca",
+          "its_parent": "ae09e4917d13de9d86bbdcfc2f5f8c67ad083239",
+          "commit_that_added_the_file": "1963cbc28f4a42d94d7c0d3d44019e7bcc3a05ca",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v7.json",
+          "recorded_champion": "5424d99a61e12ace186f352b081ad479deac14fd",
+          "maps_to": "4dd047fae346ae1b72fc0811cbb6a25a4de71ef0",
+          "commit_that_last_wrote_the_file": "4f8eeb022753bb87574312928e480720402abc85",
+          "its_parent": "4dd047fae346ae1b72fc0811cbb6a25a4de71ef0",
+          "commit_that_added_the_file": "4f8eeb022753bb87574312928e480720402abc85",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v8.json",
+          "recorded_champion": "6b3f4c0a8e5515318e7d822ca739c05a8fc73b6d",
+          "maps_to": "94213e7bb3cc307ff95fd6427e9eb74759e6638c",
+          "commit_that_last_wrote_the_file": "701821c1d0ec49a85e798aad4745fa9779161ced",
+          "its_parent": "94213e7bb3cc307ff95fd6427e9eb74759e6638c",
+          "commit_that_added_the_file": "701821c1d0ec49a85e798aad4745fa9779161ced",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        },
+        {
+          "state_file": "LOOP_STATE_v9.json",
+          "recorded_champion": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+          "maps_to": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+          "commit_that_last_wrote_the_file": "385bf90ee4b8f1abaf3ef68b036be166e77e26e4",
+          "its_parent": "608cc83dbb801db8c28923475cf2bcf95a8bd01a",
+          "commit_that_added_the_file": "385bf90ee4b8f1abaf3ef68b036be166e77e26e4",
+          "was_amended_after_being_added": false,
+          "champion_is_the_parent": true
+        }
+      ],
+      "failures": [],
+      "passes": true,
+      "what_it_checks": "the commit that LAST WROTE each state file has that file's recorded champion as its parent, once the recorded hash is mapped -- the invariant the state schema states in its own words, checked against git rather than against itself",
+      "note": "anchored on the last writer, not the adder. LOOP_STATE_v4 and v5 were amended after being added, by commits whose own messages say so; anchoring on the adder reports those two as violations of an invariant they satisfy. was_amended_after_being_added marks them."
+    }
+  },
+  "summary": {
+    "recorded_hashes": 26,
+    "resolved": 26,
+    "resolved_directly": 1,
+    "resolved_through_the_map": 25,
+    "unresolved": 0,
+    "all_resolve": true,
+    "all_verifications_pass": true
+  },
+  "map_hash": "23c43752c71c202ee48698e423fdf7b4037d5c3d7e8c710fcb29f21136aea72a"
+}

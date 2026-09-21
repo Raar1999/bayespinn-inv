@@ -1,0 +1,406 @@
+{
+  "experiment": "figures_g15",
+  "created_utc": "2026-08-29T09:59:45+00:00",
+  "git": {
+    "commit": "eaf7d1ad2505f3d0a4b1438315d9fbf9d6df283c",
+    "dirty": true,
+    "tracked_modified": 5,
+    "untracked": 0,
+    "tree_digest": "a317c33980da6e8fcf775cddb68e60c32a3fc979611d8110165e1c8363befd5c"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "git_autocrlf": "false",
+    "git_eol": null,
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "loaded_code": {
+    "package": "bayespinn_inv",
+    "tree_root": "D:\\bayespinn-inv\\bayespinn-inv",
+    "git_ls_files_available": true,
+    "n_modules_imported": 9,
+    "modules": {
+      "bayespinn_inv": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.charts": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\charts.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.constants": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\constants.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.scaling": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\scaling.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.loaded_code": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\loaded_code.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.provenance": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\provenance.py",
+        "inside_tree": true,
+        "tracked": true
+      }
+    },
+    "outside_tree": [],
+    "inside_tree_untracked": [],
+    "flagged": false,
+    "sys_path": [
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\python311.zip",
+        "resolved": "C:\\Program Files\\Python311\\python311.zip",
+        "exists": false,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\DLLs",
+        "resolved": "C:\\Program Files\\Python311\\DLLs",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib",
+        "resolved": "C:\\Program Files\\Python311\\Lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311",
+        "resolved": "C:\\Program Files\\Python311",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "resolved": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "resolved": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      }
+    ],
+    "editable_install_markers": [
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.bayespinn_inv-0.1.0.dev0.pth",
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.fab_ops_analytics-0.1.0.pth"
+    ],
+    "platform_assumptions": {
+      "os": "win32",
+      "path_separator": "\\",
+      "resolution": "Path.resolve(): follows symlinks, Windows junctions and substituted drives; a module reached through a link landing outside the tree is reported OUTSIDE",
+      "case_comparison": "os.path.normcase -- case-folded on Windows, identity on POSIX",
+      "filesystem_case_sensitive_probed": false,
+      "validated_on": "win32 / python 3.11.9",
+      "unvalidated_platforms": [
+        "linux",
+        "darwin"
+      ]
+    }
+  },
+  "seed": null,
+  "config": {
+    "inputs": {
+      "F4": "outputs/g8/chart_j.json",
+      "F4_refine": "outputs/g9/junction_refine.json",
+      "F2": "outputs/g9/rank_obs.json",
+      "F6": "outputs/gradient_fidelity/gradient_fidelity.json"
+    },
+    "noise_rel": 0.02,
+    "input_sha256": {
+      "outputs/g8/chart_j.json": "90b2050644ebbe1d83643aca8a7f6d9ca26d79e468ffa5b4832c36d22bebeaf0",
+      "outputs/g9/junction_refine.json": "bd7b296d6ee375ebd66032ed2f292083ce00442161b6478159bd914618588d59",
+      "outputs/g9/rank_obs.json": "419758b223140cc1a0f1e8d129bf885881c81c5e8a4ba9af0a75d7747b408dbc",
+      "outputs/gradient_fidelity/gradient_fidelity.json": "962706c615b2a56c4023326d67fc42a0675a4d27cea1a51dc512805d29a4305f"
+    }
+  },
+  "results": {
+    "F4": {
+      "paths": {
+        "F4.png": "outputs/figures_g15/F4.png",
+        "F4.pdf": "outputs/figures_g15/F4.pdf"
+      },
+      "junction_a_nm": 694.2688150356631,
+      "junction_b_nm": 271.3790974487106,
+      "separation_nm": 422.88971758695254,
+      "observational_distance": 0.017551083352229286,
+      "floor": 0.02,
+      "max_relative_iv_difference_pct": 1.7864626908150716
+    },
+    "F2": {
+      "paths": {
+        "F2.png": "outputs/figures_g15/F2.png",
+        "F2.pdf": "outputs/figures_g15/F2.pdf"
+      },
+      "devices": {
+        "g8_operating_point": {
+          "width_curve_rank": [
+            1,
+            1,
+            2,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "spacing_curve_rank": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "summary": {
+            "rank_range_over_width": [
+              1,
+              4
+            ],
+            "rank_range_over_spacing": [
+              4,
+              4
+            ],
+            "rank_moves_with_width": true,
+            "rank_moves_with_spacing": false
+          }
+        },
+        "device_p50": {
+          "width_curve_rank": [
+            2,
+            2,
+            2,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "spacing_curve_rank": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "summary": {
+            "rank_range_over_width": [
+              2,
+              4
+            ],
+            "rank_range_over_spacing": [
+              4,
+              4
+            ],
+            "rank_moves_with_width": true,
+            "rank_moves_with_spacing": false
+          }
+        }
+      },
+      "widths_V": [
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.75
+      ],
+      "alphas": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1.0
+      ],
+      "chart": "G",
+      "d": 16,
+      "chart_label_source": "scripts/run_g9.py::phase_rank_obs, which calls cell_spectrum with ChartG(16). NOT from the artefact: rank_obs.json's width_curve and spacing_curve rows drop the chart and chart_label fields cell_spectrum returns, so the artefact does not carry the chart its own numbers were taken in. That is the root cause of COR-2 and is reported, not fixed here"
+    },
+    "F6": {
+      "paths": {
+        "F6.png": "outputs/figures_g15/F6.png",
+        "F6.pdf": "outputs/figures_g15/F6.pdf"
+      },
+      "budgets_plotted": [
+        "300",
+        "10000"
+      ],
+      "devices": {
+        "step_symmetric": {
+          "300": {
+            "identifiable_rank": 3,
+            "mean_cosine_inside": 0.5611004475025121,
+            "mean_cosine_outside": 0.011247616362375708,
+            "median_abs_symlog_value_error": 0.09625764902943512
+          },
+          "10000": {
+            "identifiable_rank": 3,
+            "mean_cosine_inside": 0.5562071834476195,
+            "mean_cosine_outside": 0.030968145846078984,
+            "median_abs_symlog_value_error": 0.004033197397539823
+          }
+        },
+        "step_asymmetric": {
+          "300": {
+            "identifiable_rank": 4,
+            "mean_cosine_inside": 0.42655721475757297,
+            "mean_cosine_outside": -0.0006850080980255426,
+            "median_abs_symlog_value_error": 0.6996838036556916
+          },
+          "10000": {
+            "identifiable_rank": 4,
+            "mean_cosine_inside": 0.37686421083809923,
+            "mean_cosine_outside": -0.003707536328692844,
+            "median_abs_symlog_value_error": 0.3372384491940217
+          }
+        },
+        "graded": {
+          "300": {
+            "identifiable_rank": 3,
+            "mean_cosine_inside": 0.5561756546083251,
+            "mean_cosine_outside": -0.009724125831602091,
+            "median_abs_symlog_value_error": 0.24327533045376182
+          },
+          "10000": {
+            "identifiable_rank": 3,
+            "mean_cosine_inside": 0.5524669399058287,
+            "mean_cosine_outside": -0.0032277375144664734,
+            "median_abs_symlog_value_error": 0.1799420826138256
+          }
+        },
+        "ldd": {
+          "300": {
+            "identifiable_rank": 3,
+            "mean_cosine_inside": 0.5082910568509781,
+            "mean_cosine_outside": 0.009813574442979102,
+            "median_abs_symlog_value_error": 3.4916474123840153
+          },
+          "10000": {
+            "identifiable_rank": 3,
+            "mean_cosine_inside": 0.5322682819886827,
+            "mean_cosine_outside": -0.027674102789181827,
+            "median_abs_symlog_value_error": 0.48617929357699996
+          }
+        }
+      },
+      "verdict": {
+        "mean_cosine_inside": 0.5044516540450575,
+        "mean_cosine_outside": -0.0009103076965655404,
+        "value_error_small": 1.132716048880726,
+        "value_error_large": 0.25184825569559677,
+        "outside_cosine_small": 0.0026630142189317937,
+        "outside_cosine_large": -0.0009103076965655404,
+        "hypothesis_supported": true,
+        "lines": [
+          "at 10000 epochs: mean |cos| inside identifiable subspace +0.504, outside -0.001",
+          "value error improved 1.1327 -> 0.2518 symlog (300 -> 10000 epochs)",
+          "outside-subspace agreement moved +0.003 -> -0.001 (flat => not an undertraining artefact)",
+          "HYPOTHESIS SUPPORTED: gradients are trustworthy only inside the identifiable subspace"
+        ]
+      }
+    }
+  },
+  "artifacts": {
+    "F4.png": "outputs/figures_g15/F4.png",
+    "F4.pdf": "outputs/figures_g15/F4.pdf",
+    "F2.png": "outputs/figures_g15/F2.png",
+    "F2.pdf": "outputs/figures_g15/F2.pdf",
+    "F6.png": "outputs/figures_g15/F6.png",
+    "F6.pdf": "outputs/figures_g15/F6.pdf"
+  },
+  "notes": "F4, F2 and F6 of docs/PAPER_AUDIT_g15.md section 5. Reads committed artefacts and performs no solve."
+}

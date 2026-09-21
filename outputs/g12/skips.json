@@ -1,0 +1,80 @@
+{
+  "rule": "SKIP-01",
+  "what_this_is": "every skip the suite emits, recorded beside the pass and fail counts. A failing guard is loud; a skipping guard reports green",
+  "invocation": "PYTHONPATH=src python -m pytest tests -q -rs",
+  "summary_line": "1041 passed, 10 skipped in 217.53s (0:03:37)",
+  "taken_at_commit": "a22d41d0617e50fa08fcc289135b1e16f5cce44d",
+  "working_tree_dirty_when_taken": true,
+  "n_distinct_skip_sites": 10,
+  "n_skips_total": 10,
+  "skips_by_module": {
+    "tests/test_claim_surface_g9.py": 4,
+    "tests/test_skip_register_g12.py": 1,
+    "tests/test_witness_admissibility_g10.py": 2,
+    "tests/test_witness_refinement_close.py": 3
+  },
+  "skips": [
+    {
+      "count": 1,
+      "module": "tests/test_claim_surface_g9.py",
+      "line": 162,
+      "reason": "docs/G8_RESULT.md quotes no rank"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_claim_surface_g9.py",
+      "line": 162,
+      "reason": "docs/G9_RESULT.md quotes no rank"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_claim_surface_g9.py",
+      "line": 162,
+      "reason": "docs/CLOSE_RULING.md quotes no rank"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_claim_surface_g9.py",
+      "line": 162,
+      "reason": "docs/CLOSE_ADDENDUM.md quotes no rank"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_skip_register_g12.py",
+      "line": 141,
+      "reason": "skip report predates HEAD; SKIP-01 register entry 'skip report stale' -- expires when report_skips.py is re-run"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_witness_admissibility_g10.py",
+      "line": 229,
+      "reason": "docs/NOVELTY_AUDIT.md quotes no witness count"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_witness_admissibility_g10.py",
+      "line": 229,
+      "reason": "docs/CLOSE_ADDENDUM.md quotes no witness count"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_witness_refinement_close.py",
+      "line": 236,
+      "reason": "chart G has been refined in full; record is historical"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_witness_refinement_close.py",
+      "line": 256,
+      "reason": "docs/NOVELTY_AUDIT.md quotes no witness count"
+    },
+    {
+      "count": 1,
+      "module": "tests/test_witness_refinement_close.py",
+      "line": 256,
+      "reason": "docs/CLOSE_ADDENDUM.md quotes no witness count"
+    }
+  ],
+  "wall_clock_s": 219.0100695000001,
+  "staleness": "this artefact is a measurement of one tree. tests/test_skip_register_g12.py reports it as stale rather than trusting it silently if the commit has moved"
+}

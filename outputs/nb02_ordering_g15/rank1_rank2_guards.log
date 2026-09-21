@@ -1,0 +1,25 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0 -- C:\Program Files\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\bayespinn-inv\bayespinn-inv
+configfile: pyproject.toml
+plugins: anyio-4.14.2, cov-7.1.0
+collecting ... collected 15 items
+
+tests/test_line_endings_g6.py::TestCheckoutReturnsWhatWasCommitted::test_unmodified_files_match_their_blob_byte_for_byte PASSED [  6%]
+tests/test_line_endings_g6.py::TestCheckoutReturnsWhatWasCommitted::test_gitattributes_disables_conversion PASSED [ 13%]
+tests/test_line_endings_g6.py::TestCheckoutReturnsWhatWasCommitted::test_no_tracked_file_would_be_normalised PASSED [ 20%]
+tests/test_line_endings_g6.py::TestTheGuardIsNotVacuous::test_there_are_tracked_files_to_check PASSED [ 26%]
+tests/test_line_endings_g6.py::TestTheGuardIsNotVacuous::test_the_repository_really_does_contain_crlf_files PASSED [ 33%]
+tests/test_line_endings_g6.py::TestNoTextIoUsesThePlatformEncoding::test_every_text_open_declares_utf8 PASSED [ 40%]
+tests/test_line_endings_g6.py::TestNoTextIoUsesThePlatformEncoding::test_the_scan_is_not_vacuous PASSED [ 46%]
+tests/test_eol02_line_endings_g13.py::TestTheGuard::test_the_scan_scope_excludes_this_module PASSED [ 53%]
+tests/test_eol02_line_endings_g13.py::TestTheGuard::test_this_module_would_otherwise_report_itself PASSED [ 60%]
+tests/test_eol02_line_endings_g13.py::TestTheGuard::test_it_catches_a_planted_violation PASSED [ 66%]
+tests/test_eol02_line_endings_g13.py::TestTheGuard::test_it_does_not_fire_on_prose_describing_it PASSED [ 73%]
+tests/test_eol02_line_endings_g13.py::TestTheGuard::test_binary_and_read_modes_are_not_in_scope PASSED [ 80%]
+tests/test_eol02_line_endings_g13.py::TestTheGuard::test_an_explicit_empty_newline_satisfies_the_rule PASSED [ 86%]
+tests/test_eol02_line_endings_g13.py::TestTheTreeComplies::test_no_text_mode_write_omits_its_line_ending PASSED [ 93%]
+tests/test_eol02_line_endings_g13.py::TestTheTreeComplies::test_the_csv_call_sites_still_state_newline_explicitly PASSED [100%]
+
+============================= 15 passed in 6.79s ==============================

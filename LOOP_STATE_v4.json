@@ -1,0 +1,151 @@
+{
+  "generation": 7,
+  "designation": "G7-R (bounded reconciliation follow-on; not a new loop)",
+  "terminated": true,
+  "termination_condition": "T-1 was reached at generation 6 and is not re-opened. G7-R was a single bounded generation ordered post-termination; it resolved every SPEC-g7 clause and opened no new scientific scope.",
+  "champion_commit": "922c2cc35f047f5c5556ba02e0305cf71c05e3cc",
+  "machinery_commit": "3e05c9da55e152c8305838ff1da4166207051826",
+  "champion_branch": "loop/champion",
+  "one_tree_one_commit": {
+    "honoured": true,
+    "note": "Every G7-R measurement and the Phase A audit ran against 3e05c9d. outputs/chart_reconciliation_g7/manifest.json records that commit with dirty=false, 0 tracked-modified, 0 untracked, and loaded_code.flagged=false across 15 imported modules."
+  },
+  "baselines": {
+    "tests_collected": 509,
+    "tests_passed": 509,
+    "tests_failed": 0,
+    "suite_wall_clock_s": [
+      171.07,
+      174.07,
+      180.56
+    ],
+    "mypy_findings": 25,
+    "ruff_exit": 0
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e",
+    "g7": "922c2cc"
+  },
+  "spec_clause_status": {
+    "SPEC-g7-1": "PASS - neither chart contains the other, read from the construction",
+    "SPEC-g7-2": "PASS - falsifier did not fire; the witness embeds at 0.70% and 2.2% of the floor",
+    "SPEC-g7-3": "PASS - 2x2 spectra at one operating point, full spectra reported before ranks",
+    "SPEC-g7-3e": "PASS - witnesses found natively in chart L at d=16",
+    "SPEC-g7-4": "PASS - profile likelihood with path, endpoints, parameterisation and a control",
+    "SPEC-g7-5": "PASS - PROV-07 mitigated with 6 controls; platform validation stated, not assumed",
+    "SPEC-g7-6": "PASS with a recorded deviation (DEC-g7-3)",
+    "SPEC-g7-negative-control": "REJECTED as required, end to end through the same predicate",
+    "SPEC-g0-3a": "PASS on 3.11.9",
+    "SPEC-g0-3b-local": "PARTIAL - only 3.11 obtainable on this host; 3.9 and 3.12 unobtainable without network (SK-09)",
+    "SPEC-g0-3b-windows": "OPERATOR-BLOCKED (hard); substitute evidence docs/WINDOWS_RISK_g6.md"
+  },
+  "open_findings": [
+    {
+      "id": "CHART-01",
+      "severity": "HIGH",
+      "status": "MITIGATED",
+      "note": "Six generations of identifiability results published without recording the parameterisation chart. Charts now named, claim surface relabelled, guard enforces the label."
+    },
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "cost_grown_since_assignment": false
+    },
+    {
+      "id": "PROV-07",
+      "severity": "HIGH",
+      "status": "MITIGATED-PENDING-CI",
+      "note": "Upgraded from MEDIUM by operator ruling section 3.1. Mitigation and 6 controls in tests/test_loaded_code_g7.py, including the live gitignored build/lib shadow. Validated on win32 only; linux and darwin unvalidated and stated as such in every manifest."
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "OPERATOR-BLOCKED",
+      "action": "OT-1",
+      "note": "OT-1 is not executable as written: `git remote -v` is empty on this host, so there is no origin to push to."
+    },
+    {
+      "id": "CHART-02",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "note": "ScharfetterGummel1D.solve silently resamples a short doping array, arithmetically in C. That defines a chart, and no call site that depends on it says so."
+    },
+    {
+      "id": "RULE-01",
+      "severity": "MEDIUM",
+      "status": "MITIGATED",
+      "note": "Operator-enacted rules existed only in ruling text. docs/RULES_ENACTED.md now records SW-20 and DOC-07 with their motivating defects; DOC-07 is guarded by tests/test_commit_messages_g7.py with 1a090f0 as positive control. Pre-g7 rules deliberately not backfilled."
+    },
+    {
+      "id": "SPEC-11",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "note": "At d=16 the identifiable rank is a threshold count, not a population boundary: the noise cutoff falls outside the spectrum's largest gap in both charts. Every published 'of 16' number inherits this."
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z"
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "EOL-01",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "pathlib.Path.write_text rewrites LF as CRLF on Windows, silently changing the bytes of LF-committed files. Caught by tests/test_line_endings_g6.py. Tools that rewrite tracked files must open with newline=''."
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "scripts/build_notebooks.py strips execution outputs and reshuffles cell ids in all 12 committed notebooks when run locally, as the CI BUG-14 guard runs it."
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    }
+  ],
+  "ruling_premises_falsified": [
+    "Chart L cannot represent either witness member to within the instrument floor - FALSE, and the error originated in my own collocation-only scouting pass",
+    "SPEC-g7-2's falsifier fires - it does not, against a best embedding",
+    "The 2%-noise ESS collapse is a posterior diffuse along a degenerate manifold - it is bimodality, two isolated modes separated by a 242-log-unit barrier"
+  ],
+  "highest_remaining_scientific_risk": "Chart-invariance is generalised from two charts that are more alike than the result makes them sound. Both are piecewise interpolation over equally spaced anchors in log10|C| with the same fixed sign convention; they differ only in whether the interpolation is geometric or arithmetic. 'The dimension moves the rank and the chart does not' is measured across that one axis of variation and is not established for a genuinely different parameterisation - a spectral basis, a free junction position, or physically-parameterised (peak doping, junction depth, grading length) coordinates, where the reachable set has a different shape entirely.",
+  "second_remaining_scientific_risk": "At d=16 the identifiable rank is a threshold count rather than a population boundary (SPEC-11), so the headline 'of 16' number is softer than its precision suggests. At d=4 the cutoff is a genuine population boundary.",
+  "not_supported_and_not_to_be_written": [
+    "any rank fraction compared across charts",
+    "any frequency or probability of degeneracy in either chart - both searches are existence proofs at stated budgets, not density estimates",
+    "any contraction number at the instrument's own 2% noise",
+    "'4 of 16 is a population boundary'"
+  ],
+  "operator_tasks": [
+    "OT-1 push and run CI - BLOCKED: no git remote exists on this host; a remote must be added before the documented command can run",
+    "OT-2 apply papers/CORRIGENDA_g6.md - still unapplied; papers/draft.md:255 is unchanged"
+  ],
+  "halt": null,
+  "results_commit": "f807024df752fc52e0ccd1b7eefc6ca8b846ff46"
+}

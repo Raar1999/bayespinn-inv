@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: tests (py${{ matrix.python-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        # AUDIT_g7: 3.9 was removed together with the support claim it was
+        # meant to evidence -- `requires-python = ">=3.11"` now makes the 3.9
+        # leg fail at install rather than at test, which would be noise. 3.12
+        # stays: it installs under the new floor, has still never executed, and
+        # a green 3.12 leg is what restores its classifier.
+        python-version: ["3.11", "3.12"]
+        include:
+          # AUDIT_MASTER BUG-14 was a Windows-only encoding defect that a
+          # Linux-only matrix could not see. Keep one Windows job.
+          - os: windows-latest
+            python-version: "3.11"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install (CPU torch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev,sklearn]"
+      - name: Lint
+        run: python -m ruff check src tests scripts
+      - name: Test
+        run: python -m pytest tests -q --tb=short
+
+      # AUDIT_MASTER BUG-14: the generator crashed on any non-ASCII physics
+      # symbol under a non-UTF-8 default encoding, so it could not be run at
+      # all on Windows. tests/test_notebooks.py additionally checks that the
+      # committed notebooks' code still matches what the generator produces.
+      - name: Notebook generator must run (BUG-14 regression guard)
+        run: |
+          pip install nbformat
+          python scripts/build_notebooks.py
+
+  clean-install:
+    name: clean-environment install + selftest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build --wheel
+      - name: Install the wheel into a clean venv and run the physics selftest
+        run: |
+          python -m venv /tmp/clean
+          /tmp/clean/bin/pip install --upgrade pip
+          /tmp/clean/bin/pip install torch --index-url https://download.pytorch.org/whl/cpu
+          /tmp/clean/bin/pip install dist/*.whl pytest
+          cd /tmp && /tmp/clean/bin/bayespinn selftest
+      - name: Run the test suite against the INSTALLED package
+        run: /tmp/clean/bin/python -m pytest tests -q --tb=short

@@ -20,7 +20,6 @@ The output directory will contain a single ``member_000/`` with
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -42,7 +41,7 @@ def main():
     if args.dropout <= 0:
         raise SystemExit("--dropout must be > 0 for MC-Dropout training")
 
-    with open(args.config) as f:
+    with open(args.config, encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
     # Force MC-Dropout-appropriate config

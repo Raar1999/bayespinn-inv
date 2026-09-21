@@ -15,25 +15,31 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 import numpy as np
 import torch
 import yaml
 
-from bayespinn_inv.physics.constants import SILICON, GAAS
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
-from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
 from bayespinn_inv.bayesian.ensembles import DeepEnsemble
-from bayespinn_inv.inverse.inverse_design import (
-    InverseDesigner, InverseConfig,
-    FreePointwiseDoping, StepJunctionDoping, GradedJunctionDoping,
-)
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
-)
 from bayespinn_inv.data.datasets import sample_doping
+from bayespinn_inv.inverse.charts import regrid_signed
+from bayespinn_inv.inverse.inverse_design import (
+    FreePointwiseDoping,
+    GradedJunctionDoping,
+    InverseConfig,
+    InverseDesigner,
+    StepJunctionDoping,
+)
+from bayespinn_inv.physics.constants import GAAS, SILICON
+from bayespinn_inv.physics.scaling import Scaling
+from bayespinn_inv.pinn.forward_pinn import ForwardPINN, ForwardPINNConfig
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
 
 
 def _material(name: str):
@@ -42,7 +48,7 @@ def _material(name: str):
 
 def _load_ensemble(manifest_path: Path, cfg: dict) -> DeepEnsemble:
     """Reconstruct a DeepEnsemble from a training-run manifest."""
-    with open(manifest_path) as f:
+    with open(manifest_path, encoding="utf-8") as f:
         manifest = json.load(f)
     train_cfg = manifest["config"]
     mat = _material(train_cfg["material"]["name"])
@@ -98,7 +104,7 @@ def _make_target(cfg: dict, scaling: Scaling) -> Dict[str, Any]:
         prev = None
         currents = []
         for V in biases:
-            s = sg.solve(np.interp(scaling.x_to_si(
+            s = sg.solve(regrid_signed(scaling.x_to_si(
                 torch.as_tensor(grid.x)).numpy(),
                                      sample.x_si, sample.doping_si),
                           float(V), initial_state=prev)
@@ -148,7 +154,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/inverse_base.yaml")
     args = ap.parse_args()
-    with open(args.config) as f:
+    with open(args.config, encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
     out_dir = Path(cfg["out_dir"])
@@ -199,9 +205,9 @@ def main():
                 if target["true_doping_si"] is not None else np.array([]),
               true_x_si=target["true_x_si"]
                 if target["true_x_si"] is not None else np.array([]))
-    with open(out_dir / "history.json", "w") as f:
+    with open(out_dir / "history.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(result.history, f, indent=2)
-    with open(out_dir / "config_used.yaml", "w") as f:
+    with open(out_dir / "config_used.yaml", "w", encoding="utf-8", newline="\n") as f:
         yaml.safe_dump(cfg, f)
     print(f"Final loss: {result.final_loss:.3e}")
     print(f"Outputs -> {out_dir}/")

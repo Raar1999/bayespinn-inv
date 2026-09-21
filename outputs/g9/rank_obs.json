@@ -1,0 +1,3187 @@
+{
+  "devices": {
+    "g8_operating_point": {
+      "theta_chartG_d4": [
+        22.052336061003242,
+        21.92875081578813,
+        21.445066677544368,
+        22.512934220719224
+      ],
+      "width_curve": [
+        {
+          "width_V": 0.1,
+          "lo_V": 0.47500000000000003,
+          "hi_V": 0.5750000000000001,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 1,
+          "bare_integer_rank_justified": true,
+          "largest_gap_ratio": 230.6120658709414,
+          "operational_cutoff_falls_in_largest_gap": true,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            }
+          ],
+          "singular_values": [
+            1.2665079503105123,
+            0.00549194139312422,
+            0.0009459226872925052,
+            4.923383434710896e-05,
+            6.325191321158907e-06,
+            3.977211880565889e-07,
+            1.5797620674815818e-08,
+            9.060378455099819e-09,
+            2.2574720363450984e-09,
+            1.973007127673957e-09,
+            1.0769193328295168e-09,
+            7.772465336473604e-10,
+            6.165553660856963e-10,
+            3.4583696435805143e-10,
+            2.1284764927256118e-10,
+            2.4300523130048038e-11
+          ]
+        },
+        {
+          "width_V": 0.15,
+          "lo_V": 0.45,
+          "hi_V": 0.6,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 1,
+          "bare_integer_rank_justified": true,
+          "largest_gap_ratio": 171.3351459166448,
+          "operational_cutoff_falls_in_largest_gap": true,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2601648378187167,
+            0.00735496988126296,
+            0.0028821296454109094,
+            0.00018518694748394048,
+            3.139520315385066e-05,
+            3.3674040167284677e-06,
+            1.5380859219490022e-07,
+            5.8980762899864345e-08,
+            1.7232500482047667e-08,
+            9.130904045322338e-09,
+            3.56677625636565e-09,
+            1.4692838993794155e-09,
+            6.16084844233635e-10,
+            3.335531117576663e-10,
+            2.0742538060491568e-10,
+            3.978533389324692e-11
+          ]
+        },
+        {
+          "width_V": 0.2,
+          "lo_V": 0.42500000000000004,
+          "hi_V": 0.625,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 2,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 141.70998870666162,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2492232619913703,
+            0.008815350797728529,
+            0.007078725499042936,
+            0.0005292596034056877,
+            9.301221224762847e-05,
+            1.7113711282675974e-05,
+            1.0957627471651765e-06,
+            3.86284257874806e-07,
+            5.991624285735158e-08,
+            2.297544843689086e-08,
+            1.9779479270300616e-08,
+            6.416212382714551e-09,
+            2.052944615760164e-09,
+            5.702221728866827e-10,
+            1.4755675448362322e-10,
+            1.2236028634515298e-10
+          ]
+        },
+        {
+          "width_V": 0.3,
+          "lo_V": 0.375,
+          "hi_V": 0.675,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 3,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 44.33302804335114,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2113611949537162,
+            0.027324124888766548,
+            0.010369889244062912,
+            0.003303566363545292,
+            0.00037058424661720043,
+            0.00019970805418346153,
+            2.5957547376881156e-05,
+            2.108191694399401e-06,
+            8.633805675341693e-07,
+            3.424503144781934e-07,
+            2.556343918416748e-07,
+            4.501065651166619e-08,
+            1.3728181372693907e-08,
+            8.016702794610067e-09,
+            2.543340369240883e-09,
+            3.0989490323817574e-10
+          ]
+        },
+        {
+          "width_V": 0.4,
+          "lo_V": 0.325,
+          "hi_V": 0.7250000000000001,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 19.581516934979476,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1679978518818461,
+            0.05964797598470991,
+            0.013780595038454623,
+            0.00997661231497827,
+            0.001340606546029995,
+            0.0005734864341796186,
+            0.0001336450945840199,
+            2.4033280517608825e-05,
+            6.177258472881122e-06,
+            1.5389458825924144e-06,
+            5.590623722679756e-07,
+            3.067827712405028e-07,
+            1.3490416178441482e-07,
+            2.931463267785036e-08,
+            2.5079695719315012e-08,
+            2.736893379894408e-09
+          ]
+        },
+        {
+          "width_V": 0.5,
+          "lo_V": 0.275,
+          "hi_V": 0.775,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 11.160458935867029,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1388958065474926,
+            0.10204739904443853,
+            0.023264425229885487,
+            0.012185279504629679,
+            0.003062277373085794,
+            0.0011594975422226732,
+            0.0004167982562019956,
+            9.542508983608032e-05,
+            1.6533812122858504e-05,
+            8.388130838613205e-06,
+            5.939261795599822e-06,
+            1.3138510868505698e-06,
+            8.499691095609591e-07,
+            3.204973280318252e-07,
+            7.723402833093568e-08,
+            9.178339355016823e-09
+          ]
+        },
+        {
+          "width_V": 0.6,
+          "lo_V": 0.22500000000000003,
+          "hi_V": 0.825,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 7.538860105506671,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1246417819698922,
+            0.14917928788045967,
+            0.032180234885288636,
+            0.012937898000831253,
+            0.005051393348891403,
+            0.0024883151586397416,
+            0.0008257561909174334,
+            0.00018197911694970827,
+            0.00010521294788132447,
+            2.4209974425164043e-05,
+            1.5119510611169773e-05,
+            6.32391099459493e-06,
+            3.0203060917364484e-06,
+            9.881909258816397e-07,
+            4.520995942339927e-07,
+            1.4561472865175763e-08
+          ]
+        },
+        {
+          "width_V": 0.7,
+          "lo_V": 0.17500000000000004,
+          "hi_V": 0.875,
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.4104231098653175,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0600910235114902,
+            0.19593495776301295,
+            0.04002331210953084,
+            0.012777517600090594,
+            0.006774755764602384,
+            0.002726708223230119,
+            0.0011427779844610441,
+            0.00021942757698137374,
+            0.0001060905359391411,
+            6.945742020319201e-05,
+            1.7761238829089573e-05,
+            1.588928985697112e-05,
+            2.5576190364232953e-06,
+            3.8858909793992855e-07,
+            1.7148874080786968e-07,
+            0.0
+          ]
+        },
+        {
+          "width_V": 0.75,
+          "lo_V": 0.15000000000000002,
+          "hi_V": 0.9,
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 4.986455219629413,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0599671544374416,
+            0.2184868455126899,
+            0.04381606489768649,
+            0.012991873738932357,
+            0.007549719888748142,
+            0.0038828505535512484,
+            0.0013228494407248122,
+            0.0003104983892497943,
+            0.0002460547740187888,
+            7.714263426789454e-05,
+            2.276730812812077e-05,
+            1.5559389303916955e-05,
+            3.816204815233144e-06,
+            7.445965124610289e-07,
+            3.535317791407935e-07,
+            0.0
+          ]
+        }
+      ],
+      "spacing_curve": [
+        {
+          "alpha": 0.0,
+          "biases": [
+            0.15,
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 4.986455219629413,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0599671544374416,
+            0.2184868455126899,
+            0.04381606489768649,
+            0.012991873738932357,
+            0.007549719888748142,
+            0.0038828505535512484,
+            0.0013228494407248122,
+            0.0003104983892497943,
+            0.0002460547740187888,
+            7.714263426789454e-05,
+            2.276730812812077e-05,
+            1.5559389303916955e-05,
+            3.816204815233144e-06,
+            7.445965124610289e-07,
+            3.535317791407935e-07,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "biases": [
+            0.15,
+            0.1961,
+            0.2426,
+            0.2893,
+            0.3365,
+            0.3841,
+            0.4321,
+            0.4808,
+            0.53,
+            0.5799,
+            0.6307,
+            0.6823,
+            0.7349,
+            0.7886,
+            0.8436,
+            0.9
+          ],
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.130630331639827,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0802877281920744,
+            0.21055653172478675,
+            0.04277576363361183,
+            0.013081489858113483,
+            0.007491396038472895,
+            0.0043172467715371365,
+            0.0013094218741781095,
+            0.00041221483770335524,
+            0.00017868337787884164,
+            0.00011610401697949818,
+            3.5834184957472084e-05,
+            1.555281063505509e-05,
+            8.607708272799855e-06,
+            1.4490603584470549e-06,
+            2.222068848484333e-07,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "biases": [
+            0.15,
+            0.1923,
+            0.2351,
+            0.2787,
+            0.323,
+            0.3681,
+            0.4143,
+            0.4615,
+            0.51,
+            0.5599,
+            0.6113,
+            0.6645,
+            0.7197,
+            0.7772,
+            0.8372,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.115074693993675,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0395457681311089,
+            0.20323178649801243,
+            0.04166364826347615,
+            0.012826710836065734,
+            0.00729979985999282,
+            0.0023298040654132213,
+            0.0011707027360826027,
+            0.0002398601366859831,
+            0.00013768676977773123,
+            5.758759568314428e-05,
+            1.710075264700947e-05,
+            4.4442419481434246e-06,
+            2.188514120586508e-06,
+            4.791449045924328e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.375,
+          "biases": [
+            0.15,
+            0.1884,
+            0.2277,
+            0.268,
+            0.3095,
+            0.3522,
+            0.3964,
+            0.4423,
+            0.49,
+            0.5398,
+            0.592,
+            0.6468,
+            0.7046,
+            0.7658,
+            0.8308,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.376359313328459,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0593683188407088,
+            0.19704194922657853,
+            0.04057063554380075,
+            0.012924033069880369,
+            0.007142610593326637,
+            0.002594819263423367,
+            0.0011692119264229215,
+            0.0002446776574923617,
+            0.00012670025332536277,
+            4.9946442013294495e-05,
+            1.997926415407865e-05,
+            3.2574287633082266e-06,
+            1.0385227794171233e-06,
+            7.674947225400256e-08,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "biases": [
+            0.15,
+            0.1845,
+            0.2202,
+            0.2573,
+            0.2959,
+            0.3363,
+            0.3786,
+            0.4231,
+            0.47,
+            0.5198,
+            0.5726,
+            0.6291,
+            0.6895,
+            0.7544,
+            0.8243,
+            0.9
+          ],
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.926201723703651,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1361136445929854,
+            0.1917102551620463,
+            0.03950348948551341,
+            0.013282348560453468,
+            0.0072196979176053135,
+            0.005231323419335588,
+            0.0012467233025790607,
+            0.0003850309899973443,
+            0.00023056815906400522,
+            0.00012934762390641325,
+            3.5439423529924996e-05,
+            1.0583706147063749e-05,
+            5.69218757971855e-06,
+            1.6363079863076592e-06,
+            2.541784425893764e-07,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.625,
+          "biases": [
+            0.15,
+            0.1806,
+            0.2128,
+            0.2467,
+            0.2824,
+            0.3204,
+            0.3607,
+            0.4038,
+            0.45,
+            0.4997,
+            0.5533,
+            0.6113,
+            0.6743,
+            0.743,
+            0.8179,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.8663150536161215,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.0952965405030224,
+            0.18670946420238005,
+            0.03840043287841456,
+            0.013089409322298063,
+            0.006842988621698438,
+            0.003305644929951711,
+            0.0010903564678843996,
+            0.00022210180433829933,
+            0.0001928790830469006,
+            4.4750182073978626e-05,
+            2.160533826297212e-05,
+            8.869106920227467e-06,
+            1.3518601483916045e-06,
+            4.308493352346201e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.75,
+          "biases": [
+            0.15,
+            0.1768,
+            0.2054,
+            0.236,
+            0.2689,
+            0.3044,
+            0.3429,
+            0.3846,
+            0.43,
+            0.4796,
+            0.534,
+            0.5936,
+            0.6592,
+            0.7316,
+            0.8115,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 6.09281196693378,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1115141397265904,
+            0.18243040253972617,
+            0.03738496986824572,
+            0.0130457400755507,
+            0.006633707144606107,
+            0.0036219761979308985,
+            0.0012122245384320895,
+            0.0002449248362212534,
+            0.00014109845077476412,
+            3.9677733056108857e-05,
+            2.1472201662724823e-05,
+            7.472734720648172e-06,
+            1.8875610535119994e-06,
+            5.867517264592087e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.875,
+          "biases": [
+            0.15,
+            0.1729,
+            0.1979,
+            0.2253,
+            0.2554,
+            0.2885,
+            0.325,
+            0.3654,
+            0.41,
+            0.4596,
+            0.5146,
+            0.5759,
+            0.6441,
+            0.7202,
+            0.8051,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 6.3060121700190495,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1263733932318616,
+            0.17861896914614725,
+            0.03650475851382206,
+            0.012815710816557557,
+            0.0064831688511318986,
+            0.004079691657255383,
+            0.0012311211395347726,
+            0.0003929761611429755,
+            0.00012752785141845652,
+            9.40294240022972e-05,
+            2.6761006112963492e-05,
+            1.0214075042895833e-05,
+            1.559755351914176e-06,
+            5.930844706757588e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "biases": [
+            0.15,
+            0.169,
+            0.1905,
+            0.2146,
+            0.2419,
+            0.2726,
+            0.3072,
+            0.3461,
+            0.39,
+            0.4395,
+            0.4953,
+            0.5581,
+            0.6289,
+            0.7087,
+            0.7987,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 6.504891212273548,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.1398474979264581,
+            0.1752292945000791,
+            0.035680208217647176,
+            0.0127618816976236,
+            0.006405913371571766,
+            0.004553450274316493,
+            0.0011393449588667874,
+            0.0005176796222524287,
+            0.00022508874310014356,
+            7.914093708769992e-05,
+            3.3024632983976724e-05,
+            1.988706121399442e-05,
+            3.940435099154546e-06,
+            6.193743298272172e-07,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "summary": {
+        "rank_range_over_width": [
+          1,
+          4
+        ],
+        "rank_range_over_spacing": [
+          4,
+          4
+        ],
+        "rank_moves_with_width": true,
+        "rank_moves_with_spacing": false
+      }
+    },
+    "device_p50": {
+      "theta_chartG_d4": [
+        21.892911460654517,
+        21.787058343746764,
+        22.084998332640506,
+        22.317087292758885
+      ],
+      "width_curve": [
+        {
+          "width_V": 0.1,
+          "lo_V": 0.47500000000000003,
+          "hi_V": 0.5750000000000001,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 2,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 87.77147936531571,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": false
+            }
+          ],
+          "singular_values": [
+            1.4449163670062581,
+            0.01646225376915818,
+            0.0007727069254679846,
+            8.043277176147087e-05,
+            1.0232299534189064e-05,
+            4.4744883104743204e-07,
+            2.032298653879684e-08,
+            9.676641743404866e-09,
+            6.917959782706457e-09,
+            4.603231237606373e-09,
+            2.129492082205458e-09,
+            9.3156943394619e-10,
+            6.128395288079726e-10,
+            2.468767216551518e-10,
+            2.1015205848067836e-10,
+            7.688370276468192e-11
+          ]
+        },
+        {
+          "width_V": 0.15,
+          "lo_V": 0.45,
+          "hi_V": 0.6,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 2,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 62.01576985052466,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.4389847215621174,
+            0.02320352911897204,
+            0.0020617496108479654,
+            0.0003597681654464193,
+            4.6669596974838733e-05,
+            3.459831755259211e-06,
+            2.1914737161451612e-07,
+            1.918355059720737e-08,
+            1.6848074593270294e-08,
+            8.711540606615636e-09,
+            5.912836361656754e-09,
+            2.6601406353560685e-09,
+            1.3071676318001023e-09,
+            9.562668710559758e-10,
+            3.1066008339293263e-10,
+            1.3432058498689726e-10
+          ]
+        },
+        {
+          "width_V": 0.2,
+          "lo_V": 0.42500000000000004,
+          "hi_V": 0.625,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 2,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 50.79086193674687,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.4288589044639424,
+            0.028132204297761126,
+            0.005036118497028927,
+            0.0010698158490579082,
+            0.00013961644522367904,
+            1.4239240000972386e-05,
+            1.1096453091557938e-06,
+            2.3954089190138693e-07,
+            5.6296877479079295e-08,
+            1.2181656929997703e-08,
+            1.156672713042989e-08,
+            4.037707743308873e-09,
+            2.6814937534644135e-09,
+            1.1300184091262602e-09,
+            2.379590526747084e-10,
+            4.928186683055719e-11
+          ]
+        },
+        {
+          "width_V": 0.3,
+          "lo_V": 0.375,
+          "hi_V": 0.675,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 3,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 39.012740894712984,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 1,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.3955120249366393,
+            0.03577067370638804,
+            0.02508920663791473,
+            0.004481156387127429,
+            0.0007116522567554343,
+            7.24336380181568e-05,
+            2.299184619036598e-05,
+            4.673387995904748e-06,
+            1.2814774375145769e-06,
+            2.408296229002445e-07,
+            7.326076978512643e-08,
+            4.1537301546377335e-08,
+            1.2902003658657045e-08,
+            5.774813729733466e-09,
+            9.824659115845176e-10,
+            1.0385400966579136e-10
+          ]
+        },
+        {
+          "width_V": 0.4,
+          "lo_V": 0.325,
+          "hi_V": 0.7250000000000001,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 17.076190374828215,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 7,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.3620356366698811,
+            0.07976226586684344,
+            0.03789812043572523,
+            0.011707422305353746,
+            0.0019323708754639592,
+            0.00027723133648793497,
+            0.00014909388420938948,
+            1.868466280450789e-05,
+            1.2387754961504615e-05,
+            2.850685227460993e-06,
+            9.301924040043125e-07,
+            1.723164683558695e-07,
+            8.773625882422346e-08,
+            3.7769726151092624e-08,
+            1.2191531980503832e-08,
+            2.871666320808122e-09
+          ]
+        },
+        {
+          "width_V": 0.5,
+          "lo_V": 0.275,
+          "hi_V": 0.775,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 9.349684193284522,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 6,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.3446026202736339,
+            0.1438126243065412,
+            0.04457938686592385,
+            0.02095985172206822,
+            0.00367796573647333,
+            0.0007967483278052917,
+            0.00029718594230467406,
+            0.00013402358138866875,
+            3.9228678263700444e-05,
+            1.6210542286124614e-05,
+            5.837675185714502e-06,
+            1.9848483537983247e-06,
+            6.009374808947565e-07,
+            1.8415799734133992e-07,
+            2.87321017710387e-08,
+            3.668722722853455e-09
+          ]
+        },
+        {
+          "width_V": 0.6,
+          "lo_V": 0.22500000000000003,
+          "hi_V": 0.825,
+          "rows_used": 16,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 6.424944740056166,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.3418120324985499,
+            0.20884413590875803,
+            0.05146428131406818,
+            0.029510659555336324,
+            0.005802844324077935,
+            0.0015385104591669964,
+            0.0005309691352289149,
+            0.0003469583923003489,
+            0.00010801820194247478,
+            5.278705488393563e-05,
+            2.067110394352595e-05,
+            4.686642115151303e-06,
+            3.7008926291827315e-06,
+            7.463012910919216e-07,
+            1.294004286850171e-07,
+            4.506346296591794e-08
+          ]
+        },
+        {
+          "width_V": 0.7,
+          "lo_V": 0.17500000000000004,
+          "hi_V": 0.875,
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 4.995213271879045,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.259149578685393,
+            0.27059327244874787,
+            0.054170514394665484,
+            0.035313103462132525,
+            0.007298209719559687,
+            0.0023333397592596615,
+            0.0006913042551089326,
+            0.0004661898045697252,
+            0.0001525922227206611,
+            9.27989700199739e-05,
+            1.8717321106760594e-05,
+            7.662254519779395e-06,
+            3.5191165528216866e-06,
+            7.436464539710558e-07,
+            3.39180125855443e-07,
+            0.0
+          ]
+        },
+        {
+          "width_V": 0.75,
+          "lo_V": 0.15000000000000002,
+          "hi_V": 0.9,
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.1055032696819085,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2628167149700404,
+            0.30020822741894626,
+            0.058800907875561956,
+            0.0375713390078389,
+            0.008466082859676547,
+            0.002983970521765691,
+            0.0008004636220962865,
+            0.0005406830949513503,
+            0.00015723563486411257,
+            0.00013478395017530814,
+            3.083881098112353e-05,
+            1.738198596930377e-05,
+            4.165627765403924e-06,
+            2.5855465956212523e-06,
+            1.8313725659289411e-07,
+            0.0
+          ]
+        }
+      ],
+      "spacing_curve": [
+        {
+          "alpha": 0.0,
+          "biases": [
+            0.15,
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.1055032696819085,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2628167149700404,
+            0.30020822741894626,
+            0.058800907875561956,
+            0.0375713390078389,
+            0.008466082859676547,
+            0.002983970521765691,
+            0.0008004636220962865,
+            0.0005406830949513503,
+            0.00015723563486411257,
+            0.00013478395017530814,
+            3.083881098112353e-05,
+            1.738198596930377e-05,
+            4.165627765403924e-06,
+            2.5855465956212523e-06,
+            1.8313725659289411e-07,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "biases": [
+            0.15,
+            0.1961,
+            0.2426,
+            0.2893,
+            0.3365,
+            0.3841,
+            0.4321,
+            0.4808,
+            0.53,
+            0.5799,
+            0.6307,
+            0.6823,
+            0.7349,
+            0.7886,
+            0.8436,
+            0.9
+          ],
+          "rows_used": 15,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 4.921887882578467,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2920673282167119,
+            0.28884974380447054,
+            0.05868677846703583,
+            0.03741572419898499,
+            0.00836825993075229,
+            0.002889903379801287,
+            0.0008639542706896076,
+            0.0006169688389938538,
+            0.00022205353804651722,
+            0.00013096021508958685,
+            3.221722223560867e-05,
+            1.5014626174099995e-05,
+            3.922893524797929e-06,
+            7.366267781543815e-07,
+            2.1353139398631852e-07,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "biases": [
+            0.15,
+            0.1923,
+            0.2351,
+            0.2787,
+            0.323,
+            0.3681,
+            0.4143,
+            0.4615,
+            0.51,
+            0.5599,
+            0.6113,
+            0.6645,
+            0.7197,
+            0.7772,
+            0.8372,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.074150122833508,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2313649828970958,
+            0.2784275158809967,
+            0.054871753720506226,
+            0.03545591647618838,
+            0.00771748384767576,
+            0.0026264772341103547,
+            0.0007501106380838941,
+            0.0003585752805701278,
+            0.00016294216536808865,
+            7.626035268893931e-05,
+            1.603866183546126e-05,
+            7.2404816275344565e-06,
+            2.028706828077015e-06,
+            3.5697357822497916e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.375,
+          "biases": [
+            0.15,
+            0.1884,
+            0.2277,
+            0.268,
+            0.3095,
+            0.3522,
+            0.3964,
+            0.4423,
+            0.49,
+            0.5398,
+            0.592,
+            0.6468,
+            0.7046,
+            0.7658,
+            0.8308,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 4.918994403467459,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.2608112040006234,
+            0.26957337723241553,
+            0.054802537901321856,
+            0.03541791002355583,
+            0.007641042471637511,
+            0.00263004216908427,
+            0.0007167167268784515,
+            0.00047107746973538343,
+            0.00013385731220927994,
+            8.124013228118495e-05,
+            1.7226067251909195e-05,
+            4.424598363353859e-06,
+            1.145030083276417e-06,
+            2.0090364493304484e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "biases": [
+            0.15,
+            0.1845,
+            0.2202,
+            0.2573,
+            0.2959,
+            0.3363,
+            0.3786,
+            0.4231,
+            0.47,
+            0.5198,
+            0.5726,
+            0.6291,
+            0.6895,
+            0.7544,
+            0.8243,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 4.926103042091093,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.289263161879504,
+            0.26172070516255824,
+            0.054784301312715694,
+            0.035189456510705625,
+            0.007653640035991042,
+            0.0025815811141469062,
+            0.0007071663293267499,
+            0.00047931831664558275,
+            0.0001449431801417431,
+            5.7016265013736255e-05,
+            3.342101703355882e-05,
+            5.862028687302487e-06,
+            5.167765577879777e-07,
+            2.3142546502501893e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.625,
+          "biases": [
+            0.15,
+            0.1806,
+            0.2128,
+            0.2467,
+            0.2824,
+            0.3204,
+            0.3607,
+            0.4038,
+            0.45,
+            0.4997,
+            0.5533,
+            0.6113,
+            0.6743,
+            0.743,
+            0.8179,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.166755802666748,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.316662325534157,
+            0.2548334730382613,
+            0.054772926464475104,
+            0.03480148736387445,
+            0.007634697000614855,
+            0.002572404953054525,
+            0.0007956779256509273,
+            0.00047314970906164004,
+            0.00013537325861730158,
+            5.3239813403918103e-05,
+            2.6534145711551186e-05,
+            4.017586356096449e-06,
+            7.476974580870762e-07,
+            9.10922863060593e-08,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.75,
+          "biases": [
+            0.15,
+            0.1768,
+            0.2054,
+            0.236,
+            0.2689,
+            0.3044,
+            0.3429,
+            0.3846,
+            0.43,
+            0.4796,
+            0.534,
+            0.5936,
+            0.6592,
+            0.7316,
+            0.8115,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.39959631731983,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.3430918439682349,
+            0.24873930661448013,
+            0.054887425798973835,
+            0.0343570176045289,
+            0.007541397316840611,
+            0.0026153295640082555,
+            0.0007401351323417719,
+            0.0005021129129615274,
+            0.00013844195343163453,
+            5.4044146894125674e-05,
+            1.3556365586953577e-05,
+            6.3447329442518336e-06,
+            2.100332480854011e-06,
+            2.949402666298746e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 0.875,
+          "biases": [
+            0.15,
+            0.1729,
+            0.1979,
+            0.2253,
+            0.2554,
+            0.2885,
+            0.325,
+            0.3654,
+            0.41,
+            0.4596,
+            0.5146,
+            0.5759,
+            0.6441,
+            0.7202,
+            0.8051,
+            0.9
+          ],
+          "rows_used": 14,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.6251934729040975,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 4,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.368693215789068,
+            0.2433148695030498,
+            0.05517921458217884,
+            0.03382189276999139,
+            0.007544991955699124,
+            0.00267145796711858,
+            0.0007841341656806943,
+            0.00043158734878857,
+            0.00018451700901516227,
+            0.00010182302443207182,
+            2.1155876715305696e-05,
+            7.5945159006817255e-06,
+            2.365449980623659e-06,
+            3.56704819120929e-07,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "biases": [
+            0.15,
+            0.169,
+            0.1905,
+            0.2146,
+            0.2419,
+            0.2726,
+            0.3072,
+            0.3461,
+            0.39,
+            0.4395,
+            0.4953,
+            0.5581,
+            0.6289,
+            0.7087,
+            0.7987,
+            0.9
+          ],
+          "rows_used": 13,
+          "rank_at_operational_cutoff": 4,
+          "bare_integer_rank_justified": false,
+          "largest_gap_ratio": 5.492002514072151,
+          "operational_cutoff_falls_in_largest_gap": false,
+          "rank_cutoff_curve": [
+            {
+              "noise_rel": 0.2,
+              "cutoff_symlog": 0.07918124604762482,
+              "rank": 2,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.1,
+              "cutoff_symlog": 0.04139268515822508,
+              "rank": 3,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.05,
+              "cutoff_symlog": 0.021189299069938092,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.02,
+              "cutoff_symlog": 0.00860017176191757,
+              "rank": 4,
+              "cutoff_below_spectral_floor": false
+            },
+            {
+              "noise_rel": 0.01,
+              "cutoff_symlog": 0.004321373782642578,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.001,
+              "cutoff_symlog": 0.0004340774793185929,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 0.0001,
+              "cutoff_symlog": 4.342727686266486e-05,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            },
+            {
+              "noise_rel": 1e-06,
+              "cutoff_symlog": 4.3429426472042774e-07,
+              "rank": 5,
+              "cutoff_below_spectral_floor": true
+            }
+          ],
+          "singular_values": [
+            1.3084983640721755,
+            0.23825523763316053,
+            0.05248877017039757,
+            0.03274000837293368,
+            0.007069196765067414,
+            0.0024730791465800575,
+            0.0005683760836752994,
+            0.00021434543480391806,
+            0.00011926631273259739,
+            6.226609667994144e-05,
+            1.154384547759443e-05,
+            2.02617392967647e-06,
+            5.327182645085551e-07,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "summary": {
+        "rank_range_over_width": [
+          2,
+          4
+        ],
+        "rank_range_over_spacing": [
+          4,
+          4
+        ],
+        "rank_moves_with_width": true,
+        "rank_moves_with_spacing": false
+      }
+    }
+  },
+  "axes": {
+    "width": {
+      "centre_V": 0.525,
+      "widths_V": [
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.75
+      ],
+      "n_biases": 16,
+      "spacing": "linear",
+      "why": "the window is widened about a fixed centre so that width is the only thing that moves; centring it elsewhere would confound width with which part of the I-V is being looked at"
+    },
+    "spacing": {
+      "window_V": [
+        0.15,
+        0.9
+      ],
+      "alphas": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1.0
+      ],
+      "n_biases": 16,
+      "why": "alpha interpolates linear (0) to geometric (1) spacing over one fixed window, so the endpoints and the count never move and only the interior placement does"
+    }
+  },
+  "falsifier": "SPEC-g9-2 fires if a rank appears anywhere on the claim surface at a single window without its curve. Guarded on the prose by tests/test_claim_surface_g9.py, not by this artefact."
+}

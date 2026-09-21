@@ -26,8 +26,7 @@ import argparse
 import json
 from pathlib import Path
 from textwrap import dedent
-from typing import Dict, Optional
-
+from typing import Optional
 
 # =============================================================================
 # LaTeX table fragments
@@ -253,7 +252,7 @@ def _maybe_load(path: Optional[str]) -> Optional[dict]:
     if not p.exists():
         print(f"  warning: {p} not found, skipping")
         return None
-    with open(p) as f:
+    with open(p, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -300,9 +299,9 @@ def main():
         tex_parts.append(_defect_block(def_));     tex_parts.append("")
         md_parts.append(_defect_md(def_));         md_parts.append("")
 
-    with open(out_tex, "w") as f:
+    with open(out_tex, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(tex_parts))
-    with open(out_md, "w") as f:
+    with open(out_md, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(md_parts))
     print(f"  -> {out_tex}")
     print(f"  -> {out_md}")

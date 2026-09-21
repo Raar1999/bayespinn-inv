@@ -1,0 +1,304 @@
+{
+  "generation": 10,
+  "designation": "G10 (mechanism generation; ordered post-termination by the ruling of 2026-08-26 issued after G9). One bounded generation aimed at the gap generation 9 named, plus WIT-01 retro-applied and a validity boundary stated rather than tested.",
+  "terminated": true,
+  "termination_condition": "T-1 was reached at generation 6 and is not re-opened. G10, like G7-R, G8 and G9, is a bounded generation ordered post-termination. It opened no new scientific scope: SPEC-g10-1 was falsified and the clause's own instruction -- do not chase a second mechanism if this one fails -- was obeyed; SPEC-g10-2 used a witness set that has existed since generation 8; SPEC-g10-3 states a boundary and explicitly does not test one; no fourth chart, no S-5, no S-2.",
+  "schema": {
+    "champion_commit": "The last CONTENT commit of the generation, by definition. Never the commit that wrote this file: a state file cannot name its own commit, because its bytes are part of the tree that commit hashes. Guarded by tests/test_loop_state_g10.py.",
+    "bookkeeping_commit": "null at write time, always. Nothing may fill this during the commit that writes the file, because the value would be that commit's own hash. A later generation reading git history may fill it; the null is the record that this one did not.",
+    "machinery_commit": "The commit every measurement in this generation ran against. One tree, one commit: outputs/g10/manifest.json records it with dirty=false.",
+    "results_commit": "The commit carrying the artefacts and the result documents. Equal to champion_commit when the generation ends with its results.",
+    "baselines": "REP-01 as amended at generation 9 section 3: every entry is an OBJECT carrying the invocation that produced it, never a bare scalar. Entries marked rerunnable are re-run by tests/test_loop_state_g9.py and compared; entries that are not carry conditions and measured_at_commit instead, because a number the suite cannot re-derive is only checkable against its conditions."
+  },
+  "champion_commit": "5424d99a61e12ace186f352b081ad479deac14fd",
+  "machinery_commit": "e05d463a5cdbbed7251d5691724ad4cc7aa6ea0d",
+  "results_commit": "5424d99a61e12ace186f352b081ad479deac14fd",
+  "bookkeeping_commit": null,
+  "champion_branch": "loop/champion",
+  "one_tree_one_commit": {
+    "honoured": true,
+    "note": "Every G10 measurement ran against e05d463. outputs/g10/manifest.json records that commit with dirty=false. The suite timings in baselines.pytest were taken against the results tree, on a quiet host, and say so."
+  },
+  "baselines": {
+    "pytest": {
+      "invocation": "PYTHONPATH=src python -m pytest tests -q",
+      "tool_version": "pytest 9.1.1",
+      "collected": 812,
+      "passed": 792,
+      "skipped": 20,
+      "failed": 0,
+      "wall_clock_s": [
+        212.93,
+        218.46,
+        197.82
+      ],
+      "rerunnable": false,
+      "conditions": "Quiet host: no other job on the machine, three consecutive runs, taken at results_commit 5424d99 with LOOP_STATE_v7.json NOT yet in the tree. That matters and is the reason the counts below differ: adding this file un-skips the seventeen guards in tests/test_loop_state_g10.py, which are skipped while it does not exist. The band this sits in is generation 9's 163.8-171.4 s plus this generation's added modules; it is not comparable to generation 8's 370-374 s, which were measured under load.",
+      "measured_at_commit": "5424d99a61e12ace186f352b081ad479deac14fd",
+      "environment": "CPython 3.11.9, win32",
+      "skips_are": "17 loop-state guards that skip until this file exists, 2 claim-surface documents that quote no rank fraction, and 1 that quotes no witness count. Every skip states its reason.",
+      "collected_at_state_commit": 812,
+      "passed_at_state_commit": 809,
+      "skipped_at_state_commit": 3,
+      "why_two_counts": "The collection does not move when this file is added -- it is not a test module -- but the pass/skip split does, because the loop-state guards are gated on its existence. Both numbers are the same invocation at two named trees, which is the point of recording the invocation."
+    },
+    "ruff_whole_tree": {
+      "invocation": "ruff check .",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true,
+      "note": "Unchanged from generation 9, where the two scopes were made to agree by configuration rather than by annotation. Guarded by tests/test_lint_scope_g9.py."
+    },
+    "ruff_scoped": {
+      "invocation": "ruff check src tests scripts",
+      "tool_version": "ruff 0.16.3",
+      "exit_code": 0,
+      "findings": 0,
+      "rerunnable": true,
+      "note": "The invocation .github/workflows/ci.yml and the Makefile run."
+    },
+    "mypy_tracked_tree": {
+      "invocation": "mypy src tests scripts",
+      "tool_version": "mypy 2.3.1",
+      "findings": 150,
+      "files_checked": 119,
+      "rerunnable": false,
+      "conditions": "THE CARRIED BASELINE, by the ruling of 2026-08-26 section 4. 150 reproduces generation 9's tracked-tree figure exactly; generation 10 adds five source and test modules and no findings. The five arg-type findings this generation's first draft introduced -- ndarray offered where Sequence[float] was annotated -- were removed by widening the annotations to the Coords alias charts.py already used, rather than by leaving them in the baseline. The file count is the scope at measured_at_commit and grows with the tree; tests/test_loop_state_g9.py asserts it never shrinks rather than asserting equality.",
+      "measured_at_commit": "5424d99a61e12ace186f352b081ad479deac14fd",
+      "was_at_generation_9": {
+        "findings": 150,
+        "files_checked": 113
+      }
+    },
+    "mypy_package": {
+      "invocation": "mypy src",
+      "tool_version": "mypy 2.3.1",
+      "findings": 25,
+      "files_checked": 45,
+      "rerunnable": false,
+      "conditions": "Advisory in the Makefile ('-' prefixed), so exit code is not a gate. No longer the carried baseline -- the ruling of 2026-08-26 section 4 moved that to mypy_tracked_tree -- but retained because 25 is the number nine generations of documentation quote, and retiring it silently would leave those documents pointing at nothing. Every historical statement of it now carries its scope; tests/test_mypy_scope_g10.py keeps it that way.",
+      "measured_at_commit": "5424d99a61e12ace186f352b081ad479deac14fd"
+    },
+    "python_support_floor_scan": {
+      "invocation": "PYTHONPATH=src python scripts/check_python_support_floor.py",
+      "files_scanned": 117,
+      "syntax_rejections": 0,
+      "api_uses_newer_than_floor": 0,
+      "runtime_pep604_unions": 0,
+      "obstruction_found": 0,
+      "rerunnable": false,
+      "conditions": "Static analysis at a floor of 3.9. It can only FALSIFY a floor, never confirm one, and it cannot see dependency resolution at all. Not re-run by the loop-state guards because tests/test_python_support_floor_g7.py already exercises the scanner with both SW-20 controls; this record exists to carry the file count, which is CI-01's cost and which grows.",
+      "measured_at_commit": "5424d99a61e12ace186f352b081ad479deac14fd",
+      "was_at_generation_7": 96,
+      "was_at_generation_9": 110
+    }
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e",
+    "g7": "922c2cc",
+    "g8": "0f22ecc",
+    "g9": "68f3d5d4a0265a3d99f57031af2442c1d0d820db",
+    "g10": "5424d99a61e12ace186f352b081ad479deac14fd"
+  },
+  "spec_clause_status": {
+    "SPEC-g10-1": "PASS as a measurement, and the FALSIFIER FIRES. The localisation mechanism for rank(window width) is dead. Under a measure hashed before the first SVD (678c272f...), the leading right singular vector's spread moves by 0.0080 and 0.0117 on a 0.0625-1.000 scale while the rank climbs 1 -> 4 over the same windows; spearman(width, spread) is -0.433 and -1.000, both the wrong SIGN against a registered threshold of >= +0.7, and the junction distance moves AWAY from the junction as the window widens. At one of the two devices the trend against spacing is stronger than the trend against width, which is the clause's second falsifier clause on its own terms. Pre-registered as reportable either way; the clause's instruction not to chase a second mechanism was obeyed.",
+    "SPEC-g10-2": "PASS, run whole, and the reading it was ordered to disambiguate CHANGES. The pilot projected 522 s against a 1200 s budget so the clause was not dropped and was not part-run. Chart L at d=16 is a BASIN -- 0 of 37 pairs within the floor barrier, median 212 floor units -- so both d=16 cells are basins and the only ridge is chart G at d=4. Under the decision table registered before the third set was measured, the ridge/basin split is a property of the DIMENSION. Generation 9's two sets reproduce bit for bit (relative_change 0.0) through the same imported function. The ruling's own statement of this falsifier is inverted and the correction was registered before the measurement.",
+    "SPEC-g10-3": "PASS, as a statement rather than a test, which is what the clause ordered. The adopted range V in [0.15, 0.90] is stated with its source, the claim it bounds is named, and the two boundaries are recorded as having DIFFERENT status: the lower one is measured and rejected below, the upper one is untested (PH-15) because the convergence sweep's own upper end is 0.9 V. Checked rather than asserted -- every bias list in every artefact under outputs/ was read, 74 JSON files, and the largest bias any artefact was ever evaluated at is 0.9 V. The range was not extended.",
+    "WIT-01": "ENACTED and RETRO-APPLIED, and it removes nothing. The admissibility ratio is 1.000 in all three committed witness sets: chart G d=4 13 of 13, chart L d=16 37 of 37, chart J d=16 13 of 13. Every pair qualifies on a magnitude coordinate and magnitude coordinates reach the grid exactly, so the rule is vacuous for charts G and L by construction and does not bite on chart J either. What it catches is one reported QUANTITY -- a chart-J pair's junction separation of 0.425 nm against a 3.333 nm node -- which is withdrawn. The premise the rule was ordered on does not hold: see ruling_premises_corrected.",
+    "SPEC-g10-negative-control": "REJECTED and ACCEPTED as required, five controls. The localisation statistic returns 1/16 on a planted single-anchor direction and 1.000 on a uniform one, and shows no width trend on Haar-random directions. WIT-01 rejects a planted sub-node chart-J pair FOR THE STATED REASON -- the first draft of that control would have been rejected by the separation criterion instead, and would have passed whatever the rule did -- and admits the headline pair. The ridge/basin classifier returns RIDGE for a device against itself and BASIN for a distinguishable pair on a certified path. The pinned-junction control is retained from generation 9 and extended with the WIT-01 resolution, which must be infinite. all_controls_pass=True.",
+    "SPEC-g9-1": "Unchanged. PASS as a measurement, falsifier fired.",
+    "SPEC-g9-2": "Unchanged. PASS. The rank(observation set) curves are the cells SPEC-g10-1 re-measured for localisation, and the ranks reproduce.",
+    "SPEC-g9-3": "Unchanged as a result; its READING is sharpened at generation 10. 7 of 13 chart-J pairs survive refinement and the headline pair is among them. What is corrected is the account of WHY the other 6 separate: it is proximity to the floor, not sub-grid junctions.",
+    "SPEC-g9-4": "Unchanged, and reproduced bit for bit at generation 10 through the same imported function.",
+    "SPEC-g0-3b-windows": "OPERATOR-BLOCKED (hard), unchanged; substitute evidence docs/WINDOWS_RISK_g6.md."
+  },
+  "open_findings": [
+    {
+      "id": "MECH-01",
+      "severity": "HIGH",
+      "status": "OPEN, NARROWED BY MEASUREMENT",
+      "note": "Opened at generation 10, from generation 9's highest remaining scientific risk. Nothing explains WHY bias-window width sets the rank. SPEC-g10-1 tested the obvious mechanism -- the window selects spatial transport regimes, so the observable directions should localise -- and killed it: the leading right singular vector is essentially FIXED (its spread moves under 2.5%) while the count of directions above the noise quadruples, and what movement there is runs the wrong way. The gap is now sharper than generation 9 left it: the question is why the leading direction does not move while the ones behind it cross the noise floor. Not chased further, per the clause."
+    },
+    {
+      "id": "PATH-01",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "note": "Promoted at generation 10 from generation 9's second remaining scientific risk, because three witness sets now rest on it. Every barrier walks a STRAIGHT LINE in that chart's own coordinates, so every depth is an UPPER bound -- a curved path can only be shallower. The direction is favourable for the ridge result and unfavourable for both basin results. The three sets walk lines through three coordinate systems, one of which spends a coordinate on a junction ratio that is not commensurate with a decade of doping, and the d=4 set's members sit 3.7x closer together than the d=16 sets'. Path-length normalisation and the matched-d chart-L-against-chart-J contrast each address part of this; neither addresses all of it. A search over paths was not run."
+    },
+    {
+      "id": "GEOM-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED-BY-MEASUREMENT",
+      "note": "Opened and closed at generation 10. 'The geometry of the degeneracy is chart-dependent -- a ridge at the instrument floor in one chart, isolated basins in another' is withdrawn: the comparison behind it was confounded in chart and dimension together. At matched d=16 both charts are basins. What replaces it is two statements: the ridge is a property of the DIMENSION (only d=4 puts pairs at the floor, and it survives path-length normalisation), and what the chart moves at matched d is the DEPTH (charts L and J differ 13x in witness-to-null ratio with matched path lengths on both sides of the ratio)."
+    },
+    {
+      "id": "WIT-02",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "Opened at generation 10. WIT-01 was enacted against a defect it does not reach: it admits all thirteen chart-J pairs including the one whose junctions are 0.425 nm apart, because that pair qualifies on magnitude coordinates. What actually predicts which pairs separate under refinement is proximity to the distinguishability floor -- the 7 survivors are exactly the 7 smallest distances at N=301 and the 6 that separate are the 6 largest, with the boundary falling between 0.01844 and 0.01873 against a floor of 0.02. No rule in this repository guards a witness reported within a few per cent of the floor without its refinement result beside it."
+    },
+    {
+      "id": "BOUND-01",
+      "severity": "LOW",
+      "status": "RESOLVED",
+      "note": "Opened and closed at generation 10. docs/CLAIM_EVIDENCE_MATRIX.md said the straight-line barrier is a LOWER bound while LOOP_STATE_v6.json said UPPER, with the same justification clause attached to both. Upper is correct. Corrected in place with the correction marked. Recorded because a wrong statement of a bound's direction is the class of error that survives review, being one word in a sentence everybody agrees with."
+    },
+    {
+      "id": "DOC-03a",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "Opened at generation 10. The README badge reads 'tests-N passing' and its guard compares N against COLLECTION, not against passes; the suite collects more than it passes because some tests skip with a stated reason. The number is honest as a collected count and loose as a passing one, and the badge text cannot be changed without breaking the guard's own regex. Found while repairing a worse instance of the same class in the same file -- a capability-table row that restated the total by hand and had drifted by more than a hundred tests, now replaced by a pointer to the guarded badge."
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/G9_RESULT.md section 1.4; reviewed at generation 10 in docs/AUDIT_MASTER.md under CI-01",
+      "cost_grown_since_assignment": true,
+      "note": "Unchanged in status. The generation-10 review is a review rather than a restatement: the statically-scanned surface grows again with this generation's new modules, and the file count is carried in baselines.python_support_floor_scan beside its generation-7 and generation-9 values so the direction is visible. docs/OPERATOR_TASKS.md OT-1 stands and records the reversion condition."
+    },
+    {
+      "id": "CHART-03",
+      "severity": "MEDIUM",
+      "status": "OPEN, AMENDED",
+      "note": "Amended at generation 10. Chart-invariance at matched d was already confined to a (device, bias window) cell by generation 9. Generation 10 adds a second axis on which the chart is not invariant at matched d: the likelihood barrier between witness members, where charts L and J at d=16 differ 13x in witness-to-null ratio with matched path lengths on both sides. What makes a cell one or the other is still not known."
+    },
+    {
+      "id": "WITNESS-04",
+      "severity": "MEDIUM",
+      "status": "OPEN, NOW LOAD-BEARING",
+      "note": "Unchanged as a finding and raised in consequence. The generation-7 chart-L native search has still never been re-checked at N=1201. Generation 10 used its 37 pairs for barriers, which does not test them against refinement. If some of those 37 separate under refinement, the chart-L BASIN classification -- which is what reclassifies the ridge/basin split as a dimension effect -- is measured over a set that includes non-witnesses. The direction of that error is not obvious and is not guessed at."
+    },
+    {
+      "id": "FALSIFIER-01",
+      "severity": "MEDIUM",
+      "status": "PARTIALLY-ADDRESSED",
+      "note": "Unchanged. Generation 10 exercised the barrier metric and the chart discriminator through their controls, which is evidence they are live and is not the audit the finding asks for."
+    },
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "cost_grown_since_assignment": false
+    },
+    {
+      "id": "PROV-07",
+      "severity": "HIGH",
+      "status": "MITIGATED-PENDING-CI",
+      "note": "Unchanged. Validated on win32 only; linux and darwin unvalidated and stated as such in every manifest."
+    },
+    {
+      "id": "CHART-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-STRUCTURALLY",
+      "note": "Unchanged in kind. scripts/run_g10.py's single anchor-to-anchor collocation is allowlisted per call with its reason; the solver grid is still reached only through charts._lerp."
+    },
+    {
+      "id": "CHART-02",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "ORDER-01",
+      "severity": "HIGH",
+      "status": "RESOLVED-BY-FALSIFICATION",
+      "note": "Unchanged from generation 9."
+    },
+    {
+      "id": "SPEC-11",
+      "severity": "MEDIUM",
+      "status": "MITIGATED",
+      "note": "Unchanged. tests/test_claim_surface_g7.py still reads the licensed denominators from outputs/g8/ranks.json rather than keying them on the (chart, d, device, bias window) cell. Not taken at generation 10 either."
+    },
+    {
+      "id": "DOC-07-a",
+      "severity": "LOW",
+      "status": "MITIGATED",
+      "note": "The widened guard fired on generation 10's machinery commit message before it was built on -- its second live catch, both on this loop's own messages. See docs/audit/AUDIT_g10.md section 5."
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z"
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "NB-04",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "EOL-01",
+      "severity": "LOW",
+      "status": "OPEN",
+      "note": "Fired at generation 10 on this session's own edits -- four documents and one module whose working-tree bytes stopped matching their blobs. Restored to match rather than normalising the blobs, which is what the -text policy requires and why the finding stays OPEN."
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    }
+  ],
+  "ruling_premises_corrected": [
+    "Section 5's SPEC-g10-2 falsifier is INVERTED. It reads 'chart L d=16 sits at the floor like chart G d=4, which would make the ridge/basin split a dimension effect rather than a chart effect'. If chart L sat at the floor while chart J at the SAME d did not, two charts at one dimension would disagree and d=4 and d=16 would land on the same side of the split, which is a chart effect and is precisely what a dimension effect cannot produce. The dimension reading requires chart L to behave like chart J. The correction was registered with its hash BEFORE the third set was measured, and the measurement then returned BASIN.",
+    "Section 2's account of g9-3 does not hold. It states that the chart-J pairs which separate under refinement 'are those whose junctions were nearly coincident -- 0.4 nm apart, rising 195% -- which is sub-grid and was never a witness'. Of the six that separate, ONE has a sub-node junction separation; the others separate with junctions 9 to 412 nm apart, and the surviving set includes separations of 26.6 and 41.7 nm. What predicts survival is headroom below the floor: the 7 survivors are exactly the 7 smallest distances at N=301 and the 6 that separate are exactly the 6 largest.",
+    "Section 4's WIT-01, read literally -- reject the pair if ANY coordinate is separated by less than its resolution -- rejects almost every real witness, including the generation-8 headline pair, because two devices sharing a junction are separated by exactly zero in that coordinate. The implemented reading applies the rule to the separation that QUALIFIES the pair, and is stated in full in the module rather than left as an interpretation.",
+    "Section 6's paper spine, item 4, reads 'Its geometry is not universal: a ridge at the instrument floor in one chart, isolated basins at 59x the floor in another'. Both d=16 charts are basins; the sentence is withdrawn and replaced by two measured ones."
+  ],
+  "highest_remaining_scientific_risk": "The mechanism question is still open and generation 10 narrowed it rather than answering it. SPEC-g10-1 shows the rank climb is not the leading observable direction broadening: v_1's spatial extent moves by under 2.5% while the count of directions above the noise quadruples, and where it moves it moves the wrong way. What replaces 'the window selects spatial regimes' is not another mechanism but a sharper question -- why is the leading direction essentially fixed while the ones behind it cross the noise floor? Nothing here answers it and the clause forbade chasing it.",
+  "second_remaining_scientific_risk": "PATH-01. Every barrier in this repository walks a straight line in one chart's own coordinates, so every depth is an upper bound, and the three sets that now carry the geometry result walk lines through three different coordinate systems whose members sit at different separations. The matched-d chart-L-against-chart-J contrast is free of the separation confound and is the only one that is; the d=4 ridge rests on a set whose members are 3.7x closer together than the others', and survives path-length normalisation by a factor whose linearity is assumed rather than measured.",
+  "third_remaining_scientific_risk": "WITNESS-04 is now load-bearing. The 37 chart-L witness pairs whose barriers reclassify the ridge/basin split have never been through the refinement battery, and generation 9 showed that battery separating 6 of 13 pairs in another chart. If some of the 37 are not witnesses at N=1201, the chart-L BASIN classification is measured over a contaminated set.",
+  "not_supported_and_not_to_be_written": [
+    "any ordering of the four sensitivities (observation set, junction, dimension, interpolant) as a general claim -- withdrawn by measurement at nine further operating points at generation 9",
+    "'the geometry of the degeneracy is chart-dependent', or 'a ridge in one chart and isolated basins in another' -- withdrawn at generation 10; at matched d=16 both charts are basins and the ridge is a property of the dimension",
+    "any statement that two devices have junctions 0.425 nm apart and are indistinguishable; the grid node is 3.333 nm and the representation does not carry that difference",
+    "any witness count without its admissibility ratio, guarded by tests/test_witness_admissibility_g10.py",
+    "any claim that the right singular vectors localise, or delocalise, with bias-window width -- falsified at two devices under a criterion hashed before the measurement",
+    "any barrier depth as a property of the landscape rather than of the straight line between two points in one chart's coordinates, and none compared across charts without its null control and its path length beside it",
+    "any statement that the solver fails, or that identifiability changes, above 0.90 V; that range is UNTESTED (PH-15), which is not the same sentence",
+    "'the chart does not move the local spectrum at matched d', with or without the interpolant-family qualifier; it moves it by 101.5% at one of the nine operating points and it moves the barrier depth by 13x at matched d=16",
+    "13 chart-J witness pairs, without the refinement result beside it; 7 survive N=301->1201 at tol_carrier=1e-12",
+    "44% as the observable-space distance between the two compared chart cells; the measured value is at most 2.67%",
+    "any rank fraction on the claim surface without the observation set it was measured over, guarded by tests/test_claim_surface_g9.py",
+    "any rank fraction compared across charts -- three charts, and the rank moves with the device and the window inside a single chart",
+    "any frequency or probability of degeneracy in any chart",
+    "any contraction number at the instrument's own 2% noise",
+    "any bare integer rank whose cell has no measured population gap; the licence is a property of the (chart, d, device, bias window) cell",
+    "any full-spectrum comparison involving chart J without stating junction_scale",
+    "any statement that an identifiable rank is a property of the device; it is a property of the (device, observation set) pair, and the observation-set half is a curve"
+  ],
+  "operator_tasks": [
+    "OT-1 push and run CI -- CI-01 is ACCEPTED-PERMANENT; the generation-10 cost review is done and recorded. The task is not withdrawn and the reversion condition is in docs/OPERATOR_TASKS.md.",
+    "OT-2 apply papers/CORRIGENDA_g6.md -- still unapplied; papers/draft.md line 255 unchanged. R-3 reserves papers/**. Five cycles.",
+    "OT-3 preservation: two copies on one disk is one failure from losing ten generations. PRESERVE_MANIFEST_g0.sha256 covers the generation-0 adoption only. Five cycles."
+  ],
+  "halt": null
+}

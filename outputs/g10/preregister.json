@@ -1,0 +1,66 @@
+{
+  "written_before": "any SVD, any barrier and any admissibility verdict in this generation. Every later phase recomputes these hashes and refuses to run on a mismatch.",
+  "localisation_measure": {
+    "primary": "spread_fraction of the leading right singular vector = participation ratio of v_1**2 over anchors, divided by d",
+    "primary_vector_index": 0,
+    "n_vectors_reported": 4,
+    "reference": "the junction, which charts G and L pin at the device midpoint",
+    "min_rho": 0.7,
+    "min_range_ratio": 2.0,
+    "decision": "SUPPORTED iff at EVERY device: spearman(width, spread_fraction of v_1) >= min_rho AND range over width >= min_range_ratio * range over spacing. FALSIFIED otherwise, and reported either way.",
+    "reliability": "a right singular vector below the identifiable rank spans a near-null subspace and its orientation there is not determined by the data; such vectors are reported and stamped unreliable, never used in the decision",
+    "secondary_reported": [
+      "centroid",
+      "reference_distance",
+      "rms_spread",
+      "spearman(rank_at_operational_cutoff, spread_fraction of v_1)"
+    ],
+    "cells": "the same devices, widths and alphas as SPEC-g9-2's rank(observation set), cell for cell, so the localisation curve and the rank curve are the same experiment",
+    "measure_hash": "678c272f84319be2dfbc8003c2181f5801442663beb1c0ad40420505be28387b"
+  },
+  "ridge_basin_decision": {
+    "floor_barrier": "0.5 * B_certified log-units, inherited unchanged from BarrierCriterion",
+    "ridge_fraction": 0.3333333333333333,
+    "classifier": "RIDGE if at least ridge_fraction of witness pairs are at or below the floor barrier; BASIN if none is; MIXED otherwise",
+    "matched_cell": "chart L, d=16 -- matched in d to chart J, matched in interpolant family to chart G",
+    "if_matched_cell_is_ridge": "chart effect: two charts at one d disagree",
+    "if_matched_cell_is_basin": "dimension effect: both d=16 cells are basins and the only ridge is d=4",
+    "if_matched_cell_is_mixed": "neither; one more cell was not enough",
+    "rulings_stated_falsifier": "chart L d=16 sits at the floor like chart G d=4, which would make the ridge/basin split a dimension effect rather than a chart effect",
+    "rulings_stated_falsifier_is_inverted": true,
+    "why_inverted": "chart L at the floor while chart J at the same d is not means two charts at one dimension disagree, and d=4 and d=16 land on the same side; that is a chart effect. The dimension reading requires chart L to behave like chart J, not like chart G.",
+    "reproduction_control": "chart G d=4 and chart J d=16 are re-measured here through the same imported function; their barrier medians must reproduce generation 9's",
+    "decision_hash": "88748b9f6d4e3ed84a70e3e704ff96d9ba0c84b206d071d3e4508666600565a2"
+  },
+  "witness_admissibility_rule": {
+    "min_separation_decades": 0.3,
+    "predicate": "admissible iff some coordinate is separated by at least min_separation_decades AND that separation is resolved by the chart's reconstruction",
+    "resolution_source": "Chart.separation_is_resolved -- exact; the junction coordinate of chart J is a node-index test, every magnitude coordinate is exact",
+    "applied": "before counting, never as a post-hoc filter",
+    "rule_hash": "a7dc1fee969a78f19b216cb1091c0dbb6f15cc0206a05aae2fb484ea9cb7cd7c"
+  },
+  "barrier_criterion": {
+    "metric": "profile likelihood barrier depth, straight line in chart coordinates",
+    "n_points": 11,
+    "noise_rel": 0.02,
+    "floor_reference": "0.5 * B_certified log-units, the cost of a curve one noise unit away at every bias",
+    "threshold_multiples_of_floor": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      25.0,
+      50.0,
+      100.0,
+      250.0,
+      1000.0
+    ],
+    "null_control": "the same criterion over the same number of ordinary prior draws that form no witness pair, taken in draw order",
+    "criterion_hash": "9631b4711f99a6319504b5c50185a26cb4f6dc2427024816831fa0846184c56f"
+  },
+  "barrier_criterion_matches_generation_9": true,
+  "barrier_criterion_g9_hash": "9631b4711f99a6319504b5c50185a26cb4f6dc2427024816831fa0846184c56f",
+  "what_would_falsify_g10_1": "the leading vector's spread does not track window width, or tracks spacing equally. Pre-registered as reportable either way (AH-04, AH-13): a negative closes the mechanism question as unanswered by this measurement and is a paragraph, not a further generation.",
+  "what_would_falsify_g10_2": "see ridge_basin_decision. The ruling's own statement of this falsifier is inverted and the correction is registered here, before the third set is measured."
+}

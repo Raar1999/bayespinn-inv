@@ -1,0 +1,120 @@
+{
+  "N1_negative": {
+    "construction": "one Haar-random unit direction per width, scored by the same statistic. The width axis carries no information about them by construction",
+    "rows": [
+      {
+        "width_V": 0.1,
+        "w_out": 0.2200452113074997,
+        "excess_vs_uniform": 0.1575452113074997
+      },
+      {
+        "width_V": 0.15,
+        "w_out": 0.22046258975226576,
+        "excess_vs_uniform": -0.15453741024773424
+      },
+      {
+        "width_V": 0.2,
+        "w_out": 0.4762576924617036,
+        "excess_vs_uniform": -0.023742307538296425
+      },
+      {
+        "width_V": 0.3,
+        "w_out": 0.7967921533923107,
+        "excess_vs_uniform": 0.10929215339231069
+      },
+      {
+        "width_V": 0.4,
+        "w_out": 0.672513482591909,
+        "excess_vs_uniform": -0.07748651740809098
+      },
+      {
+        "width_V": 0.5,
+        "w_out": 0.5298888836811722,
+        "excess_vs_uniform": -0.28261111631882785
+      },
+      {
+        "width_V": 0.6,
+        "w_out": 0.6197890247567277,
+        "excess_vs_uniform": -0.2552109752432723
+      },
+      {
+        "width_V": 0.7,
+        "w_out": 0.8810563170682288,
+        "excess_vs_uniform": 0.014389650401562148
+      },
+      {
+        "width_V": 0.75,
+        "w_out": 0.5821609646423108,
+        "excess_vs_uniform": -0.2845057020243559
+      }
+    ],
+    "spearman_vs_width": -0.5833333333333334,
+    "threshold": 0.7,
+    "passes": true,
+    "note": "a single draw per width, so this bounds the statistic's gullibility rather than estimating a null distribution -- generation 10's wording, and its limit"
+  },
+  "P1_positive": {
+    "construction": "a Jacobian whose head is flat over every row and whose trailing directions are supported ONLY on rows outside the core window",
+    "stats": {
+      "n_rows": 16,
+      "n_outside_core": 14,
+      "uniform_baseline": 0.875,
+      "indices": [
+        {
+          "index": 1,
+          "available": true,
+          "singular_value": 4.000006652707252,
+          "w_out": 0.8750008316073704,
+          "excess_vs_uniform": 8.316073704106586e-07,
+          "excess_vs_head": 0.0
+        },
+        {
+          "index": 2,
+          "available": true,
+          "singular_value": 0.05704733595725056,
+          "w_out": 0.9999945545059722,
+          "excess_vs_uniform": 0.12499455450597219,
+          "excess_vs_head": 0.12499372289860178
+        },
+        {
+          "index": 3,
+          "available": true,
+          "singular_value": 0.03504617302397271,
+          "w_out": 0.9992217878426144,
+          "excess_vs_uniform": 0.1242217878426144,
+          "excess_vs_head": 0.12422095623524398
+        },
+        {
+          "index": 4,
+          "available": true,
+          "singular_value": 0.028174191054138292,
+          "w_out": 0.9928450393046289,
+          "excess_vs_uniform": 0.11784503930462886,
+          "excess_vs_head": 0.11784420769725845
+        }
+      ],
+      "mean_excess_trailing": 0.12235379388440515,
+      "excess_head": 8.316073704106586e-07,
+      "trailing_exceeds_head": true
+    },
+    "passes": true,
+    "why_it_is_the_positive_control": "IA-1 requires a control that fails if the rule does nothing. Without it a CONDITIONING verdict could mean the statistic cannot see row concentration at all, rather than that there is none"
+  },
+  "C1_control_axis": {
+    "construction": "the same statistic along SPEC-g9-2's spacing axis, where the rank does not move at all",
+    "devices": {
+      "g8_operating_point": {
+        "n_cells": 9,
+        "n_trailing_exceeds_head": 7,
+        "fraction": 0.7777777777777778
+      },
+      "device_p50": {
+        "n_cells": 9,
+        "n_trailing_exceeds_head": 9,
+        "fraction": 1.0
+      }
+    },
+    "why": "a row-side signal that appears just as strongly along the axis where nothing happens is not about width"
+  },
+  "seed": 20260828
+}

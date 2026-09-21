@@ -29,18 +29,17 @@ import sys
 import time
 from pathlib import Path
 
-import numpy as np
 import torch
 import yaml
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.physics.constants import SILICON, GAAS
-from bayespinn_inv.physics.scaling import Scaling
-from bayespinn_inv.pinn.network import SemiconductorPINN, PINNConfig
-from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
+from bayespinn_inv.bayesian.swag import SWAGConfig, SWAGRecorder
 from bayespinn_inv.data.datasets import build_dataset
-from bayespinn_inv.bayesian.swag import SWAGRecorder, SWAGConfig
+from bayespinn_inv.physics.constants import GAAS, SILICON
+from bayespinn_inv.physics.scaling import Scaling
+from bayespinn_inv.pinn.network import PINNConfig, SemiconductorPINN
+from bayespinn_inv.training.trainer import PINNTrainer, TrainConfig
 
 
 def _material(name: str):
@@ -61,7 +60,7 @@ def main():
     ap.add_argument("--out_dir", default=None)
     args = ap.parse_args()
 
-    with open(args.config) as f:
+    with open(args.config, encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
     if args.out_dir is not None:
         cfg["out_dir"] = args.out_dir
@@ -173,7 +172,7 @@ def main():
         "checkpoints":  [str(member_dir / "ckpt_final.pt")],
         "swag_recorder": str(out_dir / "swag_recorder.pt"),
     }
-    with open(out_dir / "manifest.json", "w") as f:
+    with open(out_dir / "manifest.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, indent=2, default=str)
     print(f"\nDone -> {out_dir}")
     print(f"  manifest: {out_dir / 'manifest.json'}")

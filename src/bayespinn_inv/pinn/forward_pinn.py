@@ -31,17 +31,17 @@ Design notes
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional, Sequence, Tuple
 
 import numpy as np
 import torch
 import torch.nn as nn
 
-from ..physics.scaling import Scaling
 from ..physics.constants import Material
+from ..physics.scaling import Scaling
 from ..solvers.scharfetter_gummel import DeviceState, Grid1D
-from .network import SemiconductorPINN, PINNConfig
+from .network import SemiconductorPINN
 
 
 @dataclass

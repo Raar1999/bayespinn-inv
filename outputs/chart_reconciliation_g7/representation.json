@@ -1,0 +1,290 @@
+{
+  "witness_pair": 0,
+  "published_observational_distance": 0.012254760252752345,
+  "reproduced_chartG_d4_distance": 0.012254760252752345,
+  "separation_decades_chartG_d4": 0.9125150783578668,
+  "floors": {
+    "noise_rel": 0.02,
+    "discretisation_rel": 0.0015,
+    "distinguishability": 0.02
+  },
+  "members": {
+    "a": {
+      "candidates": {
+        "collocate": {
+          "diagnostics": {
+            "method": "collocate"
+          },
+          "theta": [
+            22.052336061003242,
+            22.02761901196022,
+            22.002901962917196,
+            21.978184913874177,
+            21.953467864831154,
+            21.92875081578813,
+            21.83201398813938,
+            21.735277160490625,
+            21.638540332841874,
+            21.54180350519312,
+            21.445066677544368,
+            21.65864018617934,
+            21.87221369481431,
+            22.085787203449282,
+            22.29936071208425,
+            22.512934220719224
+          ],
+          "profile_max_decades": 1.9544840915788946,
+          "profile_rms_decades": 0.1624637334749961,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 2,
+          "observational_representation_error": 0.007296986260163149,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        },
+        "linear_C": {
+          "diagnostics": {
+            "method": "linear_C",
+            "coef_sign_flips_vs_chart": 0
+          },
+          "theta": [
+            22.052227526670162,
+            22.02750434622674,
+            22.00276595479137,
+            21.978146476859663,
+            21.953038514950297,
+            21.929871471914083,
+            21.820270275745106,
+            21.77611843917581,
+            21.743417573822807,
+            21.498585763630963,
+            21.452622081954726,
+            21.64722871957737,
+            21.863775512203777,
+            22.07727445850214,
+            22.28992172048645,
+            22.50579378356307
+          ],
+          "profile_max_decades": 1.351293212333406,
+          "profile_rms_decades": 0.1343862655599779,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 1,
+          "observational_representation_error": 0.0008132395497464645,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        },
+        "log10": {
+          "diagnostics": {
+            "method": "log10",
+            "loss": "soft_l1",
+            "f_scale": 0.05,
+            "nfev": 55,
+            "nodes_saturated": 0,
+            "max_decades": 1.2325972578517828
+          },
+          "theta": [
+            22.052217524872795,
+            22.027523407037616,
+            22.002700740181616,
+            21.978385783083265,
+            21.952157346276998,
+            21.933116085314914,
+            21.80844679725422,
+            21.828677950696058,
+            21.69526154526886,
+            21.526774118605857,
+            21.444625365873925,
+            21.64782912293596,
+            21.86403953938002,
+            22.076980711674736,
+            22.290559531083794,
+            22.504742401693196
+          ],
+          "profile_max_decades": 1.2325972578517828,
+          "profile_rms_decades": 0.13072723849284867,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 2,
+          "observational_representation_error": 0.008081225826771836,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        },
+        "observational_refine": {
+          "diagnostics": {
+            "method": "Nelder-Mead in observation space",
+            "seeded_from": "linear_C",
+            "maxfev_budget": 800,
+            "n_evaluations": 800,
+            "converged": false
+          },
+          "theta": [
+            22.0627601521498,
+            22.009055180678416,
+            22.00813549315214,
+            21.96893214511043,
+            21.9563097288273,
+            21.92762176141175,
+            21.825736351545082,
+            21.78276184529507,
+            21.740574024154263,
+            21.48796721594922,
+            21.44005738187344,
+            21.64017008286831,
+            21.883356370251345,
+            22.073958371657618,
+            22.293278670552517,
+            22.505039138094332
+          ],
+          "profile_max_decades": 1.2386972791729498,
+          "profile_rms_decades": 0.1328756660158716,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 1,
+          "observational_representation_error": 0.00013923827472992715,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        }
+      },
+      "best_method": "observational_refine"
+    },
+    "b": {
+      "candidates": {
+        "collocate": {
+          "diagnostics": {
+            "method": "collocate"
+          },
+          "theta": [
+            22.61289465164883,
+            22.293562868805118,
+            21.974231085961403,
+            21.65489930311769,
+            21.335567520273976,
+            21.016235737430264,
+            21.226450354995155,
+            21.436664972560045,
+            21.646879590124936,
+            21.857094207689826,
+            22.067308825254717,
+            22.058331042280813,
+            22.049353259306912,
+            22.040375476333008,
+            22.031397693359107,
+            22.022419910385203
+          ],
+          "profile_max_decades": 1.3934937513511194,
+          "profile_rms_decades": 0.14109024369271508,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 2,
+          "observational_representation_error": 0.02917772923230973,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        },
+        "linear_C": {
+          "diagnostics": {
+            "method": "linear_C",
+            "coef_sign_flips_vs_chart": 0
+          },
+          "theta": [
+            22.597885031079787,
+            22.27141066466317,
+            21.95600654433697,
+            21.63498039110853,
+            21.312776753646272,
+            21.02392063497642,
+            21.15945293164724,
+            21.54131707743989,
+            21.68560109225141,
+            21.838396992587082,
+            22.064859320450626,
+            22.058976231374743,
+            22.04915765981035,
+            22.040409376158564,
+            22.031367806406504,
+            22.0224123391245
+          ],
+          "profile_max_decades": 1.3523473221038707,
+          "profile_rms_decades": 0.13234642454671702,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 1,
+          "observational_representation_error": 0.0051767843880700815,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        },
+        "log10": {
+          "diagnostics": {
+            "method": "log10",
+            "loss": "soft_l1",
+            "f_scale": 0.05,
+            "nfev": 36,
+            "nodes_saturated": 0,
+            "max_decades": 1.2093861268082975
+          },
+          "theta": [
+            22.59448312189211,
+            22.27390384190892,
+            21.954786452010183,
+            21.635773438526297,
+            21.314844015469244,
+            21.002104404196036,
+            21.221191794449158,
+            21.420658613583097,
+            21.832321640268617,
+            21.81062398331679,
+            22.070634583610605,
+            22.057424970826883,
+            22.04957537104965,
+            22.040296532568007,
+            22.03139986402135,
+            22.02239732790936
+          ],
+          "profile_max_decades": 1.2093861268082975,
+          "profile_rms_decades": 0.11949695335540446,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 4,
+          "observational_representation_error": 0.009696961156116035,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        },
+        "observational_refine": {
+          "diagnostics": {
+            "method": "Nelder-Mead in observation space",
+            "seeded_from": "linear_C",
+            "maxfev_budget": 800,
+            "n_evaluations": 800,
+            "converged": false
+          },
+          "theta": [
+            22.617617410034327,
+            22.25788911872594,
+            21.95602956105229,
+            21.612555652835766,
+            21.354605991821103,
+            21.01613539962799,
+            21.140118640994366,
+            21.580626451808122,
+            21.784811973429512,
+            21.81827044797643,
+            22.0729351731541,
+            22.03296736156713,
+            22.02640917482949,
+            22.054210384034334,
+            22.048875794592014,
+            22.012736039986535
+          ],
+          "profile_max_decades": 1.337016938005661,
+          "profile_rms_decades": 0.1242976473767879,
+          "profile_nodes_nonfinite": 0,
+          "sign_disagreements": 2,
+          "observational_representation_error": 0.0004337992900747789,
+          "oracle_trustworthy": true,
+          "oracle_converged": true
+        }
+      },
+      "best_method": "observational_refine"
+    }
+  },
+  "pair_of_best_chartL_standins": {
+    "observational_distance": 0.012071848040177044,
+    "below_floor": true,
+    "separation_decades": 0.9114863617837585,
+    "separation_decades_chartG_collocated_to_16": 0.9125150783578668,
+    "separation_ratio_L_over_G": 0.9988726579992963
+  }
+}

@@ -1,0 +1,598 @@
+{
+  "experiment": "floor_sensitivity_g15",
+  "created_utc": "2026-08-29T09:14:48+00:00",
+  "git": {
+    "commit": "157a785b4c929b974023ef8034c2b24623f6213b",
+    "dirty": true,
+    "tracked_modified": 3,
+    "untracked": 2,
+    "tree_digest": "1afae767b7bc20ad4194b34a8b179652eb9de56ba50fe756ffe69271d349ed5a"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "git_autocrlf": "false",
+    "git_eol": null,
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "loaded_code": {
+    "package": "bayespinn_inv",
+    "tree_root": "D:\\bayespinn-inv\\bayespinn-inv",
+    "git_ls_files_available": true,
+    "n_modules_imported": 7,
+    "modules": {
+      "bayespinn_inv": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.constants": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\constants.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.scaling": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\scaling.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.loaded_code": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\loaded_code.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.provenance": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\provenance.py",
+        "inside_tree": true,
+        "tracked": true
+      }
+    },
+    "outside_tree": [],
+    "inside_tree_untracked": [],
+    "flagged": false,
+    "sys_path": [
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\python311.zip",
+        "resolved": "C:\\Program Files\\Python311\\python311.zip",
+        "exists": false,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\DLLs",
+        "resolved": "C:\\Program Files\\Python311\\DLLs",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib",
+        "resolved": "C:\\Program Files\\Python311\\Lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311",
+        "resolved": "C:\\Program Files\\Python311",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "resolved": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "resolved": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      }
+    ],
+    "editable_install_markers": [
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.bayespinn_inv-0.1.0.dev0.pth",
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.fab_ops_analytics-0.1.0.pth"
+    ],
+    "platform_assumptions": {
+      "os": "win32",
+      "path_separator": "\\",
+      "resolution": "Path.resolve(): follows symlinks, Windows junctions and substituted drives; a module reached through a link landing outside the tree is reported OUTSIDE",
+      "case_comparison": "os.path.normcase -- case-folded on Windows, identity on POSIX",
+      "filesystem_case_sensitive_probed": false,
+      "validated_on": "win32 / python 3.11.9",
+      "unvalidated_platforms": [
+        "linux",
+        "darwin"
+      ]
+    }
+  },
+  "seed": null,
+  "config": {
+    "register": "outputs/close/wit02_register_v3.json",
+    "sets": {
+      "chart_G_d4": {
+        "artefact": "outputs/wit02_chartG/refine.json",
+        "chart": "G",
+        "d": 4,
+        "carries": "the ridge result"
+      },
+      "chart_J_d16": {
+        "artefact": "outputs/g9/junction_refine.json",
+        "chart": "J",
+        "d": 16,
+        "carries": "the junction degeneracy"
+      },
+      "chart_L_d16": {
+        "artefact": "outputs/g11/wit02_chartL/refine.json",
+        "chart": "L",
+        "d": 16,
+        "carries": "the chart-L basin search statement"
+      }
+    },
+    "input_sha256": {
+      "outputs/close/wit02_register_v3.json": "ab0ee7d89d2c6be7595cd2ab24b7e29a360c6919e700823ed695a70567c94028",
+      "outputs/wit02_chartG/refine.json": "63b1064338e19b74cf6cd533093df80f9ea6222b0ac63ba97020850d41e0aa3d",
+      "outputs/g9/junction_refine.json": "bd7b296d6ee375ebd66032ed2f292083ce00442161b6478159bd914618588d59",
+      "outputs/g11/wit02_chartL/refine.json": "f33218252315b9de85996ae14230030048077ceba0bf1f67e984d4ec9af1f1ae"
+    }
+  },
+  "results": {
+    "question": "at what instrument noise level does each committed witness set stop containing an indistinguishable pair",
+    "method": "worst observational distance over the refinement battery, per surviving pair; the set's last witness goes when the floor drops below the smallest of those",
+    "floor_as_stated": 0.02,
+    "sets": {
+      "chart_G_d4": {
+        "chart": "G",
+        "d": 4,
+        "carries": "the ridge result",
+        "artefact": "outputs/wit02_chartG/refine.json",
+        "floor": 0.02,
+        "n_pairs": 13,
+        "n_surviving": 12,
+        "floor_last_witness": 0.012368512029011668,
+        "floor_last_witness_pct": 1.236851202901167,
+        "floor_last_witness_in_floor_units": 0.6184256014505833,
+        "floor_first_loss": 0.01981212099655743,
+        "floor_first_loss_pct": 1.981212099655743,
+        "floor_first_loss_in_floor_units": 0.9906060498278715,
+        "floor_last_witness_default_grid": 0.012254760252752345,
+        "floor_last_witness_default_grid_pct": 1.2254760252752346,
+        "floor_last_witness_default_grid_in_floor_units": 0.6127380126376173,
+        "tightest_surviving_pair_index": 0,
+        "n_separated_by_refinement": 1,
+        "survivors": [
+          {
+            "pair_index": 0,
+            "distance_default_grid": 0.012254760252752345,
+            "distance_worst_over_battery": 0.012368512029011668,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.6184256014505833
+          },
+          {
+            "pair_index": 1,
+            "distance_default_grid": 0.013788224487543424,
+            "distance_worst_over_battery": 0.013788224501646094,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.6894112250823047
+          },
+          {
+            "pair_index": 2,
+            "distance_default_grid": 0.014223591577103359,
+            "distance_worst_over_battery": 0.014520826042279241,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.726041302113962
+          },
+          {
+            "pair_index": 4,
+            "distance_default_grid": 0.015319545886537224,
+            "distance_worst_over_battery": 0.015319545886537224,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.7659772943268612
+          },
+          {
+            "pair_index": 5,
+            "distance_default_grid": 0.016533548731450343,
+            "distance_worst_over_battery": 0.016533548731450343,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8266774365725171
+          },
+          {
+            "pair_index": 6,
+            "distance_default_grid": 0.01752904763771505,
+            "distance_worst_over_battery": 0.01752904763771505,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8764523818857525
+          },
+          {
+            "pair_index": 3,
+            "distance_default_grid": 0.014926755711088615,
+            "distance_worst_over_battery": 0.018177524059908277,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9088762029954138
+          },
+          {
+            "pair_index": 7,
+            "distance_default_grid": 0.018450585325744347,
+            "distance_worst_over_battery": 0.018450585325744347,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9225292662872173
+          },
+          {
+            "pair_index": 9,
+            "distance_default_grid": 0.018860749037720115,
+            "distance_worst_over_battery": 0.018860749037720115,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9430374518860057
+          },
+          {
+            "pair_index": 8,
+            "distance_default_grid": 0.018680964321856786,
+            "distance_worst_over_battery": 0.01937868477547137,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9689342387735685
+          },
+          {
+            "pair_index": 11,
+            "distance_default_grid": 0.01954300007502341,
+            "distance_worst_over_battery": 0.019543000082845288,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9771500041422644
+          },
+          {
+            "pair_index": 10,
+            "distance_default_grid": 0.019536235788203255,
+            "distance_worst_over_battery": 0.01981212099655743,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9906060498278715
+          }
+        ]
+      },
+      "chart_J_d16": {
+        "chart": "J",
+        "d": 16,
+        "carries": "the junction degeneracy",
+        "artefact": "outputs/g9/junction_refine.json",
+        "floor": 0.02,
+        "n_pairs": 13,
+        "n_surviving": 7,
+        "floor_last_witness": 0.0151656697595081,
+        "floor_last_witness_pct": 1.51656697595081,
+        "floor_last_witness_in_floor_units": 0.758283487975405,
+        "floor_first_loss": 0.01986684340993443,
+        "floor_first_loss_pct": 1.986684340993443,
+        "floor_first_loss_in_floor_units": 0.9933421704967215,
+        "floor_last_witness_default_grid": 0.0151656697595081,
+        "floor_last_witness_default_grid_pct": 1.51656697595081,
+        "floor_last_witness_default_grid_in_floor_units": 0.758283487975405,
+        "tightest_surviving_pair_index": 0,
+        "n_separated_by_refinement": 6,
+        "survivors": [
+          {
+            "pair_index": 0,
+            "distance_default_grid": 0.0151656697595081,
+            "distance_worst_over_battery": 0.0151656697595081,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.758283487975405
+          },
+          {
+            "pair_index": 1,
+            "distance_default_grid": 0.015714091453734966,
+            "distance_worst_over_battery": 0.015721886212974642,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.7860943106487321
+          },
+          {
+            "pair_index": 2,
+            "distance_default_grid": 0.016144424996701157,
+            "distance_worst_over_battery": 0.016379776052083753,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8189888026041876
+          },
+          {
+            "pair_index": 3,
+            "distance_default_grid": 0.017551083352229286,
+            "distance_worst_over_battery": 0.017551084077486217,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8775542038743108
+          },
+          {
+            "pair_index": 4,
+            "distance_default_grid": 0.01761871144428258,
+            "distance_worst_over_battery": 0.01761871187258709,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8809355936293546
+          },
+          {
+            "pair_index": 6,
+            "distance_default_grid": 0.018435757956950953,
+            "distance_worst_over_battery": 0.019469009322205452,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9734504661102726
+          },
+          {
+            "pair_index": 5,
+            "distance_default_grid": 0.017874004096620835,
+            "distance_worst_over_battery": 0.01986684340993443,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9933421704967215
+          }
+        ]
+      },
+      "chart_L_d16": {
+        "chart": "L",
+        "d": 16,
+        "carries": "the chart-L basin search statement",
+        "artefact": "outputs/g11/wit02_chartL/refine.json",
+        "floor": 0.02,
+        "n_pairs": 37,
+        "n_surviving": 26,
+        "floor_last_witness": 0.012551225993859149,
+        "floor_last_witness_pct": 1.255122599385915,
+        "floor_last_witness_in_floor_units": 0.6275612996929574,
+        "floor_first_loss": 0.01991412903808938,
+        "floor_first_loss_pct": 1.991412903808938,
+        "floor_first_loss_in_floor_units": 0.995706451904469,
+        "floor_last_witness_default_grid": 0.008813702322268633,
+        "floor_last_witness_default_grid_pct": 0.8813702322268633,
+        "floor_last_witness_default_grid_in_floor_units": 0.44068511611343164,
+        "tightest_surviving_pair_index": 1,
+        "n_separated_by_refinement": 11,
+        "survivors": [
+          {
+            "pair_index": 1,
+            "distance_default_grid": 0.009001411630028041,
+            "distance_worst_over_battery": 0.012551225993859149,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.6275612996929574
+          },
+          {
+            "pair_index": 0,
+            "distance_default_grid": 0.008813702322268633,
+            "distance_worst_over_battery": 0.013003930301440229,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.6501965150720115
+          },
+          {
+            "pair_index": 6,
+            "distance_default_grid": 0.014350056253306936,
+            "distance_worst_over_battery": 0.014365312833252729,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.7182656416626364
+          },
+          {
+            "pair_index": 5,
+            "distance_default_grid": 0.013843141082205525,
+            "distance_worst_over_battery": 0.014480138446950248,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.7240069223475124
+          },
+          {
+            "pair_index": 7,
+            "distance_default_grid": 0.014591508402476158,
+            "distance_worst_over_battery": 0.01475946262810808,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.737973131405404
+          },
+          {
+            "pair_index": 8,
+            "distance_default_grid": 0.014800638346884078,
+            "distance_worst_over_battery": 0.014800638346884078,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.7400319173442039
+          },
+          {
+            "pair_index": 9,
+            "distance_default_grid": 0.015040988944446086,
+            "distance_worst_over_battery": 0.015043280568784581,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.752164028439229
+          },
+          {
+            "pair_index": 11,
+            "distance_default_grid": 0.01524201558924716,
+            "distance_worst_over_battery": 0.01525503213941134,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.762751606970567
+          },
+          {
+            "pair_index": 12,
+            "distance_default_grid": 0.015545592202037628,
+            "distance_worst_over_battery": 0.015600297209695309,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.7800148604847654
+          },
+          {
+            "pair_index": 16,
+            "distance_default_grid": 0.01647931186438656,
+            "distance_worst_over_battery": 0.016479313919241595,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8239656959620797
+          },
+          {
+            "pair_index": 17,
+            "distance_default_grid": 0.01652419133283165,
+            "distance_worst_over_battery": 0.01652764117111042,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8263820585555209
+          },
+          {
+            "pair_index": 19,
+            "distance_default_grid": 0.017237411365881805,
+            "distance_worst_over_battery": 0.017296077267961726,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.8648038633980862
+          },
+          {
+            "pair_index": 4,
+            "distance_default_grid": 0.013313573072314188,
+            "distance_worst_over_battery": 0.018147712298987876,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9073856149493937
+          },
+          {
+            "pair_index": 15,
+            "distance_default_grid": 0.015927916050840037,
+            "distance_worst_over_battery": 0.018242951923512447,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9121475961756224
+          },
+          {
+            "pair_index": 18,
+            "distance_default_grid": 0.016594095023358714,
+            "distance_worst_over_battery": 0.01824711088175391,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9123555440876955
+          },
+          {
+            "pair_index": 23,
+            "distance_default_grid": 0.0182780022902705,
+            "distance_worst_over_battery": 0.01859795472963981,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9298977364819905
+          },
+          {
+            "pair_index": 24,
+            "distance_default_grid": 0.01862285593123238,
+            "distance_worst_over_battery": 0.018623724094517465,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9311862047258732
+          },
+          {
+            "pair_index": 25,
+            "distance_default_grid": 0.0187651235163717,
+            "distance_worst_over_battery": 0.018818926440511627,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9409463220255814
+          },
+          {
+            "pair_index": 27,
+            "distance_default_grid": 0.019281716069126948,
+            "distance_worst_over_battery": 0.01928171608501707,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9640858042508536
+          },
+          {
+            "pair_index": 28,
+            "distance_default_grid": 0.019488565081026785,
+            "distance_worst_over_battery": 0.01960075057455438,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.980037528727719
+          },
+          {
+            "pair_index": 30,
+            "distance_default_grid": 0.019671459039217937,
+            "distance_worst_over_battery": 0.019671459039217937,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9835729519608968
+          },
+          {
+            "pair_index": 31,
+            "distance_default_grid": 0.019734712641783277,
+            "distance_worst_over_battery": 0.019734712641783277,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9867356320891638
+          },
+          {
+            "pair_index": 34,
+            "distance_default_grid": 0.019880966689431963,
+            "distance_worst_over_battery": 0.019880966689431963,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9940483344715981
+          },
+          {
+            "pair_index": 33,
+            "distance_default_grid": 0.019860109995498584,
+            "distance_worst_over_battery": 0.01988674232476564,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.994337116238282
+          },
+          {
+            "pair_index": 35,
+            "distance_default_grid": 0.019910016981342635,
+            "distance_worst_over_battery": 0.019910016981342635,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.9955008490671318
+          },
+          {
+            "pair_index": 36,
+            "distance_default_grid": 0.01991412903808938,
+            "distance_worst_over_battery": 0.01991412903808938,
+            "n_configurations": 6,
+            "worst_in_floor_units": 0.995706451904469
+          }
+        ]
+      }
+    },
+    "headline": {
+      "tightest_set": "chart_G_d4",
+      "floor_last_witness_anywhere": 0.012368512029011668,
+      "floor_last_witness_anywhere_pct": 1.236851202901167,
+      "reading": "every committed witness set still contains an indistinguishable pair at an instrument of 1.24% relative noise, and the global degeneracy statement therefore does not depend on the 2% figure to within a factor of 1.62"
+    },
+    "what_this_is_not": "not a justification of the 2% noise model, and not a statement about noise models other than relative Gaussian. It says only how far the stated floor can move before the stated conclusion changes. A different noise model would need a different search, not a rescaling of this one"
+  },
+  "artifacts": {
+    "floor_sensitivity.json": "outputs/floor_sensitivity_g15/floor_sensitivity.json"
+  },
+  "notes": "Operator ruling of 2026-08-29 section 6 item 2. Re-expresses committed witness distances against the floor they were measured under. No solve."
+}

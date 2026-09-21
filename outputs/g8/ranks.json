@@ -1,0 +1,760 @@
+{
+  "cells": {
+    "G_d4": {
+      "singular_values": [
+        1.9233889205140295,
+        0.3220298252297486,
+        0.06080574927341394,
+        0.008227672088140578
+      ],
+      "spectral_floor": 0.0030031114047258172,
+      "jacobian_noise": 0.00038770001524362173,
+      "n_observations": 15,
+      "n_parameters": 4,
+      "operational_noise_rel": 0.02,
+      "operational_cutoff_symlog": 0.00860017176191757,
+      "rank_curve": [
+        {
+          "noise_rel": 0.2,
+          "cutoff_symlog": 0.07918124604762482,
+          "rank": 2,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.1,
+          "cutoff_symlog": 0.04139268515822508,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.05,
+          "cutoff_symlog": 0.021189299069938092,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.02,
+          "cutoff_symlog": 0.00860017176191757,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.01,
+          "cutoff_symlog": 0.004321373782642578,
+          "rank": 4,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.001,
+          "cutoff_symlog": 0.0004340774793185929,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.0001,
+          "cutoff_symlog": 4.342727686266486e-05,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 1e-06,
+          "cutoff_symlog": 4.3429426472042774e-07,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        }
+      ],
+      "rank_at_operational_cutoff": 3,
+      "resolvable_rank": 4,
+      "largest_gap_after_index": 2,
+      "largest_gap_ratio": 7.390395317414236,
+      "operational_cutoff_falls_in_largest_gap": true,
+      "bare_integer_rank_justified": true,
+      "plateau_containing_operational_cutoff": {
+        "noise_rel_lo": 0.02,
+        "noise_rel_hi": 0.1,
+        "limited_by_resolvable_rank": false,
+        "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"
+      },
+      "how_to_quote": "rank 3 at cutoff 8.600e-03 symlog (noise_rel=0.02); the cutoff falls inside the largest multiplicative gap (x7.39 after index 2), so this is a population boundary and the bare integer may be quoted",
+      "chart": "G",
+      "chart_label": "G(d=4)",
+      "d": 4,
+      "n_magnitude_coordinates": 4,
+      "theta": [
+        22.052336061003242,
+        21.92875081578813,
+        21.445066677544368,
+        22.512934220719224
+      ],
+      "biases_used": [
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "n_biases_offered": 16,
+      "rel_step_decades": 0.05,
+      "wall_clock_s": 6.104927400010638,
+      "profile_distance_from_operating_point_decades": 0.0,
+      "operating_point_method": {
+        "method": "exact",
+        "note": "no projection was needed; the chart holds the point"
+      }
+    },
+    "G_d16": {
+      "singular_values": [
+        1.0599671544374416,
+        0.2184868455126899,
+        0.04381606489768649,
+        0.012991873738932357,
+        0.007549719888748142,
+        0.0038828505535512484,
+        0.0013228494407248122,
+        0.0003104983892497943,
+        0.0002460547740187888,
+        7.714263426789454e-05,
+        2.276730812812077e-05,
+        1.5559389303916955e-05,
+        3.816204815233144e-06,
+        7.445965124610289e-07,
+        3.535317791407935e-07,
+        0.0
+      ],
+      "spectral_floor": 0.006318681422978183,
+      "jacobian_noise": 0.0004078691320197448,
+      "n_observations": 15,
+      "n_parameters": 16,
+      "operational_noise_rel": 0.02,
+      "operational_cutoff_symlog": 0.00860017176191757,
+      "rank_curve": [
+        {
+          "noise_rel": 0.2,
+          "cutoff_symlog": 0.07918124604762482,
+          "rank": 2,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.1,
+          "cutoff_symlog": 0.04139268515822508,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.05,
+          "cutoff_symlog": 0.021189299069938092,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.02,
+          "cutoff_symlog": 0.00860017176191757,
+          "rank": 4,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.01,
+          "cutoff_symlog": 0.004321373782642578,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.001,
+          "cutoff_symlog": 0.0004340774793185929,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.0001,
+          "cutoff_symlog": 4.342727686266486e-05,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 1e-06,
+          "cutoff_symlog": 4.3429426472042774e-07,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        }
+      ],
+      "rank_at_operational_cutoff": 4,
+      "resolvable_rank": 5,
+      "largest_gap_after_index": 1,
+      "largest_gap_ratio": 4.986455219629413,
+      "operational_cutoff_falls_in_largest_gap": false,
+      "bare_integer_rank_justified": false,
+      "plateau_containing_operational_cutoff": {
+        "noise_rel_lo": 0.02,
+        "noise_rel_hi": 0.02,
+        "limited_by_resolvable_rank": false,
+        "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"
+      },
+      "how_to_quote": "rank 4 at cutoff 8.600e-03 symlog (noise_rel=0.02); the cutoff does NOT fall inside the largest multiplicative gap (x4.99 after index 1) -- this is a threshold count and must never be quoted without its cutoff",
+      "chart": "G",
+      "chart_label": "G(d=16)",
+      "d": 16,
+      "n_magnitude_coordinates": 16,
+      "theta": [
+        22.052336061003242,
+        22.02761901196022,
+        22.002901962917196,
+        21.978184913874177,
+        21.953467864831154,
+        21.92875081578813,
+        21.83201398813938,
+        21.735277160490625,
+        21.638540332841874,
+        21.54180350519312,
+        21.445066677544368,
+        21.65864018617934,
+        21.87221369481431,
+        22.085787203449282,
+        22.29936071208425,
+        22.512934220719224
+      ],
+      "biases_used": [
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "n_biases_offered": 16,
+      "rel_step_decades": 0.05,
+      "wall_clock_s": 22.940692100004526,
+      "profile_distance_from_operating_point_decades": 3.552713678800501e-15,
+      "operating_point_method": {
+        "method": "exact",
+        "note": "no projection was needed; the chart holds the point"
+      }
+    },
+    "L_d4": {
+      "singular_values": [
+        1.9901308921018914,
+        0.3944868525933941,
+        0.07424450257637098,
+        0.0042521212766748785
+      ],
+      "spectral_floor": 0.0021156713835172466,
+      "jacobian_noise": 0.0002731320011469967,
+      "n_observations": 15,
+      "n_parameters": 4,
+      "operational_noise_rel": 0.02,
+      "operational_cutoff_symlog": 0.00860017176191757,
+      "rank_curve": [
+        {
+          "noise_rel": 0.2,
+          "cutoff_symlog": 0.07918124604762482,
+          "rank": 2,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.1,
+          "cutoff_symlog": 0.04139268515822508,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.05,
+          "cutoff_symlog": 0.021189299069938092,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.02,
+          "cutoff_symlog": 0.00860017176191757,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.01,
+          "cutoff_symlog": 0.004321373782642578,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.001,
+          "cutoff_symlog": 0.0004340774793185929,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.0001,
+          "cutoff_symlog": 4.342727686266486e-05,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 1e-06,
+          "cutoff_symlog": 4.3429426472042774e-07,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        }
+      ],
+      "rank_at_operational_cutoff": 3,
+      "resolvable_rank": 4,
+      "largest_gap_after_index": 2,
+      "largest_gap_ratio": 17.460579730790165,
+      "operational_cutoff_falls_in_largest_gap": true,
+      "bare_integer_rank_justified": true,
+      "plateau_containing_operational_cutoff": {
+        "noise_rel_lo": 0.01,
+        "noise_rel_hi": 0.1,
+        "limited_by_resolvable_rank": false,
+        "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"
+      },
+      "how_to_quote": "rank 3 at cutoff 8.600e-03 symlog (noise_rel=0.02); the cutoff falls inside the largest multiplicative gap (x17.46 after index 2), so this is a population boundary and the bare integer may be quoted",
+      "chart": "L",
+      "chart_label": "L(d=4)",
+      "d": 4,
+      "n_magnitude_coordinates": 4,
+      "theta": [
+        22.016360470836428,
+        22.005078204342706,
+        21.387908116214472,
+        22.276301817071985
+      ],
+      "biases_used": [
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "n_biases_offered": 16,
+      "rel_step_decades": 0.05,
+      "wall_clock_s": 6.463985000009416,
+      "profile_distance_from_operating_point_decades": 1.7855877486142262,
+      "operating_point_method": {
+        "method": "log10",
+        "loss": "soft_l1",
+        "f_scale": 0.05,
+        "nfev": 119,
+        "nodes_saturated": 0,
+        "max_decades": 1.7855877486142262
+      }
+    },
+    "L_d16": {
+      "singular_values": [
+        1.063547925528168,
+        0.2239008838167487,
+        0.04384553483821603,
+        0.012632650752760198,
+        0.0074092714830082665,
+        0.0037259229071202817,
+        0.0014084161951576637,
+        0.0002720910375324466,
+        0.00021004471353769163,
+        0.00010225586470015008,
+        2.7698662186316016e-05,
+        1.8783961249697434e-05,
+        3.6583936568727597e-06,
+        7.426073847077516e-07,
+        1.5802124954532467e-07,
+        0.0
+      ],
+      "spectral_floor": 0.005846620156237629,
+      "jacobian_noise": 0.0003773977082784824,
+      "n_observations": 15,
+      "n_parameters": 16,
+      "operational_noise_rel": 0.02,
+      "operational_cutoff_symlog": 0.00860017176191757,
+      "rank_curve": [
+        {
+          "noise_rel": 0.2,
+          "cutoff_symlog": 0.07918124604762482,
+          "rank": 2,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.1,
+          "cutoff_symlog": 0.04139268515822508,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.05,
+          "cutoff_symlog": 0.021189299069938092,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.02,
+          "cutoff_symlog": 0.00860017176191757,
+          "rank": 4,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.01,
+          "cutoff_symlog": 0.004321373782642578,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.001,
+          "cutoff_symlog": 0.0004340774793185929,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.0001,
+          "cutoff_symlog": 4.342727686266486e-05,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 1e-06,
+          "cutoff_symlog": 4.3429426472042774e-07,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        }
+      ],
+      "rank_at_operational_cutoff": 4,
+      "resolvable_rank": 5,
+      "largest_gap_after_index": 1,
+      "largest_gap_ratio": 5.106583478634986,
+      "operational_cutoff_falls_in_largest_gap": false,
+      "bare_integer_rank_justified": false,
+      "plateau_containing_operational_cutoff": {
+        "noise_rel_lo": 0.02,
+        "noise_rel_hi": 0.02,
+        "limited_by_resolvable_rank": false,
+        "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"
+      },
+      "how_to_quote": "rank 4 at cutoff 8.600e-03 symlog (noise_rel=0.02); the cutoff does NOT fall inside the largest multiplicative gap (x5.11 after index 1) -- this is a threshold count and must never be quoted without its cutoff",
+      "chart": "L",
+      "chart_label": "L(d=16)",
+      "d": 16,
+      "n_magnitude_coordinates": 16,
+      "theta": [
+        22.052217524872795,
+        22.027523407037616,
+        22.002700740181616,
+        21.978385783083265,
+        21.952157346276998,
+        21.933116085314914,
+        21.80844679725422,
+        21.828677950696058,
+        21.69526154526886,
+        21.526774118605857,
+        21.444625365873925,
+        21.64782912293596,
+        21.86403953938002,
+        22.076980711674736,
+        22.290559531083794,
+        22.504742401693196
+      ],
+      "biases_used": [
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "n_biases_offered": 16,
+      "rel_step_decades": 0.05,
+      "wall_clock_s": 28.623814299993683,
+      "profile_distance_from_operating_point_decades": 1.2325972578517828,
+      "operating_point_method": {
+        "method": "log10",
+        "loss": "soft_l1",
+        "f_scale": 0.05,
+        "nfev": 55,
+        "nodes_saturated": 0,
+        "max_decades": 1.2325972578517828
+      }
+    },
+    "J_d4": {
+      "singular_values": [
+        2.3555990723676494,
+        0.4252436701174815,
+        0.06845684032761522,
+        0.013077756908271197
+      ],
+      "spectral_floor": 0.0008246928793672446,
+      "jacobian_noise": 0.0001102042215680115,
+      "n_observations": 14,
+      "n_parameters": 4,
+      "operational_noise_rel": 0.02,
+      "operational_cutoff_symlog": 0.00860017176191757,
+      "rank_curve": [
+        {
+          "noise_rel": 0.2,
+          "cutoff_symlog": 0.07918124604762482,
+          "rank": 2,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.1,
+          "cutoff_symlog": 0.04139268515822508,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.05,
+          "cutoff_symlog": 0.021189299069938092,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.02,
+          "cutoff_symlog": 0.00860017176191757,
+          "rank": 4,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.01,
+          "cutoff_symlog": 0.004321373782642578,
+          "rank": 4,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.001,
+          "cutoff_symlog": 0.0004340774793185929,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.0001,
+          "cutoff_symlog": 4.342727686266486e-05,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 1e-06,
+          "cutoff_symlog": 4.3429426472042774e-07,
+          "rank": 4,
+          "cutoff_below_spectral_floor": true
+        }
+      ],
+      "rank_at_operational_cutoff": 4,
+      "resolvable_rank": 4,
+      "largest_gap_after_index": 1,
+      "largest_gap_ratio": 6.211850679674736,
+      "operational_cutoff_falls_in_largest_gap": false,
+      "bare_integer_rank_justified": false,
+      "plateau_containing_operational_cutoff": {
+        "noise_rel_lo": 1e-06,
+        "noise_rel_hi": 0.02,
+        "limited_by_resolvable_rank": true,
+        "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"
+      },
+      "how_to_quote": "rank 4 at cutoff 8.600e-03 symlog (noise_rel=0.02); the cutoff does NOT fall inside the largest multiplicative gap (x6.21 after index 1) -- this is a threshold count and must never be quoted without its cutoff",
+      "chart": "J",
+      "chart_label": "J(d=4)",
+      "d": 4,
+      "n_magnitude_coordinates": 3,
+      "theta": [
+        0.0,
+        22.052336061003242,
+        21.686908746666248,
+        22.512934220719224
+      ],
+      "biases_used": [
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "n_biases_offered": 16,
+      "rel_step_decades": 0.05,
+      "wall_clock_s": 8.2272859000077,
+      "profile_distance_from_operating_point_decades": 0.5171838938062052,
+      "operating_point_method": {
+        "method": "collocated junction at midpoint + chart-G anchors",
+        "note": "no projection was needed; the chart holds the point"
+      }
+    },
+    "J_d16": {
+      "singular_values": [
+        1.3386734248956316,
+        0.29922792203474735,
+        0.0453735648602727,
+        0.01506608693614436,
+        0.011146181187957179,
+        0.0040867169629849815,
+        0.002119185640759331,
+        0.00033451120569057293,
+        0.00019864801030373383,
+        3.8236786078758e-05,
+        3.428606856413821e-05,
+        1.4665881618067173e-05,
+        4.3053078908977284e-06,
+        1.7915374358318294e-06,
+        8.673556648227002e-08,
+        0.0
+      ],
+      "spectral_floor": 0.007721131588231971,
+      "jacobian_noise": 0.0004983969009183074,
+      "n_observations": 15,
+      "n_parameters": 16,
+      "operational_noise_rel": 0.02,
+      "operational_cutoff_symlog": 0.00860017176191757,
+      "rank_curve": [
+        {
+          "noise_rel": 0.2,
+          "cutoff_symlog": 0.07918124604762482,
+          "rank": 2,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.1,
+          "cutoff_symlog": 0.04139268515822508,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.05,
+          "cutoff_symlog": 0.021189299069938092,
+          "rank": 3,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.02,
+          "cutoff_symlog": 0.00860017176191757,
+          "rank": 5,
+          "cutoff_below_spectral_floor": false
+        },
+        {
+          "noise_rel": 0.01,
+          "cutoff_symlog": 0.004321373782642578,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.001,
+          "cutoff_symlog": 0.0004340774793185929,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 0.0001,
+          "cutoff_symlog": 4.342727686266486e-05,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        },
+        {
+          "noise_rel": 1e-06,
+          "cutoff_symlog": 4.3429426472042774e-07,
+          "rank": 5,
+          "cutoff_below_spectral_floor": true
+        }
+      ],
+      "rank_at_operational_cutoff": 5,
+      "resolvable_rank": 5,
+      "largest_gap_after_index": 1,
+      "largest_gap_ratio": 6.594763337556038,
+      "operational_cutoff_falls_in_largest_gap": false,
+      "bare_integer_rank_justified": false,
+      "plateau_containing_operational_cutoff": {
+        "noise_rel_lo": 1e-06,
+        "noise_rel_hi": 0.02,
+        "limited_by_resolvable_rank": true,
+        "note": "a wide plateau means the rank does not move with the cutoff -- UNLESS it is pinned by resolvable_rank, in which case the estimator's own floor is doing the work and the plateau says nothing about the spectrum's population structure"
+      },
+      "how_to_quote": "rank 5 at cutoff 8.600e-03 symlog (noise_rel=0.02); the cutoff does NOT fall inside the largest multiplicative gap (x6.59 after index 1) -- this is a threshold count and must never be quoted without its cutoff",
+      "chart": "J",
+      "chart_label": "J(d=16)",
+      "d": 16,
+      "n_magnitude_coordinates": 15,
+      "theta": [
+        0.0,
+        22.052336061003242,
+        22.025853508457146,
+        21.99937095591105,
+        21.972888403364955,
+        21.946405850818863,
+        21.89420194877072,
+        21.790555347718485,
+        21.686908746666248,
+        21.583262145614015,
+        21.47961554456178,
+        21.597619183712204,
+        21.82644794296396,
+        22.055276702215714,
+        22.28410546146747,
+        22.512934220719224
+      ],
+      "biases_used": [
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "n_biases_offered": 16,
+      "rel_step_decades": 0.05,
+      "wall_clock_s": 23.830951099982485,
+      "profile_distance_from_operating_point_decades": 0.073883413400889,
+      "operating_point_method": {
+        "method": "collocated junction at midpoint + chart-G anchors",
+        "note": "no projection was needed; the chart holds the point"
+      }
+    }
+  },
+  "operating_point": "witness pair 0 member a (chart G d=4)",
+  "cells_where_a_bare_integer_rank_may_be_quoted": [
+    "G_d4",
+    "L_d4"
+  ]
+}

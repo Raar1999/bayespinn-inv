@@ -30,18 +30,19 @@ code is acquisition-agnostic.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Protocol, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Protocol, Sequence, Tuple
 
 import numpy as np
 import torch
 
-from ..bayesian.ensembles import DeepEnsemble, EnsemblePrediction
-from ..pinn.forward_pinn import ForwardPINN
+from ..bayesian.ensembles import EnsemblePrediction
+from ..inverse.charts import regrid_signed
 from ..inverse.inverse_design import (
-    InverseDesigner, InverseConfig, FreePointwiseDoping,
-    DopingParameterization,
+    FreePointwiseDoping,
+    InverseConfig,
+    InverseDesigner,
 )
-
+from ..pinn.forward_pinn import ForwardPINN
 
 # ============================================================================
 # Protocols
@@ -70,10 +71,25 @@ def simulate_measurement(
     noise_std_rel: float = 0.02,
     rng: Optional[np.random.Generator] = None,
 ) -> float:
-    """Run the oracle, extract terminal current, add multiplicative noise.
+    """Run the oracle, extract terminal current, add measurement noise.
 
-    Models realistic measurement noise as Gaussian in *log-current* space
-    when current is significant, additive when current is near zero.
+    Noise model
+    -----------
+    Multiplicative Gaussian on the current, plus an independent additive
+    floor:
+
+        I_meas = I * (1 + sigma * eps_mult) + I_floor * eps_add
+
+    with ``eps_mult`` and ``eps_add`` drawn *independently*. The additive
+    floor is the oracle's own numerical noise floor where available, which is
+    the physically meaningful "instrument can't see below this" level for
+    this simulator, rather than an arbitrary constant.
+
+    AUDIT_MASTER AL-01: the previous implementation documented "Gaussian in
+    log-current space when current is significant, additive when near zero"
+    but implemented neither. It used a single draw for *both* the
+    multiplicative and additive terms -- making them perfectly correlated --
+    and hard-coded the additive floor at ``noise_std_rel * 1e-3`` A/m^2.
 
     Interpolates the user-provided doping onto the oracle's native grid
     before solving (the oracle decides the simulation resolution; the
@@ -91,7 +107,7 @@ def simulate_measurement(
         if doping_np.shape[0] != N_oracle:
             x_user = np.linspace(0.0, 1.0, doping_np.shape[0])
             x_oracle = np.linspace(0.0, 1.0, N_oracle)
-            doping_for_oracle = np.interp(x_oracle, x_user, doping_np)
+            doping_for_oracle = regrid_signed(x_oracle, x_user, doping_np)
         else:
             doping_for_oracle = doping_np
     else:
@@ -99,12 +115,15 @@ def simulate_measurement(
                               if isinstance(true_doping_si, torch.Tensor)
                               else true_doping_si)
     state = oracle.solve(doping_for_oracle, bias)
-    I = (float(state.terminal_current)
-         if hasattr(state, "terminal_current")
-         else float(0.5 * (state.Jn.mean() + state.Jp.mean())))
-    # multiplicative noise on |I|, additive floor 1e-3 A/m^2
-    noise = rng.normal(0.0, 1.0)
-    noisy = I * (1.0 + noise_std_rel * noise) + noise_std_rel * 1e-3 * noise
+    if hasattr(state, "terminal_current"):
+        I = float(state.terminal_current)
+    else:
+        # DOC-02: terminal current is mean(Jn + Jp), NOT 0.5*(mean Jn + mean Jp)
+        # -- the old fallback was low by a factor of two.
+        I = float(np.mean(state.Jn + state.Jp))
+    floor = float(getattr(state, "current_noise_floor", 0.0) or 0.0)
+    eps_mult, eps_add = rng.normal(0.0, 1.0, size=2)
+    noisy = I * (1.0 + noise_std_rel * eps_mult) + floor * eps_add
     return float(noisy)
 
 
@@ -154,7 +173,11 @@ def acquire_ucb(
     try:
         from sklearn.gaussian_process import GaussianProcessRegressor
         from sklearn.gaussian_process.kernels import (
-            RBF, ConstantKernel as C, WhiteKernel,
+            RBF,
+            WhiteKernel,
+        )
+        from sklearn.gaussian_process.kernels import (
+            ConstantKernel as C,
         )
     except ImportError:
         return int(rng.integers(0, len(candidate_biases)))
@@ -311,11 +334,11 @@ def active_learning_loop(
 
 
 __all__ = [
-    "ActiveLearningConfig",
     "ALRoundLog",
-    "active_learning_loop",
-    "acquire_random",
+    "ActiveLearningConfig",
     "acquire_max_std",
+    "acquire_random",
     "acquire_ucb",
+    "active_learning_loop",
     "simulate_measurement",
 ]

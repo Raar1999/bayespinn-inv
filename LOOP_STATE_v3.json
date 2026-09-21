@@ -1,0 +1,105 @@
+{
+  "generation": 7,
+  "terminated": true,
+  "termination_condition": "T-1 (amended): all mandatory spec clauses PASS; no open CRITICAL; the only open HIGH (PROV-03) carries ACCEPTED-PERMANENT with a cost statement; the terminal adversarial generation produced one MEDIUM and no HIGH+",
+  "champion_commit": "a59255e71ee92015bf43d325cc6dd05f805f6ff4",
+  "champion_branch": "loop/champion",
+  "adoption_commit": "c115757f3e9829cd1feb8bb86d739bfd74ff2dcf",
+  "pre_audit_parent": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+  "spec_hashes": {
+    "SPEC_g0.md": "28c853f0550adf023ed8e463f29a1a4af7af1f75a830955414280109553f4140",
+    "SPEC_g6.md": "c69d610fdf3359e26ae3ef37a645d0e7c5131f704bbdb6a5bc2679b96840e980"
+  },
+  "acceptance_suite_hash": "9df3b5837f011cdf8077e3aba96b011287401118ee9f7c6586ecf9955e4c3420",
+  "baselines": {
+    "tests_collected": 438,
+    "mypy_findings": 25,
+    "ruff_exit": 0
+  },
+  "champion_per_generation": {
+    "g0": "06eb32f",
+    "g1": "9670bec",
+    "g2": "aff9195",
+    "g3": "3302817",
+    "g4": "de1b6f6",
+    "g5": "b5218b1",
+    "g6": "a59255e"
+  },
+  "open_findings": [
+    {
+      "id": "PROV-03",
+      "severity": "HIGH",
+      "status": "ACCEPTED-PERMANENT",
+      "cost_statement": "docs/gen/GEN_g6.md section 2",
+      "cost_grown_since_assignment": false
+    },
+    {
+      "id": "CI-01",
+      "severity": "MEDIUM",
+      "status": "OPERATOR-BLOCKED",
+      "action": "OT-1"
+    },
+    {
+      "id": "REPRO-01",
+      "severity": "MEDIUM",
+      "status": "UNRESOLVABLE-BY-CONSTRUCTION",
+      "lost": "the working tree that produced outputs/identifiability/ at 2026-08-19T12:03:43Z"
+    },
+    {
+      "id": "NB-02",
+      "severity": "MEDIUM",
+      "status": "OPEN"
+    },
+    {
+      "id": "PROV-07",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "found_by": "A-6 falsifier F3"
+    },
+    {
+      "id": "PROV-05",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "SW-18a",
+      "severity": "LOW",
+      "status": "OPEN"
+    },
+    {
+      "id": "S-3",
+      "severity": "unassigned",
+      "status": "OPEN, equivalence pinned"
+    }
+  ],
+  "spec_clause_status": {
+    "SPEC-g0-1": "PASS",
+    "SPEC-g0-2": "PASS",
+    "SPEC-g0-3a": "PASS for every python leg available in the environment (3.11)",
+    "SPEC-g0-3b": "OPERATOR-BLOCKED",
+    "SPEC-g0-4": "PASS",
+    "SPEC-g0-5": "PASS",
+    "SPEC-g0-6": "PASS",
+    "SPEC-g0-7": "PASS",
+    "SPEC-g6-1": "PASS - 13 witnesses",
+    "SPEC-g6-2": "PASS with a stated limit",
+    "SPEC-g6-3": "PASS - d=8 confounded and stated",
+    "SPEC-g6-4": "PASS",
+    "SPEC-g6-5": "PASS",
+    "SPEC-g6-6": "PASS"
+  },
+  "terminal_adversarial_generation": {
+    "ran": true,
+    "falsifiers": 6,
+    "new_findings": [
+      "PROV-07 (MEDIUM)"
+    ],
+    "new_high_or_above": 0
+  },
+  "operator_tasks": [
+    "OT-1 push and run CI",
+    "OT-2 apply papers/CORRIGENDA_g6.md"
+  ],
+  "highest_remaining_scientific_risk": "the global result is at d in {2,4,8}; the published local result uses d=16 and the two have never been measured on the same parameterisation",
+  "halt": null
+}

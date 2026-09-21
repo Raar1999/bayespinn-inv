@@ -37,9 +37,11 @@ import torch
 
 from ..bayesian.ensembles import EnsemblePrediction
 from .iv_surrogate import (
-    IVSurrogate, IVSurrogateConfig, Normalizer, SymlogTransform,
+    IVSurrogate,
+    IVSurrogateConfig,
+    Normalizer,
+    SymlogTransform,
 )
-
 
 # ---------------------------------------------------------------------------
 # Minimal cfg object so legacy code can read .device / .dtype / anchors
@@ -200,15 +202,15 @@ def save_surrogate_ensemble(
         },
     }
     mpath = out_dir / "manifest.json"
-    mpath.write_text(json.dumps(manifest, indent=2))
+    mpath.write_text(json.dumps(manifest, indent=2), encoding="utf-8", newline="\n")
     return mpath
 
 
 def load_surrogate_ensemble(manifest_path) -> Tuple[SurrogateEnsembleAdapter, dict]:
     """Reconstruct a :class:`SurrogateEnsembleAdapter` from a manifest."""
-    from ..physics.constants import SILICON, GAAS
+    from ..physics.constants import GAAS, SILICON
     from ..physics.scaling import Scaling
-    manifest = json.loads(Path(manifest_path).read_text())
+    manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
     material = {"Si": SILICON, "Silicon": SILICON, "GaAs": GAAS}[manifest["material"]["name"]]
     scaling = Scaling.for_material(material, T=manifest["material"]["T"])
     symlog = SymlogTransform(I0=manifest.get("symlog_I0", 1e-6))
@@ -218,7 +220,18 @@ def load_surrogate_ensemble(manifest_path) -> Tuple[SurrogateEnsembleAdapter, di
     )
     members = []
     for ck in manifest["checkpoints"]:
-        state = torch.load(ck, map_location="cpu", weights_only=False)
+        # AUDIT_MASTER SEC-01: weights_only=False disables PyTorch >= 2.6's
+        # safe-loading default, so a malicious checkpoint executes arbitrary
+        # code on load. Our checkpoints hold only a state_dict and a plain dict
+        # of config scalars, so weights_only=True is always sufficient.
+        #
+        # AUDIT_g0 SEC-02: this used to fall back to weights_only=False behind a
+        # warnings.warn. SW-03 requires a degraded path to return a status flag
+        # the caller is forced to read, or to raise -- a warning is neither, and
+        # it is emitted only once the unsafe load is already underway. Measured
+        # before removal: all seven checkpoints shipped in outputs/ load cleanly
+        # under weights_only=True, so the fallback guarded nothing.
+        state = torch.load(ck, map_location="cpu", weights_only=True)
         cfg = IVSurrogateConfig(**state["cfg"])
         net = IVSurrogate(cfg)
         net.load_state_dict(state["state_dict"])
@@ -239,22 +252,29 @@ def load_forward_ensemble(manifest_path):
 
     This lets every pipeline script consume either forward model transparently.
     """
-    manifest = json.loads(Path(manifest_path).read_text())
+    manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
     if manifest.get("type") == "surrogate":
         return load_surrogate_ensemble(manifest_path)
-    # Legacy PINN path
-    import importlib.util
-    import sys
-    scripts_dir = Path(__file__).resolve().parents[3] / "scripts"
-    spec = importlib.util.spec_from_file_location(
-        "_rbs", scripts_dir / "run_benchmark_sweep.py")
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["_rbs"] = mod
-    spec.loader.exec_module(mod)
-    return mod.load_ensemble(Path(manifest_path))
+
+    # Legacy pure-physics PINN path (ADR-0004). AUDIT_g0 PKG-04 / SW-17: this
+    # used to reach parents[3]/"scripts"/run_benchmark_sweep.py and exec_module
+    # it at runtime. That path is the *source checkout* -- in site-packages it
+    # points somewhere arbitrary and scripts/ does not exist, so the branch could
+    # only ever work in a dev install. AUDIT_MASTER PKG-02 closed the symptom by
+    # improving the error message; the exec_module call survived, which is why
+    # the recurrence check reopened it as PKG-04.
+    #
+    # The loader depended on nothing repo-only, so it now lives in the package
+    # and is imported normally. One definition, no exec, works from a wheel.
+    from ..bayesian.ensembles import load_deep_ensemble
+
+    return load_deep_ensemble(manifest_path)
 
 
 __all__ = [
-    "SurrogateForwardAdapter", "SurrogateEnsembleAdapter",
-    "save_surrogate_ensemble", "load_surrogate_ensemble", "load_forward_ensemble",
+    "SurrogateEnsembleAdapter",
+    "SurrogateForwardAdapter",
+    "load_forward_ensemble",
+    "load_surrogate_ensemble",
+    "save_surrogate_ensemble",
 ]

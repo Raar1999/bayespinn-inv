@@ -28,27 +28,31 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
 import torch
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from bayespinn_inv.bayesian.ensembles import DeepEnsemble
-from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
-)
-from bayespinn_inv.inverse.inverse_design import (
-    InverseDesigner, InverseConfig, FreePointwiseDoping,
-)
 from bayespinn_inv.data.datasets import defect_profile
-from bayespinn_inv.visualization.plots import (
-    apply_style, PALETTE,
+from bayespinn_inv.inverse.charts import regrid_signed
+from bayespinn_inv.inverse.inverse_design import (
+    FreePointwiseDoping,
+    InverseConfig,
+    InverseDesigner,
 )
-
+from bayespinn_inv.solvers.scharfetter_gummel import (
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
+)
 from bayespinn_inv.surrogate import load_forward_ensemble as load_ensemble
+from bayespinn_inv.visualization.plots import (
+    PALETTE,
+    apply_style,
+)
 
 
 def main():
@@ -105,8 +109,12 @@ def main():
     rng = np.random.default_rng(args.seed)
     I_clean = []
     prev = None
+    # CHART-01: C_true lives on `x_true` (256 points), the solver on 301 nodes.
+    # A physical-abscissa regrid, said out loud.
+    C_true_grid = regrid_signed(
+        scaling.x_to_si(np.asarray(sg.grid.x)), x_true, C_true)
     for V in biases:
-        s = sg.solve(C_true, float(V), initial_state=prev)
+        s = sg.solve(C_true_grid, float(V), initial_state=prev)
         I_clean.append(s.terminal_current)
         prev = s
     I_clean = np.asarray(I_clean)
@@ -156,7 +164,7 @@ def main():
     recovered_amp = float(bump.max() if abs(bump.max()) > abs(bump.min()) else bump.min())
     recovered_center = float(x_anchor.numpy()[np.argmax(np.abs(bump))])
 
-    print(f"\n=== Recovery results ===")
+    print("\n=== Recovery results ===")
     print(f"  relative L2 doping error: {rel_l2:.4f}")
     print(f"  coverage of 90% band:     {coverage:.4f} (target 0.90)")
     print(f"  recovered defect:         amp={recovered_amp:+.2e}, "
@@ -181,7 +189,7 @@ def main():
         "mean_loss":        float(np.mean(per_member_loss)),
         "M":                ens.M,
     }
-    with open(out_dir / "metrics.json", "w") as f:
+    with open(out_dir / "metrics.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(metrics, f, indent=2)
 
     # 7) Hero figure

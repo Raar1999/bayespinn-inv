@@ -17,8 +17,8 @@ The harness is solver-agnostic — it expects both solvers to expose the
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from dataclasses import dataclass
+from typing import Sequence
 
 import numpy as np
 import torch

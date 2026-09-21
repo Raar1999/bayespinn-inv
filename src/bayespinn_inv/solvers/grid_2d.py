@@ -39,12 +39,10 @@ Limitations vs full 2D TCAD
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Tuple, Optional
+from dataclasses import dataclass
+from typing import Tuple
 
 import numpy as np
-
-from ..physics.constants import EPS_0
 
 
 @dataclass
@@ -184,4 +182,4 @@ class MOSCapBoundary:
     phi_ms: float = 0.0
 
 
-__all__ = ["MOSCapGeometry", "Grid2D", "MOSCapBoundary"]
+__all__ = ["Grid2D", "MOSCapBoundary", "MOSCapGeometry"]

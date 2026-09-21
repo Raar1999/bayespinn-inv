@@ -1,0 +1,37 @@
+{
+  "config": {
+    "seed": 0,
+    "pinn_epochs": 8000,
+    "surrogate_epochs": 2500,
+    "n_anchor": 16
+  },
+  "label_integrity": {
+    "n_candidate_labels": 156,
+    "n_dropped_untrustworthy": 12,
+    "n_used": 144,
+    "why": "SG terminal current below its own numerical noise floor near equilibrium; fitting it would be fitting noise"
+  },
+  "head_to_head": {
+    "pinn": {
+      "median_rel_err": 0.9999970197631748,
+      "p90_rel_err": 1.0000456802107016,
+      "max_rel_err": 283.0343183321931,
+      "n": 72,
+      "frac_within_50pct": 0.05555555555555555,
+      "train_seconds": 425.69398307800293,
+      "self_consistency_std_over_mean_J": {
+        "median": 0.02982050832360983,
+        "max": 0.03285031020641327,
+        "note": "div(J)=0 in steady state, so std(J)/|mean(J)| is 0 for an exact solution. This is the PINN's own diagnostic, independent of the oracle."
+      }
+    },
+    "surrogate": {
+      "median_rel_err": 0.026436009151515727,
+      "p90_rel_err": 0.06642569583235006,
+      "max_rel_err": 0.3222989758374556,
+      "n": 72,
+      "frac_within_50pct": 1.0,
+      "train_seconds": 44.83801603317261
+    }
+  }
+}

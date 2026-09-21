@@ -1,0 +1,109 @@
+{
+  "positive_control_chartL_vs_solver_max_rel": 0.0,
+  "anchor_lattice": {
+    "d4_anchor_x_over_L": [
+      0.0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1.0
+    ],
+    "nearest_d16_node_index": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "max_abs_offset_m": 1.0587911840678754e-22,
+    "lattice_nested": true
+  },
+  "G_into_G": {
+    "max_decades": 3.552713678800501e-15,
+    "rms_decades": 1.4623860930856521e-15,
+    "max_rel": 8.30376274202096e-15,
+    "sign_disagreements": 0,
+    "nodes_nonfinite": 0,
+    "n_nodes": 301
+  },
+  "G_into_L": {
+    "max_decades": 1.9544840915788946,
+    "rms_decades": 0.1624637334749961,
+    "max_rel": 1.111602771784006,
+    "sign_disagreements": 2,
+    "nodes_nonfinite": 0,
+    "n_nodes": 301
+  },
+  "L_into_G_step_asymmetric": {
+    "max_decades": 0.6456450361642574,
+    "rms_decades": 0.116451625289665,
+    "max_rel": 1.7845430907475113,
+    "sign_disagreements": 9,
+    "nodes_nonfinite": 0,
+    "n_nodes": 301
+  },
+  "L_into_G_prior_draw": {
+    "max_decades": 2.3264035678667483,
+    "rms_decades": 0.31801515093105603,
+    "max_rel": 213.03305358553476,
+    "sign_disagreements": 5,
+    "nodes_nonfinite": 0,
+    "n_nodes": 301
+  },
+  "L_into_G_sources": {
+    "step_asymmetric_log10": [
+      21.0,
+      21.0,
+      21.0,
+      21.0,
+      21.0,
+      21.0,
+      21.0,
+      21.0,
+      22.69897000433602,
+      22.69897000433602,
+      22.69897000433602,
+      22.69897000433602,
+      22.69897000433602,
+      22.69897000433602,
+      22.69897000433602,
+      22.69897000433602
+    ],
+    "prior_draw_log10": [
+      22.27392337464291,
+      21.539573427527742,
+      21.08194704787239,
+      21.03305527105706,
+      22.626540478400546,
+      22.825511154555443,
+      22.21327155153436,
+      22.458993121967996,
+      22.087249982930846,
+      22.870144847575535,
+      22.631707108243063,
+      21.005477000340296,
+      22.71480855317514,
+      21.06717115061093,
+      22.45931089285989,
+      21.351311241205117
+    ],
+    "prior_draw_seed": 0
+  },
+  "interpolant_divergence": [
+    {
+      "endpoint_ratio": 2.0,
+      "midpoint_arithmetic_over_geometric": 1.0606601717798212
+    },
+    {
+      "endpoint_ratio": 5.0,
+      "midpoint_arithmetic_over_geometric": 1.3416407864998738
+    },
+    {
+      "endpoint_ratio": 10.0,
+      "midpoint_arithmetic_over_geometric": 1.7392527130926085
+    },
+    {
+      "endpoint_ratio": 100.0,
+      "midpoint_arithmetic_over_geometric": 5.05
+    }
+  ],
+  "verdict": "NEITHER contains the other: G is geometric between anchors, L is arithmetic, and they agree only where adjacent anchors are equal; independently, G carries a grid-level sign discontinuity that a continuous piecewise-linear L cannot produce at any finite d."
+}

@@ -1,0 +1,221 @@
+{
+  "experiment": "results",
+  "created_utc": "2026-08-25T11:20:39+00:00",
+  "git": {
+    "commit": "6577f4b87a65cd2c255062e42ea5181f04483e93",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "seed": 0,
+  "config": {
+    "domain_si": [
+      0.0,
+      1e-06
+    ],
+    "n_anchor": 16,
+    "n_bias": 13,
+    "bias_max": 0.6,
+    "ensemble_M": 5,
+    "epochs": 2500,
+    "train_band": [
+      1e+21,
+      2e+22
+    ],
+    "extrap_band": [
+      2e+20,
+      8e+22
+    ],
+    "seed": 0
+  },
+  "results": {
+    "H1_forward_accuracy": {
+      "interpolation": {
+        "median_rel_err": {
+          "point": 0.027834281028660313,
+          "lo": 0.019563938015089488,
+          "hi": 0.03877240933680387,
+          "n": 72
+        },
+        "p90_rel_err": 0.06976176088158392,
+        "max_rel_err": 0.33924419047270993,
+        "n": 72,
+        "n_profiles": 6
+      },
+      "extrapolation": {
+        "median_rel_err": {
+          "point": 0.3818233071446869,
+          "lo": 0.23062521728906027,
+          "hi": 0.8966923383585573,
+          "n": 68
+        },
+        "p90_rel_err": 8.605547777215666,
+        "max_rel_err": 68.94639617755425,
+        "n": 68,
+        "n_profiles": 6
+      },
+      "family_transfer_graded": {
+        "median_rel_err": {
+          "point": 0.8423089146208244,
+          "lo": 0.7500877125738705,
+          "hi": 1.063902165599747,
+          "n": 60
+        },
+        "p90_rel_err": 1.5148711248336633,
+        "max_rel_err": 1.793910901864018,
+        "n": 60,
+        "n_profiles": 5
+      }
+    },
+    "H2_inverse_vs_noise": {
+      "noise_0.0": {
+        "median_abs_err_decades": {
+          "point": 0.0017956257886453386,
+          "lo": 0.0012683402436692859,
+          "hi": 0.0023548273620797033,
+          "n": 40
+        },
+        "mean_abs_err_decades": {
+          "point": 0.0019167900085452771,
+          "lo": 0.001715561989908807,
+          "hi": 0.0021104581363482785,
+          "n": 40
+        },
+        "coverage_1sigma": {
+          "point": 0.75,
+          "lo": 0.5980603857923197,
+          "hi": 0.858128813609037,
+          "n": 40
+        }
+      },
+      "noise_0.02": {
+        "median_abs_err_decades": {
+          "point": 0.0020400829805229392,
+          "lo": 0.0011734828856647893,
+          "hi": 0.0023841391938645984,
+          "n": 40
+        },
+        "mean_abs_err_decades": {
+          "point": 0.0022160426758615513,
+          "lo": 0.0017445459379522178,
+          "hi": 0.0027536092628590975,
+          "n": 40
+        },
+        "coverage_1sigma": {
+          "point": 0.775,
+          "lo": 0.6249690325768998,
+          "hi": 0.8768390867645927,
+          "n": 40
+        }
+      },
+      "noise_0.05": {
+        "median_abs_err_decades": {
+          "point": 0.0033437161536191695,
+          "lo": 0.001900356345721832,
+          "hi": 0.005380789370883932,
+          "n": 40
+        },
+        "mean_abs_err_decades": {
+          "point": 0.0039860686175684275,
+          "lo": 0.0031359816274413375,
+          "hi": 0.004810340033833127,
+          "n": 40
+        },
+        "coverage_1sigma": {
+          "point": 0.475,
+          "lo": 0.329354701126789,
+          "hi": 0.6250263789330753,
+          "n": 40
+        }
+      },
+      "noise_0.1": {
+        "median_abs_err_decades": {
+          "point": 0.007197985316212296,
+          "lo": 0.004658252663070073,
+          "hi": 0.010073350620482202,
+          "n": 40
+        },
+        "mean_abs_err_decades": {
+          "point": 0.010048274138039392,
+          "lo": 0.007490265370380442,
+          "hi": 0.012869562418920504,
+          "n": 40
+        },
+        "coverage_1sigma": {
+          "point": 0.275,
+          "lo": 0.16108016247667337,
+          "hi": 0.42834955806210573,
+          "n": 40
+        }
+      }
+    },
+    "H3_calibration": {
+      "temperature": 2.0926970199407045,
+      "n_val": 48,
+      "n_test": 140,
+      "fit": "T = RMS(z) on the calibration split; NLL-optimal variance inflation. Evaluated pre and post on the identical test set.",
+      "z_1.0": {
+        "pre": {
+          "point": 0.2857142857142857,
+          "lo": 0.21738979502274602,
+          "hi": 0.36548429084985956,
+          "n": 140
+        },
+        "post": {
+          "point": 0.6214285714285714,
+          "lo": 0.5388554401603023,
+          "hi": 0.6975159111785545,
+          "n": 140
+        },
+        "nominal": 0.6826894921370857
+      },
+      "z_1.64": {
+        "pre": {
+          "point": 0.45714285714285713,
+          "lo": 0.3768699173117245,
+          "hi": 0.5397048998627966,
+          "n": 140
+        },
+        "post": {
+          "point": 0.9,
+          "lo": 0.8391410969490967,
+          "hi": 0.939493942755373,
+          "n": 140
+        },
+        "nominal": 0.8989948330517925
+      },
+      "z_2.0": {
+        "pre": {
+          "point": 0.5857142857142857,
+          "lo": 0.5028920761838734,
+          "hi": 0.6639582894670845,
+          "n": 140
+        },
+        "post": {
+          "point": 0.9785714285714285,
+          "lo": 0.9388952114746261,
+          "hi": 0.9926859967432213,
+          "n": 140
+        },
+        "nominal": 0.9544997361036417
+      }
+    }
+  },
+  "artifacts": {
+    "results_json": "outputs\\results_g0\\results.json",
+    "results_summary": "outputs\\results_g0\\results_summary.md"
+  },
+  "notes": ""
+}

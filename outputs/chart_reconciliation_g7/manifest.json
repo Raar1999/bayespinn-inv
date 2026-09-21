@@ -1,0 +1,2427 @@
+{
+  "experiment": "chart_reconciliation_g7",
+  "created_utc": "2026-08-25T19:09:09+00:00",
+  "git": {
+    "commit": "3e05c9da55e152c8305838ff1da4166207051826",
+    "dirty": false,
+    "tracked_modified": 0,
+    "untracked": 0,
+    "tree_digest": "a6be97c40fddf4de63182c6b112cb1444a0f0168f600c7ea10d0fcbf550711cc"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "git_autocrlf": "false",
+    "git_eol": null,
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "torch": "2.11.0+cu128",
+    "sklearn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_threads": 20
+  },
+  "loaded_code": {
+    "package": "bayespinn_inv",
+    "tree_root": "D:\\bayespinn-inv\\bayespinn-inv",
+    "git_ls_files_available": true,
+    "n_modules_imported": 15,
+    "modules": {
+      "bayespinn_inv": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.charts": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\charts.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.global_identifiability": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\global_identifiability.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.inverse.identifiability": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\inverse\\identifiability.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.constants": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\constants.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.physics.scaling": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\physics\\scaling.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers.grid_2d": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\grid_2d.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers.mos_cap_2d": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\mos_cap_2d.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.solvers.scharfetter_gummel": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\solvers\\scharfetter_gummel.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\__init__.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.loaded_code": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\loaded_code.py",
+        "inside_tree": true,
+        "tracked": true
+      },
+      "bayespinn_inv.utils.provenance": {
+        "file": "D:\\bayespinn-inv\\bayespinn-inv\\src\\bayespinn_inv\\utils\\provenance.py",
+        "inside_tree": true,
+        "tracked": true
+      }
+    },
+    "outside_tree": [],
+    "inside_tree_untracked": [],
+    "flagged": false,
+    "sys_path": [
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\scripts",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "resolved": "D:\\bayespinn-inv\\bayespinn-inv\\src",
+        "exists": true,
+        "inside_tree": true
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\python311.zip",
+        "resolved": "C:\\Program Files\\Python311\\python311.zip",
+        "exists": false,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\DLLs",
+        "resolved": "C:\\Program Files\\Python311\\DLLs",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib",
+        "resolved": "C:\\Program Files\\Python311\\Lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311",
+        "resolved": "C:\\Program Files\\Python311",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "resolved": "D:\\fab-ops-analytics-complete\\fab-ops-analytics-complete\\project5-fab-operations-analytics\\src",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\win32\\lib",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "resolved": "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\pythonwin",
+        "exists": true,
+        "inside_tree": false
+      },
+      {
+        "entry": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "resolved": "C:\\Program Files\\Python311\\Lib\\site-packages",
+        "exists": true,
+        "inside_tree": false
+      }
+    ],
+    "editable_install_markers": [
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.bayespinn_inv-0.1.0.dev0.pth",
+      "C:\\Users\\abhis\\AppData\\Roaming\\Python\\Python311\\site-packages\\__editable__.fab_ops_analytics-0.1.0.pth"
+    ],
+    "platform_assumptions": {
+      "os": "win32",
+      "path_separator": "\\",
+      "resolution": "Path.resolve(): follows symlinks, Windows junctions and substituted drives; a module reached through a link landing outside the tree is reported OUTSIDE",
+      "case_comparison": "os.path.normcase -- case-folded on Windows, identity on POSIX",
+      "filesystem_case_sensitive_probed": false,
+      "validated_on": "win32 / python 3.11.9",
+      "unvalidated_platforms": [
+        "linux",
+        "darwin"
+      ]
+    }
+  },
+  "seed": 0,
+  "config": {
+    "n_anchor": 4,
+    "prior_lo_si": 1e+21,
+    "prior_hi_si": 1e+23,
+    "biases": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9
+    ],
+    "noise_rel": 0.02,
+    "discretisation_floor_rel": 0.0015,
+    "domain_si": [
+      0.0,
+      1e-06
+    ],
+    "seed": 0,
+    "min_separation_decades": 0.3,
+    "distinguishability_floor": 0.02,
+    "prior_hash": "ba11a6d5357388cb564e88a7c1f397adbaf0131c396dfab57153685e42a16f31",
+    "grid_n": 301,
+    "phases": [
+      "containment",
+      "representation",
+      "spectra",
+      "profile",
+      "native_witness"
+    ],
+    "refine_evals": 800,
+    "profile_points": 61,
+    "native_samples": 1200,
+    "seed_evals": 400,
+    "spectra_cells": "G_d4,G_d16,L_d16,L_d4",
+    "witness_artefact": "outputs/global_identifiability_g6/global_identifiability.json"
+  },
+  "results": {
+    "containment": {
+      "positive_control_chartL_vs_solver_max_rel": 0.0,
+      "anchor_lattice": {
+        "d4_anchor_x_over_L": [
+          0.0,
+          0.3333333333333333,
+          0.6666666666666666,
+          1.0
+        ],
+        "nearest_d16_node_index": [
+          0,
+          5,
+          10,
+          15
+        ],
+        "max_abs_offset_m": 1.0587911840678754e-22,
+        "lattice_nested": true
+      },
+      "G_into_G": {
+        "max_decades": 3.552713678800501e-15,
+        "rms_decades": 1.4623860930856521e-15,
+        "max_rel": 8.30376274202096e-15,
+        "sign_disagreements": 0,
+        "nodes_nonfinite": 0,
+        "n_nodes": 301
+      },
+      "G_into_L": {
+        "max_decades": 1.9544840915788946,
+        "rms_decades": 0.1624637334749961,
+        "max_rel": 1.111602771784006,
+        "sign_disagreements": 2,
+        "nodes_nonfinite": 0,
+        "n_nodes": 301
+      },
+      "L_into_G_step_asymmetric": {
+        "max_decades": 0.6456450361642574,
+        "rms_decades": 0.116451625289665,
+        "max_rel": 1.7845430907475113,
+        "sign_disagreements": 9,
+        "nodes_nonfinite": 0,
+        "n_nodes": 301
+      },
+      "L_into_G_prior_draw": {
+        "max_decades": 2.3264035678667483,
+        "rms_decades": 0.31801515093105603,
+        "max_rel": 213.03305358553476,
+        "sign_disagreements": 5,
+        "nodes_nonfinite": 0,
+        "n_nodes": 301
+      },
+      "L_into_G_sources": {
+        "step_asymmetric_log10": [
+          21.0,
+          21.0,
+          21.0,
+          21.0,
+          21.0,
+          21.0,
+          21.0,
+          21.0,
+          22.69897000433602,
+          22.69897000433602,
+          22.69897000433602,
+          22.69897000433602,
+          22.69897000433602,
+          22.69897000433602,
+          22.69897000433602,
+          22.69897000433602
+        ],
+        "prior_draw_log10": [
+          22.27392337464291,
+          21.539573427527742,
+          21.08194704787239,
+          21.03305527105706,
+          22.626540478400546,
+          22.825511154555443,
+          22.21327155153436,
+          22.458993121967996,
+          22.087249982930846,
+          22.870144847575535,
+          22.631707108243063,
+          21.005477000340296,
+          22.71480855317514,
+          21.06717115061093,
+          22.45931089285989,
+          21.351311241205117
+        ],
+        "prior_draw_seed": 0
+      },
+      "interpolant_divergence": [
+        {
+          "endpoint_ratio": 2.0,
+          "midpoint_arithmetic_over_geometric": 1.0606601717798212
+        },
+        {
+          "endpoint_ratio": 5.0,
+          "midpoint_arithmetic_over_geometric": 1.3416407864998738
+        },
+        {
+          "endpoint_ratio": 10.0,
+          "midpoint_arithmetic_over_geometric": 1.7392527130926085
+        },
+        {
+          "endpoint_ratio": 100.0,
+          "midpoint_arithmetic_over_geometric": 5.05
+        }
+      ],
+      "verdict": "NEITHER contains the other: G is geometric between anchors, L is arithmetic, and they agree only where adjacent anchors are equal; independently, G carries a grid-level sign discontinuity that a continuous piecewise-linear L cannot produce at any finite d."
+    },
+    "representation": {
+      "witness_pair": 0,
+      "published_observational_distance": 0.012254760252752345,
+      "reproduced_chartG_d4_distance": 0.012254760252752345,
+      "separation_decades_chartG_d4": 0.9125150783578668,
+      "floors": {
+        "noise_rel": 0.02,
+        "discretisation_rel": 0.0015,
+        "distinguishability": 0.02
+      },
+      "members": {
+        "a": {
+          "candidates": {
+            "collocate": {
+              "diagnostics": {
+                "method": "collocate"
+              },
+              "theta": [
+                22.052336061003242,
+                22.02761901196022,
+                22.002901962917196,
+                21.978184913874177,
+                21.953467864831154,
+                21.92875081578813,
+                21.83201398813938,
+                21.735277160490625,
+                21.638540332841874,
+                21.54180350519312,
+                21.445066677544368,
+                21.65864018617934,
+                21.87221369481431,
+                22.085787203449282,
+                22.29936071208425,
+                22.512934220719224
+              ],
+              "profile_max_decades": 1.9544840915788946,
+              "profile_rms_decades": 0.1624637334749961,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 2,
+              "observational_representation_error": 0.007296986260163149,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            },
+            "linear_C": {
+              "diagnostics": {
+                "method": "linear_C",
+                "coef_sign_flips_vs_chart": 0
+              },
+              "theta": [
+                22.052227526670162,
+                22.02750434622674,
+                22.00276595479137,
+                21.978146476859663,
+                21.953038514950297,
+                21.929871471914083,
+                21.820270275745106,
+                21.77611843917581,
+                21.743417573822807,
+                21.498585763630963,
+                21.452622081954726,
+                21.64722871957737,
+                21.863775512203777,
+                22.07727445850214,
+                22.28992172048645,
+                22.50579378356307
+              ],
+              "profile_max_decades": 1.351293212333406,
+              "profile_rms_decades": 0.1343862655599779,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 1,
+              "observational_representation_error": 0.0008132395497464645,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            },
+            "log10": {
+              "diagnostics": {
+                "method": "log10",
+                "loss": "soft_l1",
+                "f_scale": 0.05,
+                "nfev": 55,
+                "nodes_saturated": 0,
+                "max_decades": 1.2325972578517828
+              },
+              "theta": [
+                22.052217524872795,
+                22.027523407037616,
+                22.002700740181616,
+                21.978385783083265,
+                21.952157346276998,
+                21.933116085314914,
+                21.80844679725422,
+                21.828677950696058,
+                21.69526154526886,
+                21.526774118605857,
+                21.444625365873925,
+                21.64782912293596,
+                21.86403953938002,
+                22.076980711674736,
+                22.290559531083794,
+                22.504742401693196
+              ],
+              "profile_max_decades": 1.2325972578517828,
+              "profile_rms_decades": 0.13072723849284867,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 2,
+              "observational_representation_error": 0.008081225826771836,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            },
+            "observational_refine": {
+              "diagnostics": {
+                "method": "Nelder-Mead in observation space",
+                "seeded_from": "linear_C",
+                "maxfev_budget": 800,
+                "n_evaluations": 800,
+                "converged": false
+              },
+              "theta": [
+                22.0627601521498,
+                22.009055180678416,
+                22.00813549315214,
+                21.96893214511043,
+                21.9563097288273,
+                21.92762176141175,
+                21.825736351545082,
+                21.78276184529507,
+                21.740574024154263,
+                21.48796721594922,
+                21.44005738187344,
+                21.64017008286831,
+                21.883356370251345,
+                22.073958371657618,
+                22.293278670552517,
+                22.505039138094332
+              ],
+              "profile_max_decades": 1.2386972791729498,
+              "profile_rms_decades": 0.1328756660158716,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 1,
+              "observational_representation_error": 0.00013923827472992715,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            }
+          },
+          "best_method": "observational_refine"
+        },
+        "b": {
+          "candidates": {
+            "collocate": {
+              "diagnostics": {
+                "method": "collocate"
+              },
+              "theta": [
+                22.61289465164883,
+                22.293562868805118,
+                21.974231085961403,
+                21.65489930311769,
+                21.335567520273976,
+                21.016235737430264,
+                21.226450354995155,
+                21.436664972560045,
+                21.646879590124936,
+                21.857094207689826,
+                22.067308825254717,
+                22.058331042280813,
+                22.049353259306912,
+                22.040375476333008,
+                22.031397693359107,
+                22.022419910385203
+              ],
+              "profile_max_decades": 1.3934937513511194,
+              "profile_rms_decades": 0.14109024369271508,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 2,
+              "observational_representation_error": 0.02917772923230973,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            },
+            "linear_C": {
+              "diagnostics": {
+                "method": "linear_C",
+                "coef_sign_flips_vs_chart": 0
+              },
+              "theta": [
+                22.597885031079787,
+                22.27141066466317,
+                21.95600654433697,
+                21.63498039110853,
+                21.312776753646272,
+                21.02392063497642,
+                21.15945293164724,
+                21.54131707743989,
+                21.68560109225141,
+                21.838396992587082,
+                22.064859320450626,
+                22.058976231374743,
+                22.04915765981035,
+                22.040409376158564,
+                22.031367806406504,
+                22.0224123391245
+              ],
+              "profile_max_decades": 1.3523473221038707,
+              "profile_rms_decades": 0.13234642454671702,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 1,
+              "observational_representation_error": 0.0051767843880700815,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            },
+            "log10": {
+              "diagnostics": {
+                "method": "log10",
+                "loss": "soft_l1",
+                "f_scale": 0.05,
+                "nfev": 36,
+                "nodes_saturated": 0,
+                "max_decades": 1.2093861268082975
+              },
+              "theta": [
+                22.59448312189211,
+                22.27390384190892,
+                21.954786452010183,
+                21.635773438526297,
+                21.314844015469244,
+                21.002104404196036,
+                21.221191794449158,
+                21.420658613583097,
+                21.832321640268617,
+                21.81062398331679,
+                22.070634583610605,
+                22.057424970826883,
+                22.04957537104965,
+                22.040296532568007,
+                22.03139986402135,
+                22.02239732790936
+              ],
+              "profile_max_decades": 1.2093861268082975,
+              "profile_rms_decades": 0.11949695335540446,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 4,
+              "observational_representation_error": 0.009696961156116035,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            },
+            "observational_refine": {
+              "diagnostics": {
+                "method": "Nelder-Mead in observation space",
+                "seeded_from": "linear_C",
+                "maxfev_budget": 800,
+                "n_evaluations": 800,
+                "converged": false
+              },
+              "theta": [
+                22.617617410034327,
+                22.25788911872594,
+                21.95602956105229,
+                21.612555652835766,
+                21.354605991821103,
+                21.01613539962799,
+                21.140118640994366,
+                21.580626451808122,
+                21.784811973429512,
+                21.81827044797643,
+                22.0729351731541,
+                22.03296736156713,
+                22.02640917482949,
+                22.054210384034334,
+                22.048875794592014,
+                22.012736039986535
+              ],
+              "profile_max_decades": 1.337016938005661,
+              "profile_rms_decades": 0.1242976473767879,
+              "profile_nodes_nonfinite": 0,
+              "sign_disagreements": 2,
+              "observational_representation_error": 0.0004337992900747789,
+              "oracle_trustworthy": true,
+              "oracle_converged": true
+            }
+          },
+          "best_method": "observational_refine"
+        }
+      },
+      "pair_of_best_chartL_standins": {
+        "observational_distance": 0.012071848040177044,
+        "below_floor": true,
+        "separation_decades": 0.9114863617837585,
+        "separation_decades_chartG_collocated_to_16": 0.9125150783578668,
+        "separation_ratio_L_over_G": 0.9988726579992963
+      }
+    },
+    "spectra": {
+      "operating_point": "witness pair 0, member a (chart G d=4)",
+      "note": "chart L cells sit at that member's BEST chart-L stand-in, not at the same device -- chart L cannot hold it. The profile distance from the true operating point is carried in each cell.",
+      "cells": {
+        "G_d4": {
+          "dtype": "float64",
+          "n_observations": 15,
+          "n_parameters": 4,
+          "singular_values": [
+            1.9233889205140295,
+            0.3220298252297486,
+            0.06080574927341394,
+            0.008227672088140578
+          ],
+          "spectral_floor": 0.0030031114047258172,
+          "jacobian_noise": 0.00038770001524362173,
+          "noise_rel": 0.02,
+          "noise_cutoff_symlog": 0.00860017176191757,
+          "identifiable_rank": 3,
+          "resolvable_rank": 4,
+          "rank_fraction_within_chart": "3/4  (NOT comparable across charts)",
+          "condition_number": 233.7707312480787,
+          "largest_gap_after_index": 2,
+          "largest_gap_ratio": 7.390395317414236,
+          "noise_cutoff_falls_in_largest_gap": true,
+          "chart": "G",
+          "d": 4,
+          "theta": [
+            22.052336061003242,
+            21.92875081578813,
+            21.445066677544368,
+            22.512934220719224
+          ],
+          "biases_used": [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "wall_clock_s": 3.0161777999892365,
+          "profile_distance_from_operating_point_decades": 0.0
+        },
+        "G_d16": {
+          "dtype": "float64",
+          "n_observations": 15,
+          "n_parameters": 16,
+          "singular_values": [
+            1.0599671544374416,
+            0.2184868455126899,
+            0.04381606489768649,
+            0.012991873738932357,
+            0.007549719888748142,
+            0.0038828505535512484,
+            0.0013228494407248122,
+            0.0003104983892497943,
+            0.0002460547740187888,
+            7.714263426789454e-05,
+            2.276730812812077e-05,
+            1.5559389303916955e-05,
+            3.816204815233144e-06,
+            7.445965124610289e-07,
+            3.535317791407935e-07,
+            0.0
+          ],
+          "spectral_floor": 0.006318681422978183,
+          "jacobian_noise": 0.0004078691320197448,
+          "noise_rel": 0.02,
+          "noise_cutoff_symlog": 0.00860017176191757,
+          "identifiable_rank": 4,
+          "resolvable_rank": 5,
+          "rank_fraction_within_chart": "4/16  (NOT comparable across charts)",
+          "condition_number": Infinity,
+          "largest_gap_after_index": 1,
+          "largest_gap_ratio": 4.986455219629413,
+          "noise_cutoff_falls_in_largest_gap": false,
+          "chart": "G",
+          "d": 16,
+          "theta": [
+            22.052336061003242,
+            22.02761901196022,
+            22.002901962917196,
+            21.978184913874177,
+            21.953467864831154,
+            21.92875081578813,
+            21.83201398813938,
+            21.735277160490625,
+            21.638540332841874,
+            21.54180350519312,
+            21.445066677544368,
+            21.65864018617934,
+            21.87221369481431,
+            22.085787203449282,
+            22.29936071208425,
+            22.512934220719224
+          ],
+          "biases_used": [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "wall_clock_s": 11.200039299990749,
+          "profile_distance_from_operating_point_decades": 3.552713678800501e-15
+        },
+        "L_d16": {
+          "dtype": "float64",
+          "n_observations": 15,
+          "n_parameters": 16,
+          "singular_values": [
+            1.0694065413521707,
+            0.22432270407576352,
+            0.04378426211076862,
+            0.012706394077535635,
+            0.007928235589047351,
+            0.0038862009118068174,
+            0.0013529064910128843,
+            0.00026425911333694154,
+            0.00025193690619636656,
+            0.00010707139379110939,
+            2.3832901268050135e-05,
+            1.6533174024250762e-05,
+            5.062540875092261e-06,
+            5.067144139810813e-07,
+            2.0278225199701348e-07,
+            0.0
+          ],
+          "spectral_floor": 0.004948754489836514,
+          "jacobian_noise": 0.00031944072872676664,
+          "noise_rel": 0.02,
+          "noise_cutoff_symlog": 0.00860017176191757,
+          "identifiable_rank": 4,
+          "resolvable_rank": 5,
+          "rank_fraction_within_chart": "4/16  (NOT comparable across charts)",
+          "condition_number": Infinity,
+          "largest_gap_after_index": 1,
+          "largest_gap_ratio": 5.123363812966759,
+          "noise_cutoff_falls_in_largest_gap": false,
+          "chart": "L",
+          "d": 16,
+          "theta": [
+            22.0627601521498,
+            22.009055180678416,
+            22.00813549315214,
+            21.96893214511043,
+            21.9563097288273,
+            21.92762176141175,
+            21.825736351545082,
+            21.78276184529507,
+            21.740574024154263,
+            21.48796721594922,
+            21.44005738187344,
+            21.64017008286831,
+            21.883356370251345,
+            22.073958371657618,
+            22.293278670552517,
+            22.505039138094332
+          ],
+          "biases_used": [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "wall_clock_s": 11.054379699999117,
+          "profile_distance_from_operating_point_decades": 1.2386972791729498
+        },
+        "L_d4": {
+          "dtype": "float64",
+          "n_observations": 15,
+          "n_parameters": 4,
+          "singular_values": [
+            1.9901308921018914,
+            0.3944868525933941,
+            0.07424450257637098,
+            0.0042521212766748785
+          ],
+          "spectral_floor": 0.0021156713835172466,
+          "jacobian_noise": 0.0002731320011469967,
+          "noise_rel": 0.02,
+          "noise_cutoff_symlog": 0.00860017176191757,
+          "identifiable_rank": 3,
+          "resolvable_rank": 4,
+          "rank_fraction_within_chart": "3/4  (NOT comparable across charts)",
+          "condition_number": 468.0324860485062,
+          "largest_gap_after_index": 2,
+          "largest_gap_ratio": 17.460579730790165,
+          "noise_cutoff_falls_in_largest_gap": true,
+          "chart": "L",
+          "d": 4,
+          "theta": [
+            22.016360470836428,
+            22.005078204342706,
+            21.387908116214472,
+            22.276301817071985
+          ],
+          "biases_used": [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "wall_clock_s": 3.0018035999964923,
+          "profile_distance_from_operating_point_decades": 1.7855877486142262
+        }
+      },
+      "positive_control_chart_vs_sg_jacobian_max_rel": 0.002122117282847357
+    },
+    "profile": {
+      "parameterisation": "chart G, d=4, theta = log10|C| at 4 equally spaced anchors",
+      "path": "straight line in theta between witness pair 0 members, extended to t in [-0.25, 1.25]",
+      "endpoint_a_log10": [
+        22.052336061003242,
+        21.92875081578813,
+        21.445066677544368,
+        22.512934220719224
+      ],
+      "endpoint_b_log10": [
+        22.61289465164883,
+        21.016235737430264,
+        22.067308825254717,
+        22.022419910385203
+      ],
+      "reference_observation": "oracle I-V of endpoint a, noise-free; sigma = 0.02 relative, 16 biases",
+      "noise_model": "independent Gaussian in relative current",
+      "witness_path": [
+        {
+          "t": -0.25,
+          "loglik": -306.6344871986587,
+          "obs_distance_from_a": 0.15925890358349395,
+          "max_param_change_decades": 0.2281287695894676
+        },
+        {
+          "t": -0.225,
+          "loglik": -243.98131557775127,
+          "obs_distance_from_a": 0.1423124573009016,
+          "max_param_change_decades": 0.20531589263052297
+        },
+        {
+          "t": -0.2,
+          "loglik": -188.96374985804653,
+          "obs_distance_from_a": 0.1254993619267278,
+          "max_param_change_decades": 0.18250301567157123
+        },
+        {
+          "t": -0.175,
+          "loglik": -141.66533967869708,
+          "obs_distance_from_a": 0.1088300818596355,
+          "max_param_change_decades": 0.1596901387126266
+        },
+        {
+          "t": -0.15,
+          "loglik": -101.6233376139368,
+          "obs_distance_from_a": 0.09236655052077444,
+          "max_param_change_decades": 0.13687726175367843
+        },
+        {
+          "t": -0.125,
+          "loglik": -68.78311733715084,
+          "obs_distance_from_a": 0.07613085132945664,
+          "max_param_change_decades": 0.1140643847947338
+        },
+        {
+          "t": -0.09999999999999998,
+          "loglik": -42.83397554777626,
+          "obs_distance_from_a": 0.06017675255088333,
+          "max_param_change_decades": 0.09125150783578917
+        },
+        {
+          "t": -0.07499999999999998,
+          "loglik": -23.3898279074941,
+          "obs_distance_from_a": 0.04454591680984925,
+          "max_param_change_decades": 0.06843863087683744
+        },
+        {
+          "t": -0.04999999999999999,
+          "loglik": -10.062129013083606,
+          "obs_distance_from_a": 0.02927162245035112,
+          "max_param_change_decades": 0.04562575391789281
+        },
+        {
+          "t": -0.024999999999999994,
+          "loglik": -2.4377668107838186,
+          "obs_distance_from_a": 0.014409386877546273,
+          "max_param_change_decades": 0.022812876958944628
+        },
+        {
+          "t": 0.0,
+          "loglik": -0.0,
+          "obs_distance_from_a": 0.0,
+          "max_param_change_decades": 0.0
+        },
+        {
+          "t": 0.025000000000000022,
+          "loglik": -2.2544603676759043,
+          "obs_distance_from_a": 0.013734948117201561,
+          "max_param_change_decades": 0.02281287695894818
+        },
+        {
+          "t": 0.050000000000000044,
+          "loglik": -8.70901818761751,
+          "obs_distance_from_a": 0.026583220483436094,
+          "max_param_change_decades": 0.04562575391789281
+        },
+        {
+          "t": 0.07500000000000001,
+          "loglik": -18.735409832995938,
+          "obs_distance_from_a": 0.03856868383703457,
+          "max_param_change_decades": 0.06843863087683744
+        },
+        {
+          "t": 0.10000000000000003,
+          "loglik": -31.825285440593337,
+          "obs_distance_from_a": 0.04971702602060583,
+          "max_param_change_decades": 0.09125150783578917
+        },
+        {
+          "t": 0.125,
+          "loglik": -47.32287682111651,
+          "obs_distance_from_a": 0.06003438067926734,
+          "max_param_change_decades": 0.1140643847947338
+        },
+        {
+          "t": 0.15000000000000002,
+          "loglik": -64.68507845625015,
+          "obs_distance_from_a": 0.06953426915339429,
+          "max_param_change_decades": 0.13687726175368198
+        },
+        {
+          "t": 0.17500000000000004,
+          "loglik": -83.45179411765528,
+          "obs_distance_from_a": 0.07823560578660008,
+          "max_param_change_decades": 0.1596901387126266
+        },
+        {
+          "t": 0.2,
+          "loglik": -102.88928902872206,
+          "obs_distance_from_a": 0.08615917001203932,
+          "max_param_change_decades": 0.18250301567157123
+        },
+        {
+          "t": 0.22500000000000003,
+          "loglik": -122.49825985261921,
+          "obs_distance_from_a": 0.09331205273530686,
+          "max_param_change_decades": 0.20531589263052297
+        },
+        {
+          "t": 0.25,
+          "loglik": -141.90814097939636,
+          "obs_distance_from_a": 0.0997107482462528,
+          "max_param_change_decades": 0.2281287695894676
+        },
+        {
+          "t": 0.275,
+          "loglik": -160.59741591352832,
+          "obs_distance_from_a": 0.10536976653120346,
+          "max_param_change_decades": 0.2509416465484122
+        },
+        {
+          "t": 0.30000000000000004,
+          "loglik": -178.02020298736153,
+          "obs_distance_from_a": 0.11030788014320003,
+          "max_param_change_decades": 0.2737545235073604
+        },
+        {
+          "t": 0.32500000000000007,
+          "loglik": -193.90644051953947,
+          "obs_distance_from_a": 0.11454081324953318,
+          "max_param_change_decades": 0.29656740046630503
+        },
+        {
+          "t": 0.3500000000000001,
+          "loglik": -207.93838198515397,
+          "obs_distance_from_a": 0.11807955829797226,
+          "max_param_change_decades": 0.3193802774252532
+        },
+        {
+          "t": 0.375,
+          "loglik": -219.9024541743175,
+          "obs_distance_from_a": 0.12092609889710643,
+          "max_param_change_decades": 0.3421931543842014
+        },
+        {
+          "t": 0.4,
+          "loglik": -229.36391133028746,
+          "obs_distance_from_a": 0.1231015001454681,
+          "max_param_change_decades": 0.365006031343146
+        },
+        {
+          "t": 0.42500000000000004,
+          "loglik": -236.3257632008644,
+          "obs_distance_from_a": 0.1246286590003501,
+          "max_param_change_decades": 0.38781890830209065
+        },
+        {
+          "t": 0.45000000000000007,
+          "loglik": -240.66662363445596,
+          "obs_distance_from_a": 0.1255010097997023,
+          "max_param_change_decades": 0.4106317852610424
+        },
+        {
+          "t": 0.4750000000000001,
+          "loglik": -242.44329175300908,
+          "obs_distance_from_a": 0.1257438353342316,
+          "max_param_change_decades": 0.433444662219987
+        },
+        {
+          "t": 0.5,
+          "loglik": -241.3529122410378,
+          "obs_distance_from_a": 0.12536134889095096,
+          "max_param_change_decades": 0.45625753917893164
+        },
+        {
+          "t": 0.525,
+          "loglik": -237.69263163762298,
+          "obs_distance_from_a": 0.12450083276990166,
+          "max_param_change_decades": 0.4790704161378798
+        },
+        {
+          "t": 0.55,
+          "loglik": -231.57808205341178,
+          "obs_distance_from_a": 0.12304930045944026,
+          "max_param_change_decades": 0.501883293096828
+        },
+        {
+          "t": 0.5750000000000001,
+          "loglik": -223.01578496000667,
+          "obs_distance_from_a": 0.12097629846128362,
+          "max_param_change_decades": 0.5246961700557726
+        },
+        {
+          "t": 0.6000000000000001,
+          "loglik": -212.39263905760913,
+          "obs_distance_from_a": 0.11834307788032632,
+          "max_param_change_decades": 0.5475090470147208
+        },
+        {
+          "t": 0.625,
+          "loglik": -199.7778529031599,
+          "obs_distance_from_a": 0.11512562417688064,
+          "max_param_change_decades": 0.570321923973669
+        },
+        {
+          "t": 0.65,
+          "loglik": -185.58691525981655,
+          "obs_distance_from_a": 0.11190739340090942,
+          "max_param_change_decades": 0.5931348009326136
+        },
+        {
+          "t": 0.675,
+          "loglik": -170.0648900044368,
+          "obs_distance_from_a": 0.1082390143543036,
+          "max_param_change_decades": 0.6159476778915582
+        },
+        {
+          "t": 0.7000000000000001,
+          "loglik": -153.3791986928255,
+          "obs_distance_from_a": 0.10374587145528982,
+          "max_param_change_decades": 0.6387605548505064
+        },
+        {
+          "t": 0.7250000000000001,
+          "loglik": -136.13822432328192,
+          "obs_distance_from_a": 0.09906196709258552,
+          "max_param_change_decades": 0.6615734318094546
+        },
+        {
+          "t": 0.75,
+          "loglik": -118.4268943463938,
+          "obs_distance_from_a": 0.09352175738400018,
+          "max_param_change_decades": 0.6843863087683992
+        },
+        {
+          "t": 0.7750000000000001,
+          "loglik": -100.85136222903769,
+          "obs_distance_from_a": 0.08782451814939524,
+          "max_param_change_decades": 0.7071991857273474
+        },
+        {
+          "t": 0.8,
+          "loglik": -83.57931073640816,
+          "obs_distance_from_a": 0.08143217339341877,
+          "max_param_change_decades": 0.7300120626862956
+        },
+        {
+          "t": 0.825,
+          "loglik": -67.03018414403077,
+          "obs_distance_from_a": 0.07443199749115746,
+          "max_param_change_decades": 0.7528249396452402
+        },
+        {
+          "t": 0.8500000000000001,
+          "loglik": -51.58731665492485,
+          "obs_distance_from_a": 0.06702195985439893,
+          "max_param_change_decades": 0.7756378166041848
+        },
+        {
+          "t": 0.875,
+          "loglik": -37.5989981794222,
+          "obs_distance_from_a": 0.0592581178921036,
+          "max_param_change_decades": 0.798450693563133
+        },
+        {
+          "t": 0.9000000000000001,
+          "loglik": -25.353890570879877,
+          "obs_distance_from_a": 0.05070294227593938,
+          "max_param_change_decades": 0.8212635705220812
+        },
+        {
+          "t": 0.925,
+          "loglik": -15.244936451976468,
+          "obs_distance_from_a": 0.04185449152845439,
+          "max_param_change_decades": 0.8440764474810294
+        },
+        {
+          "t": 0.9500000000000002,
+          "loglik": -7.560648219330229,
+          "obs_distance_from_a": 0.032580056856738,
+          "max_param_change_decades": 0.866889324439974
+        },
+        {
+          "t": 0.9750000000000001,
+          "loglik": -2.581729005580897,
+          "obs_distance_from_a": 0.02271164635309515,
+          "max_param_change_decades": 0.8897022013989186
+        },
+        {
+          "t": 1.0,
+          "loglik": -0.5905769203058111,
+          "obs_distance_from_a": 0.012254760252752345,
+          "max_param_change_decades": 0.9125150783578668
+        },
+        {
+          "t": 1.0250000000000001,
+          "loglik": -1.8584023154014204,
+          "obs_distance_from_a": 0.014636635282609112,
+          "max_param_change_decades": 0.9353279553168115
+        },
+        {
+          "t": 1.05,
+          "loglik": -6.617352574585836,
+          "obs_distance_from_a": 0.02669530222697312,
+          "max_param_change_decades": 0.9581408322757596
+        },
+        {
+          "t": 1.0750000000000002,
+          "loglik": -15.080765001413555,
+          "obs_distance_from_a": 0.03896502130864428,
+          "max_param_change_decades": 0.9809537092347078
+        },
+        {
+          "t": 1.1,
+          "loglik": -27.45354297196008,
+          "obs_distance_from_a": 0.05142663361584796,
+          "max_param_change_decades": 1.0037665861936524
+        },
+        {
+          "t": 1.125,
+          "loglik": -43.915176218635196,
+          "obs_distance_from_a": 0.06405382195181128,
+          "max_param_change_decades": 1.0265794631526006
+        },
+        {
+          "t": 1.1500000000000001,
+          "loglik": -64.62130085415097,
+          "obs_distance_from_a": 0.0768271359515523,
+          "max_param_change_decades": 1.0493923401115453
+        },
+        {
+          "t": 1.175,
+          "loglik": -89.67244785322667,
+          "obs_distance_from_a": 0.08972689996090338,
+          "max_param_change_decades": 1.0722052170704934
+        },
+        {
+          "t": 1.2000000000000002,
+          "loglik": -119.2181135900065,
+          "obs_distance_from_a": 0.10273295285880846,
+          "max_param_change_decades": 1.0950180940294416
+        },
+        {
+          "t": 1.225,
+          "loglik": -153.35888759421752,
+          "obs_distance_from_a": 0.11582489940849781,
+          "max_param_change_decades": 1.1178309709883862
+        },
+        {
+          "t": 1.25,
+          "loglik": -192.10594900024287,
+          "obs_distance_from_a": 0.12898921919097123,
+          "max_param_change_decades": 1.1406438479473344
+        }
+      ],
+      "control_direction": {
+        "description": "most observable right singular direction of the chart-G d=4 Jacobian at endpoint a, same excursion length in theta",
+        "direction": [
+          0.6201187906721983,
+          0.7169731911170009,
+          0.13755580090293434,
+          0.28719423795178634
+        ],
+        "singular_value": 1.9233889205140295,
+        "points": [
+          {
+            "t": -0.25,
+            "loglik": -5476.658541280076,
+            "obs_distance_from_a": 0.4192196412907038,
+            "max_param_change_decades": 0.2387840490663855
+          },
+          {
+            "t": -0.225,
+            "loglik": -4155.766860397836,
+            "obs_distance_from_a": 0.3843102063488602,
+            "max_param_change_decades": 0.21490564415974944
+          },
+          {
+            "t": -0.2,
+            "loglik": -3079.812029143024,
+            "obs_distance_from_a": 0.3479126831699222,
+            "max_param_change_decades": 0.19102723925310983
+          },
+          {
+            "t": -0.175,
+            "loglik": -2215.279822866457,
+            "obs_distance_from_a": 0.3100324765963342,
+            "max_param_change_decades": 0.1671488343464702
+          },
+          {
+            "t": -0.15,
+            "loglik": -1530.7843595563563,
+            "obs_distance_from_a": 0.27060750641511444,
+            "max_param_change_decades": 0.1432704294398306
+          },
+          {
+            "t": -0.125,
+            "loglik": -1001.5796449394425,
+            "obs_distance_from_a": 0.22965442536932615,
+            "max_param_change_decades": 0.11939202453319453
+          },
+          {
+            "t": -0.09999999999999998,
+            "loglik": -604.4418134616751,
+            "obs_distance_from_a": 0.1870462337624727,
+            "max_param_change_decades": 0.09551361962655491
+          },
+          {
+            "t": -0.07499999999999998,
+            "loglik": -321.03754141627144,
+            "obs_distance_from_a": 0.14286234733761352,
+            "max_param_change_decades": 0.0716352147199153
+          },
+          {
+            "t": -0.04999999999999999,
+            "loglik": -134.8796805629428,
+            "obs_distance_from_a": 0.09695559771446019,
+            "max_param_change_decades": 0.04775680981327568
+          },
+          {
+            "t": -0.024999999999999994,
+            "loglik": -31.891133815754717,
+            "obs_distance_from_a": 0.0493385384976045,
+            "max_param_change_decades": 0.023878404906639616
+          },
+          {
+            "t": 0.0,
+            "loglik": -0.0,
+            "obs_distance_from_a": 0.0,
+            "max_param_change_decades": 0.0
+          },
+          {
+            "t": 0.025000000000000022,
+            "loglik": -28.689396677749265,
+            "obs_distance_from_a": 0.048697395008977205,
+            "max_param_change_decades": 0.023878404906639616
+          },
+          {
+            "t": 0.050000000000000044,
+            "loglik": -108.91279585892349,
+            "obs_distance_from_a": 0.09430578349352424,
+            "max_param_change_decades": 0.04775680981327568
+          },
+          {
+            "t": 0.07500000000000001,
+            "loglik": -232.89456193018782,
+            "obs_distance_from_a": 0.1372719860756568,
+            "max_param_change_decades": 0.0716352147199153
+          },
+          {
+            "t": 0.10000000000000003,
+            "loglik": -394.0190563064871,
+            "obs_distance_from_a": 0.1777118968694494,
+            "max_param_change_decades": 0.09551361962655491
+          },
+          {
+            "t": 0.125,
+            "loglik": -586.351539761107,
+            "obs_distance_from_a": 0.21580259676102118,
+            "max_param_change_decades": 0.11939202453319453
+          },
+          {
+            "t": 0.15000000000000002,
+            "loglik": -804.8586336426004,
+            "obs_distance_from_a": 0.25170925018502666,
+            "max_param_change_decades": 0.1432704294398306
+          },
+          {
+            "t": 0.17500000000000004,
+            "loglik": -1045.2957216878067,
+            "obs_distance_from_a": 0.2855883692991737,
+            "max_param_change_decades": 0.1671488343464702
+          },
+          {
+            "t": 0.2,
+            "loglik": -1303.893141612999,
+            "obs_distance_from_a": 0.3175652666164562,
+            "max_param_change_decades": 0.19102723925310983
+          },
+          {
+            "t": 0.22500000000000003,
+            "loglik": -1577.2105070368393,
+            "obs_distance_from_a": 0.3477676652863868,
+            "max_param_change_decades": 0.21490564415974944
+          },
+          {
+            "t": 0.25,
+            "loglik": -1862.1892200870648,
+            "obs_distance_from_a": 0.3763166574013828,
+            "max_param_change_decades": 0.2387840490663855
+          },
+          {
+            "t": 0.275,
+            "loglik": -2157.3599462531365,
+            "obs_distance_from_a": 0.4033117335873526,
+            "max_param_change_decades": 0.2626624539730251
+          },
+          {
+            "t": 0.30000000000000004,
+            "loglik": -2459.999505551981,
+            "obs_distance_from_a": 0.4288719625422493,
+            "max_param_change_decades": 0.28654085887966474
+          },
+          {
+            "t": 0.32500000000000007,
+            "loglik": -2768.0417590363104,
+            "obs_distance_from_a": 0.453060218641232,
+            "max_param_change_decades": 0.31041926378630436
+          },
+          {
+            "t": 0.3500000000000001,
+            "loglik": -3079.7702627873587,
+            "obs_distance_from_a": 0.47598928385299355,
+            "max_param_change_decades": 0.3342976686929404
+          },
+          {
+            "t": 0.375,
+            "loglik": -3395.2171123938347,
+            "obs_distance_from_a": 0.4977409851904137,
+            "max_param_change_decades": 0.35817607359958004
+          },
+          {
+            "t": 0.4,
+            "loglik": -3712.2175511235573,
+            "obs_distance_from_a": 0.518356685758413,
+            "max_param_change_decades": 0.38205447850621965
+          },
+          {
+            "t": 0.42500000000000004,
+            "loglik": -4029.1292698434336,
+            "obs_distance_from_a": 0.537923317471351,
+            "max_param_change_decades": 0.40593288341285927
+          },
+          {
+            "t": 0.45000000000000007,
+            "loglik": -4346.657971791601,
+            "obs_distance_from_a": 0.556498669460683,
+            "max_param_change_decades": 0.42981128831949533
+          },
+          {
+            "t": 0.4750000000000001,
+            "loglik": -4663.550280314796,
+            "obs_distance_from_a": 0.5741694748139281,
+            "max_param_change_decades": 0.45368969322613495
+          },
+          {
+            "t": 0.5,
+            "loglik": -4978.993077689187,
+            "obs_distance_from_a": 0.5909558281207211,
+            "max_param_change_decades": 0.47756809813277457
+          },
+          {
+            "t": 0.525,
+            "loglik": -5291.88191218654,
+            "obs_distance_from_a": 0.6069183888704315,
+            "max_param_change_decades": 0.5014465030394142
+          },
+          {
+            "t": 0.55,
+            "loglik": -5602.883488446567,
+            "obs_distance_from_a": 0.6221019685410586,
+            "max_param_change_decades": 0.5253249079460502
+          },
+          {
+            "t": 0.5750000000000001,
+            "loglik": -5909.804921970919,
+            "obs_distance_from_a": 0.6365573031588139,
+            "max_param_change_decades": 0.5492033128526899
+          },
+          {
+            "t": 0.6000000000000001,
+            "loglik": -6215.686560516295,
+            "obs_distance_from_a": 0.650315242867403,
+            "max_param_change_decades": 0.5730817177593295
+          },
+          {
+            "t": 0.625,
+            "loglik": -6517.917558116465,
+            "obs_distance_from_a": 0.6635159433349247,
+            "max_param_change_decades": 0.5969601226659655
+          },
+          {
+            "t": 0.65,
+            "loglik": -6815.390854316947,
+            "obs_distance_from_a": 0.6761585524247898,
+            "max_param_change_decades": 0.6208385275726052
+          },
+          {
+            "t": 0.675,
+            "loglik": -7110.797475992101,
+            "obs_distance_from_a": 0.6882175561970348,
+            "max_param_change_decades": 0.6447169324792448
+          },
+          {
+            "t": 0.7000000000000001,
+            "loglik": -7402.100097990761,
+            "obs_distance_from_a": 0.6997230326760788,
+            "max_param_change_decades": 0.6685953373858844
+          },
+          {
+            "t": 0.7250000000000001,
+            "loglik": -7689.080941346087,
+            "obs_distance_from_a": 0.710710008546942,
+            "max_param_change_decades": 0.6924737422925205
+          },
+          {
+            "t": 0.75,
+            "loglik": -7973.144380019972,
+            "obs_distance_from_a": 0.7211996208061328,
+            "max_param_change_decades": 0.7163521471991601
+          },
+          {
+            "t": 0.7750000000000001,
+            "loglik": -8252.38058870446,
+            "obs_distance_from_a": 0.7312234138132397,
+            "max_param_change_decades": 0.7402305521057997
+          },
+          {
+            "t": 0.8,
+            "loglik": -8527.331592695691,
+            "obs_distance_from_a": 0.7407999560955324,
+            "max_param_change_decades": 0.7641089570124393
+          },
+          {
+            "t": 0.825,
+            "loglik": -8798.56445512688,
+            "obs_distance_from_a": 0.7499565199618649,
+            "max_param_change_decades": 0.7879873619190754
+          },
+          {
+            "t": 0.8500000000000001,
+            "loglik": -9067.030288644723,
+            "obs_distance_from_a": 0.7587170803395588,
+            "max_param_change_decades": 0.811865766825715
+          },
+          {
+            "t": 0.875,
+            "loglik": -9329.692384616847,
+            "obs_distance_from_a": 0.7670978795438402,
+            "max_param_change_decades": 0.8357441717323546
+          },
+          {
+            "t": 0.9000000000000001,
+            "loglik": -9588.681697428001,
+            "obs_distance_from_a": 0.7751176136976221,
+            "max_param_change_decades": 0.8596225766389942
+          },
+          {
+            "t": 0.925,
+            "loglik": -9844.657145254987,
+            "obs_distance_from_a": 0.7827998351181368,
+            "max_param_change_decades": 0.8835009815456303
+          },
+          {
+            "t": 0.9500000000000002,
+            "loglik": -10093.9572449511,
+            "obs_distance_from_a": 0.7901536909888685,
+            "max_param_change_decades": 0.9073793864522699
+          },
+          {
+            "t": 0.9750000000000001,
+            "loglik": -10341.65666534815,
+            "obs_distance_from_a": 0.7972018164805206,
+            "max_param_change_decades": 0.9312577913589095
+          },
+          {
+            "t": 1.0,
+            "loglik": -10584.477811520486,
+            "obs_distance_from_a": 0.8039591711364885,
+            "max_param_change_decades": 0.9551361962655456
+          },
+          {
+            "t": 1.0250000000000001,
+            "loglik": -10824.166327332227,
+            "obs_distance_from_a": 0.8104331190071858,
+            "max_param_change_decades": 0.9790146011721852
+          },
+          {
+            "t": 1.05,
+            "loglik": -11059.036576571789,
+            "obs_distance_from_a": 0.8166466620765787,
+            "max_param_change_decades": 1.0028930060788248
+          },
+          {
+            "t": 1.0750000000000002,
+            "loglik": -11288.66320007529,
+            "obs_distance_from_a": 0.8226095479563371,
+            "max_param_change_decades": 1.0267714109854644
+          },
+          {
+            "t": 1.1,
+            "loglik": -11514.699922466463,
+            "obs_distance_from_a": 0.8283315064545371,
+            "max_param_change_decades": 1.0506498158921005
+          },
+          {
+            "t": 1.125,
+            "loglik": -11738.832536120899,
+            "obs_distance_from_a": 0.8338243004862468,
+            "max_param_change_decades": 1.07452822079874
+          },
+          {
+            "t": 1.1500000000000001,
+            "loglik": -11958.455470541205,
+            "obs_distance_from_a": 0.839100639197646,
+            "max_param_change_decades": 1.0984066257053797
+          },
+          {
+            "t": 1.175,
+            "loglik": -12170.110415805517,
+            "obs_distance_from_a": 0.8441706628551097,
+            "max_param_change_decades": 1.1222850306120193
+          },
+          {
+            "t": 1.2000000000000002,
+            "loglik": -12381.011552063694,
+            "obs_distance_from_a": 0.8490407212175382,
+            "max_param_change_decades": 1.1461634355186554
+          },
+          {
+            "t": 1.225,
+            "loglik": -12584.149569540947,
+            "obs_distance_from_a": 0.85372461768959,
+            "max_param_change_decades": 1.170041840425295
+          },
+          {
+            "t": 1.25,
+            "loglik": -12784.658377380994,
+            "obs_distance_from_a": 0.8582239858928322,
+            "max_param_change_decades": 1.1939202453319346
+          }
+        ]
+      },
+      "witness_path_loglik_range": [
+        -306.6344871986587,
+        -0.0
+      ],
+      "control_loglik_range": [
+        -12784.658377380994,
+        -0.0
+      ]
+    },
+    "native_witness": {
+      "chart": "L",
+      "d": 16,
+      "prior_search": {
+        "config": {
+          "n_anchor": 16,
+          "prior_lo_si": 1e+21,
+          "prior_hi_si": 1e+23,
+          "biases": [
+            0.15,
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "noise_rel": 0.02,
+          "discretisation_floor_rel": 0.0015,
+          "domain_si": [
+            0.0,
+            1e-06
+          ],
+          "seed": 0,
+          "min_separation_decades": 0.3,
+          "distinguishability_floor": 0.02,
+          "prior_hash": "1bf57e7ee7be53b242763cdc8661df5003bd4da2fbe44767548201d85705201a"
+        },
+        "sampling": {
+          "drawn": 1200,
+          "kept": 1200,
+          "rejected_not_converged": 0,
+          "rejected_not_trustworthy": 0
+        },
+        "n_pairs_examined": 719400,
+        "floors": {
+          "noise_rel": 0.02,
+          "discretisation_rel": 0.0015,
+          "distinguishability": 0.02
+        },
+        "n_witnesses": 37,
+        "witnesses": [
+          {
+            "observational_distance": 0.008813702322268633,
+            "separation_decades": 1.1687575066162061,
+            "profile_a_log10": [
+              22.316942126757812,
+              22.42971778553202,
+              22.41645042474277,
+              21.559990897065056,
+              22.895134047185362,
+              21.97722728099774,
+              22.42037015985937,
+              22.39912787466315,
+              22.802793964605268,
+              22.24881533682433,
+              22.367732265833038,
+              21.368272692160488,
+              21.866968968963562,
+              22.436535662293288,
+              21.558252946330683,
+              21.461280713326175
+            ],
+            "profile_b_log10": [
+              22.058081310290554,
+              21.70065110895353,
+              22.93251321626308,
+              22.43927173154283,
+              22.666051457567495,
+              21.88533016919074,
+              22.4124257224229,
+              21.230370368046945,
+              22.47871936844012,
+              22.299984394162596,
+              21.965957638879175,
+              21.477303745974172,
+              21.97408568946593,
+              22.609305791624553,
+              21.452313387799474,
+              21.41929399099372
+            ],
+            "current_a": [
+              0.0032052249720809804,
+              0.020838753871878116,
+              0.13866988038542152,
+              0.9325266905352858,
+              6.297162712989609,
+              42.56958854327279,
+              287.66667499740055,
+              1941.295597418078,
+              13063.111784492598,
+              87150.09238992639,
+              559571.6812491079,
+              3045092.8191450876,
+              11175844.859178357,
+              26890041.622516155,
+              48747321.35341555,
+              74174933.65357421
+            ],
+            "current_b": [
+              0.00322491875511075,
+              0.02074146843881834,
+              0.13749344122908116,
+              0.9243076778773375,
+              6.249000800177182,
+              42.324524239171275,
+              286.65985440163917,
+              1939.240486365041,
+              13080.663632794789,
+              87408.37543256012,
+              560197.2860538855,
+              3026327.2227911204,
+              11110403.84303037,
+              26885509.96557384,
+              48769855.73503886,
+              73920543.62442668
+            ]
+          },
+          {
+            "observational_distance": 0.009001411630028041,
+            "separation_decades": 1.558157541904972,
+            "profile_a_log10": [
+              22.382504639408484,
+              21.182849064332324,
+              21.981391468654692,
+              22.899412964725922,
+              22.06272827225084,
+              21.282770888563228,
+              22.52495868485472,
+              22.556014787230165,
+              22.46907368064885,
+              22.321434521951765,
+              22.701774165875193,
+              21.86063750024055,
+              21.680654085074444,
+              22.791223195398008,
+              21.171512184912622,
+              22.93822373412413
+            ],
+            "profile_b_log10": [
+              22.864661421346934,
+              21.34338413813606,
+              22.557302939118426,
+              21.7447355619339,
+              22.360844406368173,
+              21.752825497027224,
+              21.336981148631516,
+              22.841160734462704,
+              21.2269428633104,
+              22.66568077467737,
+              21.14361662397022,
+              22.991237153297508,
+              21.901073369927413,
+              22.07461580941979,
+              22.702974921296867,
+              21.971616771759226
+            ],
+            "current_a": [
+              0.0028322020237651056,
+              0.018359921442353995,
+              0.12220600759312457,
+              0.8237095938230643,
+              5.5802281847796635,
+              37.86219565913651,
+              256.87487704927867,
+              1740.8766599651278,
+              11770.634741994641,
+              79079.94112989503,
+              517489.08002563496,
+              3012542.619067739,
+              12742837.379960194,
+              36064383.46836535,
+              76053741.2541068,
+              133364723.22336751
+            ],
+            "current_b": [
+              0.0028350687698525784,
+              0.018407830309280053,
+              0.12250682390736198,
+              0.825040733825051,
+              5.581560420192968,
+              37.81166037570832,
+              256.11457768304103,
+              1732.966654172713,
+              11699.887348796554,
+              78502.75613457212,
+              513117.3469284721,
+              2985425.4829005077,
+              12677422.557325255,
+              36110360.44292857,
+              76326327.95866124,
+              133318439.14564162
+            ]
+          },
+          {
+            "observational_distance": 0.010668213378639026,
+            "separation_decades": 1.7340329871048077,
+            "profile_a_log10": [
+              22.353119677497354,
+              22.54303097834114,
+              21.231632152580108,
+              22.42238262425083,
+              22.763967033608008,
+              21.687109816210565,
+              22.19364034485471,
+              22.510392788133267,
+              22.83560393186932,
+              22.363302520756832,
+              21.529125157055063,
+              22.784967496128267,
+              22.973983847077513,
+              21.238465335256905,
+              21.675520059077897,
+              22.195628848858384
+            ],
+            "profile_b_log10": [
+              21.483908523925752,
+              22.866074364964863,
+              22.243229144282566,
+              22.72963103426135,
+              22.300259729422024,
+              21.975158152821177,
+              21.9419287719949,
+              22.37337418565917,
+              21.10157094476451,
+              22.394860517513624,
+              22.381963672446545,
+              22.116739940266925,
+              22.24426370095985,
+              21.958410582463426,
+              22.76873207627692,
+              22.183370996531632
+            ],
+            "current_a": [
+              0.002912353579296535,
+              0.01885808404011054,
+              0.12537170334899658,
+              0.8448622910098116,
+              5.722083450478783,
+              38.808217068400296,
+              263.11724229090026,
+              1781.4510811272253,
+              12028.87161564656,
+              80665.33596873652,
+              526250.7866914641,
+              3039014.8870145543,
+              12548949.310016897,
+              34156770.5732024,
+              69197251.45234676,
+              116980967.06238733
+            ],
+            "current_b": [
+              0.0029360966570598237,
+              0.01872573429866175,
+              0.12405016816055925,
+              0.8358491198137531,
+              5.67121012542756,
+              38.56871998278566,
+              262.3604491136502,
+              1782.95989096572,
+              12086.871737287283,
+              81334.44281454265,
+              530414.6373222361,
+              3031888.7075482244,
+              12470857.9591161,
+              34360344.482476845,
+              69828698.41034229,
+              116086302.93302172
+            ]
+          },
+          {
+            "observational_distance": 0.013081251834781463,
+            "separation_decades": 1.6803002713663453,
+            "profile_a_log10": [
+              22.178480598709328,
+              21.532340862215822,
+              21.967818817543417,
+              22.834774847172913,
+              22.548139212183614,
+              22.535514597697496,
+              21.185132193990007,
+              21.214053701466597,
+              22.54170346985931,
+              21.95711225099952,
+              22.693319311582346,
+              21.750991063815544,
+              22.258388109313064,
+              21.535162474656637,
+              21.802059814545153,
+              21.99655864113704
+            ],
+            "profile_b_log10": [
+              22.36649415873824,
+              21.85406917488064,
+              21.853353155152504,
+              21.702715289266962,
+              22.57688879927168,
+              22.038943635817418,
+              22.865432465356353,
+              21.519349363356678,
+              21.648271819302096,
+              22.550649601340645,
+              21.041256324796464,
+              21.704134749548132,
+              22.981458388018073,
+              21.79427892112072,
+              21.096729873369053,
+              21.89577044199056
+            ],
+            "current_a": [
+              0.003419080610377569,
+              0.021923138486135016,
+              0.1451210255348954,
+              0.9755499067389921,
+              6.600568211936475,
+              44.763885073358594,
+              303.69852017006696,
+              2058.731001706413,
+              13919.259273079537,
+              93241.53119824636,
+              598730.1357245888,
+              3225335.895926857,
+              11708963.670029169,
+              28462260.458838213,
+              53375358.140722275,
+              85521610.68699756
+            ],
+            "current_b": [
+              0.0033743547558698016,
+              0.021759682582643602,
+              0.14437161341264343,
+              0.9709786422640938,
+              6.566584485803087,
+              44.49118488886617,
+              301.48682567797,
+              2041.0293058184188,
+              13781.115496410064,
+              92209.90409627525,
+              591716.0966616338,
+              3189343.740283997,
+              11634821.625957234,
+              28467726.77483863,
+              53576084.434491575,
+              85851251.06514797
+            ]
+          },
+          {
+            "observational_distance": 0.013313573072314188,
+            "separation_decades": 1.4627754832625044,
+            "profile_a_log10": [
+              22.085368357296865,
+              22.551006255238306,
+              22.140963833817246,
+              21.52161469660505,
+              21.49337597982756,
+              22.309555584007168,
+              22.669719044754732,
+              22.11753105185775,
+              22.297269921411424,
+              21.890018307300682,
+              22.261981600261628,
+              22.93509959509006,
+              22.61289465164883,
+              21.016235737430264,
+              22.067308825254717,
+              22.022419910385203
+            ],
+            "profile_b_log10": [
+              22.748727376594672,
+              21.906088810957968,
+              21.999785263591285,
+              22.68208994336405,
+              21.63396495077489,
+              22.591811910312632,
+              21.51852481185403,
+              21.443614987204295,
+              22.534526386785124,
+              21.399000956613897,
+              21.256258148638956,
+              22.07436367129417,
+              22.65482946248389,
+              22.47901122069277,
+              21.318891719816275,
+              21.870201692133836
+            ],
+            "current_a": [
+              0.0037682953133702994,
+              0.02435142288264319,
+              0.16177581248725795,
+              1.0881349244697522,
+              7.355240076000683,
+              49.791588722947886,
+              336.9907130058868,
+              2277.5643061392752,
+              15342.983050486477,
+              102335.0441762518,
+              653960.3314248481,
+              3523167.361571474,
+              13064103.604084935,
+              32789308.33979166,
+              63115036.793954924,
+              102975490.09725063
+            ],
+            "current_b": [
+              0.003741500448235537,
+              0.02407110039276974,
+              0.15964345210857053,
+              1.0736479606402871,
+              7.2619767972604405,
+              49.21026666534187,
+              333.49006870566416,
+              2257.49610672598,
+              15235.88098361196,
+              101789.09917251211,
+              650220.5052030719,
+              3492421.060934168,
+              12963477.373464994,
+              32609998.3516834,
+              62743572.12342908,
+              102027156.12347041
+            ]
+          }
+        ],
+        "closest_far_pair": {
+          "observational_distance": 0.008813702322268633,
+          "separation_decades": 1.1687575066162061,
+          "profile_a_log10": [
+            22.316942126757812,
+            22.42971778553202,
+            22.41645042474277,
+            21.559990897065056,
+            22.895134047185362,
+            21.97722728099774,
+            22.42037015985937,
+            22.39912787466315,
+            22.802793964605268,
+            22.24881533682433,
+            22.367732265833038,
+            21.368272692160488,
+            21.866968968963562,
+            22.436535662293288,
+            21.558252946330683,
+            21.461280713326175
+          ],
+          "profile_b_log10": [
+            22.058081310290554,
+            21.70065110895353,
+            22.93251321626308,
+            22.43927173154283,
+            22.666051457567495,
+            21.88533016919074,
+            22.4124257224229,
+            21.230370368046945,
+            22.47871936844012,
+            22.299984394162596,
+            21.965957638879175,
+            21.477303745974172,
+            21.97408568946593,
+            22.609305791624553,
+            21.452313387799474,
+            21.41929399099372
+          ],
+          "current_a": [
+            0.0032052249720809804,
+            0.020838753871878116,
+            0.13866988038542152,
+            0.9325266905352858,
+            6.297162712989609,
+            42.56958854327279,
+            287.66667499740055,
+            1941.295597418078,
+            13063.111784492598,
+            87150.09238992639,
+            559571.6812491079,
+            3045092.8191450876,
+            11175844.859178357,
+            26890041.622516155,
+            48747321.35341555,
+            74174933.65357421
+          ],
+          "current_b": [
+            0.00322491875511075,
+            0.02074146843881834,
+            0.13749344122908116,
+            0.9243076778773375,
+            6.249000800177182,
+            42.324524239171275,
+            286.65985440163917,
+            1939.240486365041,
+            13080.663632794789,
+            87408.37543256012,
+            560197.2860538855,
+            3026327.2227911204,
+            11110403.84303037,
+            26885509.96557384,
+            48769855.73503886,
+            73920543.62442668
+          ]
+        },
+        "closest_any_pair": {
+          "observational_distance": 0.008813702322268633,
+          "separation_decades": 1.1687575066162061,
+          "profile_a_log10": [
+            22.316942126757812,
+            22.42971778553202,
+            22.41645042474277,
+            21.559990897065056,
+            22.895134047185362,
+            21.97722728099774,
+            22.42037015985937,
+            22.39912787466315,
+            22.802793964605268,
+            22.24881533682433,
+            22.367732265833038,
+            21.368272692160488,
+            21.866968968963562,
+            22.436535662293288,
+            21.558252946330683,
+            21.461280713326175
+          ],
+          "profile_b_log10": [
+            22.058081310290554,
+            21.70065110895353,
+            22.93251321626308,
+            22.43927173154283,
+            22.666051457567495,
+            21.88533016919074,
+            22.4124257224229,
+            21.230370368046945,
+            22.47871936844012,
+            22.299984394162596,
+            21.965957638879175,
+            21.477303745974172,
+            21.97408568946593,
+            22.609305791624553,
+            21.452313387799474,
+            21.41929399099372
+          ],
+          "current_a": [
+            0.0032052249720809804,
+            0.020838753871878116,
+            0.13866988038542152,
+            0.9325266905352858,
+            6.297162712989609,
+            42.56958854327279,
+            287.66667499740055,
+            1941.295597418078,
+            13063.111784492598,
+            87150.09238992639,
+            559571.6812491079,
+            3045092.8191450876,
+            11175844.859178357,
+            26890041.622516155,
+            48747321.35341555,
+            74174933.65357421
+          ],
+          "current_b": [
+            0.00322491875511075,
+            0.02074146843881834,
+            0.13749344122908116,
+            0.9243076778773375,
+            6.249000800177182,
+            42.324524239171275,
+            286.65985440163917,
+            1939.240486365041,
+            13080.663632794789,
+            87408.37543256012,
+            560197.2860538855,
+            3026327.2227911204,
+            11110403.84303037,
+            26885509.96557384,
+            48769855.73503886,
+            73920543.62442668
+          ]
+        },
+        "verdict": "37 witness pair(s) found",
+        "wall_clock_s": 445.44406910000544,
+        "budget": {
+          "n_samples": 1200,
+          "n_pairs_examined": 719400
+        }
+      },
+      "seeded_refinement": {
+        "budget_evals_per_seed": 400,
+        "n_seeds": 3,
+        "results": [
+          {
+            "seed_from_g6_witness": 0,
+            "n_evaluations": 400,
+            "maxfev_budget": 400,
+            "observational_distance": 0.0028371094912167595,
+            "separation_decades": 0.6004761663348361,
+            "oracle_trustworthy": true,
+            "oracle_converged": true,
+            "is_witness": true,
+            "theta_a": [
+              22.052217524872795,
+              22.027523407037616,
+              22.002700740181616,
+              21.978385783083265,
+              21.952157346276998,
+              21.933116085314914,
+              21.80844679725422,
+              21.828677950696058,
+              21.69526154526886,
+              21.526774118605857,
+              21.444625365873925,
+              21.64782912293596,
+              21.86403953938002,
+              22.076980711674736,
+              22.290559531083794,
+              22.504742401693196
+            ],
+            "theta_b": [
+              22.584374445674527,
+              22.26342649931415,
+              21.941920973642517,
+              21.616900292537537,
+              21.35916665404484,
+              21.426793286859024,
+              21.57524827119449,
+              21.273172194051362,
+              21.73372889763334,
+              21.89168960142699,
+              22.04510153220876,
+              22.08463922956892,
+              22.101994517857413,
+              22.011433733747864,
+              22.041974440419118,
+              22.018313296076883
+            ]
+          },
+          {
+            "seed_from_g6_witness": 1,
+            "n_evaluations": 400,
+            "maxfev_budget": 400,
+            "observational_distance": 0.0021988585561120867,
+            "separation_decades": 0.3695363206001048,
+            "oracle_trustworthy": true,
+            "oracle_converged": true,
+            "is_witness": true,
+            "theta_a": [
+              22.699054412290028,
+              22.687591068276973,
+              22.676153858017166,
+              22.664638534979204,
+              22.653402961842758,
+              22.641139130625103,
+              22.55428834336535,
+              22.470863329048132,
+              22.590148486563173,
+              22.265938909451393,
+              22.22083362962801,
+              22.11996856993548,
+              22.032425660568677,
+              21.941380547371253,
+              21.851209893759613,
+              21.761001609544433
+            ],
+            "theta_b": [
+              22.724581375798927,
+              22.318054747676868,
+              22.480060792595054,
+              22.48423880347371,
+              22.54302247812568,
+              22.774084833649933,
+              22.744284304764626,
+              22.757683896232738,
+              22.60033417984012,
+              22.309593910673712,
+              22.073332752642898,
+              22.18998545381073,
+              22.07038135330192,
+              22.153270995136936,
+              22.1176445707168,
+              21.706223679032124
+            ]
+          },
+          {
+            "seed_from_g6_witness": 2,
+            "n_evaluations": 400,
+            "maxfev_budget": 400,
+            "observational_distance": 0.002215275976570765,
+            "separation_decades": 0.45314326746906985,
+            "oracle_trustworthy": true,
+            "oracle_converged": true,
+            "is_witness": true,
+            "theta_a": [
+              22.326797603695162,
+              22.206755955487232,
+              22.086729505533352,
+              21.967660741348656,
+              21.84467734062093,
+              21.73667931475004,
+              21.68979254719245,
+              21.84900770249768,
+              21.722942578040325,
+              21.67490352938084,
+              21.670944423550704,
+              21.790849896787947,
+              21.916752215927527,
+              22.04110252503641,
+              22.165782287066666,
+              22.290669553564232
+            ],
+            "theta_b": [
+              22.155252202043005,
+              22.06344183483497,
+              21.973760633676616,
+              21.97655592450556,
+              21.960487975448245,
+              21.922211306768073,
+              21.811525092982315,
+              21.913852539037634,
+              21.61086350637725,
+              21.711864948541834,
+              21.217801156081634,
+              21.58247328707069,
+              21.76299640415493,
+              22.080641181140116,
+              22.271848965790777,
+              22.575410924338552
+            ]
+          }
+        ],
+        "n_witnesses": 3
+      },
+      "verdict": "chart L is globally non-identifiable too at d=16: 37 witness(es) from prior sampling (n=1200), 3 from seeded refinement."
+    }
+  },
+  "artifacts": {
+    "containment": "outputs\\chart_reconciliation_g7\\containment.json",
+    "representation": "outputs\\chart_reconciliation_g7\\representation.json",
+    "spectra": "outputs\\chart_reconciliation_g7\\spectra.json",
+    "profile": "outputs\\chart_reconciliation_g7\\profile.json",
+    "native_witness": "outputs\\chart_reconciliation_g7\\native_witness.json"
+  },
+  "notes": "G7-R chart reconciliation. Oracle-arbitrated; surrogate never called."
+}

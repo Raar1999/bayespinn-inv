@@ -38,7 +38,6 @@ from typing import Optional, Tuple
 import torch
 import torch.nn as nn
 
-
 # ============================================================================
 # Fourier-feature embedding
 # ============================================================================
@@ -129,8 +128,20 @@ class SemiconductorPINN(nn.Module):
     def __init__(self, cfg: PINNConfig, doping_encoder: bool = False):
         super().__init__()
         self.cfg = cfg
-        if cfg.seed is not None:
-            torch.manual_seed(cfg.seed)
+        # AUDIT_MASTER API-03 (same hazard as IVSurrogate): seeding the global
+        # RNG inside a constructor means merely *building* a model silently
+        # changes every downstream random draw for the caller. Seed for
+        # reproducible weights, then restore the global state so construction
+        # has no observable side effect. Weights are bit-identical to before.
+        _rng_state = torch.get_rng_state()
+        try:
+            if cfg.seed is not None:
+                torch.manual_seed(cfg.seed)
+            self._build(cfg, doping_encoder)
+        finally:
+            torch.set_rng_state(_rng_state)
+
+    def _build(self, cfg: PINNConfig, doping_encoder: bool) -> None:
 
         # Coordinate embedding (Fourier on x and V_a)
         self.embed = FourierEmbedding(cfg.in_dim, cfg.fourier_features,

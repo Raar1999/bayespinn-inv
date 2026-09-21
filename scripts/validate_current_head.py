@@ -10,19 +10,24 @@ If held-out I-V tracks SG across 13 orders of magnitude, the surrogate
 reframe is proven: inverse design / UQ / AL / calibration all work on top.
 """
 from __future__ import annotations
+
+import sys
 import time
+from pathlib import Path
+
 import numpy as np
 import torch
 import torch.nn as nn
 
-import sys
-from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
+from bayespinn_inv.inverse.charts import anchor_signed_to_grid
 from bayespinn_inv.physics.constants import SILICON
 from bayespinn_inv.physics.scaling import Scaling
 from bayespinn_inv.solvers.scharfetter_gummel import (
-    ScharfetterGummel1D, Grid1D, SGConfig,
+    Grid1D,
+    ScharfetterGummel1D,
+    SGConfig,
 )
 
 torch.manual_seed(0); np.random.seed(0)
@@ -53,9 +58,10 @@ def build_xy(levels):
     for L in levels:
         C = step_profile(L, L)
         latent = scaling.doping_to_net_input(C)   # (N_ANCHOR,)
+        C_grid = anchor_signed_to_grid(C, sg.grid.N)   # CHART-01: chart L
         prev = None
         for V in biases:
-            st = sg.solve(C, float(V), initial_state=prev); prev = st
+            st = sg.solve(C_grid, float(V), initial_state=prev); prev = st
             X.append(np.concatenate([latent, [V / scaling.V_T]]))
             Y.append(symlog_np(st.terminal_current))
     return np.array(X, dtype=np.float32), np.array(Y, dtype=np.float32)

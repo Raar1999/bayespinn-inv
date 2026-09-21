@@ -26,23 +26,30 @@ References
 ----------
 - Chen et al., "Physics-informed neural networks for inverse problems
   in nano-optics and metamaterials," Opt. Express 28, 11618 (2020).
-- Beucler et al., "Constraining neural networks for the inverse design of
-  semiconductor devices," (2022) — provides the TV+positivity scheme used
-  here.
+- Rudin, Osher & Fatemi, "Nonlinear total variation based noise removal
+  algorithms," Physica D 60, 259 (1992) — origin of the TV regularizer used
+  here for piecewise-constant profile recovery.
+- Burger, Engl, Leitao & Markowich, "Identification of doping profiles in
+  semiconductor devices," Inverse Problems 17, 1765 (2001) — the canonical
+  formulation of this inverse problem, its ill-posedness, and the use of
+  regularization for it. See docs/NOVELTY_AUDIT.md.
+
+Note: a previous version of this docstring cited "Beucler et al.,
+'Constraining neural networks for the inverse design of semiconductor
+devices' (2022)" as the source of the TV+positivity scheme. That reference
+could not be verified and has been removed (docs/AUDIT_MASTER.md CITE-01).
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Callable, Dict, List, Optional, Sequence, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Optional
 
 import numpy as np
 import torch
 import torch.nn as nn
 
 from ..pinn.forward_pinn import ForwardPINN
-from ..physics.scaling import Scaling
-
 
 # ============================================================================
 # Regularizers (all act on doping in SI units)
@@ -411,12 +418,12 @@ class InverseDesigner:
 __all__ = [
     "DopingParameterization",
     "FreePointwiseDoping",
-    "StepJunctionDoping",
     "GradedJunctionDoping",
     "InverseConfig",
-    "InverseResult",
     "InverseDesigner",
-    "total_variation",
+    "InverseResult",
+    "StepJunctionDoping",
     "smoothness_penalty",
     "solubility_penalty",
+    "total_variation",
 ]

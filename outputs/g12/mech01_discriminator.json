@@ -1,0 +1,290 @@
+{
+  "what_this_is": "a DESCRIPTION of what separates the width axis from the control axis, written after the pre-registered SIGN test failed to separate them. Not pre-registered, and AH-14 applies in full",
+  "why_the_sign_verdict_is_void": "run_mech01_rows.py pre-registered NEW_ROWS iff the trailing directions sit further outside the core window than the head, at every width. That is true at 16 of 16 width cells -- and also at 16 of 18 cells of the SPACING axis, where SPEC-g9-2 measured the rank as fixed. A discriminator that fires on the axis where nothing happens is not discriminating",
+  "new_solves": 0,
+  "devices": {
+    "g8_operating_point": {
+      "width": {
+        "n": 9,
+        "max_gap": 0.2715129080366789,
+        "min_gap": 0.05448182233583073,
+        "at_max_width_V": 0.15,
+        "range": 0.21703108570084814
+      },
+      "spacing_excluding_the_shared_cell": {
+        "n": 8,
+        "max_gap": 0.07856939678017513,
+        "min_gap": -0.021782957478063504,
+        "range": 0.10035235425823863
+      },
+      "max_ratio_width_over_spacing": 3.4557081912736263,
+      "width_max_exceeds_every_spacing_cell": true,
+      "shared_cell_control": {
+        "alpha_0_equals_width_0_75": true,
+        "width_0_75_gap": 0.05448182233583073,
+        "alpha_0_gap": 0.05448182233583073,
+        "why": "generation 9's C4: alpha=0 and width=0.75 are one observation set reached by two code paths. They must agree exactly, and it is a free reproduction control on this statistic"
+      },
+      "width_curve": [
+        {
+          "param": 0.1,
+          "gap": 0.0920931814840818,
+          "n_rows": 16,
+          "n_outside_core": 1
+        },
+        {
+          "param": 0.15,
+          "gap": 0.2715129080366789,
+          "n_rows": 16,
+          "n_outside_core": 6
+        },
+        {
+          "param": 0.2,
+          "gap": 0.26162685033134825,
+          "n_rows": 16,
+          "n_outside_core": 8
+        },
+        {
+          "param": 0.3,
+          "gap": 0.17880253589050502,
+          "n_rows": 16,
+          "n_outside_core": 11
+        },
+        {
+          "param": 0.4,
+          "gap": 0.17402963364084498,
+          "n_rows": 16,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.5,
+          "gap": 0.09161231225987376,
+          "n_rows": 16,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.6,
+          "gap": 0.062230693462029626,
+          "n_rows": 16,
+          "n_outside_core": 14
+        },
+        {
+          "param": 0.7,
+          "gap": 0.06358691728451205,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.75,
+          "gap": 0.05448182233583073,
+          "n_rows": 15,
+          "n_outside_core": 13
+        }
+      ],
+      "spacing_curve": [
+        {
+          "param": 0.0,
+          "gap": 0.05448182233583073,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.125,
+          "gap": 0.07856939678017513,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.25,
+          "gap": 0.04815259963671581,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.375,
+          "gap": 0.06739854189711585,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.5,
+          "gap": -0.007319520864562334,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.625,
+          "gap": 0.023217880432981786,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.75,
+          "gap": 0.04076490746565668,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.875,
+          "gap": 0.003797867148845298,
+          "n_rows": 14,
+          "n_outside_core": 13
+        },
+        {
+          "param": 1.0,
+          "gap": -0.021782957478063504,
+          "n_rows": 14,
+          "n_outside_core": 12
+        }
+      ]
+    },
+    "device_p50": {
+      "width": {
+        "n": 9,
+        "max_gap": 0.2756422491620346,
+        "min_gap": 0.07079323926475847,
+        "at_max_width_V": 0.15,
+        "range": 0.20484900989727614
+      },
+      "spacing_excluding_the_shared_cell": {
+        "n": 8,
+        "max_gap": 0.08962468644237243,
+        "min_gap": 0.013994844968567918,
+        "range": 0.07562984147380451
+      },
+      "max_ratio_width_over_spacing": 3.0755170266539142,
+      "width_max_exceeds_every_spacing_cell": true,
+      "shared_cell_control": {
+        "alpha_0_equals_width_0_75": true,
+        "width_0_75_gap": 0.07079323926475847,
+        "alpha_0_gap": 0.07079323926475847,
+        "why": "generation 9's C4: alpha=0 and width=0.75 are one observation set reached by two code paths. They must agree exactly, and it is a free reproduction control on this statistic"
+      },
+      "width_curve": [
+        {
+          "param": 0.1,
+          "gap": 0.08175625361594985,
+          "n_rows": 16,
+          "n_outside_core": 1
+        },
+        {
+          "param": 0.15,
+          "gap": 0.2756422491620346,
+          "n_rows": 16,
+          "n_outside_core": 6
+        },
+        {
+          "param": 0.2,
+          "gap": 0.26066482677480474,
+          "n_rows": 16,
+          "n_outside_core": 8
+        },
+        {
+          "param": 0.3,
+          "gap": 0.17318943143980883,
+          "n_rows": 16,
+          "n_outside_core": 11
+        },
+        {
+          "param": 0.4,
+          "gap": 0.17145209552441568,
+          "n_rows": 16,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.5,
+          "gap": 0.09544800636408275,
+          "n_rows": 16,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.6,
+          "gap": 0.07145940118503877,
+          "n_rows": 16,
+          "n_outside_core": 14
+        },
+        {
+          "param": 0.7,
+          "gap": 0.07997920956620405,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.75,
+          "gap": 0.07079323926475847,
+          "n_rows": 15,
+          "n_outside_core": 13
+        }
+      ],
+      "spacing_curve": [
+        {
+          "param": 0.0,
+          "gap": 0.07079323926475847,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.125,
+          "gap": 0.08962468644237243,
+          "n_rows": 15,
+          "n_outside_core": 13
+        },
+        {
+          "param": 0.25,
+          "gap": 0.06345391141947995,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.375,
+          "gap": 0.0821334022896546,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.5,
+          "gap": 0.02272320065876976,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.625,
+          "gap": 0.037608179641271985,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.75,
+          "gap": 0.053403416422912166,
+          "n_rows": 14,
+          "n_outside_core": 12
+        },
+        {
+          "param": 0.875,
+          "gap": 0.013994844968567918,
+          "n_rows": 14,
+          "n_outside_core": 13
+        },
+        {
+          "param": 1.0,
+          "gap": 0.015509394321136294,
+          "n_rows": 13,
+          "n_outside_core": 11
+        }
+      ]
+    }
+  },
+  "reading": {
+    "width_max_exceeds_every_spacing_cell_at_both_devices": true,
+    "ratio_range": [
+      3.0755170266539142,
+      3.4557081912736263
+    ],
+    "peak_width_V": [
+      0.15
+    ],
+    "what_it_suggests": "the concentration of the trailing directions on rows outside the core is a general property of these Jacobians -- it is present on both axes -- but it is LARGER on the width axis, and largest at the narrow-to-mid windows where the rank is actually climbing rather than at the widest windows where it has saturated at four",
+    "what_it_does_not_establish": "that the width effect is real as a TEST. Nine points per axis, no pre-registered threshold, and a threshold chosen now would be tuned (PH-11). MECH-01 stays open"
+  },
+  "consequence_for_U_EMPIR": "the row-side method is INCONCLUSIVE as pre-registered, which is not the same as failed: the hypothesis was not falsified, the discriminator was too blunt. A sharpened version -- the magnitude statistic, pre-registered, with the spacing axis as the null -- is the SAME method with a better statistic, not a third distinct one. U-EMPIR still stands at one falsified method (generation 10's column side)"
+}

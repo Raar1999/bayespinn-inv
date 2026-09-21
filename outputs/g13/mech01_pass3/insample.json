@@ -1,0 +1,371 @@
+{
+  "devices": {
+    "g8_operating_point": {
+      "width": [
+        {
+          "param": 0.1,
+          "n_rows": 16,
+          "n_out": 1,
+          "b": 0.0625,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 0.15,
+          "n_rows": 16,
+          "n_out": 6,
+          "b": 0.375,
+          "admissible": true,
+          "dz": 1.682503953770245
+        },
+        {
+          "param": 0.2,
+          "n_rows": 16,
+          "n_out": 8,
+          "b": 0.5,
+          "admissible": true,
+          "dz": 1.5697611019880897
+        },
+        {
+          "param": 0.3,
+          "n_rows": 16,
+          "n_out": 11,
+          "b": 0.6875,
+          "admissible": true,
+          "dz": 1.157266993012391
+        },
+        {
+          "param": 0.4,
+          "n_rows": 16,
+          "n_out": 12,
+          "b": 0.75,
+          "admissible": true,
+          "dz": 1.2057126699541656
+        },
+        {
+          "param": 0.5,
+          "n_rows": 16,
+          "n_out": 13,
+          "b": 0.8125,
+          "admissible": true,
+          "dz": 0.7041461005434594
+        },
+        {
+          "param": 0.6,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": 0.564503790224995
+        },
+        {
+          "param": 0.7,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 0.5453581637201604
+        },
+        {
+          "param": 0.75,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 0.467267605571338
+        }
+      ],
+      "spacing": [
+        {
+          "param": 0.125,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 0.6738565695977473
+        },
+        {
+          "param": 0.25,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.389212829074134
+        },
+        {
+          "param": 0.375,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.5447759283020331
+        },
+        {
+          "param": 0.5,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": -0.06277644252116305
+        },
+        {
+          "param": 0.625,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.187667893251924
+        },
+        {
+          "param": 0.75,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.3294988241830189
+        },
+        {
+          "param": 0.875,
+          "n_rows": 14,
+          "n_out": 13,
+          "b": 0.9285714285714286,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 1.0,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": -0.1760695490918859
+        }
+      ],
+      "test": {
+        "n_width_admissible": 8,
+        "n_spacing_admissible": 7,
+        "width_dz": [
+          1.682503953770245,
+          1.5697611019880897,
+          1.157266993012391,
+          1.2057126699541656,
+          0.7041461005434594,
+          0.564503790224995,
+          0.5453581637201604,
+          0.467267605571338
+        ],
+        "spacing_dz": [
+          0.6738565695977473,
+          0.389212829074134,
+          0.5447759283020331,
+          -0.06277644252116305,
+          0.187667893251924,
+          0.3294988241830189,
+          -0.1760695490918859
+        ],
+        "width_median": 0.9307065467779252,
+        "spacing_median": 0.3294988241830189,
+        "b_overlap": {
+          "width_b_range": [
+            0.375,
+            0.875
+          ],
+          "spacing_b_range": [
+            0.8571428571428571,
+            0.8666666666666667
+          ]
+        },
+        "test_ran": true,
+        "u_statistic": 52.0,
+        "p_value": 0.0018648018648018648,
+        "alpha": 0.05,
+        "clears_alpha": true
+      }
+    },
+    "device_p50": {
+      "width": [
+        {
+          "param": 0.1,
+          "n_rows": 16,
+          "n_out": 1,
+          "b": 0.0625,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 0.15,
+          "n_rows": 16,
+          "n_out": 6,
+          "b": 0.375,
+          "admissible": true,
+          "dz": 1.7080925448251447
+        },
+        {
+          "param": 0.2,
+          "n_rows": 16,
+          "n_out": 8,
+          "b": 0.5,
+          "admissible": true,
+          "dz": 1.5639889606488282
+        },
+        {
+          "param": 0.3,
+          "n_rows": 16,
+          "n_out": 11,
+          "b": 0.6875,
+          "admissible": true,
+          "dz": 1.1209371922253397
+        },
+        {
+          "param": 0.4,
+          "n_rows": 16,
+          "n_out": 12,
+          "b": 0.75,
+          "admissible": true,
+          "dz": 1.1878549620497618
+        },
+        {
+          "param": 0.5,
+          "n_rows": 16,
+          "n_out": 13,
+          "b": 0.8125,
+          "admissible": true,
+          "dz": 0.7336278260859255
+        },
+        {
+          "param": 0.6,
+          "n_rows": 16,
+          "n_out": 14,
+          "b": 0.875,
+          "admissible": true,
+          "dz": 0.6482187578509948
+        },
+        {
+          "param": 0.7,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 0.6859479390965673
+        },
+        {
+          "param": 0.75,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 0.6071637471665006
+        }
+      ],
+      "spacing": [
+        {
+          "param": 0.125,
+          "n_rows": 15,
+          "n_out": 13,
+          "b": 0.8666666666666667,
+          "admissible": true,
+          "dz": 0.7686731250629848
+        },
+        {
+          "param": 0.25,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.5128918597483997
+        },
+        {
+          "param": 0.375,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.6638763868994866
+        },
+        {
+          "param": 0.5,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.18366944424066842
+        },
+        {
+          "param": 0.625,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.30398329695468246
+        },
+        {
+          "param": 0.75,
+          "n_rows": 14,
+          "n_out": 12,
+          "b": 0.8571428571428571,
+          "admissible": true,
+          "dz": 0.4316546758637962
+        },
+        {
+          "param": 0.875,
+          "n_rows": 14,
+          "n_out": 13,
+          "b": 0.9285714285714286,
+          "admissible": false,
+          "dz": null
+        },
+        {
+          "param": 1.0,
+          "n_rows": 13,
+          "n_out": 11,
+          "b": 0.8461538461538461,
+          "admissible": true,
+          "dz": 0.11772195925999593
+        }
+      ],
+      "test": {
+        "n_width_admissible": 8,
+        "n_spacing_admissible": 7,
+        "width_dz": [
+          1.7080925448251447,
+          1.5639889606488282,
+          1.1209371922253397,
+          1.1878549620497618,
+          0.7336278260859255,
+          0.6482187578509948,
+          0.6859479390965673,
+          0.6071637471665006
+        ],
+        "spacing_dz": [
+          0.7686731250629848,
+          0.5128918597483997,
+          0.6638763868994866,
+          0.18366944424066842,
+          0.30398329695468246,
+          0.4316546758637962,
+          0.11772195925999593
+        ],
+        "width_median": 0.9272825091556326,
+        "spacing_median": 0.4316546758637962,
+        "b_overlap": {
+          "width_b_range": [
+            0.375,
+            0.875
+          ],
+          "spacing_b_range": [
+            0.8461538461538461,
+            0.8666666666666667
+          ]
+        },
+        "test_ran": true,
+        "u_statistic": 50.0,
+        "p_value": 0.004662004662004662,
+        "alpha": 0.05,
+        "clears_alpha": true
+      }
+    }
+  },
+  "new_solves": 0,
+  "is_evidence": false,
+  "why_not_evidence": "AH-06. The statistic was chosen after seeing these cells. Reported so that the out-of-sample result can be read against it, and for no other purpose"
+}

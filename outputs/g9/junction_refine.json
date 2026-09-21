@@ -1,0 +1,1114 @@
+{
+  "records": [
+    {
+      "pair_index": 0,
+      "member_indices": [
+        571,
+        914
+      ],
+      "g8_observational_distance": 0.0151656697595081,
+      "separation_magnitudes_only": 1.6088760231687687,
+      "junction_separation_nm": 26.558347681668327,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.0151656697595081,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.839223828331414e-07,
+          "junction_x_si_b": 4.573640351514731e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.0151656697595081,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.839223828331414e-07,
+          "junction_x_si_b": 4.573640351514731e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014710583080772194,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.839223828331414e-07,
+          "junction_x_si_b": 4.573640351514731e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014710583080772194,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.839223828331414e-07,
+          "junction_x_si_b": 4.573640351514731e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014038651822670839,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.839223828331414e-07,
+          "junction_x_si_b": 4.573640351514731e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014038651822670839,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.839223828331414e-07,
+          "junction_x_si_b": 4.573640351514731e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.0151656697595081,
+      "distance_at_1201_tight": 0.014038651822670839,
+      "distance_rose": false,
+      "relative_change": -0.07431375961029871,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 1,
+      "member_indices": [
+        721,
+        1125
+      ],
+      "g8_observational_distance": 0.015714091453734966,
+      "separation_magnitudes_only": 1.3871142992736054,
+      "junction_separation_nm": 41.718350266903286,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015714091453734966,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.697450501782308e-07,
+          "junction_x_si_b": 6.114634004451341e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015714091453734966,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.697450501782308e-07,
+          "junction_x_si_b": 6.114634004451341e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.015721886212974642,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.697450501782308e-07,
+          "junction_x_si_b": 6.114634004451341e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.015721886212974642,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.697450501782308e-07,
+          "junction_x_si_b": 6.114634004451341e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.014439568365426822,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.697450501782308e-07,
+          "junction_x_si_b": 6.114634004451341e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.014439568365426822,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.697450501782308e-07,
+          "junction_x_si_b": 6.114634004451341e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.015714091453734966,
+      "distance_at_1201_tight": 0.014439568365426822,
+      "distance_rose": false,
+      "relative_change": -0.08110701735830941,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 2,
+      "member_indices": [
+        311,
+        1124
+      ],
+      "g8_observational_distance": 0.016144424996701157,
+      "separation_magnitudes_only": 1.4625588236169271,
+      "junction_separation_nm": 178.35899509936266,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016144424996701157,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.350048796723418e-07,
+          "junction_x_si_b": 6.133638747717045e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016144425326777657,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.350048796723418e-07,
+          "junction_x_si_b": 6.133638747717045e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016208960390478176,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.350048796723418e-07,
+          "junction_x_si_b": 6.133638747717045e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01620896074925102,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.350048796723418e-07,
+          "junction_x_si_b": 6.133638747717045e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.016379775681613258,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.350048796723418e-07,
+          "junction_x_si_b": 6.133638747717045e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.016379776052083753,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.350048796723418e-07,
+          "junction_x_si_b": 6.133638747717045e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.016144424996701157,
+      "distance_at_1201_tight": 0.016379776052083753,
+      "distance_rose": true,
+      "relative_change": 0.014577853062632215,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 3,
+      "member_indices": [
+        299,
+        612
+      ],
+      "g8_observational_distance": 0.017551083352229286,
+      "separation_magnitudes_only": 1.1026651833988126,
+      "junction_separation_nm": 422.88971758695254,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017551083352229286,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.942688150356631e-07,
+          "junction_x_si_b": 2.7137909744871056e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017551084077486217,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.942688150356631e-07,
+          "junction_x_si_b": 2.7137909744871056e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017147793773503464,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.942688150356631e-07,
+          "junction_x_si_b": 2.7137909744871056e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017147793773503464,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.942688150356631e-07,
+          "junction_x_si_b": 2.7137909744871056e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017246734568980845,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.942688150356631e-07,
+          "junction_x_si_b": 2.7137909744871056e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017246735292666602,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.942688150356631e-07,
+          "junction_x_si_b": 2.7137909744871056e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.017551083352229286,
+      "distance_at_1201_tight": 0.017246735292666602,
+      "distance_rose": false,
+      "relative_change": -0.017340699343441197,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 4,
+      "member_indices": [
+        561,
+        985
+      ],
+      "g8_observational_distance": 0.01761871144428258,
+      "separation_magnitudes_only": 1.440829467728367,
+      "junction_separation_nm": 63.17338378298158,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01761871144428258,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.37250065379103e-07,
+          "junction_x_si_b": 6.740766815961214e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01761871187258709,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.37250065379103e-07,
+          "junction_x_si_b": 6.740766815961214e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01745534689557682,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.37250065379103e-07,
+          "junction_x_si_b": 6.740766815961214e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017455347440560754,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.37250065379103e-07,
+          "junction_x_si_b": 6.740766815961214e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017471444364312857,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.37250065379103e-07,
+          "junction_x_si_b": 6.740766815961214e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017471444862960005,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.37250065379103e-07,
+          "junction_x_si_b": 6.740766815961214e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.01761871144428258,
+      "distance_at_1201_tight": 0.017471444862960005,
+      "distance_rose": false,
+      "relative_change": -0.00835853301691743,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 5,
+      "member_indices": [
+        23,
+        553
+      ],
+      "g8_observational_distance": 0.017874004096620835,
+      "separation_magnitudes_only": 1.6507009567594402,
+      "junction_separation_nm": 249.4901633517027,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.017874004096620835,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.8831370694455e-07,
+          "junction_x_si_b": 3.3882354359284736e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.017874004096620835,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.8831370694455e-07,
+          "junction_x_si_b": 3.3882354359284736e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019866843379223238,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.8831370694455e-07,
+          "junction_x_si_b": 3.3882354359284736e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01986684340993443,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.8831370694455e-07,
+          "junction_x_si_b": 3.3882354359284736e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018725300839132118,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.8831370694455e-07,
+          "junction_x_si_b": 3.3882354359284736e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018725300990745923,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.8831370694455e-07,
+          "junction_x_si_b": 3.3882354359284736e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.017874004096620835,
+      "distance_at_1201_tight": 0.018725300990745923,
+      "distance_rose": true,
+      "relative_change": 0.047627654638729186,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 6,
+      "member_indices": [
+        493,
+        597
+      ],
+      "g8_observational_distance": 0.018435757956950953,
+      "separation_magnitudes_only": 1.5702700417014803,
+      "junction_separation_nm": 177.09747740080266,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018435757956950953,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.674050434011105e-07,
+          "junction_x_si_b": 3.903075660003078e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018435757956950953,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.674050434011105e-07,
+          "junction_x_si_b": 3.903075660003078e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019139368369043456,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.674050434011105e-07,
+          "junction_x_si_b": 3.903075660003078e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019139368369043456,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.674050434011105e-07,
+          "junction_x_si_b": 3.903075660003078e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019469009322205452,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.674050434011105e-07,
+          "junction_x_si_b": 3.903075660003078e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01946900751109599,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 5.674050434011105e-07,
+          "junction_x_si_b": 3.903075660003078e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.018435757956950953,
+      "distance_at_1201_tight": 0.01946900751109599,
+      "distance_rose": true,
+      "relative_change": 0.05604594921227324,
+      "survives_refinement": true
+    },
+    {
+      "pair_index": 7,
+      "member_indices": [
+        1027,
+        1066
+      ],
+      "g8_observational_distance": 0.018732864120271663,
+      "separation_magnitudes_only": 1.5767847509775166,
+      "junction_separation_nm": 412.18361463733487,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.018732864120271663,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 2.679319314987683e-07,
+          "junction_x_si_b": 6.801155461361032e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01873286411165795,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 2.679319314987683e-07,
+          "junction_x_si_b": 6.801155461361032e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.022335149514527402,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 2.679319314987683e-07,
+          "junction_x_si_b": 6.801155461361032e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.022335149514527402,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 2.679319314987683e-07,
+          "junction_x_si_b": 6.801155461361032e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01930686492370271,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 2.679319314987683e-07,
+          "junction_x_si_b": 6.801155461361032e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01930686492370271,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 2.679319314987683e-07,
+          "junction_x_si_b": 6.801155461361032e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.018732864120271663,
+      "distance_at_1201_tight": 0.01930686492370271,
+      "distance_rose": true,
+      "relative_change": 0.030641379756227306,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 8,
+      "member_indices": [
+        36,
+        595
+      ],
+      "g8_observational_distance": 0.01878533528897962,
+      "separation_magnitudes_only": 1.3261755786836247,
+      "junction_separation_nm": 0.42490988528915685,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01878533528897962,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.915012152990735e-07,
+          "junction_x_si_b": 4.910763054137843e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.018788553622225323,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.915012152990735e-07,
+          "junction_x_si_b": 4.910763054137843e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.024312675216923933,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.915012152990735e-07,
+          "junction_x_si_b": 4.910763054137843e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.024312675216923933,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.915012152990735e-07,
+          "junction_x_si_b": 4.910763054137843e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.055498238916716194,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.915012152990735e-07,
+          "junction_x_si_b": 4.910763054137843e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.055498238916716194,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 4.915012152990735e-07,
+          "junction_x_si_b": 4.910763054137843e-07,
+          "below_floor": false
+        }
+      ],
+      "distance_at_301_default": 0.01878533528897962,
+      "distance_at_1201_tight": 0.055498238916716194,
+      "distance_rose": true,
+      "relative_change": 1.9543384806804127,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 9,
+      "member_indices": [
+        557,
+        1092
+      ],
+      "g8_observational_distance": 0.019120244503201586,
+      "separation_magnitudes_only": 1.0969044488084343,
+      "junction_separation_nm": 9.034258223146763,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019120244503201586,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 3.62389037391265e-07,
+          "junction_x_si_b": 3.714232956144118e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019120244503201586,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 3.62389037391265e-07,
+          "junction_x_si_b": 3.714232956144118e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.030076529969485694,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 3.62389037391265e-07,
+          "junction_x_si_b": 3.714232956144118e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.030076529969485694,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 3.62389037391265e-07,
+          "junction_x_si_b": 3.714232956144118e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.02463138017966839,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 3.62389037391265e-07,
+          "junction_x_si_b": 3.714232956144118e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.02463138017966839,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 3.62389037391265e-07,
+          "junction_x_si_b": 3.714232956144118e-07,
+          "below_floor": false
+        }
+      ],
+      "distance_at_301_default": 0.019120244503201586,
+      "distance_at_1201_tight": 0.02463138017966839,
+      "distance_rose": true,
+      "relative_change": 0.2882356277161619,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 10,
+      "member_indices": [
+        273,
+        881
+      ],
+      "g8_observational_distance": 0.01954370089422851,
+      "separation_magnitudes_only": 1.9186575878760692,
+      "junction_separation_nm": 3.3503557473636962,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01954370089422851,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.222714615600789e-07,
+          "junction_x_si_b": 6.256218173074426e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.01954370083843057,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.222714615600789e-07,
+          "junction_x_si_b": 6.256218173074426e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.024309444820549354,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.222714615600789e-07,
+          "junction_x_si_b": 6.256218173074426e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.024309444820549354,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.222714615600789e-07,
+          "junction_x_si_b": 6.256218173074426e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.021089732031519995,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.222714615600789e-07,
+          "junction_x_si_b": 6.256218173074426e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.021089731887825806,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.222714615600789e-07,
+          "junction_x_si_b": 6.256218173074426e-07,
+          "below_floor": false
+        }
+      ],
+      "distance_at_301_default": 0.01954370089422851,
+      "distance_at_1201_tight": 0.021089731887825806,
+      "distance_rose": true,
+      "relative_change": 0.07910635769368822,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 11,
+      "member_indices": [
+        142,
+        1163
+      ],
+      "g8_observational_distance": 0.019614890121270975,
+      "separation_magnitudes_only": 1.2469632695899548,
+      "junction_separation_nm": 196.1762577809094,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019614890121270975,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.08974724965036e-07,
+          "junction_x_si_b": 5.127984671841266e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019614890311433254,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.08974724965036e-07,
+          "junction_x_si_b": 5.127984671841266e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.020109935711708278,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.08974724965036e-07,
+          "junction_x_si_b": 5.127984671841266e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.020109935904230408,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.08974724965036e-07,
+          "junction_x_si_b": 5.127984671841266e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.01984293643354506,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.08974724965036e-07,
+          "junction_x_si_b": 5.127984671841266e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019842936627366126,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 7.08974724965036e-07,
+          "junction_x_si_b": 5.127984671841266e-07,
+          "below_floor": true
+        }
+      ],
+      "distance_at_301_default": 0.019614890121270975,
+      "distance_at_1201_tight": 0.019842936627366126,
+      "distance_rose": true,
+      "relative_change": 0.011626193401300298,
+      "survives_refinement": false
+    },
+    {
+      "pair_index": 12,
+      "member_indices": [
+        686,
+        807
+      ],
+      "g8_observational_distance": 0.019705035797117517,
+      "separation_magnitudes_only": 1.4335040368148242,
+      "junction_separation_nm": 246.1918221561671,
+      "refinements": [
+        {
+          "grid_n": 301,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.019705035797117517,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.423005006836524e-07,
+          "junction_x_si_b": 3.9610867852748525e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 301,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.019705033787386694,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.423005006836524e-07,
+          "junction_x_si_b": 3.9610867852748525e-07,
+          "below_floor": true
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.020496630695622495,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.423005006836524e-07,
+          "junction_x_si_b": 3.9610867852748525e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 601,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.020496628643546903,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.423005006836524e-07,
+          "junction_x_si_b": 3.9610867852748525e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "default",
+          "tol_carrier": 1e-08,
+          "observational_distance": 0.020203904397446255,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.423005006836524e-07,
+          "junction_x_si_b": 3.9610867852748525e-07,
+          "below_floor": false
+        },
+        {
+          "grid_n": 1201,
+          "tolerance": "tight",
+          "tol_carrier": 1e-12,
+          "observational_distance": 0.020203902380318623,
+          "n_biases_certified": 16,
+          "n_biases": 16,
+          "junction_x_si_a": 6.423005006836524e-07,
+          "junction_x_si_b": 3.9610867852748525e-07,
+          "below_floor": false
+        }
+      ],
+      "distance_at_301_default": 0.019705035797117517,
+      "distance_at_1201_tight": 0.020203902380318623,
+      "distance_rose": true,
+      "relative_change": 0.025316705249227765,
+      "survives_refinement": false
+    }
+  ],
+  "verdict": {
+    "n_pairs": 13,
+    "n_surviving": 7,
+    "n_separated_by_refinement": 6,
+    "widest_junction_pair": {
+      "pair_index": 3,
+      "junction_separation_nm": 422.88971758695254,
+      "junction_x_si_a": 6.942688150356631e-07,
+      "junction_x_si_b": 2.7137909744871056e-07,
+      "distance_at_301_default": 0.017551083352229286,
+      "distance_at_1201_tight": 0.017246735292666602,
+      "survives_refinement": true
+    },
+    "falsifier": "SPEC-g9-3 fires if the observational distance RISES -- the junction degeneracy would then be a discretisation artefact and comes straight out of the headline",
+    "falsifier_fires": true,
+    "n_pairs_whose_distance_rose_without_crossing_the_floor": 3,
+    "floor": 0.02
+  },
+  "battery": {
+    "grids": [
+      301,
+      601,
+      1201
+    ],
+    "tolerances": [
+      "default",
+      "tight"
+    ],
+    "tol_carrier_tight": 1e-12,
+    "inherited_from": "scripts/run_witness_falsifier.py"
+  }
+}

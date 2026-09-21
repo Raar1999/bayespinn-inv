@@ -73,7 +73,7 @@ def main():
     by_strategy = defaultdict(list)   # strategy -> list of per-seed value arrays
     seed_index = defaultdict(set)
     for strategy, seed, log_path in _find_log_files(root):
-        with open(log_path) as f:
+        with open(log_path, encoding="utf-8") as f:
             log = json.load(f)
         values = []
         for entry in log:
@@ -112,7 +112,7 @@ def main():
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w") as f:
+    with open(out_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(aggregated, f, indent=2, default=str)
     print(f"Aggregated {sum(len(v) for v in by_strategy.values())} runs "
           f"across {len(by_strategy)} strategies -> {out_path}")
@@ -132,7 +132,7 @@ def main():
             mean = np.asarray(info["mean"])
             lo   = np.asarray(info["p10"])
             hi   = np.asarray(info["p90"])
-            c = colors.get(s, None)
+            c = colors.get(s)
             ax.plot(r, mean, "o-", color=c, ms=4, label=f"{s} (n={info['n_seeds']})")
             ax.fill_between(r, lo, hi, color=c, alpha=0.18)
         ax.set_xlabel("AL round")

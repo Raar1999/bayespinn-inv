@@ -1,0 +1,267 @@
+{
+  "what_this_is": "a COST MEASUREMENT for the U-BUDGET class, not a WIT-02 coverage result. Coverage is a property of the whole set and this ran a prefix of it.",
+  "set": "chart_L_d16",
+  "n_pairs_in_set": 37,
+  "n_pairs_piloted": 3,
+  "battery": {
+    "grids": [
+      301,
+      601,
+      1201
+    ],
+    "tolerances": [
+      "default",
+      "tight"
+    ],
+    "solves_per_member": 6,
+    "inherited_from": "run_g9.REFINEMENT_GRIDS and run_g9.REFINEMENT_TOLS, imported rather than restated -- the same objects run_wit02_chartG.py used for chart G"
+  },
+  "timing": {
+    "pilot_total_s": 22.56623650000074,
+    "per_pair_s": [
+      7.571357299999363,
+      7.247951600000306,
+      7.746867500000008
+    ],
+    "per_pair_mean_s": 7.5220587999998925,
+    "per_pair_min_s": 7.247951600000306,
+    "per_pair_max_s": 7.746867500000008,
+    "per_pair_spread_factor": 1.0688354348281908
+  },
+  "projection": {
+    "all_pairs_s": 278.31617559999603,
+    "all_pairs_plus_null_control_s": 285.83823439999594,
+    "all_pairs_low_s": 268.1742092000113,
+    "all_pairs_high_s": 286.6340975000003,
+    "basis": "mean piloted pair cost x 37. The battery's cost is set by the grid and the tolerance, both fixed, so it does not depend on which pair is solved; per_pair_spread_factor is what makes that checkable rather than asserted."
+  },
+  "pilot_observations": {
+    "note": "recorded because the solves were paid for. NOT a coverage claim and NOT a WIT-02 result for chart L: this is 3 of 37 pairs, and DOC-08 forbids reporting a filtered subset as though it were the set.",
+    "records": [
+      {
+        "pair_index": 0,
+        "member_indices": [
+          500,
+          1154
+        ],
+        "separation_decades": 1.1687575066162061,
+        "g8_observational_distance": 0.008813702322268633,
+        "refinements": [
+          {
+            "grid_n": 301,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.008813702322268633,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.6686903999998322
+          },
+          {
+            "grid_n": 301,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.008813702322268633,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.8223001999995176
+          },
+          {
+            "grid_n": 601,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.00881827994759253,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.0504833000013605
+          },
+          {
+            "grid_n": 601,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.00881827994759253,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.2236909000002925
+          },
+          {
+            "grid_n": 1201,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.013003930301440229,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.738523099998929
+          },
+          {
+            "grid_n": 1201,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.013003930301440229,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 2.067656100000022
+          }
+        ],
+        "survives_battery": true,
+        "wall_clock_s": 7.571357299999363
+      },
+      {
+        "pair_index": 1,
+        "member_indices": [
+          107,
+          873
+        ],
+        "separation_decades": 1.558157541904972,
+        "g8_observational_distance": 0.009001411630028041,
+        "refinements": [
+          {
+            "grid_n": 301,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.009001411630028041,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.6584732999999687
+          },
+          {
+            "grid_n": 301,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.009001411765802799,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.8145268000007491
+          },
+          {
+            "grid_n": 601,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.009002176095416436,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.9813860000012937
+          },
+          {
+            "grid_n": 601,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.00900217621659619,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.1020398999989993
+          },
+          {
+            "grid_n": 1201,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.012551225993859149,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.6129533000002994
+          },
+          {
+            "grid_n": 1201,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.012551225993859149,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 2.078560199999629
+          }
+        ],
+        "survives_battery": true,
+        "wall_clock_s": 7.247951600000306
+      },
+      {
+        "pair_index": 2,
+        "member_indices": [
+          443,
+          861
+        ],
+        "separation_decades": 1.7340329871048077,
+        "g8_observational_distance": 0.010668213378639026,
+        "refinements": [
+          {
+            "grid_n": 301,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.010668213378639026,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.6642307999991317
+          },
+          {
+            "grid_n": 301,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.010668213378639026,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 0.7498958000014682
+          },
+          {
+            "grid_n": 601,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.016250776452572745,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.0846100999988266
+          },
+          {
+            "grid_n": 601,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.016250776452572745,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": true,
+            "wall_clock_s": 1.2741975000008097
+          },
+          {
+            "grid_n": 1201,
+            "tolerance": "default",
+            "tol_carrier": 1e-08,
+            "observational_distance": 0.04122880066427317,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": false,
+            "wall_clock_s": 1.9067923999991763
+          },
+          {
+            "grid_n": 1201,
+            "tolerance": "tight",
+            "tol_carrier": 1e-12,
+            "observational_distance": 0.04122880066427317,
+            "n_biases_certified": 16,
+            "n_biases": 16,
+            "below_floor": false,
+            "wall_clock_s": 2.0671299999994517
+          }
+        ],
+        "survives_battery": false,
+        "wall_clock_s": 7.746867500000008
+      }
+    ]
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "win32",
+    "machine": "AMD64"
+  }
+}

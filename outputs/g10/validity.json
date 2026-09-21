@@ -1,0 +1,51 @@
+{
+  "adopted_observation_set": {
+    "lo_V": 0.15,
+    "hi_V": 0.9,
+    "n": 16,
+    "source": "docs/spec/SPEC_g6.md section 1b"
+  },
+  "the_claim_this_bounds": "the observation set dominates the other three axes at every operating point measured -- 0.925 to 1.080 across twelve points, against x21 to x39 for junction, dimension and interpolant. That stability is measured over three bias windows, and all three sit INSIDE [0.15, 0.90] V.",
+  "the_three_windows": [
+    {
+      "name": "wide_0.15_0.90",
+      "lo": 0.15,
+      "hi": 0.9
+    },
+    {
+      "name": "low_0.15_0.50",
+      "lo": 0.15,
+      "hi": 0.5
+    },
+    {
+      "name": "high_0.50_0.90",
+      "lo": 0.5,
+      "hi": 0.9
+    }
+  ],
+  "all_three_inside_the_converged_range": true,
+  "the_two_boundaries_do_not_have_the_same_status": {
+    "lower_0.15_V": {
+      "status": "MEASURED AND REJECTED BELOW",
+      "evidence": "docs/spec/SPEC_g6.md section 1b: the convergence sweep ran 19 biases over 0-0.9 V. For V >= 0.15 the N=301/601/1201 differences halve under refinement (1.47e-3 -> 1.20e-3 at 0.15 V). The non-monotone maximum comes entirely from V = 0.10, where I ~ 1.3e-3 A/m^2 and the solver's own current noise floor competes with discretisation.",
+      "reading": "below 0.15 V the oracle was tested and found unconverged. That is a measurement."
+    },
+    "upper_0.90_V": {
+      "status": "UNTESTED (PH-15)",
+      "evidence": "the convergence sweep's own upper end is 0.9 V. Above it there is no evidence in either direction, because nothing was ever solved there in this line of work.",
+      "reading": "above 0.90 V the oracle was never tested. That is not a measurement, and 'the solver is unvalidated there' must never be written as 'the solver fails there'."
+    }
+  },
+  "largest_bias_any_artefact_was_evaluated_at": {
+    "value_V": 0.9,
+    "found_in": "manifest.json:biases",
+    "json_files_scanned": 74,
+    "method": "every bias list in every artefact under outputs/, read not re-run. Reading files is not extending the range."
+  },
+  "PH-15_labels": [
+    "the observation-set dominance is bounded to V in [0.15, 0.90]; outside that range it is UNTESTED, not weaker",
+    "rank(window width) 1 -> 4 is measured over widths 0.10-0.75 V centred at 0.525 V, all inside the converged range; the rank outside it is UNTESTED",
+    "every witness search, every barrier and every spectrum in this repository uses the same 16 biases over 0.15-0.90 V, so the boundary is common to the whole claim surface and is not a property of any one result"
+  ],
+  "not_tested_here_and_why": "SPEC-g10-3 says state the range, not extend it. Extending it is a different study: a bias above 0.90 V carries its own convergence burden -- the discretisation floor would have to be re-measured there before any identifiability number taken there meant anything -- and running one without the other would produce a number with no floor beneath it."
+}

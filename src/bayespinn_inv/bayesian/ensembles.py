@@ -30,17 +30,15 @@ at inference time.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
 import torch.nn as nn
 
-from ..pinn.forward_pinn import ForwardPINN
-from ..pinn.network import SemiconductorPINN, PINNConfig
 from ..physics.constants import Material
 from ..physics.scaling import Scaling
+from ..pinn.forward_pinn import ForwardPINN
 from ..solvers.scharfetter_gummel import DeviceState
 
 
@@ -176,4 +174,77 @@ class DeepEnsemble(nn.Module):
         return mean_state, agg
 
 
-__all__ = ["DeepEnsemble", "EnsemblePrediction"]
+def load_deep_ensemble(manifest_path) -> Tuple["DeepEnsemble", Dict]:
+    """Reconstruct a :class:`DeepEnsemble` from a pure-physics PINN manifest.
+
+    AUDIT_g0 PKG-04 / SW-17. This function previously lived in the repository's
+    ``scripts/run_benchmark_sweep.py``, and ``surrogate/adapters.py`` reached it
+    by ``exec_module``-ing that file from the source checkout at runtime -- a
+    path that does not exist in an installed wheel. It depends on nothing
+    repo-only, so it belongs in the package; the script now delegates here, which
+    also gives the project one definition instead of two (SW-02).
+
+    The ensemble it rebuilds is the **legacy** pure-physics PINN
+    (``ADR-0004``: 100% median relative error as a forward model). It is
+    reconstructible because a shipped artefact still exercises this path --
+    ``outputs/smoke/manifest.json`` carries checkpoints and no ``type`` key.
+
+    Parameters
+    ----------
+    manifest_path : str or Path
+        A ``manifest.json`` written by the legacy training pipeline, carrying
+        ``config``, ``member_seeds`` and ``checkpoints``.
+
+    Returns
+    -------
+    (ensemble, manifest)
+        The rebuilt ensemble and the parsed manifest dict.
+    """
+    import json
+    from pathlib import Path as _Path
+
+    from ..physics.constants import GAAS, SILICON
+    from ..pinn.forward_pinn import ForwardPINNConfig
+    from ..pinn.network import PINNConfig, SemiconductorPINN
+
+    manifest = json.loads(_Path(manifest_path).read_text(encoding="utf-8"))
+    cfg = manifest["config"]
+    material = {"Si": SILICON, "Silicon": SILICON, "GaAs": GAAS}[cfg["material"]["name"]]
+    scaling = Scaling.for_material(material, T=cfg["material"]["T"])
+    L_scaled = float(scaling.x_to_scaled(
+        torch.tensor(cfg["domain_si"][1] - cfg["domain_si"][0])))
+    V_a_max_s = float(cfg["dataset"]["bias_range"][1]) / scaling.V_T
+
+    ens = DeepEnsemble(scaling, material)
+    for seed, ck_path in zip(manifest["member_seeds"], manifest["checkpoints"]):
+        net_cfg = PINNConfig(
+            in_dim=cfg["network"]["in_dim"],
+            hidden_dim=cfg["network"]["hidden_dim"],
+            num_blocks=cfg["network"]["num_blocks"],
+            fourier_features=cfg["network"]["fourier_features"],
+            fourier_sigma=cfg["network"]["fourier_sigma"],
+            dropout=cfg["network"]["dropout"],
+            doping_dim=cfg["network"]["doping_dim"],
+            output_dim=cfg["network"]["output_dim"],
+            seed=seed,
+            x_scaled_extent=L_scaled,
+            V_a_scaled_extent=V_a_max_s,
+        )
+        net = SemiconductorPINN(net_cfg)
+        # SEC-02 / SW-16: never execute code from a checkpoint. These hold only
+        # tensors and plain scalars, so weights_only=True is always sufficient.
+        ck = torch.load(ck_path, map_location="cpu", weights_only=True)
+        net.load_state_dict(ck["model_state"])
+        net.eval()
+        ens.add_member(ForwardPINN(
+            net, scaling, material,
+            ForwardPINNConfig(
+                n_query=cfg["network"].get("n_query", 201),
+                n_anchor=cfg["network"]["doping_dim"],
+                domain_si=tuple(cfg["domain_si"]),
+            ),
+        ))
+    return ens, manifest
+
+
+__all__ = ["DeepEnsemble", "EnsemblePrediction", "load_deep_ensemble"]

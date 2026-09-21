@@ -1,0 +1,137 @@
+{
+  "what_this_is": "IA-2, the mandatory archive re-run. Every historical negative control in the tree, re-executed at generation 11 and compared against the artefact it was first written to. If a historical control had started behaving differently, standards would have drifted and the rule is to halt and repair toward strictness before scoring anything.",
+  "how_it_was_run": "each generation's own script, invoked with --phases negative_control and --out pointing at outputs/g11/archive_rerun/<gen>/, so the archive artefacts were never overwritten. The close addendum has no separate control phase, so its whole refine phase was re-run.",
+  "what_is_ignored_and_why": [
+    "duration_s",
+    "elapsed_s",
+    "generated_at",
+    "run_finished",
+    "run_started",
+    "timestamp",
+    "wall_clock_s"
+  ],
+  "rows": [
+    {
+      "generation": "g8",
+      "archive": "outputs/g8/negative_control.json",
+      "rerun": "outputs/g11/archive_rerun/g8/negative_control.json",
+      "controls_compared": [
+        "witness_predicate_rejects_a_distinguishable_pair",
+        "chart_discriminator_returns_not_different_for_a_pinned_junction",
+        "cluster_criterion_recovers_a_known_answer",
+        "solver_refuses_a_chartless_parameter_vector"
+      ],
+      "n_controls": 4,
+      "identical_after_dropping_wall_clock": true,
+      "archive_verdict": true,
+      "rerun_verdict": true,
+      "verdict_unchanged": true
+    },
+    {
+      "generation": "g9",
+      "archive": "outputs/g9/negative_control.json",
+      "rerun": "outputs/g11/archive_rerun/g9/negative_control.json",
+      "controls_compared": [
+        "an_ordering_from_one_operating_point_is_rejected",
+        "the_same_predicate_accepts_a_consistent_ordering",
+        "the_refinement_battery_can_separate_a_distinguishable_pair",
+        "chart_discriminator_returns_not_different_for_a_pinned_junction"
+      ],
+      "n_controls": 4,
+      "identical_after_dropping_wall_clock": true,
+      "archive_verdict": true,
+      "rerun_verdict": true,
+      "verdict_unchanged": true
+    },
+    {
+      "generation": "g10",
+      "archive": "outputs/g10/negative_control.json",
+      "rerun": "outputs/g11/archive_rerun/g10/negative_control.json",
+      "controls_compared": [
+        "localisation_measure_separates_planted_extremes",
+        "random_directions_show_no_width_trend",
+        "wit01_rejects_a_sub_node_pair_and_admits_the_headline_pair",
+        "classifier_returns_both_answers",
+        "pinned_junction_is_still_not_different"
+      ],
+      "n_controls": 5,
+      "identical_after_dropping_wall_clock": true,
+      "archive_verdict": true,
+      "rerun_verdict": true,
+      "verdict_unchanged": true
+    },
+    {
+      "generation": "close_addendum",
+      "archive": "outputs/wit02_chartG/refine.json",
+      "rerun": "outputs/g11/archive_rerun/wit02_chartG/refine.json",
+      "controls_compared": [
+        "reproduction_control",
+        "negative_control",
+        "headroom_check"
+      ],
+      "n_controls": 3,
+      "identical_after_dropping_wall_clock": true,
+      "archive_verdict": {
+        "set": "chart_G_d4",
+        "n_pairs": 13,
+        "n_refined_here": 13,
+        "n_surviving": 12,
+        "n_separated_by_refinement": 1,
+        "surviving_pair_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "separated_pair_indices": [
+          12
+        ],
+        "coverage_after_this_run": 1.0,
+        "floor": 0.02
+      },
+      "rerun_verdict": {
+        "set": "chart_G_d4",
+        "n_pairs": 13,
+        "n_refined_here": 13,
+        "n_surviving": 12,
+        "n_separated_by_refinement": 1,
+        "surviving_pair_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "separated_pair_indices": [
+          12
+        ],
+        "coverage_after_this_run": 1.0,
+        "floor": 0.02
+      },
+      "verdict_unchanged": true
+    }
+  ],
+  "summary": {
+    "generations_rerun": 4,
+    "controls_compared": 16,
+    "all_identical": true,
+    "all_verdicts_unchanged": true,
+    "drift_detected": false,
+    "reading": "no drift. Every measured quantity reproduces bit-for-bit across four generations of controls; the only differences anywhere are wall-clock timings, which is what makes dropping them safe rather than convenient."
+  }
+}

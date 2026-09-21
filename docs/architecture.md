@@ -2,19 +2,37 @@
 
 This document captures **why** the code is structured the way it is, and the bugs we hit during development. It is intended for a new contributor (or future-you) who needs to understand non-obvious design choices.
 
+> **Read this first: the forward model is the surrogate, not the PINN.**
+> Much of the layout below dates from when `pinn/` held the forward model. It
+> no longer does. The pure-physics PINN was measured at **100% median relative
+> error** on terminal current and is retained as legacy infrastructure plus a
+> documented negative result
+> ([ADR-0004](adr/ADR-0004-pure-physics-pinn-is-legacy.md)). Everything the
+> project claims about forward accuracy, inverse design, UQ, calibration and
+> experiment design runs through `surrogate/` — the SG-supervised
+> differentiable surrogate — and the UQ backends that matter live in
+> `bayesian/surrogate_uq.py`, not in the `ForwardPINN`-based wrappers.
+
 ## High-level layout
 
 ```
 src/bayespinn_inv/
 ├── physics/        Constants, De-Mari scaling — pure data + conversion functions
 ├── solvers/        Scharfetter–Gummel reference solver (deterministic oracle)
-├── pinn/           PINN network, residual losses, ForwardPINN wrapper
-├── training/       PINN training loop
-├── data/           Synthetic doping profile families + TrainingExample factory
-├── inverse/        Input-space autodiff inverse design
-├── bayesian/       Three UQ wrappers (DeepEnsemble, MCDropoutPINN, SWAG)
+├── surrogate/      **The forward model.** SG-supervised differentiable I-V
+│                   surrogate, symlog transform, ensemble, adapters
+├── pinn/           LEGACY (ADR-0004): PINN network, residual losses,
+│                   ForwardPINN wrapper. Not a working forward model.
+├── training/       LEGACY: PINN training loop
+├── data/           Doping profile families, TrainingExample factory, and
+│                   `splits.py` — the single definition of the eval protocol
+├── inverse/        Input-space autodiff inverse design + identifiability
+├── bayesian/       UQ. `surrogate_uq.py` (ensemble/MC-dropout/SWAG over the
+│                   surrogate) is the live path; the ForwardPINN-based
+│                   DeepEnsemble/MCDropoutPINN/SWAG wrappers are legacy
 ├── calibration/    ECE, CRPS, reliability, temperature scaling
-├── active_learning/ Acquisition strategies + AL loop driver
+├── active_learning/ Acquisition strategies, AL loop driver, and `design.py`
+│                   (D-/E-optimal + null-space experiment design)
 ├── benchmarks/     SG-vs-PINN quantitative comparison
 └── visualization/  Publication-grade plots
 ```

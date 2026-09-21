@@ -1,37 +1,37 @@
 """SG-supervised current surrogate (the working forward model)."""
 
-from .iv_surrogate import (
-    SymlogTransform,
-    Normalizer,
-    IVSurrogateConfig,
-    IVSurrogate,
-    make_features,
-    build_sg_dataset,
-    train_surrogate,
-    SurrogatePrediction,
-    SurrogateEnsemble,
-)
 from .adapters import (
-    SurrogateForwardAdapter,
     SurrogateEnsembleAdapter,
-    save_surrogate_ensemble,
-    load_surrogate_ensemble,
+    SurrogateForwardAdapter,
     load_forward_ensemble,
+    load_surrogate_ensemble,
+    save_surrogate_ensemble,
+)
+from .iv_surrogate import (
+    IVSurrogate,
+    IVSurrogateConfig,
+    Normalizer,
+    SurrogateEnsemble,
+    SurrogatePrediction,
+    SymlogTransform,
+    build_sg_dataset,
+    make_features,
+    train_surrogate,
 )
 
 __all__ = [
-    "SymlogTransform",
-    "Normalizer",
-    "IVSurrogateConfig",
     "IVSurrogate",
-    "make_features",
-    "build_sg_dataset",
-    "train_surrogate",
-    "SurrogatePrediction",
+    "IVSurrogateConfig",
+    "Normalizer",
     "SurrogateEnsemble",
-    "SurrogateForwardAdapter",
     "SurrogateEnsembleAdapter",
-    "save_surrogate_ensemble",
-    "load_surrogate_ensemble",
+    "SurrogateForwardAdapter",
+    "SurrogatePrediction",
+    "SymlogTransform",
+    "build_sg_dataset",
     "load_forward_ensemble",
+    "load_surrogate_ensemble",
+    "make_features",
+    "save_surrogate_ensemble",
+    "train_surrogate",
 ]
