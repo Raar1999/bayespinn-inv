@@ -658,3 +658,103 @@ Two smaller things that are now cheaper than they were:
 5. **Publication is irreversible in practice.** Flipping back to private does
    not unpublish anything already cloned, cached, forked or indexed. The
    decision is treated as one-way and was made on that basis.
+
+---
+
+# `RECORD release-01a` — the visibility flip executed, and verified against GitHub rather than against this tree
+
+**Written** 2026-09-21. **Not a generation** and **not a ruling.** No
+`LOOP_STATE` increment, no ladder movement, no rule enacted, no `SR-2` row.
+`RULING release-01` authorised publication and left the action pending; this
+records that the action was taken, which is the only thing missing between that
+ruling and the state of the world.
+**Appended to** `RULINGS.md` at hash
+`ee3bbd56866103f391851a94009d12c85dbaeaace673fbba801353fb202296cd`.
+**Ladder** `LADDER.md` unedited at
+`184e1ef0f10617303556ecb2a9e9029659c7fdce170fe4d97b394aa9672d2efe`.
+
+---
+
+## What was measured
+
+**The repository is public.** `[OBS]` Verified live against GitHub, not against
+any document in this tree:
+
+```
+gh repo view Raar1999/bayespinn-inv --json visibility,isPrivate,url,updatedAt
+{"isPrivate": false, "visibility": "PUBLIC",
+  "url": "https://github.com/Raar1999/bayespinn-inv",
+  "updatedAt": "2026-09-21T03:21:59Z"}
+```
+
+The flip was executed by the operator directly, with `gh repo edit --visibility
+public`, outside any tool session and after `RULING release-01` was written.
+
+**The commit the record points at is on the public remote.** `[OBS]`
+`git ls-remote origin` returns `3c46f6b6b2930b82c23e53dbbd37b37b70bb9097` for
+`refs/heads/loop/champion`, equal to local `HEAD`, and
+`gh api repos/Raar1999/bayespinn-inv/commits/3c46f6b` retrieves it. So
+`release-01`'s `NEXT` premise — that the repository becomes citable the moment
+it is public — is satisfied in fact and not only in principle: the tree a reader
+is pointed at is fetchable by anyone, with no credential.
+
+**The exact moment of the flip is not determinable from the available
+surfaces, and is not asserted here.** `[OBS]` The repository's event timeline
+carries exactly one `PublicEvent`, at `2026-08-28T03:50:15Z`, which equals
+`createdAt` and therefore does not record a later private-to-public transition.
+`updatedAt` is `2026-09-21T03:21:59Z` and is the closest available bound, but it
+moves on any metadata change and so is an upper bound on the flip rather than a
+measurement of it. The last push preceding it is `2026-09-20T18:48:15Z`. Stating
+a flip time from these would be inference presented as observation, which is the
+defect this record exists to correct.
+
+## What this supersedes, forward and without editing
+
+`RULING release-01` superseded `docs/OPERATOR_TASKS.md`'s *"The visibility
+question is closed, permanently"* entry and explicitly declined to edit it. The
+same disposition is extended here to the entries that ruling did not name
+individually, all of which are correct on their own dates and are now overtaken:
+
+* the statement that *"`Raar1999/bayespinn-inv` is **private**"*, and the
+  Actions-billing discussion that rests on it — Actions minutes are free on a
+  public repository, so the billing choice that entry poses no longer has two
+  live options;
+* the CI-billing entry's *"two days away"* and *"wait two days"*, already
+  recorded as a live `AGE-01` instance in `docs/RULES_ENACTED.md` and left
+  unrepaired there for the same reason it is left unrepaired here.
+
+**`docs/OPERATOR_TASKS.md` is not edited.** Its entries are dated operator
+records, and this tree's convention — set by `release-01` and by `AGE-01`'s
+disposition of the billing instance — is to supersede forward on the record
+rather than to rewrite a correctly dated sentence. `docs/RELEASE_HOLD_g16.md` is
+likewise left exactly as written: it is an accurate record of the hold as it
+stood on 2026-09-20 and is not a claim about today.
+
+## The failure this record also closes
+
+An export pass on 2026-09-21 reported the repository as private and told a
+reader that the URL would not resolve. It reached that from
+`docs/RELEASE_HOLD_g16.md` and the 2026-08-29 ruling. Two things were wrong with
+that, and only the first is the one usually named:
+
+1. **A local artefact was trusted over the live source it describes.** A
+   document about GitHub's state is evidence about the date it was written, not
+   about now. Visibility, CI status and pull-request state are readable directly
+   and were not read.
+2. **The superseding ruling was already in this file and was not read.**
+   `RULING release-01` was committed at `143bf35`, one commit before the `HEAD`
+   that pass exported from. The correction did not require the network at all;
+   it required reading the newest entry in the file that exists to carry
+   corrections. `AGE-01`'s frozen-enumeration half fired, and the reading list
+   stopped one commit short.
+
+## `PREMISES`
+
+1. **The `gh` query reflects the repository's state and not a cached view.** The
+   call was made once, authenticated as `Raar1999`, and not repeated against a
+   second surface such as an anonymous fetch.
+2. **`updatedAt` moves on metadata changes generally.** It is used above only as
+   an upper bound, and nothing here rests on it being the flip itself.
+3. **The operator's account of how the flip was performed** — `gh repo edit
+   --visibility public`, outside a tool session — is taken from the operator and
+   is not independently evidenced. What is evidenced is the resulting state.
